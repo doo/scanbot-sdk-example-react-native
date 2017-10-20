@@ -17,6 +17,15 @@ export default class ScanbotCameraDemoScreen extends Component {
     this.state = {
       spinnerVisible: false
     };
+
+    this.textResBundle = {
+      autosnapping_hint_do_not_move: "Don't move",
+      autosnapping_hint_move_closer: "Move closer",
+      autosnapping_hint_bad_angles: "Perspective",
+      autosnapping_hint_nothing_detected: "No document",
+      autosnapping_hint_too_noisy: "Background too noisy",
+      autosnapping_hint_too_dark: "Poor light"
+    };
   }
 
   render() {
@@ -34,7 +43,8 @@ export default class ScanbotCameraDemoScreen extends Component {
               edgeColor={'#0000ff'}
               onStartCapturingImage={this.onStartCapturingImage.bind(this)}
               onImageCaptured={this.onImageCaptured.bind(this)}
-              onDocumentImageCaptured={this.onDocumentImageCaptured.bind(this)} />
+              onDocumentImageCaptured={this.onDocumentImageCaptured.bind(this)}
+              textResBundle={this.textResBundle} />
         </View>
     );
   }
