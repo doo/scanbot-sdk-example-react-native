@@ -37,8 +37,8 @@ export default class ScanbotCameraDemoScreen extends Component {
                    cancelable={false} />
           <ScanbotCameraView
               style={styles.container}
-              autoSnappingEnabled='true'
-              autoSnappingSensitivity={0.5}
+              autoSnappingEnabled={true}
+              autoSnappingSensitivity={0.66}
               imageCompressionQuality={DemoConstants.JPG_QUALITY}
               edgeColor={'#0000ff'}
               onStartCapturingImage={this.onStartCapturingImage.bind(this)}
