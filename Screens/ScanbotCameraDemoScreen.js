@@ -41,6 +41,7 @@ export default class ScanbotCameraDemoScreen extends Component {
               autoSnappingSensitivity={0.66}
               imageCompressionQuality={DemoConstants.JPG_QUALITY}
               edgeColor={'#0000ff'}
+              onPolygonDetected={this.onPolygonDetected.bind(this)}
               onStartCapturingImage={this.onStartCapturingImage.bind(this)}
               onImageCaptured={this.onImageCaptured.bind(this)}
               onDocumentImageCaptured={this.onDocumentImageCaptured.bind(this)}
@@ -73,6 +74,10 @@ export default class ScanbotCameraDemoScreen extends Component {
     this.setState({
       spinnerVisible: true
     });
+  }
+
+  onPolygonDetected(event: Event) {
+    console.log("onPolygonDetected: " + JSON.stringify(event.nativeEvent));
   }
 
 }
