@@ -1,6 +1,0 @@
-framework module ScanbotSDK {
-  umbrella header "ScanbotSDK.h"
-
-  export *
-  module * { export * }
-}
