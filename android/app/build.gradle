@@ -90,13 +90,13 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.3'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "io.scanbot.demo.reactnative"
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         ndk {
@@ -134,13 +134,14 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-camera-kit')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:25.3.1"
 
     compile "com.facebook.react:react-native:+"  // From node_modules
 
     compile project(':react-native-navigation')
-    compile project(":rncamerakit")
+    compile project(":react-native-camera-kit")
     compile project(':react-native-scanbot-sdk')
 }
 

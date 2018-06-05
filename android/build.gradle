@@ -29,8 +29,25 @@ allprojects {
     }
     configurations.all {
 
-        // Hack to let Gradle pickup latest SNAPSHOTS
-        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+        resolutionStrategy {
+            // Hack to let Gradle pickup latest SNAPSHOTS
+            cacheChangingModulesFor 0, 'seconds'
 
+            force 'com.android.support:design:27.0.2'
+            force 'com.android.support:support-v4:27.0.2'
+            force 'com.android.support:appcompat-v7:27.0.2'
+            force 'com.android.support:recyclerview-v7:27.0.2'
+        }
+    }
+}
+
+subprojects { subproject ->
+    afterEvaluate{
+        if((subproject.plugins.hasPlugin('android') || subproject.plugins.hasPlugin('android-library'))) {
+            android {
+                compileSdkVersion 27
+                buildToolsVersion "27.0.3"
+            }
+        }
     }
 }

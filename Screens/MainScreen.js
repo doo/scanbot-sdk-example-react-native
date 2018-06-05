@@ -8,12 +8,26 @@ import {
   Image,
   Alert
 } from 'react-native';
+import _ from 'lodash';
 
 import Spinner from 'react-native-loading-spinner-overlay';
 
-import { ScanbotSDK, ImageFilter, OCROutputFormat } from 'react-native-scanbot-sdk';
+import { ScanbotSDK, ImageFilter, OCROutputFormat, Page } from 'react-native-scanbot-sdk';
 
 import { DemoScreens, DemoConstants } from '.';
+
+class RowButton extends Component {
+  render() {
+    const {title, onPress} = this.props;
+    return (
+      <View style={styles.demoButtonPanel}>
+        <Button
+            title={title}
+            onPress={onPress} />
+      </View>
+      );
+  }
+}
 
 export default class MainScreen extends Component {
 
@@ -21,9 +35,6 @@ export default class MainScreen extends Component {
     super(props);
 
     this.state = {
-      documentImageFileUri: null,
-      originalImageFileUri: null,
-      filteredImageFileUri: null,
       spinnerVisible: false,
       debugText: ""
     };
@@ -44,17 +55,18 @@ export default class MainScreen extends Component {
             Copyright (c) 2017 doo GmbH. All rights reserved.
           </Text>
 
-          <View style={styles.demoButtonPanel}>
-            <Button
-                title="Scanbot Camera UI"
-                onPress={this.startScanbotCameraButtonTapped.bind(this)} />
-          </View>
+          <RowButton
+            title="Pick Image"
+            onPress={this.pickImageTapped}/>
 
-          <View style={styles.demoButtonPanel}>
-            <Button
-                title="Scanbot Cropping UI"
-                onPress={this.startScanbotCroppingButtonTapped.bind(this)} />
-          </View>
+          <RowButton
+            title="Start Document Scanner"
+            onPress={this.startScanbotCameraButtonTapped}/>
+
+
+          <RowButton
+            title="Open Cropping Screen"
+            onPress={this.startScanbotCroppingButtonTapped}/>
 
           <View style={styles.container}>
             {this.renderDocumentImage()}
@@ -63,53 +75,43 @@ export default class MainScreen extends Component {
           <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', margin: 10}}>
             <Button
                 title="Rotate Image CCW️"
-                onPress={this.rotateImageCCWButtonTapped.bind(this)} />
+                onPress={this.rotateImageCCWButtonTapped} />
             <Button
                 title="Rotate Image CW"
-                onPress={this.rotateImageCWButtonTapped.bind(this)} />
+                onPress={this.rotateImageCWButtonTapped} />
           </View>
 
-          <View style={styles.demoButtonPanel}>
-            <Button
-                title="Apply Image Filter"
-                onPress={this.applyImageFilterButtonTapped.bind(this)} />
-          </View>
+          <RowButton
+            title="Apply Image Filter"
+            onPress={this.applyImageFilterButtonTapped}/>
 
-          <View style={styles.demoButtonPanel}>
-            <Button
-                title="Document Detection on Gallery Image"
-                onPress={this.documentDetectionButtonTapped.bind(this)} />
-          </View>
+          <RowButton
+            title="Create PDF"
+            onPress={this.createPDFButtonTapped} />
 
-          <View style={styles.demoButtonPanel}>
-            <Button
-                title="Create PDF"
-                onPress={this.createPDFButtonTapped.bind(this)} />
-          </View>
+          <RowButton
+            title="Get OCR Configs"
+            onPress={this.getOCRConfigsButtonTapped} />
 
-          <View style={styles.demoButtonPanel}>
-            <Button
-                title="Get OCR Configs"
-                onPress={this.getOCRConfigsButtonTapped.bind(this)} />
-          </View>
+          <RowButton
+            title="Perform OCR"
+            onPress={this.performOCRButtonTapped} />
 
-          <View style={styles.demoButtonPanel}>
-            <Button
-                title="Perform OCR"
-                onPress={this.performOCRButtonTapped.bind(this)} />
-          </View>
+          <RowButton
+            title="Open MRZ Scanner"
+            onPress={this.openMrzScannerTapped}/>
 
-          <View style={styles.demoButtonPanel}>
-            <Button
-                title="Is License Valid Check"
-                onPress={this.isLicenseValidButtonTapped.bind(this)} />
-          </View>
+          <RowButton
+            title="Open Barcode Scanner"
+            onPress={this.openBarcodeScannerTapped}/>
 
-          <View style={styles.demoButtonPanel}>
-            <Button
-                title="SDK Cleanup"
-                onPress={this.sdkCleanupButtonTapped.bind(this)} />
-          </View>
+          <RowButton
+            title="Is License Valid Check"
+            onPress={this.isLicenseValidButtonTapped} />
+
+          <RowButton
+            title="SDK Cleanup"
+            onPress={this.sdkCleanupButtonTapped} />
 
           <Text style={styles.debugOutputHeader}>
             {'DEBUG OUTPUT:'}
@@ -122,271 +124,209 @@ export default class MainScreen extends Component {
     );
   }
 
-  initializeSDK() {
+  async initializeSDK() {
     let options = { licenseKey: DemoConstants.scanbotLicenseKey, loggingEnabled: true };
-    ScanbotSDK.initializeSDK(options, (result) => {
+    try {
+      var result = await ScanbotSDK.initializeSDK(options);
       this.debugLog('initializeSDK result: ' + JSON.stringify(result));
-    },
-    (error) => {
-      this.debugLog('initializeSDK error: ' + JSON.stringify(error));
-    });
+    } catch (ex) {
+      this.debugLog('initializeSDK error: ' + JSON.stringify(ex.error));
+    }
   }
 
-  isLicenseValidButtonTapped() {
-    ScanbotSDK.isLicenseValid((result) => {
-      this.debugLog('isLicenseValid result: ' + JSON.stringify(result));
-    },
-    (error) => {
-      this.debugLog('isLicenseValid error: ' + JSON.stringify(error));
-    });
+  isLicenseValidButtonTapped = async () => {
+    const result = await ScanbotSDK.isLicenseValid();
+    this.debugLog('isLicenseValid result: ' + JSON.stringify(result));
   }
 
-  startScanbotCameraButtonTapped() {
-    this.props.navigator.push({
-      screen: DemoScreens.ScanbotCameraDemoScreen.id,
-      title: DemoScreens.ScanbotCameraDemoScreen.title,
-      passProps: {
-        onImageCaptured: this.onImageCaptured.bind(this),
-        onDocumentImageCaptured: this.onDocumentImageCaptured.bind(this),
-        onChangesCanceled: this.onChangesCanceled.bind(this)
-      }
+  startScanbotCameraButtonTapped = async () => {
+    const result = await ScanbotSDK.UI.launchDocumentScanner({
+      multiPageButtonTitle: 'mooltaypage',
+      polygonColor: '#00ffff',
+      polygonLineWidth: 10,
+      flashButtonHidden: true,
+      imageScale: 1,
     });
+
+    this.debugLog(`DocumentScanner result: ${JSON.stringify(result)}`);
+
+    if (result.status == "OK") {
+      this.setPages(result.pages);
+    }
   }
 
-  startScanbotCroppingButtonTapped() {
+  startScanbotCroppingButtonTapped = async () => {
     if (!this.checkOriginalImage(true)) { return; }
 
-    this.props.navigator.push({
-      screen: DemoScreens.ScanbotCroppingDemoScreen.id,
-      title: DemoScreens.ScanbotCroppingDemoScreen.title,
-      passProps: {
-        imageFileUri: this.state.originalImageFileUri,
-        onChangesAppliedWithPolygon: this.onChangesAppliedWithPolygon.bind(this),
-        onChangesCanceled: this.onChangesCanceled.bind(this)
-      }
-    });
+    const result = await ScanbotSDK.UI.launchCroppingScreen(this.state.pages[0], {});
+    this.debugLog(`CroppingScreen result: ${JSON.stringify(result)}`);
+
+    if (result.status == "OK") {
+      const pages = _.clone(this.state.pages);
+      pages[0] = result.page;
+      this.setPages(pages);
+    }
   }
 
-  applyImageFilterButtonTapped() {
+  openMrzScannerTapped = async () => {
+    const result = await ScanbotSDK.UI.launchMrzScanner({
+      finderTextHint: "Put passport here ^^^"
+    });
+    this.debugLog(`MRZ result: ${JSON.stringify(result)}`);
+  }
+
+  openBarcodeScannerTapped = async () => {
+    const result = await ScanbotSDK.UI.launchBarcodeScanner({
+      barcodeFormats: ["QR_CODE"],
+      cancelButtonTitle: "Abort"
+    });
+    this.debugLog(`Barcode result: ${JSON.stringify(result)}`);
+  }
+
+  applyImageFilterButtonTapped = async () => {
     if (!this.checkDocumentImage(true)) { return; }
 
     this.showSpinner();
-
-    let options = {
-      imageFileUri: this.state.documentImageFileUri,
-      filterType: ImageFilter.BINARIZED,
-      imageCompressionQuality: DemoConstants.JPG_QUALITY
-    };
-    ScanbotSDK.applyImageFilter(options, (result) => {
-      this.hideSpinner();
+    try {
+      const result = await ScanbotSDK.applyImageFilter(this.state.pages[0].documentImageFileUri, ImageFilter.BINARIZED);
       this.debugLog('applyImageFilter result: ' + JSON.stringify(result));
-      this.setState({
-        documentImageFileUri: this.state.documentImageFileUri,
-        originalImageFileUri: this.state.originalImageFileUri,
-        filteredImageFileUri: result.imageFileUri
-      });
-    },
-    (error) => {
+      await this.replaceDocumentUriOnFirstPage(result.imageFileUri);
+    } finally {
       this.hideSpinner();
-      this.debugLog('applyImageFilter error: ' + JSON.stringify(error));
-    });
+    }
   }
 
-  documentDetectionButtonTapped() {
+  pickImageTapped = () => {
     // Open photo gallery to select an image and run document detection on it
     this.props.navigator.push({
       screen: DemoScreens.CameraKitGalleryDemoScreen.id,
       title: DemoScreens.CameraKitGalleryDemoScreen.title,
       passProps: {
-        onImageSelected: this.onGalleryImageSelected.bind(this),
+        onImageSelected: this.onGalleryImageSelected,
       }
     });
   }
 
-  onGalleryImageSelected(imageFileUri: String) {
+  onGalleryImageSelected = async (imageFileUri: String) => {
     this.goBack();
 
     this.debugLog('onGalleryImageSelected imageFileUri: ' + imageFileUri);
 
-    let fileUri = (imageFileUri.startsWith('file://') ? imageFileUri : 'file://' + imageFileUri);
-    this.runDocumentDetectionOnGalleryImage(fileUri);
+    const page = await ScanbotSDK.UI.createPage(imageFileUri);
+    this.setPages([page]);
   }
 
-  runDocumentDetectionOnGalleryImage(galleryImageFileUri: String) {
-    if (!galleryImageFileUri) {
-      Alert.alert('Image required', 'Please select an image from the Photo Gallery.');
-      return;
-    }
+  // runDocumentDetectionOnGalleryImage(galleryImageFileUri: String) {
+  //   if (!galleryImageFileUri) {
+  //     Alert.alert('Image required', 'Please select an image from the Photo Gallery.');
+  //     return;
+  //   }
 
-    this.showSpinner();
-    let options = {
-      imageFileUri: galleryImageFileUri,
-      imageCompressionQuality: DemoConstants.JPG_QUALITY
-    };
-    ScanbotSDK.detectDocument(options, (result) => {
-      this.hideSpinner();
-      this.debugLog('detectDocument result: ' + JSON.stringify(result));
-      this.setState({
-        documentImageFileUri: result.imageFileUri,
-        originalImageFileUri: galleryImageFileUri,
-        filteredImageFileUri: null
-      });
-    },
-    (error) => {
-      this.hideSpinner();
-      this.debugLog('detectDocument error: ' + JSON.stringify(error));
-    });
-  }
+  //   this.showSpinner();
+  //   let options = {
+  //     imageFileUri: galleryImageFileUri,
+  //     imageCompressionQuality: DemoConstants.JPG_QUALITY
+  //   };
+  //   ScanbotSDK.detectDocument(options, (result) => {
+  //     this.hideSpinner();
+  //     this.debugLog('detectDocument result: ' + JSON.stringify(result));
+  //     this.setState({
+  //       documentImageFileUri: result.imageFileUri,
+  //       originalImageFileUri: galleryImageFileUri,
+  //       filteredImageFileUri: null
+  //     });
+  //   },
+  //   (error) => {
+  //     this.hideSpinner();
+  //     this.debugLog('detectDocument error: ' + JSON.stringify(error));
+  //   });
+  // }
 
-  createPDFButtonTapped() {
+  createPDFButtonTapped = async () => {
     if (!this.checkDocumentImage(true)) { return; }
 
     this.showSpinner();
-
-    let imageUri = this.state.filteredImageFileUri || this.state.documentImageFileUri;
-    let options = { imageFileUris: [imageUri] }; // add more images here
-    ScanbotSDK.createPDF(options, (result) => {
-      this.hideSpinner();
+    try {
+      const imageUris = this.state.pages.map(p => p.documentImageFileUri || p.originalImageFileUri);
+      const result = await ScanbotSDK.createPDF(imageUris);
       this.debugLog('createPDF result: ' + JSON.stringify(result));
-      // PDF file created - Please check result.pdfFileUri
-    },
-    (error) => {
+    } finally {
       this.hideSpinner();
-      this.debugLog('createPDF error: ' + JSON.stringify(error));
-    });
+    }
   }
 
-  getOCRConfigsButtonTapped() {
-    ScanbotSDK.getOCRConfigs((result) => {
-      this.debugLog('getOCRConfigs result: ' + JSON.stringify(result));
-    },
-    (error) => {
-      this.debugLog('getOCRConfigs error: ' + JSON.stringify(error));
-    });
+  getOCRConfigsButtonTapped = async () => {
+    const result = await ScanbotSDK.getOCRConfigs();
+    this.debugLog('getOCRConfigs result: ' + JSON.stringify(result));
   }
 
-  performOCRButtonTapped() {
+  performOCRButtonTapped = async () => {
     if (!this.checkDocumentImage(true)) { return; }
 
     this.showSpinner();
-
-    let imageUri = this.state.filteredImageFileUri || this.state.documentImageFileUri;
-    let options = {
-      imageFileUris: [imageUri], // add more images here
-      languages: ['en', 'de'], // run OCR for languages english and german
-      outputFormat: OCROutputFormat.FULL_OCR_RESULT
-    };
-    ScanbotSDK.performOCR(options, (result) => {
-      this.hideSpinner();
+    try {
+      let imageUri = this.state.pages[0].documentImageFileUri;
+      const result = await ScanbotSDK.performOCR([imageUri], ['en', 'de'], {outputFormat: OCROutputFormat.PLAIN_TEXT});
       this.debugLog('performOCR result: ' + JSON.stringify(result));
-      // Sandwiched PDF file with OCR created - Please check result.pdfFileUri
-    },
-    (error) => {
+    } finally {
       this.hideSpinner();
-      this.debugLog('performOCR error: ' + JSON.stringify(error));
-    });
+    }
   }
 
-  sdkCleanupButtonTapped() {
-    ScanbotSDK.cleanup((result) => {
-      this.debugLog('cleanup result: ' + JSON.stringify(result));
-      this.setState({
-        documentImageFileUri: null,
-        originalImageFileUri: null,
-        filteredImageFileUri: null
-      });
-    },
-    (error) => {
-      this.debugLog('cleanup error: ' + JSON.stringify(error));
+  sdkCleanupButtonTapped = async () => {
+    await ScanbotSDK.cleanup();
+    this.setState({
+      pages: null
     });
+    this.debugLog("Cleanup finished");
   }
 
-  rotateImageCWButtonTapped() {
+  rotateImageCWButtonTapped = () => {
     // romate image clockwise
     this.rotateImage(-90);
   }
 
-  rotateImageCCWButtonTapped() {
+  rotateImageCCWButtonTapped = () => {
     // romate image counter clockwise
     this.rotateImage(90);
   }
 
-  rotateImage(degrees: Number) {
+  rotateImage = async (degrees: Number) => {
     if (!this.checkDocumentImage(true)) { return; }
 
     this.showSpinner();
 
-    let options = {
-      imageFileUri: this.state.documentImageFileUri,
-      degrees: degrees,
-      imageCompressionQuality: DemoConstants.JPG_QUALITY
-    };
-    ScanbotSDK.rotateImage(options, (result) => {
-      this.hideSpinner();
+    try {
+      const result = await ScanbotSDK.rotateImage(this.state.pages[0].documentImageFileUri, degrees);
       this.debugLog('rotateImage result: ' + JSON.stringify(result));
-      this.setState({
-        documentImageFileUri: result.imageFileUri,
-        originalImageFileUri: this.state.originalImageFileUri,
-        filteredImageFileUri: null
-      });
-    },
-    (error) => {
+      await this.replaceDocumentUriOnFirstPage(result.imageFileUri);
+    } finally {
       this.hideSpinner();
-      this.debugLog('rotateImage error: ' + JSON.stringify(error));
-    });
+    }
   }
 
-  checkDocumentImage(showAlert: Boolean) {
-    if (this.state.documentImageFileUri) {
+  checkDocumentImage = (showAlert: Boolean) => {
+    const {pages} = this.state;
+    if (_.every(pages, p => p && p.documentImageFileUri)) {
       return true;
-    }
-    else {
-      if (showAlert) { Alert.alert('Document image required', 'Please snap an image via Camera UI.'); }
+    } else {
+      if (showAlert) {
+        Alert.alert('Document image required', 'Snap a document or crop an image that was chosen from the gallery.');
+      }
       return false;
     }
   }
 
   checkOriginalImage(showAlert: Boolean) {
-    if (this.state.originalImageFileUri) {
+    const {pages} = this.state;
+    if (_.some(pages)) {
       return true;
-    }
-    else {
-      if (showAlert) { Alert.alert('Original image required', 'Please snap an image via Camera UI.'); }
+    } else {
+      if (showAlert) {
+        Alert.alert('Image required', 'Snap a document or open one from the gallery.');
+      }
       return false;
     }
-  }
-
-  onImageCaptured(event: Event) {
-    console.log(event.nativeEvent);
-  }
-
-  onDocumentImageCaptured(event: Event) {
-    this.goBack();
-
-    this.debugLogEventResult('onDocumentImageCaptured', event);
-
-    this.setState({
-      documentImageFileUri: event.nativeEvent.imageFileUri,
-      originalImageFileUri: event.nativeEvent.originalImageFileUri,
-      filteredImageFileUri: null
-    });
-  }
-
-  onChangesAppliedWithPolygon(event: Event) {
-    this.goBack();
-
-    this.debugLogEventResult('onChangesAppliedWithPolygon', event);
-
-    this.setState({
-      documentImageFileUri: event.nativeEvent.imageFileUri,
-      originalImageFileUri: this.state.originalImageFileUri,
-      filteredImageFileUri: null
-    });
-  }
-
-  onChangesCanceled(event: Event) {
-    this.goBack();
-    console.log(event.nativeEvent);
   }
 
   goBack() {
@@ -395,15 +335,32 @@ export default class MainScreen extends Component {
     });
   }
 
+  setPages = (pages: Page[]) => {
+    const timestamp = `?t=${new Date().getTime()}`;
+    this.setState({
+      pages: pages.map((p, i) => Object.assign(p, {
+        originalImageFileUri: p.originalImageFileUri + timestamp,
+        documentImageFileUri: p.documentImageFileUri + timestamp,
+        originalPreviewImageFileUri: p.originalPreviewImageFileUri + timestamp,
+        documentPreviewImageFileUri: p.documentPreviewImageFileUri + timestamp,
+      }))
+    });
+  }
+
+  replaceDocumentUriOnFirstPage = async (documentUri: String) => {
+    const {pages} = this.state;
+    pages[0] = await ScanbotSDK.UI.setDocumentImage(pages[0], documentUri);
+    this.setPages(pages);
+  }
+
   renderDocumentImage() {
-    let imageUri = this.state.documentImageFileUri;
-    if (this.state.filteredImageFileUri) {
-      imageUri = this.state.filteredImageFileUri;
-    }
-    if (imageUri) {
-      return (
-          <Image source={{uri: imageUri}} style={styles.documentImage}/>
-      );
+    let {pages} = this.state;
+    if (pages) {
+      return pages.map((p, i) => <Image
+        key={i}
+        style={styles.documentImage}
+        source={{uri:p.documentPreviewImageFileUri || p.originalPreviewImageFileUri}}
+        />);
     }
   }
 
@@ -419,13 +376,6 @@ export default class MainScreen extends Component {
     console.log(msg);
     this.setState({
       debugText: msg
-    });
-  }
-
-  debugLogEventResult(msg: String, event: Event) {
-    console.log(msg);
-    this.setState({
-      debugText: msg + ": " + JSON.stringify(event.nativeEvent)
     });
   }
 }
