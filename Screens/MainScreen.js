@@ -12,7 +12,7 @@ import _ from 'lodash';
 
 import Spinner from 'react-native-loading-spinner-overlay';
 
-import { ScanbotSDK, ImageFilter, OCROutputFormat, Page } from 'react-native-scanbot-sdk';
+import ScanbotSDK, { Page, Point } from 'react-native-scanbot-sdk';
 
 import { DemoScreens, DemoConstants } from '.';
 
@@ -44,7 +44,7 @@ export default class MainScreen extends Component {
 
   render() {
     return (
-        <ScrollView>
+        <ScrollView onLayout={this.onLayout}>
 
           <Spinner visible={this.state.spinnerVisible}
                    textContent={"Processing ..."}
@@ -60,13 +60,24 @@ export default class MainScreen extends Component {
             onPress={this.pickImageTapped}/>
 
           <RowButton
+            title="Show Stored Pages"
+            onPress={this.showStoredPagesTapped}/>
+
+          <RowButton
             title="Start Document Scanner"
             onPress={this.startScanbotCameraButtonTapped}/>
-
 
           <RowButton
             title="Open Cropping Screen"
             onPress={this.startScanbotCroppingButtonTapped}/>
+
+          <RowButton
+            title="Auto-crop page"
+            onPress={this.autoCropPageTapped}/>
+
+          <RowButton
+            title="Auto-crop image"
+            onPress={this.autoCropImageTapped}/>
 
           <View style={styles.container}>
             {this.renderDocumentImage()}
@@ -74,7 +85,7 @@ export default class MainScreen extends Component {
 
           <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', margin: 10}}>
             <Button
-                title="Rotate Image CCW️"
+                title="Rotate Image CCW"
                 onPress={this.rotateImageCCWButtonTapped} />
             <Button
                 title="Rotate Image CW"
@@ -139,6 +150,11 @@ export default class MainScreen extends Component {
     this.debugLog('isLicenseValid result: ' + JSON.stringify(result));
   }
 
+  onLayout = evt => {
+    const {width} = evt.nativeEvent.layout;
+    this.setState({width});
+  }
+
   startScanbotCameraButtonTapped = async () => {
     const result = await ScanbotSDK.UI.launchDocumentScanner({
       multiPageButtonTitle: 'mooltaypage',
@@ -146,6 +162,7 @@ export default class MainScreen extends Component {
       polygonLineWidth: 10,
       flashButtonHidden: true,
       imageScale: 1,
+      orientationLockMode: "PORTRAIT_UPSIDE_DOWN",
     });
 
     this.debugLog(`DocumentScanner result: ${JSON.stringify(result)}`);
@@ -170,7 +187,8 @@ export default class MainScreen extends Component {
 
   openMrzScannerTapped = async () => {
     const result = await ScanbotSDK.UI.launchMrzScanner({
-      finderTextHint: "Put passport here ^^^"
+      finderTextHint: "Put passport here ^^^",
+      finderHeight: this.state.width / 5,
     });
     this.debugLog(`MRZ result: ${JSON.stringify(result)}`);
   }
@@ -183,12 +201,37 @@ export default class MainScreen extends Component {
     this.debugLog(`Barcode result: ${JSON.stringify(result)}`);
   }
 
+  autoCropImageTapped = async () => {
+    try {
+      this.showSpinner();
+      const result = await ScanbotSDK.detectDocument(this.state.pages[0].originalImageFileUri);
+      this.debugLog(`detectDocument result: ${JSON.stringify(result)}`);
+      if (result.detectionResult.startsWith("OK")) {
+        this.replaceDocumentUriOnFirstPage(result.documentImageFileUri, result.polygon);
+      }
+    } finally {
+      this.hideSpinner();
+    }
+  }
+
+  autoCropPageTapped = async () => {
+    try {
+      this.showSpinner();
+      const page = await ScanbotSDK.cropPage(this.state.pages[0]);
+      if (page) {
+        this.setPages([page]);
+      }
+    } finally {
+      this.hideSpinner();
+    }
+  }
+
   applyImageFilterButtonTapped = async () => {
     if (!this.checkDocumentImage(true)) { return; }
 
     this.showSpinner();
     try {
-      const result = await ScanbotSDK.applyImageFilter(this.state.pages[0].documentImageFileUri, ImageFilter.BINARIZED);
+      const result = await ScanbotSDK.applyImageFilter(this.state.pages[0].documentImageFileUri, "BINARIZED");
       this.debugLog('applyImageFilter result: ' + JSON.stringify(result));
       await this.replaceDocumentUriOnFirstPage(result.imageFileUri);
     } finally {
@@ -207,40 +250,20 @@ export default class MainScreen extends Component {
     });
   }
 
+  showStoredPagesTapped = () => {
+    this.props.navigator.push({
+      screen: DemoScreens.ReviewScreen.id,
+      title: DemoScreens.ReviewScreen.title,
+    });
+  }
+
   onGalleryImageSelected = async (imageFileUri: String) => {
     this.goBack();
 
-    this.debugLog('onGalleryImageSelected imageFileUri: ' + imageFileUri);
-
-    const page = await ScanbotSDK.UI.createPage(imageFileUri);
+    const page = await ScanbotSDK.createPage(imageFileUri);
+    this.debugLog('onGalleryImageSelected page: ' + JSON.stringify(page));
     this.setPages([page]);
   }
-
-  // runDocumentDetectionOnGalleryImage(galleryImageFileUri: String) {
-  //   if (!galleryImageFileUri) {
-  //     Alert.alert('Image required', 'Please select an image from the Photo Gallery.');
-  //     return;
-  //   }
-
-  //   this.showSpinner();
-  //   let options = {
-  //     imageFileUri: galleryImageFileUri,
-  //     imageCompressionQuality: DemoConstants.JPG_QUALITY
-  //   };
-  //   ScanbotSDK.detectDocument(options, (result) => {
-  //     this.hideSpinner();
-  //     this.debugLog('detectDocument result: ' + JSON.stringify(result));
-  //     this.setState({
-  //       documentImageFileUri: result.imageFileUri,
-  //       originalImageFileUri: galleryImageFileUri,
-  //       filteredImageFileUri: null
-  //     });
-  //   },
-  //   (error) => {
-  //     this.hideSpinner();
-  //     this.debugLog('detectDocument error: ' + JSON.stringify(error));
-  //   });
-  // }
 
   createPDFButtonTapped = async () => {
     if (!this.checkDocumentImage(true)) { return; }
@@ -266,7 +289,7 @@ export default class MainScreen extends Component {
     this.showSpinner();
     try {
       let imageUri = this.state.pages[0].documentImageFileUri;
-      const result = await ScanbotSDK.performOCR([imageUri], ['en', 'de'], {outputFormat: OCROutputFormat.PLAIN_TEXT});
+      const result = await ScanbotSDK.performOCR([imageUri], ['en', 'de'], {outputFormat: "PLAIN_TEXT"});
       this.debugLog('performOCR result: ' + JSON.stringify(result));
     } finally {
       this.hideSpinner();
@@ -340,16 +363,20 @@ export default class MainScreen extends Component {
     this.setState({
       pages: pages.map((p, i) => Object.assign(p, {
         originalImageFileUri: p.originalImageFileUri + timestamp,
-        documentImageFileUri: p.documentImageFileUri + timestamp,
+        documentImageFileUri: p.documentImageFileUri ? p.documentImageFileUri + timestamp : null,
         originalPreviewImageFileUri: p.originalPreviewImageFileUri + timestamp,
-        documentPreviewImageFileUri: p.documentPreviewImageFileUri + timestamp,
+        documentPreviewImageFileUri: p.documentImageFileUri ? p.documentPreviewImageFileUri + timestamp : null,
       }))
     });
   }
 
-  replaceDocumentUriOnFirstPage = async (documentUri: String) => {
+  replaceDocumentUriOnFirstPage = async (documentUri: String, polygon: Point[] = null) => {
     const {pages} = this.state;
-    pages[0] = await ScanbotSDK.UI.setDocumentImage(pages[0], documentUri);
+    pages[0] = await ScanbotSDK.setDocumentImage(pages[0], documentUri);
+    console.log(`Setting first page to ${JSON.stringify(pages[0])}`);
+    if (polygon) {
+      pages[0].polygon = polygon;
+    }
     this.setPages(pages);
   }
 

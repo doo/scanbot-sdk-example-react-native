@@ -1,9 +1,8 @@
 import { Navigation, ScreenVisibilityListener } from 'react-native-navigation';
 
 import MainScreen from './MainScreen.js';
-import ScanbotCameraDemoScreen from './ScanbotCameraDemoScreen';
-import ScanbotCroppingDemoScreen from './ScanbotCroppingDemoScreen';
 import CameraKitGalleryDemoScreen from './CameraKitGalleryDemoScreen';
+import ReviewScreen from './ReviewScreen';
 
 export const DemoScreens = {
   MainScreen: {
@@ -16,29 +15,36 @@ export const DemoScreens = {
     title: 'Select an image'
   },
 
-  ScanbotCameraDemoScreen: {
-    id: 'myDemo.ScanbotCameraDemoScreen',
-    title: 'ScanbotCameraView Demo'
-  },
-
-  ScanbotCroppingDemoScreen: {
-    id: 'myDemo.ScanbotCroppingDemoScreen',
-    title: 'ScanbotCroppingView Demo'
-  },
+  ReviewScreen: {
+    id: 'myDemo.ReviewScreen',
+    title: 'Stored Pages',
+  }
 };
+let licenseKey =
+  "M+NzOkvq5IioisKLbzwGTFozoltOAM" +
+  "6bMRIxxfikeErKtt8XFPN70rFkCctd" +
+  "U5GTUeJvJKmqj6BRHYSaMJyDNWQ7Kq" +
+  "t5XUQGuhPbP2JqWvPBQ1wMg4hv4dte" +
+  "czpKJuMxNmwkwMK1c4aozdzZdLsB4L" +
+  "A7wQeWiBCU7Vdbz7PhJPR3nYpXoT/6" +
+  "mBSo/hyEdB4Y+tZqfJd82JMCo7Lp5q" +
+  "e6uq8ZSti3rjU48zrbe8zX+2g2UXSi" +
+  "JzRiCPOxxJMLjmqmI/R6sxvmbM0eLK" +
+  "SVxFGTlHMCAHRaS4H7YzorgqT7aUtj" +
+  "8WwgoS9b+NjgpGeyUw6r4L9FmO4I14" +
+  "S0a/NfyeZOow==\nU2NhbmJvdFNESw" +
+  "ppby5zY2FuYm90LmRlbW8ucmVhY3Ru" +
+  "YXRpdmUKMTUzMDc0ODc5OQozMjc2Nw" +
+  "oz\n";
 
 export const DemoConstants = {
-  JPG_QUALITY : 70,
-
-  scanbotLicenseKey: '' // Add your Scanbot SDK license key string here
+  scanbotLicenseKey: licenseKey
 };
 
 export function registerScreens() {
   Navigation.registerComponent(DemoScreens.MainScreen.id, () => MainScreen);
   Navigation.registerComponent(DemoScreens.CameraKitGalleryDemoScreen.id, () => CameraKitGalleryDemoScreen);
-
-  Navigation.registerComponent(DemoScreens.ScanbotCameraDemoScreen.id, () => ScanbotCameraDemoScreen);
-  Navigation.registerComponent(DemoScreens.ScanbotCroppingDemoScreen.id, () => ScanbotCroppingDemoScreen);
+  Navigation.registerComponent(DemoScreens.ReviewScreen.id, () => ReviewScreen);
 }
 
 export function registerScreenVisibilityListener() {

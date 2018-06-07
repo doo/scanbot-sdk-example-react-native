@@ -39,8 +39,9 @@
 		6473141E1F8FD89F003180B2 /* libRNScanbotSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 647314181F8FD85E003180B2 /* libRNScanbotSDK.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		C204B7C91F558B68006C04E6 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C204B7C81F558A84006C04E6 /* libReactNativeNavigation.a */; };
-		C2262B8F1F8FB5A1004EB42C /* SBSDKLanguageData in Resources */ = {isa = PBXBuildFile; fileRef = C2262B8E1F8FB593004EB42C /* SBSDKLanguageData */; };
 		F0334B7220C19D2E00D490CA /* ScanbotSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F0334B7120C19D2E00D490CA /* ScanbotSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F09BE82620C7E0AC00EA204D /* ScanbotSDKOCRData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F09BE82520C7E0AC00EA204D /* ScanbotSDKOCRData.bundle */; };
+		F09BE82920C7FE0200EA204D /* ScanbotSDKMRZData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F09BE82820C7FE0200EA204D /* ScanbotSDKMRZData.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -368,8 +369,9 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		C204B79E1F558A84006C04E6 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
-		C2262B8E1F8FB593004EB42C /* SBSDKLanguageData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SBSDKLanguageData; sourceTree = "<group>"; };
 		F0334B7120C19D2E00D490CA /* ScanbotSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScanbotSDK.framework; path = "../node_modules/react-native-scanbot-sdk/ios/ScanbotSDK.framework"; sourceTree = "<group>"; };
+		F09BE82520C7E0AC00EA204D /* ScanbotSDKOCRData.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ScanbotSDKOCRData.bundle; sourceTree = "<group>"; };
+		F09BE82820C7FE0200EA204D /* ScanbotSDKMRZData.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ScanbotSDKMRZData.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -509,7 +511,8 @@
 		13B07FAE1A68108700A75B9A /* ScanbotSDKDemo */ = {
 			isa = PBXGroup;
 			children = (
-				C2262B8E1F8FB593004EB42C /* SBSDKLanguageData */,
+				F09BE82820C7FE0200EA204D /* ScanbotSDKMRZData.bundle */,
+				F09BE82520C7E0AC00EA204D /* ScanbotSDKOCRData.bundle */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1112,9 +1115,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2262B8F1F8FB5A1004EB42C /* SBSDKLanguageData in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				F09BE82620C7E0AC00EA204D /* ScanbotSDKOCRData.bundle in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				F09BE82920C7FE0200EA204D /* ScanbotSDKMRZData.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
