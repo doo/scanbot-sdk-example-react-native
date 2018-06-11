@@ -101,6 +101,10 @@ export default class MainScreen extends Component {
             onPress={this.createPDFButtonTapped} />
 
           <RowButton
+            title="Create TIFF"
+            onPress={this.createTiffTapped}/>
+
+          <RowButton
             title="Get OCR Configs"
             onPress={this.getOCRConfigsButtonTapped} />
 
@@ -273,6 +277,19 @@ export default class MainScreen extends Component {
       const imageUris = this.state.pages.map(p => p.documentImageFileUri || p.originalImageFileUri);
       const result = await ScanbotSDK.createPDF(imageUris);
       this.debugLog('createPDF result: ' + JSON.stringify(result));
+    } finally {
+      this.hideSpinner();
+    }
+  }
+
+  createTiffTapped = async () => {
+    if (!this.checkDocumentImage(true)) { return; }
+
+    this.showSpinner();
+    try {
+      const imageUris = this.state.pages.map(p => p.documentImageFileUri || p.originalImageFileUri);
+      const result = await ScanbotSDK.writeTIFF(imageUris, {oneBitEncoded: true});
+      this.debugLog('writeTiff result: ' + JSON.stringify(result));
     } finally {
       this.hideSpinner();
     }
