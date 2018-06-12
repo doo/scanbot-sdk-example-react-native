@@ -15,7 +15,7 @@ export default class ReviewScreen extends Component {
   }
 
   async updatePages() {
-    const pages = await ScanbotSDK.getAllPages();
+    const pages = await ScanbotSDK.getStoredPages();
     this.setState({pages});
   }
 

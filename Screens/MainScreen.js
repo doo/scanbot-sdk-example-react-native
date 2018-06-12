@@ -160,7 +160,7 @@ export default class MainScreen extends Component {
   }
 
   startScanbotCameraButtonTapped = async () => {
-    const result = await ScanbotSDK.UI.launchDocumentScanner({
+    const result = await ScanbotSDK.UI.startDocumentScanner({
       multiPageButtonTitle: 'mooltaypage',
       polygonColor: '#00ffff',
       polygonLineWidth: 10,
@@ -179,7 +179,7 @@ export default class MainScreen extends Component {
   startScanbotCroppingButtonTapped = async () => {
     if (!this.checkOriginalImage(true)) { return; }
 
-    const result = await ScanbotSDK.UI.launchCroppingScreen(this.state.pages[0], {});
+    const result = await ScanbotSDK.UI.startCroppingScreen(this.state.pages[0], {});
     this.debugLog(`CroppingScreen result: ${JSON.stringify(result)}`);
 
     if (result.status == "OK") {
@@ -190,7 +190,7 @@ export default class MainScreen extends Component {
   }
 
   openMrzScannerTapped = async () => {
-    const result = await ScanbotSDK.UI.launchMrzScanner({
+    const result = await ScanbotSDK.UI.startMrzScanner({
       finderTextHint: "Put passport here ^^^",
       finderHeight: this.state.width / 5,
     });
@@ -198,7 +198,7 @@ export default class MainScreen extends Component {
   }
 
   openBarcodeScannerTapped = async () => {
-    const result = await ScanbotSDK.UI.launchBarcodeScanner({
+    const result = await ScanbotSDK.UI.startBarcodeScanner({
       barcodeFormats: ["QR_CODE"],
       cancelButtonTitle: "Abort"
     });
@@ -221,7 +221,7 @@ export default class MainScreen extends Component {
   autoCropPageTapped = async () => {
     try {
       this.showSpinner();
-      const page = await ScanbotSDK.cropPage(this.state.pages[0]);
+      const page = await ScanbotSDK.detectDocumentOnPage(this.state.pages[0]);
       if (page) {
         this.setPages([page]);
       }
