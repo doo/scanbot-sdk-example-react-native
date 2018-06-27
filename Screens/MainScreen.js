@@ -100,22 +100,22 @@ export default class MainScreen extends Component {
             title="Auto-crop page"
             onPress={this.autoCropPageTapped}/>
 
-          <RowButton
-            title="Auto-crop image"
-            onPress={this.autoCropImageTapped}/>
-
           <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', margin: 10}}>
             <Button
-                title="Rotate Image CCW"
+                title="Rotate CCW"
                 onPress={this.rotateImageCCWButtonTapped} />
             <Button
-                title="Rotate Image CW"
+                title="Rotate CW"
                 onPress={this.rotateImageCWButtonTapped} />
           </View>
 
           <RowButton
-            title="Apply Image Filter"
+            title="Binarize"
             onPress={this.applyImageFilterButtonTapped}/>
+
+          <RowButton
+            title="Preview binarized"
+            onPress={this.previewBinarized}/>
 
           <RowButton
             title="Create PDF"
@@ -227,31 +227,13 @@ export default class MainScreen extends Component {
     this.debugLog(`Barcode result: ${JSON.stringify(result)}`);
   }
 
-  autoCropImageTapped = async () => {
-    if (!this.checkSelectedOriginal()) { return; }
-
-    try {
-      this.showSpinner();
-      const {selectedPage} = this.state;
-      const result = await ScanbotSDK.detectDocument(selectedPage.originalImageFileUri);
-      this.debugLog(`detectDocument result: ${JSON.stringify(result)}`);
-      if (result.detectionResult.startsWith("OK")) {
-        this.replaceDocumentUri(selectedPage, result.documentImageFileUri, result.polygon);
-      }
-    } finally {
-      this.hideSpinner();
-    }
-  }
-
   autoCropPageTapped = async () => {
     if (!this.checkSelectedOriginal()) { return; }
 
     try {
       this.showSpinner();
       const page = await ScanbotSDK.detectDocumentOnPage(this.state.selectedPage);
-      if (page) {
-        this.updatePage(page);
-      }
+      this.updatePage(page);
     } finally {
       this.hideSpinner();
     }
@@ -263,9 +245,24 @@ export default class MainScreen extends Component {
     this.showSpinner();
     try {
       const {selectedPage} = this.state;
-      const result = await ScanbotSDK.applyImageFilter(selectedPage.documentImageFileUri, "BINARIZED");
-      this.debugLog('applyImageFilter result: ' + JSON.stringify(result));
-      await this.replaceDocumentUri(selectedPage, result.imageFileUri);
+      this.setState({filterPreviewUri: null});
+      const page = await ScanbotSDK.applyImageFilterOnPage(selectedPage, "BINARIZED");
+      if (page) {
+        this.updatePage(page);
+      }
+    } finally {
+      this.hideSpinner();
+    }
+  }
+
+  previewBinarized = async () => {
+    if (!this.checkSelectedDocument()) { return; }
+
+    this.showSpinner();
+    try {
+      const {selectedPage} = this.state;
+      const uri = await ScanbotSDK.getFilteredDocumentPreviewUri(selectedPage, "BINARIZED");
+      this.setState({filterPreviewUri: uri})
     } finally {
       this.hideSpinner();
     }
@@ -368,25 +365,22 @@ export default class MainScreen extends Component {
   }
 
   rotateImageCWButtonTapped = () => {
-    // romate image clockwise
-    this.rotateImage(-90);
+    this.rotateImage(-1);
   }
 
   rotateImageCCWButtonTapped = () => {
-    // romate image counter clockwise
-    this.rotateImage(90);
+    this.rotateImage(1);
   }
 
-  rotateImage = async (degrees: Number) => {
-    if (!this.checkSelectedDocument()) { return; }
+  rotateImage = async (times: Number) => {
+    if (!this.checkSelectedOriginal()) { return; }
 
     this.showSpinner();
 
     try {
       const {selectedPage} = this.state;
-      const result = await ScanbotSDK.rotateImage(selectedPage.documentImageFileUri, degrees);
-      this.debugLog('rotateImage result: ' + JSON.stringify(result));
-      await this.replaceDocumentUri(selectedPage, result.imageFileUri);
+      const page = await ScanbotSDK.rotatePage(selectedPage, times);
+      this.updatePage(page);
     } finally {
       this.hideSpinner();
     }
@@ -457,16 +451,6 @@ export default class MainScreen extends Component {
     });
   }
 
-  replaceDocumentUri = async (page: Page, documentUri: String, polygon: Point[] = null) => {
-    page = await ScanbotSDK.setDocumentImage(page, documentUri);
-    if (polygon) {
-      page.polygon = polygon;
-    }
-
-    this.updatePage(page);
-    this.setPages(this.state.pages, page);
-  }
-
   renderPickedImages() {
     let {pages} = this.state;
     if (pages) {
@@ -484,11 +468,11 @@ export default class MainScreen extends Component {
   }
 
   renderDocumentImage() {
-    let {selectedPage} = this.state;
+    let {selectedPage, filterPreviewUri} = this.state;
     if (selectedPage) {
       return <Image
         style={styles.documentImage}
-        source={{uri:selectedPage.documentPreviewImageFileUri || selectedPage.originalPreviewImageFileUri}}
+        source={{uri:filterPreviewUri || selectedPage.documentPreviewImageFileUri || selectedPage.originalPreviewImageFileUri}}
         />;
     }
   }
