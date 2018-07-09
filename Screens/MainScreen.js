@@ -8,12 +8,13 @@ import {
   Image,
   Alert,
   TouchableHighlight,
+  Platform
 } from 'react-native';
 import _ from 'lodash';
 
 import Spinner from 'react-native-loading-spinner-overlay';
 
-import ScanbotSDK, { Page, Point } from 'react-native-scanbot-sdk';
+import ScanbotSDK, { Page, Point, MrzScannerConfiguration, BarcodeScannerConfiguration } from 'react-native-scanbot-sdk';
 
 import { DemoScreens, DemoConstants } from '.';
 
@@ -44,13 +45,15 @@ export default class MainScreen extends Component {
 
     this.initializeSDK();
 
+    /*
     this.props.navigator.setOnNavigatorEvent(evt => {
       switch (evt.id) {
         case 'willAppear':
-          this.refreshPages();
+          //this.refreshPages();
           break;
       }
     });
+    */
   }
 
   render() {
@@ -63,20 +66,16 @@ export default class MainScreen extends Component {
                    cancelable={false} />
 
           <Text style={styles.instructions}>
-            Copyright (c) 2017 doo GmbH. All rights reserved.
+            Copyright (c) 2018 doo GmbH. All rights reserved.
           </Text>
 
           <RowButton
-            title="Pick Image"
+              title="Start Document Scanner"
+              onPress={this.startScanbotCameraButtonTapped}/>
+
+          <RowButton
+            title="Pick Image from Photo Library"
             onPress={this.pickImageTapped}/>
-
-          <RowButton
-            title="Show Stored Pages"
-            onPress={this.showStoredPagesTapped}/>
-
-          <RowButton
-            title="Start Document Scanner"
-            onPress={this.startScanbotCameraButtonTapped}/>
 
           <View style={styles.container}>
             {this.renderPickedImages()}
@@ -88,7 +87,7 @@ export default class MainScreen extends Component {
 
           {
             this.state.pages.length == 0 && <Text style={styles.infoblock}>
-              Snap some photos or select existing ones.
+              Scan some images or import from Photo Library.
             </Text>
           }
 
@@ -186,11 +185,9 @@ export default class MainScreen extends Component {
 
   startScanbotCameraButtonTapped = async () => {
     const result = await ScanbotSDK.UI.startDocumentScanner({
-      multiPageButtonTitle: 'Multiple Pages',
+      // Customize colors, text resources, etc..
       polygonColor: '#00ffff',
-      polygonLineWidth: 10,
-      flashButtonHidden: true,
-      imageScale: 1,
+      cameraPreviewMode: 'FIT_IN'
     });
 
     this.debugLog(`DocumentScanner result: ${JSON.stringify(result)}`);
@@ -212,18 +209,26 @@ export default class MainScreen extends Component {
   }
 
   openMrzScannerTapped = async () => {
-    const result = await ScanbotSDK.UI.startMrzScanner({
-      finderTextHint: "Put passport here ^^^",
-      finderHeight: this.state.width / 5,
-    });
+    let config: MrzScannerConfiguration = {
+      // Customize colors, text resources, etc..
+      finderTextHint: 'Please hold your phone over the 2- or 3-line MRZ code at the front of your passport.'
+    };
+
+    if (Platform.OS === 'ios') {
+      config.finderWidth = this.state.width * 0.9;
+      config.finderHeight = this.state.width * 0.18;
+    }
+
+    const result = await ScanbotSDK.UI.startMrzScanner(config);
     this.debugLog(`MRZ result: ${JSON.stringify(result)}`);
   }
 
   openBarcodeScannerTapped = async () => {
-    const result = await ScanbotSDK.UI.startBarcodeScanner({
-      barcodeFormats: ["QR_CODE"],
-      cancelButtonTitle: "Abort"
-    });
+    let config: BarcodeScannerConfiguration = {
+      finderTextHint: 'Please align the barcode or QR code in the frame above to scan it.',
+      //barcodeFormats: ["QR_CODE"],
+    };
+    const result = await ScanbotSDK.UI.startBarcodeScanner(config);
     this.debugLog(`Barcode result: ${JSON.stringify(result)}`);
   }
 
@@ -275,16 +280,6 @@ export default class MainScreen extends Component {
       title: DemoScreens.CameraKitGalleryDemoScreen.title,
       passProps: {
         onImageSelected: this.onGalleryImageSelected,
-      }
-    });
-  }
-
-  showStoredPagesTapped = () => {
-    this.props.navigator.push({
-      screen: DemoScreens.ReviewScreen.id,
-      title: DemoScreens.ReviewScreen.title,
-      passProps: {
-        onPageSelected: this.onStoredPageSelected,
       }
     });
   }
@@ -420,18 +415,6 @@ export default class MainScreen extends Component {
     this.props.navigator.pop({
       animated: true
     });
-  }
-
-  refreshPages = async () => {
-    const allPages = await ScanbotSDK.getStoredPages();
-    const pageDict = _.fromPairs(allPages.map(p => [p.pageId, p]));
-
-    let {pages, selectedPage} = this.state;
-    _.remove(pages, p => !pageDict[p.pageId]);
-    if (selectedPage && !pageDict[selectedPage.pageId]) {
-      selectedPage = _.last(allPages);
-    }
-    this.setState({pages, selectedPage});
   }
 
   updatePage = (newPage: Page) => {

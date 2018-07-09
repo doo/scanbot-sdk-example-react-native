@@ -2,7 +2,6 @@ import { Navigation, ScreenVisibilityListener } from 'react-native-navigation';
 
 import MainScreen from './MainScreen.js';
 import CameraKitGalleryDemoScreen from './CameraKitGalleryDemoScreen';
-import ReviewScreen from './ReviewScreen';
 
 export const DemoScreens = {
   MainScreen: {
@@ -14,28 +13,24 @@ export const DemoScreens = {
     id: 'myDemo.CameraKitGalleryDemoScreen',
     title: 'Select an image'
   },
-
-  ReviewScreen: {
-    id: 'myDemo.ReviewScreen',
-    title: 'Stored Pages',
-  }
 };
+
 let licenseKey =
-  "M+NzOkvq5IioisKLbzwGTFozoltOAM" +
-  "6bMRIxxfikeErKtt8XFPN70rFkCctd" +
-  "U5GTUeJvJKmqj6BRHYSaMJyDNWQ7Kq" +
-  "t5XUQGuhPbP2JqWvPBQ1wMg4hv4dte" +
-  "czpKJuMxNmwkwMK1c4aozdzZdLsB4L" +
-  "A7wQeWiBCU7Vdbz7PhJPR3nYpXoT/6" +
-  "mBSo/hyEdB4Y+tZqfJd82JMCo7Lp5q" +
-  "e6uq8ZSti3rjU48zrbe8zX+2g2UXSi" +
-  "JzRiCPOxxJMLjmqmI/R6sxvmbM0eLK" +
-  "SVxFGTlHMCAHRaS4H7YzorgqT7aUtj" +
-  "8WwgoS9b+NjgpGeyUw6r4L9FmO4I14" +
-  "S0a/NfyeZOow==\nU2NhbmJvdFNESw" +
-  "ppby5zY2FuYm90LmRlbW8ucmVhY3Ru" +
-  "YXRpdmUKMTUzMDc0ODc5OQozMjc2Nw" +
-  "oz\n";
+    "HMIO6RYOYEkWptsWx0oPa/ehifgF26" +
+    "5+0j1VzxNnps1AGqZWeKBf4993j+PN" +
+    "i7YIg55l3BpzHN6SGbO7fVuSfezQFr" +
+    "waz6sfXF1ene40rX8CJniyn3ce/LZ5" +
+    "HzKTnUcENVrVGh4MRuutpuSekt6vLD" +
+    "ZcBNl2qe7FOKwF4HZCaR0JgFVewXjm" +
+    "L7rd8gH2SPJyDweBcRxrlo9/oLaIOn" +
+    "pBfAWrOLHxbBl64QGrG8UEcI33asKz" +
+    "hUQ0ATI7b6eR3FpANlCZrCEsngc/ok" +
+    "/iXP/r7tl/O0944HJJkbDM3zaIeCm5" +
+    "tU8yPFApYuc49Ze9Juj66Nsd8/KFnb" +
+    "tNq+vuFiJXqg==\nU2NhbmJvdFNESw" +
+    "ppby5zY2FuYm90LmRlbW8ucmVhY3Ru" +
+    "YXRpdmUKMTUzMTY5OTE5OQozMjc2Nw" +
+    "oz\n";
 
 export const DemoConstants = {
   scanbotLicenseKey: licenseKey
@@ -44,7 +39,6 @@ export const DemoConstants = {
 export function registerScreens() {
   Navigation.registerComponent(DemoScreens.MainScreen.id, () => MainScreen);
   Navigation.registerComponent(DemoScreens.CameraKitGalleryDemoScreen.id, () => CameraKitGalleryDemoScreen);
-  Navigation.registerComponent(DemoScreens.ReviewScreen.id, () => ReviewScreen);
 }
 
 export function registerScreenVisibilityListener() {
