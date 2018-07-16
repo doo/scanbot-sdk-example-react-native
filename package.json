@@ -13,7 +13,7 @@
     "react-native-camera-kit": "^5.3.32",
     "react-native-loading-spinner-overlay": "^0.5.2",
     "react-native-navigation": "^1.1.457",
-    "react-native-scanbot-sdk": "2.0.0"
+    "react-native-scanbot-sdk": "^2.0.1"
   },
   "devDependencies": {
     "babel-jest": "22.4.3",

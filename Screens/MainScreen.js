@@ -166,7 +166,7 @@ export default class MainScreen extends Component {
   async initializeSDK() {
     let options = { licenseKey: DemoConstants.scanbotLicenseKey, loggingEnabled: true };
     try {
-      var result = await ScanbotSDK.initializeSDK(options);
+      const result = await ScanbotSDK.initializeSDK(options);
       this.debugLog('initializeSDK result: ' + JSON.stringify(result));
     } catch (ex) {
       this.debugLog('initializeSDK error: ' + JSON.stringify(ex.error));
@@ -308,7 +308,7 @@ export default class MainScreen extends Component {
       const imageUris = this.state.pages.map(p => p.documentImageFileUri || p.originalImageFileUri);
       const result = await ScanbotSDK.createPDF(imageUris);
       this.debugLog('createPDF result: ' + JSON.stringify(result));
-      Alert.alert('PDF created', result.pdfFileUri);
+      this.delayedAlert('PDF created', result.pdfFileUri);
     } finally {
       this.hideSpinner();
     }
@@ -322,7 +322,7 @@ export default class MainScreen extends Component {
       const imageUris = this.state.pages.map(p => p.documentImageFileUri || p.originalImageFileUri);
       const result = await ScanbotSDK.writeTIFF(imageUris, {oneBitEncoded: true});
       this.debugLog('writeTiff result: ' + JSON.stringify(result));
-      Alert.alert('TIFF created', result.tiffFileUri);
+      this.delayedAlert('TIFF created', result.tiffFileUri);
     } finally {
       this.hideSpinner();
     }
@@ -341,13 +341,14 @@ export default class MainScreen extends Component {
   }
 
   performOCRButtonTapped = async () => {
-    if (!this.checkSelectedDocument()) { return; }
+    if (!this.checkAllDocumentImages(true)) { return; }
 
     this.showSpinner();
     try {
-      let imageUri = this.state.selectedPage.documentImageFileUri;
-      const result = await ScanbotSDK.performOCR([imageUri], ['en', 'de'], {outputFormat: "PLAIN_TEXT"});
+      const imageUris = this.state.pages.map(p => p.documentImageFileUri || p.originalImageFileUri);
+      const result = await ScanbotSDK.performOCR(imageUris, ['en', 'de'], {outputFormat: "FULL_OCR_RESULT"});
       this.debugLog('performOCR result: ' + JSON.stringify(result));
+      this.delayedAlert('OCR result', (result.pdfFileUri || result.plainText));
     } finally {
       this.hideSpinner();
     }
@@ -473,6 +474,10 @@ export default class MainScreen extends Component {
     this.setState({
       debugText: msg
     });
+  }
+
+  delayedAlert(title: string, message: string) {
+    setTimeout(() => {Alert.alert(title, message);}, 500);
   }
 }
 
