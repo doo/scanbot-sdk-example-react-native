@@ -2,6 +2,7 @@ import { Navigation, ScreenVisibilityListener } from 'react-native-navigation';
 
 import MainScreen from './MainScreen.js';
 import CameraKitGalleryDemoScreen from './CameraKitGalleryDemoScreen';
+import ImageFilterDemoScreen from './ImageFilterDemoScreen';
 
 export const DemoScreens = {
   MainScreen: {
@@ -13,15 +14,24 @@ export const DemoScreens = {
     id: 'myDemo.CameraKitGalleryDemoScreen',
     title: 'Select an image'
   },
+
+  ImageFilterDemoScreen: {
+    id: 'myDemo.ImageFilterDemoScreen',
+    title: ''
+  }
 };
 
 export const DemoConstants = {
-  scanbotLicenseKey: '' // Add the Scanbot SDK license key string here
+  imageFormat: 'JPG',   // 'JPG' or 'PNG'
+  imageQuality: 80,     // the quality factor of JPEG images, 1-100
+  loggingEnabled: true, // ! consider switching logging OFF in production builds for security and performance reasons !
+  scanbotLicenseKey: '' // TODO Add the Scanbot SDK license key string here
 };
 
 export function registerScreens() {
   Navigation.registerComponent(DemoScreens.MainScreen.id, () => MainScreen);
   Navigation.registerComponent(DemoScreens.CameraKitGalleryDemoScreen.id, () => CameraKitGalleryDemoScreen);
+  Navigation.registerComponent(DemoScreens.ImageFilterDemoScreen.id, () => ImageFilterDemoScreen);
 }
 
 export function registerScreenVisibilityListener() {

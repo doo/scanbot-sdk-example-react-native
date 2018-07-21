@@ -44,16 +44,6 @@ export default class MainScreen extends Component {
     };
 
     this.initializeSDK();
-
-    /*
-    this.props.navigator.setOnNavigatorEvent(evt => {
-      switch (evt.id) {
-        case 'willAppear':
-          //this.refreshPages();
-          break;
-      }
-    });
-    */
   }
 
   render() {
@@ -96,8 +86,8 @@ export default class MainScreen extends Component {
             onPress={this.startScanbotCroppingButtonTapped}/>
 
           <RowButton
-            title="Auto-crop page"
-            onPress={this.autoCropPageTapped}/>
+              title="Image Filter"
+              onPress={this.gotoImageFilterPage}/>
 
           <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', margin: 10}}>
             <Button
@@ -109,24 +99,12 @@ export default class MainScreen extends Component {
           </View>
 
           <RowButton
-            title="Binarize"
-            onPress={this.applyImageFilterButtonTapped}/>
-
-          <RowButton
-            title="Preview binarized"
-            onPress={this.previewBinarized}/>
-
-          <RowButton
             title="Create PDF"
             onPress={this.createPDFButtonTapped} />
 
           <RowButton
             title="Create TIFF"
             onPress={this.createTiffTapped}/>
-
-          <RowButton
-            title="Reset Selected Pages"
-            onPress={this.resetSelectedPagesTapped}/>
 
           <RowButton
             title="Get OCR Configs"
@@ -164,7 +142,12 @@ export default class MainScreen extends Component {
   }
 
   async initializeSDK() {
-    let options = { licenseKey: DemoConstants.scanbotLicenseKey, loggingEnabled: true };
+    let options = {
+      licenseKey: DemoConstants.scanbotLicenseKey,
+      loggingEnabled: DemoConstants.loggingEnabled,
+      storageImageFormat: DemoConstants.imageFormat,
+      storageImageQuality: DemoConstants.imageQuality
+    };
     try {
       const result = await ScanbotSDK.initializeSDK(options);
       this.debugLog('initializeSDK result: ' + JSON.stringify(result));
@@ -176,12 +159,12 @@ export default class MainScreen extends Component {
   isLicenseValidButtonTapped = async () => {
     const result = await ScanbotSDK.isLicenseValid();
     this.debugLog('isLicenseValid result: ' + JSON.stringify(result));
-  }
+  };
 
   onLayout = evt => {
     const {width} = evt.nativeEvent.layout;
     this.setState({width});
-  }
+  };
 
   startScanbotCameraButtonTapped = async () => {
     const result = await ScanbotSDK.UI.startDocumentScanner({
@@ -192,10 +175,10 @@ export default class MainScreen extends Component {
 
     this.debugLog(`DocumentScanner result: ${JSON.stringify(result)}`);
 
-    if (result.status == "OK") {
+    if (result.status === "OK") {
       this.setPages(this.state.pages.concat(result.pages));
     }
-  }
+  };
 
   startScanbotCroppingButtonTapped = async () => {
     if (!this.checkSelectedOriginal()) { return; }
@@ -203,10 +186,10 @@ export default class MainScreen extends Component {
     const result = await ScanbotSDK.UI.startCroppingScreen(this.state.selectedPage, {});
     this.debugLog(`CroppingScreen result: ${JSON.stringify(result)}`);
 
-    if (result.status == "OK") {
+    if (result.status === "OK") {
       this.updatePage(result.page);
     }
-  }
+  };
 
   openMrzScannerTapped = async () => {
     let config: MrzScannerConfiguration = {
@@ -221,7 +204,7 @@ export default class MainScreen extends Component {
 
     const result = await ScanbotSDK.UI.startMrzScanner(config);
     this.debugLog(`MRZ result: ${JSON.stringify(result)}`);
-  }
+  };
 
   openBarcodeScannerTapped = async () => {
     let config: BarcodeScannerConfiguration = {
@@ -230,48 +213,26 @@ export default class MainScreen extends Component {
     };
     const result = await ScanbotSDK.UI.startBarcodeScanner(config);
     this.debugLog(`Barcode result: ${JSON.stringify(result)}`);
-  }
+  };
 
-  autoCropPageTapped = async () => {
-    if (!this.checkSelectedOriginal()) { return; }
-
-    try {
-      this.showSpinner();
-      const page = await ScanbotSDK.detectDocumentOnPage(this.state.selectedPage);
-      this.updatePage(page);
-    } finally {
-      this.hideSpinner();
-    }
-  }
-
-  applyImageFilterButtonTapped = async () => {
+  gotoImageFilterPage = () => {
     if (!this.checkSelectedDocument()) { return; }
 
-    this.showSpinner();
-    try {
-      const {selectedPage} = this.state;
-      this.setState({filterPreviewUri: null});
-      const page = await ScanbotSDK.applyImageFilterOnPage(selectedPage, "BINARIZED");
-      if (page) {
-        this.updatePage(page);
+    this.props.navigator.push({
+      screen: DemoScreens.ImageFilterDemoScreen.id,
+      title: DemoScreens.ImageFilterDemoScreen.title,
+      passProps: {
+        page: this.state.selectedPage,
+        onImageFilterApplied: this.onImageFilterApplied
       }
-    } finally {
-      this.hideSpinner();
-    }
-  }
+    });
+  };
 
-  previewBinarized = async () => {
-    if (!this.checkSelectedDocument()) { return; }
-
-    this.showSpinner();
-    try {
-      const {selectedPage} = this.state;
-      const uri = await ScanbotSDK.getFilteredDocumentPreviewUri(selectedPage, "BINARIZED");
-      this.setState({filterPreviewUri: uri})
-    } finally {
-      this.hideSpinner();
-    }
-  }
+  onImageFilterApplied = async (page: Page) => {
+    this.goBack();
+    this.debugLog('page with applied image filter: ' + JSON.stringify(page));
+    this.updatePage(page);
+  };
 
   pickImageTapped = () => {
     // Open photo gallery to select an image and run document detection on it
@@ -282,15 +243,22 @@ export default class MainScreen extends Component {
         onImageSelected: this.onGalleryImageSelected,
       }
     });
-  }
+  };
 
   onGalleryImageSelected = async (imageFileUri: String) => {
     this.goBack();
-
-    const page = await ScanbotSDK.createPage(imageFileUri);
-    this.debugLog('onGalleryImageSelected page: ' + JSON.stringify(page));
-    this.onStoredPageSelected(page);
-  }
+    try {
+      this.showSpinner();
+      // create a page of the original selected image:
+      const pageWithOriginalImage = await ScanbotSDK.createPage(imageFileUri);
+      this.onStoredPageSelected(pageWithOriginalImage);
+      // and run auto document detection and cropping on it:
+      const pageWithDocImage = await ScanbotSDK.detectDocumentOnPage(pageWithOriginalImage);
+      this.updatePage(pageWithDocImage);
+    } finally {
+      this.hideSpinner();
+    }
+  };
   
   onStoredPageSelected = (page: Page) => {
     const {pages} = this.state;
@@ -298,7 +266,7 @@ export default class MainScreen extends Component {
       pages.push(page);
     }
     this.setState({pages, selectedPage: page});
-  }
+  };
 
   createPDFButtonTapped = async () => {
     if (!this.checkAllDocumentImages(true)) { return; }
@@ -312,7 +280,7 @@ export default class MainScreen extends Component {
     } finally {
       this.hideSpinner();
     }
-  }
+  };
 
   createTiffTapped = async () => {
     if (!this.checkAllDocumentImages(true)) { return; }
@@ -326,19 +294,19 @@ export default class MainScreen extends Component {
     } finally {
       this.hideSpinner();
     }
-  }
+  };
 
-  resetSelectedPagesTapped = () => {
+  resetSelectedPages = () => {
     this.setState({
       pages: [],
       selectedPage: null,
     })
-  }
+  };
 
   getOCRConfigsButtonTapped = async () => {
     const result = await ScanbotSDK.getOCRConfigs();
     this.debugLog('getOCRConfigs result: ' + JSON.stringify(result));
-  }
+  };
 
   performOCRButtonTapped = async () => {
     if (!this.checkAllDocumentImages(true)) { return; }
@@ -352,21 +320,21 @@ export default class MainScreen extends Component {
     } finally {
       this.hideSpinner();
     }
-  }
+  };
 
   sdkCleanupButtonTapped = async () => {
-    this.resetSelectedPagesTapped();
+    this.resetSelectedPages();
     await ScanbotSDK.cleanup();
     this.debugLog("Cleanup finished");
-  }
+  };
 
   rotateImageCWButtonTapped = () => {
     this.rotateImage(-1);
-  }
+  };
 
   rotateImageCCWButtonTapped = () => {
     this.rotateImage(1);
-  }
+  };
 
   rotateImage = async (times: Number) => {
     if (!this.checkSelectedOriginal()) { return; }
@@ -380,7 +348,7 @@ export default class MainScreen extends Component {
     } finally {
       this.hideSpinner();
     }
-  }
+  };
 
   checkAllDocumentImages = () => {
     const {pages} = this.state;
@@ -390,7 +358,7 @@ export default class MainScreen extends Component {
       Alert.alert('Document image required', "Some selected images have not yet been cropped. Crop any remaining uncropped images and try again.");
       return false;
     }
-  }
+  };
 
   checkSelectedDocument = () => {
     const {selectedPage} = this.state;
@@ -400,7 +368,7 @@ export default class MainScreen extends Component {
       Alert.alert('Document image required', 'Snap a document or crop an image that was chosen from the gallery.');
       return false;
     }
-  }
+  };
 
   checkSelectedOriginal = () => {
     const {selectedPage} = this.state;
@@ -410,7 +378,7 @@ export default class MainScreen extends Component {
       Alert.alert('Image required', 'Snap a document or open one from the gallery.');
       return false;
     }
-  }
+  };
 
   goBack() {
     this.props.navigator.pop({
@@ -426,14 +394,14 @@ export default class MainScreen extends Component {
     }
     
     this.setPages(pages, newPage);
-  }
+  };
 
   setPages = (pages: Page[], selectedPage: Page) => {
     this.setState({
       pages: pages,
       selectedPage: selectedPage ? _.find(pages, p => p.pageId == selectedPage.pageId) : _.last(pages)
     });
-  }
+  };
 
   renderPickedImages() {
     let {pages} = this.state;
@@ -449,7 +417,7 @@ export default class MainScreen extends Component {
 
   onPickedImageSelected = (page: Page) => {
     this.setState({selectedPage: page});
-  }
+  };
 
   renderDocumentImage() {
     let {selectedPage, filterPreviewUri} = this.state;
