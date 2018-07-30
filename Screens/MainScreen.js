@@ -123,6 +123,10 @@ export default class MainScreen extends Component {
             onPress={this.openMrzScannerTapped}/>
 
           <RowButton
+              title="ID Card Scanner"
+              onPress={this.openIdCardWorkflowDemo}/>
+
+          <RowButton
             title="Open Barcode Scanner"
             onPress={this.openBarcodeScannerTapped}/>
 
@@ -204,6 +208,13 @@ export default class MainScreen extends Component {
 
     const result = await ScanbotSDK.UI.startMrzScanner(config);
     this.debugLog(`MRZ result: ${JSON.stringify(result)}`);
+  };
+
+  openIdCardWorkflowDemo = () => {
+    this.props.navigator.push({
+      screen: DemoScreens.IdCardDemoScreen.id,
+      title: DemoScreens.IdCardDemoScreen.title
+    });
   };
 
   openBarcodeScannerTapped = async () => {

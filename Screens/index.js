@@ -3,6 +3,7 @@ import { Navigation, ScreenVisibilityListener } from 'react-native-navigation';
 import MainScreen from './MainScreen.js';
 import CameraKitGalleryDemoScreen from './CameraKitGalleryDemoScreen';
 import ImageFilterDemoScreen from './ImageFilterDemoScreen';
+import IdCardDemoScreen  from './IdCardDemoScreen';
 
 export const DemoScreens = {
   MainScreen: {
@@ -18,6 +19,11 @@ export const DemoScreens = {
   ImageFilterDemoScreen: {
     id: 'myDemo.ImageFilterDemoScreen',
     title: ''
+  },
+
+  IdCardDemoScreen: {
+    id: 'myDemo.IdCardDemoScreen',
+    title: ''
   }
 };
 
@@ -32,6 +38,7 @@ export function registerScreens() {
   Navigation.registerComponent(DemoScreens.MainScreen.id, () => MainScreen);
   Navigation.registerComponent(DemoScreens.CameraKitGalleryDemoScreen.id, () => CameraKitGalleryDemoScreen);
   Navigation.registerComponent(DemoScreens.ImageFilterDemoScreen.id, () => ImageFilterDemoScreen);
+  Navigation.registerComponent(DemoScreens.IdCardDemoScreen.id, () => IdCardDemoScreen);
 }
 
 export function registerScreenVisibilityListener() {
