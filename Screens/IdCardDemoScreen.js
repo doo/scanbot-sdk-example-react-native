@@ -12,7 +12,7 @@ import {
 
 import Spinner from 'react-native-loading-spinner-overlay';
 
-import ScanbotSDK, { Page } from 'react-native-scanbot-sdk';
+import ScanbotSDK, { Page, MrzRecognitionResult } from 'react-native-scanbot-sdk';
 
 const Side = { front: 'front', back: 'back' };
 Object.freeze(Side);
@@ -26,7 +26,7 @@ export default class IdCardDemoScreen extends Component {
       spinnerVisible: false,
       frontImagePage: null,
       backImagePage: null,
-      mrzData: null
+      mrzData: []
     };
   }
 
@@ -122,13 +122,12 @@ export default class IdCardDemoScreen extends Component {
 
   renderMrzData() {
     let {mrzData} = this.state;
-    if (mrzData) {
+    if (mrzData && mrzData.length > 0) {
       return (
           <View style={styles.container}>
             <FlatList
-                data={mrzData.fields}
-                renderItem={({item}) => <Text style={styles.mrzFieldItem}>{item.name}: {item.value}</Text>}
-                keyExtractor={(item, index) => item.name}
+                data={mrzData}
+                renderItem={({item}) => <Text style={styles.mrzFieldItem}>{item.key}: {item.value}</Text>}
             />
           </View>
       );
@@ -156,7 +155,8 @@ export default class IdCardDemoScreen extends Component {
       autoSnappingButtonHidden: true,
       multiPageButtonHidden: true,
       multiPageEnabled: false,
-      flashButtonHidden: true // TODO eddy: bug on iOS?
+      flashEnabled: false,
+      flashButtonHidden: true
     });
   };
 
@@ -164,8 +164,9 @@ export default class IdCardDemoScreen extends Component {
     try {
       this.showSpinner();
       const result = await ScanbotSDK.recognizeMrz(page.documentImageFileUri);
+      console.log("MRZ result: " + JSON.stringify(result));
       if (result && result.fields && result.fields.length > 0) {
-        this.setState({ mrzData: result });
+        this.setState({ mrzData: this.prepareMrzData(result) });
       } else {
         this.delayedAlert("Info", "No MRZ data recognized.\nPlease re-scan or re-crop the back side of the ID Card.");
       }
@@ -173,6 +174,26 @@ export default class IdCardDemoScreen extends Component {
       this.hideSpinner();
     }
   };
+
+  prepareMrzData(mrzResult: MrzRecognitionResult) {
+    let mrzData = [];
+
+    if (mrzResult) {
+      mrzData.push({key: "recognitionSuccessful", value: ""+mrzResult.recognitionSuccessful});
+      mrzData.push({key: "documentType", value: mrzResult.documentType});
+      mrzData.push({key: "checkDigitsCount", value: mrzResult.checkDigitsCount});
+      mrzData.push({key: "validCheckDigitsCount", value: mrzResult.validCheckDigitsCount});
+
+      // get the fields
+      if (mrzResult.fields && mrzResult.fields.length > 0) {
+        mrzResult.fields.forEach((item, index) => {
+          mrzData.push({key: item.name, value: item.value}); // item.confidence
+        });
+      }
+    }
+
+    return mrzData;
+  }
 
   startCropping = async (page: Page, side: Side) => {
     const result = await ScanbotSDK.UI.startCroppingScreen(page, {});
