@@ -3,25 +3,19 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
     "lodash": "^4.17.10",
-    "react": "16.3.1",
-    "react-native": "0.55.3",
+    "react": "16.6.3",
+    "react-native": "^0.57.8",
     "react-native-camera-kit": "^5.3.32",
     "react-native-loading-spinner-overlay": "^0.5.2",
     "react-native-navigation": "^1.1.457",
-    "react-native-scanbot-sdk": "^2.0.5"
+    "react-native-scanbot-sdk": "~2"
   },
   "devDependencies": {
-    "babel-jest": "22.4.3",
     "babel-preset-react-native": "4.0.0",
-    "jest": "22.4.3",
     "react-test-renderer": "16.3.1"
-  },
-  "jest": {
-    "preset": "react-native"
   }
 }

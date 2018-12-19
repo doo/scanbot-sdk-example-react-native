@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
   documentImage: {
     width: 300,
     height: 300,
-    resizeMode: Image.resizeMode.contain,
+    resizeMode: 'contain',
   },
   mrzFieldItem: {
     padding: 10,

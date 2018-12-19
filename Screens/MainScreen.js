@@ -187,7 +187,9 @@ export default class MainScreen extends Component {
   startScanbotCroppingButtonTapped = async () => {
     if (!this.checkSelectedOriginal()) { return; }
 
-    const result = await ScanbotSDK.UI.startCroppingScreen(this.state.selectedPage, {});
+    const result = await ScanbotSDK.UI.startCroppingScreen(this.state.selectedPage, {
+      doneButtonTitle: 'Apply'
+    });
     this.debugLog(`CroppingScreen result: ${JSON.stringify(result)}`);
 
     if (result.status === "OK") {
@@ -488,12 +490,12 @@ const styles = StyleSheet.create({
   documentImage: {
     width: 400,
     height: 400,
-    resizeMode: Image.resizeMode.contain,
+    resizeMode: 'contain',
   },
   galleryImage: {
     width: 80,
     height: 80,
-    resizeMode: Image.resizeMode.contain,
+    resizeMode: 'contain',
   },
   debugOutputHeader: {
     margin: 10,

@@ -141,6 +141,6 @@ const styles = StyleSheet.create({
   documentImage: {
     width: 400,
     height: 400,
-    resizeMode: Image.resizeMode.contain,
+    resizeMode: 'contain',
   },
 });
