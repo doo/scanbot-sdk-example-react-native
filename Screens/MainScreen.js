@@ -190,7 +190,8 @@ export default class MainScreen extends Component {
     if (!this.checkSelectedOriginal()) { return; }
 
     const result = await ScanbotSDK.UI.startCroppingScreen(this.state.selectedPage, {
-      doneButtonTitle: 'Apply'
+      doneButtonTitle: 'Apply',
+      topBarBackgroundColor: '#c8193c'
     });
     this.debugLog(`CroppingScreen result: ${JSON.stringify(result)}`);
 
