@@ -42,7 +42,9 @@ export default class MainScreen extends Component {
       spinnerVisible: false,
       debugText: ""
     };
+  }
 
+  componentDidMount() {
     this.initializeSDK();
   }
 
