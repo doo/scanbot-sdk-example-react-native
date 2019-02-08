@@ -1,4 +1,6 @@
-# Example App for Scanbot SDK React Native Module
+# Document Scan SDK with the option to scan QR codes, MRZ and barcodes
+
+## Scanbot SDK example app for React Native
 
 This example app shows how to integrate the Scanbot SDK React Native Module. 
 
@@ -11,7 +13,7 @@ For more details please see this [documentation](https://scanbotsdk.github.io/do
 ## What is Scanbot SDK?
 The Scanbot SDK brings scanning and document creation capabilities to your mobile apps. 
 It contains modules which are individually licensable as license packages. 
-For more details visit our website [https://scanbot.io/sdk.html](https://scanbot.io/sdk.html)
+For more details visit our website https://scanbot.io/sdk
 
 
 
