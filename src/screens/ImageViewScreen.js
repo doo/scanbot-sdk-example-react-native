@@ -55,7 +55,7 @@ class ImageViewScreen extends Component {
                      cancelable={false} />
             <View style={styles.content}>
               {/*<Text>Page ID: {page.pageId}</Text>*/}
-              <Image source={{uri: page.documentPreviewImageFileUri}} style={styles.documentImage} />
+              <Image source={{uri: `${page.documentPreviewImageFileUri}?${Date.now()}`}} style={styles.documentImage} />
             </View>
           </Content>
           <Footer>

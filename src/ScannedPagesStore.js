@@ -31,25 +31,28 @@ function addPages(pages: Page[], state: ScannedPagesState): ScannedPagesState {
 
 function updateOrAddPage(page: Page, state: ScannedPagesState): ScannedPagesState {
   let updated = false;
-  for (let i = 0; i < state.pages.length; ++i) {
-    if (state.pages[i].pageId === page.pageId) {
-      state.pages[i] = page;
+  const pages = [...state.pages]
+  for (let i = 0; i < pages.length; ++i) {
+    if (pages[i].pageId === page.pageId) {
+      pages[i] = page;
       updated = true;
       break;
     }
   }
   if (!updated) {
-    state.pages.push(page);
+    pages.push(page);
   }
-  return { pages: state.pages };
+  return { pages };
 }
 
 function removePage(page: Page, state: ScannedPagesState): ScannedPagesState {
-  const index = state.pages.findIndex(p => p.pageId === page.pageId);
-  if (index > -1) {
-    state.pages.splice(index, 1);
+  let pages = state.pages;
+  const index = pages.findIndex(p => p.pageId === page.pageId);
+  if (index !== -1) {
+    pages = [...pages];
+    pages.splice(index, 1);
   }
-  return { pages: state.pages };
+  return { pages };
 }
 
 function removeAllPages(): ScannedPagesState {
