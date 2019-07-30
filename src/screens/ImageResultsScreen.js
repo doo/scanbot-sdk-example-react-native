@@ -37,7 +37,7 @@ class ImageResultsScreen extends Component {
     super(props);
 
     this.state = {
-      spinnerVisible: false
+      spinnerVisible: false,
     };
   }
 
@@ -83,7 +83,7 @@ class ImageResultsScreen extends Component {
     if (pages) {
       return pages.map((p, i) =>
           <TouchableOpacity key={i} onPress={() => this.gotoImageView(p)}>
-            <Image style={styles.galleryImage} source={{uri:p.documentPreviewImageFileUri}} />
+            <Image style={styles.galleryImage} source={{uri: `${p.documentPreviewImageFileUri}?${Date.now()}`}} />
           </TouchableOpacity>);
     }
   }
