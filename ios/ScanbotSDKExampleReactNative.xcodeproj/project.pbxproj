@@ -1510,7 +1510,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.scanbot.sdk.example.ScanbotSDKExampleReactNative;
+				PRODUCT_BUNDLE_IDENTIFIER = io.scanbot.example.sdk.reactnative;
 				PRODUCT_NAME = ScanbotSDKExampleReactNative;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1535,7 +1535,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.scanbot.sdk.example.ScanbotSDKExampleReactNative;
+				PRODUCT_BUNDLE_IDENTIFIER = io.scanbot.example.sdk.reactnative;
 				PRODUCT_NAME = ScanbotSDKExampleReactNative;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

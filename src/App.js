@@ -13,16 +13,14 @@ import ImageViewScreen from './screens/ImageViewScreen';
 import ImageFilterScreen from './screens/ImageFilterScreen';
 
 /*
- * TODO add the license key here.
+ * TODO Add the Scanbot SDK license key here.
  * Please note: The Scanbot SDK will run without a license key for one minute per session!
  * After the trial period is over all Scanbot SDK functions as well as the UI components will stop working
  * or may be terminated. You can get an unrestricted "no-strings-attached" 30 day trial license key for free.
- * Please see the trial license form (https://scanbot.io/sdk/trial.html) on our website.
+ * Please submit the trial license form (https://scanbot.io/sdk/trial.html) on our website by using
+ * the app identifier "io.scanbot.example.sdk.reactnative" of this example app.
  */
-const SDK_LICENSE_KEY = Platform.select({
-  ios: '',
-  android: ''
-});
+const SDK_LICENSE_KEY = '';
 
 
 const MainStack = createStackNavigator({
