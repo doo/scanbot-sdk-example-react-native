@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Platform } from 'react-native';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import ScanbotSDK from 'react-native-scanbot-sdk';
 import { Provider } from 'react-redux';
 import { DocumentDirectoryPath, ExternalDirectoryPath } from 'react-native-fs';
@@ -79,9 +80,9 @@ export default class App extends Component {
     };
     try {
       const result = await ScanbotSDK.initializeSDK(options);
-      console.log('initializeSDK result: ' + JSON.stringify(result));
+      console.log('Scanbot SDK initialization result: ' + JSON.stringify(result));
     } catch (ex) {
-      console.log('initializeSDK error: ' + JSON.stringify(ex.error));
+      console.error('Scanbot SDK initialization error: ' + JSON.stringify(ex.error));
     }
   }
 
