@@ -221,16 +221,16 @@ PODS:
     - React
   - RNGestureHandler (1.4.1):
     - React
-  - RNScanbotSDK/ALL (4.0.0-beta3):
+  - RNScanbotSDK/ALL (4.0.0-beta4):
     - React
-    - ScanbotSDK (= 1.9.2)
-    - ScanbotSDK/ALL (= 1.9.2)
+    - ScanbotSDK (= 1.9.3)
+    - ScanbotSDK/ALL (= 1.9.3)
   - RNVectorIcons (6.6.0):
     - React
-  - ScanbotSDK (1.9.2):
-    - ScanbotSDK/NONE (= 1.9.2)
-  - ScanbotSDK/ALL (1.9.2)
-  - ScanbotSDK/NONE (1.9.2)
+  - ScanbotSDK (1.9.3):
+    - ScanbotSDK/NONE (= 1.9.3)
+  - ScanbotSDK/ALL (1.9.3)
+  - ScanbotSDK/NONE (1.9.3)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -360,9 +360,9 @@ SPEC CHECKSUMS:
   ReactCommon: 4fba5be89efdf0b5720e0adb3d8d7edf6e532db0
   RNFS: a8fbe7060fa49157d819466404794ad9c58e58cf
   RNGestureHandler: 4cb47a93019c1a201df2644413a0a1569a51c8aa
-  RNScanbotSDK: 09b7c64979b50836da532e25a226217dc6a5fb2e
+  RNScanbotSDK: 90ae88d1c987abc74ac436465e34c1a66746395f
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
-  ScanbotSDK: 3006db96d9c8900eed31c19fbd8987a06427d923
+  ScanbotSDK: 2685165fbb96bc8b58fa7cb07c5f8e6eb86ad2d2
   Yoga: d8c572ddec8d05b7dba08e4e5f1924004a177078
 
 PODFILE CHECKSUM: 239e31d9af292d08b52ff2093c75ea66f020ede1

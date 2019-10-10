@@ -39,6 +39,7 @@ class ImageFilterScreen extends Component {
     'DEEP_BINARIZATION',
     'EDGE_HIGHLIGHT',
     'LOW_LIGHT_BINARIZATION',
+    'LOW_LIGHT_BINARIZATION_2',
   ];
 
   constructor(props) {
