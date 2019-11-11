@@ -231,7 +231,7 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				6EB84EED116DA208B4F7857B /* [CP] Embed Pods Frameworks */,
 				ECD869B06F9595AD2F497524 /* [CP] Copy Pods Resources */,
-				640D61A5236B0B5E00977830 /* Run Script - strip-SBSDK-Framework */,
+				640D61A5236B0B5E00977830 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -439,7 +439,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		640D61A5236B0B5E00977830 /* Run Script - strip-SBSDK-Framework */ = {
+		640D61A5236B0B5E00977830 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -449,7 +449,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/ScanbotSDK/ScanbotSDK.framework.dSYM",
 			);
-			name = "Run Script - strip-SBSDK-Framework";
+			name = "Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
