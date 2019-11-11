@@ -11,6 +11,7 @@ For more details please see this [documentation](https://scanbotsdk.github.io/do
 
 
 ## What is Scanbot SDK?
+
 The Scanbot SDK brings scanning and document creation capabilities to your mobile apps. 
 It contains modules which are individually licensable as license packages. 
 For more details visit our website https://scanbot.io/sdk
@@ -19,24 +20,34 @@ For more details visit our website https://scanbot.io/sdk
 
 ## How to run this app
 
-Install [React Native CLI](https://facebook.github.io/react-native/). 
-Fetch this repository and navigate to the project directory.
-
-`cd scanbot-sdk-example-react-native`
+Make sure you have the latest versions of [React Native CLI](https://facebook.github.io/react-native/) 
+and [CocoaPods](https://cocoapods.org/) installed.
 
 Install node modules:
 
-`npm install`
+```
+cd scanbot-sdk-example-react-native/
+npm install
+```
 
 ### Run on Android
 
-`react-native run-android`
+```
+react-native run-android
+```
 
-### Run on iOS (Xcode required)
+### Run on iOS
 
-- Open the project file `ScanbotSDKDemo.xcodeproj` from the `ios` directory in Xcode 
-- Adjust *Provisioning* and *Code Signing* settings
-- Start the App in Xcode or via `react-native run-ios`
+Install CocoaPods dependencies:
+
+```
+cd ios/
+pod install
+```
+
+- Open the **workspace** file `ScanbotSDKExampleReactNative.xcworkspace` (not .xcodeproj) from the `ios` directory in Xcode. 
+- Adjust *Provisioning* and *Signing* settings.
+- And run the app in Xcode or via `react-native run-ios`.
 
 
 
