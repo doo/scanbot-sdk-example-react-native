@@ -221,7 +221,7 @@ PODS:
     - React
   - RNGestureHandler (1.4.1):
     - React
-  - RNScanbotSDK/ALL (4.0.0-beta4):
+  - RNScanbotSDK/ALL (4.0.0):
     - React
     - ScanbotSDK (= 1.9.3)
     - ScanbotSDK/ALL (= 1.9.3)
@@ -268,7 +268,7 @@ DEPENDENCIES:
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - boost-for-react-native
     - ScanbotSDK
 
@@ -360,11 +360,11 @@ SPEC CHECKSUMS:
   ReactCommon: 4fba5be89efdf0b5720e0adb3d8d7edf6e532db0
   RNFS: a8fbe7060fa49157d819466404794ad9c58e58cf
   RNGestureHandler: 4cb47a93019c1a201df2644413a0a1569a51c8aa
-  RNScanbotSDK: 90ae88d1c987abc74ac436465e34c1a66746395f
+  RNScanbotSDK: 5a310238345df6d1ac930bf4f5df9240da3be755
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   ScanbotSDK: 2685165fbb96bc8b58fa7cb07c5f8e6eb86ad2d2
   Yoga: d8c572ddec8d05b7dba08e4e5f1924004a177078
 
 PODFILE CHECKSUM: 239e31d9af292d08b52ff2093c75ea66f020ede1
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.4
