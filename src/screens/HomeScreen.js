@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import { StyleSheet, Platform, Dimensions } from 'react-native';
 import { Container, Content, Text, ListItem, List, Right, Left, Icon } from 'native-base';
-import ScanbotSDK, { Page, BarcodeScannerConfiguration, MrzScannerConfiguration } from 'react-native-scanbot-sdk';
 import { connect } from 'react-redux';
+import ImagePicker from 'react-native-image-picker';
+import Toast from 'react-native-easy-toast'
 
-import { ACTION_ADD_PAGES } from '../ScannedPagesStore';
+import ScanbotSDK, { Page, BarcodeScannerConfiguration, MrzScannerConfiguration } from 'react-native-scanbot-sdk';
+
+import {ACTION_ADD_PAGES, ACTION_UPDATE_OR_ADD_PAGE} from '../ScannedPagesStore';
 
 const mapDispatchToProps = (dispatch) => {
   return {
     addScannedPages: (pages: Page[]) => dispatch({ type: ACTION_ADD_PAGES, pages: pages }),
+    updateScannedPage: (page: Page) => dispatch({ type: ACTION_UPDATE_OR_ADD_PAGE, page: page })
   };
 };
 
@@ -17,6 +21,10 @@ class HomeScreen extends Component {
     title: 'Scanbot SDK React Native Example',
   };
 
+  constructor() {
+    super();
+    this.toast = React.createRef();
+  }
   render() {
     return (
         <Container>
@@ -28,6 +36,9 @@ class HomeScreen extends Component {
               </ListItem>
               <ListItem button onPress={this.startDocumentScannerButtonTapped}>
                 <Text>Scan Documents</Text>
+              </ListItem>
+              <ListItem button onPress={this.importImageButtonTapped}>
+                <Text>Import image</Text>
               </ListItem>
               <ListItem button onPress={this.viewImageResultsButtonTapped}>
                 <Left>
@@ -50,11 +61,13 @@ class HomeScreen extends Component {
             </List>
 
           </Content>
+          <Toast ref={this.toast}/>
         </Container>
     );
   }
 
   startDocumentScannerButtonTapped = async () => {
+
     const result = await ScanbotSDK.UI.startDocumentScanner({
       // Customize colors, text resources, etc..
       polygonColor: '#00ffff',
@@ -72,6 +85,28 @@ class HomeScreen extends Component {
       this.props.addScannedPages(result.pages);
       this.gotoImageResults();
     }
+  };
+
+  importImageButtonTapped = async () => {
+    const options = {
+      title: 'Import image',
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+
+    ImagePicker.launchImageLibrary(options, async response => {
+
+      if (!ScanbotSDK.isLicenseValid()) {
+        this.toast.current.show("License invalid, image not imported");
+        return;
+      }
+      let page = await ScanbotSDK.createPage(response.uri);
+      this.props.updateScannedPage(page);
+      this.toast.current.show("Image successfully imported, you can now view it by clicking 'View Image Results'");
+
+    });
   };
 
   viewImageResultsButtonTapped = async () => {

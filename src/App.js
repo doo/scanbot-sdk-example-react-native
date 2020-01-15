@@ -23,7 +23,6 @@ import ImageFilterScreen from './screens/ImageFilterScreen';
  */
 const SDK_LICENSE_KEY = '';
 
-
 const MainStack = createStackNavigator({
   Home: HomeScreen,
   ImageResults: ImageResultsScreen,
