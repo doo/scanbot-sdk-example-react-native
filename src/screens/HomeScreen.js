@@ -7,12 +7,11 @@ import Toast from 'react-native-easy-toast'
 
 import ScanbotSDK, { Page, BarcodeScannerConfiguration, MrzScannerConfiguration } from 'react-native-scanbot-sdk';
 
-import {ACTION_ADD_PAGES, ACTION_UPDATE_OR_ADD_PAGE} from '../ScannedPagesStore';
+import {ACTION_ADD_PAGES } from '../ScannedPagesStore';
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addScannedPages: (pages: Page[]) => dispatch({ type: ACTION_ADD_PAGES, pages: pages }),
-    updateScannedPage: (page: Page) => dispatch({ type: ACTION_UPDATE_OR_ADD_PAGE, page: page })
+    addScannedPages: (pages: Page[]) => dispatch({ type: ACTION_ADD_PAGES, pages: pages })
   };
 };
 
@@ -102,8 +101,11 @@ class HomeScreen extends Component {
         this.toast.current.show("License invalid, image not imported");
         return;
       }
-      let page = await ScanbotSDK.createPage(response.uri);
-      this.props.updateScannedPage(page);
+
+      var page = await ScanbotSDK.createPage(response.uri);
+      page = await ScanbotSDK.detectDocumentOnPage(page);
+
+      this.props.addScannedPages([page]);
       this.toast.current.show("Image successfully imported, you can now view it by clicking 'View Image Results'");
 
     });
