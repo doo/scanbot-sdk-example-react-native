@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { StyleSheet, Platform, Dimensions } from 'react-native';
 import { Container, Content, Text, ListItem, List, Right, Left, Icon } from 'native-base';
-import ScanbotSDK, { Page, BarcodeScannerConfiguration, MrzScannerConfiguration } from 'react-native-scanbot-sdk';
 import { connect } from 'react-redux';
+import ImagePicker from 'react-native-image-picker';
+import Toast from 'react-native-easy-toast';
 
-import { ACTION_ADD_PAGES } from '../ScannedPagesStore';
+import ScanbotSDK, { Page, BarcodeScannerConfiguration, MrzScannerConfiguration } from 'react-native-scanbot-sdk';
+
+import {ACTION_ADD_PAGES } from '../ScannedPagesStore';
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addScannedPages: (pages: Page[]) => dispatch({ type: ACTION_ADD_PAGES, pages: pages }),
+    addScannedPages: (pages: Page[]) => dispatch({ type: ACTION_ADD_PAGES, pages: pages })
   };
 };
 
@@ -17,6 +20,10 @@ class HomeScreen extends Component {
     title: 'Scanbot SDK React Native Example',
   };
 
+  constructor() {
+    super();
+    this.toast = React.createRef();
+  }
   render() {
     return (
         <Container>
@@ -28,6 +35,9 @@ class HomeScreen extends Component {
               </ListItem>
               <ListItem button onPress={this.startDocumentScannerButtonTapped}>
                 <Text>Scan Documents</Text>
+              </ListItem>
+              <ListItem button onPress={this.importImageButtonTapped}>
+                <Text>Import Image</Text>
               </ListItem>
               <ListItem button onPress={this.viewImageResultsButtonTapped}>
                 <Left>
@@ -50,11 +60,14 @@ class HomeScreen extends Component {
             </List>
 
           </Content>
+          <Toast ref={this.toast}/>
         </Container>
     );
   }
 
   startDocumentScannerButtonTapped = async () => {
+    if (!(await this.checkLicense())) { return; }
+
     const result = await ScanbotSDK.UI.startDocumentScanner({
       // Customize colors, text resources, etc..
       polygonColor: '#00ffff',
@@ -74,11 +87,33 @@ class HomeScreen extends Component {
     }
   };
 
+  importImageButtonTapped = async () => {
+    const options = {
+      title: 'Import image',
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+
+    ImagePicker.launchImageLibrary(options, async response => {
+      if (!(await this.checkLicense())) { return; }
+
+      let page = await ScanbotSDK.createPage(response.uri);
+      page = await ScanbotSDK.detectDocumentOnPage(page);
+
+      this.props.addScannedPages([page]);
+      this.gotoImageResults();
+    });
+  };
+
   viewImageResultsButtonTapped = async () => {
     this.gotoImageResults();
   };
 
   startBarcodeScannerButtonTapped = async () => {
+    if (!(await this.checkLicense())) { return; }
+
     const config: BarcodeScannerConfiguration = {
       finderTextHint: 'Please align the barcode or QR code in the frame above to scan it.',
       // barcodeFormats: ['EAN_8', 'EAN_13', 'QR_CODE'],
@@ -91,6 +126,8 @@ class HomeScreen extends Component {
   };
 
   startMrzScannerButtonTapped = async () => {
+    if (!(await this.checkLicense())) { return; }
+
     let config: MrzScannerConfiguration = {
       // Customize colors, text resources, etc..
       finderTextHint: 'Please hold your phone over the 2- or 3-line MRZ code at the front of your passport.'
@@ -113,6 +150,14 @@ class HomeScreen extends Component {
     this.props.navigation.push('ImageResults');
   };
 
+  checkLicense = async () => {
+    if (await ScanbotSDK.isLicenseValid()) {
+      // OK - we have a trial session, a valid trial license or valid production license.
+      return true;
+    }
+    this.toast.current.show('Scanbot SDK trial period or license has expired!');
+    return false;
+  };
 }
 
 const styles = StyleSheet.create({
