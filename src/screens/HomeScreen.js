@@ -3,7 +3,7 @@ import { StyleSheet, Platform, Dimensions } from 'react-native';
 import { Container, Content, Text, ListItem, List, Right, Left, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
-import Toast from 'react-native-easy-toast'
+import Toast from 'react-native-easy-toast';
 
 import ScanbotSDK, { Page, BarcodeScannerConfiguration, MrzScannerConfiguration } from 'react-native-scanbot-sdk';
 
@@ -37,7 +37,7 @@ class HomeScreen extends Component {
                 <Text>Scan Documents</Text>
               </ListItem>
               <ListItem button onPress={this.importImageButtonTapped}>
-                <Text>Import image</Text>
+                <Text>Import Image</Text>
               </ListItem>
               <ListItem button onPress={this.viewImageResultsButtonTapped}>
                 <Left>
@@ -66,6 +66,7 @@ class HomeScreen extends Component {
   }
 
   startDocumentScannerButtonTapped = async () => {
+    if (!(await this.checkLicense())) { return; }
 
     const result = await ScanbotSDK.UI.startDocumentScanner({
       // Customize colors, text resources, etc..
@@ -96,18 +97,13 @@ class HomeScreen extends Component {
     };
 
     ImagePicker.launchImageLibrary(options, async response => {
+      if (!(await this.checkLicense())) { return; }
 
-      if (!ScanbotSDK.isLicenseValid()) {
-        this.toast.current.show("License invalid, image not imported");
-        return;
-      }
-
-      var page = await ScanbotSDK.createPage(response.uri);
+      let page = await ScanbotSDK.createPage(response.uri);
       page = await ScanbotSDK.detectDocumentOnPage(page);
 
       this.props.addScannedPages([page]);
-      this.toast.current.show("Image successfully imported, you can now view it by clicking 'View Image Results'");
-
+      this.gotoImageResults();
     });
   };
 
@@ -116,6 +112,8 @@ class HomeScreen extends Component {
   };
 
   startBarcodeScannerButtonTapped = async () => {
+    if (!(await this.checkLicense())) { return; }
+
     const config: BarcodeScannerConfiguration = {
       finderTextHint: 'Please align the barcode or QR code in the frame above to scan it.',
       // barcodeFormats: ['EAN_8', 'EAN_13', 'QR_CODE'],
@@ -128,6 +126,8 @@ class HomeScreen extends Component {
   };
 
   startMrzScannerButtonTapped = async () => {
+    if (!(await this.checkLicense())) { return; }
+
     let config: MrzScannerConfiguration = {
       // Customize colors, text resources, etc..
       finderTextHint: 'Please hold your phone over the 2- or 3-line MRZ code at the front of your passport.'
@@ -150,6 +150,14 @@ class HomeScreen extends Component {
     this.props.navigation.push('ImageResults');
   };
 
+  checkLicense = async () => {
+    if (await ScanbotSDK.isLicenseValid()) {
+      // OK - we have a trial session, a valid trial license or valid production license.
+      return true;
+    }
+    this.toast.current.show('Scanbot SDK trial period or license has expired!');
+    return false;
+  };
 }
 
 const styles = StyleSheet.create({
