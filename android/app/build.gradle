@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "io.scanbot.sdk.example.react"
+        applicationId "com.scanbotsdkexamplereact"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -93,8 +93,10 @@ export class HomeScreen extends React.Component {
         // ...
       };
       const result = await ScanbotSDK.UI.startDocumentScanner(config);
-      Pages.addList(result.pages);
-      this.pushPage(App.IMAGE_RESULTS);
+      if (result.status === 'OK') {
+        Pages.addList(result.pages);
+        this.pushPage(App.IMAGE_RESULTS);
+      }
     } else if (item.id === FeatureId.ImportImage) {
       if (!(await SDKUtils.checkLicense())) {
         return;
@@ -110,7 +112,6 @@ export class HomeScreen extends React.Component {
       if (!(await SDKUtils.checkLicense())) {
         return;
       }
-      console.log(BarcodeFormats.getAcceptedFormats());
       const config: BarcodeScannerConfiguration = {
         barcodeFormats: BarcodeFormats.getAcceptedFormats(),
       };
@@ -123,7 +124,6 @@ export class HomeScreen extends React.Component {
         return;
       }
       const image = await ImageUtils.pickFromGallery();
-      console.log(ScanbotSDK.detectBarcodesOnImage, image.uri, BarcodeFormats.getAcceptedFormats());
       const result = await ScanbotSDK.detectBarcodesOnImage({
         imageFileUri: image.uri,
         barcodeFormats: BarcodeFormats.getAcceptedFormats(),
