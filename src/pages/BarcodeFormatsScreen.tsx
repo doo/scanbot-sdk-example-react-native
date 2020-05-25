@@ -31,6 +31,9 @@ export class BarcodeFormatsScreen extends BaseScreen {
                 <Switch
                   style={Styles.INSTANCE.barcodeFormats.listItemSwitch}
                   value={item.value}
+                  onValueChange={(_) => {
+                    this.onListItemClick(item);
+                  }}
                 />
               </View>
             </TouchableOpacity>
