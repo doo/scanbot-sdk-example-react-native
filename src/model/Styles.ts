@@ -50,7 +50,7 @@ export class Styles {
       paddingRight: 10,
       marginRight: 10,
       fontWeight: 'bold',
-      fontSize: 15,
+      fontSize: 13,
     },
     alignRight: {
       marginLeft: 'auto',

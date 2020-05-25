@@ -30,11 +30,12 @@ export class ImageResultScreen extends React.Component {
         <SafeAreaView style={Styles.INSTANCE.imageResults.container}>
           <View style={Styles.INSTANCE.imageResults.gallery}>
             {Pages.list.map((page) => (
-              <TouchableOpacity onPress={() => this.onGalleryItemClick(page)}>
+              <TouchableOpacity
+                onPress={() => this.onGalleryItemClick(page)}
+                key={page.pageId}>
                 <Image
                   style={Styles.INSTANCE.imageResults.galleryCell}
                   source={{uri: page.documentImageFileUri}}
-                  key={page.pageId}
                 />
               </TouchableOpacity>
             ))}
