@@ -17,26 +17,15 @@ import {HomeScreen} from './pages/HomeScreen';
 import {ImageResultScreen} from './pages/ImageResultScreen';
 import {BarcodeFormatsScreen} from './pages/BarcodeFormatsScreen';
 import {ImageDetailScreen} from './pages/ImageDetailScreen';
-import {Navigation} from "./utils/Navigation";
+import {Navigation} from './utils/Navigation';
+import {Styles} from "./model/Styles";
 
 const Stack = createStackNavigator();
-
-const nearWhite = 'rgb(250, 250, 250)';
-const ScanbotTheme = {
-  dark: false,
-  colors: {
-    primary: nearWhite,
-    background: nearWhite,
-    card: '#c8193c',
-    text: nearWhite,
-    border: nearWhite,
-  },
-};
 
 export class App extends React.Component {
   render() {
     return (
-      <NavigationContainer theme={ScanbotTheme}>
+      <NavigationContainer theme={Styles.ScanbotTheme}>
         <Stack.Navigator initialRouteName={Navigation.HOME}>
           <Stack.Screen name={Navigation.HOME} component={HomeScreen} />
           <Stack.Screen

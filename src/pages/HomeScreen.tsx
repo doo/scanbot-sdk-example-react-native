@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ActivityIndicator,
   Dimensions,
   Linking,
   Platform,
@@ -48,7 +49,14 @@ export class HomeScreen extends BaseScreen {
     return (
       <>
         <StatusBar barStyle="light-content" />
+
         <SafeAreaView>
+          <ActivityIndicator
+            size="large"
+            color={Styles.SCANBOT_RED}
+            style={Styles.INSTANCE.common.progress}
+            animating={false}
+          />
           <SectionList
             style={Styles.INSTANCE.home.list}
             sections={Examples.list}

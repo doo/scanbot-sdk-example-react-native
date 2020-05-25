@@ -8,6 +8,20 @@ export class Styles {
 
   imageResults: any;
 
+  public static NEAR_WHITE = 'rgb(250, 250, 250)';
+  public static SCANBOT_RED = '#c8193c';
+
+  public static ScanbotTheme = {
+    dark: false,
+    colors: {
+      primary: Styles.NEAR_WHITE,
+      background: Styles.NEAR_WHITE,
+      card: Styles.SCANBOT_RED,
+      text: Styles.NEAR_WHITE,
+      border: Styles.NEAR_WHITE,
+    },
+  };
+
   constructor() {
     this.WINDOW_WIDTH = Dimensions.get('window').width;
     this.imageResults = StyleSheet.create({
@@ -54,6 +68,13 @@ export class Styles {
     },
     alignRight: {
       marginLeft: 'auto',
+    },
+    progress: {
+      color: Styles.SCANBOT_RED,
+      position: 'absolute',
+      left: '47%',
+      top: '40%',
+      width: '6%',
     },
   });
 
@@ -125,7 +146,6 @@ export class Styles {
       marginTop: 5,
     },
   });
-
 
   public modal = StyleSheet.create({
     centeredView: {
