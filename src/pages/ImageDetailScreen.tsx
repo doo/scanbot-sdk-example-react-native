@@ -15,7 +15,10 @@ export class ImageDetailScreen extends BaseScreen {
       <>
         <SafeAreaView />
         <Image
-          style={Styles.INSTANCE.imageDetails.image}
+          style={[
+            Styles.INSTANCE.imageDetails.image,
+            Styles.INSTANCE.common.containImage,
+          ]}
           source={{uri: Pages.selectedPage.documentImageFileUri}}
           key={Pages.selectedPage.pageId}
         />
@@ -52,6 +55,7 @@ export class ImageDetailScreen extends BaseScreen {
     if (result.status === 'OK') {
       if (result.page) {
         Pages.update(result.page);
+        Pages.selectedPage = result.page;
       }
     }
 

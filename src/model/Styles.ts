@@ -9,6 +9,7 @@ export class Styles {
   imageResults: any;
 
   public static NEAR_WHITE = 'rgb(250, 250, 250)';
+  public static LIGHT_GRAY = 'rgb(245, 245, 245)';
   public static SCANBOT_RED = '#c8193c';
 
   public static ScanbotTheme = {
@@ -40,6 +41,7 @@ export class Styles {
         height: (this.WINDOW_WIDTH - 4 * this.GALLERY_CELL_PADDING) / 3,
         marginLeft: this.GALLERY_CELL_PADDING,
         marginTop: this.GALLERY_CELL_PADDING,
+        backgroundColor: Styles.LIGHT_GRAY,
       },
     });
   }
@@ -75,6 +77,9 @@ export class Styles {
       left: '47%',
       top: '40%',
       width: '6%',
+    },
+    containImage: {
+      resizeMode: 'contain',
     },
   });
 

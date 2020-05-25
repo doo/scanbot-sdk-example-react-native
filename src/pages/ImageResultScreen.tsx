@@ -42,7 +42,10 @@ export class ImageResultScreen extends BaseScreen {
                 onPress={() => this.onGalleryItemClick(page)}
                 key={page.pageId}>
                 <Image
-                  style={Styles.INSTANCE.imageResults.galleryCell}
+                  style={[
+                    Styles.INSTANCE.imageResults.galleryCell,
+                    Styles.INSTANCE.common.containImage,
+                  ]}
                   source={{uri: page.documentImageFileUri}}
                 />
               </TouchableOpacity>
