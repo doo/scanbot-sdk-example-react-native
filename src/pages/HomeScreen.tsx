@@ -24,9 +24,10 @@ import {SDKUtils} from '../utils/SDKUtils';
 import {Pages} from '../model/Pages';
 import {ViewUtils} from '../utils/ViewUtils';
 import {BarcodeFormats} from '../model/BarcodeFormats';
-import {Navigation} from "../utils/Navigation";
+import {Navigation} from '../utils/Navigation';
+import {BaseScreen} from '../utils/BaseScreen';
 
-export class HomeScreen extends React.Component {
+export class HomeScreen extends BaseScreen {
   constructor(props: any) {
     super(props);
     this.registerLicense().then((r) => console.log(r));

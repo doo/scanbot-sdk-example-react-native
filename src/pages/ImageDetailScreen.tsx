@@ -3,8 +3,9 @@ import {Image, SafeAreaView, Text, View} from 'react-native';
 import {Pages} from '../model/Pages';
 import {Styles} from '../model/Styles';
 import ScanbotSDK from 'react-native-scanbot-sdk/src';
+import {BaseScreen} from '../utils/BaseScreen';
 
-export class ImageDetailScreen extends React.Component {
+export class ImageDetailScreen extends BaseScreen {
   constructor(props: any) {
     super(props);
   }
@@ -54,7 +55,7 @@ export class ImageDetailScreen extends React.Component {
       }
     }
 
-    this.forceUpdate();
+    this.refresh();
   }
   private filterButtonPress() {}
 

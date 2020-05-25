@@ -34,7 +34,6 @@ const ScanbotTheme = {
 };
 
 export class App extends React.Component {
-
   render() {
     return (
       <NavigationContainer theme={ScanbotTheme}>

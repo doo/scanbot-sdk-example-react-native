@@ -9,8 +9,9 @@ import {
 } from 'react-native';
 import {BarcodeFormats} from '../model/BarcodeFormats';
 import {Styles} from '../model/Styles';
+import {BaseScreen} from '../utils/BaseScreen';
 
-export class BarcodeFormatsScreen extends React.Component {
+export class BarcodeFormatsScreen extends BaseScreen {
   constructor(props: any) {
     super(props);
   }
@@ -43,6 +44,6 @@ export class BarcodeFormatsScreen extends React.Component {
   private onListItemClick(item: any) {
     item.value = !item.value;
     BarcodeFormats.update(item);
-    this.forceUpdate();
+    this.refresh();
   }
 }

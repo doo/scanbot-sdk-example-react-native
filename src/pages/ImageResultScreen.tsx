@@ -16,10 +16,11 @@ import {Styles} from '../model/Styles';
 import {SDKUtils} from '../utils/SDKUtils';
 import {ViewUtils} from '../utils/ViewUtils';
 import {Navigation} from '../utils/Navigation';
+import {BaseScreen} from '../utils/BaseScreen';
 
-export class ImageResultScreen extends React.Component {
-  constructor(props: any) {
-    super(props);
+export class ImageResultScreen extends BaseScreen {
+  onScreenFocused() {
+    this.refresh();
   }
 
   modalVisible = false;
@@ -129,7 +130,7 @@ export class ImageResultScreen extends React.Component {
     const result = await ScanbotSDK.UI.startDocumentScanner(config);
     Pages.addList(result.pages);
 
-    this.forceUpdate();
+    this.refresh();
   }
   saveButtonPress() {
     if (Pages.isEmpty()) {
@@ -138,12 +139,12 @@ export class ImageResultScreen extends React.Component {
       );
     }
     this.modalVisible = true;
-    this.forceUpdate();
+    this.refresh();
   }
 
   deleteAllButtonPress() {
     Pages.list = [];
-    this.forceUpdate();
+    this.refresh();
   }
 
   private onGalleryItemClick(page: Page) {
@@ -154,7 +155,7 @@ export class ImageResultScreen extends React.Component {
 
   private onModalClose() {
     this.modalVisible = false;
-    this.forceUpdate();
+    this.refresh();
   }
 
   async onSaveAsPDF() {
