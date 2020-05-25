@@ -15,4 +15,21 @@ export class BaseScreen extends React.Component {
   refresh() {
     this.forceUpdate();
   }
+
+  public pushPage(name: string) {
+    // @ts-ignore
+    this.props.navigation.push(name);
+  }
+
+  public progressVisible = false;
+
+  public showProgress() {
+    this.progressVisible = true;
+    this.refresh();
+  }
+
+  public hideProgress() {
+    this.progressVisible = false;
+    this.refresh();
+  }
 }

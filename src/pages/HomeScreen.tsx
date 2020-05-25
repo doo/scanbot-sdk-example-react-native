@@ -55,7 +55,7 @@ export class HomeScreen extends BaseScreen {
             size="large"
             color={Styles.SCANBOT_RED}
             style={Styles.INSTANCE.common.progress}
-            animating={false}
+            animating={this.progressVisible}
           />
           <SectionList
             style={Styles.INSTANCE.home.list}
@@ -85,6 +85,7 @@ export class HomeScreen extends BaseScreen {
   }
 
   async onListItemClick(item: any) {
+
     if (item.id === FeatureId.DocumentScanner) {
       if (!(await SDKUtils.checkLicense())) {
         return;
@@ -132,11 +133,13 @@ export class HomeScreen extends BaseScreen {
       if (!(await SDKUtils.checkLicense())) {
         return;
       }
+      this.showProgress();
       const image = await ImageUtils.pickFromGallery();
       const result = await ScanbotSDK.detectBarcodesOnImage({
         imageFileUri: image.uri,
         barcodeFormats: BarcodeFormats.getAcceptedFormats(),
       });
+      this.hideProgress();
       if (result.status === 'OK') {
         ViewUtils.showAlert(JSON.stringify(result.barcodes));
       }
@@ -174,10 +177,5 @@ export class HomeScreen extends BaseScreen {
     } else if (item.id === FeatureId.LearnMore) {
       await Linking.openURL('https://scanbot.io/sdk');
     }
-  }
-
-  private pushPage(name: string) {
-    // @ts-ignore
-    this.props.navigation.push(name);
   }
 }

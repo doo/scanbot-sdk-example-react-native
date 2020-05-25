@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ActivityIndicator,
   Image,
   Modal,
   SafeAreaView,
@@ -29,6 +30,12 @@ export class ImageResultScreen extends BaseScreen {
     return (
       <>
         <SafeAreaView style={Styles.INSTANCE.imageResults.container}>
+          <ActivityIndicator
+            size="large"
+            color={Styles.SCANBOT_RED}
+            style={Styles.INSTANCE.common.progress}
+            animating={this.progressVisible}
+          />
           <View style={Styles.INSTANCE.imageResults.gallery}>
             {Pages.list.map((page) => (
               <TouchableOpacity
@@ -164,11 +171,13 @@ export class ImageResultScreen extends BaseScreen {
       return;
     }
     try {
+      this.showProgress();
       const result = await ScanbotSDK.createPDF(
         Pages.getImageUris(),
         'FIXED_A4',
       );
       ViewUtils.showAlert('PDF file created: ' + result.pdfFileUri);
+      this.hideProgress();
     } finally {
     }
   }
@@ -178,10 +187,12 @@ export class ImageResultScreen extends BaseScreen {
       return;
     }
     try {
+      this.showProgress();
       const result = await ScanbotSDK.performOCR(Pages.getImageUris(), ['en'], {
         outputFormat: 'FULL_OCR_RESULT',
       });
       ViewUtils.showAlert('PDF file created: ' + result.pdfFileUri);
+      this.hideProgress();
     } finally {
     }
   }
@@ -192,10 +203,12 @@ export class ImageResultScreen extends BaseScreen {
       return;
     }
     try {
+      this.showProgress();
       const result = await ScanbotSDK.writeTIFF(Pages.getImageUris(), {
         oneBitEncoded: true,
       });
       ViewUtils.showAlert('TIFF file created: ' + result.tiffFileUri);
+      this.hideProgress();
     } finally {
     }
   }
