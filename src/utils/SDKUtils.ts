@@ -2,7 +2,7 @@ import ScanbotSDK from 'react-native-scanbot-sdk/src';
 
 export class SDKUtils {
   static license: string =
-    '';
+      '';
 
   public static async checkLicense(): Promise<boolean> {
     if (await ScanbotSDK.isLicenseValid()) {

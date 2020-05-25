@@ -17,6 +17,7 @@ import {HomeScreen} from './pages/HomeScreen';
 import {ImageResultScreen} from './pages/ImageResultScreen';
 import {BarcodeFormatsScreen} from './pages/BarcodeFormatsScreen';
 import {ImageDetailScreen} from './pages/ImageDetailScreen';
+import {Navigation} from "./utils/Navigation";
 
 const Stack = createStackNavigator();
 
@@ -33,26 +34,22 @@ const ScanbotTheme = {
 };
 
 export class App extends React.Component {
-  public static HOME = 'Scanbot SDK Example React';
-  public static BARCODE_FORMATS = 'Barcode Formats';
-  public static IMAGE_RESULTS = 'Image Results';
-  public static IMAGE_DETAILS = 'Image Details';
 
   render() {
     return (
       <NavigationContainer theme={ScanbotTheme}>
-        <Stack.Navigator initialRouteName={App.HOME}>
-          <Stack.Screen name={App.HOME} component={HomeScreen} />
+        <Stack.Navigator initialRouteName={Navigation.HOME}>
+          <Stack.Screen name={Navigation.HOME} component={HomeScreen} />
           <Stack.Screen
-            name={App.IMAGE_RESULTS}
+            name={Navigation.IMAGE_RESULTS}
             component={ImageResultScreen}
           />
           <Stack.Screen
-            name={App.BARCODE_FORMATS}
+            name={Navigation.BARCODE_FORMATS}
             component={BarcodeFormatsScreen}
           />
           <Stack.Screen
-            name={App.IMAGE_DETAILS}
+            name={Navigation.IMAGE_DETAILS}
             component={ImageDetailScreen}
           />
         </Stack.Navigator>

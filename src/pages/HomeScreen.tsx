@@ -22,9 +22,9 @@ import {Styles} from '../model/Styles';
 import {ImageUtils} from '../utils/ImageUtils';
 import {SDKUtils} from '../utils/SDKUtils';
 import {Pages} from '../model/Pages';
-import App from '../App';
 import {ViewUtils} from '../utils/ViewUtils';
 import {BarcodeFormats} from '../model/BarcodeFormats';
+import {Navigation} from "../utils/Navigation";
 
 export class HomeScreen extends React.Component {
   constructor(props: any) {
@@ -95,7 +95,7 @@ export class HomeScreen extends React.Component {
       const result = await ScanbotSDK.UI.startDocumentScanner(config);
       if (result.status === 'OK') {
         Pages.addList(result.pages);
-        this.pushPage(App.IMAGE_RESULTS);
+        this.pushPage(Navigation.IMAGE_RESULTS);
       }
     } else if (item.id === FeatureId.ImportImage) {
       if (!(await SDKUtils.checkLicense())) {
@@ -105,7 +105,7 @@ export class HomeScreen extends React.Component {
       let page = await ScanbotSDK.createPage(result.uri);
       page = await ScanbotSDK.detectDocumentOnPage(page);
       Pages.add(page);
-      this.pushPage(App.IMAGE_RESULTS);
+      this.pushPage(Navigation.IMAGE_RESULTS);
     } else if (item.id === FeatureId.ViewPages) {
       this.pushPage('Image Results');
     } else if (item.id === FeatureId.ScanBarcodes) {
@@ -132,7 +132,7 @@ export class HomeScreen extends React.Component {
         ViewUtils.showAlert(JSON.stringify(result.barcodes));
       }
     } else if (item.id === FeatureId.BarcodeFormatsFilter) {
-      this.pushPage(App.BARCODE_FORMATS);
+      this.pushPage(Navigation.BARCODE_FORMATS);
     } else if (item.id === FeatureId.ScanMRZ) {
       if (!(await SDKUtils.checkLicense())) {
         return;

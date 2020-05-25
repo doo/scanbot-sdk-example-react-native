@@ -12,10 +12,10 @@ import ScanbotSDK, {
   DocumentScannerConfiguration,
   Page,
 } from 'react-native-scanbot-sdk/src';
-import App from '../App';
 import {Styles} from '../model/Styles';
 import {SDKUtils} from '../utils/SDKUtils';
 import {ViewUtils} from '../utils/ViewUtils';
+import {Navigation} from '../utils/Navigation';
 
 export class ImageResultScreen extends React.Component {
   constructor(props: any) {
@@ -148,7 +148,7 @@ export class ImageResultScreen extends React.Component {
   private onGalleryItemClick(page: Page) {
     Pages.selectedPage = page;
     // @ts-ignore
-    this.props.navigation.push(App.IMAGE_DETAILS);
+    this.props.navigation.push(Navigation.IMAGE_DETAILS);
   }
 
   private onModalClose() {
