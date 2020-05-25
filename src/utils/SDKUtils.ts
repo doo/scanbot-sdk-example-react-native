@@ -5,7 +5,8 @@ export class SDKUtils {
     '';
 
   public static async checkLicense(): Promise<boolean> {
-    if (await ScanbotSDK.isLicenseValid()) {
+    const info = await ScanbotSDK.getLicenseInfo();
+    if (info.isLicenseValid) {
       // OK - we have a trial session, a valid trial license or valid production license.
       return true;
     }

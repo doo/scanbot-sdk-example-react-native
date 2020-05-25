@@ -85,7 +85,6 @@ export class HomeScreen extends BaseScreen {
   }
 
   async onListItemClick(item: any) {
-
     if (item.id === FeatureId.DocumentScanner) {
       if (!(await SDKUtils.checkLicense())) {
         return;
@@ -170,10 +169,8 @@ export class HomeScreen extends BaseScreen {
         ViewUtils.showAlert(fields.join('\n'));
       }
     } else if (item.id === FeatureId.LicenseInfo) {
-      const valid = await ScanbotSDK.isLicenseValid();
-      ViewUtils.showAlert(
-        'Scanbot SDK license is ' + (valid ? 'valid' : 'expired'),
-      );
+      const info = await ScanbotSDK.getLicenseInfo();
+      ViewUtils.showAlert(JSON.stringify(info));
     } else if (item.id === FeatureId.LearnMore) {
       await Linking.openURL('https://scanbot.io/sdk');
     }
