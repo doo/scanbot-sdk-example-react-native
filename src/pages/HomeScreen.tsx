@@ -85,97 +85,117 @@ export class HomeScreen extends BaseScreen {
   }
 
   async onListItemClick(item: any) {
-    if (item.id === FeatureId.DocumentScanner) {
-      if (!(await SDKUtils.checkLicense())) {
-        return;
-      }
-      const config: DocumentScannerConfiguration = {
-        // Customize colors, text resources, etc..
-        polygonColor: '#00ffff',
-        cameraPreviewMode: 'FIT_IN',
-        orientationLockMode: 'PORTRAIT',
-        pageCounterButtonTitle: '%d Page(s)',
-        multiPageEnabled: true,
-        ignoreBadAspectRatio: true,
-        // documentImageSizeLimit: { width: 1500, height: 2000 },
-        // maxNumberOfPages: 3,
-        // ...
-      };
-      const result = await ScanbotSDK.UI.startDocumentScanner(config);
-      if (result.status === 'OK') {
-        Pages.addList(result.pages);
-        this.pushPage(Navigation.IMAGE_RESULTS);
-      }
-    } else if (item.id === FeatureId.ImportImage) {
-      if (!(await SDKUtils.checkLicense())) {
-        return;
-      }
+    if (item.id === FeatureId.LearnMore) {
+      await Linking.openURL('https://scanbot.io/sdk');
+      return;
+    }
 
-      const result = await ImageUtils.pickFromGallery();
-      this.showProgress();
-      let page = await ScanbotSDK.createPage(result.uri);
-      page = await ScanbotSDK.detectDocumentOnPage(page);
-      Pages.add(page);
-      this.hideProgress();
-      this.pushPage(Navigation.IMAGE_RESULTS);
-    } else if (item.id === FeatureId.ViewPages) {
-      this.pushPage('Image Results');
-    } else if (item.id === FeatureId.ScanBarcodes) {
-      if (!(await SDKUtils.checkLicense())) {
-        return;
-      }
-      const config: BarcodeScannerConfiguration = {
-        barcodeFormats: BarcodeFormats.getAcceptedFormats(),
-      };
-      const result = await ScanbotSDK.UI.startBarcodeScanner(config);
-      if (result.status === 'OK') {
-        ViewUtils.showAlert(JSON.stringify(result.barcodes));
-      }
-    } else if (item.id === FeatureId.DetectBarcodesOnStillImage) {
-      if (!(await SDKUtils.checkLicense())) {
-        return;
-      }
-      this.showProgress();
-      const image = await ImageUtils.pickFromGallery();
-      const result = await ScanbotSDK.detectBarcodesOnImage({
-        imageFileUri: image.uri,
-        barcodeFormats: BarcodeFormats.getAcceptedFormats(),
-      });
-      this.hideProgress();
-      if (result.status === 'OK') {
-        ViewUtils.showAlert(JSON.stringify(result.barcodes));
-      }
-    } else if (item.id === FeatureId.BarcodeFormatsFilter) {
-      this.pushPage(Navigation.BARCODE_FORMATS);
-    } else if (item.id === FeatureId.ScanMRZ) {
-      if (!(await SDKUtils.checkLicense())) {
-        return;
-      }
-
-      let config: MrzScannerConfiguration = {
-        // Customize colors, text resources, etc..
-        finderTextHint:
-          'Please hold your phone over the 2- or 3-line MRZ code at the front of your passport.',
-      };
-
-      if (Platform.OS === 'ios') {
-        const {width} = Dimensions.get('window');
-        config.finderWidth = width * 0.9;
-        config.finderHeight = width * 0.18;
-      }
-
-      const result = await ScanbotSDK.UI.startMrzScanner(config);
-      if (result.status === 'OK') {
-        const fields = result.fields.map(
-          (f) => `${f.name}: ${f.value} (${f.confidence.toFixed(2)})`,
-        );
-        ViewUtils.showAlert(fields.join('\n'));
-      }
-    } else if (item.id === FeatureId.LicenseInfo) {
+    if (item.id === FeatureId.LicenseInfo) {
       const info = await ScanbotSDK.getLicenseInfo();
       ViewUtils.showAlert(JSON.stringify(info));
-    } else if (item.id === FeatureId.LearnMore) {
-      await Linking.openURL('https://scanbot.io/sdk');
+      return;
+    }
+
+    if (!(await SDKUtils.checkLicense())) {
+      return;
+    }
+    if (item.id === FeatureId.DocumentScanner) {
+      this.startDocumentScanner();
+    } else if (item.id === FeatureId.ImportImage) {
+      this.importImageAndDetectDocument();
+    } else if (item.id === FeatureId.ViewPages) {
+      this.viewImageResults();
+    } else if (item.id === FeatureId.ScanBarcodes) {
+      this.startBarcodeScanner();
+    } else if (item.id === FeatureId.DetectBarcodesOnStillImage) {
+      this.importImageAndDetectBarcodes();
+    } else if (item.id === FeatureId.BarcodeFormatsFilter) {
+      this.setBarcodeFormats();
+    } else if (item.id === FeatureId.ScanMRZ) {
+      this.startMRZScanner();
+    }
+  }
+
+  async startDocumentScanner() {
+    const config: DocumentScannerConfiguration = {
+      // Customize colors, text resources, etc..
+      polygonColor: '#00ffff',
+      cameraPreviewMode: 'FIT_IN',
+      orientationLockMode: 'PORTRAIT',
+      pageCounterButtonTitle: '%d Page(s)',
+      multiPageEnabled: true,
+      ignoreBadAspectRatio: true,
+      // documentImageSizeLimit: { width: 1500, height: 2000 },
+      // maxNumberOfPages: 3,
+      // ...
+    };
+    const result = await ScanbotSDK.UI.startDocumentScanner(config);
+    if (result.status === 'OK') {
+      Pages.addList(result.pages);
+      this.pushPage(Navigation.IMAGE_RESULTS);
+    }
+  }
+
+  async importImageAndDetectDocument() {
+    const result = await ImageUtils.pickFromGallery();
+    this.showProgress();
+    let page = await ScanbotSDK.createPage(result.uri);
+    page = await ScanbotSDK.detectDocumentOnPage(page);
+    Pages.add(page);
+    this.hideProgress();
+    this.pushPage(Navigation.IMAGE_RESULTS);
+  }
+
+  viewImageResults() {
+    this.pushPage('Image Results');
+  }
+
+  async startBarcodeScanner() {
+    const config: BarcodeScannerConfiguration = {
+      barcodeFormats: BarcodeFormats.getAcceptedFormats(),
+    };
+    const result = await ScanbotSDK.UI.startBarcodeScanner(config);
+    if (result.status === 'OK') {
+      ViewUtils.showAlert(JSON.stringify(result.barcodes));
+    }
+  }
+
+  async importImageAndDetectBarcodes() {
+    this.showProgress();
+    const image = await ImageUtils.pickFromGallery();
+    const result = await ScanbotSDK.detectBarcodesOnImage({
+      imageFileUri: image.uri,
+      barcodeFormats: BarcodeFormats.getAcceptedFormats(),
+    });
+    this.hideProgress();
+    if (result.status === 'OK') {
+      ViewUtils.showAlert(JSON.stringify(result.barcodes));
+    }
+  }
+
+  setBarcodeFormats() {
+    this.pushPage(Navigation.BARCODE_FORMATS);
+  }
+
+  async startMRZScanner() {
+    let config: MrzScannerConfiguration = {
+      // Customize colors, text resources, etc..
+      finderTextHint:
+        'Please hold your phone over the 2- or 3-line MRZ code at the front of your passport.',
+    };
+
+    if (Platform.OS === 'ios') {
+      const {width} = Dimensions.get('window');
+      config.finderWidth = width * 0.9;
+      config.finderHeight = width * 0.18;
+    }
+
+    const result = await ScanbotSDK.UI.startMrzScanner(config);
+    if (result.status === 'OK') {
+      const fields = result.fields.map(
+        (f) => `${f.name}: ${f.value} (${f.confidence.toFixed(2)})`,
+      );
+      ViewUtils.showAlert(fields.join('\n'));
     }
   }
 }
