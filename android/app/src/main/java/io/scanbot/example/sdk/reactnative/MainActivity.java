@@ -1,4 +1,4 @@
-package com.scanbotsdkexamplereact;
+package io.scanbot.example.sdk.reactnative;
 
 import com.facebook.react.ReactActivity;
 
