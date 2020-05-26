@@ -81,6 +81,16 @@ export class Styles {
     containImage: {
       resizeMode: 'contain',
     },
+    copyrightLabel: {
+      textAlign: 'center',
+      lineHeight: 40,
+      width: '100%',
+      height: 40,
+      position: 'absolute',
+      bottom: 0,
+      color: 'gray',
+      fontSize: 12,
+    },
   });
 
   public imageDetails = StyleSheet.create({

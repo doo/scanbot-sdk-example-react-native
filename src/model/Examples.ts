@@ -50,7 +50,7 @@ export class Examples {
           customStyle: StyleSheet.create({
             content: {
               textAlign: 'center',
-              fontSize: 17,
+              fontSize: 14,
               marginTop: 25,
               marginBottom: 10,
               color: Colors.SCANBOT_RED,

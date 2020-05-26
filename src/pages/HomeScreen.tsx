@@ -80,6 +80,9 @@ export class HomeScreen extends BaseScreen {
             )}
           />
         </SafeAreaView>
+        <Text style={Styles.INSTANCE.common.copyrightLabel}>
+          Copyright {new Date().getFullYear()} doo GmbH. All rights reserved.
+        </Text>
       </>
     );
   }
