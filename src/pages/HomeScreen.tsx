@@ -110,10 +110,13 @@ export class HomeScreen extends BaseScreen {
       if (!(await SDKUtils.checkLicense())) {
         return;
       }
+
       const result = await ImageUtils.pickFromGallery();
+      this.showProgress();
       let page = await ScanbotSDK.createPage(result.uri);
       page = await ScanbotSDK.detectDocumentOnPage(page);
       Pages.add(page);
+      this.hideProgress();
       this.pushPage(Navigation.IMAGE_RESULTS);
     } else if (item.id === FeatureId.ViewPages) {
       this.pushPage('Image Results');

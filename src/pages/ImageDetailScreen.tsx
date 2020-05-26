@@ -37,7 +37,6 @@ export class ImageDetailScreen extends BaseScreen {
   handlePress = async (index: number) => {
     this.setState({selected: index});
     const filter = options[index];
-
     const updated = await ScanbotSDK.applyImageFilterOnPage(
       Pages.selectedPage,
       // @ts-ignore
@@ -91,7 +90,7 @@ export class ImageDetailScreen extends BaseScreen {
   }
 
   async cropButtonPress() {
-    if (await SDKUtils.checkLicense()) {
+    if (!(await SDKUtils.checkLicense())) {
       return;
     }
     const result = await ScanbotSDK.UI.startCroppingScreen(Pages.selectedPage, {
@@ -112,7 +111,7 @@ export class ImageDetailScreen extends BaseScreen {
     this.refresh();
   }
   async filterButtonPress() {
-    if (await SDKUtils.checkLicense()) {
+    if (!(await SDKUtils.checkLicense())) {
       return;
     }
     this.actionSheet.show();
