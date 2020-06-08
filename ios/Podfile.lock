@@ -302,14 +302,18 @@ PODS:
     - React
   - RNReanimated (1.8.0):
     - React
-  - RNScanbotSDK/NONE (4.1.0-beta2):
+  - RNScanbotSDK (4.1.0-beta5):
     - React
-    - ScanbotSDK (= 1.9.14)
+    - RNScanbotSDK/NONE (= 4.1.0-beta5)
+    - ScanbotSDK (= 1.9.15)
+  - RNScanbotSDK/NONE (4.1.0-beta5):
+    - React
+    - ScanbotSDK (= 1.9.15)
   - RNScreens (2.7.0):
     - React
-  - ScanbotSDK (1.9.14):
-    - ScanbotSDK/NONE (= 1.9.14)
-  - ScanbotSDK/NONE (1.9.14)
+  - ScanbotSDK (1.9.15):
+    - ScanbotSDK/NONE (= 1.9.15)
+  - ScanbotSDK/NONE (1.9.15)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -366,7 +370,7 @@ DEPENDENCIES:
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
-  - RNScanbotSDK/NONE (from `../node_modules/react-native-scanbot-sdk/RNScanbotSDK.podspec`)
+  - RNScanbotSDK (from `../node_modules/react-native-scanbot-sdk`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -446,7 +450,7 @@ EXTERNAL SOURCES:
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScanbotSDK:
-    :podspec: "../node_modules/react-native-scanbot-sdk/RNScanbotSDK.podspec"
+    :path: "../node_modules/react-native-scanbot-sdk"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   Yoga:
@@ -493,12 +497,12 @@ SPEC CHECKSUMS:
   RNCMaskedView: f5c7d14d6847b7b44853f7acb6284c1da30a3459
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
-  RNScanbotSDK: e0fa912b0cfa8b5a7dee2eb87ff8d057676b8826
+  RNScanbotSDK: 30c0991091401b20bbc654676f27049b41cf5536
   RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
-  ScanbotSDK: 4269092f202b8684f26c584f1c47b66045945fcb
+  ScanbotSDK: 59eb6f395118923d8fa98657e3a49474d29f8208
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 8240e03cae4d834b91aa71ec14995b6e42f31d14
+PODFILE CHECKSUM: bc3e545caa84df05819f2a55adb88b2cad137b67
 
 COCOAPODS: 1.8.4

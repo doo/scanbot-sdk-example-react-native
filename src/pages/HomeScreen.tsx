@@ -40,6 +40,7 @@ export class HomeScreen extends BaseScreen {
       loggingEnabled: true,
       storageImageFormat: 'JPG',
       storageImageQuality: 80,
+      documentDetectorMode: 'ML_BASED',
     };
 
     await ScanbotSDK.initializeSDK(options);
