@@ -14,9 +14,8 @@ import {
 import ScanbotSDK, {
   BarcodeScannerConfiguration,
   DocumentScannerConfiguration,
-  InitializationOptions,
   MrzScannerConfiguration,
-} from 'react-native-scanbot-sdk/src';
+} from 'react-native-scanbot-sdk';
 
 import {Examples, FeatureId} from '../model/Examples';
 import {Styles} from '../model/Styles';
@@ -27,25 +26,9 @@ import {ViewUtils} from '../utils/ViewUtils';
 import {BarcodeFormats} from '../model/BarcodeFormats';
 import {Navigation} from '../utils/Navigation';
 import {BaseScreen} from '../utils/BaseScreen';
+import {Colors} from '../model/Colors';
 
 export class HomeScreen extends BaseScreen {
-  constructor(props: any) {
-    super(props);
-    this.registerLicense().then((r) => console.log(r));
-  }
-
-  async registerLicense() {
-    const options: InitializationOptions = {
-      licenseKey: SDKUtils.license,
-      loggingEnabled: true,
-      storageImageFormat: 'JPG',
-      storageImageQuality: 80,
-      documentDetectorMode: 'ML_BASED',
-    };
-
-    await ScanbotSDK.initializeSDK(options);
-  }
-
   render() {
     return (
       <>
@@ -90,7 +73,7 @@ export class HomeScreen extends BaseScreen {
 
   async onListItemClick(item: any) {
     if (item.id === FeatureId.LearnMore) {
-      await Linking.openURL('https://scanbot.io/sdk');
+      await Linking.openURL('https://scanbot.io');
       return;
     }
 
@@ -124,14 +107,17 @@ export class HomeScreen extends BaseScreen {
     const config: DocumentScannerConfiguration = {
       // Customize colors, text resources, etc..
       polygonColor: '#00ffff',
+      bottomBarBackgroundColor: Colors.SCANBOT_RED,
+      cameraBackgroundColor: Colors.SCANBOT_RED,
       cameraPreviewMode: 'FIT_IN',
       orientationLockMode: 'PORTRAIT',
       pageCounterButtonTitle: '%d Page(s)',
       multiPageEnabled: true,
       ignoreBadAspectRatio: true,
-      // documentImageSizeLimit: { width: 1500, height: 2000 },
+      autoSnappingSensitivity: 0.85,
+      // documentImageSizeLimit: { width: 2000, height: 3000 },
       // maxNumberOfPages: 3,
-      // ...
+      // See further config properties ...
     };
     const result = await ScanbotSDK.UI.startDocumentScanner(config);
     if (result.status === 'OK') {

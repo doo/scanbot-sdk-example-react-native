@@ -127,25 +127,23 @@ export class ImageResultScreen extends BaseScreen {
     }
     const config: DocumentScannerConfiguration = {
       // Customize colors, text resources, etc..
-      polygonColor: '#00ffff',
       cameraPreviewMode: 'FIT_IN',
       orientationLockMode: 'PORTRAIT',
-      pageCounterButtonTitle: '%d Page(s)',
-      multiPageEnabled: true,
+      multiPageEnabled: false,
+      multiPageButtonHidden: true,
       ignoreBadAspectRatio: true,
-      // documentImageSizeLimit: { width: 1500, height: 2000 },
-      // maxNumberOfPages: 3,
-      // ...
+      // See further config properties ...
     };
     const result = await ScanbotSDK.UI.startDocumentScanner(config);
-    Pages.addList(result.pages);
-
-    this.refresh();
+    if (result.status === 'OK') {
+      Pages.addList(result.pages);
+      this.refresh();
+    }
   }
   saveButtonPress() {
     if (Pages.isEmpty()) {
       ViewUtils.showAlert(
-        'You have no images to save. Scan a few documents first, mate!',
+        'You have no images to save. Please scan a few documents first.',
       );
     }
     this.modalVisible = true;
@@ -180,8 +178,10 @@ export class ImageResultScreen extends BaseScreen {
         'FIXED_A4',
       );
       ViewUtils.showAlert('PDF file created: ' + result.pdfFileUri);
-      this.hideProgress();
+    } catch (e) {
+      ViewUtils.showAlert('ERROR: ' + JSON.stringify(e));
     } finally {
+      this.hideProgress();
     }
   }
   async onSaveAsPDFWithOCR() {
@@ -194,9 +194,11 @@ export class ImageResultScreen extends BaseScreen {
       const result = await ScanbotSDK.performOCR(Pages.getImageUris(), ['en'], {
         outputFormat: 'FULL_OCR_RESULT',
       });
-      ViewUtils.showAlert('PDF file created: ' + result.pdfFileUri);
-      this.hideProgress();
+      ViewUtils.showAlert('PDF with OCR layer created: ' + result.pdfFileUri);
+    } catch (e) {
+      ViewUtils.showAlert('ERROR: ' + JSON.stringify(e));
     } finally {
+      this.hideProgress();
     }
   }
 
@@ -211,8 +213,10 @@ export class ImageResultScreen extends BaseScreen {
         oneBitEncoded: true,
       });
       ViewUtils.showAlert('TIFF file created: ' + result.tiffFileUri);
-      this.hideProgress();
+    } catch (e) {
+      ViewUtils.showAlert('ERROR: ' + JSON.stringify(e));
     } finally {
+      this.hideProgress();
     }
   }
 }

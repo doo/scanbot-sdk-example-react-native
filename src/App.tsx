@@ -1,13 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
 import React from 'react';
 
 import {createStackNavigator} from '@react-navigation/stack';
@@ -18,11 +8,29 @@ import {ImageResultScreen} from './pages/ImageResultScreen';
 import {BarcodeFormatsScreen} from './pages/BarcodeFormatsScreen';
 import {ImageDetailScreen} from './pages/ImageDetailScreen';
 import {Navigation} from './utils/Navigation';
-import {Styles} from "./model/Styles";
+import {Styles} from './model/Styles';
+import ScanbotSDK, {InitializationOptions} from 'react-native-scanbot-sdk';
+import {SDKUtils} from './utils/SDKUtils';
 
 const Stack = createStackNavigator();
 
 export class App extends React.Component {
+  constructor(props: any) {
+    super(props);
+    this.initScanbotSdk().then((r) => console.log(r));
+  }
+
+  async initScanbotSdk() {
+    const options: InitializationOptions = {
+      licenseKey: SDKUtils.SDK_LICENSE_KEY,
+      loggingEnabled: true,
+      storageImageFormat: 'JPG',
+      storageImageQuality: 80,
+      documentDetectorMode: 'ML_BASED',
+    };
+    return await ScanbotSDK.initializeSDK(options);
+  }
+
   render() {
     return (
       <NavigationContainer theme={Styles.ScanbotTheme}>

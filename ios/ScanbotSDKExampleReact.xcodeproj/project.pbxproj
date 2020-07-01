@@ -731,7 +731,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.scanbot.sdk.example.react;
+				PRODUCT_BUNDLE_IDENTIFIER = io.scanbot.example.sdk.reactnative;
 				PRODUCT_NAME = ScanbotSDKExampleReact;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -754,7 +754,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.scanbot.sdk.example.react;
+				PRODUCT_BUNDLE_IDENTIFIER = io.scanbot.example.sdk.reactnative;
 				PRODUCT_NAME = ScanbotSDKExampleReact;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
