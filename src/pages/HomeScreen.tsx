@@ -100,6 +100,9 @@ export class HomeScreen extends BaseScreen {
       this.setBarcodeFormats();
     } else if (item.id === FeatureId.ScanMRZ) {
       this.startMRZScanner();
+    } else if (item.id === FeatureId.OcrConfigs) {
+      const result = await ScanbotSDK.getOCRConfigs();
+      ViewUtils.showAlert(JSON.stringify(result));
     }
   }
 

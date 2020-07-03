@@ -77,9 +77,10 @@ target 'ScanbotSDKExampleReact' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-
   # Pod for Scanbot SDK React Native Module
   pod 'RNScanbotSDK', :podspec => '../node_modules/react-native-scanbot-sdk/RNScanbotSDK.podspec', :subspecs => ['ALL']
+
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
 
   target 'ScanbotSDKExampleReactTests' do
     inherit! :complete

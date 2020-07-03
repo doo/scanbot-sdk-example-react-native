@@ -10,6 +10,7 @@ export enum FeatureId {
   BarcodeFormatsFilter,
   ScanMRZ,
   LicenseInfo,
+  OcrConfigs,
   LearnMore,
 }
 export class Examples {
@@ -44,6 +45,7 @@ export class Examples {
       title: 'MISCELLANEOUS',
       data: [
         {id: FeatureId.LicenseInfo, title: 'View License Info'},
+        {id: FeatureId.OcrConfigs, title: 'View OCR Configs'},
         {
           id: FeatureId.LearnMore,
           title: 'Learn More About Scanbot SDK',

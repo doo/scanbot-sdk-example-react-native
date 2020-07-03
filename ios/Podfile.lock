@@ -298,11 +298,13 @@ PODS:
     - ReactCommon/callinvoker (= 0.62.2)
   - RNCMaskedView (0.1.10):
     - React
+  - RNFS (2.16.6):
+    - React
   - RNGestureHandler (1.6.1):
     - React
   - RNReanimated (1.8.0):
     - React
-  - RNScanbotSDK/ALL (4.1.0-beta8):
+  - RNScanbotSDK/ALL (4.1.0-beta9):
     - React
     - ScanbotSDK (= 1.9.15)
     - ScanbotSDK/ALL (= 1.9.15)
@@ -366,6 +368,7 @@ DEPENDENCIES:
   - ReactCommon/callinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
+  - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScanbotSDK/ALL (from `../node_modules/react-native-scanbot-sdk/RNScanbotSDK.podspec`)
@@ -443,6 +446,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCMaskedView:
     :path: "../node_modules/@react-native-community/masked-view"
+  RNFS:
+    :path: "../node_modules/react-native-fs"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNReanimated:
@@ -493,14 +498,15 @@ SPEC CHECKSUMS:
   React-RCTVibration: 4356114dbcba4ce66991096e51a66e61eda51256
   ReactCommon: ed4e11d27609d571e7eee8b65548efc191116eb3
   RNCMaskedView: f5c7d14d6847b7b44853f7acb6284c1da30a3459
+  RNFS: 2bd9eb49dc82fa9676382f0585b992c424cd59df
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
-  RNScanbotSDK: 83dc0e48aab405630733cfc6c3e74ee8ca6052fd
+  RNScanbotSDK: bf97897bea7f4738770faaa2eb4c21b979ee0036
   RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
   ScanbotSDK: 59eb6f395118923d8fa98657e3a49474d29f8208
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: dc78e35196d3537a23554cc90257a612bec68dbd
+PODFILE CHECKSUM: 3e51284aaa8ce577cffb8d51603c5d3e887f632e
 
 COCOAPODS: 1.9.2
