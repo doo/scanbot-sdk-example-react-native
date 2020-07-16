@@ -233,7 +233,7 @@ PODS:
     - React-cxxreact (= 0.62.2)
     - React-jsi (= 0.62.2)
   - React-jsinspector (0.62.2)
-  - react-native-image-picker (2.3.1):
+  - react-native-image-picker (2.3.3):
     - React
   - react-native-safe-area-context (1.0.0):
     - React
@@ -304,7 +304,7 @@ PODS:
     - React
   - RNReanimated (1.8.0):
     - React
-  - RNScanbotSDK/ALL (4.1.0-beta10):
+  - RNScanbotSDK/ALL (4.1.0-rc2):
     - React
     - ScanbotSDK (= 1.9.15)
     - ScanbotSDK/ALL (= 1.9.15)
@@ -485,7 +485,7 @@ SPEC CHECKSUMS:
   React-jsi: b6dc94a6a12ff98e8877287a0b7620d365201161
   React-jsiexecutor: 1540d1c01bb493ae3124ed83351b1b6a155db7da
   React-jsinspector: 512e560d0e985d0e8c479a54a4e5c147a9c83493
-  react-native-image-picker: 668e72d0277dc8c12ae90e835507c1eddd2e4f85
+  react-native-image-picker: a6c3d644751a388b0fc8b56822ff7cbd398a3008
   react-native-safe-area-context: 5f3e081f937ab7c44c179d551f332fa494cfcf8f
   React-RCTActionSheet: f41ea8a811aac770e0cc6e0ad6b270c644ea8b7c
   React-RCTAnimation: 49ab98b1c1ff4445148b72a3d61554138565bad0
@@ -501,7 +501,7 @@ SPEC CHECKSUMS:
   RNFS: 2bd9eb49dc82fa9676382f0585b992c424cd59df
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
-  RNScanbotSDK: 950ff1d6da5f6ae11b76d3d7936ae8be0b853c4d
+  RNScanbotSDK: 65d8ef29c3461ef47e8d654dc4546c0d7e289efd
   RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
   ScanbotSDK: 59eb6f395118923d8fa98657e3a49474d29f8208
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
@@ -509,4 +509,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 3e51284aaa8ce577cffb8d51603c5d3e887f632e
 
-COCOAPODS: 1.9.2
+COCOAPODS: 1.8.4
