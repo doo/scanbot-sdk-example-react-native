@@ -1,0 +1,222 @@
+import React from 'react';
+import {
+  ActivityIndicator,
+  Image,
+  Modal,
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {Pages} from '../model/Pages';
+import ScanbotSDK, {
+  DocumentScannerConfiguration,
+  Page,
+} from 'react-native-scanbot-sdk/src';
+import {Styles} from '../model/Styles';
+import {SDKUtils} from '../utils/SDKUtils';
+import {ViewUtils} from '../utils/ViewUtils';
+import {Navigation} from '../utils/Navigation';
+import {BaseScreen} from '../utils/BaseScreen';
+
+export class ImageResultScreen extends BaseScreen {
+  onScreenFocused() {
+    this.refresh();
+  }
+
+  modalVisible = false;
+
+  render() {
+    return (
+      <>
+        <SafeAreaView style={Styles.INSTANCE.imageResults.container}>
+          <ActivityIndicator
+            size="large"
+            color={Styles.SCANBOT_RED}
+            style={Styles.INSTANCE.common.progress}
+            animating={this.progressVisible}
+          />
+          <View style={Styles.INSTANCE.imageResults.gallery}>
+            {Pages.list.map((page) => (
+              <TouchableOpacity
+                onPress={() => this.onGalleryItemClick(page)}
+                key={page.pageId}>
+                <Image
+                  style={[
+                    Styles.INSTANCE.imageResults.galleryCell,
+                    Styles.INSTANCE.common.containImage,
+                  ]}
+                  source={{uri: page.documentImageFileUri}}
+                />
+              </TouchableOpacity>
+            ))}
+          </View>
+          <View style={Styles.INSTANCE.common.bottomBar}>
+            <Text
+              style={Styles.INSTANCE.common.bottomBarButton}
+              onPress={() => this.addButtonPress()}>
+              ADD
+            </Text>
+            <Text
+              style={Styles.INSTANCE.common.bottomBarButton}
+              onPress={() => this.saveButtonPress()}>
+              SAVE
+            </Text>
+            <Text
+              style={[
+                Styles.INSTANCE.common.bottomBarButton,
+                Styles.INSTANCE.common.alignRight,
+              ]}
+              onPress={() => this.deleteAllButtonPress()}>
+              DELETE ALL
+            </Text>
+          </View>
+        </SafeAreaView>
+
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={this.modalVisible}>
+          <View style={Styles.INSTANCE.modal.centeredView}>
+            <View style={Styles.INSTANCE.modal.modalView}>
+              <Text style={Styles.INSTANCE.modal.text}>
+                How would you like to save the pages?
+              </Text>
+              <Text
+                style={[
+                  Styles.INSTANCE.modal.button,
+                  Styles.INSTANCE.modal.actionButton,
+                ]}
+                onPress={() => this.onSaveAsPDF()}>
+                PDF
+              </Text>
+              <Text
+                style={[
+                  Styles.INSTANCE.modal.button,
+                  Styles.INSTANCE.modal.actionButton,
+                ]}
+                onPress={() => this.onSaveAsPDFWithOCR()}>
+                PDF with OCR
+              </Text>
+              <Text
+                style={[
+                  Styles.INSTANCE.modal.button,
+                  Styles.INSTANCE.modal.actionButton,
+                ]}
+                onPress={() => this.onSaveAsTIFF()}>
+                TIFF (1-bit B&W)
+              </Text>
+              <Text
+                style={[
+                  Styles.INSTANCE.modal.button,
+                  Styles.INSTANCE.modal.closeButton,
+                ]}
+                onPress={() => this.onModalClose()}>
+                Cancel
+              </Text>
+            </View>
+          </View>
+        </Modal>
+      </>
+    );
+  }
+
+  async addButtonPress() {
+    if (!(await SDKUtils.checkLicense())) {
+      return;
+    }
+    const config: DocumentScannerConfiguration = {
+      // Customize colors, text resources, etc..
+      cameraPreviewMode: 'FIT_IN',
+      orientationLockMode: 'PORTRAIT',
+      multiPageEnabled: false,
+      multiPageButtonHidden: true,
+      ignoreBadAspectRatio: true,
+      // See further config properties ...
+    };
+    const result = await ScanbotSDK.UI.startDocumentScanner(config);
+    if (result.status === 'OK') {
+      Pages.addList(result.pages);
+      this.refresh();
+    }
+  }
+  saveButtonPress() {
+    if (Pages.isEmpty()) {
+      ViewUtils.showAlert(
+        'You have no images to save. Please scan a few documents first.',
+      );
+    }
+    this.modalVisible = true;
+    this.refresh();
+  }
+
+  deleteAllButtonPress() {
+    Pages.list = [];
+    this.refresh();
+  }
+
+  private onGalleryItemClick(page: Page) {
+    Pages.selectedPage = page;
+    // @ts-ignore
+    this.props.navigation.push(Navigation.IMAGE_DETAILS);
+  }
+
+  private onModalClose() {
+    this.modalVisible = false;
+    this.refresh();
+  }
+
+  async onSaveAsPDF() {
+    this.onModalClose();
+    if (!(await SDKUtils.checkLicense())) {
+      return;
+    }
+    try {
+      this.showProgress();
+      const result = await ScanbotSDK.createPDF(
+        Pages.getImageUris(),
+        'FIXED_A4',
+      );
+      ViewUtils.showAlert('PDF file created: ' + result.pdfFileUri);
+    } catch (e) {
+      ViewUtils.showAlert('ERROR: ' + JSON.stringify(e));
+    } finally {
+      this.hideProgress();
+    }
+  }
+  async onSaveAsPDFWithOCR() {
+    this.onModalClose();
+    if (!(await SDKUtils.checkLicense())) {
+      return;
+    }
+    try {
+      this.showProgress();
+      const result = await ScanbotSDK.performOCR(Pages.getImageUris(), ['en'], {
+        outputFormat: 'FULL_OCR_RESULT',
+      });
+      ViewUtils.showAlert('PDF with OCR layer created: ' + result.pdfFileUri);
+    } catch (e) {
+      ViewUtils.showAlert('ERROR: ' + JSON.stringify(e));
+    } finally {
+      this.hideProgress();
+    }
+  }
+
+  async onSaveAsTIFF() {
+    this.onModalClose();
+    if (!(await SDKUtils.checkLicense())) {
+      return;
+    }
+    try {
+      this.showProgress();
+      const result = await ScanbotSDK.writeTIFF(Pages.getImageUris(), {
+        oneBitEncoded: true,
+      });
+      ViewUtils.showAlert('TIFF file created: ' + result.tiffFileUri);
+    } catch (e) {
+      ViewUtils.showAlert('ERROR: ' + JSON.stringify(e));
+    } finally {
+      this.hideProgress();
+    }
+  }
+}
