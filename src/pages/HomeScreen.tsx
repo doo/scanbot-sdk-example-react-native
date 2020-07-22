@@ -27,6 +27,7 @@ import {BarcodeFormats} from '../model/BarcodeFormats';
 import {Navigation} from '../utils/Navigation';
 import {BaseScreen} from '../utils/BaseScreen';
 import {Colors} from '../model/Colors';
+import {HealthInsuranceCardScannerConfiguration} from "react-native-scanbot-sdk/src";
 
 export class HomeScreen extends BaseScreen {
   render() {
@@ -100,6 +101,8 @@ export class HomeScreen extends BaseScreen {
       this.setBarcodeFormats();
     } else if (item.id === FeatureId.ScanMRZ) {
       this.startMRZScanner();
+    } else if (item.id === FeatureId.ScanEHIC) {
+      this.startEHICScanner()
     } else if (item.id === FeatureId.OcrConfigs) {
       const result = await ScanbotSDK.getOCRConfigs();
       ViewUtils.showAlert(JSON.stringify(result));
@@ -187,6 +190,18 @@ export class HomeScreen extends BaseScreen {
     if (result.status === 'OK') {
       const fields = result.fields.map(
         (f) => `${f.name}: ${f.value} (${f.confidence.toFixed(2)})`,
+      );
+      ViewUtils.showAlert(fields.join('\n'));
+    }
+  }
+  async startEHICScanner() {
+    const config: HealthInsuranceCardScannerConfiguration = {
+      finderLineColor: 'red',
+    };
+    const result = await ScanbotSDK.UI.startEHICScanner(config);
+    if (result.status === 'OK') {
+      const fields = result.fields.map(
+        (f) => `${f.type}: ${f.value} (${f.confidence.toFixed(2)})`,
       );
       ViewUtils.showAlert(fields.join('\n'));
     }

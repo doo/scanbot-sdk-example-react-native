@@ -9,6 +9,7 @@ export enum FeatureId {
   DetectBarcodesOnStillImage,
   BarcodeFormatsFilter,
   ScanMRZ,
+  ScanEHIC,
   LicenseInfo,
   OcrConfigs,
   LearnMore,
@@ -39,7 +40,10 @@ export class Examples {
     },
     {
       title: 'DATA DETECTORS',
-      data: [{id: FeatureId.ScanMRZ, title: 'Scan MRZ on ID Card'}],
+      data: [
+        {id: FeatureId.ScanMRZ, title: 'Scan MRZ on ID Card'},
+        {id: FeatureId.ScanEHIC, title: 'Scan Health Insurance Card'},
+      ],
     },
     {
       title: 'MISCELLANEOUS',
