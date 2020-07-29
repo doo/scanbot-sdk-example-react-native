@@ -135,6 +135,12 @@ export class HomeScreen extends BaseScreen {
   async importImageAndDetectDocument() {
     const result = await ImageUtils.pickFromGallery();
     this.showProgress();
+
+    if (result.didCancel) {
+      this.hideProgress();
+      return;
+    }
+
     let page = await ScanbotSDK.createPage(result.uri);
     page = await ScanbotSDK.detectDocumentOnPage(page);
     Pages.add(page);
@@ -159,6 +165,12 @@ export class HomeScreen extends BaseScreen {
   async importImageAndDetectBarcodes() {
     this.showProgress();
     const image = await ImageUtils.pickFromGallery();
+
+    if (image.didCancel) {
+      this.hideProgress();
+      return;
+    }
+
     const result = await ScanbotSDK.detectBarcodesOnImage({
       imageFileUri: image.uri,
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
