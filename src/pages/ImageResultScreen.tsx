@@ -150,7 +150,13 @@ export class ImageResultScreen extends BaseScreen {
     this.refresh();
   }
 
-  deleteAllButtonPress() {
+  async deleteAllButtonPress() {
+    try {
+      await ScanbotSDK.cleanup();
+    } catch (e) {
+      ViewUtils.showAlert('ERROR: ' + JSON.stringify(e));
+      return;
+    }
     Pages.list = [];
     this.refresh();
   }
