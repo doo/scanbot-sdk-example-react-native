@@ -304,16 +304,16 @@ PODS:
     - React
   - RNReanimated (1.8.0):
     - React
-  - RNScanbotSDK/ALL (4.1.0):
+  - RNScanbotSDK/ALL (4.2.0):
     - React
-    - ScanbotSDK (= 1.9.15)
-    - ScanbotSDK/ALL (= 1.9.15)
+    - ScanbotSDK (= 1.9.19)
+    - ScanbotSDK/ALL (= 1.9.19)
   - RNScreens (2.7.0):
     - React
-  - ScanbotSDK (1.9.15):
-    - ScanbotSDK/NONE (= 1.9.15)
-  - ScanbotSDK/ALL (1.9.15)
-  - ScanbotSDK/NONE (1.9.15)
+  - ScanbotSDK (1.9.19):
+    - ScanbotSDK/NONE (= 1.9.19)
+  - ScanbotSDK/ALL (1.9.19)
+  - ScanbotSDK/NONE (1.9.19)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -501,12 +501,12 @@ SPEC CHECKSUMS:
   RNFS: 2bd9eb49dc82fa9676382f0585b992c424cd59df
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
-  RNScanbotSDK: b839e89326c7bcb5ab97959241cff2d4a6ee0379
+  RNScanbotSDK: 8e74f71f109397658c40dffc3e219a9371f84953
   RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
-  ScanbotSDK: 59eb6f395118923d8fa98657e3a49474d29f8208
+  ScanbotSDK: cf8c3be986e236bdbe3063ef0d001cacfedfb980
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
 PODFILE CHECKSUM: 3e51284aaa8ce577cffb8d51603c5d3e887f632e
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.2

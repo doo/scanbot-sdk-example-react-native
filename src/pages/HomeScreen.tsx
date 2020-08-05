@@ -27,6 +27,7 @@ import {BarcodeFormats} from '../model/BarcodeFormats';
 import {Navigation} from '../utils/Navigation';
 import {BaseScreen} from '../utils/BaseScreen';
 import {Colors} from '../model/Colors';
+import {HealthInsuranceCardScannerConfiguration} from "react-native-scanbot-sdk/src";
 
 export class HomeScreen extends BaseScreen {
   render() {
@@ -100,6 +101,8 @@ export class HomeScreen extends BaseScreen {
       this.setBarcodeFormats();
     } else if (item.id === FeatureId.ScanMRZ) {
       this.startMRZScanner();
+    } else if (item.id === FeatureId.ScanEHIC) {
+      this.startEHICScanner()
     } else if (item.id === FeatureId.OcrConfigs) {
       const result = await ScanbotSDK.getOCRConfigs();
       ViewUtils.showAlert(JSON.stringify(result));
@@ -111,8 +114,8 @@ export class HomeScreen extends BaseScreen {
       // Customize colors, text resources, etc..
       polygonColor: '#00ffff',
       bottomBarBackgroundColor: Colors.SCANBOT_RED,
+      topBarBackgroundColor: Colors.SCANBOT_RED,
       cameraBackgroundColor: Colors.SCANBOT_RED,
-      cameraPreviewMode: 'FIT_IN',
       orientationLockMode: 'PORTRAIT',
       pageCounterButtonTitle: '%d Page(s)',
       multiPageEnabled: true,
@@ -132,6 +135,12 @@ export class HomeScreen extends BaseScreen {
   async importImageAndDetectDocument() {
     const result = await ImageUtils.pickFromGallery();
     this.showProgress();
+
+    if (result.didCancel) {
+      this.hideProgress();
+      return;
+    }
+
     let page = await ScanbotSDK.createPage(result.uri);
     page = await ScanbotSDK.detectDocumentOnPage(page);
     Pages.add(page);
@@ -156,6 +165,12 @@ export class HomeScreen extends BaseScreen {
   async importImageAndDetectBarcodes() {
     this.showProgress();
     const image = await ImageUtils.pickFromGallery();
+
+    if (image.didCancel) {
+      this.hideProgress();
+      return;
+    }
+
     const result = await ScanbotSDK.detectBarcodesOnImage({
       imageFileUri: image.uri,
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
@@ -187,6 +202,18 @@ export class HomeScreen extends BaseScreen {
     if (result.status === 'OK') {
       const fields = result.fields.map(
         (f) => `${f.name}: ${f.value} (${f.confidence.toFixed(2)})`,
+      );
+      ViewUtils.showAlert(fields.join('\n'));
+    }
+  }
+  async startEHICScanner() {
+    const config: HealthInsuranceCardScannerConfiguration = {
+      finderLineColor: 'red',
+    };
+    const result = await ScanbotSDK.UI.startEHICScanner(config);
+    if (result.status === 'OK') {
+      const fields = result.fields.map(
+        (f) => `${f.type}: ${f.value} (${f.confidence.toFixed(2)})`,
       );
       ViewUtils.showAlert(fields.join('\n'));
     }
