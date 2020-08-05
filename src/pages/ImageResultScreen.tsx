@@ -103,8 +103,16 @@ export class ImageResultScreen extends BaseScreen {
                   Styles.INSTANCE.modal.button,
                   Styles.INSTANCE.modal.actionButton,
                 ]}
-                onPress={() => this.onSaveAsTIFF()}>
+                onPress={() => this.onSaveAsTIFF(true)}>
                 TIFF (1-bit B&W)
+              </Text>
+              <Text
+                style={[
+                  Styles.INSTANCE.modal.button,
+                  Styles.INSTANCE.modal.actionButton,
+                ]}
+                onPress={() => this.onSaveAsTIFF(false)}>
+                TIFF (color)
               </Text>
               <Text
                 style={[
@@ -208,7 +216,7 @@ export class ImageResultScreen extends BaseScreen {
     }
   }
 
-  async onSaveAsTIFF() {
+  async onSaveAsTIFF(binarized: boolean) {
     this.onModalClose();
     if (!(await SDKUtils.checkLicense())) {
       return;
@@ -216,7 +224,9 @@ export class ImageResultScreen extends BaseScreen {
     try {
       this.showProgress();
       const result = await ScanbotSDK.writeTIFF(Pages.getImageUris(), {
-        oneBitEncoded: true,
+        oneBitEncoded: binarized, // "true" means create 1-bit binarized black and white TIFF
+        dpi: 300, // optional DPI. default value is 200
+        compression: binarized ? 'CCITT_T6' : 'ADOBE_DEFLATE', // optional compression. see documentation!
       });
       ViewUtils.showAlert('TIFF file created: ' + result.tiffFileUri);
     } catch (e) {
