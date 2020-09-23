@@ -10,6 +10,7 @@ export enum FeatureId {
   BarcodeFormatsFilter,
   ScanMRZ,
   ScanEHIC,
+  ScanGT,
   LicenseInfo,
   OcrConfigs,
   LearnMore,
@@ -43,6 +44,7 @@ export class Examples {
       data: [
         {id: FeatureId.ScanMRZ, title: 'Scan MRZ on ID Card'},
         {id: FeatureId.ScanEHIC, title: 'Scan Health Insurance Card'},
+        {id: FeatureId.ScanGT, title: 'Scan Generic Text'},
       ],
     },
     {

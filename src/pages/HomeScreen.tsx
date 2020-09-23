@@ -2,7 +2,7 @@ import React from 'react';
 import {
   ActivityIndicator,
   Dimensions,
-  Linking,
+  Linking, NativeEventEmitter, NativeModules,
   Platform,
   SafeAreaView,
   SectionList,
@@ -102,7 +102,9 @@ export class HomeScreen extends BaseScreen {
     } else if (item.id === FeatureId.ScanMRZ) {
       this.startMRZScanner();
     } else if (item.id === FeatureId.ScanEHIC) {
-      this.startEHICScanner()
+      this.startEHICScanner();
+    } else if (item.id === FeatureId.ScanGT) {
+      this.startGTScanner();
     } else if (item.id === FeatureId.OcrConfigs) {
       const result = await ScanbotSDK.getOCRConfigs();
       ViewUtils.showAlert(JSON.stringify(result));
@@ -217,5 +219,22 @@ export class HomeScreen extends BaseScreen {
       );
       ViewUtils.showAlert(fields.join('\n'));
     }
+  }
+
+  async startGTScanner() {
+    console.log("startGTScanner");
+    ScanbotSDK.UI.startGTScanner({});
+
+    const eventEmitter = new NativeEventEmitter(NativeModules.ScanbotSDK);
+    eventEmitter.addListener('GTREvent', (params) =>
+      console.log('GTResult (Simple):', params),
+    );
+
+    const eventEmitter2 = new NativeEventEmitter(
+      NativeModules.ScanbotSDK.SBSDKDefaultUi,
+    );
+    eventEmitter2.addListener('GTREvent', (params) =>
+      console.log('GTResult (UIModule):', params),
+    );
   }
 }
