@@ -27,7 +27,7 @@ import {BarcodeFormats} from '../model/BarcodeFormats';
 import {Navigation} from '../utils/Navigation';
 import {BaseScreen} from '../utils/BaseScreen';
 import {Colors} from '../model/Colors';
-import {HealthInsuranceCardScannerConfiguration} from "react-native-scanbot-sdk/src";
+import {BatchBarcodeScannerConfiguration, HealthInsuranceCardScannerConfiguration} from "react-native-scanbot-sdk/src";
 
 export class HomeScreen extends BaseScreen {
   render() {
@@ -95,6 +95,8 @@ export class HomeScreen extends BaseScreen {
       this.viewImageResults();
     } else if (item.id === FeatureId.ScanBarcodes) {
       this.startBarcodeScanner();
+    } else if (item.id === FeatureId.ScanBatchBarcodes) {
+      this.startBatchBarcodeScanner();
     } else if (item.id === FeatureId.DetectBarcodesOnStillImage) {
       this.importImageAndDetectBarcodes();
     } else if (item.id === FeatureId.BarcodeFormatsFilter) {
@@ -159,6 +161,16 @@ export class HomeScreen extends BaseScreen {
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
     };
     const result = await ScanbotSDK.UI.startBarcodeScanner(config);
+    if (result.status === 'OK') {
+      ViewUtils.showAlert(JSON.stringify(result.barcodes));
+    }
+  }
+
+  async startBatchBarcodeScanner() {
+    const config: BatchBarcodeScannerConfiguration = {
+      barcodeFormats: BarcodeFormats.getAcceptedFormats(),
+    };
+    const result = await ScanbotSDK.UI.startBatchBarcodeScanner(config);
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result.barcodes));
     }

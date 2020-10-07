@@ -6,6 +6,7 @@ export enum FeatureId {
   ImportImage,
   ViewPages,
   ScanBarcodes,
+  ScanBatchBarcodes,
   DetectBarcodesOnStillImage,
   BarcodeFormatsFilter,
   ScanMRZ,
@@ -29,6 +30,7 @@ export class Examples {
       title: 'BARCODE DETECTOR',
       data: [
         {id: FeatureId.ScanBarcodes, title: 'Scan QR-/Barcode'},
+        {id: FeatureId.ScanBatchBarcodes, title: 'Scan Multiple QR-/Barcode'},
         {
           id: FeatureId.DetectBarcodesOnStillImage,
           title: 'Import Image & Detect Barcodes',
