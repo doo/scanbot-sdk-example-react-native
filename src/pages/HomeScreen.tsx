@@ -2,7 +2,9 @@ import React from 'react';
 import {
   ActivityIndicator,
   Dimensions,
-  Linking, NativeEventEmitter, NativeModules,
+  Linking,
+  NativeEventEmitter,
+  NativeModules,
   Platform,
   SafeAreaView,
   SectionList,
@@ -27,7 +29,11 @@ import {BarcodeFormats} from '../model/BarcodeFormats';
 import {Navigation} from '../utils/Navigation';
 import {BaseScreen} from '../utils/BaseScreen';
 import {Colors} from '../model/Colors';
-import {BatchBarcodeScannerConfiguration, HealthInsuranceCardScannerConfiguration} from "react-native-scanbot-sdk/src";
+import {
+  BatchBarcodeScannerConfiguration,
+  HealthInsuranceCardScannerConfiguration,
+  IdCardScannerConfiguration,
+} from 'react-native-scanbot-sdk/src';
 
 export class HomeScreen extends BaseScreen {
   render() {
@@ -105,6 +111,8 @@ export class HomeScreen extends BaseScreen {
       this.startMRZScanner();
     } else if (item.id === FeatureId.ScanEHIC) {
       this.startEHICScanner();
+    } else if (item.id === FeatureId.ScanIdCard) {
+      this.startIdCardCScanner();
     } else if (item.id === FeatureId.ScanGT) {
       this.startGTScanner();
     } else if (item.id === FeatureId.OcrConfigs) {
@@ -233,8 +241,16 @@ export class HomeScreen extends BaseScreen {
     }
   }
 
+  async startIdCardCScanner() {
+    const config: IdCardScannerConfiguration = {};
+    const result = await ScanbotSDK.UI.startIdCardScanner(config);
+    if (result.status === 'OK') {
+      ViewUtils.showAlert(JSON.stringify(result));
+    }
+  }
+
   async startGTScanner() {
-    console.log("startGTScanner");
+    console.log('startGTScanner');
     ScanbotSDK.UI.startGTScanner({});
 
     const eventEmitter = new NativeEventEmitter(NativeModules.ScanbotSDK);
