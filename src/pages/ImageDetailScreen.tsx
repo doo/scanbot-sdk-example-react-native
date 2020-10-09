@@ -6,6 +6,7 @@ import ScanbotSDK, {Page} from 'react-native-scanbot-sdk/src';
 import {BaseScreen} from '../utils/BaseScreen';
 import {ActionSheetCustom as ActionSheet} from 'react-native-custom-actionsheet';
 import {SDKUtils} from '../utils/SDKUtils';
+import {Colors} from '../model/Colors';
 
 const CANCEL_INDEX = 0;
 
@@ -95,7 +96,9 @@ export class ImageDetailScreen extends BaseScreen {
     }
     const result = await ScanbotSDK.UI.startCroppingScreen(Pages.selectedPage, {
       doneButtonTitle: 'Apply',
-      topBarBackgroundColor: '#b30127',
+      topBarBackgroundColor: Colors.SCANBOT_RED,
+      bottomBarBackgroundColor: Colors.SCANBOT_RED,
+      // See further config properties ...
     });
 
     if (result.status === 'OK') {

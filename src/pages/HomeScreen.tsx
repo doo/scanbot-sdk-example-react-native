@@ -126,8 +126,8 @@ export class HomeScreen extends BaseScreen {
       // Customize colors, text resources, etc..
       polygonColor: '#00ffff',
       bottomBarBackgroundColor: Colors.SCANBOT_RED,
+      topBarBackgroundColor: Colors.SCANBOT_RED,
       cameraBackgroundColor: Colors.SCANBOT_RED,
-      cameraPreviewMode: 'FIT_IN',
       orientationLockMode: 'PORTRAIT',
       pageCounterButtonTitle: '%d Page(s)',
       multiPageEnabled: true,
