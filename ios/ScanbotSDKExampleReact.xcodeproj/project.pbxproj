@@ -469,12 +469,10 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests-frameworks.sh",
 				"${PODS_ROOT}/ScanbotSDK/ScanbotSDK.framework",
-				"${PODS_ROOT}/ScanbotSDK/ScanbotSDK.framework.dSYM",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ScanbotSDK.framework",
-				"${DWARF_DSYM_FOLDER_PATH}/ScanbotSDK.framework.dSYM",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -489,14 +487,12 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact/Pods-ScanbotSDKExampleReact-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
-				"${PODS_ROOT}/ScanbotSDK/AdditionalData/ScanbotSDKDocumentDetectorData.bundle",
 				"${PODS_ROOT}/ScanbotSDK/AdditionalData/ScanbotSDKMRZData.bundle",
 				"${PODS_ROOT}/ScanbotSDK/AdditionalData/ScanbotSDKOCRData.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ScanbotSDKDocumentDetectorData.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ScanbotSDKMRZData.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ScanbotSDKOCRData.bundle",
 			);
@@ -513,14 +509,12 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
-				"${PODS_ROOT}/ScanbotSDK/AdditionalData/ScanbotSDKDocumentDetectorData.bundle",
 				"${PODS_ROOT}/ScanbotSDK/AdditionalData/ScanbotSDKMRZData.bundle",
 				"${PODS_ROOT}/ScanbotSDK/AdditionalData/ScanbotSDKOCRData.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ScanbotSDKDocumentDetectorData.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ScanbotSDKMRZData.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ScanbotSDKOCRData.bundle",
 			);
@@ -537,12 +531,10 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact/Pods-ScanbotSDKExampleReact-frameworks.sh",
 				"${PODS_ROOT}/ScanbotSDK/ScanbotSDK.framework",
-				"${PODS_ROOT}/ScanbotSDK/ScanbotSDK.framework.dSYM",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ScanbotSDK.framework",
-				"${DWARF_DSYM_FOLDER_PATH}/ScanbotSDK.framework.dSYM",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -914,7 +906,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
@@ -967,7 +959,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
