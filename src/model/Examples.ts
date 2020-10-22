@@ -6,10 +6,12 @@ export enum FeatureId {
   ImportImage,
   ViewPages,
   ScanBarcodes,
+  ScanBatchBarcodes,
   DetectBarcodesOnStillImage,
   BarcodeFormatsFilter,
   ScanMRZ,
   ScanEHIC,
+  ScanIdCard,
   LicenseInfo,
   OcrConfigs,
   LearnMore,
@@ -28,6 +30,7 @@ export class Examples {
       title: 'BARCODE DETECTOR',
       data: [
         {id: FeatureId.ScanBarcodes, title: 'Scan QR-/Barcode'},
+        {id: FeatureId.ScanBatchBarcodes, title: 'Scan Multiple QR-/Barcode'},
         {
           id: FeatureId.DetectBarcodesOnStillImage,
           title: 'Import Image & Detect Barcodes',
@@ -43,6 +46,7 @@ export class Examples {
       data: [
         {id: FeatureId.ScanMRZ, title: 'Scan MRZ on ID Card'},
         {id: FeatureId.ScanEHIC, title: 'Scan Health Insurance Card'},
+        {id: FeatureId.ScanIdCard, title: 'Scan Id Card'},
       ],
     },
     {

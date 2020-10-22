@@ -3,6 +3,8 @@ import {
   ActivityIndicator,
   Dimensions,
   Linking,
+  NativeEventEmitter,
+  NativeModules,
   Platform,
   SafeAreaView,
   SectionList,
@@ -27,9 +29,14 @@ import {BarcodeFormats} from '../model/BarcodeFormats';
 import {Navigation} from '../utils/Navigation';
 import {BaseScreen} from '../utils/BaseScreen';
 import {Colors} from '../model/Colors';
-import {HealthInsuranceCardScannerConfiguration} from "react-native-scanbot-sdk/src";
+import {
+  BatchBarcodeScannerConfiguration,
+  HealthInsuranceCardScannerConfiguration,
+  IdCardScannerConfiguration,
+} from 'react-native-scanbot-sdk/src';
 
 export class HomeScreen extends BaseScreen {
+
   render() {
     return (
       <>
@@ -95,6 +102,8 @@ export class HomeScreen extends BaseScreen {
       this.viewImageResults();
     } else if (item.id === FeatureId.ScanBarcodes) {
       this.startBarcodeScanner();
+    } else if (item.id === FeatureId.ScanBatchBarcodes) {
+      this.startBatchBarcodeScanner();
     } else if (item.id === FeatureId.DetectBarcodesOnStillImage) {
       this.importImageAndDetectBarcodes();
     } else if (item.id === FeatureId.BarcodeFormatsFilter) {
@@ -102,7 +111,9 @@ export class HomeScreen extends BaseScreen {
     } else if (item.id === FeatureId.ScanMRZ) {
       this.startMRZScanner();
     } else if (item.id === FeatureId.ScanEHIC) {
-      this.startEHICScanner()
+      this.startEHICScanner();
+    } else if (item.id === FeatureId.ScanIdCard) {
+      this.startIdCardCScanner();
     } else if (item.id === FeatureId.OcrConfigs) {
       const result = await ScanbotSDK.getOCRConfigs();
       ViewUtils.showAlert(JSON.stringify(result));
@@ -145,6 +156,9 @@ export class HomeScreen extends BaseScreen {
     page = await ScanbotSDK.detectDocumentOnPage(page);
     Pages.add(page);
     this.hideProgress();
+
+    const blur = await ScanbotSDK.estimateBlur({ imageFileUri: page.documentImageFileUri! });
+    console.log("Blur:", blur);
     this.pushPage(Navigation.IMAGE_RESULTS);
   }
 
@@ -157,6 +171,17 @@ export class HomeScreen extends BaseScreen {
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
     };
     const result = await ScanbotSDK.UI.startBarcodeScanner(config);
+    if (result.status === 'OK') {
+      ViewUtils.showAlert(JSON.stringify(result.barcodes));
+    }
+  }
+
+  async startBatchBarcodeScanner() {
+    const config: BatchBarcodeScannerConfiguration = {
+      barcodeFormats: BarcodeFormats.getAcceptedFormats(),
+      finderAspectRatio: { width: 1, height: 2 }
+    };
+    const result = await ScanbotSDK.UI.startBatchBarcodeScanner(config);
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result.barcodes));
     }
@@ -216,6 +241,14 @@ export class HomeScreen extends BaseScreen {
         (f) => `${f.type}: ${f.value} (${f.confidence.toFixed(2)})`,
       );
       ViewUtils.showAlert(fields.join('\n'));
+    }
+  }
+
+  async startIdCardCScanner() {
+    const config: IdCardScannerConfiguration = {};
+    const result = await ScanbotSDK.UI.startIdCardScanner(config);
+    if (result.status === 'OK') {
+      ViewUtils.showAlert(JSON.stringify(result));
     }
   }
 }
