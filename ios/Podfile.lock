@@ -308,7 +308,7 @@ PODS:
     - React
   - RNReanimated (1.8.0):
     - React
-  - RNScanbotSDK/ALL (4.3.0-rc0):
+  - RNScanbotSDK/ALL (4.3.0):
     - React
     - ScanbotSDK (= 1.11.2)
     - ScanbotSDK/ALL (= 1.11.2)
@@ -508,7 +508,7 @@ SPEC CHECKSUMS:
   RNFS: 2bd9eb49dc82fa9676382f0585b992c424cd59df
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
-  RNScanbotSDK: 1153c31ab3842339e40b1f1051c8fcbaf001b4de
+  RNScanbotSDK: ba01a798fd3f0216edfaaa8bc54940b1cc37dbaf
   RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
   ScanbotSDK: b074af983e38eaaf5f5501ac000e29f461236ac2
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
