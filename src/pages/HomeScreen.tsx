@@ -34,6 +34,7 @@ import {
   HealthInsuranceCardScannerConfiguration,
   IdCardScannerConfiguration,
 } from 'react-native-scanbot-sdk/src';
+import { TextDataScannerConfiguration, TextDataCallback } from 'react-native-scanbot-sdk/src/configuration';
 
 export class HomeScreen extends BaseScreen {
 
@@ -108,6 +109,8 @@ export class HomeScreen extends BaseScreen {
       this.importImageAndDetectBarcodes();
     } else if (item.id === FeatureId.BarcodeFormatsFilter) {
       this.setBarcodeFormats();
+    } else if (item.id === FeatureId.ScanTextData) {
+      this.startTextDataScanner();
     } else if (item.id === FeatureId.ScanMRZ) {
       this.startMRZScanner();
     } else if (item.id === FeatureId.ScanEHIC) {
@@ -208,6 +211,35 @@ export class HomeScreen extends BaseScreen {
 
   setBarcodeFormats() {
     this.pushPage(Navigation.BARCODE_FORMATS);
+  }
+
+  async startTextDataScanner() {
+
+    class MyTextDataCallback extends TextDataCallback {
+      validate(result: string): boolean {
+        console.log("MyTextDataCallback validate", result);
+        return super.validate(result);
+      }
+
+      process(result: string): string {
+        console.log("MyTextDataCallback process", result);
+        return super.process(result);
+      }
+    }
+
+    let config: TextDataScannerConfiguration = {
+      title: "Text Data Scanner Example",
+      guidanceText: "Move the finder over text with the matching pattern",
+      pattern: "#### ###",
+      shouldMatchSubstring: true,
+      preferredZoom: 1.4,
+      unzoomedFinderHeight: 40,
+      callback: new MyTextDataCallback(),
+      aspectRatio: { width: 4, height: 1},
+      allowedSymbols: ["C", "O", "D", "E", "1", "2", "8"]
+    };
+
+    ScanbotSDK.UI.startTextDataScanner(config);
   }
 
   async startMRZScanner() {

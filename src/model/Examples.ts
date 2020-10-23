@@ -9,6 +9,7 @@ export enum FeatureId {
   ScanBatchBarcodes,
   DetectBarcodesOnStillImage,
   BarcodeFormatsFilter,
+  ScanTextData,
   ScanMRZ,
   ScanEHIC,
   ScanIdCard,
@@ -44,6 +45,7 @@ export class Examples {
     {
       title: 'DATA DETECTORS',
       data: [
+        {id: FeatureId.ScanTextData, title: 'Scan Generic Text Data'},
         {id: FeatureId.ScanMRZ, title: 'Scan MRZ on ID Card'},
         {id: FeatureId.ScanEHIC, title: 'Scan Health Insurance Card'},
         {id: FeatureId.ScanIdCard, title: 'Scan Id Card'},
