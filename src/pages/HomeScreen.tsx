@@ -114,6 +114,8 @@ export class HomeScreen extends BaseScreen {
       this.startEHICScanner();
     } else if (item.id === FeatureId.ScanIdCard) {
       this.startIdCardCScanner();
+    } else if (item.id === FeatureId.ScanTextData) {
+      this.startTextDataScanner();
     } else if (item.id === FeatureId.OcrConfigs) {
       const result = await ScanbotSDK.getOCRConfigs();
       ViewUtils.showAlert(JSON.stringify(result));
@@ -249,6 +251,31 @@ export class HomeScreen extends BaseScreen {
     const result = await ScanbotSDK.UI.startIdCardScanner(config);
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result));
+    }
+  }
+
+  async startTextDataScanner() {
+    console.log('startTextDataScanner');
+    const config: TextDataScannerConfiguration = {
+        title: 'Hey',
+        guidanceText: 'Hey',
+    };
+
+    const eventEmitter = new NativeEventEmitter(NativeModules.ScanbotSDK);
+    eventEmitter.addListener('GTREvent', (params) =>
+      console.log('GTResult (Simple):', params),
+    );
+
+    const eventEmitter2 = new NativeEventEmitter(
+      NativeModules.ScanbotSDK.SBSDKDefaultUi,
+    );
+    eventEmitter2.addListener('GTREvent', (params) =>
+      console.log('GTResult (UIModule):', params),
+    );
+
+    const result = await ScanbotSDK.UI.startTextDataScanner(config);
+    if (result.status === 'OK') {
+          ViewUtils.showAlert(JSON.stringify(result.result));
     }
   }
 }
