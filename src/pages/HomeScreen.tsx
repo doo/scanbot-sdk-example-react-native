@@ -34,6 +34,7 @@ import {
   HealthInsuranceCardScannerConfiguration,
   IdCardScannerConfiguration,
 } from 'react-native-scanbot-sdk/src';
+import {PageStorage} from "../utils/PageStorage";
 
 export class HomeScreen extends BaseScreen {
 
@@ -94,6 +95,7 @@ export class HomeScreen extends BaseScreen {
     if (!(await SDKUtils.checkLicense())) {
       return;
     }
+
     if (item.id === FeatureId.DocumentScanner) {
       this.startDocumentScanner();
     } else if (item.id === FeatureId.ImportImage) {
@@ -136,6 +138,8 @@ export class HomeScreen extends BaseScreen {
       // maxNumberOfPages: 3,
       // See further config properties ...
     };
+    const loadedPages = await PageStorage.INSTANCE.load();
+    await ScanbotSDK.refreshImageUris({pages: loadedPages});
     const result = await ScanbotSDK.UI.startDocumentScanner(config);
     if (result.status === 'OK') {
       Pages.addList(result.pages);
