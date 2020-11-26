@@ -138,13 +138,16 @@ export class HomeScreen extends BaseScreen {
       // maxNumberOfPages: 3,
       // See further config properties ...
     };
-    const loadedPages = await PageStorage.INSTANCE.load();
-    await ScanbotSDK.refreshImageUris({pages: loadedPages});
+
     const result = await ScanbotSDK.UI.startDocumentScanner(config);
     if (result.status === 'OK') {
       Pages.addList(result.pages);
       this.pushPage(Navigation.IMAGE_RESULTS);
+      await PageStorage.INSTANCE.saveAll(result.pages);
     }
+
+    const loadedPages = await PageStorage.INSTANCE.load();
+    await ScanbotSDK.refreshImageUris({pages: loadedPages});
   }
 
   async importImageAndDetectDocument() {

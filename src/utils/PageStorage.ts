@@ -35,12 +35,18 @@ export class PageStorage {
         });
     }
 
+    public async saveAll(pages: Page[]) {
+        for (const page of pages) {
+            await this.save(page);
+        }
+    }
+
     public async save(page: Page) {
-        const result = this.plugin.save({ key: this.KEY, data: page });
+        const result = this.plugin.save({ key: this.KEY, id: page.pageId, data: page });
         console.log("Saved page (" + page.pageId + ") to local storage:", result);
     }
 
     public async load(): Promise<Page[]> {
-        return await this.plugin.load({ key: this.KEY });
+        return await this.plugin.getAllDataForKey(this.KEY);
     }
 }
