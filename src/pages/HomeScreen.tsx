@@ -146,8 +146,10 @@ export class HomeScreen extends BaseScreen {
       await PageStorage.INSTANCE.saveAll(result.pages);
     }
 
-    const loadedPages = await PageStorage.INSTANCE.load();
-    await ScanbotSDK.refreshImageUris({pages: loadedPages});
+    const loaded = await PageStorage.INSTANCE.load();
+    console.log("loaded", loaded);
+    const refreshed = await ScanbotSDK.refreshImageUris({pages: loaded});
+    console.log("refreshed", refreshed);
   }
 
   async importImageAndDetectDocument() {
