@@ -114,6 +114,8 @@ export class HomeScreen extends BaseScreen {
       this.startEHICScanner();
     } else if (item.id === FeatureId.ScanIdCard) {
       this.startIdCardCScanner();
+    } else if (item.id === FeatureId.ScanDataText) {
+      this.startDataTextScanner();
     } else if (item.id === FeatureId.OcrConfigs) {
       const result = await ScanbotSDK.getOCRConfigs();
       ViewUtils.showAlert(JSON.stringify(result));
@@ -249,6 +251,14 @@ export class HomeScreen extends BaseScreen {
     const result = await ScanbotSDK.UI.startIdCardScanner(config);
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result));
+    }
+  }
+
+  async startDataTextScanner() {
+    const config: DataScannerConfiguration = {};
+    const result = await ScanbotSDK.UI.startTextDataScanner(config);
+    if (result.status === 'OK') {
+      viewUtils.showAlert(JSON.stringify(result));
     }
   }
 }
