@@ -178,6 +178,8 @@ export class HomeScreen extends BaseScreen {
   async startBarcodeScanner() {
     const config: BarcodeScannerConfiguration = {
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
+      finderAspectRatio: {width: 1, height: 1},
+      useButtonsAllCaps: false,
     };
     const result = await ScanbotSDK.UI.startBarcodeScanner(config);
     if (result.status === 'OK') {
@@ -188,7 +190,8 @@ export class HomeScreen extends BaseScreen {
   async startBatchBarcodeScanner() {
     const config: BatchBarcodeScannerConfiguration = {
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
-      finderAspectRatio: { width: 1, height: 2 }
+      finderAspectRatio: {width: 2, height: 1},
+      useButtonsAllCaps: false,
     };
     const result = await ScanbotSDK.UI.startBatchBarcodeScanner(config);
     if (result.status === 'OK') {
