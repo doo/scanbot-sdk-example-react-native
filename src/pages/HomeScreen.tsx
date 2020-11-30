@@ -44,7 +44,10 @@ export class HomeScreen extends BaseScreen {
 
   async componentDidMount(): Promise<void> {
     const loaded = await PageStorage.INSTANCE.load();
-    console.log("loaded", loaded);
+    if (loaded.length === 0) {
+      console.log("You have no pages to refresh");
+      return;
+    }
     const refreshed = await ScanbotSDK.refreshImageUris({pages: loaded});
     Pages.clear();
     Pages.addList(refreshed.pages);
