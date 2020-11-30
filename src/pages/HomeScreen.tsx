@@ -149,7 +149,6 @@ export class HomeScreen extends BaseScreen {
       pageCounterButtonTitle: '%d Page(s)',
       multiPageEnabled: true,
       ignoreBadAspectRatio: true,
-      autoSnappingSensitivity: 0.85,
       // documentImageSizeLimit: { width: 2000, height: 3000 },
       // maxNumberOfPages: 3,
       // See further config properties ...
