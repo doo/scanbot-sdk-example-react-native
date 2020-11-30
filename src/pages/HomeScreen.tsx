@@ -38,6 +38,19 @@ import {PageStorage} from "../utils/PageStorage";
 
 export class HomeScreen extends BaseScreen {
 
+  constructor(props: any) {
+    super(props);
+  }
+
+  async componentDidMount(): Promise<void> {
+    const loaded = await PageStorage.INSTANCE.load();
+    console.log("loaded", loaded);
+    const refreshed = await ScanbotSDK.refreshImageUris({pages: loaded});
+    Pages.clear();
+    Pages.addList(refreshed.pages);
+    console.log("Refreshed pages", refreshed);
+  }
+
   render() {
     return (
       <>
@@ -143,13 +156,7 @@ export class HomeScreen extends BaseScreen {
     if (result.status === 'OK') {
       Pages.addList(result.pages);
       this.pushPage(Navigation.IMAGE_RESULTS);
-      await PageStorage.INSTANCE.saveAll(result.pages);
     }
-
-    const loaded = await PageStorage.INSTANCE.load();
-    console.log("loaded", loaded);
-    const refreshed = await ScanbotSDK.refreshImageUris({pages: loaded});
-    console.log("refreshed", refreshed);
   }
 
   async importImageAndDetectDocument() {

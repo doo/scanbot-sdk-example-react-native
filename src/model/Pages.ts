@@ -1,16 +1,22 @@
 import {Page} from 'react-native-scanbot-sdk/src';
+import {PageStorage} from "../utils/PageStorage";
 
 export class Pages {
   public static list: Page[] = [];
   public static selectedPage: Page;
 
-  static add(page: Page) {
+  static async add(page: Page) {
     Pages.list.push(page);
+    await PageStorage.INSTANCE.saveAll(this.list);
   }
   static addList(pages: Page[]) {
     pages.forEach((page) => {
-      Pages.list.push(page);
+      this.add(page);
     });
+  }
+
+  static clear() {
+    this.list = [];
   }
 
   static isEmpty() {
