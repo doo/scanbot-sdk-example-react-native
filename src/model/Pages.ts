@@ -23,7 +23,7 @@ export class Pages {
     return Pages.list.length === 0;
   }
 
-  static update(page: Page) {
+  static async update(page: Page) {
     let index: number = -1;
     for (let i = 0; i < Pages.list.length; i++) {
       if (Pages.list[i].pageId === page.pageId) {
@@ -33,7 +33,17 @@ export class Pages {
 
     if (index !== -1) {
       Pages.list[index] = page;
+      await PageStorage.INSTANCE.save(page);
     }
+  }
+
+  static deleteSelectedPage() {
+    this.delete(this.selectedPage);
+  }
+
+  static async delete(page: Page) {
+    this.list.splice(this.list.indexOf(page), 1);
+    await PageStorage.INSTANCE.delete(page);
   }
 
   static getImageUris(): string[] {

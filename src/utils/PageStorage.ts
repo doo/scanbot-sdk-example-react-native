@@ -46,6 +46,10 @@ export class PageStorage {
         console.log("Saved page (" + page.pageId + ") to local storage:", result);
     }
 
+    public async delete(page: Page) {
+        await this.plugin.remove({ key: this.KEY, id: page.pageId });
+    }
+
     public async load(): Promise<Page[]> {
         return await this.plugin.getAllDataForKey(this.KEY);
     }

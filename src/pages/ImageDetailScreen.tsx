@@ -121,7 +121,7 @@ export class ImageDetailScreen extends BaseScreen {
   }
 
   private deleteButtonPress() {
-    Pages.list.splice(Pages.list.indexOf(Pages.selectedPage), 1);
+    Pages.deleteSelectedPage();
     // @ts-ignore
     this.props.navigation.pop();
   }
