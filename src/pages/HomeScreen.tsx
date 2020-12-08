@@ -35,6 +35,7 @@ import {
   IdCardScannerConfiguration,
 } from 'react-native-scanbot-sdk/src';
 import {PageStorage} from '../utils/PageStorage';
+import { TextDataCallback, TextDataScannerConfiguration } from 'react-native-scanbot-sdk/src/configuration';
 
 export class HomeScreen extends BaseScreen {
   constructor(props: any) {
@@ -140,26 +141,53 @@ export class HomeScreen extends BaseScreen {
   }
 
   async startDocumentScanner() {
-    const config: DocumentScannerConfiguration = {
-      // Customize colors, text resources, etc..
-      polygonColor: '#00ffff',
-      bottomBarBackgroundColor: Colors.SCANBOT_RED,
-      topBarBackgroundColor: Colors.SCANBOT_RED,
-      cameraBackgroundColor: Colors.SCANBOT_RED,
-      orientationLockMode: 'PORTRAIT',
-      pageCounterButtonTitle: '%d Page(s)',
-      multiPageEnabled: true,
-      ignoreBadAspectRatio: true,
-      // documentImageSizeLimit: { width: 2000, height: 3000 },
-      // maxNumberOfPages: 3,
-      // See further config properties ...
-    };
+    // const config: DocumentScannerConfiguration = {
+    //   // Customize colors, text resources, etc..
+    //   polygonColor: '#00ffff',
+    //   bottomBarBackgroundColor: Colors.SCANBOT_RED,
+    //   topBarBackgroundColor: Colors.SCANBOT_RED,
+    //   cameraBackgroundColor: Colors.SCANBOT_RED,
+    //   orientationLockMode: 'PORTRAIT',
+    //   pageCounterButtonTitle: '%d Page(s)',
+    //   multiPageEnabled: true,
+    //   ignoreBadAspectRatio: true,
+    //   // documentImageSizeLimit: { width: 2000, height: 3000 },
+    //   // maxNumberOfPages: 3,
+    //   // See further config properties ...
+    // };
+    //
+    // const result = await ScanbotSDK.UI.startDocumentScanner(config);
+    // if (result.status === 'OK') {
+    //   await Pages.addList(result.pages);
+    //   this.pushPage(Navigation.IMAGE_RESULTS);
+    // }
 
-    const result = await ScanbotSDK.UI.startDocumentScanner(config);
-    if (result.status === 'OK') {
-      await Pages.addList(result.pages);
-      this.pushPage(Navigation.IMAGE_RESULTS);
+    class MyTextDataCallback extends TextDataCallback {
+      validate(result: string): boolean {
+        console.log("MyTextDataCallback validate", result);
+        const parent = super.validate(result);
+        console.log("parent");
+        return parent;
+      }
+
+      process(result: string): string {
+        console.log("MyTextDataCallback process", result);
+        return super.process(result);
+      }
     }
+
+    let configuration: TextDataScannerConfiguration = {
+      title: "Text Data Scanner Example",
+      guidanceText: "Move the finder over text with the matching pattern",
+      pattern: "#### ###",
+      shouldMatchSubstring: true,
+      preferredZoom: 1.4,
+      unzoomedFinderHeight: 40,
+      callback: new MyTextDataCallback(),
+      aspectRatio: { width: 4, height: 1},
+      allowedSymbols: ["C", "O", "D", "E", "1", "2", "8"]
+    };
+    await ScanbotSDK.UI.startTextDataScanner(configuration);
   }
 
   async importImageAndDetectDocument() {
