@@ -1,22 +1,22 @@
 import {Page} from 'react-native-scanbot-sdk/src';
-import {PageStorage} from "../utils/PageStorage";
+import {PageStorage} from '../utils/PageStorage';
 
 export class Pages {
-  public static list: Page[] = [];
+  private static list: Page[] = [];
   public static selectedPage: Page;
+
+  static getAllPages() {
+    return Pages.list;
+  }
 
   static async add(page: Page) {
     Pages.list.push(page);
-    await PageStorage.INSTANCE.saveAll(this.list);
-  }
-  static addList(pages: Page[]) {
-    pages.forEach((page) => {
-      this.add(page);
-    });
+    await PageStorage.INSTANCE.saveAll(Pages.list);
   }
 
-  static clear() {
-    this.list = [];
+  static async addList(pages: Page[]) {
+    Pages.list = Pages.list.concat(pages);
+    await PageStorage.INSTANCE.saveAll(Pages.list);
   }
 
   static isEmpty() {
@@ -37,13 +37,19 @@ export class Pages {
     }
   }
 
-  static deleteSelectedPage() {
-    this.delete(this.selectedPage);
+  static async deleteSelectedPage() {
+    await this.delete(Pages.selectedPage);
+    delete Pages.selectedPage;
   }
 
   static async delete(page: Page) {
-    this.list.splice(this.list.indexOf(page), 1);
+    Pages.list.splice(Pages.list.indexOf(page), 1);
     await PageStorage.INSTANCE.delete(page);
+  }
+
+  static async deleteAllPages() {
+    await PageStorage.INSTANCE.deleteAll();
+    Pages.list = [];
   }
 
   static getImageUris(): string[] {

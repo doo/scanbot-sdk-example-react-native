@@ -236,8 +236,8 @@ PODS:
     - React-cxxreact (= 0.63.3)
     - React-jsi (= 0.63.3)
   - React-jsinspector (0.63.3)
-  - react-native-image-picker (2.3.4):
-    - React-Core
+  - react-native-image-picker (3.0.0):
+    - React
   - react-native-safe-area-context (1.0.0):
     - React
   - React-RCTActionSheet (0.63.3):
@@ -310,16 +310,16 @@ PODS:
     - React
   - RNReanimated (1.8.0):
     - React
-  - RNScanbotSDK/ALL (4.4.0-beta1):
+  - RNScanbotSDK/ALL (4.4.0):
     - React
-    - ScanbotSDK (= 1.11.9)
-    - ScanbotSDK/ALL (= 1.11.9)
+    - ScanbotSDK (= 1.12.1)
+    - ScanbotSDK/ALL (= 1.12.1)
   - RNScreens (2.7.0):
     - React
-  - ScanbotSDK (1.11.9):
-    - ScanbotSDK/NONE (= 1.11.9)
-  - ScanbotSDK/ALL (1.11.9)
-  - ScanbotSDK/NONE (1.11.9)
+  - ScanbotSDK (1.12.1):
+    - ScanbotSDK/NONE (= 1.12.1)
+  - ScanbotSDK/ALL (1.12.1)
+  - ScanbotSDK/NONE (1.12.1)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -497,7 +497,7 @@ SPEC CHECKSUMS:
   React-jsi: df07aa95b39c5be3e41199921509bfa929ed2b9d
   React-jsiexecutor: b56c03e61c0dd5f5801255f2160a815f4a53d451
   React-jsinspector: 8e68ffbfe23880d3ee9bafa8be2777f60b25cbe2
-  react-native-image-picker: 32d1ad2c0024ca36161ae0d5c2117e2d6c441f11
+  react-native-image-picker: ecbc077260fb219f6deb8251022743255caff5e5
   react-native-safe-area-context: 5f3e081f937ab7c44c179d551f332fa494cfcf8f
   React-RCTActionSheet: 53ea72699698b0b47a6421cb1c8b4ab215a774aa
   React-RCTAnimation: 1befece0b5183c22ae01b966f5583f42e69a83c2
@@ -514,9 +514,9 @@ SPEC CHECKSUMS:
   RNFS: 2bd9eb49dc82fa9676382f0585b992c424cd59df
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
-  RNScanbotSDK: 1d00e3bc297ae868cb4338719e63ce5facdb87f3
+  RNScanbotSDK: 90c1b32b087804a7e5f688f92c4b68ca0414cdbe
   RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
-  ScanbotSDK: 6e786d8b205fbebe6143ce67e128baa8a100d24c
+  ScanbotSDK: 694c31b2da5907139ae5e8778e8949d74080f092
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

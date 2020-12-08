@@ -34,24 +34,25 @@ import {
   HealthInsuranceCardScannerConfiguration,
   IdCardScannerConfiguration,
 } from 'react-native-scanbot-sdk/src';
-import {PageStorage} from "../utils/PageStorage";
+import {PageStorage} from '../utils/PageStorage';
 
 export class HomeScreen extends BaseScreen {
-
   constructor(props: any) {
     super(props);
   }
 
   async componentDidMount(): Promise<void> {
-    const loaded = await PageStorage.INSTANCE.load();
-    if (loaded.length === 0) {
-      console.log("You have no pages to refresh");
-      return;
+    try {
+      const loaded = await PageStorage.INSTANCE.load();
+      console.log('+++> loaded pages', loaded);
+      if (loaded.length === 0) {
+        return;
+      }
+      const refreshed = await ScanbotSDK.refreshImageUris({pages: loaded});
+      await Pages.addList(refreshed.pages);
+    } catch (e) {
+      console.error('error loading/refreshing pages: ' + JSON.stringify(e));
     }
-    const refreshed = await ScanbotSDK.refreshImageUris({pages: loaded});
-    Pages.clear();
-    Pages.addList(refreshed.pages);
-    console.log("Refreshed pages", refreshed);
   }
 
   render() {
@@ -156,7 +157,7 @@ export class HomeScreen extends BaseScreen {
 
     const result = await ScanbotSDK.UI.startDocumentScanner(config);
     if (result.status === 'OK') {
-      Pages.addList(result.pages);
+      await Pages.addList(result.pages);
       this.pushPage(Navigation.IMAGE_RESULTS);
     }
   }
