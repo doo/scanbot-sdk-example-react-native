@@ -26,7 +26,6 @@
     "react-native-safe-area-view": "1.1.1",
     "react-native-scanbot-sdk": "4.4.0",
     "react-native-screens": "2.7.0",
-    "react-native-storage": "1.0.1",
     "react-navigation-stack": "2.5.1"
   },
   "devDependencies": {

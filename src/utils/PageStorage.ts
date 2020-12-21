@@ -1,37 +1,10 @@
-import Storage from 'react-native-storage';
+
 import AsyncStorage from '@react-native-community/async-storage';
 import {Page} from 'react-native-scanbot-sdk';
 
 export class PageStorage {
-  private KEY = 'pageStorageKey';
-  private plugin: Storage;
 
   public static INSTANCE = new PageStorage();
-
-  constructor() {
-    this.plugin = new Storage({
-      // maximum capacity, default 1000 key-ids
-      size: 1000,
-
-      // Use AsyncStorage for RN apps, or window.localStorage for web apps.
-      // If storageBackend is not set, data will be lost after reload.
-      storageBackend: AsyncStorage, // for web: window.localStorage
-
-      // expire time, default: 1 day (1000 * 3600 * 24 milliseconds).
-      // can be null, which means never expire.
-      defaultExpires: 1000 * 3600 * 24,
-
-      // cache data in the memory. default is true.
-      enableCache: true,
-
-      // if data was not found in storage or expired data was found,
-      // the corresponding sync method will be invoked returning
-      // the latest data.
-      sync: {
-        // we'll talk about the details later.
-      },
-    });
-  }
 
   public async saveAll(pages: Page[]) {
     for (const page of pages) {
@@ -40,22 +13,36 @@ export class PageStorage {
   }
 
   public async save(page: Page) {
-    await this.plugin.save({
-      key: this.KEY,
-      id: page.pageId,
-      data: page,
-    });
+    await AsyncStorage.setItem(page.pageId, JSON.stringify(page));
   }
 
   public async delete(page: Page) {
-    await this.plugin.remove({key: this.KEY, id: page.pageId});
+    await AsyncStorage.removeItem(page.pageId);
   }
 
   public async deleteAll() {
-    await this.plugin.remove({key: this.KEY});
+    await AsyncStorage.multiRemove(await this.keys());
   }
 
   public async load(): Promise<Page[]> {
-    return await this.plugin.getAllDataForKey(this.KEY);
+    const result: Page[] = [];
+    const stringified = await AsyncStorage.multiGet(await this.keys());
+    stringified.forEach(item => {
+      // AsyncStorage contains "__react_native_storage_test" key and...
+      // All the data stored in a two-dimensional array, apparently, for some reason,
+      // so just check whether the first element is an actual entry and grab the second one
+      if (item[0] !== "__react_native_storage_test") {
+        const page = item[1];
+        if (typeof page === "string") {
+          result.push(JSON.parse(page));
+        }
+      }
+    });
+
+    return result;
+  }
+
+  private async keys() {
+    return await AsyncStorage.getAllKeys();
   }
 }
