@@ -114,6 +114,8 @@ export class HomeScreen extends BaseScreen {
       this.startEHICScanner();
     } else if (item.id === FeatureId.ScanIdCard) {
       this.startIdCardCScanner();
+    } else if (item.id === FeatureId.ReadPassportNFC) {
+      this.startNFCReader();
     } else if (item.id === FeatureId.OcrConfigs) {
       const result = await ScanbotSDK.getOCRConfigs();
       ViewUtils.showAlert(JSON.stringify(result));
@@ -251,4 +253,13 @@ export class HomeScreen extends BaseScreen {
       ViewUtils.showAlert(JSON.stringify(result));
     }
   }
+
+  async startNFCReader() {
+    const config = NFCPassportReaderConfiguration = {};
+    const result = await ScanbotSDK.UI.startNFCPassportReader(config);
+    if (result.status === 'OK') {
+      ViewUtils.showAlert(JSON.stringify(result));
+    }
+  }
+
 }

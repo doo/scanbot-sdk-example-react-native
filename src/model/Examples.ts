@@ -12,6 +12,7 @@ export enum FeatureId {
   ScanMRZ,
   ScanEHIC,
   ScanIdCard,
+  ReadPassportNFC,
   LicenseInfo,
   OcrConfigs,
   LearnMore,
@@ -47,6 +48,7 @@ export class Examples {
         {id: FeatureId.ScanMRZ, title: 'Scan MRZ on ID Card'},
         {id: FeatureId.ScanEHIC, title: 'Scan Health Insurance Card'},
         {id: FeatureId.ScanIdCard, title: 'Scan Id Card'},
+        {id: FeatureId.ReadPassportNFC, title: 'Read Passport NFC'}
       ],
     },
     {
