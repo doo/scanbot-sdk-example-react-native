@@ -1,12 +1,14 @@
 import React from 'react';
-import {Image, SafeAreaView, Text, View} from 'react-native';
+import {SafeAreaView, Text, View} from 'react-native';
 import {Pages} from '../model/Pages';
 import {Styles} from '../model/Styles';
 import ScanbotSDK, {Page} from 'react-native-scanbot-sdk/src';
 import {BaseScreen} from '../utils/BaseScreen';
+// @ts-ignore
 import {ActionSheetCustom as ActionSheet} from 'react-native-custom-actionsheet';
 import {SDKUtils} from '../utils/SDKUtils';
 import {Colors} from '../model/Colors';
+import PreviewImage from '../ui/PreviewImage';
 
 const CANCEL_INDEX = 0;
 
@@ -50,13 +52,12 @@ export class ImageDetailScreen extends BaseScreen {
     return (
       <>
         <SafeAreaView />
-        <Image
+        <PreviewImage
+          page={Pages.selectedPage}
           style={[
             Styles.INSTANCE.imageDetails.image,
             Styles.INSTANCE.common.containImage,
           ]}
-          source={{uri: Pages.selectedPage.documentImageFileUri}}
-          key={Pages.selectedPage.pageId}
         />
         <View style={Styles.INSTANCE.common.bottomBar}>
           <Text

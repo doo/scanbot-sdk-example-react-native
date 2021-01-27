@@ -27,11 +27,15 @@ export class App extends React.Component {
     const options: InitializationOptions = {
       licenseKey: SDKUtils.SDK_LICENSE_KEY,
       loggingEnabled: true, // Consider switching logging OFF in production builds for security and performance reasons!
-      storageImageFormat: 'JPG',
-      storageImageQuality: 80,
+      storageImageFormat: SDKUtils.IMAGE_FILE_FORMAT,
+      storageImageQuality: SDKUtils.JPG_IMAGE_QUALITY,
       storageBaseDirectory: this.getCustomStoragePath(), // Optional custom storage path. See comments below!
       documentDetectorMode: 'ML_BASED',
     };
+    if (SDKUtils.FILE_ENCRYPTION_ENABLED && SDKUtils.FILE_ENCRYPTION_PASSWORD) {
+      options.fileEncryptionPassword = SDKUtils.FILE_ENCRYPTION_PASSWORD;
+      options.fileEncryptionMode = SDKUtils.FILE_ENCRYPTION_MODE;
+    }
     return await ScanbotSDK.initializeSDK(options);
   }
 

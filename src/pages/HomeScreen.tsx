@@ -3,8 +3,6 @@ import {
   ActivityIndicator,
   Dimensions,
   Linking,
-  NativeEventEmitter,
-  NativeModules,
   Platform,
   SafeAreaView,
   SectionList,
@@ -36,7 +34,6 @@ import {
 } from 'react-native-scanbot-sdk/src';
 
 export class HomeScreen extends BaseScreen {
-
   render() {
     return (
       <>
@@ -152,13 +149,15 @@ export class HomeScreen extends BaseScreen {
       return;
     }
 
-    let page = await ScanbotSDK.createPage(result.uri);
+    let page = await ScanbotSDK.createPage(result.uri!);
     page = await ScanbotSDK.detectDocumentOnPage(page);
     Pages.add(page);
     this.hideProgress();
 
-    const blur = await ScanbotSDK.estimateBlur({ imageFileUri: page.documentImageFileUri! });
-    console.log("Blur:", blur);
+    const blur = await ScanbotSDK.estimateBlur({
+      imageFileUri: page.documentImageFileUri!,
+    });
+    console.log('Blur:', blur);
     this.pushPage(Navigation.IMAGE_RESULTS);
   }
 
@@ -179,7 +178,7 @@ export class HomeScreen extends BaseScreen {
   async startBatchBarcodeScanner() {
     const config: BatchBarcodeScannerConfiguration = {
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
-      finderAspectRatio: { width: 1, height: 2 }
+      finderAspectRatio: {width: 1, height: 2},
     };
     const result = await ScanbotSDK.UI.startBatchBarcodeScanner(config);
     if (result.status === 'OK') {
@@ -197,7 +196,7 @@ export class HomeScreen extends BaseScreen {
     }
 
     const result = await ScanbotSDK.detectBarcodesOnImage({
-      imageFileUri: image.uri,
+      imageFileUri: image.uri!,
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
     });
     this.hideProgress();

@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   ActivityIndicator,
-  Image,
   Modal,
   SafeAreaView,
   Text,
@@ -18,6 +17,7 @@ import {SDKUtils} from '../utils/SDKUtils';
 import {ViewUtils} from '../utils/ViewUtils';
 import {Navigation} from '../utils/Navigation';
 import {BaseScreen} from '../utils/BaseScreen';
+import PreviewImage from '../ui/PreviewImage';
 
 export class ImageResultScreen extends BaseScreen {
   onScreenFocused() {
@@ -41,12 +41,12 @@ export class ImageResultScreen extends BaseScreen {
               <TouchableOpacity
                 onPress={() => this.onGalleryItemClick(page)}
                 key={page.pageId}>
-                <Image
+                <PreviewImage
+                  page={page}
                   style={[
                     Styles.INSTANCE.imageResults.galleryCell,
                     Styles.INSTANCE.common.containImage,
                   ]}
-                  source={{uri: page.documentImageFileUri}}
                 />
               </TouchableOpacity>
             ))}

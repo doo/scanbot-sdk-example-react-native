@@ -1,4 +1,8 @@
-import ScanbotSDK from 'react-native-scanbot-sdk/src';
+import ScanbotSDK from 'react-native-scanbot-sdk';
+import {
+  CameraImageFormat,
+  FileEncryptionMode,
+} from 'react-native-scanbot-sdk/src/enum';
 
 export class SDKUtils {
   /*
@@ -9,7 +13,19 @@ export class SDKUtils {
    * Please submit the trial license form (https://scanbot.io/en/sdk/demo/trial) on our website by using
    * the app identifier "io.scanbot.example.sdk.reactnative" of this example app.
    */
+  // prettier-ignore
   static readonly SDK_LICENSE_KEY: string = '';
+
+  static readonly IMAGE_FILE_FORMAT: CameraImageFormat = 'JPG';
+
+  static readonly JPG_IMAGE_QUALITY = 80;
+
+  static readonly FILE_ENCRYPTION_ENABLED: boolean = true;
+
+  // prettier-ignore
+  static readonly FILE_ENCRYPTION_PASSWORD: string = 'SomeSecretPa$$w0rdForFileEncryption';
+
+  static readonly FILE_ENCRYPTION_MODE: FileEncryptionMode = 'AES256';
 
   public static async checkLicense(): Promise<boolean> {
     const info = await ScanbotSDK.getLicenseInfo();
