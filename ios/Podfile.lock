@@ -308,18 +308,23 @@ PODS:
     - React
   - RNReanimated (1.8.0):
     - React
-  - RNScanbotSDK (4.5.0-alpha6):
+  - RNScanbotSDK (4.5.0-alpha7):
     - React
-    - RNScanbotSDK/NONE (= 4.5.0-alpha6)
-    - sbsdk-dev (= 0.1.12.3.1)
-  - RNScanbotSDK/NONE (4.5.0-alpha6):
+    - RNScanbotSDK/NONE (= 4.5.0-alpha7)
+    - sbsdk-dev (= 0.1.12.3.2)
+  - RNScanbotSDK/ALL (4.5.0-alpha7):
     - React
-    - sbsdk-dev (= 0.1.12.3.1)
+    - sbsdk-dev (= 0.1.12.3.2)
+    - sbsdk-dev/ALL (= 0.1.12.3.2)
+  - RNScanbotSDK/NONE (4.5.0-alpha7):
+    - React
+    - sbsdk-dev (= 0.1.12.3.2)
   - RNScreens (2.7.0):
     - React
-  - sbsdk-dev (0.1.12.3.1):
-    - sbsdk-dev/NONE (= 0.1.12.3.1)
-  - sbsdk-dev/NONE (0.1.12.3.1)
+  - sbsdk-dev (0.1.12.3.2):
+    - sbsdk-dev/NONE (= 0.1.12.3.2)
+  - sbsdk-dev/ALL (0.1.12.3.2)
+  - sbsdk-dev/NONE (0.1.12.3.2)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -378,6 +383,7 @@ DEPENDENCIES:
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScanbotSDK (from `../node_modules/react-native-scanbot-sdk`)
+  - RNScanbotSDK/ALL (from `../node_modules/react-native-scanbot-sdk`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -510,12 +516,12 @@ SPEC CHECKSUMS:
   RNFS: 2bd9eb49dc82fa9676382f0585b992c424cd59df
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
-  RNScanbotSDK: 869f4987d19ca71609bc70820c54ace9605a6558
+  RNScanbotSDK: 05e95db6cb0562c5faa0c26b0f74d52f13c04923
   RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
-  sbsdk-dev: e6b0894e4a458336372edca769507976f6462717
+  sbsdk-dev: 0af57b360c30b49d4120d29665859853ff7a5d29
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: eb5221f6333f36384540450d404d6d0f403a772e
+PODFILE CHECKSUM: 900dda44fc5d81c2053eb5f2651040ef2aecd5b0
 
 COCOAPODS: 1.10.0
