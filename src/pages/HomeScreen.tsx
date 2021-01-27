@@ -178,7 +178,7 @@ export class HomeScreen extends BaseScreen {
 
     let page = await ScanbotSDK.createPage(result.uri);
     page = await ScanbotSDK.detectDocumentOnPage(page);
-    Pages.add(page);
+    await Pages.add(page);
     this.hideProgress();
 
     // TODO move estimateBlur() example to another location
@@ -222,6 +222,12 @@ export class HomeScreen extends BaseScreen {
 
     if (image.didCancel) {
       this.hideProgress();
+      return;
+    }
+
+    if (!image.uri) {
+      this.hideProgress();
+      ViewUtils.showAlert('Error picking image from gallery!');
       return;
     }
 

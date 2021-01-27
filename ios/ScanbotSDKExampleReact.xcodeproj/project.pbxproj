@@ -468,7 +468,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests-frameworks.sh",
-				"${PODS_ROOT}/ScanbotSDK/ScanbotSDK.framework",
+				"${PODS_ROOT}/sbsdk-dev/ScanbotSDK.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -487,8 +487,8 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact/Pods-ScanbotSDKExampleReact-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
-				"${PODS_ROOT}/ScanbotSDK/AdditionalData/ScanbotSDKMRZData.bundle",
-				"${PODS_ROOT}/ScanbotSDK/AdditionalData/ScanbotSDKOCRData.bundle",
+				"${PODS_ROOT}/sbsdk-dev/AdditionalData/ScanbotSDKMRZData.bundle",
+				"${PODS_ROOT}/sbsdk-dev/AdditionalData/ScanbotSDKOCRData.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -509,8 +509,8 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
-				"${PODS_ROOT}/ScanbotSDK/AdditionalData/ScanbotSDKMRZData.bundle",
-				"${PODS_ROOT}/ScanbotSDK/AdditionalData/ScanbotSDKOCRData.bundle",
+				"${PODS_ROOT}/sbsdk-dev/AdditionalData/ScanbotSDKMRZData.bundle",
+				"${PODS_ROOT}/sbsdk-dev/AdditionalData/ScanbotSDKOCRData.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -530,7 +530,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact/Pods-ScanbotSDKExampleReact-frameworks.sh",
-				"${PODS_ROOT}/ScanbotSDK/ScanbotSDK.framework",
+				"${PODS_ROOT}/sbsdk-dev/ScanbotSDK.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
