@@ -1,16 +1,17 @@
-import ImagePicker, {ImagePickerResponse} from 'react-native-image-picker';
+import {
+  launchImageLibrary,
+  ImagePickerResponse,
+  ImageLibraryOptions,
+} from 'react-native-image-picker';
 
 export class ImageUtils {
   public static async pickFromGallery(): Promise<ImagePickerResponse> {
-    const options = {
-      title: 'Import image',
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
+    const options: ImageLibraryOptions = {
+      mediaType: 'photo',
+      quality: 1,
     };
     return await new Promise<ImagePickerResponse>((resolve) => {
-      ImagePicker.launchImageLibrary(options, async (response) => {
+      launchImageLibrary(options, async (response) => {
         resolve(response);
       });
     });

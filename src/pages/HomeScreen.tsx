@@ -32,8 +32,28 @@ import {
   HealthInsuranceCardScannerConfiguration,
   IdCardScannerConfiguration,
 } from 'react-native-scanbot-sdk/src';
+import {PageStorage} from '../utils/PageStorage';
 
 export class HomeScreen extends BaseScreen {
+  constructor(props: any) {
+    super(props);
+  }
+
+  async componentDidMount(): Promise<void> {
+    try {
+      const loaded = await PageStorage.INSTANCE.load();
+      //console.log('+++> loaded pages', loaded);
+      console.log(`Loaded ${loaded.length} pages from storage`);
+      if (loaded.length === 0) {
+        return;
+      }
+      const refreshed = await ScanbotSDK.refreshImageUris({pages: loaded});
+      await Pages.addList(refreshed.pages);
+    } catch (e) {
+      console.error('error loading/refreshing pages: ' + JSON.stringify(e));
+    }
+  }
+
   render() {
     return (
       <>
@@ -91,6 +111,7 @@ export class HomeScreen extends BaseScreen {
     if (!(await SDKUtils.checkLicense())) {
       return;
     }
+
     if (item.id === FeatureId.DocumentScanner) {
       this.startDocumentScanner();
     } else if (item.id === FeatureId.ImportImage) {
@@ -128,14 +149,14 @@ export class HomeScreen extends BaseScreen {
       pageCounterButtonTitle: '%d Page(s)',
       multiPageEnabled: true,
       ignoreBadAspectRatio: true,
-      autoSnappingSensitivity: 0.85,
       // documentImageSizeLimit: { width: 2000, height: 3000 },
       // maxNumberOfPages: 3,
       // See further config properties ...
     };
+
     const result = await ScanbotSDK.UI.startDocumentScanner(config);
     if (result.status === 'OK') {
-      Pages.addList(result.pages);
+      await Pages.addList(result.pages);
       this.pushPage(Navigation.IMAGE_RESULTS);
     }
   }
@@ -149,15 +170,21 @@ export class HomeScreen extends BaseScreen {
       return;
     }
 
-    let page = await ScanbotSDK.createPage(result.uri!);
+    if (!result.uri) {
+      this.hideProgress();
+      ViewUtils.showAlert('Error picking image from gallery!');
+      return;
+    }
+
+    let page = await ScanbotSDK.createPage(result.uri);
     page = await ScanbotSDK.detectDocumentOnPage(page);
     Pages.add(page);
     this.hideProgress();
 
-    const blur = await ScanbotSDK.estimateBlur({
-      imageFileUri: page.documentImageFileUri!,
-    });
-    console.log('Blur:', blur);
+    // TODO move estimateBlur() example to another location
+    //const blur = await ScanbotSDK.estimateBlur({ imageFileUri: page.documentImageFileUri! });
+    //console.log("Blur:", blur);
+
     this.pushPage(Navigation.IMAGE_RESULTS);
   }
 
@@ -168,6 +195,8 @@ export class HomeScreen extends BaseScreen {
   async startBarcodeScanner() {
     const config: BarcodeScannerConfiguration = {
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
+      finderAspectRatio: {width: 1, height: 1},
+      useButtonsAllCaps: false,
     };
     const result = await ScanbotSDK.UI.startBarcodeScanner(config);
     if (result.status === 'OK') {
@@ -178,7 +207,8 @@ export class HomeScreen extends BaseScreen {
   async startBatchBarcodeScanner() {
     const config: BatchBarcodeScannerConfiguration = {
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
-      finderAspectRatio: {width: 1, height: 2},
+      finderAspectRatio: {width: 2, height: 1},
+      useButtonsAllCaps: false,
     };
     const result = await ScanbotSDK.UI.startBatchBarcodeScanner(config);
     if (result.status === 'OK') {
@@ -196,7 +226,7 @@ export class HomeScreen extends BaseScreen {
     }
 
     const result = await ScanbotSDK.detectBarcodesOnImage({
-      imageFileUri: image.uri!,
+      imageFileUri: image.uri,
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
     });
     this.hideProgress();

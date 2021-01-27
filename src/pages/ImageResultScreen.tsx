@@ -37,7 +37,7 @@ export class ImageResultScreen extends BaseScreen {
             animating={this.progressVisible}
           />
           <View style={Styles.INSTANCE.imageResults.gallery}>
-            {Pages.list.map((page) => (
+            {Pages.getAllPages().map((page) => (
               <TouchableOpacity
                 onPress={() => this.onGalleryItemClick(page)}
                 key={page.pageId}>
@@ -144,7 +144,7 @@ export class ImageResultScreen extends BaseScreen {
     };
     const result = await ScanbotSDK.UI.startDocumentScanner(config);
     if (result.status === 'OK') {
-      Pages.addList(result.pages);
+      await Pages.addList(result.pages);
       this.refresh();
     }
   }
@@ -161,12 +161,11 @@ export class ImageResultScreen extends BaseScreen {
   async deleteAllButtonPress() {
     try {
       await ScanbotSDK.cleanup();
+      await Pages.deleteAllPages();
+      this.refresh();
     } catch (e) {
       ViewUtils.showAlert('ERROR: ' + JSON.stringify(e));
-      return;
     }
-    Pages.list = [];
-    this.refresh();
   }
 
   private onGalleryItemClick(page: Page) {

@@ -7,6 +7,7 @@ import {BaseScreen} from '../utils/BaseScreen';
 // @ts-ignore
 import {ActionSheetCustom as ActionSheet} from 'react-native-custom-actionsheet';
 import {SDKUtils} from '../utils/SDKUtils';
+import {ViewUtils} from '../utils/ViewUtils';
 import {Colors} from '../model/Colors';
 import PreviewImage from '../ui/PreviewImage';
 
@@ -121,9 +122,14 @@ export class ImageDetailScreen extends BaseScreen {
     this.actionSheet.show();
   }
 
-  private deleteButtonPress() {
-    Pages.list.splice(Pages.list.indexOf(Pages.selectedPage), 1);
-    // @ts-ignore
-    this.props.navigation.pop();
+  private async deleteButtonPress() {
+    try {
+      await ScanbotSDK.removePage(Pages.selectedPage);
+      await Pages.deleteSelectedPage();
+      // @ts-ignore
+      this.props.navigation.pop();
+    } catch (e) {
+      ViewUtils.showAlert('ERROR: ' + JSON.stringify(e));
+    }
   }
 }

@@ -42,7 +42,7 @@ Install CocoaPods dependencies:
 
 ```
 cd ios/
-pod install
+pod install --repo-update
 ```
 
 - Open the **workspace** file `ScanbotSDKExampleReactNative.xcworkspace` (not .xcodeproj) from the `ios` directory in Xcode. 
