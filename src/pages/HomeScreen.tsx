@@ -44,7 +44,8 @@ export class HomeScreen extends BaseScreen {
   async componentDidMount(): Promise<void> {
     try {
       const loaded = await PageStorage.INSTANCE.load();
-      console.log('+++> loaded pages', loaded);
+      //console.log('+++> loaded pages', loaded);
+      console.log(`Loaded ${loaded.length} pages from storage`);
       if (loaded.length === 0) {
         return;
       }
@@ -171,13 +172,21 @@ export class HomeScreen extends BaseScreen {
       return;
     }
 
+    if (!result.uri) {
+      this.hideProgress();
+      ViewUtils.showAlert('Error picking image from gallery!');
+      return;
+    }
+
     let page = await ScanbotSDK.createPage(result.uri);
     page = await ScanbotSDK.detectDocumentOnPage(page);
     Pages.add(page);
     this.hideProgress();
 
-    const blur = await ScanbotSDK.estimateBlur({ imageFileUri: page.documentImageFileUri! });
-    console.log("Blur:", blur);
+    // TODO move estimateBlur() example to another location
+    //const blur = await ScanbotSDK.estimateBlur({ imageFileUri: page.documentImageFileUri! });
+    //console.log("Blur:", blur);
+
     this.pushPage(Navigation.IMAGE_RESULTS);
   }
 
