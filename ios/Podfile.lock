@@ -310,23 +310,23 @@ PODS:
     - React
   - RNReanimated (1.8.0):
     - React
-  - RNScanbotSDK (4.5.0-alpha9):
+  - RNScanbotSDK (4.5.0-beta1):
     - React
-    - RNScanbotSDK/NONE (= 4.5.0-alpha9)
-    - sbsdk-dev (= 0.1.12.4)
-  - RNScanbotSDK/ALL (4.5.0-alpha9):
+    - RNScanbotSDK/NONE (= 4.5.0-beta1)
+    - ScanbotSDK (= 1.13.0)
+  - RNScanbotSDK/ALL (4.5.0-beta1):
     - React
-    - sbsdk-dev (= 0.1.12.4)
-    - sbsdk-dev/ALL (= 0.1.12.4)
-  - RNScanbotSDK/NONE (4.5.0-alpha9):
+    - ScanbotSDK (= 1.13.0)
+    - ScanbotSDK/ALL (= 1.13.0)
+  - RNScanbotSDK/NONE (4.5.0-beta1):
     - React
-    - sbsdk-dev (= 0.1.12.4)
+    - ScanbotSDK (= 1.13.0)
   - RNScreens (2.7.0):
     - React
-  - sbsdk-dev (0.1.12.4):
-    - sbsdk-dev/NONE (= 0.1.12.4)
-  - sbsdk-dev/ALL (0.1.12.4)
-  - sbsdk-dev/NONE (0.1.12.4)
+  - ScanbotSDK (1.13.0):
+    - ScanbotSDK/NONE (= 1.13.0)
+  - ScanbotSDK/ALL (1.13.0)
+  - ScanbotSDK/NONE (1.13.0)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -403,7 +403,7 @@ SPEC REPOS:
     - Flipper-RSocket
     - FlipperKit
     - OpenSSL-Universal
-    - sbsdk-dev
+    - ScanbotSDK
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -522,9 +522,9 @@ SPEC CHECKSUMS:
   RNFS: 2bd9eb49dc82fa9676382f0585b992c424cd59df
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
-  RNScanbotSDK: 123f3efc69283a62724f9395e042407abf244e99
+  RNScanbotSDK: 22a3e6bb02a34bc6b5d8b432080fc85db0544f09
   RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
-  sbsdk-dev: 3d9309d38cb3787554010dcb1fc74234d1cdafef
+  ScanbotSDK: e1ed79b76398f2856c3d9c7d997e1f3341f10d9b
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

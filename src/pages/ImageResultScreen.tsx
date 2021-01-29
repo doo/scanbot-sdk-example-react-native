@@ -197,6 +197,7 @@ export class ImageResultScreen extends BaseScreen {
       this.hideProgress();
     }
   }
+
   async onSaveAsPDFWithOCR() {
     this.onModalClose();
     if (!(await SDKUtils.checkLicense())) {
