@@ -20,7 +20,7 @@ export class SDKUtils {
 
   static readonly JPG_IMAGE_QUALITY = 80;
 
-  static readonly FILE_ENCRYPTION_ENABLED: boolean = true;
+  static readonly FILE_ENCRYPTION_ENABLED: boolean = false;
 
   // prettier-ignore
   static readonly FILE_ENCRYPTION_PASSWORD: string = 'SomeSecretPa$$w0rdForFileEncryption';

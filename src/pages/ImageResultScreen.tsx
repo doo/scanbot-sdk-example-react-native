@@ -221,6 +221,14 @@ export class ImageResultScreen extends BaseScreen {
     if (!(await SDKUtils.checkLicense())) {
       return;
     }
+    if (SDKUtils.FILE_ENCRYPTION_ENABLED) {
+      // TODO encryption for TIFF files currently not supported
+      ViewUtils.showAlert(
+        'Encryption for TIFF files currently not supported. ' +
+          'In order to test TIFF please disable image file encryption.',
+      );
+      return;
+    }
     try {
       this.showProgress();
       const result = await ScanbotSDK.writeTIFF(Pages.getImageUris(), {

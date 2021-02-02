@@ -73,6 +73,7 @@ export class Styles {
     },
     progress: {
       color: Styles.SCANBOT_RED,
+      elevation: 6,
       position: 'absolute',
       left: '47%',
       top: '40%',
