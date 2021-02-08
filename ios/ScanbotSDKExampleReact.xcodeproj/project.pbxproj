@@ -471,12 +471,10 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests-frameworks.sh",
 				"${PODS_ROOT}/ScanbotSDK/ScanbotSDK.framework",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ScanbotSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -535,12 +533,10 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact/Pods-ScanbotSDKExampleReact-frameworks.sh",
 				"${PODS_ROOT}/ScanbotSDK/ScanbotSDK.framework",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ScanbotSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -709,6 +705,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = ScanbotSDKExampleReact/ScanbotSDKExampleReact.entitlements;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = FRUPYT6KB3;
 				ENABLE_BITCODE = NO;
@@ -738,6 +735,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = ScanbotSDKExampleReact/ScanbotSDKExampleReact.entitlements;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = FRUPYT6KB3;
 				ENABLE_BITCODE = YES;
