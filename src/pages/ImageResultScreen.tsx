@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   ActivityIndicator,
-  Image,
   Modal,
   SafeAreaView,
   Text,
@@ -18,6 +17,7 @@ import {SDKUtils} from '../utils/SDKUtils';
 import {ViewUtils} from '../utils/ViewUtils';
 import {Navigation} from '../utils/Navigation';
 import {BaseScreen} from '../utils/BaseScreen';
+import PreviewImage from '../ui/PreviewImage';
 
 export class ImageResultScreen extends BaseScreen {
   onScreenFocused() {
@@ -37,16 +37,16 @@ export class ImageResultScreen extends BaseScreen {
             animating={this.progressVisible}
           />
           <View style={Styles.INSTANCE.imageResults.gallery}>
-            {Pages.list.map((page) => (
+            {Pages.getAllPages().map((page) => (
               <TouchableOpacity
                 onPress={() => this.onGalleryItemClick(page)}
                 key={page.pageId}>
-                <Image
+                <PreviewImage
+                  page={page}
                   style={[
                     Styles.INSTANCE.imageResults.galleryCell,
                     Styles.INSTANCE.common.containImage,
                   ]}
-                  source={{uri: page.documentImageFileUri}}
                 />
               </TouchableOpacity>
             ))}
@@ -144,7 +144,7 @@ export class ImageResultScreen extends BaseScreen {
     };
     const result = await ScanbotSDK.UI.startDocumentScanner(config);
     if (result.status === 'OK') {
-      Pages.addList(result.pages);
+      await Pages.addList(result.pages);
       this.refresh();
     }
   }
@@ -161,12 +161,11 @@ export class ImageResultScreen extends BaseScreen {
   async deleteAllButtonPress() {
     try {
       await ScanbotSDK.cleanup();
+      await Pages.deleteAllPages();
+      this.refresh();
     } catch (e) {
       ViewUtils.showAlert('ERROR: ' + JSON.stringify(e));
-      return;
     }
-    Pages.list = [];
-    this.refresh();
   }
 
   private onGalleryItemClick(page: Page) {
@@ -198,6 +197,7 @@ export class ImageResultScreen extends BaseScreen {
       this.hideProgress();
     }
   }
+
   async onSaveAsPDFWithOCR() {
     this.onModalClose();
     if (!(await SDKUtils.checkLicense())) {
@@ -219,6 +219,14 @@ export class ImageResultScreen extends BaseScreen {
   async onSaveAsTIFF(binarized: boolean) {
     this.onModalClose();
     if (!(await SDKUtils.checkLicense())) {
+      return;
+    }
+    if (SDKUtils.FILE_ENCRYPTION_ENABLED) {
+      // TODO encryption for TIFF files currently not supported
+      ViewUtils.showAlert(
+        'Encryption for TIFF files currently not supported. ' +
+          'In order to test TIFF please disable image file encryption.',
+      );
       return;
     }
     try {
