@@ -14,13 +14,14 @@ import {Navigation} from './utils/Navigation';
 import {Styles} from './model/Styles';
 import ScanbotSDK, {InitializationOptions} from 'react-native-scanbot-sdk';
 import {SDKUtils} from './utils/SDKUtils';
+import { ViewUtils } from "./utils/ViewUtils";
 
 const Stack = createStackNavigator();
 
 export class App extends React.Component {
   constructor(props: any) {
     super(props);
-    this.initScanbotSdk().then((r) => console.log(r));
+    this.initScanbotSdk();
   }
 
   async initScanbotSdk() {
@@ -36,7 +37,15 @@ export class App extends React.Component {
       options.fileEncryptionPassword = SDKUtils.FILE_ENCRYPTION_PASSWORD;
       options.fileEncryptionMode = SDKUtils.FILE_ENCRYPTION_MODE;
     }
-    return await ScanbotSDK.initializeSDK(options);
+    try {
+      const result = await ScanbotSDK.initializeSDK(options);
+      console.log(result);
+    } catch (e) {
+      console.error('Error initializing Scanbot SDK:', e);
+      ViewUtils.showAlert(
+        'Error initializing Scanbot SDK:\n' + JSON.stringify(e),
+      );
+    }
   }
 
   getCustomStoragePath(): string {
