@@ -15,6 +15,7 @@ import ScanbotSDK, {
   BarcodeScannerConfiguration,
   DocumentScannerConfiguration,
   MrzScannerConfiguration,
+  NFCPassportReaderConfiguration,
 } from 'react-native-scanbot-sdk';
 
 import {Examples, FeatureId} from '../model/Examples';
@@ -42,7 +43,6 @@ export class HomeScreen extends BaseScreen {
   async componentDidMount(): Promise<void> {
     try {
       const loaded = await PageStorage.INSTANCE.load();
-      //console.log('+++> loaded pages', loaded);
       console.log(`Loaded ${loaded.length} pages from storage`);
       if (loaded.length === 0) {
         return;
@@ -50,7 +50,7 @@ export class HomeScreen extends BaseScreen {
       const refreshed = await ScanbotSDK.refreshImageUris({pages: loaded});
       await Pages.addList(refreshed.pages);
     } catch (e) {
-      console.error('error loading/refreshing pages: ' + JSON.stringify(e));
+      console.error('Error loading/refreshing pages: ' + JSON.stringify(e));
     }
   }
 
@@ -290,11 +290,10 @@ export class HomeScreen extends BaseScreen {
   }
 
   async startNFCReader() {
-    const config = NFCPassportReaderConfiguration = {};
+    const config: NFCPassportReaderConfiguration = {};
     const result = await ScanbotSDK.UI.startNFCPassportReader(config);
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result));
     }
   }
-
 }
