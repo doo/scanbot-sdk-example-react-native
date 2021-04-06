@@ -16,6 +16,7 @@ export enum FeatureId {
   LicenseInfo,
   OcrConfigs,
   LearnMore,
+  LicensePlateScanner
 }
 export class Examples {
   public static list = [
@@ -48,7 +49,8 @@ export class Examples {
         {id: FeatureId.ScanMRZ, title: 'Scan MRZ on ID Card'},
         {id: FeatureId.ScanEHIC, title: 'Scan Health Insurance Card'},
         {id: FeatureId.ScanIdCard, title: 'Scan Id Card'},
-        {id: FeatureId.ReadPassportNFC, title: 'Read Passport NFC'}
+        {id: FeatureId.ReadPassportNFC, title: 'Read Passport NFC'},
+        {id: FeatureId.LicensePlateScanner, title: 'Scan Vehicle License Plate'}
       ],
     },
     {
