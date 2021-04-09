@@ -310,23 +310,23 @@ PODS:
     - React
   - RNReanimated (1.8.0):
     - React
-  - RNScanbotSDK (4.6.0):
+  - RNScanbotSDK (4.7.0-beta4):
     - React
-    - RNScanbotSDK/NONE (= 4.6.0)
-    - ScanbotSDK (= 1.15.0)
-  - RNScanbotSDK/ALL (4.6.0):
+    - RNScanbotSDK/NONE (= 4.7.0-beta4)
+    - ScanbotSDK (= 1.15.1)
+  - RNScanbotSDK/ALL (4.7.0-beta4):
     - React
-    - ScanbotSDK (= 1.15.0)
-    - ScanbotSDK/ALL (= 1.15.0)
-  - RNScanbotSDK/NONE (4.6.0):
+    - ScanbotSDK (= 1.15.1)
+    - ScanbotSDK/ALL (= 1.15.1)
+  - RNScanbotSDK/NONE (4.7.0-beta4):
     - React
-    - ScanbotSDK (= 1.15.0)
+    - ScanbotSDK (= 1.15.1)
   - RNScreens (2.7.0):
     - React
-  - ScanbotSDK (1.15.0):
-    - ScanbotSDK/NONE (= 1.15.0)
-  - ScanbotSDK/ALL (1.15.0)
-  - ScanbotSDK/NONE (1.15.0)
+  - ScanbotSDK (1.15.1):
+    - ScanbotSDK/NONE (= 1.15.1)
+  - ScanbotSDK/ALL (1.15.1)
+  - ScanbotSDK/NONE (1.15.1)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -519,15 +519,15 @@ SPEC CHECKSUMS:
   ReactCommon: 4167844018c9ed375cc01a843e9ee564399e53c3
   RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
-  RNFS: 2bd9eb49dc82fa9676382f0585b992c424cd59df
+  RNFS: 751428ec3aa24945dad64640903833ad034b6d03
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
-  RNScanbotSDK: d012ffad2ded477db0b0d98f84a8610efe36981a
+  RNScanbotSDK: 7949b940a0d04dbea2bdbe7dafac4c374a67f333
   RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
-  ScanbotSDK: a9e7e1a50543892d14360b56c7fa2ee278e5abcf
+  ScanbotSDK: 50b0ccf0083bc53587431857cfbe24e520cfd654
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 1ba174204729c547d3b884932f7f9ceec886e1ca
+PODFILE CHECKSUM: f860cf9c51bddd7d3f0ab574f0bdf87d55cfad45
 
 COCOAPODS: 1.10.1
