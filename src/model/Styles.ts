@@ -163,6 +163,61 @@ export class Styles {
     },
   });
 
+  public barcodeDocumentFormats = StyleSheet.create({
+    headerItemText: {
+      fontSize: 16,
+      textAlignVertical: 'center',
+      fontWeight: 'bold',
+    },
+    headerTextContainer: {
+      width: '80%'
+    },
+    headerItemDescription: {
+      fontSize: 14,
+      textAlignVertical: 'center',
+    },
+    headerItemContainer: {
+      paddingLeft: 16,
+      flexDirection: 'row',
+      paddingTop: 24,
+      paddingBottom: 24,
+      paddingRight: 16,
+      borderBottomWidth: 1,
+      borderBottomColor: '#e2e2e2',
+      alignItems: 'center',
+      backgroundColor: 'white'
+    },
+    headerItemSwitch: {
+      position: 'absolute',
+      right: 16
+    },
+    list: {
+      paddingTop: '0%',
+      height: '98%',
+    },
+    listItemContainer: {
+      paddingLeft: 20,
+      paddingRight: 24,
+      flexDirection: 'row',
+      height: 60,
+      borderBottomWidth: 1,
+      borderBottomColor: '#e2e2e2',
+      alignItems: 'center'
+    },
+    listItemText: {
+      fontSize: 12,
+      height: 60,
+      textAlignVertical: 'center',
+      lineHeight: 60
+    },
+    listItemSwitch: {
+      marginTop: 5,
+      position: 'absolute',
+      alignSelf: 'center',
+      right: 16,
+    },
+  });
+
   public modal = StyleSheet.create({
     centeredView: {
       flex: 1,

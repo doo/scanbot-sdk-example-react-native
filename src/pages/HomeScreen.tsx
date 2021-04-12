@@ -26,6 +26,7 @@ import {SDKUtils} from '../utils/SDKUtils';
 import {Pages} from '../model/Pages';
 import {ViewUtils} from '../utils/ViewUtils';
 import {BarcodeFormats} from '../model/BarcodeFormats';
+import {BarcodeDocumentFormats} from '../model/BarcodeDocumentFormats';
 import {Navigation} from '../utils/Navigation';
 import {BaseScreen} from '../utils/BaseScreen';
 import {Colors} from '../model/Colors';
@@ -36,6 +37,7 @@ import {
 } from 'react-native-scanbot-sdk/src';
 import {PageStorage} from '../utils/PageStorage';
 import { LicensePlateScannerConfiguration } from 'react-native-scanbot-sdk/src/configuration';
+import { LicensePlateDetectorMode } from 'react-native-scanbot-sdk/src/enum';
 
 export class HomeScreen extends BaseScreen {
   constructor(props: any) {
@@ -136,6 +138,9 @@ export class HomeScreen extends BaseScreen {
       case FeatureId.BarcodeFormatsFilter:
         this.setBarcodeFormats();
         break;
+      case FeatureId.BarcodeDocumentFormatsFilter:
+        this.setBarcodeDocumentFormats();
+        break;
       case FeatureId.ScanMRZ:
         this.startMRZScanner();
         break;
@@ -152,8 +157,11 @@ export class HomeScreen extends BaseScreen {
         const result = await ScanbotSDK.getOCRConfigs();
         ViewUtils.showAlert(JSON.stringify(result));
         break;
-      case FeatureId.LicensePlateScanner:
-        this.startLicensePlateScanner();
+      case FeatureId.LicensePlateScannerML:
+        this.startLicensePlateScanner("ML_BASED");
+        break;
+      case FeatureId.LicensePlateScannerClassic:
+        this.startLicensePlateScanner("CLASSIC");
         break;
     }
   }
@@ -181,10 +189,11 @@ export class HomeScreen extends BaseScreen {
     }
   }
 
-  async startLicensePlateScanner() {
+  async startLicensePlateScanner(detectorMode: LicensePlateDetectorMode = "ML_BASED") {
 
     var config: LicensePlateScannerConfiguration = {
       topBarBackgroundColor: Colors.SCANBOT_RED,
+      detectorMode: detectorMode
     }
 
     const result = await ScanbotSDK.UI.startLicensePlateScanner(config);
@@ -227,6 +236,7 @@ export class HomeScreen extends BaseScreen {
 
   async startBarcodeScanner() {
     const config: BarcodeScannerConfiguration = {
+      acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
       finderAspectRatio: {width: 1, height: 1},
       useButtonsAllCaps: false,
@@ -239,6 +249,7 @@ export class HomeScreen extends BaseScreen {
 
   async startBatchBarcodeScanner() {
     const config: BatchBarcodeScannerConfiguration = {
+      acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
       finderAspectRatio: {width: 2, height: 1},
       useButtonsAllCaps: false,
@@ -265,6 +276,7 @@ export class HomeScreen extends BaseScreen {
     }
 
     const result = await ScanbotSDK.detectBarcodesOnImage({
+      acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
       imageFileUri: image.uri,
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
     });
@@ -276,6 +288,10 @@ export class HomeScreen extends BaseScreen {
 
   setBarcodeFormats() {
     this.pushPage(Navigation.BARCODE_FORMATS);
+  }
+
+  setBarcodeDocumentFormats() {
+    this.pushPage(Navigation.BARCODE_DOCUMENT_FORMATS);
   }
 
   async startMRZScanner() {

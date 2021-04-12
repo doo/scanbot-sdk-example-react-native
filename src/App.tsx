@@ -9,6 +9,7 @@ import {DocumentDirectoryPath, ExternalDirectoryPath} from 'react-native-fs';
 import {HomeScreen} from './pages/HomeScreen';
 import {ImageResultScreen} from './pages/ImageResultScreen';
 import {BarcodeFormatsScreen} from './pages/BarcodeFormatsScreen';
+import {BarcodeDocumentFormatsScreen} from './pages/BarcodeDocumentFormatsScreen';
 import {ImageDetailScreen} from './pages/ImageDetailScreen';
 import {Navigation} from './utils/Navigation';
 import {Styles} from './model/Styles';
@@ -90,6 +91,16 @@ export class App extends React.Component {
           <Stack.Screen
             name={Navigation.BARCODE_FORMATS}
             component={BarcodeFormatsScreen}
+            options={{
+              headerBackTitleVisible: false
+            }}
+          />
+          <Stack.Screen
+            name={Navigation.BARCODE_DOCUMENT_FORMATS}
+            component={BarcodeDocumentFormatsScreen}
+            options={{
+              headerBackTitleVisible: false
+            }}
           />
           <Stack.Screen
             name={Navigation.IMAGE_DETAILS}
