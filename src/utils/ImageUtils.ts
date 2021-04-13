@@ -7,6 +7,8 @@ import {
 import ImagePicker from 'react-native-image-crop-picker'
 
 export interface MultipleImagePickerResponse {
+  isCanceled: boolean;
+  error?: string;
   imagesUris: string[];
 }
 
@@ -31,7 +33,15 @@ export class ImageUtils {
         .filter((image) => image && image.path)
         .map((image) => image.path);
       var response: MultipleImagePickerResponse = {
-        imagesUris: uris
+        imagesUris: uris,
+        isCanceled: false
+      };
+      return response;
+    }).catch(err => {
+      var response: MultipleImagePickerResponse = {
+        imagesUris: [],
+        isCanceled: err.code === 'E_PICKER_CANCELLED',
+        error: err
       };
       return response;
     });

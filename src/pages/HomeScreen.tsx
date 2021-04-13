@@ -265,22 +265,22 @@ export class HomeScreen extends BaseScreen {
 
   async importImageAndDetectBarcodes() {
     this.showProgress();
-    const image = await ImageUtils.pickFromGallery();
+    const pickerResult = await ImageUtils.pickFromGallery();
 
-    if (image.didCancel) {
+    if (pickerResult.didCancel) {
       this.hideProgress();
       return;
     }
 
-    if (!image.uri) {
+    if (!pickerResult || !pickerResult.uri) {
       this.hideProgress();
       ViewUtils.showAlert('Error picking image from gallery!');
       return;
     }
-
+    
     const result = await ScanbotSDK.detectBarcodesOnImage({
       acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
-      imageFileUri: image.uri,
+      imageFileUri: pickerResult.uri,
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
     });
     this.hideProgress();
@@ -293,8 +293,14 @@ export class HomeScreen extends BaseScreen {
     this.showProgress();
     const pickerResult = await ImageUtils.pickMultipleImagesFromGallery();
 
-    if (pickerResult.imagesUris.length == 0) {
+    if (pickerResult.isCanceled || pickerResult.imagesUris.length == 0) {
       this.hideProgress();
+      return;
+    }
+
+    if (pickerResult.error) {
+      this.hideProgress();
+      ViewUtils.showAlert('Error picking image from gallery! ' + pickerResult.error);
       return;
     }
 
