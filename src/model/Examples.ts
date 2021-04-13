@@ -8,6 +8,7 @@ export enum FeatureId {
   ScanBarcodes,
   ScanBatchBarcodes,
   DetectBarcodesOnStillImage,
+  DetectBarcodesOnStillImages,
   BarcodeFormatsFilter,
   BarcodeDocumentFormatsFilter,
   ScanMRZ,
@@ -38,6 +39,10 @@ export class Examples {
         {
           id: FeatureId.DetectBarcodesOnStillImage,
           title: 'Import Image & Detect Barcodes',
+        },
+        {
+          id: FeatureId.DetectBarcodesOnStillImages,
+          title: 'Import Multiple Images & Detect Barcodes',
         },
         {
           id: FeatureId.BarcodeFormatsFilter,

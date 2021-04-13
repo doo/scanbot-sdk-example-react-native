@@ -135,6 +135,9 @@ export class HomeScreen extends BaseScreen {
       case FeatureId.DetectBarcodesOnStillImage:
         this.importImageAndDetectBarcodes();
         break;
+      case FeatureId.DetectBarcodesOnStillImages:
+        this.importImagesAndDetectBarcodes();
+        break;
       case FeatureId.BarcodeFormatsFilter:
         this.setBarcodeFormats();
         break;
@@ -284,6 +287,28 @@ export class HomeScreen extends BaseScreen {
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result.barcodes));
     }
+  }
+
+  async importImagesAndDetectBarcodes() {
+    this.showProgress();
+    const pickerResult = await ImageUtils.pickMultipleImagesFromGallery();
+
+    if (pickerResult.imagesUris.length == 0) {
+      this.hideProgress();
+      return;
+    }
+
+    const result = await ScanbotSDK.detectBarcodesOnImages({
+      acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
+      imageFileUris: pickerResult.imagesUris,
+      barcodeFormats: BarcodeFormats.getAcceptedFormats(),
+    });
+
+    this.hideProgress();
+    if (result.status === 'OK') {
+      ViewUtils.showAlert(JSON.stringify(result.results));
+    }
+
   }
 
   setBarcodeFormats() {

@@ -308,6 +308,15 @@ PODS:
     - React
   - RNGestureHandler (1.6.1):
     - React
+  - RNImageCropPicker (0.36.0):
+    - React-Core
+    - React-RCTImage
+    - RNImageCropPicker/QBImagePickerController (= 0.36.0)
+    - TOCropViewController
+  - RNImageCropPicker/QBImagePickerController (0.36.0):
+    - React-Core
+    - React-RCTImage
+    - TOCropViewController
   - RNReanimated (1.8.0):
     - React
   - RNScanbotSDK (4.7.0-rc1):
@@ -327,6 +336,7 @@ PODS:
     - ScanbotSDK/NONE (= 1.15.1)
   - ScanbotSDK/ALL (1.15.1)
   - ScanbotSDK/NONE (1.15.1)
+  - TOCropViewController (2.6.0)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -384,6 +394,7 @@ DEPENDENCIES:
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScanbotSDK (from `../node_modules/react-native-scanbot-sdk`)
   - RNScanbotSDK/ALL (from `../node_modules/react-native-scanbot-sdk`)
@@ -404,6 +415,7 @@ SPEC REPOS:
     - FlipperKit
     - OpenSSL-Universal
     - ScanbotSDK
+    - TOCropViewController
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -469,6 +481,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-fs"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNImageCropPicker:
+    :path: "../node_modules/react-native-image-crop-picker"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScanbotSDK:
@@ -521,10 +535,12 @@ SPEC CHECKSUMS:
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNFS: 751428ec3aa24945dad64640903833ad034b6d03
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
+  RNImageCropPicker: e641bf83ac47324994cac139bde74635ec52c17c
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
   RNScanbotSDK: b99de1aabca500d84c17067d73f56b4e71f440d3
   RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
   ScanbotSDK: 50b0ccf0083bc53587431857cfbe24e520cfd654
+  TOCropViewController: 3105367e808b7d3d886a74ff59bf4804e7d3ab38
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
