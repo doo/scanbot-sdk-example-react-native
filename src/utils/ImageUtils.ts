@@ -27,7 +27,9 @@ export class ImageUtils {
 
   public static async pickMultipleImagesFromGallery(): Promise<MultipleImagePickerResponse> {
     return ImagePicker.openPicker({
-      multiple: true
+      multiple: true,
+      mediaType: "photo",
+      maxFiles: 5
     }).then(images => {
       var uris: string[] = images
         .filter((image) => image && image.path)
