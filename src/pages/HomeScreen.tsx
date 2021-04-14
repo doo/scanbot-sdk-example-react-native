@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ActivityIndicator,
+  Alert,
   Dimensions,
   Linking,
   Platform,
@@ -25,6 +26,7 @@ import {SDKUtils} from '../utils/SDKUtils';
 import {Pages} from '../model/Pages';
 import {ViewUtils} from '../utils/ViewUtils';
 import {BarcodeFormats} from '../model/BarcodeFormats';
+import {BarcodeDocumentFormats} from '../model/BarcodeDocumentFormats';
 import {Navigation} from '../utils/Navigation';
 import {BaseScreen} from '../utils/BaseScreen';
 import {Colors} from '../model/Colors';
@@ -34,6 +36,8 @@ import {
   IdCardScannerConfiguration,
 } from 'react-native-scanbot-sdk/src';
 import {PageStorage} from '../utils/PageStorage';
+import { LicensePlateScannerConfiguration } from 'react-native-scanbot-sdk/src/configuration';
+import { LicensePlateDetectorMode } from 'react-native-scanbot-sdk/src/enum';
 
 export class HomeScreen extends BaseScreen {
   constructor(props: any) {
@@ -112,31 +116,56 @@ export class HomeScreen extends BaseScreen {
       return;
     }
 
-    if (item.id === FeatureId.DocumentScanner) {
-      this.startDocumentScanner();
-    } else if (item.id === FeatureId.ImportImage) {
-      this.importImageAndDetectDocument();
-    } else if (item.id === FeatureId.ViewPages) {
-      this.viewImageResults();
-    } else if (item.id === FeatureId.ScanBarcodes) {
-      this.startBarcodeScanner();
-    } else if (item.id === FeatureId.ScanBatchBarcodes) {
-      this.startBatchBarcodeScanner();
-    } else if (item.id === FeatureId.DetectBarcodesOnStillImage) {
-      this.importImageAndDetectBarcodes();
-    } else if (item.id === FeatureId.BarcodeFormatsFilter) {
-      this.setBarcodeFormats();
-    } else if (item.id === FeatureId.ScanMRZ) {
-      this.startMRZScanner();
-    } else if (item.id === FeatureId.ScanEHIC) {
-      this.startEHICScanner();
-    } else if (item.id === FeatureId.ScanIdCard) {
-      this.startIdCardCScanner();
-    } else if (item.id === FeatureId.ReadPassportNFC) {
-      this.startNFCReader();
-    } else if (item.id === FeatureId.OcrConfigs) {
-      const result = await ScanbotSDK.getOCRConfigs();
-      ViewUtils.showAlert(JSON.stringify(result));
+    switch(item.id) {
+      case FeatureId.DocumentScanner:
+        this.startDocumentScanner();
+        break;
+      case FeatureId.ImportImage:
+        this.importImageAndDetectDocument();
+        break;
+      case FeatureId.ViewPages:
+        this.viewImageResults();
+        break;
+      case FeatureId.ScanBarcodes:
+        this.startBarcodeScanner();
+        break;
+      case FeatureId.ScanBatchBarcodes:
+        this.startBatchBarcodeScanner();
+        break;
+      case FeatureId.DetectBarcodesOnStillImage:
+        this.importImageAndDetectBarcodes();
+        break;
+      case FeatureId.DetectBarcodesOnStillImages:
+        this.importImagesAndDetectBarcodes();
+        break;
+      case FeatureId.BarcodeFormatsFilter:
+        this.setBarcodeFormats();
+        break;
+      case FeatureId.BarcodeDocumentFormatsFilter:
+        this.setBarcodeDocumentFormats();
+        break;
+      case FeatureId.ScanMRZ:
+        this.startMRZScanner();
+        break;
+      case FeatureId.ScanEHIC:
+        this.startEHICScanner();
+        break;
+      case FeatureId.ScanIdCard:
+        this.startIdCardCScanner();
+        break;
+      case FeatureId.ReadPassportNFC:
+        this.startNFCReader();
+        break;
+      case FeatureId.OcrConfigs:
+        const result = await ScanbotSDK.getOCRConfigs();
+        ViewUtils.showAlert(JSON.stringify(result));
+        break;
+      case FeatureId.LicensePlateScannerML:
+        this.startLicensePlateScanner("ML_BASED");
+        break;
+      case FeatureId.LicensePlateScannerClassic:
+        this.startLicensePlateScanner("CLASSIC");
+        break;
     }
   }
 
@@ -160,6 +189,20 @@ export class HomeScreen extends BaseScreen {
     if (result.status === 'OK') {
       await Pages.addList(result.pages);
       this.pushPage(Navigation.IMAGE_RESULTS);
+    }
+  }
+
+  async startLicensePlateScanner(detectorMode: LicensePlateDetectorMode = "ML_BASED") {
+
+    var config: LicensePlateScannerConfiguration = {
+      topBarBackgroundColor: Colors.SCANBOT_RED,
+      detectorMode: detectorMode
+    }
+
+    const result = await ScanbotSDK.UI.startLicensePlateScanner(config);
+
+    if (result.status === 'OK') {
+      ViewUtils.showAlert(JSON.stringify(result));
     }
   }
 
@@ -196,6 +239,7 @@ export class HomeScreen extends BaseScreen {
 
   async startBarcodeScanner() {
     const config: BarcodeScannerConfiguration = {
+      acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
       finderAspectRatio: {width: 1, height: 1},
       useButtonsAllCaps: false,
@@ -208,6 +252,7 @@ export class HomeScreen extends BaseScreen {
 
   async startBatchBarcodeScanner() {
     const config: BatchBarcodeScannerConfiguration = {
+      acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
       finderAspectRatio: {width: 2, height: 1},
       useButtonsAllCaps: false,
@@ -220,21 +265,22 @@ export class HomeScreen extends BaseScreen {
 
   async importImageAndDetectBarcodes() {
     this.showProgress();
-    const image = await ImageUtils.pickFromGallery();
+    const pickerResult = await ImageUtils.pickFromGallery();
 
-    if (image.didCancel) {
+    if (pickerResult.didCancel) {
       this.hideProgress();
       return;
     }
 
-    if (!image.uri) {
+    if (!pickerResult || !pickerResult.uri) {
       this.hideProgress();
       ViewUtils.showAlert('Error picking image from gallery!');
       return;
     }
-
+    
     const result = await ScanbotSDK.detectBarcodesOnImage({
-      imageFileUri: image.uri,
+      acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
+      imageFileUri: pickerResult.uri,
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
     });
     this.hideProgress();
@@ -243,8 +289,40 @@ export class HomeScreen extends BaseScreen {
     }
   }
 
+  async importImagesAndDetectBarcodes() {
+    this.showProgress();
+    const pickerResult = await ImageUtils.pickMultipleImagesFromGallery();
+
+    if (pickerResult.isCanceled || pickerResult.imagesUris.length == 0) {
+      this.hideProgress();
+      return;
+    }
+
+    if (pickerResult.error) {
+      this.hideProgress();
+      ViewUtils.showAlert('Error picking image from gallery! ' + pickerResult.error);
+      return;
+    }
+
+    const result = await ScanbotSDK.detectBarcodesOnImages({
+      acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
+      imageFileUris: pickerResult.imagesUris,
+      barcodeFormats: BarcodeFormats.getAcceptedFormats(),
+    });
+
+    this.hideProgress();
+    if (result.status === 'OK') {
+      ViewUtils.showAlert(JSON.stringify(result.results));
+    }
+
+  }
+
   setBarcodeFormats() {
     this.pushPage(Navigation.BARCODE_FORMATS);
+  }
+
+  setBarcodeDocumentFormats() {
+    this.pushPage(Navigation.BARCODE_DOCUMENT_FORMATS);
   }
 
   async startMRZScanner() {

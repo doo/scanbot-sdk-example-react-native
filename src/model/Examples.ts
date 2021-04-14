@@ -8,7 +8,9 @@ export enum FeatureId {
   ScanBarcodes,
   ScanBatchBarcodes,
   DetectBarcodesOnStillImage,
+  DetectBarcodesOnStillImages,
   BarcodeFormatsFilter,
+  BarcodeDocumentFormatsFilter,
   ScanMRZ,
   ScanEHIC,
   ScanIdCard,
@@ -16,6 +18,8 @@ export enum FeatureId {
   LicenseInfo,
   OcrConfigs,
   LearnMore,
+  LicensePlateScannerML,
+  LicensePlateScannerClassic
 }
 export class Examples {
   public static list = [
@@ -37,9 +41,16 @@ export class Examples {
           title: 'Import Image & Detect Barcodes',
         },
         {
+          id: FeatureId.DetectBarcodesOnStillImages,
+          title: 'Import Multiple Images & Detect Barcodes',
+        },
+        {
           id: FeatureId.BarcodeFormatsFilter,
           title: 'Set Barcode Formats Filter',
         },
+        { id: FeatureId.BarcodeDocumentFormatsFilter,
+          title: 'Set Barcode Document Formats Filter'
+        }
       ],
     },
     {
@@ -48,7 +59,9 @@ export class Examples {
         {id: FeatureId.ScanMRZ, title: 'Scan MRZ on ID Card'},
         {id: FeatureId.ScanEHIC, title: 'Scan Health Insurance Card'},
         {id: FeatureId.ScanIdCard, title: 'Scan Id Card'},
-        {id: FeatureId.ReadPassportNFC, title: 'Read Passport NFC'}
+        {id: FeatureId.ReadPassportNFC, title: 'Read Passport NFC'},
+        {id: FeatureId.LicensePlateScannerML, title: 'Scan Vehicle License Plate (ML Based)'},
+        {id: FeatureId.LicensePlateScannerClassic, title: 'Scan Vehicle License Plate (Classic)'},
       ],
     },
     {

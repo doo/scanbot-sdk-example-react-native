@@ -8,7 +8,6 @@ target 'ScanbotSDKExampleReact' do
 
   use_react_native!(:path => config["reactNativePath"])
 
-  pod 'RNFS', :path => '../node_modules/react-native-fs'
 
   # Pod for Scanbot SDK React Native Module
   pod 'RNScanbotSDK/ALL', :path => '../node_modules/react-native-scanbot-sdk'
