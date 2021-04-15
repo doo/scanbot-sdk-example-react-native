@@ -29,7 +29,7 @@ export class ImageUtils {
     return ImagePicker.openPicker({
       multiple: true,
       mediaType: "photo",
-      maxFiles: 5
+      maxFiles: 0
     }).then(images => {
       var uris: string[] = images
         .filter((image) => image && image.path)
