@@ -11,11 +11,11 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "latest",
-    "@react-native-community/masked-view": "0.1.10",
+    "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/native": "5.4.0",
     "@react-navigation/stack": "5.3.7",
     "install": "0.13.0",
-    "react": "^16.8.0",
+    "react": "16.13.1",
     "react-native": "0.63.3",
     "react-native-custom-actionsheet": "github:Nikituh/react-native-custom-actionsheet",
     "react-native-fs": "github:marcosaia1812/react-native-fs",
