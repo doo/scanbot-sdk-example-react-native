@@ -240,7 +240,7 @@ export class HomeScreen extends BaseScreen {
   async startBarcodeScanner() {
     const config: BarcodeScannerConfiguration = {
       acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
-      barcodeFormats: BarcodeFormats.getAcceptedFormats(),
+      barcodeFormats: ["MSI_PLESSEY"],
       finderAspectRatio: {width: 1, height: 1},
       useButtonsAllCaps: false,
     };
@@ -277,7 +277,7 @@ export class HomeScreen extends BaseScreen {
       ViewUtils.showAlert('Error picking image from gallery!');
       return;
     }
-    
+
     const result = await ScanbotSDK.detectBarcodesOnImage({
       acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
       imageFileUri: pickerResult.uri,
