@@ -243,6 +243,7 @@ export class HomeScreen extends BaseScreen {
       barcodeFormats: ["MSI_PLESSEY"],
       finderAspectRatio: {width: 1, height: 1},
       useButtonsAllCaps: false,
+      msiPlesseyChecksumAlgorithm: "Mod10"
     };
     const result = await ScanbotSDK.UI.startBarcodeScanner(config);
     if (result.status === 'OK') {
