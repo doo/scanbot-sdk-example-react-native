@@ -17,6 +17,7 @@ export class BarcodeFormats {
     {key: 'RSS_EXPANDED', value: true},
     {key: 'UPC_A', value: true},
     {key: 'UPC_E', value: true},
+    {key: 'MSI_PLESSEY', value: false}
   ];
 
   public static getAcceptedFormats(): BarcodeFormat[] {
