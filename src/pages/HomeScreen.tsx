@@ -17,6 +17,7 @@ import ScanbotSDK, {
   DocumentScannerConfiguration,
   MrzScannerConfiguration,
   NFCPassportReaderConfiguration,
+  TextDataScannerResult,
 } from 'react-native-scanbot-sdk';
 
 import {Examples, FeatureId} from '../model/Examples';
@@ -36,8 +37,9 @@ import {
   IdCardScannerConfiguration,
 } from 'react-native-scanbot-sdk/src';
 import {PageStorage} from '../utils/PageStorage';
-import { LicensePlateScannerConfiguration } from 'react-native-scanbot-sdk/src/configuration';
+import { LicensePlateScannerConfiguration, TextDataScannerConfiguration } from 'react-native-scanbot-sdk/src/configuration';
 import { LicensePlateDetectorMode } from 'react-native-scanbot-sdk/src/enum';
+import { TextDataScannerStepResult } from 'react-native-scanbot-sdk/src/result';
 
 export class HomeScreen extends BaseScreen {
   constructor(props: any) {
@@ -166,6 +168,10 @@ export class HomeScreen extends BaseScreen {
       case FeatureId.LicensePlateScannerClassic:
         this.startLicensePlateScanner("CLASSIC");
         break;
+      case FeatureId.TextDataScanner:
+        // this.startTextDataScanner();
+        ViewUtils.showAlert("COMING SOON");
+        break;
     }
   }
 
@@ -189,6 +195,18 @@ export class HomeScreen extends BaseScreen {
     if (result.status === 'OK') {
       await Pages.addList(result.pages);
       this.pushPage(Navigation.IMAGE_RESULTS);
+    }
+  }
+
+  async startTextDataScanner() {
+    const config: TextDataScannerConfiguration = {
+      topBarBackgroundColor: Colors.SCANBOT_RED
+    }
+
+    const result = await ScanbotSDK.UI.startTextDataScanner(config);
+    const data = result.result
+    if (result.status == 'OK' && data != undefined && data as TextDataScannerStepResult[]) {
+      //ViewUtils.showAlert(JSON.stringify(result));
     }
   }
 
@@ -236,19 +254,20 @@ export class HomeScreen extends BaseScreen {
   viewImageResults() {
     this.pushPage('Image Results');
   }
-
+ 
   async startBarcodeScanner() {
     const config: BarcodeScannerConfiguration = {
       acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
       finderAspectRatio: { width: 1, height: 1 },
-      useButtonsAllCaps: false
+      useButtonsAllCaps: false,
+      // engineMode: "LEGACY"
     };
     const result = await ScanbotSDK.UI.startBarcodeScanner(config);
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result.barcodes));
     }
-  }
+  } 
 
   async startBatchBarcodeScanner() {
     const config: BatchBarcodeScannerConfiguration = {
@@ -256,6 +275,7 @@ export class HomeScreen extends BaseScreen {
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
       finderAspectRatio: {width: 2, height: 1},
       useButtonsAllCaps: false,
+      // engineMode: "NEXT_GEN"
     };
     const result = await ScanbotSDK.UI.startBatchBarcodeScanner(config);
     if (result.status === 'OK') {
