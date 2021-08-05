@@ -129,8 +129,11 @@ export class HomeScreen extends BaseScreen {
       case FeatureId.DocumentScanner:
         this.startDocumentScanner();
         break;
-      case FeatureId.ImportImage:
+      case FeatureId.DetectDocumentFromPage:
         this.importImageAndDetectDocument();
+        break;
+      case FeatureId.DetectDocumentFromImage:
+        this.detectDocumentFromFile();
         break;
       case FeatureId.ViewPages:
         this.viewImageResults();
@@ -423,5 +426,31 @@ export class HomeScreen extends BaseScreen {
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result));
     }
+  }
+
+  async detectDocumentFromFile() {
+    this.showProgress();
+
+    const pickerResult = await ImageUtils.pickFromGallery();
+
+    if (pickerResult.didCancel) {
+      this.hideProgress();
+      return;
+    }
+
+    if (!pickerResult || !pickerResult.uri) {
+      this.hideProgress();
+      ViewUtils.showAlert('Error picking image from gallery!');
+      return;
+    }
+
+    const imageFileUri = pickerResult.uri;
+
+    try {
+      const result = await ScanbotSDK.detectDocument(imageFileUri);
+      ViewUtils.showAlert(JSON.stringify(result));
+    } catch (_err) {}
+
+    this.hideProgress();
   }
 }

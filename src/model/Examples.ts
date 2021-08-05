@@ -3,7 +3,8 @@ import {Colors} from './Colors';
 
 export enum FeatureId {
   DocumentScanner = 1,
-  ImportImage,
+  DetectDocumentFromPage,
+  DetectDocumentFromImage,
   ViewPages,
   ScanBarcodes,
   ScanBatchBarcodes,
@@ -20,7 +21,7 @@ export enum FeatureId {
   LearnMore,
   LicensePlateScannerML,
   LicensePlateScannerClassic,
-  TextDataScanner
+  TextDataScanner,
 }
 export class Examples {
   public static list = [
@@ -28,7 +29,14 @@ export class Examples {
       title: 'DOCUMENT SCANNER',
       data: [
         {id: FeatureId.DocumentScanner, title: 'Scan Document'},
-        {id: FeatureId.ImportImage, title: 'Import Image & Detect Document'},
+        {
+          id: FeatureId.DetectDocumentFromPage,
+          title: 'Import Image & Detect Document',
+        },
+        {
+          id: FeatureId.DetectDocumentFromImage,
+          title: 'Import Image & Detect Document (JSON)',
+        },
         {id: FeatureId.ViewPages, title: 'View Image Results'},
       ],
     },
@@ -49,9 +57,10 @@ export class Examples {
           id: FeatureId.BarcodeFormatsFilter,
           title: 'Set Barcode Formats Filter',
         },
-        { id: FeatureId.BarcodeDocumentFormatsFilter,
-          title: 'Set Barcode Document Formats Filter'
-        }
+        {
+          id: FeatureId.BarcodeDocumentFormatsFilter,
+          title: 'Set Barcode Document Formats Filter',
+        },
       ],
     },
     {
@@ -61,9 +70,15 @@ export class Examples {
         {id: FeatureId.ScanEHIC, title: 'Scan Health Insurance Card'},
         {id: FeatureId.ScanIdCard, title: 'Scan Id Card'},
         {id: FeatureId.ReadPassportNFC, title: 'Read Passport NFC'},
-        {id: FeatureId.LicensePlateScannerML, title: 'Scan Vehicle License Plate (ML Based)'},
-        {id: FeatureId.LicensePlateScannerClassic, title: 'Scan Vehicle License Plate (Classic)'},
-        {id: FeatureId.TextDataScanner, title: 'Text Data Scanner'}
+        {
+          id: FeatureId.LicensePlateScannerML,
+          title: 'Scan Vehicle License Plate (ML Based)',
+        },
+        {
+          id: FeatureId.LicensePlateScannerClassic,
+          title: 'Scan Vehicle License Plate (Classic)',
+        },
+        {id: FeatureId.TextDataScanner, title: 'Text Data Scanner'},
       ],
     },
     {
@@ -81,7 +96,7 @@ export class Examples {
               marginTop: 25,
               marginBottom: 10,
               color: Colors.SCANBOT_RED,
-            }
+            },
           }),
         },
       ],
