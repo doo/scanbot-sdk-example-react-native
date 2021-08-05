@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   ActivityIndicator,
-  Alert,
   Dimensions,
   Linking,
   Platform,
@@ -17,7 +16,6 @@ import ScanbotSDK, {
   DocumentScannerConfiguration,
   MrzScannerConfiguration,
   NFCPassportReaderConfiguration,
-  TextDataScannerResult,
 } from 'react-native-scanbot-sdk';
 
 import {Examples, FeatureId} from '../model/Examples';
@@ -37,9 +35,18 @@ import {
   IdCardScannerConfiguration,
 } from 'react-native-scanbot-sdk/src';
 import {PageStorage} from '../utils/PageStorage';
-import { LicensePlateScannerConfiguration, TextDataScannerConfiguration } from 'react-native-scanbot-sdk/src/configuration';
-import { LicensePlateDetectorMode } from 'react-native-scanbot-sdk/src/enum';
-import { TextDataScannerStepResult } from 'react-native-scanbot-sdk/src/result';
+
+import {
+  LicensePlateScannerConfiguration,
+  TextDataScannerConfiguration,
+} from 'react-native-scanbot-sdk/src/configuration';
+
+import {LicensePlateDetectorMode} from 'react-native-scanbot-sdk/src/enum';
+import {TextDataScannerStepResult} from 'react-native-scanbot-sdk/src/result';
+import {
+  JSStringToBoolTextFunctionBuilder,
+  JSStringToStringTextFunctionBuilder,
+} from 'react-native-scanbot-sdk/src/model';
 
 export class HomeScreen extends BaseScreen {
   constructor(props: any) {
@@ -118,7 +125,7 @@ export class HomeScreen extends BaseScreen {
       return;
     }
 
-    switch(item.id) {
+    switch (item.id) {
       case FeatureId.DocumentScanner:
         this.startDocumentScanner();
         break;
@@ -163,14 +170,13 @@ export class HomeScreen extends BaseScreen {
         ViewUtils.showAlert(JSON.stringify(result));
         break;
       case FeatureId.LicensePlateScannerML:
-        this.startLicensePlateScanner("ML_BASED");
+        this.startLicensePlateScanner('ML_BASED');
         break;
       case FeatureId.LicensePlateScannerClassic:
-        this.startLicensePlateScanner("CLASSIC");
+        this.startLicensePlateScanner('CLASSIC');
         break;
       case FeatureId.TextDataScanner:
-        // this.startTextDataScanner();
-        ViewUtils.showAlert("COMING SOON");
+        this.startTextDataScanner();
         break;
     }
   }
@@ -200,22 +206,45 @@ export class HomeScreen extends BaseScreen {
 
   async startTextDataScanner() {
     const config: TextDataScannerConfiguration = {
-      topBarBackgroundColor: Colors.SCANBOT_RED
-    }
+      topBarBackgroundColor: Colors.SCANBOT_RED,
+      guidanceText: 'Place the LC display in the frame to scan it',
+      textFilterStrategy: 'DOCUMENT',
+    };
 
-    const result = await ScanbotSDK.UI.startTextDataScanner(config);
-    const data = result.result
-    if (result.status == 'OK' && data != undefined && data as TextDataScannerStepResult[]) {
-      //ViewUtils.showAlert(JSON.stringify(result));
+    // config.validationBlock = new JSStringToBoolTextFunctionBuilder(
+    //   (value: string) => {
+    //     return value.length > 4;
+    //   },
+    // ).build();
+
+    // config.stringSanitizerBlock = new JSStringToStringTextFunctionBuilder(
+    //   (value: string) => {
+    //     return value.toLowerCase() + value.toUpperCase();
+    //   },
+    // ).build();
+
+    try {
+      const result = await ScanbotSDK.UI.startTextDataScanner(config);
+      const data = result.result;
+      if (
+        result.status === 'OK' &&
+        data !== undefined &&
+        (data as TextDataScannerStepResult[])
+      ) {
+        ViewUtils.showAlert(JSON.stringify(result));
+      }
+    } catch (err) {
+      ViewUtils.showAlert('Unexpected error');
     }
   }
 
-  async startLicensePlateScanner(detectorMode: LicensePlateDetectorMode = "ML_BASED") {
-
-    var config: LicensePlateScannerConfiguration = {
+  async startLicensePlateScanner(
+    detectorMode: LicensePlateDetectorMode = 'ML_BASED',
+  ) {
+    let config: LicensePlateScannerConfiguration = {
       topBarBackgroundColor: Colors.SCANBOT_RED,
-      detectorMode: detectorMode
-    }
+      detectorMode: detectorMode,
+    };
 
     const result = await ScanbotSDK.UI.startLicensePlateScanner(config);
 
@@ -254,12 +283,12 @@ export class HomeScreen extends BaseScreen {
   viewImageResults() {
     this.pushPage('Image Results');
   }
- 
+
   async startBarcodeScanner() {
     const config: BarcodeScannerConfiguration = {
       acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
-      finderAspectRatio: { width: 1, height: 1 },
+      finderAspectRatio: {width: 1, height: 1},
       useButtonsAllCaps: false,
       // engineMode: "LEGACY"
     };
@@ -267,7 +296,7 @@ export class HomeScreen extends BaseScreen {
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result.barcodes));
     }
-  } 
+  }
 
   async startBatchBarcodeScanner() {
     const config: BatchBarcodeScannerConfiguration = {
@@ -320,7 +349,9 @@ export class HomeScreen extends BaseScreen {
 
     if (pickerResult.error) {
       this.hideProgress();
-      ViewUtils.showAlert('Error picking image from gallery! ' + pickerResult.error);
+      ViewUtils.showAlert(
+        'Error picking image from gallery! ' + pickerResult.error,
+      );
       return;
     }
 
@@ -334,7 +365,6 @@ export class HomeScreen extends BaseScreen {
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result.results));
     }
-
   }
 
   setBarcodeFormats() {

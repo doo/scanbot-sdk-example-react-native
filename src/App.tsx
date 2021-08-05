@@ -15,7 +15,7 @@ import {Navigation} from './utils/Navigation';
 import {Styles} from './model/Styles';
 import ScanbotSDK, {InitializationOptions} from 'react-native-scanbot-sdk';
 import {SDKUtils} from './utils/SDKUtils';
-import { ViewUtils } from "./utils/ViewUtils";
+import {ViewUtils} from './utils/ViewUtils';
 
 const Stack = createStackNavigator();
 
@@ -92,14 +92,14 @@ export class App extends React.Component {
             name={Navigation.BARCODE_FORMATS}
             component={BarcodeFormatsScreen}
             options={{
-              headerBackTitleVisible: false
+              headerBackTitleVisible: false,
             }}
           />
           <Stack.Screen
             name={Navigation.BARCODE_DOCUMENT_FORMATS}
             component={BarcodeDocumentFormatsScreen}
             options={{
-              headerBackTitleVisible: false
+              headerBackTitleVisible: false,
             }}
           />
           <Stack.Screen
