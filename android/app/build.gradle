@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "io.scanbot.example.sdk.reactnative"
+        applicationId "io.scanbot.example.sdk.react.native"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
