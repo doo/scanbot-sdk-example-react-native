@@ -225,11 +225,7 @@ export class HomeScreen extends BaseScreen {
     try {
       const result = await ScanbotSDK.UI.startTextDataScanner(config);
       const data = result.result;
-      if (
-        result.status === 'OK' &&
-        data !== undefined &&
-        (data as TextDataScannerStepResult[])
-      ) {
+      if (result.status === 'OK' && (data as TextDataScannerStepResult)) {
         ViewUtils.showAlert(JSON.stringify(result));
       }
     } catch (err) {
