@@ -6,9 +6,12 @@ platform :ios, '11.0'
 target 'ScanbotSDKExampleReact' do
   config = use_native_modules!
 
-  use_react_native!(:path => config["reactNativePath"])
-
-
+  use_react_native!(
+    :path => config[:reactNativePath],
+    # to enable hermes on iOS, change `false` to `true` and then install pods
+    :hermes_enabled => false
+  )
+  
   # Pod for Scanbot SDK React Native Module
   pod 'RNScanbotSDK/ALL', :path => '../node_modules/react-native-scanbot-sdk'
 
