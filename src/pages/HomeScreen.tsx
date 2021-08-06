@@ -43,10 +43,6 @@ import {
 
 import {LicensePlateDetectorMode} from 'react-native-scanbot-sdk/src/enum';
 import {TextDataScannerStepResult} from 'react-native-scanbot-sdk/src/result';
-import {
-  JSStringToBoolTextFunctionBuilder,
-  JSStringToStringTextFunctionBuilder,
-} from 'react-native-scanbot-sdk/src/model';
 
 export class HomeScreen extends BaseScreen {
   constructor(props: any) {
@@ -345,7 +341,7 @@ export class HomeScreen extends BaseScreen {
     this.showProgress();
     const pickerResult = await ImageUtils.pickMultipleImagesFromGallery();
 
-    if (pickerResult.isCanceled || pickerResult.imagesUris.length == 0) {
+    if (pickerResult.isCanceled || pickerResult.imagesUris.length === 0) {
       this.hideProgress();
       return;
     }
@@ -394,7 +390,7 @@ export class HomeScreen extends BaseScreen {
     const result = await ScanbotSDK.UI.startMrzScanner(config);
     if (result.status === 'OK') {
       const fields = result.fields.map(
-        (f) => `${f.name}: ${f.value} (${f.confidence.toFixed(2)})`,
+        f => `${f.name}: ${f.value} (${f.confidence.toFixed(2)})`,
       );
       ViewUtils.showAlert(fields.join('\n'));
     }
@@ -406,7 +402,7 @@ export class HomeScreen extends BaseScreen {
     const result = await ScanbotSDK.UI.startEHICScanner(config);
     if (result.status === 'OK') {
       const fields = result.fields.map(
-        (f) => `${f.type}: ${f.value} (${f.confidence.toFixed(2)})`,
+        f => `${f.type}: ${f.value} (${f.confidence.toFixed(2)})`,
       );
       ViewUtils.showAlert(fields.join('\n'));
     }

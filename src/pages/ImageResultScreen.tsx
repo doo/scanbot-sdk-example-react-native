@@ -37,7 +37,7 @@ export class ImageResultScreen extends BaseScreen {
             animating={this.progressVisible}
           />
           <View style={Styles.INSTANCE.imageResults.gallery}>
-            {Pages.getAllPages().map((page) => (
+            {Pages.getAllPages().map(page => (
               <TouchableOpacity
                 onPress={() => this.onGalleryItemClick(page)}
                 key={page.pageId}>

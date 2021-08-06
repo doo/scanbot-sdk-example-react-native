@@ -54,7 +54,7 @@ export class Pages {
 
   static getImageUris(): string[] {
     return Pages.list.map(
-      (p) => p.documentImageFileUri || p.originalImageFileUri,
+      p => p.documentImageFileUri || p.originalImageFileUri,
     );
   }
 }

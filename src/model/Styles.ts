@@ -170,7 +170,7 @@ export class Styles {
       fontWeight: 'bold',
     },
     headerTextContainer: {
-      width: '80%'
+      width: '80%',
     },
     headerItemDescription: {
       fontSize: 14,
@@ -185,11 +185,11 @@ export class Styles {
       borderBottomWidth: 1,
       borderBottomColor: '#e2e2e2',
       alignItems: 'center',
-      backgroundColor: 'white'
+      backgroundColor: 'white',
     },
     headerItemSwitch: {
       position: 'absolute',
-      right: 16
+      right: 16,
     },
     list: {
       paddingTop: '0%',
@@ -202,13 +202,13 @@ export class Styles {
       height: 60,
       borderBottomWidth: 1,
       borderBottomColor: '#e2e2e2',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     listItemText: {
       fontSize: 12,
       height: 60,
       textAlignVertical: 'center',
-      lineHeight: 60
+      lineHeight: 60,
     },
     listItemSwitch: {
       marginTop: 5,

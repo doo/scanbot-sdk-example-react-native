@@ -31,14 +31,14 @@ export class BarcodeFormatsScreen extends BaseScreen {
                 <Switch
                   style={Styles.INSTANCE.barcodeFormats.listItemSwitch}
                   value={item.value}
-                  onValueChange={(_) => {
+                  onValueChange={_ => {
                     this.onListItemClick(item);
                   }}
                 />
               </View>
             </TouchableOpacity>
           )}
-          keyExtractor={(item) => item.key}
+          keyExtractor={item => item.key}
         />
       </SafeAreaView>
     );
