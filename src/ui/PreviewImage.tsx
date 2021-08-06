@@ -9,7 +9,7 @@ type PreviewImageProps = {
 };
 
 export default function PreviewImage(props: PreviewImageProps) {
-  const [uri, setUri] = React.useState<string | null>(null);
+  const [uri, setUri] = React.useState<string | undefined>(undefined);
 
   React.useEffect(() => {
     const loadDecryptedImageData = async () => {
