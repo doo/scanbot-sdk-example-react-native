@@ -1,7 +1,6 @@
-import { BarcodeDocumentFormat } from "react-native-scanbot-sdk/src";
+import {BarcodeDocumentFormat} from 'react-native-scanbot-sdk/src/enum';
 
 export class BarcodeDocumentFormats {
-
   public static isFilteringEnabled = false;
 
   public static list = [
@@ -19,9 +18,9 @@ export class BarcodeDocumentFormats {
     if (!BarcodeDocumentFormats.isFilteringEnabled) {
       return [];
     }
-    
+
     let result: BarcodeDocumentFormat[] = [];
-    BarcodeDocumentFormats.list.forEach((format) => {
+    BarcodeDocumentFormats.list.forEach(format => {
       if (format.value) {
         result.push(<BarcodeDocumentFormat>format.key);
       }
@@ -29,7 +28,7 @@ export class BarcodeDocumentFormats {
     return result;
   }
   public static update(updated: any) {
-    BarcodeDocumentFormats.list.forEach((original) => {
+    BarcodeDocumentFormats.list.forEach(original => {
       if (original.key === updated.key) {
         original.value = updated.value;
       }

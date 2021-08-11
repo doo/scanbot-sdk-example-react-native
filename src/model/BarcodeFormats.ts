@@ -17,12 +17,12 @@ export class BarcodeFormats {
     {key: 'RSS_EXPANDED', value: true},
     {key: 'UPC_A', value: true},
     {key: 'UPC_E', value: true},
-    {key: 'MSI_PLESSEY', value: false}
+    {key: 'MSI_PLESSEY', value: false},
   ];
 
   public static getAcceptedFormats(): BarcodeFormat[] {
     let result: BarcodeFormat[] = [];
-    BarcodeFormats.list.forEach((format) => {
+    BarcodeFormats.list.forEach(format => {
       if (format.value) {
         result.push(<BarcodeFormat>format.key);
       }
@@ -30,7 +30,7 @@ export class BarcodeFormats {
     return result;
   }
   public static update(updated: any) {
-    BarcodeFormats.list.forEach((original) => {
+    BarcodeFormats.list.forEach(original => {
       if (original.key === updated.key) {
         original.value = updated.value;
       }

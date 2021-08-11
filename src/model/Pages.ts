@@ -3,7 +3,7 @@ import {PageStorage} from '../utils/PageStorage';
 
 export class Pages {
   private static list: Page[] = [];
-  public static selectedPage: Page;
+  public static selectedPage?: Page;
 
   static getAllPages() {
     return Pages.list;
@@ -38,7 +38,9 @@ export class Pages {
   }
 
   static async deleteSelectedPage() {
-    await this.delete(Pages.selectedPage);
+    if (Pages.selectedPage) {
+      await this.delete(Pages.selectedPage);
+    }
     delete Pages.selectedPage;
   }
 
@@ -54,7 +56,7 @@ export class Pages {
 
   static getImageUris(): string[] {
     return Pages.list.map(
-      (p) => p.documentImageFileUri || p.originalImageFileUri,
+      p => p.documentImageFileUri || p.originalImageFileUri,
     );
   }
 }

@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   ActivityIndicator,
-  Alert,
   Dimensions,
   Linking,
   Platform,
@@ -36,8 +35,14 @@ import {
   IdCardScannerConfiguration,
 } from 'react-native-scanbot-sdk/src';
 import {PageStorage} from '../utils/PageStorage';
-import { LicensePlateScannerConfiguration } from 'react-native-scanbot-sdk/src/configuration';
-import { LicensePlateDetectorMode } from 'react-native-scanbot-sdk/src/enum';
+
+import {
+  LicensePlateScannerConfiguration,
+  TextDataScannerConfiguration,
+} from 'react-native-scanbot-sdk/src/configuration';
+
+import {LicensePlateDetectorMode} from 'react-native-scanbot-sdk/src/enum';
+import {TextDataScannerStepResult} from 'react-native-scanbot-sdk/src/result';
 
 export class HomeScreen extends BaseScreen {
   constructor(props: any) {
@@ -116,12 +121,15 @@ export class HomeScreen extends BaseScreen {
       return;
     }
 
-    switch(item.id) {
+    switch (item.id) {
       case FeatureId.DocumentScanner:
         this.startDocumentScanner();
         break;
-      case FeatureId.ImportImage:
+      case FeatureId.DetectDocumentFromPage:
         this.importImageAndDetectDocument();
+        break;
+      case FeatureId.DetectDocumentFromImage:
+        this.detectDocumentFromFile();
         break;
       case FeatureId.ViewPages:
         this.viewImageResults();
@@ -161,10 +169,13 @@ export class HomeScreen extends BaseScreen {
         ViewUtils.showAlert(JSON.stringify(result));
         break;
       case FeatureId.LicensePlateScannerML:
-        this.startLicensePlateScanner("ML_BASED");
+        this.startLicensePlateScanner('ML_BASED');
         break;
       case FeatureId.LicensePlateScannerClassic:
-        this.startLicensePlateScanner("CLASSIC");
+        this.startLicensePlateScanner('CLASSIC');
+        break;
+      case FeatureId.TextDataScanner:
+        this.startTextDataScanner();
         break;
     }
   }
@@ -192,12 +203,43 @@ export class HomeScreen extends BaseScreen {
     }
   }
 
-  async startLicensePlateScanner(detectorMode: LicensePlateDetectorMode = "ML_BASED") {
-
-    var config: LicensePlateScannerConfiguration = {
+  async startTextDataScanner() {
+    const config: TextDataScannerConfiguration = {
       topBarBackgroundColor: Colors.SCANBOT_RED,
-      detectorMode: detectorMode
+      guidanceText: 'Place the LC display in the frame to scan it',
+      textFilterStrategy: 'DOCUMENT',
+    };
+
+    // config.validationBlock = new JSStringToBoolTextFunctionBuilder(
+    //   (value: string) => {
+    //     return value.length > 4;
+    //   },
+    // ).build();
+
+    // config.stringSanitizerBlock = new JSStringToStringTextFunctionBuilder(
+    //   (value: string) => {
+    //     return value.toLowerCase() + value.toUpperCase();
+    //   },
+    // ).build();
+
+    try {
+      const result = await ScanbotSDK.UI.startTextDataScanner(config);
+      const data = result.result;
+      if (result.status === 'OK' && (data as TextDataScannerStepResult)) {
+        ViewUtils.showAlert(JSON.stringify(result));
+      }
+    } catch (err) {
+      ViewUtils.showAlert('Unexpected error');
     }
+  }
+
+  async startLicensePlateScanner(
+    detectorMode: LicensePlateDetectorMode = 'ML_BASED',
+  ) {
+    let config: LicensePlateScannerConfiguration = {
+      topBarBackgroundColor: Colors.SCANBOT_RED,
+      detectorMode: detectorMode,
+    };
 
     const result = await ScanbotSDK.UI.startLicensePlateScanner(config);
 
@@ -241,8 +283,9 @@ export class HomeScreen extends BaseScreen {
     const config: BarcodeScannerConfiguration = {
       acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
-      finderAspectRatio: { width: 1, height: 1 },
-      useButtonsAllCaps: false
+      finderAspectRatio: {width: 1, height: 1},
+      useButtonsAllCaps: false,
+      // engineMode: "LEGACY"
     };
     const result = await ScanbotSDK.UI.startBarcodeScanner(config);
     if (result.status === 'OK') {
@@ -256,6 +299,7 @@ export class HomeScreen extends BaseScreen {
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
       finderAspectRatio: {width: 2, height: 1},
       useButtonsAllCaps: false,
+      // engineMode: "NEXT_GEN"
     };
     const result = await ScanbotSDK.UI.startBatchBarcodeScanner(config);
     if (result.status === 'OK') {
@@ -293,14 +337,16 @@ export class HomeScreen extends BaseScreen {
     this.showProgress();
     const pickerResult = await ImageUtils.pickMultipleImagesFromGallery();
 
-    if (pickerResult.isCanceled || pickerResult.imagesUris.length == 0) {
+    if (pickerResult.isCanceled || pickerResult.imagesUris.length === 0) {
       this.hideProgress();
       return;
     }
 
     if (pickerResult.error) {
       this.hideProgress();
-      ViewUtils.showAlert('Error picking image from gallery! ' + pickerResult.error);
+      ViewUtils.showAlert(
+        'Error picking image from gallery! ' + pickerResult.error,
+      );
       return;
     }
 
@@ -314,7 +360,6 @@ export class HomeScreen extends BaseScreen {
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result.results));
     }
-
   }
 
   setBarcodeFormats() {
@@ -341,7 +386,7 @@ export class HomeScreen extends BaseScreen {
     const result = await ScanbotSDK.UI.startMrzScanner(config);
     if (result.status === 'OK') {
       const fields = result.fields.map(
-        (f) => `${f.name}: ${f.value} (${f.confidence.toFixed(2)})`,
+        f => `${f.name}: ${f.value} (${f.confidence.toFixed(2)})`,
       );
       ViewUtils.showAlert(fields.join('\n'));
     }
@@ -353,7 +398,7 @@ export class HomeScreen extends BaseScreen {
     const result = await ScanbotSDK.UI.startEHICScanner(config);
     if (result.status === 'OK') {
       const fields = result.fields.map(
-        (f) => `${f.type}: ${f.value} (${f.confidence.toFixed(2)})`,
+        f => `${f.type}: ${f.value} (${f.confidence.toFixed(2)})`,
       );
       ViewUtils.showAlert(fields.join('\n'));
     }
@@ -373,5 +418,31 @@ export class HomeScreen extends BaseScreen {
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result));
     }
+  }
+
+  async detectDocumentFromFile() {
+    this.showProgress();
+
+    const pickerResult = await ImageUtils.pickFromGallery();
+
+    if (pickerResult.didCancel) {
+      this.hideProgress();
+      return;
+    }
+
+    if (!pickerResult || !pickerResult.uri) {
+      this.hideProgress();
+      ViewUtils.showAlert('Error picking image from gallery!');
+      return;
+    }
+
+    const imageFileUri = pickerResult.uri;
+
+    try {
+      const result = await ScanbotSDK.detectDocument(imageFileUri);
+      ViewUtils.showAlert(JSON.stringify(result));
+    } catch (_err) {}
+
+    this.hideProgress();
   }
 }
