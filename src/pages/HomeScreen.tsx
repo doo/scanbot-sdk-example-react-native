@@ -42,7 +42,6 @@ import {
 } from 'react-native-scanbot-sdk/src/configuration';
 
 import {LicensePlateDetectorMode} from 'react-native-scanbot-sdk/src/enum';
-import {TextDataScannerStepResult} from 'react-native-scanbot-sdk/src/result';
 
 export class HomeScreen extends BaseScreen {
   constructor(props: any) {
@@ -177,7 +176,13 @@ export class HomeScreen extends BaseScreen {
       case FeatureId.TextDataScanner:
         this.startTextDataScanner();
         break;
+      case FeatureId.BarcodeCameraViewComponent:
+        this.goToBarcodeCameraViewComponentExample();
     }
+  }
+
+  async goToBarcodeCameraViewComponentExample() {
+    this.pushPage(Navigation.BARCODE_CAMERA_VIEW);
   }
 
   async startDocumentScanner() {
@@ -225,7 +230,7 @@ export class HomeScreen extends BaseScreen {
     try {
       const result = await ScanbotSDK.UI.startTextDataScanner(config);
       const data = result.result;
-      if (result.status === 'OK' && (data as TextDataScannerStepResult)) {
+      if (result.status === 'OK' && data) {
         ViewUtils.showAlert(JSON.stringify(result));
       }
     } catch (err) {

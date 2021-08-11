@@ -16,6 +16,7 @@ import {Styles} from './model/Styles';
 import ScanbotSDK, {InitializationOptions} from 'react-native-scanbot-sdk';
 import {SDKUtils} from './utils/SDKUtils';
 import {ViewUtils} from './utils/ViewUtils';
+import {BarcodeCameraViewScreen} from './pages/BarcodeCameraViewScreen';
 
 const Stack = createStackNavigator();
 
@@ -105,6 +106,14 @@ export class App extends React.Component {
           <Stack.Screen
             name={Navigation.IMAGE_DETAILS}
             component={ImageDetailScreen}
+          />
+          <Stack.Screen
+            name={Navigation.BARCODE_CAMERA_VIEW}
+            component={BarcodeCameraViewScreen}
+            options={{
+              headerBackTitleVisible: false,
+              title: 'Barcode Camera View',
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
