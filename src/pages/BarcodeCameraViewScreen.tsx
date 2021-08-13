@@ -138,7 +138,9 @@ export class BarcodeCameraViewScreen extends BaseScreen {
                   }
                 </Text>
               </View>
-
+            </ScanbotBarcodeCameraView>
+            <View style={this.styles.resultsView}>
+              <Text style={this.styles.resultsText}>{lastDetectedBarcode}</Text>
               <View style={this.styles.buttonsContainer}>
                 <TouchableOpacity
                   style={this.styles.button}
@@ -149,9 +151,6 @@ export class BarcodeCameraViewScreen extends BaseScreen {
                   </Text>
                 </TouchableOpacity>
               </View>
-            </ScanbotBarcodeCameraView>
-            <View style={this.styles.resultsView}>
-              <Text style={this.styles.resultsText}>{lastDetectedBarcode}</Text>
             </View>
           </View>
         </SafeAreaView>
