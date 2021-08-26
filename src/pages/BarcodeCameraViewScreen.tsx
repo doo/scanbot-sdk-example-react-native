@@ -9,12 +9,15 @@ import {
 } from 'react-native';
 import {BaseScreen} from '../utils/BaseScreen';
 import {
-  ScanbotBarcodeCameraView,
   ScanbotBarcodeCameraViewConfiguration,
   ScanbotBarcodeCameraViewResult,
-} from 'react-native-scanbot-sdk/src/components/scanbot-barcode-camera-view';
+} from 'react-native-scanbot-sdk';
+
+import {ScanbotBarcodeCameraView} from 'react-native-scanbot-sdk';
+
 import {Styles} from '../model/Styles';
 import {BarcodeFormats} from '../model/BarcodeFormats';
+import BarcodeMask from '../ui/BarcodeMask';
 
 const defaultBarcodeCameraViewConfiguration: () => ScanbotBarcodeCameraViewConfiguration =
   () => ({
@@ -99,6 +102,7 @@ export class BarcodeCameraViewScreen extends BaseScreen {
   state = {
     lastDetectedBarcode: '',
     barcodeCameraViewConfiguration: defaultBarcodeCameraViewConfiguration(),
+    isOverlayVisible: true,
   };
 
   toggleFinderView() {
@@ -114,31 +118,52 @@ export class BarcodeCameraViewScreen extends BaseScreen {
   render() {
     const {lastDetectedBarcode, barcodeCameraViewConfiguration} = this.state;
 
+    let scanningView;
+    if (this.state.isOverlayVisible) {
+      scanningView = (
+        <ScanbotBarcodeCameraView
+          style={this.styles.cameraView}
+          configuration={barcodeCameraViewConfiguration}
+          onBarcodeScannerResult={(result: ScanbotBarcodeCameraViewResult) => {
+            if (result.barcode) {
+              const barcode = result.barcode;
+              this.setState({
+                lastDetectedBarcode: `${barcode.barcode} (${barcode.type})`,
+              });
+            }
+          }}>
+          <BarcodeMask
+            isActive={this.state.isOverlayVisible}
+            onPress={() => {
+              this.setState({
+                isOverlayVisible: !this.state.isOverlayVisible,
+              });
+            }}
+          />
+        </ScanbotBarcodeCameraView>
+      );
+    } else {
+      scanningView = (
+        <ScanbotBarcodeCameraView
+          style={this.styles.cameraView}
+          configuration={barcodeCameraViewConfiguration}
+          onBarcodeScannerResult={(result: ScanbotBarcodeCameraViewResult) => {
+            if (result.barcode) {
+              const barcode = result.barcode;
+              this.setState({
+                lastDetectedBarcode: `${barcode.barcode} (${barcode.type})`,
+              });
+            }
+          }}
+        />
+      );
+    }
+
     return (
       <>
         <SafeAreaView>
           <View style={this.styles.containerView}>
-            <ScanbotBarcodeCameraView
-              style={this.styles.cameraView}
-              configuration={barcodeCameraViewConfiguration}
-              onBarcodeScannerResult={(
-                result: ScanbotBarcodeCameraViewResult,
-              ) => {
-                if (result.barcode) {
-                  const barcode = result.barcode;
-                  this.setState({
-                    lastDetectedBarcode: `${barcode.barcode} (${barcode.type})`,
-                  });
-                }
-              }}>
-              <View style={this.styles.overlayView}>
-                <Text style={this.styles.overlayText}>
-                  {
-                    'This is a native component! Changes are applied in real time. Try that!'
-                  }
-                </Text>
-              </View>
-            </ScanbotBarcodeCameraView>
+            {scanningView}
             <View style={this.styles.resultsView}>
               <Text style={this.styles.resultsText}>{lastDetectedBarcode}</Text>
               <View style={this.styles.buttonsContainer}>
