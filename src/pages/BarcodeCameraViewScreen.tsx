@@ -8,16 +8,15 @@ import {
   ViewStyle,
 } from 'react-native';
 import {BaseScreen} from '../utils/BaseScreen';
-import {
-  ScanbotBarcodeCameraViewConfiguration,
-  ScanbotBarcodeCameraViewResult,
-} from 'react-native-scanbot-sdk';
-
-import {ScanbotBarcodeCameraView} from 'react-native-scanbot-sdk';
 
 import {Styles} from '../model/Styles';
 import {BarcodeFormats} from '../model/BarcodeFormats';
 import BarcodeMask from '../ui/BarcodeMask';
+import {
+  ScanbotBarcodeCameraView,
+  ScanbotBarcodeCameraViewConfiguration,
+  ScanbotBarcodeCameraViewResult,
+} from 'react-native-scanbot-sdk';
 
 const defaultBarcodeCameraViewConfiguration: () => ScanbotBarcodeCameraViewConfiguration =
   () => ({
