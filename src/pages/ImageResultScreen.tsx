@@ -166,6 +166,7 @@ export class ImageResultScreen extends BaseScreen {
       await ScanbotSDK.cleanup();
       await Pages.deleteAllPages();
       this.refresh();
+      ViewUtils.showAlert('All pages have been deleted succesfully!');
     } catch (e) {
       ViewUtils.showAlert('ERROR: ' + JSON.stringify(e));
     }
