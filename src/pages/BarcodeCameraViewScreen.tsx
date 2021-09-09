@@ -8,13 +8,16 @@ import {
   ViewStyle,
 } from 'react-native';
 import {BaseScreen} from '../utils/BaseScreen';
+
+import {Styles} from '../model/Styles';
+import {BarcodeFormats} from '../model/BarcodeFormats';
+import BarcodeMask from '../ui/BarcodeMask';
 import {
   ScanbotBarcodeCameraView,
   ScanbotBarcodeCameraViewConfiguration,
   ScanbotBarcodeCameraViewResult,
-} from 'react-native-scanbot-sdk/src/components/scanbot-barcode-camera-view';
-import {Styles} from '../model/Styles';
-import {BarcodeFormats} from '../model/BarcodeFormats';
+} from 'react-native-scanbot-sdk';
+import {BarcodeDocumentFormats} from '../model/BarcodeDocumentFormats';
 
 const defaultBarcodeCameraViewConfiguration: () => ScanbotBarcodeCameraViewConfiguration =
   () => ({
@@ -28,6 +31,14 @@ const defaultBarcodeCameraViewConfiguration: () => ScanbotBarcodeCameraViewConfi
     finderMinimumPadding: 64,
     finderBackgroundOpacity: 0.5,
     barcodeFormats: BarcodeFormats.getAcceptedFormats(),
+    acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
+    msiPlesseyChecksumAlgorithm: 'Mod1010',
+    engineMode: 'LEGACY',
+    cameraZoomFactor: 0.2,
+    gs1DecodingEnabled: false,
+    minimumTextLength: 2,
+    maximumTextLength: 6,
+    flashEnabled: false,
   });
 
 export class BarcodeCameraViewScreen extends BaseScreen {
@@ -68,6 +79,7 @@ export class BarcodeCameraViewScreen extends BaseScreen {
         paddingVertical: 12,
         borderRadius: 12,
         zIndex: 1,
+        marginVertical: 8,
       },
 
       buttonsText: {
@@ -99,46 +111,66 @@ export class BarcodeCameraViewScreen extends BaseScreen {
   state = {
     lastDetectedBarcode: '',
     barcodeCameraViewConfiguration: defaultBarcodeCameraViewConfiguration(),
+    isOverlayVisible: true,
   };
 
   toggleFinderView() {
-    const {lastDetectedBarcode, barcodeCameraViewConfiguration} = this.state;
+    const {barcodeCameraViewConfiguration} = this.state;
     let config = {...barcodeCameraViewConfiguration};
     config.shouldUseFinderView = !config.shouldUseFinderView;
     this.setState({
-      lastDetectedBarcode: lastDetectedBarcode,
       barcodeCameraViewConfiguration: config,
     });
+  }
+
+  toggleFlashLight() {
+    const {barcodeCameraViewConfiguration} = this.state;
+    let config = {...barcodeCameraViewConfiguration};
+    config.flashEnabled = !barcodeCameraViewConfiguration.flashEnabled;
+    this.setState({barcodeCameraViewConfiguration: config});
   }
 
   render() {
     const {lastDetectedBarcode, barcodeCameraViewConfiguration} = this.state;
 
+    let scanningView;
+    if (this.state.isOverlayVisible) {
+      scanningView = (
+        <ScanbotBarcodeCameraView
+          style={this.styles.cameraView}
+          configuration={barcodeCameraViewConfiguration}>
+          <BarcodeMask
+            isActive={this.state.isOverlayVisible}
+            onPress={() => {
+              this.setState({
+                isOverlayVisible: !this.state.isOverlayVisible,
+              });
+            }}
+          />
+        </ScanbotBarcodeCameraView>
+      );
+    } else {
+      scanningView = (
+        <ScanbotBarcodeCameraView
+          style={this.styles.cameraView}
+          configuration={barcodeCameraViewConfiguration}
+          onBarcodeScannerResult={(result: ScanbotBarcodeCameraViewResult) => {
+            if (result.barcode) {
+              const barcode = result.barcode;
+              this.setState({
+                lastDetectedBarcode: `${barcode.barcode} (${barcode.type})`,
+              });
+            }
+          }}
+        />
+      );
+    }
+
     return (
       <>
         <SafeAreaView>
           <View style={this.styles.containerView}>
-            <ScanbotBarcodeCameraView
-              style={this.styles.cameraView}
-              configuration={barcodeCameraViewConfiguration}
-              onBarcodeScannerResult={(
-                result: ScanbotBarcodeCameraViewResult,
-              ) => {
-                if (result.barcode) {
-                  const barcode = result.barcode;
-                  this.setState({
-                    lastDetectedBarcode: `${barcode.barcode} (${barcode.type})`,
-                  });
-                }
-              }}>
-              <View style={this.styles.overlayView}>
-                <Text style={this.styles.overlayText}>
-                  {
-                    'This is a native component! Changes are applied in real time. Try that!'
-                  }
-                </Text>
-              </View>
-            </ScanbotBarcodeCameraView>
+            {scanningView}
             <View style={this.styles.resultsView}>
               <Text style={this.styles.resultsText}>{lastDetectedBarcode}</Text>
               <View style={this.styles.buttonsContainer}>
@@ -149,6 +181,12 @@ export class BarcodeCameraViewScreen extends BaseScreen {
                   <Text style={this.styles.buttonsText}>
                     Toggle Finder View
                   </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={this.styles.button}
+                  activeOpacity={0.6}
+                  onPress={this.toggleFlashLight.bind(this)}>
+                  <Text style={this.styles.buttonsText}>Toggle Flash</Text>
                 </TouchableOpacity>
               </View>
             </View>
