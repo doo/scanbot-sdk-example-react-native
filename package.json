@@ -19,6 +19,7 @@
     "react-native": "0.64.2",
     "react-native-clean-project": "^3.6.4",
     "react-native-custom-actionsheet": "github:Nikituh/react-native-custom-actionsheet",
+    "react-native-document-picker": "^6.0.4",
     "react-native-fs": "github:marcosaia1812/react-native-fs",
     "react-native-gesture-handler": "1.10.3",
     "react-native-image-crop-picker": "^0.36.0",
@@ -26,7 +27,7 @@
     "react-native-reanimated": "1.8.0",
     "react-native-safe-area-context": "1.0.0",
     "react-native-safe-area-view": "1.1.1",
-    "react-native-scanbot-sdk": "4.9.0",
+    "react-native-scanbot-sdk": "4.10.0-beta3",
     "react-native-screens": "2.7.0",
     "react-navigation-stack": "2.5.1"
   },

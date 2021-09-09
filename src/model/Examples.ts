@@ -5,6 +5,8 @@ export enum FeatureId {
   DocumentScanner = 1,
   DetectDocumentFromPage,
   DetectDocumentFromImage,
+  ExtractPagesFromPdf,
+  ExtractImagesFromPdf,
   ViewPages,
   ScanBarcodes,
   ScanBatchBarcodes,
@@ -36,6 +38,14 @@ export class Examples {
         {
           id: FeatureId.DetectDocumentFromImage,
           title: 'Import Image & Detect Document (JSON)',
+        },
+        {
+          id: FeatureId.ExtractPagesFromPdf,
+          title: 'Extract pages from PDF',
+        },
+        {
+          id: FeatureId.ExtractImagesFromPdf,
+          title: 'Extract images from PDF',
         },
         {id: FeatureId.ViewPages, title: 'View Image Results'},
       ],
