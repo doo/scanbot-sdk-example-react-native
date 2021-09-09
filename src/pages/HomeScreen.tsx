@@ -183,7 +183,13 @@ export class HomeScreen extends BaseScreen {
       case FeatureId.TextDataScanner:
         this.startTextDataScanner();
         break;
+      case FeatureId.BarcodeCameraViewComponent:
+        this.goToBarcodeCameraViewComponentExample();
     }
+  }
+
+  async goToBarcodeCameraViewComponentExample() {
+    this.pushPage(Navigation.BARCODE_CAMERA_VIEW);
   }
 
   async startDocumentScanner() {

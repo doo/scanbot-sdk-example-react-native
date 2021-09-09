@@ -24,6 +24,7 @@ export enum FeatureId {
   LicensePlateScannerML,
   LicensePlateScannerClassic,
   TextDataScanner,
+  BarcodeCameraViewComponent,
 }
 export class Examples {
   public static list = [
@@ -96,6 +97,10 @@ export class Examples {
       data: [
         {id: FeatureId.LicenseInfo, title: 'View License Info'},
         {id: FeatureId.OcrConfigs, title: 'View OCR Configs'},
+        {
+          id: FeatureId.BarcodeCameraViewComponent,
+          title: 'Barcode Camera View (EXPERIMENTAL)',
+        },
         {
           id: FeatureId.LearnMore,
           title: 'Learn More About Scanbot SDK',
