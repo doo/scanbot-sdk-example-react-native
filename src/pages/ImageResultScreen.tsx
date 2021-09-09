@@ -18,6 +18,7 @@ import {ViewUtils} from '../utils/ViewUtils';
 import {Navigation} from '../utils/Navigation';
 import {BaseScreen} from '../utils/BaseScreen';
 import PreviewImage from '../ui/PreviewImage';
+import {ScrollView} from 'react-native-gesture-handler';
 
 export class ImageResultScreen extends BaseScreen {
   onScreenFocused() {
@@ -36,21 +37,23 @@ export class ImageResultScreen extends BaseScreen {
             style={Styles.INSTANCE.common.progress}
             animating={this.progressVisible}
           />
-          <View style={Styles.INSTANCE.imageResults.gallery}>
-            {Pages.getAllPages().map(page => (
-              <TouchableOpacity
-                onPress={() => this.onGalleryItemClick(page)}
-                key={page.pageId}>
-                <PreviewImage
-                  page={page}
-                  style={[
-                    Styles.INSTANCE.imageResults.galleryCell,
-                    Styles.INSTANCE.common.containImage,
-                  ]}
-                />
-              </TouchableOpacity>
-            ))}
-          </View>
+          <ScrollView style={Styles.INSTANCE.imageResults.scrollView}>
+            <View style={Styles.INSTANCE.imageResults.gallery}>
+              {Pages.getAllPages().map(page => (
+                <TouchableOpacity
+                  onPress={() => this.onGalleryItemClick(page)}
+                  key={page.pageId}>
+                  <PreviewImage
+                    page={page}
+                    style={[
+                      Styles.INSTANCE.imageResults.galleryCell,
+                      Styles.INSTANCE.common.containImage,
+                    ]}
+                  />
+                </TouchableOpacity>
+              ))}
+            </View>
+          </ScrollView>
           <View style={Styles.INSTANCE.common.bottomBar}>
             <Text
               style={Styles.INSTANCE.common.bottomBarButton}

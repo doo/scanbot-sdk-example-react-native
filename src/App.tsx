@@ -105,6 +105,9 @@ export class App extends React.Component {
           <Stack.Screen
             name={Navigation.IMAGE_DETAILS}
             component={ImageDetailScreen}
+            options={{
+              headerBackTitleVisible: false,
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>

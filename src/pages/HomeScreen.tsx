@@ -42,7 +42,7 @@ import {
 } from 'react-native-scanbot-sdk/src/configuration';
 
 import {LicensePlateDetectorMode} from 'react-native-scanbot-sdk/src/enum';
-import {TextDataScannerStepResult} from 'react-native-scanbot-sdk/src/result';
+import {FileUtils} from '../utils/FileUtils';
 
 export class HomeScreen extends BaseScreen {
   constructor(props: any) {
@@ -130,6 +130,12 @@ export class HomeScreen extends BaseScreen {
         break;
       case FeatureId.DetectDocumentFromImage:
         this.detectDocumentFromFile();
+        break;
+      case FeatureId.ExtractPagesFromPdf:
+        this.importPdfAndExtractPages();
+        break;
+      case FeatureId.ExtractImagesFromPdf:
+        this.importPdfAndExtractImages();
         break;
       case FeatureId.ViewPages:
         this.viewImageResults();
@@ -225,7 +231,7 @@ export class HomeScreen extends BaseScreen {
     try {
       const result = await ScanbotSDK.UI.startTextDataScanner(config);
       const data = result.result;
-      if (result.status === 'OK' && (data as TextDataScannerStepResult)) {
+      if (result.status === 'OK' && data) {
         ViewUtils.showAlert(JSON.stringify(result));
       }
     } catch (err) {
@@ -246,6 +252,67 @@ export class HomeScreen extends BaseScreen {
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result));
     }
+  }
+
+  async importPdfAndExtractPages() {
+    const result = await FileUtils.pickPdf();
+    if (result.status === 'CANCELED') {
+      return;
+    }
+
+    const fileUrl = result.fileUrl;
+    if (result.status === 'ERROR' || !fileUrl) {
+      ViewUtils.showAlert(`ERROR: ${result.error ?? 'Unknown'}`);
+      return;
+    }
+
+    this.showProgress();
+
+    const sdkResult = await ScanbotSDK.extractPagesFromPdf({
+      pdfFilePath: fileUrl,
+      quality: 2,
+      scaling: 4,
+    });
+
+    this.hideProgress();
+
+    if (sdkResult.status !== 'OK' || !sdkResult.pages) {
+      return;
+    }
+
+    await Pages.addList(sdkResult.pages);
+    this.pushPage(Navigation.IMAGE_RESULTS);
+  }
+
+  async importPdfAndExtractImages() {
+    const result = await FileUtils.pickPdf();
+    if (result.status === 'CANCELED') {
+      return;
+    }
+
+    const fileUrl = result.fileUrl;
+    if (result.status === 'ERROR' || !fileUrl) {
+      ViewUtils.showAlert(`ERROR: ${result.error ?? 'Unknown'}`);
+      return;
+    }
+
+    this.showProgress();
+
+    const sdkResult = await ScanbotSDK.extractImagesFromPdf({
+      pdfFilePath: fileUrl,
+      quality: 100,
+      scaling: 1,
+    });
+
+    this.hideProgress();
+
+    const imageFilesUrls = sdkResult.imageFilesUrls;
+
+    if (sdkResult.status !== 'OK' || !imageFilesUrls) {
+      return;
+    }
+
+    ViewUtils.showAlert(JSON.stringify(imageFilesUrls));
   }
 
   async importImageAndDetectDocument() {
@@ -285,6 +352,7 @@ export class HomeScreen extends BaseScreen {
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
       finderAspectRatio: {width: 1, height: 1},
       useButtonsAllCaps: false,
+      cameraZoomFactor: 0.7,
       // engineMode: "LEGACY"
     };
     const result = await ScanbotSDK.UI.startBarcodeScanner(config);
@@ -299,6 +367,7 @@ export class HomeScreen extends BaseScreen {
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
       finderAspectRatio: {width: 2, height: 1},
       useButtonsAllCaps: false,
+      cameraZoomFactor: 1.0,
       // engineMode: "NEXT_GEN"
     };
     const result = await ScanbotSDK.UI.startBatchBarcodeScanner(config);
@@ -326,6 +395,7 @@ export class HomeScreen extends BaseScreen {
       acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
       imageFileUri: pickerResult.uri,
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
+      stripCheckDigits: true,
     });
     this.hideProgress();
     if (result.status === 'OK') {
@@ -354,6 +424,7 @@ export class HomeScreen extends BaseScreen {
       acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
       imageFileUris: pickerResult.imagesUris,
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
+      stripCheckDigits: true,
     });
 
     this.hideProgress();
