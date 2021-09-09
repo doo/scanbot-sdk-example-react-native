@@ -216,6 +216,7 @@ export class HomeScreen extends BaseScreen {
       textFilterStrategy: 'DOCUMENT',
     };
 
+    // eg.
     // config.validationBlock = new JSStringToBoolTextFunctionBuilder(
     //   (value: string) => {
     //     return value.length > 4;
@@ -270,8 +271,9 @@ export class HomeScreen extends BaseScreen {
 
     const sdkResult = await ScanbotSDK.extractPagesFromPdf({
       pdfFilePath: fileUrl,
-      quality: 2,
-      scaling: 4,
+      // eg.
+      // quality: 100,
+      // scaling: 4,
     });
 
     this.hideProgress();
@@ -300,8 +302,9 @@ export class HomeScreen extends BaseScreen {
 
     const sdkResult = await ScanbotSDK.extractImagesFromPdf({
       pdfFilePath: fileUrl,
-      quality: 100,
-      scaling: 1,
+      // eg.
+      // quality: 80,
+      // scaling: 3,
     });
 
     this.hideProgress();
@@ -334,11 +337,6 @@ export class HomeScreen extends BaseScreen {
     page = await ScanbotSDK.detectDocumentOnPage(page);
     await Pages.add(page);
     this.hideProgress();
-
-    // TODO move estimateBlur() example to another location
-    //const blur = await ScanbotSDK.estimateBlur({ imageFileUri: page.documentImageFileUri! });
-    //console.log("Blur:", blur);
-
     this.pushPage(Navigation.IMAGE_RESULTS);
   }
 
