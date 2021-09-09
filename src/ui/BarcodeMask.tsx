@@ -1,28 +1,27 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 type BarcodeMaskProps = {
   isActive: boolean;
   onPress: () => void;
 };
 
-const getStyles = (props: BarcodeMaskProps) =>
+const getStyles = (_props: BarcodeMaskProps) =>
   StyleSheet.create({
     overlayView: {
       width: '100%',
       height: '100%',
-      backgroundColor: 'blue',
-      opacity: props.isActive ? 1 : 1,
+      backgroundColor: 'black',
+      opacity: 0.6,
+      justifyContent: 'center',
     },
     tapToScanView: {
-      marginTop: '20%',
       textAlign: 'center',
       alignItems: 'center',
     },
     tapToScanImage: {
-      backgroundColor: 'yellow',
-      width: 64,
-      height: 64,
+      width: 48,
+      height: 48,
       textAlign: 'center',
       margin: 16,
     },
@@ -41,7 +40,10 @@ export default function BarcodeMask(props: BarcodeMaskProps) {
   return (
     <View style={styles.overlayView}>
       <TouchableOpacity style={styles.tapToScanView} onPress={props.onPress}>
-        <View style={styles.tapToScanImage} />
+        <Image
+          source={require('../assets/ic_camera.png')}
+          style={styles.tapToScanImage}
+        />
         <Text style={styles.tapToScanText}>Tap to Scan</Text>
       </TouchableOpacity>
     </View>
