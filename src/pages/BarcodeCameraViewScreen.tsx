@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Image,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -11,7 +12,7 @@ import {BaseScreen} from '../utils/BaseScreen';
 
 import {Styles} from '../model/Styles';
 import {BarcodeFormats} from '../model/BarcodeFormats';
-import BarcodeMask from '../ui/BarcodeMask';
+
 import {
   ScanbotBarcodeCameraView,
   ScanbotBarcodeCameraViewConfiguration,
@@ -69,8 +70,9 @@ export class BarcodeCameraViewScreen extends BaseScreen {
         borderRadius: 12,
         margin: 24,
         flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'flex-end',
       },
 
       button: {
@@ -93,17 +95,31 @@ export class BarcodeCameraViewScreen extends BaseScreen {
 
       resultsView: {
         flex: 1,
-        backgroundColor: '#111111',
+        backgroundColor: Styles.SCANBOT_RED,
+        shadowRadius: 4,
+        shadowOpacity: 0.4,
         alignContent: 'center',
         justifyContent: 'center',
+        borderTopLeftRadius: 32,
+        borderTopRightRadius: 32,
+        marginTop: -32,
+        marginBottom: -36,
+      },
+
+      resultsViewHeader: {
+        margin: 24,
+        fontSize: 20,
+        color: 'white',
+        alignSelf: 'center',
       },
 
       resultsText: {
-        fontSize: 22,
+        fontSize: 16,
         color: 'white',
         fontWeight: 'bold',
         padding: 16,
         alignSelf: 'center',
+        textAlign: 'center',
       },
     });
   }
@@ -131,62 +147,53 @@ export class BarcodeCameraViewScreen extends BaseScreen {
   }
 
   render() {
-    const {lastDetectedBarcode, barcodeCameraViewConfiguration} = this.state;
-
-    let scanningView;
-    if (this.state.isOverlayVisible) {
-      scanningView = (
-        <ScanbotBarcodeCameraView
-          style={this.styles.cameraView}
-          configuration={barcodeCameraViewConfiguration}>
-          <BarcodeMask
-            isActive={this.state.isOverlayVisible}
-            onPress={() => {
-              this.setState({
-                isOverlayVisible: !this.state.isOverlayVisible,
-              });
-            }}
-          />
-        </ScanbotBarcodeCameraView>
-      );
-    } else {
-      scanningView = (
-        <ScanbotBarcodeCameraView
-          style={this.styles.cameraView}
-          configuration={barcodeCameraViewConfiguration}
-          onBarcodeScannerResult={(result: ScanbotBarcodeCameraViewResult) => {
-            if (result.barcode) {
-              const barcode = result.barcode;
-              this.setState({
-                lastDetectedBarcode: `${barcode.barcode} (${barcode.type})`,
-              });
-            }
-          }}
-        />
-      );
-    }
+    const {lastDetectedBarcode} = this.state;
+    const {barcodeCameraViewConfiguration} = this.state;
 
     return (
       <>
         <SafeAreaView>
           <View style={this.styles.containerView}>
-            {scanningView}
+            <ScanbotBarcodeCameraView
+              style={this.styles.cameraView}
+              configuration={barcodeCameraViewConfiguration}
+              onBarcodeScannerResult={(
+                result: ScanbotBarcodeCameraViewResult,
+              ) => {
+                if (result.barcodes.length > 0) {
+                  const count = result.barcodes.length;
+                  const optionalText =
+                    count > 4 ? `\n(and ${count - 4} more)` : '';
+                  const text = result.barcodes
+                    .map(barcode => `${barcode.text} (${barcode.type})`)
+                    .join('\n');
+                  this.setState({
+                    lastDetectedBarcode: text + optionalText,
+                  });
+                }
+              }}
+            />
             <View style={this.styles.resultsView}>
+              <Text style={this.styles.resultsViewHeader}>Results</Text>
               <Text style={this.styles.resultsText}>{lastDetectedBarcode}</Text>
               <View style={this.styles.buttonsContainer}>
                 <TouchableOpacity
                   style={this.styles.button}
                   activeOpacity={0.6}
                   onPress={this.toggleFinderView.bind(this)}>
-                  <Text style={this.styles.buttonsText}>
-                    Toggle Finder View
-                  </Text>
+                  <Image source={require('../assets/ic_finder_view.png')} />
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={this.styles.button}
                   activeOpacity={0.6}
                   onPress={this.toggleFlashLight.bind(this)}>
-                  <Text style={this.styles.buttonsText}>Toggle Flash</Text>
+                  <Image
+                    source={
+                      barcodeCameraViewConfiguration.flashEnabled
+                        ? require('../assets/ic_flash_on.png')
+                        : require('../assets/ic_flash_off.png')
+                    }
+                  />
                 </TouchableOpacity>
               </View>
             </View>
