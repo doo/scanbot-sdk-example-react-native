@@ -1,4 +1,8 @@
 rootProject.name = 'ScanbotSDKExampleReact'
+include ':react-native-scanbot-sdk'
+project(':react-native-scanbot-sdk').projectDir = new File(rootProject.projectDir, '../../scanbot-sdk-react-native/android')
+include ':react-native-scanbot-sdk'
+project(':react-native-scanbot-sdk').projectDir = new File(rootProject.projectDir, '../../scanbot-sdk-react-native/android')
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'
 

@@ -14,6 +14,7 @@ import {ImageDetailScreen} from './pages/ImageDetailScreen';
 import {Navigation} from './utils/Navigation';
 import {Styles} from './model/Styles';
 import ScanbotSDK, {InitializationOptions} from 'react-native-scanbot-sdk';
+
 import {SDKUtils} from './utils/SDKUtils';
 import {ViewUtils} from './utils/ViewUtils';
 

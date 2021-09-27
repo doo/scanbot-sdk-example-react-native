@@ -18,31 +18,32 @@ import ScanbotSDK, {
   NFCPassportReaderConfiguration,
 } from 'react-native-scanbot-sdk';
 
-import {Examples, FeatureId} from '../model/Examples';
-import {Styles} from '../model/Styles';
-import {ImageUtils} from '../utils/ImageUtils';
-import {SDKUtils} from '../utils/SDKUtils';
-import {Pages} from '../model/Pages';
-import {ViewUtils} from '../utils/ViewUtils';
-import {BarcodeFormats} from '../model/BarcodeFormats';
-import {BarcodeDocumentFormats} from '../model/BarcodeDocumentFormats';
-import {Navigation} from '../utils/Navigation';
-import {BaseScreen} from '../utils/BaseScreen';
-import {Colors} from '../model/Colors';
+import { Examples, FeatureId } from '../model/Examples';
+import { Styles } from '../model/Styles';
+import { ImageUtils } from '../utils/ImageUtils';
+import { SDKUtils } from '../utils/SDKUtils';
+import { Pages } from '../model/Pages';
+import { ViewUtils } from '../utils/ViewUtils';
+import { BarcodeFormats } from '../model/BarcodeFormats';
+import { BarcodeDocumentFormats } from '../model/BarcodeDocumentFormats';
+import { Navigation } from '../utils/Navigation';
+import { BaseScreen } from '../utils/BaseScreen';
+import { Colors } from '../model/Colors';
 import {
   BatchBarcodeScannerConfiguration,
   HealthInsuranceCardScannerConfiguration,
   IdCardScannerConfiguration,
 } from 'react-native-scanbot-sdk/src';
-import {PageStorage} from '../utils/PageStorage';
+import { PageStorage } from '../utils/PageStorage';
+import BackgroundTimer from 'react-native-background-timer';
 
 import {
   LicensePlateScannerConfiguration,
   TextDataScannerConfiguration,
 } from 'react-native-scanbot-sdk/src/configuration';
 
-import {LicensePlateDetectorMode} from 'react-native-scanbot-sdk/src/enum';
-import {TextDataScannerStepResult} from 'react-native-scanbot-sdk/src/result';
+import { LicensePlateDetectorMode } from 'react-native-scanbot-sdk/src/enum';
+import { TextDataScannerStepResult } from 'react-native-scanbot-sdk/src/result';
 
 export class HomeScreen extends BaseScreen {
   constructor(props: any) {
@@ -56,7 +57,7 @@ export class HomeScreen extends BaseScreen {
       if (loaded.length === 0) {
         return;
       }
-      const refreshed = await ScanbotSDK.refreshImageUris({pages: loaded});
+      const refreshed = await ScanbotSDK.refreshImageUris({ pages: loaded });
       await Pages.addList(refreshed.pages);
     } catch (e) {
       console.error('Error loading/refreshing pages: ' + JSON.stringify(e));
@@ -79,7 +80,7 @@ export class HomeScreen extends BaseScreen {
             style={Styles.INSTANCE.home.list}
             sections={Examples.list}
             keyExtractor={(item, index) => item.title + index}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <View style={Styles.INSTANCE.home.sectionItemContainer}>
                 <TouchableOpacity onPress={() => this.onListItemClick(item)}>
                   <Text
@@ -93,7 +94,7 @@ export class HomeScreen extends BaseScreen {
                 </TouchableOpacity>
               </View>
             )}
-            renderSectionHeader={({section: {title}}) => (
+            renderSectionHeader={({ section: { title } }) => (
               <Text style={Styles.INSTANCE.home.sectionHeader}>{title}</Text>
             )}
           />
@@ -196,11 +197,21 @@ export class HomeScreen extends BaseScreen {
       // See further config properties ...
     };
 
+    console.log('Document scanner started');
+    BackgroundTimer.runBackgroundTimer(() => {
+      console.log('Document scanner closed');
+      ScanbotSDK.UI.closeDocumentScanner();
+    }, 5000);
+
     const result = await ScanbotSDK.UI.startDocumentScanner(config);
     if (result.status === 'OK') {
+      BackgroundTimer.stopBackgroundTimer();
+
       await Pages.addList(result.pages);
       this.pushPage(Navigation.IMAGE_RESULTS);
     }
+
+    BackgroundTimer.stopBackgroundTimer();
   }
 
   async startTextDataScanner() {
@@ -283,7 +294,7 @@ export class HomeScreen extends BaseScreen {
     const config: BarcodeScannerConfiguration = {
       acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
-      finderAspectRatio: {width: 1, height: 1},
+      finderAspectRatio: { width: 1, height: 1 },
       useButtonsAllCaps: false,
       // engineMode: "LEGACY"
     };
@@ -297,7 +308,7 @@ export class HomeScreen extends BaseScreen {
     const config: BatchBarcodeScannerConfiguration = {
       acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
-      finderAspectRatio: {width: 2, height: 1},
+      finderAspectRatio: { width: 2, height: 1 },
       useButtonsAllCaps: false,
       // engineMode: "NEXT_GEN"
     };
@@ -378,7 +389,7 @@ export class HomeScreen extends BaseScreen {
     };
 
     if (Platform.OS === 'ios') {
-      const {width} = Dimensions.get('window');
+      const { width } = Dimensions.get('window');
       config.finderWidth = width * 0.9;
       config.finderHeight = width * 0.18;
     }
@@ -441,7 +452,7 @@ export class HomeScreen extends BaseScreen {
     try {
       const result = await ScanbotSDK.detectDocument(imageFileUri);
       ViewUtils.showAlert(JSON.stringify(result));
-    } catch (_err) {}
+    } catch (_err) { }
 
     this.hideProgress();
   }
