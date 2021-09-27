@@ -16,6 +16,7 @@ import {Styles} from './model/Styles';
 import ScanbotSDK, {InitializationOptions} from 'react-native-scanbot-sdk';
 import {SDKUtils} from './utils/SDKUtils';
 import {ViewUtils} from './utils/ViewUtils';
+import {BarcodeCameraViewScreen} from './pages/BarcodeCameraViewScreen';
 
 const Stack = createStackNavigator();
 
@@ -80,6 +81,14 @@ export class App extends React.Component {
   }
 
   render() {
+    const sharedHeaderProps = {
+      headerStyle: {
+        borderBottomWidth: 0,
+        elevation: 0,
+        shadowColor: 'transparent',
+      },
+    };
+
     return (
       <NavigationContainer theme={Styles.ScanbotTheme}>
         <Stack.Navigator initialRouteName={Navigation.HOME}>
@@ -87,12 +96,14 @@ export class App extends React.Component {
           <Stack.Screen
             name={Navigation.IMAGE_RESULTS}
             component={ImageResultScreen}
+            options={sharedHeaderProps}
           />
           <Stack.Screen
             name={Navigation.BARCODE_FORMATS}
             component={BarcodeFormatsScreen}
             options={{
               headerBackTitleVisible: false,
+              ...sharedHeaderProps,
             }}
           />
           <Stack.Screen
@@ -100,11 +111,25 @@ export class App extends React.Component {
             component={BarcodeDocumentFormatsScreen}
             options={{
               headerBackTitleVisible: false,
+              ...sharedHeaderProps,
             }}
           />
           <Stack.Screen
             name={Navigation.IMAGE_DETAILS}
             component={ImageDetailScreen}
+            options={{
+              headerBackTitleVisible: false,
+              ...sharedHeaderProps,
+            }}
+          />
+          <Stack.Screen
+            name={Navigation.BARCODE_CAMERA_VIEW}
+            component={BarcodeCameraViewScreen}
+            options={{
+              headerBackTitleVisible: false,
+              title: 'Barcode Camera View',
+              ...sharedHeaderProps,
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>

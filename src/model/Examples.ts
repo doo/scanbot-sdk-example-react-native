@@ -5,6 +5,8 @@ export enum FeatureId {
   DocumentScanner = 1,
   DetectDocumentFromPage,
   DetectDocumentFromImage,
+  ExtractPagesFromPdf,
+  ExtractImagesFromPdf,
   ViewPages,
   ScanBarcodes,
   ScanBatchBarcodes,
@@ -22,6 +24,7 @@ export enum FeatureId {
   LicensePlateScannerML,
   LicensePlateScannerClassic,
   TextDataScanner,
+  BarcodeCameraViewComponent,
 }
 export class Examples {
   public static list = [
@@ -36,6 +39,14 @@ export class Examples {
         {
           id: FeatureId.DetectDocumentFromImage,
           title: 'Import Image & Detect Document (JSON)',
+        },
+        {
+          id: FeatureId.ExtractPagesFromPdf,
+          title: 'Extract pages from PDF',
+        },
+        {
+          id: FeatureId.ExtractImagesFromPdf,
+          title: 'Extract images from PDF',
         },
         {id: FeatureId.ViewPages, title: 'View Image Results'},
       ],
@@ -86,6 +97,10 @@ export class Examples {
       data: [
         {id: FeatureId.LicenseInfo, title: 'View License Info'},
         {id: FeatureId.OcrConfigs, title: 'View OCR Configs'},
+        {
+          id: FeatureId.BarcodeCameraViewComponent,
+          title: 'Barcode Camera View (EXPERIMENTAL)',
+        },
         {
           id: FeatureId.LearnMore,
           title: 'Learn More About Scanbot SDK',

@@ -26,7 +26,6 @@ export default function PreviewImage(props: PreviewImageProps) {
       // as base64 from SDK. The SDK decrypts the image data under the hood.
       loadDecryptedImageData();
     } else {
-      // File encryption is NOT enabled, so we just use the image file URI.
       setUri(props.page.documentPreviewImageFileUri!);
     }
   }, [props.page]);

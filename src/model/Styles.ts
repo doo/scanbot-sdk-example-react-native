@@ -35,6 +35,7 @@ export class Styles {
         flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
+        paddingBottom: 64,
       },
       galleryCell: {
         width: (this.WINDOW_WIDTH - 4 * this.GALLERY_CELL_PADDING) / 3,
@@ -43,6 +44,7 @@ export class Styles {
         marginTop: this.GALLERY_CELL_PADDING,
         backgroundColor: Styles.LIGHT_GRAY,
       },
+      scrollView: {},
     });
   }
 

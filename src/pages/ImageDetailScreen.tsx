@@ -42,7 +42,7 @@ export class ImageDetailScreen extends BaseScreen {
     this.setState({selected: index});
     const filter = options[index];
     const updated = await ScanbotSDK.applyImageFilterOnPage(
-      Pages.selectedPage,
+      Pages.selectedPage as Page,
       // @ts-ignore
       filter,
     );
@@ -54,7 +54,7 @@ export class ImageDetailScreen extends BaseScreen {
       <>
         <SafeAreaView />
         <PreviewImage
-          page={Pages.selectedPage}
+          page={Pages.selectedPage as Page}
           style={[
             Styles.INSTANCE.imageDetails.image,
             Styles.INSTANCE.common.containImage,
@@ -96,12 +96,15 @@ export class ImageDetailScreen extends BaseScreen {
     if (!(await SDKUtils.checkLicense())) {
       return;
     }
-    const result = await ScanbotSDK.UI.startCroppingScreen(Pages.selectedPage, {
-      doneButtonTitle: 'Apply',
-      topBarBackgroundColor: Colors.SCANBOT_RED,
-      bottomBarBackgroundColor: Colors.SCANBOT_RED,
-      // See further config properties ...
-    });
+    const result = await ScanbotSDK.UI.startCroppingScreen(
+      Pages.selectedPage as Page,
+      {
+        doneButtonTitle: 'Apply',
+        topBarBackgroundColor: Colors.SCANBOT_RED,
+        bottomBarBackgroundColor: Colors.SCANBOT_RED,
+        // See further config properties ...
+      },
+    );
 
     if (result.status === 'OK') {
       if (result.page) {
@@ -124,7 +127,7 @@ export class ImageDetailScreen extends BaseScreen {
 
   private async deleteButtonPress() {
     try {
-      await ScanbotSDK.removePage(Pages.selectedPage);
+      await ScanbotSDK.removePage(Pages.selectedPage as Page);
       await Pages.deleteSelectedPage();
       // @ts-ignore
       this.props.navigation.pop();
