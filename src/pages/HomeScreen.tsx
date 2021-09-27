@@ -29,6 +29,7 @@ import {BarcodeDocumentFormats} from '../model/BarcodeDocumentFormats';
 import {Navigation} from '../utils/Navigation';
 import {BaseScreen} from '../utils/BaseScreen';
 import {Colors} from '../model/Colors';
+import BackgroundTimer from 'react-native-background-timer';
 import {
   BatchBarcodeScannerConfiguration,
   HealthInsuranceCardScannerConfiguration,
@@ -207,6 +208,11 @@ export class HomeScreen extends BaseScreen {
       // maxNumberOfPages: 3,
       // See further config properties ...
     };
+
+    BackgroundTimer.runBackgroundTimer(() => {
+      ScanbotSDK.UI.closeDocumentScanner();
+      BackgroundTimer.stopBackgroundTimer();
+    }, 5000);
 
     const result = await ScanbotSDK.UI.startDocumentScanner(config);
     if (result.status === 'OK') {
