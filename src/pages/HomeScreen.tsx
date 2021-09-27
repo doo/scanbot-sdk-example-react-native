@@ -219,6 +219,8 @@ export class HomeScreen extends BaseScreen {
       await Pages.addList(result.pages);
       this.pushPage(Navigation.IMAGE_RESULTS);
     }
+
+    BackgroundTimer.stopBackgroundTimer();
   }
 
   async startTextDataScanner() {
