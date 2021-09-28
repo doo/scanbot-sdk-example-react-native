@@ -332,26 +332,26 @@ PODS:
     - React
   - RNGestureHandler (1.10.3):
     - React-Core
-  - RNImageCropPicker (0.36.2):
+  - RNImageCropPicker (0.36.3):
     - React-Core
     - React-RCTImage
-    - RNImageCropPicker/QBImagePickerController (= 0.36.2)
+    - RNImageCropPicker/QBImagePickerController (= 0.36.3)
     - TOCropViewController
-  - RNImageCropPicker/QBImagePickerController (0.36.2):
+  - RNImageCropPicker/QBImagePickerController (0.36.3):
     - React-Core
     - React-RCTImage
     - TOCropViewController
   - RNReanimated (1.8.0):
     - React
-  - RNScanbotSDK (4.10.1-alpha2):
+  - RNScanbotSDK (4.10.1-beta1):
     - React
-    - RNScanbotSDK/NONE (= 4.10.1-alpha2)
+    - RNScanbotSDK/NONE (= 4.10.1-beta1)
     - ScanbotSDK (= 1.20.0)
-  - RNScanbotSDK/ALL (4.10.1-alpha2):
+  - RNScanbotSDK/ALL (4.10.1-beta1):
     - React
     - ScanbotSDK (= 1.20.0)
     - ScanbotSDK/ALL (= 1.20.0)
-  - RNScanbotSDK/NONE (4.10.1-alpha2):
+  - RNScanbotSDK/NONE (4.10.1-beta1):
     - React
     - ScanbotSDK (= 1.20.0)
   - RNScreens (2.7.0):
@@ -533,7 +533,7 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: e686045572151edef46010a6f819ade377dfeb4b
-  FBReactNativeSpec: 6c0eff9001d5b838c64e2527bff229989332c80b
+  FBReactNativeSpec: e47525f68bfbc65d9186d21b02be01efbc655657
   Flipper: d3da1aa199aad94455ae725e9f3aa43f3ec17021
   Flipper-DoubleConversion: 38631e41ef4f9b12861c67d17cb5518d06badc41
   Flipper-Folly: 755929a4f851b2fb2c347d533a23f191b008554c
@@ -575,9 +575,9 @@ SPEC CHECKSUMS:
   RNCMaskedView: f5c7d14d6847b7b44853f7acb6284c1da30a3459
   RNFS: 751428ec3aa24945dad64640903833ad034b6d03
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
-  RNImageCropPicker: 35a3ceb837446fa11547704709bb22b5fac6d584
+  RNImageCropPicker: 97289cd94fb01ab79db4e5c92938be4d0d63415d
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
-  RNScanbotSDK: 32115eac1f104028f03232aeedbf22fda7055a28
+  RNScanbotSDK: 74254f73cb6bc47cae21298e23a8a54639b4a695
   RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
   ScanbotSDK: 383b1b4e15386a61a16f2bcab9fccb8adddda8fc
   TOCropViewController: 3105367e808b7d3d886a74ff59bf4804e7d3ab38
@@ -586,4 +586,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 44dde699b22e8680ff05573bb3beaef8bdfe2258
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

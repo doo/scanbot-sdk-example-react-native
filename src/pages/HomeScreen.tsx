@@ -211,7 +211,6 @@ export class HomeScreen extends BaseScreen {
 
     BackgroundTimer.runBackgroundTimer(() => {
       ScanbotSDK.UI.closeDocumentScanner();
-      BackgroundTimer.stopBackgroundTimer();
     }, 5000);
 
     const result = await ScanbotSDK.UI.startDocumentScanner(config);
@@ -244,11 +243,17 @@ export class HomeScreen extends BaseScreen {
     // ).build();
 
     try {
+      BackgroundTimer.runBackgroundTimer(() => {
+        ScanbotSDK.UI.closeTextDataScanner();
+      }, 5000);
+
       const result = await ScanbotSDK.UI.startTextDataScanner(config);
       const data = result.result;
       if (result.status === 'OK' && data) {
         ViewUtils.showAlert(JSON.stringify(result));
       }
+
+      BackgroundTimer.stopBackgroundTimer();
     } catch (err) {
       ViewUtils.showAlert('Unexpected error');
     }
@@ -262,11 +267,17 @@ export class HomeScreen extends BaseScreen {
       detectorMode: detectorMode,
     };
 
+    BackgroundTimer.runBackgroundTimer(() => {
+      ScanbotSDK.UI.closeLicensePlateScanner();
+    }, 5000);
+
     const result = await ScanbotSDK.UI.startLicensePlateScanner(config);
 
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result));
     }
+
+    BackgroundTimer.stopBackgroundTimer();
   }
 
   async importPdfAndExtractPages() {
@@ -367,10 +378,17 @@ export class HomeScreen extends BaseScreen {
       cameraZoomFactor: 0.7,
       // engineMode: "LEGACY"
     };
+
+    BackgroundTimer.runBackgroundTimer(() => {
+      ScanbotSDK.UI.closeBarcodeScanner();
+    }, 5000);
+
     const result = await ScanbotSDK.UI.startBarcodeScanner(config);
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result.barcodes));
     }
+
+    BackgroundTimer.stopBackgroundTimer();
   }
 
   async startBatchBarcodeScanner() {
@@ -382,10 +400,17 @@ export class HomeScreen extends BaseScreen {
       cameraZoomFactor: 1.0,
       // engineMode: "NEXT_GEN"
     };
+
+    BackgroundTimer.runBackgroundTimer(() => {
+      ScanbotSDK.UI.closeBatchBarcodeScanner();
+    }, 5000);
+
     const result = await ScanbotSDK.UI.startBatchBarcodeScanner(config);
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result.barcodes));
     }
+
+    BackgroundTimer.stopBackgroundTimer();
   }
 
   async importImageAndDetectBarcodes() {
@@ -466,6 +491,10 @@ export class HomeScreen extends BaseScreen {
       config.finderHeight = width * 0.18;
     }
 
+    BackgroundTimer.runBackgroundTimer(() => {
+      ScanbotSDK.UI.closeMrzScanner();
+    }, 5000);
+
     const result = await ScanbotSDK.UI.startMrzScanner(config);
     if (result.status === 'OK') {
       const fields = result.fields.map(
@@ -473,11 +502,18 @@ export class HomeScreen extends BaseScreen {
       );
       ViewUtils.showAlert(fields.join('\n'));
     }
+
+    BackgroundTimer.stopBackgroundTimer();
   }
   async startEHICScanner() {
     const config: HealthInsuranceCardScannerConfiguration = {
       finderLineColor: 'red',
     };
+
+    BackgroundTimer.runBackgroundTimer(() => {
+      ScanbotSDK.UI.closeEHICScanner();
+    }, 5000);
+
     const result = await ScanbotSDK.UI.startEHICScanner(config);
     if (result.status === 'OK') {
       const fields = result.fields.map(
@@ -485,22 +521,38 @@ export class HomeScreen extends BaseScreen {
       );
       ViewUtils.showAlert(fields.join('\n'));
     }
+
+    BackgroundTimer.stopBackgroundTimer();
   }
 
   async startIdCardCScanner() {
     const config: IdCardScannerConfiguration = {};
+
+    BackgroundTimer.runBackgroundTimer(() => {
+      ScanbotSDK.UI.closeIdCardScanner();
+    }, 5000);
+
     const result = await ScanbotSDK.UI.startIdCardScanner(config);
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result));
     }
+
+    BackgroundTimer.stopBackgroundTimer();
   }
 
   async startNFCReader() {
     const config: NFCPassportReaderConfiguration = {};
+
+    BackgroundTimer.runBackgroundTimer(() => {
+      ScanbotSDK.UI.closeNFCPassportReader();
+    }, 5000);
+
     const result = await ScanbotSDK.UI.startNFCPassportReader(config);
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result));
     }
+
+    BackgroundTimer.stopBackgroundTimer();
   }
 
   async detectDocumentFromFile() {
