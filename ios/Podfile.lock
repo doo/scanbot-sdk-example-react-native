@@ -252,6 +252,8 @@ PODS:
     - React-jsi (= 0.64.2)
     - React-perflogger (= 0.64.2)
   - React-jsinspector (0.64.2)
+  - react-native-background-timer (2.4.1):
+    - React-Core
   - react-native-document-picker (6.0.4):
     - React-Core
   - react-native-image-picker (3.1.4):
@@ -330,34 +332,34 @@ PODS:
     - React
   - RNGestureHandler (1.10.3):
     - React-Core
-  - RNImageCropPicker (0.36.2):
+  - RNImageCropPicker (0.36.3):
     - React-Core
     - React-RCTImage
-    - RNImageCropPicker/QBImagePickerController (= 0.36.2)
+    - RNImageCropPicker/QBImagePickerController (= 0.36.3)
     - TOCropViewController
-  - RNImageCropPicker/QBImagePickerController (0.36.2):
+  - RNImageCropPicker/QBImagePickerController (0.36.3):
     - React-Core
     - React-RCTImage
     - TOCropViewController
   - RNReanimated (1.8.0):
     - React
-  - RNScanbotSDK (4.10.0):
+  - RNScanbotSDK (4.10.1-beta3):
     - React
-    - RNScanbotSDK/NONE (= 4.10.0)
-    - ScanbotSDK (= 1.20.0)
-  - RNScanbotSDK/ALL (4.10.0):
+    - RNScanbotSDK/NONE (= 4.10.1-beta3)
+    - ScanbotSDK (= 1.21.2)
+  - RNScanbotSDK/ALL (4.10.1-beta3):
     - React
-    - ScanbotSDK (= 1.20.0)
-    - ScanbotSDK/ALL (= 1.20.0)
-  - RNScanbotSDK/NONE (4.10.0):
+    - ScanbotSDK (= 1.21.2)
+    - ScanbotSDK/ALL (= 1.21.2)
+  - RNScanbotSDK/NONE (4.10.1-beta3):
     - React
-    - ScanbotSDK (= 1.20.0)
+    - ScanbotSDK (= 1.21.2)
   - RNScreens (2.7.0):
     - React
-  - ScanbotSDK (1.20.0):
-    - ScanbotSDK/NONE (= 1.20.0)
-  - ScanbotSDK/ALL (1.20.0)
-  - ScanbotSDK/NONE (1.20.0)
+  - ScanbotSDK (1.21.2):
+    - ScanbotSDK/NONE (= 1.21.2)
+  - ScanbotSDK/ALL (1.21.2)
+  - ScanbotSDK/NONE (1.21.2)
   - TOCropViewController (2.6.0)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -400,6 +402,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
+  - react-native-background-timer (from `../node_modules/react-native-background-timer`)
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
@@ -474,6 +477,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
+  react-native-background-timer:
+    :path: "../node_modules/react-native-background-timer"
   react-native-document-picker:
     :path: "../node_modules/react-native-document-picker"
   react-native-image-picker:
@@ -550,6 +555,7 @@ SPEC CHECKSUMS:
   React-jsi: 67747b9722f6dab2ffe15b011bcf6b3f2c3f1427
   React-jsiexecutor: 80c46bd381fd06e418e0d4f53672dc1d1945c4c3
   React-jsinspector: cc614ec18a9ca96fd275100c16d74d62ee11f0ae
+  react-native-background-timer: 117fffdc9b0d6f144444bb49029f94275a45fdb5
   react-native-document-picker: 92adb1d337a6a7beed0110d29c9186565dab74d2
   react-native-image-picker: 248afb60a0c5a24153cb7c7483b257f30541323b
   react-native-safe-area-context: 5f3e081f937ab7c44c179d551f332fa494cfcf8f
@@ -569,11 +575,11 @@ SPEC CHECKSUMS:
   RNCMaskedView: f5c7d14d6847b7b44853f7acb6284c1da30a3459
   RNFS: 751428ec3aa24945dad64640903833ad034b6d03
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
-  RNImageCropPicker: 35a3ceb837446fa11547704709bb22b5fac6d584
+  RNImageCropPicker: 97289cd94fb01ab79db4e5c92938be4d0d63415d
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
-  RNScanbotSDK: 5a12c179cdf10641c04c14d971901d8290f599ea
+  RNScanbotSDK: 93835a95ec2b9d435da54d8e5c6172c9d49f6463
   RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
-  ScanbotSDK: 383b1b4e15386a61a16f2bcab9fccb8adddda8fc
+  ScanbotSDK: 1ff91a1758c53664f88e5c22d78b88dfeaf2f4eb
   TOCropViewController: 3105367e808b7d3d886a74ff59bf4804e7d3ab38
   Yoga: 575c581c63e0d35c9a83f4b46d01d63abc1100ac
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
