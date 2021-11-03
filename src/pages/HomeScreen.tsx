@@ -29,7 +29,6 @@ import {BarcodeDocumentFormats} from '../model/BarcodeDocumentFormats';
 import {Navigation} from '../utils/Navigation';
 import {BaseScreen} from '../utils/BaseScreen';
 import {Colors} from '../model/Colors';
-import BackgroundTimer from 'react-native-background-timer';
 import {
   BatchBarcodeScannerConfiguration,
   HealthInsuranceCardScannerConfiguration,
@@ -209,17 +208,11 @@ export class HomeScreen extends BaseScreen {
       // See further config properties ...
     };
 
-    BackgroundTimer.runBackgroundTimer(() => {
-      ScanbotSDK.UI.closeDocumentScanner();
-    }, 5000);
-
     const result = await ScanbotSDK.UI.startDocumentScanner(config);
     if (result.status === 'OK') {
       await Pages.addList(result.pages);
       this.pushPage(Navigation.IMAGE_RESULTS);
     }
-
-    BackgroundTimer.stopBackgroundTimer();
   }
 
   async startTextDataScanner() {
@@ -243,17 +236,11 @@ export class HomeScreen extends BaseScreen {
     // ).build();
 
     try {
-      BackgroundTimer.runBackgroundTimer(() => {
-        ScanbotSDK.UI.closeTextDataScanner();
-      }, 5000);
-
       const result = await ScanbotSDK.UI.startTextDataScanner(config);
       const data = result.result;
       if (result.status === 'OK' && data) {
         ViewUtils.showAlert(JSON.stringify(result));
       }
-
-      BackgroundTimer.stopBackgroundTimer();
     } catch (err) {
       ViewUtils.showAlert('Unexpected error');
     }
@@ -267,17 +254,11 @@ export class HomeScreen extends BaseScreen {
       detectorMode: detectorMode,
     };
 
-    BackgroundTimer.runBackgroundTimer(() => {
-      ScanbotSDK.UI.closeLicensePlateScanner();
-    }, 5000);
-
     const result = await ScanbotSDK.UI.startLicensePlateScanner(config);
 
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result));
     }
-
-    BackgroundTimer.stopBackgroundTimer();
   }
 
   async importPdfAndExtractPages() {
@@ -379,16 +360,10 @@ export class HomeScreen extends BaseScreen {
       // engineMode: "LEGACY"
     };
 
-    BackgroundTimer.runBackgroundTimer(() => {
-      ScanbotSDK.UI.closeBarcodeScanner();
-    }, 5000);
-
     const result = await ScanbotSDK.UI.startBarcodeScanner(config);
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result.barcodes));
     }
-
-    BackgroundTimer.stopBackgroundTimer();
   }
 
   async startBatchBarcodeScanner() {
@@ -401,16 +376,10 @@ export class HomeScreen extends BaseScreen {
       // engineMode: "NEXT_GEN"
     };
 
-    BackgroundTimer.runBackgroundTimer(() => {
-      ScanbotSDK.UI.closeBatchBarcodeScanner();
-    }, 5000);
-
     const result = await ScanbotSDK.UI.startBatchBarcodeScanner(config);
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result.barcodes));
     }
-
-    BackgroundTimer.stopBackgroundTimer();
   }
 
   async importImageAndDetectBarcodes() {
@@ -491,10 +460,6 @@ export class HomeScreen extends BaseScreen {
       config.finderHeight = width * 0.18;
     }
 
-    BackgroundTimer.runBackgroundTimer(() => {
-      ScanbotSDK.UI.closeMrzScanner();
-    }, 5000);
-
     const result = await ScanbotSDK.UI.startMrzScanner(config);
     if (result.status === 'OK') {
       const fields = result.fields.map(
@@ -503,16 +468,11 @@ export class HomeScreen extends BaseScreen {
       ViewUtils.showAlert(fields.join('\n'));
     }
 
-    BackgroundTimer.stopBackgroundTimer();
   }
   async startEHICScanner() {
     const config: HealthInsuranceCardScannerConfiguration = {
       finderLineColor: 'red',
     };
-
-    BackgroundTimer.runBackgroundTimer(() => {
-      ScanbotSDK.UI.closeEHICScanner();
-    }, 5000);
 
     const result = await ScanbotSDK.UI.startEHICScanner(config);
     if (result.status === 'OK') {
@@ -521,95 +481,31 @@ export class HomeScreen extends BaseScreen {
       );
       ViewUtils.showAlert(fields.join('\n'));
     }
-
-    BackgroundTimer.stopBackgroundTimer();
   }
 
   async startIdCardScanner() {
-    BackgroundTimer.runBackgroundTimer(() => {
-      ScanbotSDK.UI.closeIdCardScanner();
-    }, 5000);
-
     const config: IdCardScannerConfiguration = {
       acceptedDocumentTypes: ['DeIdBack', 'DeIdFront'],
-      // cameraOverlayColor: '#ff0000',
-      cancelButtonTitle: '_cancelBtn',
-      clearButtonTitle: '_clearBtn',
-      confidenceValue: '_confidence %d',
-      // detailsActionColor: '#ff0000',
-      // detailsBackgroundColor: '#ff0000',
-      // detailsPrimaryColor: '#ff0000',
-      fieldAddressTitle: '_address',
-      fieldBirthDateTitle: '_birthDate',
-      fieldBirthPlaceTitle: '_birthPlace',
-      // fieldConfidenceHighColor: '#ff0000',
-      // fieldConfidenceLowColor: '#ff0000',
-      // fieldConfidenceModerateColor: '#ff0000',
-      // fieldConfidenceTextColor: '#ff0000',
-      dePassportDocumentTitle: '_dePassportDocumentTitle',
-      deIdCardFrontDocumentTitle: '_deIdCardFrontDocumentTitle',
-      deIdCardBackDocumentTitle: '_deIdCardBackDocumentTitle',
-      fieldCountryCodeTitle: '_countryCode',
-      fieldExpiryDateTitle: '_expiryDate',
-      fieldEyeColorTitle: '_eyeColor',
-      fieldGivenNamesTitle: '_givenNames',
-      fieldHeightTitle: '_height',
-      fieldIDTitle: '_id',
-      fieldIssueDateTitle: '_issueDate',
-      fieldIssuingAuthorityTitle: '_issuingAuthority',
-      fieldMaidenNameTitle: '_name',
-      fieldMRZTitle: '_mrz',
-      fieldNationalityTitle: '_nationality',
-      fieldPassportTypeTitle: '_passportType',
-      fieldPhotoTitle: '_photo',
-      fieldPINTitle: '_pin',
-      fieldPseudonymTitle: '_pseudonym',
-      fieldsCountText: '_count %d',
-      // fieldsCountTextColor: '#ff0000',
-      fieldSignatureTitle: '_signature',
-      fieldSurnameTitle: '_surname',
-      // finderLineColor: '#ff0000',
-      finderLineWidth: 4,
-      flashEnabled: false,
-      imageTitle: '_image',
-      noDataTitle: '_noData',
-      scanBackSideTitle: '_scanBackSide',
-      scanFrontSideTitle: '_scanFrontSide',
-      scannedEverythingTitle: '_scannedEverything',
       shouldSavePhotoImageInStorage: true,
       shouldSaveSignatureImageInStorage: true,
-      startScanningTitle: '_startScanning',
-      viewResultsButtonTitle: '_viewResultsBtn',
-      // tipBackgroundColor: '#0000ff',
-      // tipTextColor: '#ff0000',
-      // topBarBackgroundColor: '#00ff00',
-      // topBarButtonsColor: '#ff0000',
-      // topBarButtonsInactiveColor: '#0000ff',
-      useButtonsAllCaps: true,
-      sharpnessAcceptanceFactor: 80,
+      startScanningTitle: 'Start Scanning!',
+      viewResultsButtonTitle: 'Confirm',
+      topBarBackgroundColor: Colors.SCANBOT_RED,
     };
 
     const result = await ScanbotSDK.UI.startIdCardScanner(config);
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result));
     }
-
-    BackgroundTimer.stopBackgroundTimer();
   }
 
   async startNFCReader() {
     const config: NFCPassportReaderConfiguration = {};
 
-    BackgroundTimer.runBackgroundTimer(() => {
-      ScanbotSDK.UI.closeNFCPassportReader();
-    }, 5000);
-
     const result = await ScanbotSDK.UI.startNFCPassportReader(config);
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result));
     }
-
-    BackgroundTimer.stopBackgroundTimer();
   }
 
   async detectDocumentFromFile() {
