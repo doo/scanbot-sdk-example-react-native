@@ -166,7 +166,7 @@ export class HomeScreen extends BaseScreen {
         this.startEHICScanner();
         break;
       case FeatureId.ScanIdCard:
-        this.startIdCardCScanner();
+        this.startIdCardScanner();
         break;
       case FeatureId.ReadPassportNFC:
         this.startNFCReader();
@@ -525,12 +525,69 @@ export class HomeScreen extends BaseScreen {
     BackgroundTimer.stopBackgroundTimer();
   }
 
-  async startIdCardCScanner() {
-    const config: IdCardScannerConfiguration = {};
-
+  async startIdCardScanner() {
     BackgroundTimer.runBackgroundTimer(() => {
       ScanbotSDK.UI.closeIdCardScanner();
     }, 5000);
+
+    const config: IdCardScannerConfiguration = {
+      acceptedDocumentTypes: ['DeIdBack', 'DeIdFront'],
+      // cameraOverlayColor: '#ff0000',
+      cancelButtonTitle: '_cancelBtn',
+      clearButtonTitle: '_clearBtn',
+      confidenceValue: '_confidence %d',
+      // detailsActionColor: '#ff0000',
+      // detailsBackgroundColor: '#ff0000',
+      // detailsPrimaryColor: '#ff0000',
+      fieldAddressTitle: '_address',
+      fieldBirthDateTitle: '_birthDate',
+      fieldBirthPlaceTitle: '_birthPlace',
+      // fieldConfidenceHighColor: '#ff0000',
+      // fieldConfidenceLowColor: '#ff0000',
+      // fieldConfidenceModerateColor: '#ff0000',
+      // fieldConfidenceTextColor: '#ff0000',
+      dePassportDocumentTitle: '_dePassportDocumentTitle',
+      deIdCardFrontDocumentTitle: '_deIdCardFrontDocumentTitle',
+      deIdCardBackDocumentTitle: '_deIdCardBackDocumentTitle',
+      fieldCountryCodeTitle: '_countryCode',
+      fieldExpiryDateTitle: '_expiryDate',
+      fieldEyeColorTitle: '_eyeColor',
+      fieldGivenNamesTitle: '_givenNames',
+      fieldHeightTitle: '_height',
+      fieldIDTitle: '_id',
+      fieldIssueDateTitle: '_issueDate',
+      fieldIssuingAuthorityTitle: '_issuingAuthority',
+      fieldMaidenNameTitle: '_name',
+      fieldMRZTitle: '_mrz',
+      fieldNationalityTitle: '_nationality',
+      fieldPassportTypeTitle: '_passportType',
+      fieldPhotoTitle: '_photo',
+      fieldPINTitle: '_pin',
+      fieldPseudonymTitle: '_pseudonym',
+      fieldsCountText: '_count %d',
+      // fieldsCountTextColor: '#ff0000',
+      fieldSignatureTitle: '_signature',
+      fieldSurnameTitle: '_surname',
+      // finderLineColor: '#ff0000',
+      finderLineWidth: 4,
+      flashEnabled: false,
+      imageTitle: '_image',
+      noDataTitle: '_noData',
+      scanBackSideTitle: '_scanBackSide',
+      scanFrontSideTitle: '_scanFrontSide',
+      scannedEverythingTitle: '_scannedEverything',
+      shouldSavePhotoImageInStorage: true,
+      shouldSaveSignatureImageInStorage: true,
+      startScanningTitle: '_startScanning',
+      viewResultsButtonTitle: '_viewResultsBtn',
+      // tipBackgroundColor: '#0000ff',
+      // tipTextColor: '#ff0000',
+      // topBarBackgroundColor: '#00ff00',
+      // topBarButtonsColor: '#ff0000',
+      // topBarButtonsInactiveColor: '#0000ff',
+      useButtonsAllCaps: true,
+      sharpnessAcceptanceFactor: 80,
+    };
 
     const result = await ScanbotSDK.UI.startIdCardScanner(config);
     if (result.status === 'OK') {

@@ -343,23 +343,23 @@ PODS:
     - TOCropViewController
   - RNReanimated (1.8.0):
     - React
-  - RNScanbotSDK (4.10.1-beta1):
+  - RNScanbotSDK (4.10.1-beta3):
     - React
-    - RNScanbotSDK/NONE (= 4.10.1-beta1)
-    - ScanbotSDK (= 1.20.0)
-  - RNScanbotSDK/ALL (4.10.1-beta1):
+    - RNScanbotSDK/NONE (= 4.10.1-beta3)
+    - ScanbotSDK (= 1.21.2)
+  - RNScanbotSDK/ALL (4.10.1-beta3):
     - React
-    - ScanbotSDK (= 1.20.0)
-    - ScanbotSDK/ALL (= 1.20.0)
-  - RNScanbotSDK/NONE (4.10.1-beta1):
+    - ScanbotSDK (= 1.21.2)
+    - ScanbotSDK/ALL (= 1.21.2)
+  - RNScanbotSDK/NONE (4.10.1-beta3):
     - React
-    - ScanbotSDK (= 1.20.0)
+    - ScanbotSDK (= 1.21.2)
   - RNScreens (2.7.0):
     - React
-  - ScanbotSDK (1.20.0):
-    - ScanbotSDK/NONE (= 1.20.0)
-  - ScanbotSDK/ALL (1.20.0)
-  - ScanbotSDK/NONE (1.20.0)
+  - ScanbotSDK (1.21.2):
+    - ScanbotSDK/NONE (= 1.21.2)
+  - ScanbotSDK/ALL (1.21.2)
+  - ScanbotSDK/NONE (1.21.2)
   - TOCropViewController (2.6.0)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -533,7 +533,7 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: e686045572151edef46010a6f819ade377dfeb4b
-  FBReactNativeSpec: e47525f68bfbc65d9186d21b02be01efbc655657
+  FBReactNativeSpec: 6c0eff9001d5b838c64e2527bff229989332c80b
   Flipper: d3da1aa199aad94455ae725e9f3aa43f3ec17021
   Flipper-DoubleConversion: 38631e41ef4f9b12861c67d17cb5518d06badc41
   Flipper-Folly: 755929a4f851b2fb2c347d533a23f191b008554c
@@ -577,13 +577,13 @@ SPEC CHECKSUMS:
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNImageCropPicker: 97289cd94fb01ab79db4e5c92938be4d0d63415d
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
-  RNScanbotSDK: 74254f73cb6bc47cae21298e23a8a54639b4a695
+  RNScanbotSDK: 93835a95ec2b9d435da54d8e5c6172c9d49f6463
   RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
-  ScanbotSDK: 383b1b4e15386a61a16f2bcab9fccb8adddda8fc
+  ScanbotSDK: 1ff91a1758c53664f88e5c22d78b88dfeaf2f4eb
   TOCropViewController: 3105367e808b7d3d886a74ff59bf4804e7d3ab38
   Yoga: 575c581c63e0d35c9a83f4b46d01d63abc1100ac
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
 PODFILE CHECKSUM: 44dde699b22e8680ff05573bb3beaef8bdfe2258
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.10.1

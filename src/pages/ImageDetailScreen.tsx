@@ -18,6 +18,7 @@ const options = [
   'NONE',
   'COLOR_ENHANCED',
   'GRAYSCALE',
+  'PURE_GRAYSCALE',
   'BINARIZED',
   'COLOR_DOCUMENT',
   'PURE_BINARIZED',
