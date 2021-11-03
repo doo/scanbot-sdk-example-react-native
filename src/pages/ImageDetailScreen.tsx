@@ -10,7 +10,6 @@ import {SDKUtils} from '../utils/SDKUtils';
 import {ViewUtils} from '../utils/ViewUtils';
 import {Colors} from '../model/Colors';
 import PreviewImage from '../ui/PreviewImage';
-import BackgroundTimer from 'react-native-background-timer';
 
 const CANCEL_INDEX = 0;
 
@@ -99,10 +98,6 @@ export class ImageDetailScreen extends BaseScreen {
       return;
     }
 
-    BackgroundTimer.runBackgroundTimer(() => {
-      ScanbotSDK.UI.closeCroppingScreen();
-    }, 5000);
-
     const result = await ScanbotSDK.UI.startCroppingScreen(
       Pages.selectedPage as Page,
       {
@@ -118,8 +113,6 @@ export class ImageDetailScreen extends BaseScreen {
         this.updateCurrentPage(result.page);
       }
     }
-
-    BackgroundTimer.stopBackgroundTimer();
   }
 
   updateCurrentPage(page: Page) {
