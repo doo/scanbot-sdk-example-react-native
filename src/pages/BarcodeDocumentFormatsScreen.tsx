@@ -1,29 +1,16 @@
 import React from 'react';
-import {
-  FlatList,
-  SafeAreaView,
-  Switch,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { FlatList, SafeAreaView, Switch, Text, TouchableOpacity, View } from 'react-native';
 
-import {BarcodeDocumentFormats} from '../model/BarcodeDocumentFormats';
-import {Styles} from '../model/Styles';
-import {BaseScreen} from '../utils/BaseScreen';
+import { BarcodeDocumentFormats } from '../model/BarcodeDocumentFormats';
+import { Styles } from '../model/Styles';
+import { BaseScreen } from '../utils/BaseScreen';
 
 export class BarcodeDocumentFormatsScreen extends BaseScreen {
-  constructor(props: any) {
-    super(props);
-  }
-
   render() {
     return (
       <SafeAreaView>
-        <View
-          style={Styles.INSTANCE.barcodeDocumentFormats.headerItemContainer}>
-          <View
-            style={Styles.INSTANCE.barcodeDocumentFormats.headerTextContainer}>
+        <View style={Styles.INSTANCE.barcodeDocumentFormats.headerItemContainer}>
+          <View style={Styles.INSTANCE.barcodeDocumentFormats.headerTextContainer}>
             <Text style={Styles.INSTANCE.barcodeDocumentFormats.headerItemText}>
               Enable Document Format Filters
             </Text>
@@ -31,7 +18,7 @@ export class BarcodeDocumentFormatsScreen extends BaseScreen {
           <Switch
             style={Styles.INSTANCE.barcodeDocumentFormats.headerItemSwitch}
             value={BarcodeDocumentFormats.isFilteringEnabled}
-            onValueChange={_ => {
+            onValueChange={() => {
               BarcodeDocumentFormats.isFilteringEnabled =
                 !BarcodeDocumentFormats.isFilteringEnabled;
               this.refresh();
@@ -41,23 +28,15 @@ export class BarcodeDocumentFormatsScreen extends BaseScreen {
         <FlatList
           style={Styles.INSTANCE.barcodeDocumentFormats.list}
           data={BarcodeDocumentFormats.list}
-          renderItem={({item}) => (
-            <TouchableOpacity
-              activeOpacity={0.6}
-              onPress={() => this.onListItemClick(item)}>
-              <View
-                style={
-                  Styles.INSTANCE.barcodeDocumentFormats.listItemContainer
-                }>
-                <Text
-                  style={Styles.INSTANCE.barcodeDocumentFormats.listItemText}>
-                  {item.key}
-                </Text>
+          renderItem={({ item }) => (
+            <TouchableOpacity activeOpacity={0.6} onPress={() => this.onListItemClick(item)}>
+              <View style={Styles.INSTANCE.barcodeDocumentFormats.listItemContainer}>
+                <Text style={Styles.INSTANCE.barcodeDocumentFormats.listItemText}>{item.key}</Text>
                 <Switch
                   style={Styles.INSTANCE.barcodeDocumentFormats.listItemSwitch}
                   value={item.value}
                   disabled={!BarcodeDocumentFormats.isFilteringEnabled}
-                  onValueChange={_ => {
+                  onValueChange={() => {
                     this.onListItemClick(item);
                   }}
                 />

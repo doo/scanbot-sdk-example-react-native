@@ -1,15 +1,19 @@
-import {Dimensions, StyleSheet} from 'react-native';
-import {Colors} from './Colors';
+import { Dimensions, StyleSheet } from 'react-native';
+import { Colors } from './Colors';
 
 export class Styles {
   public static INSTANCE = new Styles();
+
   WINDOW_WIDTH = 0;
+
   GALLERY_CELL_PADDING = 20;
 
   imageResults: any;
 
   public static NEAR_WHITE = 'rgb(250, 250, 250)';
+
   public static LIGHT_GRAY = 'rgb(245, 245, 245)';
+
   public static SCANBOT_RED = '#c8193c';
 
   public static ScanbotTheme = {

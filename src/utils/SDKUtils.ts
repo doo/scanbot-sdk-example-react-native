@@ -1,8 +1,6 @@
 import ScanbotSDK from 'react-native-scanbot-sdk';
-import {
-  CameraImageFormat,
-  FileEncryptionMode,
-} from 'react-native-scanbot-sdk/src/enum';
+import { CameraImageFormat, FileEncryptionMode } from 'react-native-scanbot-sdk/src/enum';
+import { Alert } from 'react-native';
 
 export class SDKUtils {
   /*
@@ -33,9 +31,8 @@ export class SDKUtils {
       // OK - we have a trial session, a valid trial license or valid production license.
       return true;
     }
-    // @ts-ignore
     // eslint-disable-next-line no-alert
-    alert('Scanbot SDK trial period or license has expired!', 500);
+    Alert.alert('Alert', 'Scanbot SDK trial period or license has expired!');
     return false;
   }
 }

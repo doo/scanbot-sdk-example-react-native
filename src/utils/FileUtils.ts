@@ -18,9 +18,9 @@ export class FileUtils {
       };
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
-        return {status: 'CANCELED'};
+        return { status: 'CANCELED' };
       } else {
-        return {status: 'ERROR', error: err};
+        return { status: 'ERROR', error: err };
       }
     }
   }

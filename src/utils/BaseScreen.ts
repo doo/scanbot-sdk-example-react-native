@@ -4,7 +4,6 @@ export class BaseScreen extends React.Component {
   constructor(props: any) {
     super(props);
 
-    // @ts-ignore
     this.props.navigation.addListener('focus', () => {
       this.onScreenFocused();
     });
@@ -17,7 +16,6 @@ export class BaseScreen extends React.Component {
   }
 
   public pushPage(name: string) {
-    // @ts-ignore
     this.props.navigation.push(name);
   }
 

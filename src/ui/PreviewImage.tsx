@@ -1,7 +1,7 @@
 import React from 'react';
-import {Image} from 'react-native';
-import ScanbotSDK, {Page} from 'react-native-scanbot-sdk/src';
-import {SDKUtils} from '../utils/SDKUtils';
+import { Image } from 'react-native';
+import ScanbotSDK, { Page } from 'react-native-scanbot-sdk/src';
+import { SDKUtils } from '../utils/SDKUtils';
 
 type PreviewImageProps = {
   page: Page;
@@ -13,11 +13,8 @@ export default function PreviewImage(props: PreviewImageProps) {
 
   React.useEffect(() => {
     const loadDecryptedImageData = async () => {
-      const result = await ScanbotSDK.getImageData(
-        props.page.documentPreviewImageFileUri!,
-      );
-      const imgMimeType =
-        SDKUtils.IMAGE_FILE_FORMAT === 'JPG' ? 'image/jpeg' : 'image/png';
+      const result = await ScanbotSDK.getImageData(props.page.documentPreviewImageFileUri!);
+      const imgMimeType = SDKUtils.IMAGE_FILE_FORMAT === 'JPG' ? 'image/jpeg' : 'image/png';
       setUri(`data:${imgMimeType};base64,${result.base64ImageData}`);
     };
 
@@ -30,5 +27,5 @@ export default function PreviewImage(props: PreviewImageProps) {
     }
   }, [props.page]);
 
-  return <Image source={{uri: uri}} style={props.style} />;
+  return <Image source={{ uri: uri }} style={props.style} />;
 }

@@ -1,26 +1,26 @@
 import React from 'react';
-import {Platform} from 'react-native';
+import { Platform } from 'react-native';
 
-import {createStackNavigator} from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 
-import {DocumentDirectoryPath, ExternalDirectoryPath} from 'react-native-fs';
+import { DocumentDirectoryPath, ExternalDirectoryPath } from 'react-native-fs';
 
-import {HomeScreen} from './pages/HomeScreen';
-import {ImageResultScreen} from './pages/ImageResultScreen';
-import {BarcodeFormatsScreen} from './pages/BarcodeFormatsScreen';
-import {BarcodeDocumentFormatsScreen} from './pages/BarcodeDocumentFormatsScreen';
-import {ImageDetailScreen} from './pages/ImageDetailScreen';
-import {Navigation} from './utils/Navigation';
-import {Styles} from './model/Styles';
-import ScanbotSDK, {InitializationOptions} from 'react-native-scanbot-sdk';
-import {SDKUtils} from './utils/SDKUtils';
-import {ViewUtils} from './utils/ViewUtils';
-import {BarcodeCameraViewScreen} from './pages/BarcodeCameraViewScreen';
+import { HomeScreen } from './pages/HomeScreen';
+import { ImageResultScreen } from './pages/ImageResultScreen';
+import { BarcodeFormatsScreen } from './pages/BarcodeFormatsScreen';
+import { BarcodeDocumentFormatsScreen } from './pages/BarcodeDocumentFormatsScreen';
+import { ImageDetailScreen } from './pages/ImageDetailScreen';
+import { Navigation } from './utils/Navigation';
+import { Styles } from './model/Styles';
+import ScanbotSDK, { InitializationOptions } from 'react-native-scanbot-sdk';
+import { SDKUtils } from './utils/SDKUtils';
+import { ViewUtils } from './utils/ViewUtils';
+import { BarcodeCameraViewScreen } from './pages/BarcodeCameraViewScreen';
 
 const Stack = createStackNavigator();
 
-export class App extends React.Component {
+class App extends React.Component {
   constructor(props: any) {
     super(props);
     this.initScanbotSdk();
@@ -44,9 +44,7 @@ export class App extends React.Component {
       console.log(result);
     } catch (e) {
       console.error('Error initializing Scanbot SDK:', e);
-      ViewUtils.showAlert(
-        'Error initializing Scanbot SDK:\n' + JSON.stringify(e),
-      );
+      ViewUtils.showAlert('Error initializing Scanbot SDK:\n' + JSON.stringify(e));
     }
   }
 
@@ -137,5 +135,4 @@ export class App extends React.Component {
   }
 }
 
-// @ts-ignore
 export default App;

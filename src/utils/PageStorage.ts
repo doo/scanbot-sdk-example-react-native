@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import {Page} from 'react-native-scanbot-sdk';
+import { Page } from 'react-native-scanbot-sdk';
 
 export class PageStorage {
   public static INSTANCE = new PageStorage();
@@ -41,6 +41,6 @@ export class PageStorage {
   }
 
   private async keys() {
-    return await AsyncStorage.getAllKeys();
+    return AsyncStorage.getAllKeys();
   }
 }

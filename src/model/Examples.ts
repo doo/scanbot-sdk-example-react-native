@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {Colors} from './Colors';
+import { StyleSheet } from 'react-native';
+import { Colors } from './Colors';
 
 export enum FeatureId {
   DocumentScanner = 1,
@@ -31,7 +31,7 @@ export class Examples {
     {
       title: 'DOCUMENT SCANNER',
       data: [
-        {id: FeatureId.DocumentScanner, title: 'Scan Document'},
+        { id: FeatureId.DocumentScanner, title: 'Scan Document' },
         {
           id: FeatureId.DetectDocumentFromPage,
           title: 'Import Image & Detect Document',
@@ -48,14 +48,14 @@ export class Examples {
           id: FeatureId.ExtractImagesFromPdf,
           title: 'Extract images from PDF',
         },
-        {id: FeatureId.ViewPages, title: 'View Image Results'},
+        { id: FeatureId.ViewPages, title: 'View Image Results' },
       ],
     },
     {
       title: 'BARCODE DETECTOR',
       data: [
-        {id: FeatureId.ScanBarcodes, title: 'Scan QR-/Barcode'},
-        {id: FeatureId.ScanBatchBarcodes, title: 'Scan Multiple QR-/Barcode'},
+        { id: FeatureId.ScanBarcodes, title: 'Scan QR-/Barcode' },
+        { id: FeatureId.ScanBatchBarcodes, title: 'Scan Multiple QR-/Barcode' },
         {
           id: FeatureId.DetectBarcodesOnStillImage,
           title: 'Import Image & Detect Barcodes',
@@ -77,10 +77,10 @@ export class Examples {
     {
       title: 'DATA DETECTORS',
       data: [
-        {id: FeatureId.ScanMRZ, title: 'Scan MRZ on ID Card'},
-        {id: FeatureId.ScanEHIC, title: 'Scan Health Insurance Card'},
-        {id: FeatureId.ScanIdCard, title: 'Scan Id Card'},
-        {id: FeatureId.ReadPassportNFC, title: 'Read Passport NFC'},
+        { id: FeatureId.ScanMRZ, title: 'Scan MRZ on ID Card' },
+        { id: FeatureId.ScanEHIC, title: 'Scan Health Insurance Card' },
+        { id: FeatureId.ScanIdCard, title: 'Scan Id Card' },
+        { id: FeatureId.ReadPassportNFC, title: 'Read Passport NFC' },
         {
           id: FeatureId.LicensePlateScannerML,
           title: 'Scan Vehicle License Plate (ML Based)',
@@ -89,14 +89,14 @@ export class Examples {
           id: FeatureId.LicensePlateScannerClassic,
           title: 'Scan Vehicle License Plate (Classic)',
         },
-        {id: FeatureId.TextDataScanner, title: 'Text Data Scanner'},
+        { id: FeatureId.TextDataScanner, title: 'Text Data Scanner' },
       ],
     },
     {
       title: 'MISCELLANEOUS',
       data: [
-        {id: FeatureId.LicenseInfo, title: 'View License Info'},
-        {id: FeatureId.OcrConfigs, title: 'View OCR Configs'},
+        { id: FeatureId.LicenseInfo, title: 'View License Info' },
+        { id: FeatureId.OcrConfigs, title: 'View OCR Configs' },
         {
           id: FeatureId.BarcodeCameraViewComponent,
           title: 'Barcode Camera View (EXPERIMENTAL)',

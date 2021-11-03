@@ -18,37 +18,33 @@ import ScanbotSDK, {
   NFCPassportReaderConfiguration,
 } from 'react-native-scanbot-sdk';
 
-import {Examples, FeatureId} from '../model/Examples';
-import {Styles} from '../model/Styles';
-import {ImageUtils} from '../utils/ImageUtils';
-import {SDKUtils} from '../utils/SDKUtils';
-import {Pages} from '../model/Pages';
-import {ViewUtils} from '../utils/ViewUtils';
-import {BarcodeFormats} from '../model/BarcodeFormats';
-import {BarcodeDocumentFormats} from '../model/BarcodeDocumentFormats';
-import {Navigation} from '../utils/Navigation';
-import {BaseScreen} from '../utils/BaseScreen';
-import {Colors} from '../model/Colors';
+import { Examples, FeatureId } from '../model/Examples';
+import { Styles } from '../model/Styles';
+import { ImageUtils } from '../utils/ImageUtils';
+import { SDKUtils } from '../utils/SDKUtils';
+import { Pages } from '../model/Pages';
+import { ViewUtils } from '../utils/ViewUtils';
+import { BarcodeFormats } from '../model/BarcodeFormats';
+import { BarcodeDocumentFormats } from '../model/BarcodeDocumentFormats';
+import { Navigation } from '../utils/Navigation';
+import { BaseScreen } from '../utils/BaseScreen';
+import { Colors } from '../model/Colors';
 import {
   BatchBarcodeScannerConfiguration,
   HealthInsuranceCardScannerConfiguration,
   IdCardScannerConfiguration,
 } from 'react-native-scanbot-sdk/src';
-import {PageStorage} from '../utils/PageStorage';
+import { PageStorage } from '../utils/PageStorage';
 
 import {
   LicensePlateScannerConfiguration,
   TextDataScannerConfiguration,
 } from 'react-native-scanbot-sdk/src/configuration';
 
-import {LicensePlateDetectorMode} from 'react-native-scanbot-sdk/src/enum';
-import {FileUtils} from '../utils/FileUtils';
+import { LicensePlateDetectorMode } from 'react-native-scanbot-sdk/src/enum';
+import { FileUtils } from '../utils/FileUtils';
 
 export class HomeScreen extends BaseScreen {
-  constructor(props: any) {
-    super(props);
-  }
-
   async componentDidMount(): Promise<void> {
     try {
       const loaded = await PageStorage.INSTANCE.load();
@@ -56,7 +52,7 @@ export class HomeScreen extends BaseScreen {
       if (loaded.length === 0) {
         return;
       }
-      const refreshed = await ScanbotSDK.refreshImageUris({pages: loaded});
+      const refreshed = await ScanbotSDK.refreshImageUris({ pages: loaded });
       await Pages.addList(refreshed.pages);
     } catch (e) {
       console.error('Error loading/refreshing pages: ' + JSON.stringify(e));
@@ -79,21 +75,20 @@ export class HomeScreen extends BaseScreen {
             style={Styles.INSTANCE.home.list}
             sections={Examples.list}
             keyExtractor={(item, index) => item.title + index}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <View style={Styles.INSTANCE.home.sectionItemContainer}>
                 <TouchableOpacity onPress={() => this.onListItemClick(item)}>
                   <Text
                     style={
-                      item.customStyle
-                        ? item.customStyle.content
-                        : Styles.INSTANCE.home.sectionItem
-                    }>
+                      item.customStyle ? item.customStyle.content : Styles.INSTANCE.home.sectionItem
+                    }
+                  >
                     {item.title}
                   </Text>
                 </TouchableOpacity>
               </View>
             )}
-            renderSectionHeader={({section: {title}}) => (
+            renderSectionHeader={({ section: { title } }) => (
               <Text style={Styles.INSTANCE.home.sectionHeader}>{title}</Text>
             )}
           />
@@ -246,10 +241,8 @@ export class HomeScreen extends BaseScreen {
     }
   }
 
-  async startLicensePlateScanner(
-    detectorMode: LicensePlateDetectorMode = 'ML_BASED',
-  ) {
-    let config: LicensePlateScannerConfiguration = {
+  async startLicensePlateScanner(detectorMode: LicensePlateDetectorMode = 'ML_BASED') {
+    const config: LicensePlateScannerConfiguration = {
       topBarBackgroundColor: Colors.SCANBOT_RED,
       detectorMode: detectorMode,
     };
@@ -354,7 +347,7 @@ export class HomeScreen extends BaseScreen {
     const config: BarcodeScannerConfiguration = {
       acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
-      finderAspectRatio: {width: 1, height: 1},
+      finderAspectRatio: { width: 1, height: 1 },
       useButtonsAllCaps: false,
       cameraZoomFactor: 0.7,
       // engineMode: "LEGACY"
@@ -369,9 +362,8 @@ export class HomeScreen extends BaseScreen {
     const config: BatchBarcodeScannerConfiguration = {
       acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
-      finderAspectRatio: {width: 2, height: 1},
+      finderAspectRatio: { width: 2, height: 1 },
       useButtonsAllCaps: false,
-      cameraZoomFactor: 1.0,
       // engineMode: "NEXT_GEN"
     };
     const result = await ScanbotSDK.UI.startBatchBarcodeScanner(config);
@@ -418,9 +410,7 @@ export class HomeScreen extends BaseScreen {
 
     if (pickerResult.error) {
       this.hideProgress();
-      ViewUtils.showAlert(
-        'Error picking image from gallery! ' + pickerResult.error,
-      );
+      ViewUtils.showAlert('Error picking image from gallery! ' + pickerResult.error);
       return;
     }
 
@@ -446,35 +436,32 @@ export class HomeScreen extends BaseScreen {
   }
 
   async startMRZScanner() {
-    let config: MrzScannerConfiguration = {
+    const config: MrzScannerConfiguration = {
       // Customize colors, text resources, etc..
       finderTextHint:
         'Please hold your phone over the 2- or 3-line MRZ code at the front of your passport.',
     };
 
     if (Platform.OS === 'ios') {
-      const {width} = Dimensions.get('window');
+      const { width } = Dimensions.get('window');
       config.finderWidth = width * 0.9;
       config.finderHeight = width * 0.18;
     }
 
     const result = await ScanbotSDK.UI.startMrzScanner(config);
     if (result.status === 'OK') {
-      const fields = result.fields.map(
-        f => `${f.name}: ${f.value} (${f.confidence.toFixed(2)})`,
-      );
+      const fields = result.fields.map(f => `${f.name}: ${f.value} (${f.confidence.toFixed(2)})`);
       ViewUtils.showAlert(fields.join('\n'));
     }
   }
+
   async startEHICScanner() {
     const config: HealthInsuranceCardScannerConfiguration = {
       finderLineColor: 'red',
     };
     const result = await ScanbotSDK.UI.startEHICScanner(config);
     if (result.status === 'OK') {
-      const fields = result.fields.map(
-        f => `${f.type}: ${f.value} (${f.confidence.toFixed(2)})`,
-      );
+      const fields = result.fields.map(f => `${f.type}: ${f.value} (${f.confidence.toFixed(2)})`);
       ViewUtils.showAlert(fields.join('\n'));
     }
   }

@@ -18,7 +18,7 @@ export class ImageUtils {
       mediaType: 'photo',
       quality: 1,
     };
-    return await new Promise<ImagePickerResponse>(resolve => {
+    return new Promise<ImagePickerResponse>(resolve => {
       launchImageLibrary(options, async response => {
         resolve(response);
       });
@@ -32,17 +32,15 @@ export class ImageUtils {
       maxFiles: 0,
     })
       .then(images => {
-        var uris: string[] = images
-          .filter(image => image && image.path)
-          .map(image => image.path);
-        var response: MultipleImagePickerResponse = {
+        const uris: string[] = images.filter(image => image && image.path).map(image => image.path);
+        const response: MultipleImagePickerResponse = {
           imagesUris: uris,
           isCanceled: false,
         };
         return response;
       })
       .catch(err => {
-        var response: MultipleImagePickerResponse = {
+        const response: MultipleImagePickerResponse = {
           imagesUris: [],
           isCanceled: err.code === 'E_PICKER_CANCELLED',
           error: err,

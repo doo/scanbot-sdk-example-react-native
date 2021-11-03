@@ -8,45 +8,40 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {BaseScreen} from '../utils/BaseScreen';
+import { BaseScreen } from '../utils/BaseScreen';
 
-import {Styles} from '../model/Styles';
-import {BarcodeFormats} from '../model/BarcodeFormats';
+import { Styles } from '../model/Styles';
+import { BarcodeFormats } from '../model/BarcodeFormats';
 
 import {
   ScanbotBarcodeCameraView,
   ScanbotBarcodeCameraViewConfiguration,
   ScanbotBarcodeCameraViewResult,
 } from 'react-native-scanbot-sdk';
-import {BarcodeDocumentFormats} from '../model/BarcodeDocumentFormats';
+import { BarcodeDocumentFormats } from '../model/BarcodeDocumentFormats';
 
-const defaultBarcodeCameraViewConfiguration: () => ScanbotBarcodeCameraViewConfiguration =
-  () => ({
-    shouldUseFinderView: true,
-    finderAspectRatio: {
-      width: 2,
-      height: 1,
-    },
-    finderLineWidth: 4,
-    finderVerticalOffset: 32,
-    finderMinimumPadding: 64,
-    finderBackgroundOpacity: 0.5,
-    barcodeFormats: BarcodeFormats.getAcceptedFormats(),
-    acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
-    msiPlesseyChecksumAlgorithm: 'Mod1010',
-    engineMode: 'LEGACY',
-    cameraZoomFactor: 0.2,
-    gs1DecodingEnabled: false,
-    minimumTextLength: 2,
-    maximumTextLength: 6,
-    flashEnabled: false,
-  });
+const defaultBarcodeCameraViewConfiguration: () => ScanbotBarcodeCameraViewConfiguration = () => ({
+  shouldUseFinderView: true,
+  finderAspectRatio: {
+    width: 2,
+    height: 1,
+  },
+  finderLineWidth: 4,
+  finderVerticalOffset: 32,
+  finderMinimumPadding: 64,
+  finderBackgroundOpacity: 0.5,
+  barcodeFormats: BarcodeFormats.getAcceptedFormats(),
+  acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
+  msiPlesseyChecksumAlgorithm: 'Mod1010',
+  engineMode: 'LEGACY',
+  cameraZoomFactor: 0.2,
+  gs1DecodingEnabled: false,
+  minimumTextLength: 2,
+  maximumTextLength: 6,
+  flashEnabled: false,
+});
 
 export class BarcodeCameraViewScreen extends BaseScreen {
-  constructor(props: any) {
-    super(props);
-  }
-
   get styles() {
     return StyleSheet.create({
       cameraView: {
@@ -131,8 +126,8 @@ export class BarcodeCameraViewScreen extends BaseScreen {
   };
 
   toggleFinderView() {
-    const {barcodeCameraViewConfiguration} = this.state;
-    let config = {...barcodeCameraViewConfiguration};
+    const { barcodeCameraViewConfiguration } = this.state;
+    const config = { ...barcodeCameraViewConfiguration };
     config.shouldUseFinderView = !config.shouldUseFinderView;
     this.setState({
       barcodeCameraViewConfiguration: config,
@@ -140,15 +135,15 @@ export class BarcodeCameraViewScreen extends BaseScreen {
   }
 
   toggleFlashLight() {
-    const {barcodeCameraViewConfiguration} = this.state;
-    let config = {...barcodeCameraViewConfiguration};
+    const { barcodeCameraViewConfiguration } = this.state;
+    const config = { ...barcodeCameraViewConfiguration };
     config.flashEnabled = !barcodeCameraViewConfiguration.flashEnabled;
-    this.setState({barcodeCameraViewConfiguration: config});
+    this.setState({ barcodeCameraViewConfiguration: config });
   }
 
   render() {
-    const {lastDetectedBarcode} = this.state;
-    const {barcodeCameraViewConfiguration} = this.state;
+    const { lastDetectedBarcode } = this.state;
+    const { barcodeCameraViewConfiguration } = this.state;
 
     return (
       <>
@@ -157,13 +152,10 @@ export class BarcodeCameraViewScreen extends BaseScreen {
             <ScanbotBarcodeCameraView
               style={this.styles.cameraView}
               configuration={barcodeCameraViewConfiguration}
-              onBarcodeScannerResult={(
-                result: ScanbotBarcodeCameraViewResult,
-              ) => {
+              onBarcodeScannerResult={(result: ScanbotBarcodeCameraViewResult) => {
                 if (result.barcodes.length > 0) {
                   const count = result.barcodes.length;
-                  const optionalText =
-                    count > 4 ? `\n(and ${count - 4} more)` : '';
+                  const optionalText = count > 4 ? `\n(and ${count - 4} more)` : '';
                   const text = result.barcodes
                     .map(barcode => `${barcode.text} (${barcode.type})`)
                     .join('\n');
@@ -180,13 +172,15 @@ export class BarcodeCameraViewScreen extends BaseScreen {
                 <TouchableOpacity
                   style={this.styles.button}
                   activeOpacity={0.6}
-                  onPress={this.toggleFinderView.bind(this)}>
+                  onPress={this.toggleFinderView.bind(this)}
+                >
                   <Image source={require('../assets/ic_finder_view.png')} />
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={this.styles.button}
                   activeOpacity={0.6}
-                  onPress={this.toggleFlashLight.bind(this)}>
+                  onPress={this.toggleFlashLight.bind(this)}
+                >
                   <Image
                     source={
                       barcodeCameraViewConfiguration.flashEnabled

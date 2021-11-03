@@ -1,24 +1,14 @@
 import React from 'react';
-import {
-  ActivityIndicator,
-  Modal,
-  SafeAreaView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import {Pages} from '../model/Pages';
-import ScanbotSDK, {
-  DocumentScannerConfiguration,
-  Page,
-} from 'react-native-scanbot-sdk/src';
-import {Styles} from '../model/Styles';
-import {SDKUtils} from '../utils/SDKUtils';
-import {ViewUtils} from '../utils/ViewUtils';
-import {Navigation} from '../utils/Navigation';
-import {BaseScreen} from '../utils/BaseScreen';
+import { ActivityIndicator, Modal, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { Pages } from '../model/Pages';
+import ScanbotSDK, { DocumentScannerConfiguration, Page } from 'react-native-scanbot-sdk/src';
+import { Styles } from '../model/Styles';
+import { SDKUtils } from '../utils/SDKUtils';
+import { ViewUtils } from '../utils/ViewUtils';
+import { Navigation } from '../utils/Navigation';
+import { BaseScreen } from '../utils/BaseScreen';
 import PreviewImage from '../ui/PreviewImage';
-import {ScrollView} from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export class ImageResultScreen extends BaseScreen {
   onScreenFocused() {
@@ -40,9 +30,7 @@ export class ImageResultScreen extends BaseScreen {
           <ScrollView style={Styles.INSTANCE.imageResults.scrollView}>
             <View style={Styles.INSTANCE.imageResults.gallery}>
               {Pages.getAllPages().map(page => (
-                <TouchableOpacity
-                  onPress={() => this.onGalleryItemClick(page)}
-                  key={page.pageId}>
+                <TouchableOpacity onPress={() => this.onGalleryItemClick(page)} key={page.pageId}>
                   <PreviewImage
                     page={page}
                     style={[
@@ -57,72 +45,57 @@ export class ImageResultScreen extends BaseScreen {
           <View style={Styles.INSTANCE.common.bottomBar}>
             <Text
               style={Styles.INSTANCE.common.bottomBarButton}
-              onPress={() => this.addButtonPress()}>
+              onPress={() => this.addButtonPress()}
+            >
               ADD
             </Text>
             <Text
               style={Styles.INSTANCE.common.bottomBarButton}
-              onPress={() => this.saveButtonPress()}>
+              onPress={() => this.saveButtonPress()}
+            >
               SAVE
             </Text>
             <Text
-              style={[
-                Styles.INSTANCE.common.bottomBarButton,
-                Styles.INSTANCE.common.alignRight,
-              ]}
-              onPress={() => this.deleteAllButtonPress()}>
+              style={[Styles.INSTANCE.common.bottomBarButton, Styles.INSTANCE.common.alignRight]}
+              onPress={() => this.deleteAllButtonPress()}
+            >
               DELETE ALL
             </Text>
           </View>
         </SafeAreaView>
 
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={this.modalVisible}>
+        <Modal animationType="slide" transparent={true} visible={this.modalVisible}>
           <View style={Styles.INSTANCE.modal.centeredView}>
             <View style={Styles.INSTANCE.modal.modalView}>
-              <Text style={Styles.INSTANCE.modal.text}>
-                How would you like to save the pages?
-              </Text>
+              <Text style={Styles.INSTANCE.modal.text}>How would you like to save the pages?</Text>
               <Text
-                style={[
-                  Styles.INSTANCE.modal.button,
-                  Styles.INSTANCE.modal.actionButton,
-                ]}
-                onPress={() => this.onSaveAsPDF()}>
+                style={[Styles.INSTANCE.modal.button, Styles.INSTANCE.modal.actionButton]}
+                onPress={() => this.onSaveAsPDF()}
+              >
                 PDF
               </Text>
               <Text
-                style={[
-                  Styles.INSTANCE.modal.button,
-                  Styles.INSTANCE.modal.actionButton,
-                ]}
-                onPress={() => this.onSaveAsPDFWithOCR()}>
+                style={[Styles.INSTANCE.modal.button, Styles.INSTANCE.modal.actionButton]}
+                onPress={() => this.onSaveAsPDFWithOCR()}
+              >
                 PDF with OCR
               </Text>
               <Text
-                style={[
-                  Styles.INSTANCE.modal.button,
-                  Styles.INSTANCE.modal.actionButton,
-                ]}
-                onPress={() => this.onSaveAsTIFF(true)}>
+                style={[Styles.INSTANCE.modal.button, Styles.INSTANCE.modal.actionButton]}
+                onPress={() => this.onSaveAsTIFF(true)}
+              >
                 TIFF (1-bit B&W)
               </Text>
               <Text
-                style={[
-                  Styles.INSTANCE.modal.button,
-                  Styles.INSTANCE.modal.actionButton,
-                ]}
-                onPress={() => this.onSaveAsTIFF(false)}>
+                style={[Styles.INSTANCE.modal.button, Styles.INSTANCE.modal.actionButton]}
+                onPress={() => this.onSaveAsTIFF(false)}
+              >
                 TIFF (color)
               </Text>
               <Text
-                style={[
-                  Styles.INSTANCE.modal.button,
-                  Styles.INSTANCE.modal.closeButton,
-                ]}
-                onPress={() => this.onModalClose()}>
+                style={[Styles.INSTANCE.modal.button, Styles.INSTANCE.modal.closeButton]}
+                onPress={() => this.onModalClose()}
+              >
                 Cancel
               </Text>
             </View>
@@ -151,11 +124,10 @@ export class ImageResultScreen extends BaseScreen {
       this.refresh();
     }
   }
+
   saveButtonPress() {
     if (Pages.isEmpty()) {
-      ViewUtils.showAlert(
-        'You have no images to save. Please scan a few documents first.',
-      );
+      ViewUtils.showAlert('You have no images to save. Please scan a few documents first.');
     }
     this.modalVisible = true;
     this.refresh();
@@ -174,7 +146,6 @@ export class ImageResultScreen extends BaseScreen {
 
   private onGalleryItemClick(page: Page) {
     Pages.selectedPage = page;
-    // @ts-ignore
     this.props.navigation.push(Navigation.IMAGE_DETAILS);
   }
 
@@ -190,10 +161,7 @@ export class ImageResultScreen extends BaseScreen {
     }
     try {
       this.showProgress();
-      const result = await ScanbotSDK.createPDF(
-        Pages.getImageUris(),
-        'FIXED_A4',
-      );
+      const result = await ScanbotSDK.createPDF(Pages.getImageUris(), 'FIXED_A4');
       ViewUtils.showAlert('PDF file created: ' + result.pdfFileUri);
     } catch (e) {
       ViewUtils.showAlert('ERROR: ' + JSON.stringify(e));
@@ -229,7 +197,7 @@ export class ImageResultScreen extends BaseScreen {
       // TODO encryption for TIFF files currently not supported
       ViewUtils.showAlert(
         'Encryption for TIFF files currently not supported. ' +
-          'In order to test TIFF please disable image file encryption.',
+          'In order to test TIFF please disable image file encryption.'
       );
       return;
     }

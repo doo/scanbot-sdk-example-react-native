@@ -1,8 +1,9 @@
-import {Page} from 'react-native-scanbot-sdk/src';
-import {PageStorage} from '../utils/PageStorage';
+import { Page } from 'react-native-scanbot-sdk/src';
+import { PageStorage } from '../utils/PageStorage';
 
 export class Pages {
   private static list: Page[] = [];
+
   public static selectedPage?: Page;
 
   static getAllPages() {
@@ -24,7 +25,7 @@ export class Pages {
   }
 
   static async update(page: Page) {
-    let index: number = -1;
+    let index = -1;
     for (let i = 0; i < Pages.list.length; i++) {
       if (Pages.list[i].pageId === page.pageId) {
         index = i;
@@ -55,8 +56,6 @@ export class Pages {
   }
 
   static getImageUris(): string[] {
-    return Pages.list.map(
-      p => p.documentImageFileUri || p.originalImageFileUri,
-    );
+    return Pages.list.map(p => p.documentImageFileUri || p.originalImageFileUri);
   }
 }

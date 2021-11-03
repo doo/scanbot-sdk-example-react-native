@@ -1,6 +1,9 @@
 module.exports = {
-  root: true,
-  extends: ['@react-native-community', 'plugin:react-hooks/recommended'],
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
+  extends: ['@doo/eslint-config/react'],
+  parserOptions: {
+    project: './tsconfig.json',
+  },
+  rules: {
+    '@typescript-eslint/no-var-requires': 0,
+  },
 };
