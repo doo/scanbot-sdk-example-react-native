@@ -356,7 +356,7 @@ export class HomeScreen extends BaseScreen {
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
       finderAspectRatio: {width: 1, height: 1},
       useButtonsAllCaps: false,
-      cameraZoomFactor: 0.7,
+      // cameraZoomFactor: 0.7,
       // engineMode: "LEGACY"
     };
 
@@ -372,7 +372,7 @@ export class HomeScreen extends BaseScreen {
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
       finderAspectRatio: {width: 2, height: 1},
       useButtonsAllCaps: false,
-      cameraZoomFactor: 1.0,
+      // cameraZoomFactor: 1.0,
       // engineMode: "NEXT_GEN"
     };
 
