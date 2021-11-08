@@ -165,7 +165,7 @@ export class HomeScreen extends BaseScreen {
         this.startEHICScanner();
         break;
       case FeatureId.ScanIdCard:
-        this.startIdCardCScanner();
+        this.startIdCardScanner();
         break;
       case FeatureId.ReadPassportNFC:
         this.startNFCReader();
@@ -356,9 +356,10 @@ export class HomeScreen extends BaseScreen {
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
       finderAspectRatio: {width: 1, height: 1},
       useButtonsAllCaps: false,
-      cameraZoomFactor: 0.7,
+      // cameraZoomFactor: 0.7,
       // engineMode: "LEGACY"
     };
+
     const result = await ScanbotSDK.UI.startBarcodeScanner(config);
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result.barcodes));
@@ -371,9 +372,10 @@ export class HomeScreen extends BaseScreen {
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
       finderAspectRatio: {width: 2, height: 1},
       useButtonsAllCaps: false,
-      cameraZoomFactor: 1.0,
+      // cameraZoomFactor: 1.0,
       // engineMode: "NEXT_GEN"
     };
+
     const result = await ScanbotSDK.UI.startBatchBarcodeScanner(config);
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result.barcodes));
@@ -465,11 +467,13 @@ export class HomeScreen extends BaseScreen {
       );
       ViewUtils.showAlert(fields.join('\n'));
     }
+
   }
   async startEHICScanner() {
     const config: HealthInsuranceCardScannerConfiguration = {
       finderLineColor: 'red',
     };
+
     const result = await ScanbotSDK.UI.startEHICScanner(config);
     if (result.status === 'OK') {
       const fields = result.fields.map(
@@ -479,8 +483,16 @@ export class HomeScreen extends BaseScreen {
     }
   }
 
-  async startIdCardCScanner() {
-    const config: IdCardScannerConfiguration = {};
+  async startIdCardScanner() {
+    const config: IdCardScannerConfiguration = {
+      acceptedDocumentTypes: ['DeIdBack', 'DeIdFront'],
+      shouldSavePhotoImageInStorage: true,
+      shouldSaveSignatureImageInStorage: true,
+      startScanningTitle: 'Start Scanning!',
+      viewResultsButtonTitle: 'Confirm',
+      topBarBackgroundColor: Colors.SCANBOT_RED,
+    };
+
     const result = await ScanbotSDK.UI.startIdCardScanner(config);
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result));
@@ -489,6 +501,7 @@ export class HomeScreen extends BaseScreen {
 
   async startNFCReader() {
     const config: NFCPassportReaderConfiguration = {};
+
     const result = await ScanbotSDK.UI.startNFCPassportReader(config);
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result));

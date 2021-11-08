@@ -17,6 +17,7 @@ const options = [
   'NONE',
   'COLOR_ENHANCED',
   'GRAYSCALE',
+  'PURE_GRAYSCALE',
   'BINARIZED',
   'COLOR_DOCUMENT',
   'PURE_BINARIZED',
@@ -96,6 +97,7 @@ export class ImageDetailScreen extends BaseScreen {
     if (!(await SDKUtils.checkLicense())) {
       return;
     }
+
     const result = await ScanbotSDK.UI.startCroppingScreen(
       Pages.selectedPage as Page,
       {

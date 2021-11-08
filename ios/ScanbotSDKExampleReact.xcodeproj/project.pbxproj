@@ -21,6 +21,8 @@
 		6A9C0A441F47041DE6524AD3 /* libPods-ScanbotSDKExampleReact-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF7EC67AE8BF853608F1FC52 /* libPods-ScanbotSDKExampleReact-tvOS.a */; };
 		76C696E2406303BE10AC9C5E /* libPods-ScanbotSDKExampleReact-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D3152F75613885E8DE75D85 /* libPods-ScanbotSDKExampleReact-tvOSTests.a */; };
 		90196A9A14CBC13401C05F96 /* libPods-ScanbotSDKExampleReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3297DDF2E9BB9C8C317749F9 /* libPods-ScanbotSDKExampleReact.a */; };
+		CD125AF727357459006CA675 /* _SwiftPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD125AF627357459006CA675 /* _SwiftPlaceholder.swift */; };
+		CD125AF827357459006CA675 /* _SwiftPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD125AF627357459006CA675 /* _SwiftPlaceholder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,7 @@
 		99C149B9BBCC0B4FEF56F1F9 /* Pods-ScanbotSDKExampleReact.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScanbotSDKExampleReact.release.xcconfig"; path = "Target Support Files/Pods-ScanbotSDKExampleReact/Pods-ScanbotSDKExampleReact.release.xcconfig"; sourceTree = "<group>"; };
 		9D3152F75613885E8DE75D85 /* libPods-ScanbotSDKExampleReact-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ScanbotSDKExampleReact-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2EE30E75C75D3F41AE67278 /* Pods-ScanbotSDKExampleReact-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScanbotSDKExampleReact-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-ScanbotSDKExampleReact-tvOS/Pods-ScanbotSDKExampleReact-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		CD125AF627357459006CA675 /* _SwiftPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _SwiftPlaceholder.swift; sourceTree = "<group>"; };
 		D9B5ADA143E646D052C4D2F0 /* Pods-ScanbotSDKExampleReact-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScanbotSDKExampleReact-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-ScanbotSDKExampleReact-tvOSTests/Pods-ScanbotSDKExampleReact-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -135,6 +138,7 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				CD125AF627357459006CA675 /* _SwiftPlaceholder.swift */,
 			);
 			name = ScanbotSDKExampleReact;
 			sourceTree = "<group>";
@@ -298,11 +302,11 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = FRUPYT6KB3;
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1250;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 1250;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E48F1E0B4A5D006451C7 = {
@@ -381,7 +385,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		2A8FB33AE27263282739AF9F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -632,6 +636,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				CD125AF727357459006CA675 /* _SwiftPlaceholder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,6 +646,7 @@
 			files = (
 				2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */,
 				2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */,
+				CD125AF827357459006CA675 /* _SwiftPlaceholder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -672,6 +678,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 24E66A6334BFBAB24B237659 /* Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -695,6 +702,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7352453E8EC90565B1390BE9 /* Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = ScanbotSDKExampleReactTests/Info.plist;
@@ -719,7 +727,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ScanbotSDKExampleReact/ScanbotSDKExampleReact.entitlements;
 				CURRENT_PROJECT_VERSION = 7;
-				DEVELOPMENT_TEAM = FRUPYT6KB3;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -749,7 +757,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ScanbotSDKExampleReact/ScanbotSDKExampleReact.entitlements;
 				CURRENT_PROJECT_VERSION = 7;
-				DEVELOPMENT_TEAM = FRUPYT6KB3;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = ScanbotSDKExampleReact/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -773,6 +781,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -789,6 +798,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.ScanbotSDKExampleReact-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
@@ -801,6 +812,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -817,6 +829,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.ScanbotSDKExampleReact-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
@@ -826,6 +839,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 732090984E257A69A7A6E35E /* Pods-ScanbotSDKExampleReact-tvOSTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -853,6 +867,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D9B5ADA143E646D052C4D2F0 /* Pods-ScanbotSDKExampleReact-tvOSTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
