@@ -38,11 +38,14 @@ import {PageStorage} from '../utils/PageStorage';
 
 import {
   LicensePlateScannerConfiguration,
+  MedicalCertificateScannerConfiguration,
   TextDataScannerConfiguration,
 } from 'react-native-scanbot-sdk/src/configuration';
 
 import {LicensePlateDetectorMode} from 'react-native-scanbot-sdk/src/enum';
 import {FileUtils} from '../utils/FileUtils';
+import { MedicalCertificateStandardSize } from 'react-native-scanbot-sdk/src/model';
+import { MedicalCertificateScannerResult } from 'react-native-scanbot-sdk/src/result';
 
 export class HomeScreen extends BaseScreen {
   constructor(props: any) {
@@ -160,6 +163,9 @@ export class HomeScreen extends BaseScreen {
         break;
       case FeatureId.ScanMRZ:
         this.startMRZScanner();
+        break;
+      case FeatureId.ScanMedicalCertificate:
+        this.startMedicalCertificateScanner();
         break;
       case FeatureId.ScanEHIC:
         this.startEHICScanner();
@@ -447,6 +453,23 @@ export class HomeScreen extends BaseScreen {
     this.pushPage(Navigation.BARCODE_DOCUMENT_FORMATS);
   }
 
+  async startMedicalCertificateScanner() {
+    let config: MedicalCertificateScannerConfiguration = {
+      topBarBackgroundColor: Colors.SCANBOT_RED,
+      footerTitle: 'Scan your Medical Certificate',
+      footerSubtitle: 'ScanbotSDK Demo',
+      // aspectRatios: [
+      //   MedicalCertificateStandardSize.A5_PORTRAIT,
+      //   MedicalCertificateStandardSize.A6_LANDSCAPE,
+      // ],
+    };
+    const result: MedicalCertificateScannerResult =
+      await ScanbotSDK.UI.startMedicalCertificateScanner(config);
+
+    ViewUtils.showAlert(JSON.stringify(result));
+    console.log(JSON.stringify(result, undefined, 4));
+  }
+
   async startMRZScanner() {
     let config: MrzScannerConfiguration = {
       // Customize colors, text resources, etc..
@@ -467,8 +490,8 @@ export class HomeScreen extends BaseScreen {
       );
       ViewUtils.showAlert(fields.join('\n'));
     }
-
   }
+
   async startEHICScanner() {
     const config: HealthInsuranceCardScannerConfiguration = {
       finderLineColor: 'red',
