@@ -15,6 +15,7 @@ export enum FeatureId {
   BarcodeFormatsFilter,
   BarcodeDocumentFormatsFilter,
   ScanMRZ,
+  ScanMedicalCertificate,
   ScanEHIC,
   ScanIdCard,
   ReadPassportNFC,
@@ -78,6 +79,10 @@ export class Examples {
       title: 'DATA DETECTORS',
       data: [
         {id: FeatureId.ScanMRZ, title: 'Scan MRZ on ID Card'},
+        {
+          id: FeatureId.ScanMedicalCertificate,
+          title: 'Scan Medical Certificate',
+        },
         {id: FeatureId.ScanEHIC, title: 'Scan Health Insurance Card'},
         {id: FeatureId.ScanIdCard, title: 'Scan Id Card'},
         {id: FeatureId.ReadPassportNFC, title: 'Read Passport NFC'},
