@@ -17,6 +17,7 @@ import ScanbotSDK, {InitializationOptions} from 'react-native-scanbot-sdk';
 import {SDKUtils} from './utils/SDKUtils';
 import {ViewUtils} from './utils/ViewUtils';
 import {BarcodeCameraViewScreen} from './pages/BarcodeCameraViewScreen';
+import {MedicalCertificateResultsScreen} from './pages/MedicalCertificateResultsScreen';
 
 const Stack = createStackNavigator();
 
@@ -96,6 +97,11 @@ export class App extends React.Component {
           <Stack.Screen
             name={Navigation.IMAGE_RESULTS}
             component={ImageResultScreen}
+            options={sharedHeaderProps}
+          />
+          <Stack.Screen
+            name={Navigation.MEDICAL_CERTIFICATE_RESULTS}
+            component={MedicalCertificateResultsScreen}
             options={sharedHeaderProps}
           />
           <Stack.Screen
