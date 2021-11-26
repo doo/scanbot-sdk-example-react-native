@@ -466,7 +466,9 @@ export class HomeScreen extends BaseScreen {
     const result: MedicalCertificateScannerResult =
       await ScanbotSDK.UI.startMedicalCertificateScanner(config);
 
-    ViewUtils.showAlert(JSON.stringify(result));
+    Pages.lastMedicalCertificate = result.data;
+    this.pushPage(Navigation.MEDICAL_CERTIFICATE_RESULTS);
+
     console.log(JSON.stringify(result, undefined, 4));
   }
 

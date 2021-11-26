@@ -1,9 +1,11 @@
 import {Page} from 'react-native-scanbot-sdk/src';
+import {MedicalCertificateScannerResultData} from 'react-native-scanbot-sdk/src/result';
 import {PageStorage} from '../utils/PageStorage';
 
 export class Pages {
   private static list: Page[] = [];
   public static selectedPage?: Page;
+  public static lastMedicalCertificate?: MedicalCertificateScannerResultData;
 
   static getAllPages() {
     return Pages.list;
