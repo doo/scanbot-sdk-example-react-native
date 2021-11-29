@@ -44,8 +44,9 @@ import {
 
 import {LicensePlateDetectorMode} from 'react-native-scanbot-sdk/src/enum';
 import {FileUtils} from '../utils/FileUtils';
-import { MedicalCertificateStandardSize } from 'react-native-scanbot-sdk/src/model';
-import { MedicalCertificateScannerResult } from 'react-native-scanbot-sdk/src/result';
+// import {MedicalCertificateStandardSize} from 'react-native-scanbot-sdk/src/model';
+import {MedicalCertificateScannerResult} from 'react-native-scanbot-sdk/src/result';
+import {Results} from '../model/Results';
 
 export class HomeScreen extends BaseScreen {
   constructor(props: any) {
@@ -466,7 +467,7 @@ export class HomeScreen extends BaseScreen {
     const result: MedicalCertificateScannerResult =
       await ScanbotSDK.UI.startMedicalCertificateScanner(config);
 
-    Pages.lastMedicalCertificate = result.data;
+    Results.lastMedicalCertificate = result.data;
     this.pushPage(Navigation.MEDICAL_CERTIFICATE_RESULTS);
 
     console.log(JSON.stringify(result, undefined, 4));
