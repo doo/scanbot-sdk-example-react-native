@@ -1,25 +1,14 @@
 import React from 'react';
+import {SectionList, StyleSheet, Text, View} from 'react-native';
 import {
-  ImageResizeMode,
-  SafeAreaView,
-  ScrollView,
-  SectionList,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import {MedicalCertificateCheckboxField, MedicalCertificateDateField} from 'react-native-scanbot-sdk/src/model';
+  MedicalCertificateCheckboxField,
+  MedicalCertificateDateField,
+} from 'react-native-scanbot-sdk/src/model';
 import {MedicalCertificateScannerResultData} from 'react-native-scanbot-sdk/src/result';
 import {Colors} from '../model/Colors';
 import {Results} from '../model/Results';
 import PreviewImage from '../ui/PreviewImage';
 import {BaseScreen} from '../utils/BaseScreen';
-
-const keyValueDescription = (dict: any): string => {
-  return Object.keys(dict)
-    .flatMap(key => `${key}: ${JSON.stringify(dict[key])}`)
-    .join('\n');
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -180,7 +169,11 @@ export class MedicalCertificateResultsScreen extends BaseScreen {
               {title: 'Checkboxes', data: getCheckboxesData(certificate)},
             ]}
             renderItem={({item}) => {
-              const pair: {key: string; value: string} = JSON.parse(item);
+              const jsonItem = item;
+              if (!jsonItem) {
+                return null;
+              }
+              const pair: {key: string; value: string} = JSON.parse(jsonItem);
               if (pair.key === 'page') {
                 return (
                   <PreviewImage
@@ -203,24 +196,6 @@ export class MedicalCertificateResultsScreen extends BaseScreen {
             )}
             keyExtractor={(item, index) => '' + index}
           />
-          {/* <ScrollView>
-            <PreviewImage
-              page={Results.lastMedicalCertificate!.capturedPage!}
-              style={styles.image}
-            />
-            <Text style={styles.headerText}>Patient Data</Text>
-            <Text style={styles.fieldsText}>
-              {keyValueDescription(Results.lastMedicalCertificate?.patientData)}
-            </Text>
-            <Text style={styles.headerText}>Dates</Text>
-            <Text style={styles.fieldsText}>
-              {keyValueDescription(Results.lastMedicalCertificate?.dates)}
-            </Text>
-            <Text style={styles.headerText}>Checkboxes</Text>
-            <Text style={styles.fieldsText}>
-              {keyValueDescription(Results.lastMedicalCertificate?.checkboxes)}
-            </Text>
-          </ScrollView> */}
         </View>
       </>
     );
