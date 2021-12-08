@@ -17,10 +17,11 @@ export class FileUtils {
         fileUrl: res.uri,
       };
     } catch (err) {
-      if (DocumentPicker.isCancel(err)) {
+      const error = err as Error & {code?: string | undefined};
+      if (DocumentPicker.isCancel(error)) {
         return {status: 'CANCELED'};
       } else {
-        return {status: 'ERROR', error: err};
+        return {status: 'ERROR', error: error.code};
       }
     }
   }
