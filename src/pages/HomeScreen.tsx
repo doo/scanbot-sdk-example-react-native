@@ -206,7 +206,7 @@ export class HomeScreen extends BaseScreen {
       bottomBarBackgroundColor: Colors.SCANBOT_RED,
       topBarBackgroundColor: Colors.SCANBOT_RED,
       cameraBackgroundColor: Colors.SCANBOT_RED,
-      orientationLockMode: 'PORTRAIT',
+      interfaceOrientation: 'PORTRAIT',
       pageCounterButtonTitle: '%d Page(s)',
       multiPageEnabled: true,
       ignoreBadAspectRatio: true,
