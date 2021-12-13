@@ -2,6 +2,7 @@ import ScanbotSDK from 'react-native-scanbot-sdk';
 import {
   CameraImageFormat,
   FileEncryptionMode,
+  LicenseStatus,
 } from 'react-native-scanbot-sdk/src/enum';
 
 export class SDKUtils {
@@ -35,7 +36,26 @@ export class SDKUtils {
     }
     // @ts-ignore
     // eslint-disable-next-line no-alert
-    alert('Scanbot SDK trial period or license has expired!', 500);
+    alert(this.errorStringFromLicenseStatus(info.licenseStatus), 500);
     return false;
+  }
+
+  private static errorStringFromLicenseStatus(status: LicenseStatus) {
+    switch (status) {
+      case 'AppIDMismatch':
+        return 'The App ID does not match the license key App ID';
+      case 'Corrupted':
+        return 'The license key seems to be corrupted';
+      case 'Expired':
+        return 'The license key has expired!';
+      case 'NotSet':
+        return 'The license key has not been set';
+      case 'Trial':
+        return 'The trial period has ended';
+      case 'WrongOS':
+        return 'The license key does not support the current platform';
+      default:
+        return "Scanbot SDK: there's a problem with the license";
+    }
   }
 }

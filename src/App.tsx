@@ -43,11 +43,9 @@ export class App extends React.Component {
     try {
       const result = await ScanbotSDK.initializeSDK(options);
       console.log(result);
-    } catch (e) {
-      console.error('Error initializing Scanbot SDK:', e);
-      ViewUtils.showAlert(
-        'Error initializing Scanbot SDK:\n' + JSON.stringify(e),
-      );
+    } catch (e: any) {
+      console.error('Error initializing Scanbot SDK:', e.message);
+      ViewUtils.showAlert('Error initializing Scanbot SDK:\n' + e.message);
     }
   }
 
