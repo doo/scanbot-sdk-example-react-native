@@ -38,11 +38,15 @@ import {PageStorage} from '../utils/PageStorage';
 
 import {
   LicensePlateScannerConfiguration,
+  MedicalCertificateScannerConfiguration,
   TextDataScannerConfiguration,
 } from 'react-native-scanbot-sdk/src/configuration';
 
 import {LicensePlateDetectorMode} from 'react-native-scanbot-sdk/src/enum';
 import {FileUtils} from '../utils/FileUtils';
+// import {MedicalCertificateStandardSize} from 'react-native-scanbot-sdk/src/model';
+import {MedicalCertificateScannerResult} from 'react-native-scanbot-sdk/src/result';
+import {Results} from '../model/Results';
 
 export class HomeScreen extends BaseScreen {
   constructor(props: any) {
@@ -113,7 +117,12 @@ export class HomeScreen extends BaseScreen {
 
     if (item.id === FeatureId.LicenseInfo) {
       const info = await ScanbotSDK.getLicenseInfo();
-      ViewUtils.showAlert(JSON.stringify(info));
+      const dateStr = info.licenseExpirationDate;
+      let text =
+        '• The license is ' + (info.isLicenseValid ? 'VALID' : 'NOT VALID');
+      text += '\n\n• Expiration Date: ' + (dateStr ? new Date(dateStr) : 'N/A');
+      text += '\n\n• Status: ' + info.licenseStatus;
+      ViewUtils.showAlert(text);
       return;
     }
 
@@ -161,6 +170,9 @@ export class HomeScreen extends BaseScreen {
       case FeatureId.ScanMRZ:
         this.startMRZScanner();
         break;
+      case FeatureId.ScanMedicalCertificate:
+        this.startMedicalCertificateScanner();
+        break;
       case FeatureId.ScanEHIC:
         this.startEHICScanner();
         break;
@@ -199,7 +211,7 @@ export class HomeScreen extends BaseScreen {
       bottomBarBackgroundColor: Colors.SCANBOT_RED,
       topBarBackgroundColor: Colors.SCANBOT_RED,
       cameraBackgroundColor: Colors.SCANBOT_RED,
-      orientationLockMode: 'PORTRAIT',
+      interfaceOrientation: 'PORTRAIT',
       pageCounterButtonTitle: '%d Page(s)',
       multiPageEnabled: true,
       ignoreBadAspectRatio: true,
@@ -447,6 +459,29 @@ export class HomeScreen extends BaseScreen {
     this.pushPage(Navigation.BARCODE_DOCUMENT_FORMATS);
   }
 
+  async startMedicalCertificateScanner() {
+    let config: MedicalCertificateScannerConfiguration = {
+      topBarBackgroundColor: Colors.SCANBOT_RED,
+      footerTitle: 'Scan your Medical Certificate',
+      footerSubtitle: 'ScanbotSDK Demo',
+      // aspectRatios: [
+      //   MedicalCertificateStandardSize.A5_PORTRAIT,
+      //   MedicalCertificateStandardSize.A6_LANDSCAPE,
+      // ],
+    };
+    const result: MedicalCertificateScannerResult =
+      await ScanbotSDK.UI.startMedicalCertificateScanner(config);
+
+    if (result.status !== 'OK') {
+      return;
+    }
+
+    Results.lastMedicalCertificate = result.data;
+    this.pushPage(Navigation.MEDICAL_CERTIFICATE_RESULTS);
+
+    console.log(JSON.stringify(result, undefined, 4));
+  }
+
   async startMRZScanner() {
     let config: MrzScannerConfiguration = {
       // Customize colors, text resources, etc..
@@ -467,8 +502,8 @@ export class HomeScreen extends BaseScreen {
       );
       ViewUtils.showAlert(fields.join('\n'));
     }
-
   }
+
   async startEHICScanner() {
     const config: HealthInsuranceCardScannerConfiguration = {
       finderLineColor: 'red',

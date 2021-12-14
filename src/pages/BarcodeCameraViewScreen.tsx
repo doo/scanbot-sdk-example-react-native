@@ -36,7 +36,7 @@ const defaultBarcodeCameraViewConfiguration: () => ScanbotBarcodeCameraViewConfi
     msiPlesseyChecksumAlgorithm: 'Mod1010',
     engineMode: 'LEGACY',
     cameraZoomFactor: 0.2,
-    gs1DecodingEnabled: false,
+    gs1DecodingEnabled: true,
     minimumTextLength: 2,
     maximumTextLength: 6,
     flashEnabled: false,

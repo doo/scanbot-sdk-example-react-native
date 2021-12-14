@@ -17,6 +17,7 @@ import ScanbotSDK, {InitializationOptions} from 'react-native-scanbot-sdk';
 import {SDKUtils} from './utils/SDKUtils';
 import {ViewUtils} from './utils/ViewUtils';
 import {BarcodeCameraViewScreen} from './pages/BarcodeCameraViewScreen';
+import {MedicalCertificateResultsScreen} from './pages/MedicalCertificateResultsScreen';
 
 const Stack = createStackNavigator();
 
@@ -42,11 +43,9 @@ export class App extends React.Component {
     try {
       const result = await ScanbotSDK.initializeSDK(options);
       console.log(result);
-    } catch (e) {
-      console.error('Error initializing Scanbot SDK:', e);
-      ViewUtils.showAlert(
-        'Error initializing Scanbot SDK:\n' + JSON.stringify(e),
-      );
+    } catch (e: any) {
+      console.error('Error initializing Scanbot SDK:', e.message);
+      ViewUtils.showAlert('Error initializing Scanbot SDK:\n' + e.message);
     }
   }
 
@@ -96,6 +95,11 @@ export class App extends React.Component {
           <Stack.Screen
             name={Navigation.IMAGE_RESULTS}
             component={ImageResultScreen}
+            options={sharedHeaderProps}
+          />
+          <Stack.Screen
+            name={Navigation.MEDICAL_CERTIFICATE_RESULTS}
+            component={MedicalCertificateResultsScreen}
             options={sharedHeaderProps}
           />
           <Stack.Screen
