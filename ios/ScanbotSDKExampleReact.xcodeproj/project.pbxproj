@@ -474,8 +474,9 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ScanbotSDK/ScanbotSDK.framework/ScanbotSDK",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ScanbotSDK/ALL/ScanbotSDK.framework/ScanbotSDK",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ScanbotSDK/NONE/ScanbotSDK.framework/ScanbotSDK",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -546,8 +547,9 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact/Pods-ScanbotSDKExampleReact-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ScanbotSDK/ScanbotSDK.framework/ScanbotSDK",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ScanbotSDK/ALL/ScanbotSDK.framework/ScanbotSDK",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ScanbotSDK/NONE/ScanbotSDK.framework/ScanbotSDK",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
