@@ -506,7 +506,7 @@ export class HomeScreen extends BaseScreen {
 
   async startEHICScanner() {
     const config: HealthInsuranceCardScannerConfiguration = {
-      finderLineColor: 'red',
+      finderLineColor: '#ff0000',
     };
 
     const result = await ScanbotSDK.UI.startEHICScanner(config);

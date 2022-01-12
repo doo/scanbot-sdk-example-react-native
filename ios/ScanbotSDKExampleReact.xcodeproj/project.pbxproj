@@ -474,8 +474,9 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ScanbotSDK/ScanbotSDK.framework/ScanbotSDK",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ScanbotSDK/ALL/ScanbotSDK.framework/ScanbotSDK",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ScanbotSDK/NONE/ScanbotSDK.framework/ScanbotSDK",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -546,8 +547,9 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact/Pods-ScanbotSDKExampleReact-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ScanbotSDK/ScanbotSDK.framework/ScanbotSDK",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ScanbotSDK/ALL/ScanbotSDK.framework/ScanbotSDK",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ScanbotSDK/NONE/ScanbotSDK.framework/ScanbotSDK",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -680,6 +682,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -705,6 +708,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ScanbotSDKExampleReactTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -786,6 +790,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "ScanbotSDKExampleReact-tvOS/Info.plist";
@@ -818,6 +823,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 4T9M6S8ANZ;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "ScanbotSDKExampleReact-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -846,6 +852,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "ScanbotSDKExampleReact-tvOSTests/Info.plist";
@@ -875,6 +882,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "ScanbotSDKExampleReact-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
