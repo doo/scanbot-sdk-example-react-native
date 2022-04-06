@@ -7,7 +7,7 @@ export class BarcodeDocumentFormats {
     {key: 'AAMVA', value: true},
     {key: 'BOARDING_PASS', value: true},
     {key: 'DE_MEDICAL_PLAN', value: true},
-    {key: 'DISABILITY_CERTIFICATE', value: true},
+    {key: 'MEDICAL_CERTIFICATE', value: true},
     {key: 'ID_CARD_PDF_417', value: true},
     {key: 'SEPA', value: true},
     {key: 'SWISS_QR', value: true},
