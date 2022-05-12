@@ -122,10 +122,13 @@ const getCheckboxesData = (
     renewedCertificate: 'Renewed Certificate',
     workAccident: 'Work Accident',
     assignedToAccidentInsuranceDoctor: 'Assigned to Accident Insurance Doctor',
-    accident: 'Accident?',
-    requiresCare: 'Child requires care?',
+    accident: 'Accident box checked Yes?',
+    accidentNo: 'Accident box checked No?',
+    requiresCare: 'Child requires care checked Yes?',
+    requiresCareNo: 'Child requires care checked No?',
     insuredPayCase: 'Insurance company has to pay?',
     finalCertificate: 'The certificate is final?',
+    otherAccident: 'Other Accident?',
   } as any;
 
   return Object.keys(checkboxes).flatMap(key => {
