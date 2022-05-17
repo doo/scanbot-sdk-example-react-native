@@ -44,7 +44,7 @@ export class ImageResultScreen extends BaseScreen {
                   onPress={() => this.onGalleryItemClick(page)}
                   key={page.pageId}>
                   <PreviewImage
-                    page={page}
+                    imageUri={page.documentPreviewImageFileUri}
                     style={[
                       Styles.INSTANCE.imageResults.galleryCell,
                       Styles.INSTANCE.common.containImage,
