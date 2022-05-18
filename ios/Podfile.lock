@@ -343,12 +343,12 @@ PODS:
     - TOCropViewController
   - RNReanimated (1.8.0):
     - React
-  - RNScanbotSDK/ALL (4.12.0-beta2):
+  - RNScanbotSDK/ALL (4.13.0-beta2):
     - React
-    - ScanbotSDK/ALL (= 1.25.1)
+    - ScanbotSDK/ALL (= 1.26.2)
   - RNScreens (2.7.0):
     - React
-  - ScanbotSDK/ALL (1.25.1)
+  - ScanbotSDK/ALL (1.26.2)
   - TOCropViewController (2.6.1)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -521,7 +521,7 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: e686045572151edef46010a6f819ade377dfeb4b
-  FBReactNativeSpec: 6c0eff9001d5b838c64e2527bff229989332c80b
+  FBReactNativeSpec: e47525f68bfbc65d9186d21b02be01efbc655657
   Flipper: d3da1aa199aad94455ae725e9f3aa43f3ec17021
   Flipper-DoubleConversion: 38631e41ef4f9b12861c67d17cb5518d06badc41
   Flipper-Folly: 755929a4f851b2fb2c347d533a23f191b008554c
@@ -565,13 +565,13 @@ SPEC CHECKSUMS:
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNImageCropPicker: 73891a709e6fd8a47d32104d942757971f220aee
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
-  RNScanbotSDK: c88e60e482baf66f7116075fd251323bf9d6febd
+  RNScanbotSDK: 53a85431df75b457544ad3434c012927d755aea7
   RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
-  ScanbotSDK: d0e1131b5961a73322d88d2b469962fc005b76c8
+  ScanbotSDK: 4a74bed1c7c129baa5c84d62e4cfc52bbb825298
   TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
   Yoga: 575c581c63e0d35c9a83f4b46d01d63abc1100ac
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
 PODFILE CHECKSUM: a80f446114737f8c597aac544d3a936f9c428142
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

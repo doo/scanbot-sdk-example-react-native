@@ -105,6 +105,7 @@ export class ImageDetailScreen extends BaseScreen {
         topBarBackgroundColor: Colors.SCANBOT_RED,
         bottomBarBackgroundColor: Colors.SCANBOT_RED,
         interfaceOrientation: 'ALL',
+        topAndBottomButtonsSwapped: false,
         // See further config properties ...
       },
     );
