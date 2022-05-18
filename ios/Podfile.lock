@@ -343,7 +343,7 @@ PODS:
     - TOCropViewController
   - RNReanimated (1.8.0):
     - React
-  - RNScanbotSDK/ALL (4.13.0-beta2):
+  - RNScanbotSDK/ALL (4.13.0-beta4):
     - React
     - ScanbotSDK/ALL (= 1.26.2)
   - RNScreens (2.7.0):
@@ -565,7 +565,7 @@ SPEC CHECKSUMS:
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNImageCropPicker: 73891a709e6fd8a47d32104d942757971f220aee
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
-  RNScanbotSDK: 53a85431df75b457544ad3434c012927d755aea7
+  RNScanbotSDK: 0ae5bc535591eeac7657b285cdc90450b035ac48
   RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
   ScanbotSDK: 4a74bed1c7c129baa5c84d62e4cfc52bbb825298
   TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
@@ -574,4 +574,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: a80f446114737f8c597aac544d3a936f9c428142
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3
