@@ -341,18 +341,20 @@ export class HomeScreen extends BaseScreen {
     const result = await ImageUtils.pickFromGallery();
     this.showProgress();
 
-    if (result.didCancel) {
+    if (result.didCancel || !result.assets) {
       this.hideProgress();
       return;
     }
 
-    if (!result.uri) {
+    const pickedImage = result.assets[0];
+
+    if (!pickedImage.uri) {
       this.hideProgress();
       ViewUtils.showAlert('Error picking image from gallery!');
       return;
     }
 
-    let page = await ScanbotSDK.createPage(result.uri);
+    let page = await ScanbotSDK.createPage(pickedImage.uri);
     page = await ScanbotSDK.detectDocumentOnPage(page);
     await Pages.add(page);
     this.hideProgress();
@@ -396,15 +398,17 @@ export class HomeScreen extends BaseScreen {
   }
 
   async importImageAndDetectBarcodes() {
-    this.showProgress();
     const pickerResult = await ImageUtils.pickFromGallery();
+    this.showProgress();
 
-    if (pickerResult.didCancel) {
+    if (pickerResult.didCancel || !pickerResult.assets) {
       this.hideProgress();
       return;
     }
 
-    if (!pickerResult || !pickerResult.uri) {
+    const pickedImage = pickerResult.assets[0];
+
+    if (!pickedImage.uri) {
       this.hideProgress();
       ViewUtils.showAlert('Error picking image from gallery!');
       return;
@@ -412,7 +416,7 @@ export class HomeScreen extends BaseScreen {
 
     const result = await ScanbotSDK.detectBarcodesOnImage({
       acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
-      imageFileUri: pickerResult.uri,
+      imageFileUri: pickedImage.uri,
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
       stripCheckDigits: true,
     });
@@ -545,25 +549,24 @@ export class HomeScreen extends BaseScreen {
   }
 
   async detectDocumentFromFile() {
+    const pickerResult = await ImageUtils.pickFromGallery();
     this.showProgress();
 
-    const pickerResult = await ImageUtils.pickFromGallery();
-
-    if (pickerResult.didCancel) {
+    if (pickerResult.didCancel || !pickerResult.assets) {
       this.hideProgress();
       return;
     }
 
-    if (!pickerResult || !pickerResult.uri) {
+    const pickedImage = pickerResult.assets[0];
+
+    if (!pickedImage.uri) {
       this.hideProgress();
       ViewUtils.showAlert('Error picking image from gallery!');
       return;
     }
 
-    const imageFileUri = pickerResult.uri;
-
     try {
-      const result = await ScanbotSDK.detectDocument(imageFileUri);
+      const result = await ScanbotSDK.detectDocument(pickedImage.uri);
       ViewUtils.showAlert(JSON.stringify(result));
     } catch (_err) {}
 
