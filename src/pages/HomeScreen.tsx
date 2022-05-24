@@ -467,12 +467,21 @@ export class HomeScreen extends BaseScreen {
   async startMedicalCertificateScanner() {
     let config: MedicalCertificateScannerConfiguration = {
       topBarBackgroundColor: Colors.SCANBOT_RED,
-      footerTitle: 'Scan your Medical Certificate',
-      footerSubtitle: 'ScanbotSDK Demo',
-      // aspectRatios: [
-      //   MedicalCertificateStandardSize.A5_PORTRAIT,
-      //   MedicalCertificateStandardSize.A6_LANDSCAPE,
-      // ],
+      guidanceText: {
+        capturing: 'capturing',
+        recognizing: 'recognizing',
+        searching: 'searching',
+        scanning: 'scanning',
+        paused: 'paused',
+        energySaving: 'energySaving',
+      },
+      errorDialogText: {
+        button: 'button text',
+        title: 'error title',
+        message: 'error message',
+      },
+      cancelButtonHidden: false,
+      extractPatientInfo: true,
     };
     const result: MedicalCertificateScannerResult =
       await ScanbotSDK.UI.startMedicalCertificateScanner(config);
