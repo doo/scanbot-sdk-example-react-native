@@ -1,14 +1,14 @@
 import React from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
-import {Pages} from '../model/Pages';
-import {Styles} from '../model/Styles';
-import ScanbotSDK, {Page} from 'react-native-scanbot-sdk/src';
-import {BaseScreen} from '../utils/BaseScreen';
+import { SafeAreaView, Text, View } from 'react-native';
+import { Pages } from '../model/Pages';
+import { Styles } from '../model/Styles';
+import ScanbotSDK, { Page } from 'react-native-scanbot-sdk/src';
+import { BaseScreen } from '../utils/BaseScreen';
 // @ts-ignore
-import {ActionSheetCustom as ActionSheet} from 'react-native-custom-actionsheet';
-import {SDKUtils} from '../utils/SDKUtils';
-import {ViewUtils} from '../utils/ViewUtils';
-import {Colors} from '../model/Colors';
+import { ActionSheetCustom as ActionSheet } from 'react-native-custom-actionsheet';
+import { SDKUtils } from '../utils/SDKUtils';
+import { ViewUtils } from '../utils/ViewUtils';
+import { Colors } from '../model/Colors';
 import PreviewImage from '../ui/PreviewImage';
 
 const CANCEL_INDEX = 0;
@@ -36,11 +36,11 @@ export class ImageDetailScreen extends BaseScreen {
   }
 
   actionSheet: any;
-  state = {selected: ''};
+  state = { selected: '' };
   getActionSheetRef = (ref: any) => (this.actionSheet = ref);
 
   handlePress = async (index: number) => {
-    this.setState({selected: index});
+    this.setState({ selected: index });
     const filter = options[index];
     const updated = await ScanbotSDK.applyImageFilterOnPage(
       Pages.selectedPage as Page,
@@ -55,7 +55,7 @@ export class ImageDetailScreen extends BaseScreen {
       <>
         <SafeAreaView />
         <PreviewImage
-          page={Pages.selectedPage as Page}
+          imageUri={Pages?.selectedPage?.documentPreviewImageFileUri}
           style={[
             Styles.INSTANCE.imageDetails.image,
             Styles.INSTANCE.common.containImage,
@@ -105,6 +105,7 @@ export class ImageDetailScreen extends BaseScreen {
         topBarBackgroundColor: Colors.SCANBOT_RED,
         bottomBarBackgroundColor: Colors.SCANBOT_RED,
         interfaceOrientation: 'ALL',
+        topAndBottomButtonsSwapped: false,
         // See further config properties ...
       },
     );

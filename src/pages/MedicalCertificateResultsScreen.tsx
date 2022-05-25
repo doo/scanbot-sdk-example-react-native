@@ -1,14 +1,14 @@
 import React from 'react';
-import {SectionList, StyleSheet, Text, View} from 'react-native';
+import { SectionList, StyleSheet, Text, View } from 'react-native';
 import {
   MedicalCertificateCheckboxField,
   MedicalCertificateDateField,
 } from 'react-native-scanbot-sdk/src/model';
-import {MedicalCertificateScannerResultData} from 'react-native-scanbot-sdk/src/result';
-import {Colors} from '../model/Colors';
-import {Results} from '../model/Results';
+import { MedicalCertificateScannerResultData } from 'react-native-scanbot-sdk/src/result';
+import { Colors } from '../model/Colors';
+import { Results } from '../model/Results';
 import PreviewImage from '../ui/PreviewImage';
-import {BaseScreen} from '../utils/BaseScreen';
+import { BaseScreen } from '../utils/BaseScreen';
 
 const styles = StyleSheet.create({
   container: {
@@ -58,17 +58,17 @@ const getPatientData = (certificate: MedicalCertificateScannerResultData) => {
   }
 
   const fields = [
-    {key: 'firstName', display: 'First Name'},
-    {key: 'lastName', display: 'Last Name'},
-    {key: 'insuranceProvider', display: 'Insurance Provider'},
-    {key: 'address1', display: 'Address #1'},
-    {key: 'address2', display: 'Address #2'},
-    {key: 'diagnose', display: 'Diagnose'},
-    {key: 'healthInsuranceNumber', display: 'Health Insurance Number'},
-    {key: 'insuredPersonNumber', display: 'Insured Person Number'},
-    {key: 'status', display: 'Status'},
-    {key: 'placeOfOperationNumber', display: 'Place of Operation Number'},
-    {key: 'doctorNumber', display: "Doctor's number"},
+    { key: 'firstName', display: 'First Name' },
+    { key: 'lastName', display: 'Last Name' },
+    { key: 'insuranceProvider', display: 'Insurance Provider' },
+    { key: 'address1', display: 'Address #1' },
+    { key: 'address2', display: 'Address #2' },
+    { key: 'diagnose', display: 'Diagnose' },
+    { key: 'healthInsuranceNumber', display: 'Health Insurance Number' },
+    { key: 'insuredPersonNumber', display: 'Insured Person Number' },
+    { key: 'status', display: 'Status' },
+    { key: 'placeOfOperationNumber', display: 'Place of Operation Number' },
+    { key: 'doctorNumber', display: "Doctor's number" },
   ];
 
   return fields
@@ -79,7 +79,7 @@ const getPatientData = (certificate: MedicalCertificateScannerResultData) => {
         return undefined;
       }
       const value: string = dict[key];
-      return JSON.stringify({key: item.display, value: value});
+      return JSON.stringify({ key: item.display, value: value });
     })
     .filter(item => item);
 };
@@ -122,10 +122,13 @@ const getCheckboxesData = (
     renewedCertificate: 'Renewed Certificate',
     workAccident: 'Work Accident',
     assignedToAccidentInsuranceDoctor: 'Assigned to Accident Insurance Doctor',
-    accident: 'Accident?',
-    requiresCare: 'Child requires care?',
+    accident: 'Accident box checked Yes?',
+    accidentNo: 'Accident box checked No?',
+    requiresCare: 'Child requires care checked Yes?',
+    requiresCareNo: 'Child requires care checked No?',
     insuredPayCase: 'Insurance company has to pay?',
     finalCertificate: 'The certificate is final?',
+    otherAccident: 'Other Accident?',
   } as any;
 
   return Object.keys(checkboxes).flatMap(key => {
@@ -146,7 +149,7 @@ export class MedicalCertificateResultsScreen extends BaseScreen {
 
     const B = (props: any) => (
       // eslint-disable-next-line react-native/no-inline-styles
-      <Text style={{fontWeight: 'bold'}}>{props.children}</Text>
+      <Text style={{ fontWeight: 'bold' }}>{props.children}</Text>
     );
     return (
       <>
@@ -156,28 +159,28 @@ export class MedicalCertificateResultsScreen extends BaseScreen {
             bounces={false}
             sections={[
               {
-                title: 'Snapped Page',
+                title: 'Snapped Image',
                 data: [
                   JSON.stringify({
-                    key: 'page',
+                    key: 'imageFileUri',
                     value: '',
                   }),
                 ],
               },
-              {title: 'Patient Data', data: getPatientData(certificate)},
-              {title: 'Dates', data: getDatesData(certificate)},
-              {title: 'Checkboxes', data: getCheckboxesData(certificate)},
+              { title: 'Patient Data', data: getPatientData(certificate) },
+              { title: 'Dates', data: getDatesData(certificate) },
+              { title: 'Checkboxes', data: getCheckboxesData(certificate) },
             ]}
-            renderItem={({item}) => {
+            renderItem={({ item }) => {
               const jsonItem = item;
               if (!jsonItem) {
                 return null;
               }
-              const pair: {key: string; value: string} = JSON.parse(jsonItem);
-              if (pair.key === 'page') {
+              const pair: { key: string; value: string } = JSON.parse(jsonItem);
+              if (pair.key === 'imageFileUri') {
                 return (
                   <PreviewImage
-                    page={certificate.capturedPage!}
+                    imageUri={certificate.imageFileUri}
                     style={styles.image}
                   />
                 );
@@ -191,7 +194,7 @@ export class MedicalCertificateResultsScreen extends BaseScreen {
                 </>
               );
             }}
-            renderSectionHeader={({section}) => (
+            renderSectionHeader={({ section }) => (
               <Text style={styles.sectionHeader}>{section.title}</Text>
             )}
             keyExtractor={(item, index) => '' + index}
