@@ -471,7 +471,7 @@ export class HomeScreen extends BaseScreen {
         capturing: 'capturing',
         recognizing: 'recognizing',
         searching: 'searching',
-        scanning: 'scanning',
+        scanningStarted: 'scanning Started',
         paused: 'paused',
         energySaving: 'energySaving',
       },
