@@ -2,7 +2,7 @@
 
 ## Scanbot SDK example app for React Native
 
-This example app demonstrates how to integrate the Scanbot SDK React Native Module.
+This example app demonstrates how to integrate the [Scanbot Document Scanner SDK for React Native](https://scanbot.io/developer/react-native-document-scanner/).
 
 The Scanbot SDK React Native Module is available as an [npm package](https://www.npmjs.com/package/react-native-scanbot-sdk).
 
