@@ -233,6 +233,7 @@ export class HomeScreen extends BaseScreen {
       topBarBackgroundColor: Colors.SCANBOT_RED,
       guidanceText: 'Place the LC display in the frame to scan it',
       textFilterStrategy: 'DOCUMENT',
+      allowedSymbols: ["m", "a"]
     };
 
     // eg.
