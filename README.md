@@ -18,7 +18,7 @@ For more details visit our website https://scanbot.io
 
 
 
-## How to run this app
+## How to run this app. 
 
 Make sure you have the latest versions of [React Native CLI](https://facebook.github.io/react-native/)
 and [CocoaPods](https://cocoapods.org/) installed.
