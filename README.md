@@ -30,7 +30,7 @@ cd scanbot-sdk-example-react-native/
 npm install
 ```
 
-### Run on Android
+### Run on Android. 
 
 ```
 react-native run-android
