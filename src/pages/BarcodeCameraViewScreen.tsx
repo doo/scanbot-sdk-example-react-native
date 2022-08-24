@@ -28,7 +28,7 @@ const defaultBarcodeCameraViewConfiguration: () => ScanbotBarcodeCameraViewConfi
       height: 1,
     },
     finderLineWidth: 4,
-    finderVerticalOffset: 32,
+    finderVerticalOffset: 0,
     finderMinimumPadding: 64,
     finderBackgroundOpacity: 0.5,
     barcodeFormats: BarcodeFormats.getAcceptedFormats(),

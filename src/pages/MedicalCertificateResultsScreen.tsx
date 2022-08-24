@@ -129,6 +129,13 @@ const getCheckboxesData = (
     insuredPayCase: 'Insurance company has to pay?',
     finalCertificate: 'The certificate is final?',
     otherAccident: 'Other Accident?',
+    patientInfo: 'Patient info',
+    entitlementToContinuedPayment: 'Entitlement to continued payment Yes?',
+    entitlementToContinuedPaymentNo: 'Entitlement to continued payment No?',
+    sickPayWasClaimedNo: 'Sick pay was claimed  No?',
+    sickPayWasClaimedYes: 'Sick pay was claimed Yes?',
+    singleParentNo: 'Single parent No?',
+    singleParentYes: 'Single parent Yes?',
   } as any;
 
   return Object.keys(checkboxes).flatMap(key => {
