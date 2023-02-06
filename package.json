@@ -16,7 +16,7 @@
     "@react-navigation/stack": "5.3.7",
     "install": "0.13.0",
     "react": "17.0.1",
-    "react-native": "0.64.2",
+    "react-native": "0.64.4",
     "react-native-background-timer": "^2.4.1",
     "react-native-clean-project": "^3.6.4",
     "react-native-custom-actionsheet": "github:Nikituh/react-native-custom-actionsheet",
@@ -28,7 +28,7 @@
     "react-native-reanimated": "1.8.0",
     "react-native-safe-area-context": "1.0.0",
     "react-native-safe-area-view": "1.1.1",
-    "react-native-scanbot-sdk": "4.13.0",
+    "react-native-scanbot-sdk": "4.13.2-beta6",
     "react-native-screens": "2.7.0",
     "react-navigation-stack": "2.5.1"
   },
