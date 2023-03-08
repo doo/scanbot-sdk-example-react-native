@@ -1,4 +1,4 @@
-Open Source libraries used in the Scanbot SDK for React Native version 4.13.0
+Open Source libraries used in the Scanbot SDK for React Native version 4.14.0
 
 QuickJS - Android
 
