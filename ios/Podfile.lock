@@ -343,12 +343,17 @@ PODS:
     - TOCropViewController
   - RNReanimated (1.8.0):
     - React
-  - RNScanbotSDK/ALL (4.14.0):
+  - RNScanbotSDK (4.15.1-alpha.6):
     - React
-    - ScanbotSDK/ALL (= 1.26.2)
+    - ScanbotSDK (= 2.0.0)
+    - ScanbotSDKNativeWrapper (= 2.0.0.0-alpha1)
   - RNScreens (2.7.0):
     - React
-  - ScanbotSDK/ALL (1.26.2)
+  - ScanbotSDK (2.0.0):
+    - ScanbotSDK/NONE (= 2.0.0)
+  - ScanbotSDK/NONE (2.0.0)
+  - ScanbotSDKNativeWrapper (2.0.0.0-alpha1):
+    - ScanbotSDK (= 2.0.0)
   - TOCropViewController (2.6.1)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -413,7 +418,7 @@ DEPENDENCIES:
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
-  - RNScanbotSDK/ALL (from `../node_modules/react-native-scanbot-sdk`)
+  - RNScanbotSDK (from `../node_modules/react-native-scanbot-sdk`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -431,6 +436,7 @@ SPEC REPOS:
     - libevent
     - OpenSSL-Universal
     - ScanbotSDK
+    - ScanbotSDKNativeWrapper
     - TOCropViewController
     - YogaKit
 
@@ -565,13 +571,14 @@ SPEC CHECKSUMS:
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNImageCropPicker: 73891a709e6fd8a47d32104d942757971f220aee
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
-  RNScanbotSDK: fb581eb3aef6df0fab05ff477ccd04c693035006
+  RNScanbotSDK: 99d40ec3d7ff1a58d2a26a6f2896e3b55b98fac7
   RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
-  ScanbotSDK: 4a74bed1c7c129baa5c84d62e4cfc52bbb825298
+  ScanbotSDK: 2f69748df723f4af3254b880a26381583afbe13e
+  ScanbotSDKNativeWrapper: 07e711b4af4f1bf686d217e2a41877b3f1904f9c
   TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
   Yoga: d1fc3575b8b68891ff5ef3c276daa855e841eb32
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: a80f446114737f8c597aac544d3a936f9c428142
+PODFILE CHECKSUM: 2031a637c953a28a29226f2a5838be66fe77d56b
 
 COCOAPODS: 1.11.3

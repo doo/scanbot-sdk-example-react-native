@@ -16,10 +16,4 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "ScanbotSDKExampleReact";
   }
-
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    ScanbotSDKReactNative.initializeUiModule(this);
-  }
 }
