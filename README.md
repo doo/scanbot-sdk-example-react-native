@@ -9,13 +9,18 @@ The Scanbot SDK React Native Module is available as an [npm package](https://www
 For more details please see this [documentation](https://docs.scanbot.io/document-scanner-sdk/react-native/introduction/).
 
 
-
 ## What is Scanbot SDK?
 
 The Scanbot SDK brings scanning and document creation capabilities to your mobile apps.
 It contains modules which are individually licensable as license packages.
 For more details visit our website https://scanbot.io
 
+
+## Free Developer Support
+
+We provide free "no-strings-attached" developer support for the implementation & testing of the Scanbot SDK.
+If you encounter technical issues with integrating the Scanbot SDK or need advice on choosing the appropriate
+framework or features, please visit our [Support Page](https://docs.scanbot.io/support/).
 
 
 ## How to run this app
