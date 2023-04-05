@@ -1,6 +1,6 @@
 # Scanbot Barcode & Document Scanning Example App for React Native
 
-This example app shows how to integrate the [Scanbot Barcode Scanner SDK](https://scanbot.io/developer/android-barcode-scanner/), [Scanbot Document Scanner SDK](https://scanbot.io/developer/android-document-scanner-sdk/), and [Scanbot Data Capture SDK](https://scanbot.io/developer/android-data-capture/) for React Native.
+This example app shows how to integrate the [Scanbot Barcode Scanner SDK](https://scanbot.io/developer/react-native-barcode-scanner/), [Scanbot Document Scanner SDK](https://scanbot.io/developer/react-native-document-scanner/), and [Scanbot Data Capture SDK](https://scanbot.io/developer/react-native-data-capture/) for React Native.
 
 The Scanbot SDK React Native Module is available as an [npm package](https://www.npmjs.com/package/react-native-scanbot-sdk).
 
