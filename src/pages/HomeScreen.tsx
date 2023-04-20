@@ -18,23 +18,23 @@ import ScanbotSDK, {
   NFCPassportReaderConfiguration,
 } from 'react-native-scanbot-sdk';
 
-import {Examples, FeatureId} from '../model/Examples';
-import {Styles} from '../model/Styles';
-import {ImageUtils} from '../utils/ImageUtils';
-import {SDKUtils} from '../utils/SDKUtils';
-import {Pages} from '../model/Pages';
-import {ViewUtils} from '../utils/ViewUtils';
-import {BarcodeFormats} from '../model/BarcodeFormats';
-import {BarcodeDocumentFormats} from '../model/BarcodeDocumentFormats';
-import {Navigation} from '../utils/Navigation';
-import {BaseScreen} from '../utils/BaseScreen';
-import {Colors} from '../model/Colors';
+import { Examples, FeatureId } from '../model/Examples';
+import { Styles } from '../model/Styles';
+import { ImageUtils } from '../utils/ImageUtils';
+import { SDKUtils } from '../utils/SDKUtils';
+import { Pages } from '../model/Pages';
+import { ViewUtils } from '../utils/ViewUtils';
+import { BarcodeFormats } from '../model/BarcodeFormats';
+import { BarcodeDocumentFormats } from '../model/BarcodeDocumentFormats';
+import { Navigation } from '../utils/Navigation';
+import { BaseScreen } from '../utils/BaseScreen';
+import { Colors } from '../model/Colors';
 import {
   BatchBarcodeScannerConfiguration,
   HealthInsuranceCardScannerConfiguration,
   IdCardScannerConfiguration,
 } from 'react-native-scanbot-sdk/src';
-import {PageStorage} from '../utils/PageStorage';
+import { PageStorage } from '../utils/PageStorage';
 
 import {
   LicensePlateScannerConfiguration,
@@ -42,11 +42,11 @@ import {
   TextDataScannerConfiguration,
 } from 'react-native-scanbot-sdk/src/configuration';
 
-import {LicensePlateDetectorMode} from 'react-native-scanbot-sdk/src/enum';
-import {FileUtils} from '../utils/FileUtils';
+import { LicensePlateDetectorMode } from 'react-native-scanbot-sdk/src/enum';
+import { FileUtils } from '../utils/FileUtils';
 // import {MedicalCertificateStandardSize} from 'react-native-scanbot-sdk/src/model';
-import {MedicalCertificateScannerResult} from 'react-native-scanbot-sdk/src/result';
-import {Results} from '../model/Results';
+import { MedicalCertificateScannerResult } from 'react-native-scanbot-sdk/src/result';
+import { Results } from '../model/Results';
 
 export class HomeScreen extends BaseScreen {
   constructor(props: any) {
@@ -60,7 +60,7 @@ export class HomeScreen extends BaseScreen {
       if (loaded.length === 0) {
         return;
       }
-      const refreshed = await ScanbotSDK.refreshImageUris({pages: loaded});
+      const refreshed = await ScanbotSDK.refreshImageUris({ pages: loaded });
       await Pages.addList(refreshed.pages);
     } catch (e) {
       console.error('Error loading/refreshing pages: ' + JSON.stringify(e));
@@ -83,7 +83,7 @@ export class HomeScreen extends BaseScreen {
             style={Styles.INSTANCE.home.list}
             sections={Examples.list}
             keyExtractor={(item, index) => item.title + index}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <View style={Styles.INSTANCE.home.sectionItemContainer}>
                 <TouchableOpacity onPress={() => this.onListItemClick(item)}>
                   <Text
@@ -97,7 +97,7 @@ export class HomeScreen extends BaseScreen {
                 </TouchableOpacity>
               </View>
             )}
-            renderSectionHeader={({section: {title}}) => (
+            renderSectionHeader={({ section: { title } }) => (
               <Text style={Styles.INSTANCE.home.sectionHeader}>{title}</Text>
             )}
           />
@@ -288,21 +288,25 @@ export class HomeScreen extends BaseScreen {
 
     this.showProgress();
 
-    const sdkResult = await ScanbotSDK.extractPagesFromPdf({
-      pdfFilePath: fileUrl,
-      // eg.
-      // quality: 100,
-      // scaling: 4,
-    });
+    try {
+      const sdkResult = await ScanbotSDK.extractPagesFromPdf({
+        pdfFilePath: fileUrl,
+        // eg.
+        // quality: 100,
+        // scaling: 4,
+      });
 
-    this.hideProgress();
+      if (sdkResult.status !== 'OK' || !sdkResult.pages) {
+        return;
+      }
 
-    if (sdkResult.status !== 'OK' || !sdkResult.pages) {
-      return;
+      await Pages.addList(sdkResult.pages);
+      this.pushPage(Navigation.IMAGE_RESULTS);
+    } catch (err: any) {
+      ViewUtils.showAlert(err.message);
     }
 
-    await Pages.addList(sdkResult.pages);
-    this.pushPage(Navigation.IMAGE_RESULTS);
+    this.hideProgress();
   }
 
   async importPdfAndExtractImages() {
@@ -319,22 +323,26 @@ export class HomeScreen extends BaseScreen {
 
     this.showProgress();
 
-    const sdkResult = await ScanbotSDK.extractImagesFromPdf({
-      pdfFilePath: fileUrl,
-      // eg.
-      // quality: 80,
-      // scaling: 3,
-    });
+    try {
+      const sdkResult = await ScanbotSDK.extractImagesFromPdf({
+        pdfFilePath: fileUrl,
+        // eg.
+        // quality: 80,
+        // scaling: 3,
+      });
 
-    this.hideProgress();
+      const imageFilesUrls = sdkResult.imageFilesUrls;
 
-    const imageFilesUrls = sdkResult.imageFilesUrls;
+      if (sdkResult.status !== 'OK' || !imageFilesUrls) {
+        return;
+      }
 
-    if (sdkResult.status !== 'OK' || !imageFilesUrls) {
-      return;
+      ViewUtils.showAlert(JSON.stringify(imageFilesUrls));
+    } catch (err: any) {
+      ViewUtils.showAlert(err.message);
     }
 
-    ViewUtils.showAlert(JSON.stringify(imageFilesUrls));
+    this.hideProgress();
   }
 
   async importImageAndDetectDocument() {
@@ -369,7 +377,7 @@ export class HomeScreen extends BaseScreen {
     const config: BarcodeScannerConfiguration = {
       acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
-      finderAspectRatio: {width: 1, height: 1},
+      finderAspectRatio: { width: 1, height: 1 },
       useButtonsAllCaps: false,
       // cameraZoomFactor: 0.7,
       // engineMode: "LEGACY"
@@ -385,7 +393,7 @@ export class HomeScreen extends BaseScreen {
     const config: BatchBarcodeScannerConfiguration = {
       acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
-      finderAspectRatio: {width: 2, height: 1},
+      finderAspectRatio: { width: 2, height: 1 },
       useButtonsAllCaps: false,
       // cameraZoomFactor: 1.0,
       // engineMode: "NEXT_GEN"
@@ -504,7 +512,7 @@ export class HomeScreen extends BaseScreen {
     };
 
     if (Platform.OS === 'ios') {
-      const {width} = Dimensions.get('window');
+      const { width } = Dimensions.get('window');
       config.finderWidth = width * 0.9;
       config.finderHeight = width * 0.18;
     }
@@ -577,7 +585,7 @@ export class HomeScreen extends BaseScreen {
     try {
       const result = await ScanbotSDK.detectDocument(pickedImage.uri);
       ViewUtils.showAlert(JSON.stringify(result));
-    } catch (_err) {}
+    } catch (_err) { }
 
     this.hideProgress();
   }
