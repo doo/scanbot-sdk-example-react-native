@@ -238,7 +238,9 @@ export class ImageResultScreen extends BaseScreen {
       const result = await ScanbotSDK.writeTIFF(Pages.getImageUris(), {
         oneBitEncoded: binarized, // "true" means create 1-bit binarized black and white TIFF
         dpi: 300, // optional DPI. default value is 200
-        compression: binarized ? 'CCITT_T6' : 'ADOBE_DEFLATE', // optional compression. see documentation!
+        compression: binarized
+          ? 'COMPRESSION_CCITT_T6'
+          : 'COMPRESSION_ADOBE_DEFLATE', // optional compression. see documentation!
       });
       ViewUtils.showAlert('TIFF file created: ' + result.tiffFileUri);
     } catch (e) {
