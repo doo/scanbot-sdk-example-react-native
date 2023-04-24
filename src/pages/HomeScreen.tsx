@@ -233,6 +233,20 @@ export class HomeScreen extends BaseScreen {
       topBarBackgroundColor: Colors.SCANBOT_RED,
       guidanceText: 'Place the LC display in the frame to scan it',
       textFilterStrategy: 'DOCUMENT',
+      textDataScannerStep: {
+        "allowedSymbols": "",
+        "aspectRatio": {
+          "height": 1.0,
+          "width": 5.0
+        },
+        "guidanceText": "",
+        "pattern": "",
+        "preferredZoom": 2.0,
+        "shouldMatchSubstring": false,
+        "significantShakeDelay": -1,
+        "textFilterStrategy": "Document",
+        "unzoomedFinderHeight": 40
+      }
     };
 
     // eg.
@@ -250,7 +264,7 @@ export class HomeScreen extends BaseScreen {
 
     try {
       const result = await ScanbotSDK.UI.startTextDataScanner(config);
-      const data = result.result;
+      const data = result.text;
       if (result.status === 'OK' && data) {
         ViewUtils.showAlert(JSON.stringify(result));
       }
