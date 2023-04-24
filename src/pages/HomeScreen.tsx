@@ -37,12 +37,12 @@ import {
 import { PageStorage } from '../utils/PageStorage';
 
 import {
+  LicensePlateScanStrategy,
   LicensePlateScannerConfiguration,
-  MedicalCertificateScannerConfiguration,
+  MedicalCertificateRecognizerConfiguration,
   TextDataScannerConfiguration,
 } from 'react-native-scanbot-sdk/src/configuration';
 
-import { LicensePlateDetectorMode } from 'react-native-scanbot-sdk/src/enum';
 import { FileUtils } from '../utils/FileUtils';
 // import {MedicalCertificateStandardSize} from 'react-native-scanbot-sdk/src/model';
 import { MedicalCertificateScannerResult } from 'react-native-scanbot-sdk/src/result';
@@ -187,10 +187,10 @@ export class HomeScreen extends BaseScreen {
         ViewUtils.showAlert(JSON.stringify(result));
         break;
       case FeatureId.LicensePlateScannerML:
-        this.startLicensePlateScanner('ML_BASED');
+        this.startLicensePlateScanner('MlBased');
         break;
       case FeatureId.LicensePlateScannerClassic:
-        this.startLicensePlateScanner('CLASSIC');
+        this.startLicensePlateScanner('Classic');
         break;
       case FeatureId.TextDataScanner:
         this.startTextDataScanner();
@@ -211,7 +211,7 @@ export class HomeScreen extends BaseScreen {
       bottomBarBackgroundColor: Colors.SCANBOT_RED,
       topBarBackgroundColor: Colors.SCANBOT_RED,
       cameraBackgroundColor: Colors.SCANBOT_RED,
-      interfaceOrientation: 'PORTRAIT',
+      orientationLockMode: 'PORTRAIT',
       pageCounterButtonTitle: '%d Page(s)',
       multiPageEnabled: true,
       ignoreBadAspectRatio: true,
@@ -262,7 +262,7 @@ export class HomeScreen extends BaseScreen {
 
     try {
       const result = await ScanbotSDK.UI.startTextDataScanner(config);
-      const data = result.text;
+      const data = result?.result?.text;
       if (result.status === 'OK' && data) {
         ViewUtils.showAlert(JSON.stringify(result));
       }
@@ -272,11 +272,11 @@ export class HomeScreen extends BaseScreen {
   }
 
   async startLicensePlateScanner(
-    detectorMode: LicensePlateDetectorMode = 'ML_BASED',
+    scanStrategy: LicensePlateScanStrategy = 'MlBased',
   ) {
     let config: LicensePlateScannerConfiguration = {
       topBarBackgroundColor: Colors.SCANBOT_RED,
-      detectorMode: detectorMode,
+      scanStrategy: scanStrategy,
     };
 
     const result = await ScanbotSDK.UI.startLicensePlateScanner(config);
@@ -485,23 +485,21 @@ export class HomeScreen extends BaseScreen {
   }
 
   async startMedicalCertificateScanner() {
-    let config: MedicalCertificateScannerConfiguration = {
+    let config: MedicalCertificateRecognizerConfiguration = {
       topBarBackgroundColor: Colors.SCANBOT_RED,
-      guidanceText: {
+      userGuidanceStrings: {
         capturing: 'capturing',
-        recognizing: 'recognizing',
-        searching: 'searching',
-        scanningStarted: 'scanning Started',
+        scanning: 'recognizing',
+        processing: 'processing',
+        startScanning: 'scanning Started',
         paused: 'paused',
         energySaving: 'energySaving',
       },
-      errorDialogText: {
-        button: 'button text',
-        title: 'error title',
-        message: 'error message',
-      },
+      errorDialogMessage: 'error message',
+      errorDialogOkButton: 'button text',
+      errorDialogTitle: 'error title',
       cancelButtonHidden: false,
-      extractPatientInfo: true,
+      recognizePatientInfo: true,
     };
     const result: MedicalCertificateScannerResult =
       await ScanbotSDK.UI.startMedicalCertificateScanner(config);
@@ -510,7 +508,7 @@ export class HomeScreen extends BaseScreen {
       return;
     }
 
-    Results.lastMedicalCertificate = result.data;
+    Results.lastMedicalCertificate = result;
     this.pushPage(Navigation.MEDICAL_CERTIFICATE_RESULTS);
 
     console.log(JSON.stringify(result, undefined, 4));
@@ -524,9 +522,10 @@ export class HomeScreen extends BaseScreen {
     };
 
     if (Platform.OS === 'ios') {
-      const { width } = Dimensions.get('window');
-      config.finderWidth = width * 0.9;
-      config.finderHeight = width * 0.18;
+      config.finderAspectRatio = {
+        "width": 0.9,
+        "height": 0.18
+      }
     }
 
     const result = await ScanbotSDK.UI.startMrzScanner(config);
