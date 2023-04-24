@@ -231,22 +231,20 @@ export class HomeScreen extends BaseScreen {
   async startTextDataScanner() {
     const config: TextDataScannerConfiguration = {
       topBarBackgroundColor: Colors.SCANBOT_RED,
-      guidanceText: 'Place the LC display in the frame to scan it',
-      textFilterStrategy: 'DOCUMENT',
       textDataScannerStep: {
-        "allowedSymbols": "",
-        "aspectRatio": {
-          "height": 1.0,
-          "width": 5.0
+        allowedSymbols: '',
+        aspectRatio: {
+          height: 1.0,
+          width: 5.0,
         },
-        "guidanceText": "",
-        "pattern": "",
-        "preferredZoom": 2.0,
-        "shouldMatchSubstring": false,
-        "significantShakeDelay": -1,
-        "textFilterStrategy": "Document",
-        "unzoomedFinderHeight": 40
-      }
+        guidanceText: 'Place the LC display in the frame to scan it',
+        pattern: '',
+        preferredZoom: 2.0,
+        shouldMatchSubstring: false,
+        significantShakeDelay: -1,
+        textFilterStrategy: 'Document',
+        unzoomedFinderHeight: 40,
+      },
     };
 
     // eg.
