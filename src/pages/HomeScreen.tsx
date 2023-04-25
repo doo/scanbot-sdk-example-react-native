@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   ActivityIndicator,
-  Dimensions,
   Linking,
   Platform,
   SafeAreaView,
@@ -17,34 +16,38 @@ import ScanbotSDK, {
   MrzScannerConfiguration,
 } from 'react-native-scanbot-sdk';
 
-import { Examples, FeatureId } from '../model/Examples';
-import { Styles } from '../model/Styles';
-import { ImageUtils } from '../utils/ImageUtils';
-import { SDKUtils } from '../utils/SDKUtils';
-import { Pages } from '../model/Pages';
-import { ViewUtils } from '../utils/ViewUtils';
-import { BarcodeFormats } from '../model/BarcodeFormats';
-import { BarcodeDocumentFormats } from '../model/BarcodeDocumentFormats';
-import { Navigation } from '../utils/Navigation';
-import { BaseScreen } from '../utils/BaseScreen';
-import { Colors } from '../model/Colors';
+import {Examples, FeatureId} from '../model/Examples';
+import {Styles} from '../model/Styles';
+import {ImageUtils} from '../utils/ImageUtils';
+import {SDKUtils} from '../utils/SDKUtils';
+import {Pages} from '../model/Pages';
+import {ViewUtils} from '../utils/ViewUtils';
+import {BarcodeFormats} from '../model/BarcodeFormats';
+import {BarcodeDocumentFormats} from '../model/BarcodeDocumentFormats';
+import {Navigation} from '../utils/Navigation';
+import {BaseScreen} from '../utils/BaseScreen';
+import {Colors} from '../model/Colors';
 import {
   BatchBarcodeScannerConfiguration,
   HealthInsuranceCardScannerConfiguration,
 } from 'react-native-scanbot-sdk/src';
-import { PageStorage } from '../utils/PageStorage';
+import {PageStorage} from '../utils/PageStorage';
 
 import {
+  GenericDocumentRecognizerConfiguration,
   LicensePlateScanStrategy,
   LicensePlateScannerConfiguration,
   MedicalCertificateRecognizerConfiguration,
   TextDataScannerConfiguration,
 } from 'react-native-scanbot-sdk/src/configuration';
 
-import { FileUtils } from '../utils/FileUtils';
+import {FileUtils} from '../utils/FileUtils';
 // import {MedicalCertificateStandardSize} from 'react-native-scanbot-sdk/src/model';
-import { MedicalCertificateScannerResult } from 'react-native-scanbot-sdk/src/result';
-import { Results } from '../model/Results';
+import {
+  GenericDocumentRecognizerResult,
+  MedicalCertificateScannerResult,
+} from 'react-native-scanbot-sdk/src/result';
+import {Results} from '../model/Results';
 
 export class HomeScreen extends BaseScreen {
   constructor(props: any) {
@@ -58,7 +61,7 @@ export class HomeScreen extends BaseScreen {
       if (loaded.length === 0) {
         return;
       }
-      const refreshed = await ScanbotSDK.refreshImageUris({ pages: loaded });
+      const refreshed = await ScanbotSDK.refreshImageUris({pages: loaded});
       await Pages.addList(refreshed.pages);
     } catch (e) {
       console.error('Error loading/refreshing pages: ' + JSON.stringify(e));
@@ -81,7 +84,7 @@ export class HomeScreen extends BaseScreen {
             style={Styles.INSTANCE.home.list}
             sections={Examples.list}
             keyExtractor={(item, index) => item.title + index}
-            renderItem={({ item }) => (
+            renderItem={({item}) => (
               <View style={Styles.INSTANCE.home.sectionItemContainer}>
                 <TouchableOpacity onPress={() => this.onListItemClick(item)}>
                   <Text
@@ -95,7 +98,7 @@ export class HomeScreen extends BaseScreen {
                 </TouchableOpacity>
               </View>
             )}
-            renderSectionHeader={({ section: { title } }) => (
+            renderSectionHeader={({section: {title}}) => (
               <Text style={Styles.INSTANCE.home.sectionHeader}>{title}</Text>
             )}
           />
@@ -170,6 +173,9 @@ export class HomeScreen extends BaseScreen {
         break;
       case FeatureId.ScanMedicalCertificate:
         this.startMedicalCertificateScanner();
+        break;
+      case FeatureId.ScanGenericDocument:
+        this.startGenericDocumentRecognizer();
         break;
       case FeatureId.ScanEHIC:
         this.startEHICScanner();
@@ -381,7 +387,7 @@ export class HomeScreen extends BaseScreen {
     const config: BarcodeScannerConfiguration = {
       acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
-      finderAspectRatio: { width: 1, height: 1 },
+      finderAspectRatio: {width: 1, height: 1},
       useButtonsAllCaps: false,
       // cameraZoomFactor: 0.7,
       // engineMode: "LEGACY"
@@ -397,7 +403,7 @@ export class HomeScreen extends BaseScreen {
     const config: BatchBarcodeScannerConfiguration = {
       acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
-      finderAspectRatio: { width: 2, height: 1 },
+      finderAspectRatio: {width: 2, height: 1},
       useButtonsAllCaps: false,
       // cameraZoomFactor: 1.0,
       // engineMode: "NEXT_GEN"
@@ -501,7 +507,22 @@ export class HomeScreen extends BaseScreen {
     }
 
     Results.lastMedicalCertificate = result;
-    this.pushPage(Navigation.MEDICAL_CERTIFICATE_RESULTS);
+    this.pushPage(Navigation.MEDICAL_CERTIFICATE_RESULT);
+
+    console.log(JSON.stringify(result, undefined, 4));
+  }
+
+  async startGenericDocumentRecognizer() {
+    let config: GenericDocumentRecognizerConfiguration = {};
+    const result: GenericDocumentRecognizerResult =
+      await ScanbotSDK.UI.startGenericDocumentRecognizer(config);
+
+    if (result.status !== 'OK') {
+      return;
+    }
+
+    Results.lastGenericDocumentResult = result;
+    this.pushPage(Navigation.GENERIC_DOCUMENT_RESULT);
 
     console.log(JSON.stringify(result, undefined, 4));
   }
@@ -515,9 +536,9 @@ export class HomeScreen extends BaseScreen {
 
     if (Platform.OS === 'ios') {
       config.finderAspectRatio = {
-        "width": 0.9,
-        "height": 0.18
-      }
+        width: 0.9,
+        height: 0.18,
+      };
     }
 
     const result = await ScanbotSDK.UI.startMrzScanner(config);
