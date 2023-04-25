@@ -560,10 +560,24 @@ export class HomeScreen extends BaseScreen {
       return;
     }
 
+    var result;
+    var blur;
+    const uri = pickedImage.uri;
     try {
-      const result = await ScanbotSDK.detectDocument(pickedImage.uri);
-      ViewUtils.showAlert(JSON.stringify(result));
-    } catch (_err) { }
+      result = await ScanbotSDK.detectDocument(uri);
+    } catch (err: any) {
+      result = 'Error!';
+      console.log(err);
+    }
+
+    try {
+      blur = await ScanbotSDK.estimateBlur({ imageFileUri: uri });
+    } catch (err: any) {
+      blur = 'Error!';
+      console.log(err);
+    }
+
+    ViewUtils.showAlert(JSON.stringify({ blur, result }));
 
     this.hideProgress();
   }

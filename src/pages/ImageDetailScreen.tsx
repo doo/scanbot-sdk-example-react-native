@@ -104,8 +104,8 @@ export class ImageDetailScreen extends BaseScreen {
         doneButtonTitle: 'Apply',
         topBarBackgroundColor: Colors.SCANBOT_RED,
         bottomBarBackgroundColor: Colors.SCANBOT_RED,
-        interfaceOrientation: 'ALL',
-        topAndBottomButtonsSwapped: false,
+        orientationLockMode: 'NONE',
+        swapTopBottomButtons: false,
         // See further config properties ...
       },
     );
