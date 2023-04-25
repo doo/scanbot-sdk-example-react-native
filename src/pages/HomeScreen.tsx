@@ -15,7 +15,6 @@ import ScanbotSDK, {
   BarcodeScannerConfiguration,
   DocumentScannerConfiguration,
   MrzScannerConfiguration,
-  NFCPassportReaderConfiguration,
 } from 'react-native-scanbot-sdk';
 
 import { Examples, FeatureId } from '../model/Examples';
@@ -32,7 +31,6 @@ import { Colors } from '../model/Colors';
 import {
   BatchBarcodeScannerConfiguration,
   HealthInsuranceCardScannerConfiguration,
-  IdCardScannerConfiguration,
 } from 'react-native-scanbot-sdk/src';
 import { PageStorage } from '../utils/PageStorage';
 
@@ -175,12 +173,6 @@ export class HomeScreen extends BaseScreen {
         break;
       case FeatureId.ScanEHIC:
         this.startEHICScanner();
-        break;
-      case FeatureId.ScanIdCard:
-        this.startIdCardScanner();
-        break;
-      case FeatureId.ReadPassportNFC:
-        this.startNFCReader();
         break;
       case FeatureId.OcrConfigs:
         const result = await ScanbotSDK.getOCRConfigs();
@@ -548,31 +540,6 @@ export class HomeScreen extends BaseScreen {
         f => `${f.type}: ${f.value} (${f.confidence.toFixed(2)})`,
       );
       ViewUtils.showAlert(fields.join('\n'));
-    }
-  }
-
-  async startIdCardScanner() {
-    const config: IdCardScannerConfiguration = {
-      acceptedDocumentTypes: ['DeIdBack', 'DeIdFront'],
-      shouldSavePhotoImageInStorage: true,
-      shouldSaveSignatureImageInStorage: true,
-      startScanningTitle: 'Start Scanning!',
-      viewResultsButtonTitle: 'Confirm',
-      topBarBackgroundColor: Colors.SCANBOT_RED,
-    };
-
-    const result = await ScanbotSDK.UI.startIdCardScanner(config);
-    if (result.status === 'OK') {
-      ViewUtils.showAlert(JSON.stringify(result));
-    }
-  }
-
-  async startNFCReader() {
-    const config: NFCPassportReaderConfiguration = {};
-
-    const result = await ScanbotSDK.UI.startNFCPassportReader(config);
-    if (result.status === 'OK') {
-      ViewUtils.showAlert(JSON.stringify(result));
     }
   }
 
