@@ -1,14 +1,14 @@
 import React from 'react';
-import { SectionList, StyleSheet, Text, View } from 'react-native';
+import {SectionList, StyleSheet, Text, View} from 'react-native';
 import {
   MedicalCertificateCheckboxField,
   MedicalCertificateDateField,
 } from 'react-native-scanbot-sdk/src/model';
-import { MedicalCertificateScannerResultData } from 'react-native-scanbot-sdk/src/result';
-import { Colors } from '../model/Colors';
-import { Results } from '../model/Results';
+import {MedicalCertificateScannerResult} from 'react-native-scanbot-sdk';
+import {Colors} from '../model/Colors';
+import {Results} from '../model/Results';
 import PreviewImage from '../ui/PreviewImage';
-import { BaseScreen } from '../utils/BaseScreen';
+import {BaseScreen} from '../utils/BaseScreen';
 
 const styles = StyleSheet.create({
   container: {
@@ -52,23 +52,23 @@ const styles = StyleSheet.create({
   },
 });
 
-const getPatientData = (certificate: MedicalCertificateScannerResultData) => {
+const getPatientData = (certificate: MedicalCertificateScannerResult) => {
   if (!certificate.patientData) {
     return [];
   }
 
   const fields = [
-    { key: 'firstName', display: 'First Name' },
-    { key: 'lastName', display: 'Last Name' },
-    { key: 'insuranceProvider', display: 'Insurance Provider' },
-    { key: 'address1', display: 'Address #1' },
-    { key: 'address2', display: 'Address #2' },
-    { key: 'diagnose', display: 'Diagnose' },
-    { key: 'healthInsuranceNumber', display: 'Health Insurance Number' },
-    { key: 'insuredPersonNumber', display: 'Insured Person Number' },
-    { key: 'status', display: 'Status' },
-    { key: 'placeOfOperationNumber', display: 'Place of Operation Number' },
-    { key: 'doctorNumber', display: "Doctor's number" },
+    {key: 'firstName', display: 'First Name'},
+    {key: 'lastName', display: 'Last Name'},
+    {key: 'insuranceProvider', display: 'Insurance Provider'},
+    {key: 'address1', display: 'Address #1'},
+    {key: 'address2', display: 'Address #2'},
+    {key: 'diagnose', display: 'Diagnose'},
+    {key: 'healthInsuranceNumber', display: 'Health Insurance Number'},
+    {key: 'insuredPersonNumber', display: 'Insured Person Number'},
+    {key: 'status', display: 'Status'},
+    {key: 'placeOfOperationNumber', display: 'Place of Operation Number'},
+    {key: 'doctorNumber', display: "Doctor's number"},
   ];
 
   return fields
@@ -79,12 +79,12 @@ const getPatientData = (certificate: MedicalCertificateScannerResultData) => {
         return undefined;
       }
       const value: string = dict[key];
-      return JSON.stringify({ key: item.display, value: value });
+      return JSON.stringify({key: item.display, value: value});
     })
     .filter(item => item);
 };
 
-const getDatesData = (certificate: MedicalCertificateScannerResultData) => {
+const getDatesData = (certificate: MedicalCertificateScannerResult) => {
   if (!certificate.dates) {
     return [];
   }
@@ -110,9 +110,7 @@ const getDatesData = (certificate: MedicalCertificateScannerResultData) => {
   });
 };
 
-const getCheckboxesData = (
-  certificate: MedicalCertificateScannerResultData,
-) => {
+const getCheckboxesData = (certificate: MedicalCertificateScannerResult) => {
   const checkboxes = certificate.checkboxes;
   if (!checkboxes) {
     return [];
@@ -143,13 +141,13 @@ const getCheckboxesData = (
   });
 };
 
-export class MedicalCertificateResultsScreen extends BaseScreen {
+export class MedicalCertificateResultScreen extends BaseScreen {
   render() {
     const certificate = Results.lastMedicalCertificate!;
 
     const B = (props: any) => (
       // eslint-disable-next-line react-native/no-inline-styles
-      <Text style={{ fontWeight: 'bold' }}>{props.children}</Text>
+      <Text style={{fontWeight: 'bold'}}>{props.children}</Text>
     );
     return (
       <>
@@ -167,16 +165,16 @@ export class MedicalCertificateResultsScreen extends BaseScreen {
                   }),
                 ],
               },
-              { title: 'Patient Data', data: getPatientData(certificate) },
-              { title: 'Dates', data: getDatesData(certificate) },
-              { title: 'Checkboxes', data: getCheckboxesData(certificate) },
+              {title: 'Patient Data', data: getPatientData(certificate)},
+              {title: 'Dates', data: getDatesData(certificate)},
+              {title: 'Checkboxes', data: getCheckboxesData(certificate)},
             ]}
-            renderItem={({ item }) => {
+            renderItem={({item}) => {
               const jsonItem = item;
               if (!jsonItem) {
                 return null;
               }
-              const pair: { key: string; value: string } = JSON.parse(jsonItem);
+              const pair: {key: string; value: string} = JSON.parse(jsonItem);
               if (pair.key === 'imageFileUri') {
                 return (
                   <PreviewImage
@@ -194,7 +192,7 @@ export class MedicalCertificateResultsScreen extends BaseScreen {
                 </>
               );
             }}
-            renderSectionHeader={({ section }) => (
+            renderSectionHeader={({section}) => (
               <Text style={styles.sectionHeader}>{section.title}</Text>
             )}
             keyExtractor={(item, index) => '' + index}

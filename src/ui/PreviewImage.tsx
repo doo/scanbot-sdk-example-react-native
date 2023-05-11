@@ -1,7 +1,7 @@
 import React from 'react';
-import { Image } from 'react-native';
+import {Image} from 'react-native';
 import ScanbotSDK from 'react-native-scanbot-sdk/src';
-import { SDKUtils } from '../utils/SDKUtils';
+import {SDKUtils} from '../utils/SDKUtils';
 
 type PreviewImageProps = {
   imageUri?: string;
@@ -32,5 +32,8 @@ export default function PreviewImage(props: PreviewImageProps) {
     }
   }, [props.imageUri]);
 
-  return <Image source={{ uri: uri }} style={props.style} />;
+  if (!props.imageUri) {
+    return null;
+  }
+  return <Image source={{uri: uri}} style={props.style} />;
 }

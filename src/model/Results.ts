@@ -1,5 +1,9 @@
-import {MedicalCertificateScannerResultData} from 'react-native-scanbot-sdk/src/result';
+import {
+  GenericDocumentRecognizerResult,
+  MedicalCertificateScannerResult,
+} from 'react-native-scanbot-sdk';
 
 export class Results {
-  public static lastMedicalCertificate?: MedicalCertificateScannerResultData;
+  public static lastMedicalCertificate?: MedicalCertificateScannerResult;
+  public static lastGenericDocumentResult?: GenericDocumentRecognizerResult;
 }
