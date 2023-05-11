@@ -13,7 +13,7 @@ target 'ScanbotSDKExampleReact' do
   )
   
   # Pod for Scanbot SDK React Native Module
-  pod 'RNScanbotSDK', :path => '../node_modules/react-native-scanbot-sdk'
+  pod 'RNScanbotSDK/ALL', :path => '../node_modules/react-native-scanbot-sdk'
 
   target 'ScanbotSDKExampleReactTests' do
     inherit! :complete
