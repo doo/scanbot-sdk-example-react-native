@@ -172,7 +172,7 @@ export class HomeScreen extends BaseScreen {
         this.startMRZScanner();
         break;
       case FeatureId.ScanMedicalCertificate:
-        this.startMedicalCertificateScanner();
+        this.startMedicalCertificateRecognizer();
         break;
       case FeatureId.ScanGenericDocument:
         this.startGenericDocumentRecognizer();
@@ -389,6 +389,7 @@ export class HomeScreen extends BaseScreen {
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
       finderAspectRatio: {width: 1, height: 1},
       useButtonsAllCaps: false,
+      barcodeImageGenerationType: 'NONE',
       // cameraZoomFactor: 0.7,
       // engineMode: "LEGACY"
     };
@@ -482,7 +483,7 @@ export class HomeScreen extends BaseScreen {
     this.pushPage(Navigation.BARCODE_DOCUMENT_FORMATS);
   }
 
-  async startMedicalCertificateScanner() {
+  async startMedicalCertificateRecognizer() {
     let config: MedicalCertificateRecognizerConfiguration = {
       topBarBackgroundColor: Colors.SCANBOT_RED,
       userGuidanceStrings: {
@@ -500,7 +501,7 @@ export class HomeScreen extends BaseScreen {
       recognizePatientInfo: true,
     };
     const result: MedicalCertificateScannerResult =
-      await ScanbotSDK.UI.startMedicalCertificateScanner(config);
+      await ScanbotSDK.UI.startMedicalCertificateRecognizer(config);
 
     if (result.status !== 'OK') {
       return;

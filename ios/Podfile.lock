@@ -343,20 +343,15 @@ PODS:
     - TOCropViewController
   - RNReanimated (1.8.0):
     - React
-  - RNScanbotSDK/ALL (4.15.1-beta.5):
+  - RNScanbotSDK/ALL (4.15.1-beta.6):
     - React
     - ScanbotSDK/ALL (= 2.2.0)
-    - ScanbotSDKNativeWrapper (= 2.2.0.0-alpha.2)
+    - ScanbotSDKNativeWrapper/ALL (= 2.2.0.0-alpha.3)
   - RNScreens (2.7.0):
     - React
-  - ScanbotSDK (2.2.0):
-    - ScanbotSDK/NONE (= 2.2.0)
   - ScanbotSDK/ALL (2.2.0)
-  - ScanbotSDK/NONE (2.2.0)
-  - ScanbotSDKNativeWrapper (2.2.0.0-alpha.2):
-    - ScanbotSDKNativeWrapper/NONE (= 2.2.0.0-alpha.2)
-  - ScanbotSDKNativeWrapper/NONE (2.2.0.0-alpha.2):
-    - ScanbotSDK (= 2.2.0)
+  - ScanbotSDKNativeWrapper/ALL (2.2.0.0-alpha.3):
+    - ScanbotSDK/ALL (= 2.2.0)
   - TOCropViewController (2.6.1)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -574,10 +569,10 @@ SPEC CHECKSUMS:
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNImageCropPicker: 73891a709e6fd8a47d32104d942757971f220aee
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
-  RNScanbotSDK: 488629976129c9f0b518a77fb92795868ba7f55a
+  RNScanbotSDK: d81c5623062cd44b009b057921a35bcc4f45dc4c
   RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
   ScanbotSDK: 88ea9100f2d6fe0c0fddc707bff470e7f71387d8
-  ScanbotSDKNativeWrapper: f9ed731ac4866d65f5b936cbddb027b898d8b81b
+  ScanbotSDKNativeWrapper: f224376f5240377fc853dcc00d4ac1eaa343e77d
   TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
   Yoga: d1fc3575b8b68891ff5ef3c276daa855e841eb32
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
