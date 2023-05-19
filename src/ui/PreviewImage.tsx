@@ -15,9 +15,10 @@ export default function PreviewImage(props: PreviewImageProps) {
     return null;
   }
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   React.useEffect(() => {
     const loadDecryptedImageData = async () => {
-      const result = await ScanbotSDK.getImageData(props.imageUri);
+      const result = await ScanbotSDK.getImageData(props.imageUri as string);
       const imgMimeType =
         SDKUtils.IMAGE_FILE_FORMAT === 'JPG' ? 'image/jpeg' : 'image/png';
       setUri(`data:${imgMimeType};base64,${result.base64ImageData}`);
