@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
 
 const getFieldsData = (document: GenericDocumentRecognizerResult) => {
   if (!document.fields) {
-    return undefined;
+    return [];
   }
 
   return Object.keys(document.fields)

@@ -3,6 +3,7 @@ import {Colors} from './Colors';
 
 export class Styles {
   public static INSTANCE = new Styles();
+
   WINDOW_WIDTH = 0;
   GALLERY_CELL_PADDING = 20;
 

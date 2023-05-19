@@ -73,7 +73,6 @@ export class HomeScreen extends BaseScreen {
     return (
       <>
         <StatusBar barStyle="light-content" />
-
         <SafeAreaView>
           <ActivityIndicator
             size="large"
@@ -85,20 +84,22 @@ export class HomeScreen extends BaseScreen {
             style={Styles.INSTANCE.home.list}
             sections={Examples.list}
             keyExtractor={(item, index) => item.title + index}
-            renderItem={({item}) => (
-              <View style={Styles.INSTANCE.home.sectionItemContainer}>
-                <TouchableOpacity onPress={() => this.onListItemClick(item)}>
-                  <Text
-                    style={
-                      item.customStyle
-                        ? item.customStyle.content
-                        : Styles.INSTANCE.home.sectionItem
-                    }>
-                    {item.title}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            )}
+            renderItem={({item}: any) => {
+              return (
+                <View style={Styles.INSTANCE.home.sectionItemContainer}>
+                  <TouchableOpacity onPress={() => this.onListItemClick(item)}>
+                    <Text
+                      style={
+                        item.customStyle
+                          ? item.customStyle.content
+                          : Styles.INSTANCE.home.sectionItem
+                      }>
+                      {item.title}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              );
+            }}
             renderSectionHeader={({section: {title}}) => (
               <Text style={Styles.INSTANCE.home.sectionHeader}>{title}</Text>
             )}
@@ -272,7 +273,7 @@ export class HomeScreen extends BaseScreen {
     try {
       const result = await ScanbotSDK.UI.startCheckRecognizer(config);
 
-      if (result.status !== 'OK' && result.status !== 'SUCCESS') {
+      if (result.status !== 'OK') {
         // The operation was canceled by the user
         return;
       }
