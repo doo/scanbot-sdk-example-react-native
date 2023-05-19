@@ -3,7 +3,7 @@ import {SectionList, StyleSheet, Text, View} from 'react-native';
 import {
   MedicalCertificateCheckboxField,
   MedicalCertificateDateField,
-} from 'react-native-scanbot-sdk/src/model';
+} from 'react-native-scanbot-sdk';
 import {MedicalCertificateScannerResult} from 'react-native-scanbot-sdk';
 import {Colors} from '../model/Colors';
 import {Results} from '../model/Results';

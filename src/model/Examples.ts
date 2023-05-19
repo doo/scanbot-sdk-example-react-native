@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {Colors} from './Colors';
 
+
 export enum FeatureId {
   DocumentScanner = 1,
   DetectDocumentFromPage,
@@ -24,7 +25,9 @@ export enum FeatureId {
   LicensePlateScannerML,
   LicensePlateScannerClassic,
   TextDataScanner,
+  CheckRecognizer,
   BarcodeCameraViewComponent,
+  RecognizeCheckOnImage,
 }
 export class Examples {
   public static list = [
@@ -86,6 +89,7 @@ export class Examples {
           id: FeatureId.ScanGenericDocument,
           title: 'Scan Generic Document',
         },
+        {id: FeatureId.CheckRecognizer, title: 'Scan Check'},
         {id: FeatureId.ScanEHIC, title: 'Scan Health Insurance Card'},
         {
           id: FeatureId.LicensePlateScannerML,
@@ -95,7 +99,11 @@ export class Examples {
           id: FeatureId.LicensePlateScannerClassic,
           title: 'Scan Vehicle License Plate (Classic)',
         },
-        {id: FeatureId.TextDataScanner, title: 'Text Data Scanner'},
+        {id: FeatureId.TextDataScanner, title: 'Start Text Data Scanner'},
+        {
+          id: FeatureId.RecognizeCheckOnImage,
+          title: 'Import Image and Recognize Check',
+        },
       ],
     },
     {

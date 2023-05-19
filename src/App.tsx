@@ -19,6 +19,7 @@ import {ViewUtils} from './utils/ViewUtils';
 import {BarcodeCameraViewScreen} from './pages/BarcodeCameraViewScreen';
 import {MedicalCertificateResultScreen} from './pages/MedicalCertificateResultScreen';
 import {GenericDocumentResultScreen} from './pages/GenericDocumentResultScreen';
+import {CheckRecognizerResultScreen} from './pages/CheckRecognizerResultScreen';
 
 const Stack = createStackNavigator();
 
@@ -106,6 +107,11 @@ export class App extends React.Component {
           <Stack.Screen
             name={Navigation.GENERIC_DOCUMENT_RESULT}
             component={GenericDocumentResultScreen}
+            options={sharedHeaderProps}
+          />
+          <Stack.Screen
+            name={Navigation.CHECK_RECOGNIZER_RESULT}
+            component={CheckRecognizerResultScreen}
             options={sharedHeaderProps}
           />
           <Stack.Screen

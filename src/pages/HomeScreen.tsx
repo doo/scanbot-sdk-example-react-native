@@ -34,19 +34,20 @@ import {
 import {PageStorage} from '../utils/PageStorage';
 
 import {
+  CheckRecognizerConfiguration,
   GenericDocumentRecognizerConfiguration,
   LicensePlateScanStrategy,
   LicensePlateScannerConfiguration,
   MedicalCertificateRecognizerConfiguration,
   TextDataScannerConfiguration,
-} from 'react-native-scanbot-sdk/src/configuration';
+} from 'react-native-scanbot-sdk';
 
 import {FileUtils} from '../utils/FileUtils';
 // import {MedicalCertificateStandardSize} from 'react-native-scanbot-sdk/src/model';
 import {
   GenericDocumentRecognizerResult,
   MedicalCertificateScannerResult,
-} from 'react-native-scanbot-sdk/src/result';
+} from 'react-native-scanbot-sdk';
 import {Results} from '../model/Results';
 
 export class HomeScreen extends BaseScreen {
@@ -193,6 +194,12 @@ export class HomeScreen extends BaseScreen {
       case FeatureId.TextDataScanner:
         this.startTextDataScanner();
         break;
+      case FeatureId.CheckRecognizer:
+        this.startCheckRecognizer();
+        break;
+      case FeatureId.RecognizeCheckOnImage:
+        this.importImageAndRecognizeCheck();
+        break;
       case FeatureId.BarcodeCameraViewComponent:
         this.goToBarcodeCameraViewComponentExample();
     }
@@ -245,27 +252,68 @@ export class HomeScreen extends BaseScreen {
       },
     };
 
-    // eg.
-    // config.validationBlock = new JSStringToBoolTextFunctionBuilder(
-    //   (value: string) => {
-    //     return value.length > 4;
-    //   },
-    // ).build();
-
-    // config.stringSanitizerBlock = new JSStringToStringTextFunctionBuilder(
-    //   (value: string) => {
-    //     return value.toLowerCase() + value.toUpperCase();
-    //   },
-    // ).build();
-
     try {
       const result = await ScanbotSDK.UI.startTextDataScanner(config);
       const data = result?.result?.text;
-      if (result.status === 'OK' && data) {
-        ViewUtils.showAlert(JSON.stringify(result));
+      if (result.status !== 'OK' || !data) {
+        return;
       }
-    } catch (err) {
-      ViewUtils.showAlert('Unexpected error');
+      ViewUtils.showAlert(JSON.stringify(result));
+    } catch (err: any) {
+      ViewUtils.showAlert('Unexpected error: ' + err.message);
+    }
+  }
+
+  async startCheckRecognizer() {
+    const config: CheckRecognizerConfiguration = {
+      topBarBackgroundColor: Colors.SCANBOT_RED,
+    };
+
+    try {
+      const result = await ScanbotSDK.UI.startCheckRecognizer(config);
+
+      if (result.status !== 'OK' && result.status !== 'SUCCESS') {
+        // The operation was canceled by the user
+        return;
+      }
+
+      Results.lastCheckRecognizerResult = result;
+
+      this.pushPage(Navigation.CHECK_RECOGNIZER_RESULT);
+
+      console.log(JSON.stringify(result, undefined, 4));
+    } catch (err: any) {
+      ViewUtils.showAlert(err.message);
+    }
+  }
+
+  async importImageAndRecognizeCheck() {
+    const result = await ImageUtils.pickFromGallery();
+    this.showProgress();
+
+    if (result.didCancel || !result.assets) {
+      this.hideProgress();
+      return;
+    }
+
+    const pickedImage = result.assets[0];
+
+    if (!pickedImage.uri) {
+      this.hideProgress();
+      ViewUtils.showAlert('Error picking image from gallery!');
+      return;
+    }
+
+    try {
+      let checkResult = await ScanbotSDK.recognizeCheck(pickedImage.uri);
+
+      Results.lastCheckRecognizerResult = checkResult;
+
+      this.hideProgress();
+      this.pushPage(Navigation.CHECK_RECOGNIZER_RESULT);
+    } catch (err: any) {
+      ViewUtils.showAlert(err.message);
+      this.hideProgress();
     }
   }
 

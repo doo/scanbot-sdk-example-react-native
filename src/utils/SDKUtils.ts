@@ -3,7 +3,7 @@ import {
   CameraImageFormat,
   FileEncryptionMode,
   LicenseStatus,
-} from 'react-native-scanbot-sdk/src/enum';
+} from 'react-native-scanbot-sdk';
 
 export class SDKUtils {
   /*

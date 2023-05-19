@@ -1,4 +1,4 @@
-import {BarcodeFormat} from 'react-native-scanbot-sdk/src';
+import {BarcodeFormat} from 'react-native-scanbot-sdk';
 
 export class BarcodeFormats {
   public static list = [
