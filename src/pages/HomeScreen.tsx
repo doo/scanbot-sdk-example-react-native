@@ -11,29 +11,30 @@ import {
   View,
 } from 'react-native';
 import ScanbotSDK, {
-  AAMVADocumentFormat,
   BarcodeScannerConfiguration,
-  BaseDocumentFormat,
-  BoardingPassDocumentFormat,
   DocumentScannerConfiguration,
-  GS1DocumentFormat,
-  IDCardPDF417DocumentFormat,
-  MedicalCertificateDocumentFormat,
-  MedicalPlanDocumentFormat,
   MrzScannerConfiguration,
-  SEPADocumentFormat,
-  SwissQRCodeDocumentFormat,
-  VCardDocumentFormat,
-  GenericDocumentRecognizerConfiguration,
-  LicensePlateScanStrategy,
   LicensePlateScannerConfiguration,
   MedicalCertificateRecognizerConfiguration,
   TextDataScannerConfiguration,
   BatchBarcodeScannerConfiguration,
   HealthInsuranceCardScannerConfiguration,
-  BarcodeResultField,
   GenericDocumentRecognizerResult,
   MedicalCertificateScannerResult,
+  BarcodeResultField,
+  BaseDocumentFormat,
+  AAMVADocumentFormat,
+  BoardingPassDocumentFormat,
+  MedicalPlanDocumentFormat,
+  MedicalCertificateDocumentFormat,
+  IDCardPDF417DocumentFormat,
+  SEPADocumentFormat,
+  SwissQRCodeDocumentFormat,
+  VCardDocumentFormat,
+  GS1DocumentFormat,
+  GenericDocumentRecognizerConfiguration,
+  LicensePlateScanStrategy,
+  CheckRecognizerConfiguration,
 } from 'react-native-scanbot-sdk';
 
 import {Examples, FeatureId} from '../model/Examples';
@@ -51,7 +52,6 @@ import {PageStorage} from '../utils/PageStorage';
 
 import {FileUtils} from '../utils/FileUtils';
 import {Results} from '../model/Results';
-// import {MedicalCertificateStandardSize} from 'react-native-scanbot-sdk/src/model';
 
 export class HomeScreen extends BaseScreen {
   constructor(props: any) {
@@ -76,7 +76,6 @@ export class HomeScreen extends BaseScreen {
     return (
       <>
         <StatusBar barStyle="light-content" />
-
         <SafeAreaView>
           <ActivityIndicator
             size="large"
@@ -88,20 +87,22 @@ export class HomeScreen extends BaseScreen {
             style={Styles.INSTANCE.home.list}
             sections={Examples.list}
             keyExtractor={(item, index) => item.title + index}
-            renderItem={({item}) => (
-              <View style={Styles.INSTANCE.home.sectionItemContainer}>
-                <TouchableOpacity onPress={() => this.onListItemClick(item)}>
-                  <Text
-                    style={
-                      item.customStyle
-                        ? item.customStyle.content
-                        : Styles.INSTANCE.home.sectionItem
-                    }>
-                    {item.title}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            )}
+            renderItem={({item}: any) => {
+              return (
+                <View style={Styles.INSTANCE.home.sectionItemContainer}>
+                  <TouchableOpacity onPress={() => this.onListItemClick(item)}>
+                    <Text
+                      style={
+                        item.customStyle
+                          ? item.customStyle.content
+                          : Styles.INSTANCE.home.sectionItem
+                      }>
+                      {item.title}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              );
+            }}
             renderSectionHeader={({section: {title}}) => (
               <Text style={Styles.INSTANCE.home.sectionHeader}>{title}</Text>
             )}
@@ -197,6 +198,12 @@ export class HomeScreen extends BaseScreen {
       case FeatureId.TextDataScanner:
         this.startTextDataScanner();
         break;
+      case FeatureId.CheckRecognizer:
+        this.startCheckRecognizer();
+        break;
+      case FeatureId.RecognizeCheckOnImage:
+        this.importImageAndRecognizeCheck();
+        break;
       case FeatureId.BarcodeCameraViewComponent:
         this.goToBarcodeCameraViewComponentExample();
     }
@@ -217,7 +224,6 @@ export class HomeScreen extends BaseScreen {
       pageCounterButtonTitle: '%d Page(s)',
       multiPageEnabled: true,
       ignoreBadAspectRatio: true,
-      flashButtonHidden: false,
       // documentImageSizeLimit: { width: 2000, height: 3000 },
       // maxNumberOfPages: 3,
       // See further config properties ...
@@ -249,27 +255,68 @@ export class HomeScreen extends BaseScreen {
       },
     };
 
-    // eg.
-    // config.validationBlock = new JSStringToBoolTextFunctionBuilder(
-    //   (value: string) => {
-    //     return value.length > 4;
-    //   },
-    // ).build();
-
-    // config.stringSanitizerBlock = new JSStringToStringTextFunctionBuilder(
-    //   (value: string) => {
-    //     return value.toLowerCase() + value.toUpperCase();
-    //   },
-    // ).build();
-
     try {
       const result = await ScanbotSDK.UI.startTextDataScanner(config);
       const data = result?.result?.text;
-      if (result.status === 'OK' && data) {
-        ViewUtils.showAlert(JSON.stringify(result));
+      if (result.status !== 'OK' || !data) {
+        return;
       }
-    } catch (err) {
-      ViewUtils.showAlert('Unexpected error');
+      ViewUtils.showAlert(JSON.stringify(result));
+    } catch (err: any) {
+      ViewUtils.showAlert('Unexpected error: ' + err.message);
+    }
+  }
+
+  async startCheckRecognizer() {
+    const config: CheckRecognizerConfiguration = {
+      topBarBackgroundColor: Colors.SCANBOT_RED,
+    };
+
+    try {
+      const result = await ScanbotSDK.UI.startCheckRecognizer(config);
+
+      if (result.status !== 'OK') {
+        // The operation was canceled by the user
+        return;
+      }
+
+      Results.lastCheckRecognizerResult = result;
+
+      this.pushPage(Navigation.CHECK_RECOGNIZER_RESULT);
+
+      console.log(JSON.stringify(result, undefined, 4));
+    } catch (err: any) {
+      ViewUtils.showAlert(err.message);
+    }
+  }
+
+  async importImageAndRecognizeCheck() {
+    const result = await ImageUtils.pickFromGallery();
+    this.showProgress();
+
+    if (result.didCancel || !result.assets) {
+      this.hideProgress();
+      return;
+    }
+
+    const pickedImage = result.assets[0];
+
+    if (!pickedImage.uri) {
+      this.hideProgress();
+      ViewUtils.showAlert('Error picking image from gallery!');
+      return;
+    }
+
+    try {
+      let checkResult = await ScanbotSDK.recognizeCheck(pickedImage.uri);
+
+      Results.lastCheckRecognizerResult = checkResult;
+
+      this.hideProgress();
+      this.pushPage(Navigation.CHECK_RECOGNIZER_RESULT);
+    } catch (err: any) {
+      ViewUtils.showAlert(err.message);
+      this.hideProgress();
     }
   }
 

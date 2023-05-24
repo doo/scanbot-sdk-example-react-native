@@ -1,4 +1,4 @@
-import {BarcodeDocumentFormat} from 'react-native-scanbot-sdk/src/enum';
+import {BarcodeDocumentFormat} from 'react-native-scanbot-sdk';
 
 export class BarcodeDocumentFormats {
   public static isFilteringEnabled = false;
