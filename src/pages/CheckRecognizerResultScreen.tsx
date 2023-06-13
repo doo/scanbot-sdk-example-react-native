@@ -65,7 +65,6 @@ const getCheckFields = (checkResult: CheckRecognizerResult) => {
       return undefined;
     }
     const text = value.text;
-    const confidence = value.confidence;
 
     if (!text) {
       return undefined;
@@ -73,7 +72,7 @@ const getCheckFields = (checkResult: CheckRecognizerResult) => {
 
     return JSON.stringify({
       key: key,
-      value: `${text} (confidence: ${confidence})`,
+      value: text,
     });
   });
 };
