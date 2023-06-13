@@ -4,6 +4,7 @@ export class BarcodeFormats {
   public static list = [
     {key: 'AZTEC', value: true},
     {key: 'CODABAR', value: true},
+    {key: 'CODE_25', value: true},
     {key: 'CODE_39', value: true},
     {key: 'CODE_93', value: true},
     {key: 'CODE_128', value: true},
@@ -17,7 +18,9 @@ export class BarcodeFormats {
     {key: 'RSS_EXPANDED', value: true},
     {key: 'UPC_A', value: true},
     {key: 'UPC_E', value: true},
-    {key: 'MSI_PLESSEY', value: false},
+    {key: 'MSI_PLESSEY', value: true},
+    {key: 'IATA_2_OF_5', value: true},
+    {key: 'INDUSTRIAL_2_OF_5', value: true},
   ];
 
   public static getAcceptedFormats(): BarcodeFormat[] {
