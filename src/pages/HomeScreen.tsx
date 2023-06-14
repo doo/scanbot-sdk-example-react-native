@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   ActivityIndicator,
-  Dimensions,
   Linking,
   Platform,
   SafeAreaView,
@@ -15,7 +14,27 @@ import ScanbotSDK, {
   BarcodeScannerConfiguration,
   DocumentScannerConfiguration,
   MrzScannerConfiguration,
-  NFCPassportReaderConfiguration,
+  LicensePlateScannerConfiguration,
+  MedicalCertificateRecognizerConfiguration,
+  TextDataScannerConfiguration,
+  BatchBarcodeScannerConfiguration,
+  HealthInsuranceCardScannerConfiguration,
+  GenericDocumentRecognizerResult,
+  MedicalCertificateScannerResult,
+  BarcodeResultField,
+  BaseDocumentFormat,
+  AAMVADocumentFormat,
+  BoardingPassDocumentFormat,
+  MedicalPlanDocumentFormat,
+  MedicalCertificateDocumentFormat,
+  IDCardPDF417DocumentFormat,
+  SEPADocumentFormat,
+  SwissQRCodeDocumentFormat,
+  VCardDocumentFormat,
+  GS1DocumentFormat,
+  GenericDocumentRecognizerConfiguration,
+  LicensePlateScanStrategy,
+  CheckRecognizerConfiguration,
 } from 'react-native-scanbot-sdk';
 
 import {Examples, FeatureId} from '../model/Examples';
@@ -29,23 +48,9 @@ import {BarcodeDocumentFormats} from '../model/BarcodeDocumentFormats';
 import {Navigation} from '../utils/Navigation';
 import {BaseScreen} from '../utils/BaseScreen';
 import {Colors} from '../model/Colors';
-import {
-  BatchBarcodeScannerConfiguration,
-  HealthInsuranceCardScannerConfiguration,
-  IdCardScannerConfiguration,
-} from 'react-native-scanbot-sdk/src';
 import {PageStorage} from '../utils/PageStorage';
 
-import {
-  LicensePlateScannerConfiguration,
-  MedicalCertificateScannerConfiguration,
-  TextDataScannerConfiguration,
-} from 'react-native-scanbot-sdk/src/configuration';
-
-import {LicensePlateDetectorMode} from 'react-native-scanbot-sdk/src/enum';
 import {FileUtils} from '../utils/FileUtils';
-// import {MedicalCertificateStandardSize} from 'react-native-scanbot-sdk/src/model';
-import {MedicalCertificateScannerResult} from 'react-native-scanbot-sdk/src/result';
 import {Results} from '../model/Results';
 
 export class HomeScreen extends BaseScreen {
@@ -71,7 +76,6 @@ export class HomeScreen extends BaseScreen {
     return (
       <>
         <StatusBar barStyle="light-content" />
-
         <SafeAreaView>
           <ActivityIndicator
             size="large"
@@ -83,20 +87,22 @@ export class HomeScreen extends BaseScreen {
             style={Styles.INSTANCE.home.list}
             sections={Examples.list}
             keyExtractor={(item, index) => item.title + index}
-            renderItem={({item}) => (
-              <View style={Styles.INSTANCE.home.sectionItemContainer}>
-                <TouchableOpacity onPress={() => this.onListItemClick(item)}>
-                  <Text
-                    style={
-                      item.customStyle
-                        ? item.customStyle.content
-                        : Styles.INSTANCE.home.sectionItem
-                    }>
-                    {item.title}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            )}
+            renderItem={({item}: any) => {
+              return (
+                <View style={Styles.INSTANCE.home.sectionItemContainer}>
+                  <TouchableOpacity onPress={() => this.onListItemClick(item)}>
+                    <Text
+                      style={
+                        item.customStyle
+                          ? item.customStyle.content
+                          : Styles.INSTANCE.home.sectionItem
+                      }>
+                      {item.title}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              );
+            }}
             renderSectionHeader={({section: {title}}) => (
               <Text style={Styles.INSTANCE.home.sectionHeader}>{title}</Text>
             )}
@@ -171,29 +177,32 @@ export class HomeScreen extends BaseScreen {
         this.startMRZScanner();
         break;
       case FeatureId.ScanMedicalCertificate:
-        this.startMedicalCertificateScanner();
+        this.startMedicalCertificateRecognizer();
+        break;
+      case FeatureId.ScanGenericDocument:
+        this.startGenericDocumentRecognizer();
         break;
       case FeatureId.ScanEHIC:
         this.startEHICScanner();
-        break;
-      case FeatureId.ScanIdCard:
-        this.startIdCardScanner();
-        break;
-      case FeatureId.ReadPassportNFC:
-        this.startNFCReader();
         break;
       case FeatureId.OcrConfigs:
         const result = await ScanbotSDK.getOCRConfigs();
         ViewUtils.showAlert(JSON.stringify(result));
         break;
       case FeatureId.LicensePlateScannerML:
-        this.startLicensePlateScanner('ML_BASED');
+        this.startLicensePlateScanner('MlBased');
         break;
       case FeatureId.LicensePlateScannerClassic:
-        this.startLicensePlateScanner('CLASSIC');
+        this.startLicensePlateScanner('Classic');
         break;
       case FeatureId.TextDataScanner:
         this.startTextDataScanner();
+        break;
+      case FeatureId.CheckRecognizer:
+        this.startCheckRecognizer();
+        break;
+      case FeatureId.RecognizeCheckOnImage:
+        this.importImageAndRecognizeCheck();
         break;
       case FeatureId.BarcodeCameraViewComponent:
         this.goToBarcodeCameraViewComponentExample();
@@ -211,11 +220,10 @@ export class HomeScreen extends BaseScreen {
       bottomBarBackgroundColor: Colors.SCANBOT_RED,
       topBarBackgroundColor: Colors.SCANBOT_RED,
       cameraBackgroundColor: Colors.SCANBOT_RED,
-      interfaceOrientation: 'PORTRAIT',
+      orientationLockMode: 'PORTRAIT',
       pageCounterButtonTitle: '%d Page(s)',
       multiPageEnabled: true,
       ignoreBadAspectRatio: true,
-      flashButtonHidden: false,
       // documentImageSizeLimit: { width: 2000, height: 3000 },
       // maxNumberOfPages: 3,
       // See further config properties ...
@@ -231,40 +239,93 @@ export class HomeScreen extends BaseScreen {
   async startTextDataScanner() {
     const config: TextDataScannerConfiguration = {
       topBarBackgroundColor: Colors.SCANBOT_RED,
-      guidanceText: 'Place the LC display in the frame to scan it',
-      textFilterStrategy: 'DOCUMENT',
+      textDataScannerStep: {
+        allowedSymbols: '',
+        aspectRatio: {
+          height: 1.0,
+          width: 5.0,
+        },
+        guidanceText: 'Place the LC display in the frame to scan it',
+        pattern: '',
+        preferredZoom: 2.0,
+        shouldMatchSubstring: false,
+        significantShakeDelay: -1,
+        textFilterStrategy: 'Document',
+        unzoomedFinderHeight: 40,
+      },
     };
-
-    // eg.
-    // config.validationBlock = new JSStringToBoolTextFunctionBuilder(
-    //   (value: string) => {
-    //     return value.length > 4;
-    //   },
-    // ).build();
-
-    // config.stringSanitizerBlock = new JSStringToStringTextFunctionBuilder(
-    //   (value: string) => {
-    //     return value.toLowerCase() + value.toUpperCase();
-    //   },
-    // ).build();
 
     try {
       const result = await ScanbotSDK.UI.startTextDataScanner(config);
-      const data = result.result;
-      if (result.status === 'OK' && data) {
-        ViewUtils.showAlert(JSON.stringify(result));
+      const data = result?.result?.text;
+      if (result.status !== 'OK' || !data) {
+        return;
       }
-    } catch (err) {
-      ViewUtils.showAlert('Unexpected error');
+      ViewUtils.showAlert(JSON.stringify(result));
+    } catch (err: any) {
+      ViewUtils.showAlert('Unexpected error: ' + err.message);
+    }
+  }
+
+  async startCheckRecognizer() {
+    const config: CheckRecognizerConfiguration = {
+      topBarBackgroundColor: Colors.SCANBOT_RED,
+    };
+
+    try {
+      const result = await ScanbotSDK.UI.startCheckRecognizer(config);
+
+      if (result.status !== 'OK') {
+        // The operation was canceled by the user
+        return;
+      }
+
+      Results.lastCheckRecognizerResult = result;
+
+      this.pushPage(Navigation.CHECK_RECOGNIZER_RESULT);
+
+      console.log(JSON.stringify(result, undefined, 4));
+    } catch (err: any) {
+      ViewUtils.showAlert(err.message);
+    }
+  }
+
+  async importImageAndRecognizeCheck() {
+    const result = await ImageUtils.pickFromGallery();
+    this.showProgress();
+
+    if (result.didCancel || !result.assets) {
+      this.hideProgress();
+      return;
+    }
+
+    const pickedImage = result.assets[0];
+
+    if (!pickedImage.uri) {
+      this.hideProgress();
+      ViewUtils.showAlert('Error picking image from gallery!');
+      return;
+    }
+
+    try {
+      let checkResult = await ScanbotSDK.recognizeCheck(pickedImage.uri);
+
+      Results.lastCheckRecognizerResult = checkResult;
+
+      this.hideProgress();
+      this.pushPage(Navigation.CHECK_RECOGNIZER_RESULT);
+    } catch (err: any) {
+      ViewUtils.showAlert(err.message);
+      this.hideProgress();
     }
   }
 
   async startLicensePlateScanner(
-    detectorMode: LicensePlateDetectorMode = 'ML_BASED',
+    scanStrategy: LicensePlateScanStrategy = 'MlBased',
   ) {
     let config: LicensePlateScannerConfiguration = {
       topBarBackgroundColor: Colors.SCANBOT_RED,
-      detectorMode: detectorMode,
+      scanStrategy: scanStrategy,
     };
 
     const result = await ScanbotSDK.UI.startLicensePlateScanner(config);
@@ -288,21 +349,25 @@ export class HomeScreen extends BaseScreen {
 
     this.showProgress();
 
-    const sdkResult = await ScanbotSDK.extractPagesFromPdf({
-      pdfFilePath: fileUrl,
-      // eg.
-      // quality: 100,
-      // scaling: 4,
-    });
+    try {
+      const sdkResult = await ScanbotSDK.extractPagesFromPdf({
+        pdfFilePath: fileUrl,
+        // eg.
+        // quality: 100,
+        // scaling: 4,
+      });
 
-    this.hideProgress();
+      if (sdkResult.status !== 'OK' || !sdkResult.pages) {
+        return;
+      }
 
-    if (sdkResult.status !== 'OK' || !sdkResult.pages) {
-      return;
+      await Pages.addList(sdkResult.pages);
+      this.pushPage(Navigation.IMAGE_RESULTS);
+    } catch (err: any) {
+      ViewUtils.showAlert(err.message);
     }
 
-    await Pages.addList(sdkResult.pages);
-    this.pushPage(Navigation.IMAGE_RESULTS);
+    this.hideProgress();
   }
 
   async importPdfAndExtractImages() {
@@ -319,22 +384,26 @@ export class HomeScreen extends BaseScreen {
 
     this.showProgress();
 
-    const sdkResult = await ScanbotSDK.extractImagesFromPdf({
-      pdfFilePath: fileUrl,
-      // eg.
-      // quality: 80,
-      // scaling: 3,
-    });
+    try {
+      const sdkResult = await ScanbotSDK.extractImagesFromPdf({
+        pdfFilePath: fileUrl,
+        // eg.
+        // quality: 80,
+        // scaling: 3,
+      });
 
-    this.hideProgress();
+      const imageFilesUrls = sdkResult.imageFilesUrls;
 
-    const imageFilesUrls = sdkResult.imageFilesUrls;
+      if (sdkResult.status !== 'OK' || !imageFilesUrls) {
+        return;
+      }
 
-    if (sdkResult.status !== 'OK' || !imageFilesUrls) {
-      return;
+      ViewUtils.showAlert(JSON.stringify(imageFilesUrls));
+    } catch (err: any) {
+      ViewUtils.showAlert(err.message);
     }
 
-    ViewUtils.showAlert(JSON.stringify(imageFilesUrls));
+    this.hideProgress();
   }
 
   async importImageAndDetectDocument() {
@@ -371,14 +440,28 @@ export class HomeScreen extends BaseScreen {
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
       finderAspectRatio: {width: 1, height: 1},
       useButtonsAllCaps: false,
+      barcodeImageGenerationType: 'NONE',
       // cameraZoomFactor: 0.7,
       // engineMode: "LEGACY"
     };
 
     const result = await ScanbotSDK.UI.startBarcodeScanner(config);
-    if (result.status === 'OK') {
-      ViewUtils.showAlert(JSON.stringify(result.barcodes));
+    if (result.status !== 'OK') {
+      return;
     }
+
+    // Example of document parsing:
+    const barcodes = result.barcodes;
+    if (!barcodes) {
+      return;
+    }
+    const barcodeItem = barcodes[0];
+    if (barcodeItem) {
+      this.logBarcodeDocument(barcodeItem);
+    }
+
+    // Show the result
+    ViewUtils.showAlert(JSON.stringify(result.barcodes));
   }
 
   async startBatchBarcodeScanner() {
@@ -392,8 +475,115 @@ export class HomeScreen extends BaseScreen {
     };
 
     const result = await ScanbotSDK.UI.startBatchBarcodeScanner(config);
-    if (result.status === 'OK') {
-      ViewUtils.showAlert(JSON.stringify(result.barcodes));
+    if (result.status !== 'OK') {
+      return;
+    }
+
+    // Example of document parsing:
+    const barcodes = result.barcodes;
+    if (!barcodes) {
+      return;
+    }
+    const barcodeItem = barcodes[0];
+    if (barcodeItem) {
+      this.logBarcodeDocument(barcodeItem);
+    }
+
+    // Show the result
+    ViewUtils.showAlert(JSON.stringify(result.barcodes));
+  }
+
+  logBarcodeDocument(barcodeItem: BarcodeResultField) {
+    const formattedResult = barcodeItem.formattedResult as BaseDocumentFormat;
+    if (!formattedResult) {
+      return;
+    }
+    console.log(
+      'Formatted result:\n' + JSON.stringify(formattedResult, null, 4),
+    );
+    switch (formattedResult.documentFormat) {
+      case 'AAMVA':
+        const aamva = barcodeItem.formattedResult as AAMVADocumentFormat;
+        console.log('AAMVA Number of entries: ' + aamva.numberOfEntries);
+        break;
+      case 'BOARDING_PASS':
+        const boardingPass =
+          barcodeItem.formattedResult as BoardingPassDocumentFormat;
+        console.log(
+          'Boarding Pass Security Data: ' + boardingPass.securityData,
+        );
+        break;
+      case 'DE_MEDICAL_PLAN':
+        const deMedicalPlan =
+          barcodeItem.formattedResult as MedicalPlanDocumentFormat;
+        console.log(
+          'Medical Plan Total number of pages: ' +
+            deMedicalPlan.totalNumberOfPages,
+        );
+        break;
+      case 'MEDICAL_CERTIFICATE':
+        const medicalCertificate =
+          barcodeItem.formattedResult as MedicalCertificateDocumentFormat;
+        const mcField = medicalCertificate.fields[0];
+        if (!mcField) {
+          return;
+        }
+        console.log(
+          `Medical Certificate first field: ${mcField.type}: ${mcField.value}`,
+        );
+        break;
+      case 'ID_CARD_PDF_417':
+        const idCard =
+          barcodeItem.formattedResult as IDCardPDF417DocumentFormat;
+        const idCardField = idCard.fields[0];
+        if (!idCardField) {
+          return;
+        }
+        console.log(
+          `ID Card PDF417 first field: ${idCardField.type}: ${idCardField.value}`,
+        );
+        break;
+      case 'SEPA':
+        const sepa = barcodeItem.formattedResult as SEPADocumentFormat;
+        const sepaField = sepa.fields[0];
+        if (!sepaField) {
+          return;
+        }
+        console.log(`SEPA first field: ${sepaField.type}: ${sepaField.value}`);
+        break;
+      case 'SWISS_QR':
+        const swissQR =
+          barcodeItem.formattedResult as SwissQRCodeDocumentFormat;
+        const swissQrField = swissQR.fields[0];
+        if (!swissQrField) {
+          return;
+        }
+        console.log(
+          `SwissQR first field: ${swissQrField.type}: ${swissQrField.value}`,
+        );
+        break;
+      case 'VCARD':
+        const vCard = barcodeItem.formattedResult as VCardDocumentFormat;
+        const vCardField = vCard.fields[0];
+        if (!vCardField) {
+          return;
+        }
+        console.log(
+          `vCard first field: ${vCardField.type}: ${vCardField.values.join(
+            ',',
+          )}`,
+        );
+        break;
+      case 'GS1':
+        const gs1 = barcodeItem.formattedResult as GS1DocumentFormat;
+        const gs1Field = gs1.fields[0];
+        if (!gs1Field) {
+          return;
+        }
+        console.log(
+          `GS1 first field: ${gs1Field.fieldDescription}: ${gs1Field.rawValue}`,
+        );
+        break;
     }
   }
 
@@ -464,34 +654,47 @@ export class HomeScreen extends BaseScreen {
     this.pushPage(Navigation.BARCODE_DOCUMENT_FORMATS);
   }
 
-  async startMedicalCertificateScanner() {
-    let config: MedicalCertificateScannerConfiguration = {
+  async startMedicalCertificateRecognizer() {
+    let config: MedicalCertificateRecognizerConfiguration = {
       topBarBackgroundColor: Colors.SCANBOT_RED,
-      guidanceText: {
+      userGuidanceStrings: {
         capturing: 'capturing',
-        recognizing: 'recognizing',
-        searching: 'searching',
-        scanningStarted: 'scanning Started',
+        scanning: 'recognizing',
+        processing: 'processing',
+        startScanning: 'scanning Started',
         paused: 'paused',
         energySaving: 'energySaving',
       },
-      errorDialogText: {
-        button: 'button text',
-        title: 'error title',
-        message: 'error message',
-      },
+      errorDialogMessage: 'error message',
+      errorDialogOkButton: 'button text',
+      errorDialogTitle: 'error title',
       cancelButtonHidden: false,
-      extractPatientInfo: true,
+      recognizePatientInfo: true,
     };
     const result: MedicalCertificateScannerResult =
-      await ScanbotSDK.UI.startMedicalCertificateScanner(config);
+      await ScanbotSDK.UI.startMedicalCertificateRecognizer(config);
 
     if (result.status !== 'OK') {
       return;
     }
 
-    Results.lastMedicalCertificate = result.data;
-    this.pushPage(Navigation.MEDICAL_CERTIFICATE_RESULTS);
+    Results.lastMedicalCertificate = result;
+    this.pushPage(Navigation.MEDICAL_CERTIFICATE_RESULT);
+
+    console.log(JSON.stringify(result, undefined, 4));
+  }
+
+  async startGenericDocumentRecognizer() {
+    let config: GenericDocumentRecognizerConfiguration = {};
+    const result: GenericDocumentRecognizerResult =
+      await ScanbotSDK.UI.startGenericDocumentRecognizer(config);
+
+    if (result.status !== 'OK') {
+      return;
+    }
+
+    Results.lastGenericDocumentResult = result;
+    this.pushPage(Navigation.GENERIC_DOCUMENT_RESULT);
 
     console.log(JSON.stringify(result, undefined, 4));
   }
@@ -504,9 +707,10 @@ export class HomeScreen extends BaseScreen {
     };
 
     if (Platform.OS === 'ios') {
-      const {width} = Dimensions.get('window');
-      config.finderWidth = width * 0.9;
-      config.finderHeight = width * 0.18;
+      config.finderAspectRatio = {
+        width: 0.9,
+        height: 0.18,
+      };
     }
 
     const result = await ScanbotSDK.UI.startMrzScanner(config);
@@ -532,31 +736,6 @@ export class HomeScreen extends BaseScreen {
     }
   }
 
-  async startIdCardScanner() {
-    const config: IdCardScannerConfiguration = {
-      acceptedDocumentTypes: ['DeIdBack', 'DeIdFront'],
-      shouldSavePhotoImageInStorage: true,
-      shouldSaveSignatureImageInStorage: true,
-      startScanningTitle: 'Start Scanning!',
-      viewResultsButtonTitle: 'Confirm',
-      topBarBackgroundColor: Colors.SCANBOT_RED,
-    };
-
-    const result = await ScanbotSDK.UI.startIdCardScanner(config);
-    if (result.status === 'OK') {
-      ViewUtils.showAlert(JSON.stringify(result));
-    }
-  }
-
-  async startNFCReader() {
-    const config: NFCPassportReaderConfiguration = {};
-
-    const result = await ScanbotSDK.UI.startNFCPassportReader(config);
-    if (result.status === 'OK') {
-      ViewUtils.showAlert(JSON.stringify(result));
-    }
-  }
-
   async detectDocumentFromFile() {
     const pickerResult = await ImageUtils.pickFromGallery();
     this.showProgress();
@@ -574,10 +753,24 @@ export class HomeScreen extends BaseScreen {
       return;
     }
 
+    var result;
+    var blur;
+    const uri = pickedImage.uri;
     try {
-      const result = await ScanbotSDK.detectDocument(pickedImage.uri);
-      ViewUtils.showAlert(JSON.stringify(result));
-    } catch (_err) {}
+      result = await ScanbotSDK.detectDocument(uri);
+    } catch (err: any) {
+      result = 'Error!';
+      console.log(err);
+    }
+
+    try {
+      blur = await ScanbotSDK.estimateBlur({imageFileUri: uri});
+    } catch (err: any) {
+      blur = 'Error!';
+      console.log(err);
+    }
+
+    ViewUtils.showAlert(JSON.stringify({blur, result}));
 
     this.hideProgress();
   }

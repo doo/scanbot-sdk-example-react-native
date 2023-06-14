@@ -1,7 +1,7 @@
 import React from 'react';
-import { Image } from 'react-native';
+import {Image} from 'react-native';
 import ScanbotSDK from 'react-native-scanbot-sdk/src';
-import { SDKUtils } from '../utils/SDKUtils';
+import {SDKUtils} from '../utils/SDKUtils';
 
 type PreviewImageProps = {
   imageUri?: string;
@@ -15,9 +15,10 @@ export default function PreviewImage(props: PreviewImageProps) {
     return null;
   }
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   React.useEffect(() => {
     const loadDecryptedImageData = async () => {
-      const result = await ScanbotSDK.getImageData(props.imageUri);
+      const result = await ScanbotSDK.getImageData(props.imageUri as string);
       const imgMimeType =
         SDKUtils.IMAGE_FILE_FORMAT === 'JPG' ? 'image/jpeg' : 'image/png';
       setUri(`data:${imgMimeType};base64,${result.base64ImageData}`);
@@ -32,5 +33,8 @@ export default function PreviewImage(props: PreviewImageProps) {
     }
   }, [props.imageUri]);
 
-  return <Image source={{ uri: uri }} style={props.style} />;
+  if (!props.imageUri) {
+    return null;
+  }
+  return <Image source={{uri: uri}} style={props.style} />;
 }

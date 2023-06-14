@@ -1,6 +1,10 @@
 package io.scanbot.example.sdk.reactnative;
 
+import android.os.Bundle;
+
 import com.facebook.react.ReactActivity;
+
+import io.scanbot.sdk.reactnative.ScanbotSDKReactNative;
 
 public class MainActivity extends ReactActivity {
 

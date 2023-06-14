@@ -16,16 +16,17 @@ export enum FeatureId {
   BarcodeDocumentFormatsFilter,
   ScanMRZ,
   ScanMedicalCertificate,
+  ScanGenericDocument,
   ScanEHIC,
-  ScanIdCard,
-  ReadPassportNFC,
   LicenseInfo,
   OcrConfigs,
   LearnMore,
   LicensePlateScannerML,
   LicensePlateScannerClassic,
   TextDataScanner,
+  CheckRecognizer,
   BarcodeCameraViewComponent,
+  RecognizeCheckOnImage,
 }
 export class Examples {
   public static list = [
@@ -83,9 +84,12 @@ export class Examples {
           id: FeatureId.ScanMedicalCertificate,
           title: 'Scan Medical Certificate',
         },
+        {
+          id: FeatureId.ScanGenericDocument,
+          title: 'Scan Generic Document',
+        },
+        {id: FeatureId.CheckRecognizer, title: 'Scan Check'},
         {id: FeatureId.ScanEHIC, title: 'Scan Health Insurance Card'},
-        {id: FeatureId.ScanIdCard, title: 'Scan Id Card'},
-        {id: FeatureId.ReadPassportNFC, title: 'Read Passport NFC'},
         {
           id: FeatureId.LicensePlateScannerML,
           title: 'Scan Vehicle License Plate (ML Based)',
@@ -94,7 +98,11 @@ export class Examples {
           id: FeatureId.LicensePlateScannerClassic,
           title: 'Scan Vehicle License Plate (Classic)',
         },
-        {id: FeatureId.TextDataScanner, title: 'Text Data Scanner'},
+        {id: FeatureId.TextDataScanner, title: 'Start Text Data Scanner'},
+        {
+          id: FeatureId.RecognizeCheckOnImage,
+          title: 'Import Image and Recognize Check',
+        },
       ],
     },
     {

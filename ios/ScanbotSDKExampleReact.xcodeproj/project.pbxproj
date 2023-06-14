@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* ScanbotSDKExampleReactTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ScanbotSDKExampleReactTests.m */; };
-		05FD2094EBA19ADF5FF4D630 /* libPods-ScanbotSDKExampleReact-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2666DEA5D133093EB867FD6D /* libPods-ScanbotSDKExampleReact-tvOS.a */; };
+		026930084E014A84E14008BC /* libPods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56850DBF93D2F9D8668C1325 /* libPods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -18,11 +18,11 @@
 		2DCD954D1E0B4F2C00145EB5 /* ScanbotSDKExampleReactTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ScanbotSDKExampleReactTests.m */; };
 		64116B3D252794E30065187B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64116B3C252794E30065187B /* LaunchScreen.storyboard */; };
 		64116B3E252794E30065187B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64116B3C252794E30065187B /* LaunchScreen.storyboard */; };
-		6B783DB436EFF26DD7B762DE /* libPods-ScanbotSDKExampleReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CB7AF5607082FD4C0D35662 /* libPods-ScanbotSDKExampleReact.a */; };
-		73837825BE122F71A824A9C3 /* libPods-ScanbotSDKExampleReact-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0896B20B1C512ADC769EBF /* libPods-ScanbotSDKExampleReact-tvOSTests.a */; };
-		B50CF34E83BC4CD3F1BB7118 /* libPods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8272D537386EADB7EDD72BD8 /* libPods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.a */; };
+		9B56918AF435BF65C821EF79 /* libPods-ScanbotSDKExampleReact-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 978E99EB1592D92124ABFB0D /* libPods-ScanbotSDKExampleReact-tvOSTests.a */; };
+		B855B21D1FFE2C0D06308396 /* libPods-ScanbotSDKExampleReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3D585B580FFA36731F9895 /* libPods-ScanbotSDKExampleReact.a */; };
 		CD125AF727357459006CA675 /* _SwiftPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD125AF627357459006CA675 /* _SwiftPlaceholder.swift */; };
 		CD125AF827357459006CA675 /* _SwiftPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD125AF627357459006CA675 /* _SwiftPlaceholder.swift */; };
+		DA09A0CD40679B863D50E570 /* libPods-ScanbotSDKExampleReact-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 47A633E0E1F75CF3887E23C1 /* libPods-ScanbotSDKExampleReact-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,29 +47,29 @@
 		00E356EE1AD99517003FC87E /* ScanbotSDKExampleReactTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScanbotSDKExampleReactTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* ScanbotSDKExampleReactTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanbotSDKExampleReactTests.m; sourceTree = "<group>"; };
+		03998B80BACA2368C613CBFA /* Pods-ScanbotSDKExampleReact-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScanbotSDKExampleReact-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-ScanbotSDKExampleReact-tvOSTests/Pods-ScanbotSDKExampleReact-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* ScanbotSDKExampleReact.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScanbotSDKExampleReact.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ScanbotSDKExampleReact/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ScanbotSDKExampleReact/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ScanbotSDKExampleReact/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ScanbotSDKExampleReact/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ScanbotSDKExampleReact/main.m; sourceTree = "<group>"; };
-		2666DEA5D133093EB867FD6D /* libPods-ScanbotSDKExampleReact-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ScanbotSDKExampleReact-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		288F736325A60BEB0021B716 /* ScanbotSDKExampleReact.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ScanbotSDKExampleReact.entitlements; path = ScanbotSDKExampleReact/ScanbotSDKExampleReact.entitlements; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* ScanbotSDKExampleReact-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ScanbotSDKExampleReact-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* ScanbotSDKExampleReact-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ScanbotSDKExampleReact-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		47A633E0E1F75CF3887E23C1 /* libPods-ScanbotSDKExampleReact-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ScanbotSDKExampleReact-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		56850DBF93D2F9D8668C1325 /* libPods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CD7A2392D388125817CE59E /* Pods-ScanbotSDKExampleReact.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScanbotSDKExampleReact.debug.xcconfig"; path = "Target Support Files/Pods-ScanbotSDKExampleReact/Pods-ScanbotSDKExampleReact.debug.xcconfig"; sourceTree = "<group>"; };
+		5D3D585B580FFA36731F9895 /* libPods-ScanbotSDKExampleReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ScanbotSDKExampleReact.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		64116B3C252794E30065187B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ScanbotSDKExampleReact/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		6A7CC5CD7E59B815D8836230 /* Pods-ScanbotSDKExampleReact-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScanbotSDKExampleReact-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-ScanbotSDKExampleReact-tvOS/Pods-ScanbotSDKExampleReact-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		7AADF7A31F41130BBEAFA8DD /* Pods-ScanbotSDKExampleReact-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScanbotSDKExampleReact-tvOS.release.xcconfig"; path = "Target Support Files/Pods-ScanbotSDKExampleReact-tvOS/Pods-ScanbotSDKExampleReact-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		7B054F2A1EBC7501DB41AD5F /* Pods-ScanbotSDKExampleReact.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScanbotSDKExampleReact.debug.xcconfig"; path = "Target Support Files/Pods-ScanbotSDKExampleReact/Pods-ScanbotSDKExampleReact.debug.xcconfig"; sourceTree = "<group>"; };
-		8272D537386EADB7EDD72BD8 /* libPods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		920143EE33E2E61E93593627 /* Pods-ScanbotSDKExampleReact.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScanbotSDKExampleReact.release.xcconfig"; path = "Target Support Files/Pods-ScanbotSDKExampleReact/Pods-ScanbotSDKExampleReact.release.xcconfig"; sourceTree = "<group>"; };
-		9CB7AF5607082FD4C0D35662 /* libPods-ScanbotSDKExampleReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ScanbotSDKExampleReact.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D0896B20B1C512ADC769EBF /* libPods-ScanbotSDKExampleReact-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ScanbotSDKExampleReact-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1738A6CEB7996198A85EA03 /* Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.release.xcconfig"; path = "Target Support Files/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.release.xcconfig"; sourceTree = "<group>"; };
-		AA0C108C46D00D158EB59D8A /* Pods-ScanbotSDKExampleReact-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScanbotSDKExampleReact-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-ScanbotSDKExampleReact-tvOSTests/Pods-ScanbotSDKExampleReact-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		B9B3F0A1E56865D79F961373 /* Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.debug.xcconfig"; path = "Target Support Files/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.debug.xcconfig"; sourceTree = "<group>"; };
-		BC16D6EFAFBC21D9AA0CCFF2 /* Pods-ScanbotSDKExampleReact-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScanbotSDKExampleReact-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-ScanbotSDKExampleReact-tvOSTests/Pods-ScanbotSDKExampleReact-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		93D90E6760E82B1ABE78E57D /* Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.release.xcconfig"; path = "Target Support Files/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.release.xcconfig"; sourceTree = "<group>"; };
+		978E99EB1592D92124ABFB0D /* libPods-ScanbotSDKExampleReact-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ScanbotSDKExampleReact-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5F2DDD72F1E05BEF4E21A2E /* Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.debug.xcconfig"; path = "Target Support Files/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A61FC7CEA1482B6FE58E76CF /* Pods-ScanbotSDKExampleReact-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScanbotSDKExampleReact-tvOS.release.xcconfig"; path = "Target Support Files/Pods-ScanbotSDKExampleReact-tvOS/Pods-ScanbotSDKExampleReact-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		CD125AF627357459006CA675 /* _SwiftPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _SwiftPlaceholder.swift; sourceTree = "<group>"; };
+		D1A6EC864D08FEFFB2E7B19B /* Pods-ScanbotSDKExampleReact.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScanbotSDKExampleReact.release.xcconfig"; path = "Target Support Files/Pods-ScanbotSDKExampleReact/Pods-ScanbotSDKExampleReact.release.xcconfig"; sourceTree = "<group>"; };
+		D94156511F14CB1771BCAD46 /* Pods-ScanbotSDKExampleReact-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScanbotSDKExampleReact-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-ScanbotSDKExampleReact-tvOSTests/Pods-ScanbotSDKExampleReact-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E68FCA00C5E814D46343598B /* Pods-ScanbotSDKExampleReact-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScanbotSDKExampleReact-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-ScanbotSDKExampleReact-tvOS/Pods-ScanbotSDKExampleReact-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -79,7 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B50CF34E83BC4CD3F1BB7118 /* libPods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.a in Frameworks */,
+				026930084E014A84E14008BC /* libPods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,7 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B783DB436EFF26DD7B762DE /* libPods-ScanbotSDKExampleReact.a in Frameworks */,
+				B855B21D1FFE2C0D06308396 /* libPods-ScanbotSDKExampleReact.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,7 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05FD2094EBA19ADF5FF4D630 /* libPods-ScanbotSDKExampleReact-tvOS.a in Frameworks */,
+				DA09A0CD40679B863D50E570 /* libPods-ScanbotSDKExampleReact-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73837825BE122F71A824A9C3 /* libPods-ScanbotSDKExampleReact-tvOSTests.a in Frameworks */,
+				9B56918AF435BF65C821EF79 /* libPods-ScanbotSDKExampleReact-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,10 +148,10 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				9CB7AF5607082FD4C0D35662 /* libPods-ScanbotSDKExampleReact.a */,
-				8272D537386EADB7EDD72BD8 /* libPods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.a */,
-				2666DEA5D133093EB867FD6D /* libPods-ScanbotSDKExampleReact-tvOS.a */,
-				9D0896B20B1C512ADC769EBF /* libPods-ScanbotSDKExampleReact-tvOSTests.a */,
+				5D3D585B580FFA36731F9895 /* libPods-ScanbotSDKExampleReact.a */,
+				56850DBF93D2F9D8668C1325 /* libPods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.a */,
+				47A633E0E1F75CF3887E23C1 /* libPods-ScanbotSDKExampleReact-tvOS.a */,
+				978E99EB1592D92124ABFB0D /* libPods-ScanbotSDKExampleReact-tvOSTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -192,14 +192,14 @@
 		BFEF37BADCA4AF940651C63F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7B054F2A1EBC7501DB41AD5F /* Pods-ScanbotSDKExampleReact.debug.xcconfig */,
-				920143EE33E2E61E93593627 /* Pods-ScanbotSDKExampleReact.release.xcconfig */,
-				B9B3F0A1E56865D79F961373 /* Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.debug.xcconfig */,
-				A1738A6CEB7996198A85EA03 /* Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.release.xcconfig */,
-				6A7CC5CD7E59B815D8836230 /* Pods-ScanbotSDKExampleReact-tvOS.debug.xcconfig */,
-				7AADF7A31F41130BBEAFA8DD /* Pods-ScanbotSDKExampleReact-tvOS.release.xcconfig */,
-				BC16D6EFAFBC21D9AA0CCFF2 /* Pods-ScanbotSDKExampleReact-tvOSTests.debug.xcconfig */,
-				AA0C108C46D00D158EB59D8A /* Pods-ScanbotSDKExampleReact-tvOSTests.release.xcconfig */,
+				5CD7A2392D388125817CE59E /* Pods-ScanbotSDKExampleReact.debug.xcconfig */,
+				D1A6EC864D08FEFFB2E7B19B /* Pods-ScanbotSDKExampleReact.release.xcconfig */,
+				A5F2DDD72F1E05BEF4E21A2E /* Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.debug.xcconfig */,
+				93D90E6760E82B1ABE78E57D /* Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.release.xcconfig */,
+				E68FCA00C5E814D46343598B /* Pods-ScanbotSDKExampleReact-tvOS.debug.xcconfig */,
+				A61FC7CEA1482B6FE58E76CF /* Pods-ScanbotSDKExampleReact-tvOS.release.xcconfig */,
+				D94156511F14CB1771BCAD46 /* Pods-ScanbotSDKExampleReact-tvOSTests.debug.xcconfig */,
+				03998B80BACA2368C613CBFA /* Pods-ScanbotSDKExampleReact-tvOSTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -211,12 +211,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "ScanbotSDKExampleReactTests" */;
 			buildPhases = (
-				26ED852B126C1AF4ECC536FA /* [CP] Check Pods Manifest.lock */,
+				A0923DEC401D6B3C2C3498CE /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				B22E5709F27AD644EBA2C84B /* [CP] Embed Pods Frameworks */,
-				BEFE1C74207AFC5B04CDBB13 /* [CP] Copy Pods Resources */,
+				512AB842075D8E594ED13B97 /* [CP] Embed Pods Frameworks */,
+				EF42A9E1E984659B602916CF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -232,14 +232,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "ScanbotSDKExampleReact" */;
 			buildPhases = (
-				BE51AE4CB09916A9DA15B3DB /* [CP] Check Pods Manifest.lock */,
+				AEE65E072E10E2D8C513B155 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				32D0ABC05ECD796532A2B0C4 /* [CP] Embed Pods Frameworks */,
-				1A52BE887F26EB11108BE625 /* [CP] Copy Pods Resources */,
+				8583F8E58E691D5D4E18324B /* [CP] Embed Pods Frameworks */,
+				9C475D822CABF16A8EA40DC1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -254,7 +254,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "ScanbotSDKExampleReact-tvOS" */;
 			buildPhases = (
-				70ECF5CF0D4B21BCFCDFDB25 /* [CP] Check Pods Manifest.lock */,
+				B11BDC8317A5ADC94CEF496A /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
@@ -274,7 +274,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "ScanbotSDKExampleReact-tvOSTests" */;
 			buildPhases = (
-				EBED32B00D7A04E698DEB8B4 /* [CP] Check Pods Manifest.lock */,
+				BE9BAD9642E49A4064A07F46 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
@@ -390,7 +390,65 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		1A52BE887F26EB11108BE625 /* [CP] Copy Pods Resources */ = {
+		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native Code And Images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		512AB842075D8E594ED13B97 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ScanbotSDK/ALL/ScanbotSDK.framework/ScanbotSDK",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ScanbotSDKNativeWrapper/ALL/ScanbotSDKNativeWrapper.framework/ScanbotSDKNativeWrapper",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ScanbotSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ScanbotSDKNativeWrapper.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8583F8E58E691D5D4E18324B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact/Pods-ScanbotSDKExampleReact-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ScanbotSDK/ALL/ScanbotSDK.framework/ScanbotSDK",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ScanbotSDKNativeWrapper/ALL/ScanbotSDKNativeWrapper.framework/ScanbotSDKNativeWrapper",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ScanbotSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ScanbotSDKNativeWrapper.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact/Pods-ScanbotSDKExampleReact-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9C475D822CABF16A8EA40DC1 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -399,7 +457,6 @@
 				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact/Pods-ScanbotSDKExampleReact-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/RNImageCropPicker/QBImagePicker.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
-				"${PODS_ROOT}/ScanbotSDK/AdditionalData/ScanbotSDKMRZData.bundle",
 				"${PODS_ROOT}/ScanbotSDK/AdditionalData/ScanbotSDKOCRData.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/TOCropViewController/TOCropViewControllerBundle.bundle",
 			);
@@ -407,7 +464,6 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QBImagePicker.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ScanbotSDKMRZData.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ScanbotSDKOCRData.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TOCropViewControllerBundle.bundle",
 			);
@@ -416,7 +472,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact/Pods-ScanbotSDKExampleReact-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		26ED852B126C1AF4ECC536FA /* [CP] Check Pods Manifest.lock */ = {
+		A0923DEC401D6B3C2C3498CE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -438,83 +494,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Bundle React Native Code And Images";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
-		};
-		32D0ABC05ECD796532A2B0C4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact/Pods-ScanbotSDKExampleReact-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ScanbotSDK/ALL/ScanbotSDK.framework/ScanbotSDK",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ScanbotSDK.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact/Pods-ScanbotSDKExampleReact-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		70ECF5CF0D4B21BCFCDFDB25 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ScanbotSDKExampleReact-tvOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B22E5709F27AD644EBA2C84B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ScanbotSDK/ALL/ScanbotSDK.framework/ScanbotSDK",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ScanbotSDK.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BE51AE4CB09916A9DA15B3DB /* [CP] Check Pods Manifest.lock */ = {
+		AEE65E072E10E2D8C513B155 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -536,33 +516,29 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BEFE1C74207AFC5B04CDBB13 /* [CP] Copy Pods Resources */ = {
+		B11BDC8317A5ADC94CEF496A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/RNImageCropPicker/QBImagePicker.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
-				"${PODS_ROOT}/ScanbotSDK/AdditionalData/ScanbotSDKMRZData.bundle",
-				"${PODS_ROOT}/ScanbotSDK/AdditionalData/ScanbotSDKOCRData.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/TOCropViewController/TOCropViewControllerBundle.bundle",
+			inputFileListPaths = (
 			);
-			name = "[CP] Copy Pods Resources";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QBImagePicker.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ScanbotSDKMRZData.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ScanbotSDKOCRData.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TOCropViewControllerBundle.bundle",
+				"$(DERIVED_FILE_DIR)/Pods-ScanbotSDKExampleReact-tvOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EBED32B00D7A04E698DEB8B4 /* [CP] Check Pods Manifest.lock */ = {
+		BE9BAD9642E49A4064A07F46 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -582,6 +558,30 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF42A9E1E984659B602916CF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/RNImageCropPicker/QBImagePicker.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+				"${PODS_ROOT}/ScanbotSDK/AdditionalData/ScanbotSDKOCRData.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/TOCropViewController/TOCropViewControllerBundle.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QBImagePicker.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ScanbotSDKOCRData.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TOCropViewControllerBundle.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests/Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -679,7 +679,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B9B3F0A1E56865D79F961373 /* Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.debug.xcconfig */;
+			baseConfigurationReference = A5F2DDD72F1E05BEF4E21A2E /* Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -704,7 +704,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A1738A6CEB7996198A85EA03 /* Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.release.xcconfig */;
+			baseConfigurationReference = 93D90E6760E82B1ABE78E57D /* Pods-ScanbotSDKExampleReact-ScanbotSDKExampleReactTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -726,7 +726,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B054F2A1EBC7501DB41AD5F /* Pods-ScanbotSDKExampleReact.debug.xcconfig */;
+			baseConfigurationReference = 5CD7A2392D388125817CE59E /* Pods-ScanbotSDKExampleReact.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -756,14 +756,14 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 920143EE33E2E61E93593627 /* Pods-ScanbotSDKExampleReact.release.xcconfig */;
+			baseConfigurationReference = D1A6EC864D08FEFFB2E7B19B /* Pods-ScanbotSDKExampleReact.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ScanbotSDKExampleReact/ScanbotSDKExampleReact.entitlements;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = FRUPYT6KB3;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ScanbotSDKExampleReact/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -781,7 +781,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A7CC5CD7E59B815D8836230 /* Pods-ScanbotSDKExampleReact-tvOS.debug.xcconfig */;
+			baseConfigurationReference = E68FCA00C5E814D46343598B /* Pods-ScanbotSDKExampleReact-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -816,7 +816,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7AADF7A31F41130BBEAFA8DD /* Pods-ScanbotSDKExampleReact-tvOS.release.xcconfig */;
+			baseConfigurationReference = A61FC7CEA1482B6FE58E76CF /* Pods-ScanbotSDKExampleReact-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -850,7 +850,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BC16D6EFAFBC21D9AA0CCFF2 /* Pods-ScanbotSDKExampleReact-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = D94156511F14CB1771BCAD46 /* Pods-ScanbotSDKExampleReact-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -879,7 +879,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA0C108C46D00D158EB59D8A /* Pods-ScanbotSDKExampleReact-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = 03998B80BACA2368C613CBFA /* Pods-ScanbotSDKExampleReact-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

@@ -171,8 +171,7 @@ export class BarcodeCameraViewScreen extends BaseScreen {
                   });
                 }
               }}
-            >
-            </ScanbotBarcodeCameraView>
+            />
             <View style={this.styles.resultsView}>
               <Text style={this.styles.resultsViewHeader}>Results</Text>
               <Text style={this.styles.resultsText}>{lastDetectedBarcode}</Text>
