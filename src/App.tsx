@@ -20,6 +20,7 @@ import {BarcodeCameraViewScreen} from './pages/BarcodeCameraViewScreen';
 import {MedicalCertificateResultScreen} from './pages/MedicalCertificateResultScreen';
 import {GenericDocumentResultScreen} from './pages/GenericDocumentResultScreen';
 import {CheckRecognizerResultScreen} from './pages/CheckRecognizerResultScreen';
+import {ModalTestScreen} from './pages/ModalTestScreen';
 
 const Stack = createStackNavigator();
 
@@ -144,6 +145,15 @@ export class App extends React.Component {
             options={{
               headerBackTitleVisible: false,
               title: 'Barcode Camera View',
+              ...sharedHeaderProps,
+            }}
+          />
+          <Stack.Screen
+            name={Navigation.MODAL_TEST_SCREEN}
+            component={ModalTestScreen}
+            options={{
+              headerBackTitleVisible: false,
+              title: 'Modal Test Screen',
               ...sharedHeaderProps,
             }}
           />

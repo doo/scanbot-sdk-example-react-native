@@ -137,6 +137,9 @@ export class HomeScreen extends BaseScreen {
     }
 
     switch (item.id) {
+      case FeatureId.ModalTestScreen:
+        this.goToModalTestScreen();
+        break;
       case FeatureId.DocumentScanner:
         this.startDocumentScanner();
         break;
@@ -207,6 +210,10 @@ export class HomeScreen extends BaseScreen {
       case FeatureId.BarcodeCameraViewComponent:
         this.goToBarcodeCameraViewComponentExample();
     }
+  }
+
+  async goToModalTestScreen() {
+    this.pushPage(Navigation.MODAL_TEST_SCREEN);
   }
 
   async goToBarcodeCameraViewComponentExample() {

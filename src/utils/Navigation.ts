@@ -8,4 +8,5 @@ export class Navigation {
   public static CHECK_RECOGNIZER_RESULT = 'Check Recognizer Result';
   public static IMAGE_DETAILS = 'Image Details';
   public static BARCODE_CAMERA_VIEW = 'Barcode Camera View (EXPERIMENTAL)';
+  public static MODAL_TEST_SCREEN = 'MODAL TEST SCREEN';
 }

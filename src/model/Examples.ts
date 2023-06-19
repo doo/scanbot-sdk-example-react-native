@@ -2,6 +2,7 @@ import {StyleSheet} from 'react-native';
 import {Colors} from './Colors';
 
 export enum FeatureId {
+  ModalTestScreen = 0,
   DocumentScanner = 1,
   DetectDocumentFromPage,
   DetectDocumentFromImage,
@@ -30,6 +31,10 @@ export enum FeatureId {
 }
 export class Examples {
   public static list = [
+    {
+      title: 'QA TEST',
+      data: [{id: FeatureId.ModalTestScreen, title: 'Go to MODAL TEST Screen'}],
+    },
     {
       title: 'DOCUMENT SCANNER',
       data: [
