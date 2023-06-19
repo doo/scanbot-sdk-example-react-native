@@ -6,7 +6,8 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 
 export const ModalTestScreen = () => {
   const openDocumentScanner = async () => {
-    await ScanbotSDK.UI.startDocumentScanner({});
+    const result = await ScanbotSDK.UI.startDocumentScanner({});
+    console.log(JSON.stringify(result, undefined, 4));
   };
 
   const [modalVisible, setModalVisible] = useState(false);
