@@ -36,8 +36,17 @@ and [CocoaPods](https://cocoapods.org/) installed.
 
 Install node modules:
 
+When using ReactNative version 0.64.X:
+
 ```
-cd scanbot-sdk-example-react-native/
+cd RN-0.64.X
+npm install
+```
+
+When using ReactNative version 0.71.X:
+
+```
+cd RN-0.71.X
 npm install
 ```
 

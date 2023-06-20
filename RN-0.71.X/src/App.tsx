@@ -1,0 +1,170 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ */
+
+import React from 'react';
+import { LogBox, Platform } from 'react-native';
+
+import ScanbotSDK, {InitializationOptions} from 'react-native-scanbot-sdk';
+import { SDKUtils } from './utils/SDKUtils';
+import { ViewUtils } from './utils/ViewUtils';
+import { DocumentDirectoryPath, ExternalDirectoryPath } from 'react-native-fs';
+import { NavigationContainer } from '@react-navigation/native';
+import { Styles } from './model/Styles';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Navigation } from './utils/Navigation';
+import { HomeScreen } from './pages/HomeScreen';
+import { ImageResultScreen } from './pages/ImageResultScreen';
+import { ImageDetailScreen } from './pages/ImageDetailScreen';
+import { MedicalCertificateResultScreen } from './pages/MedicalCertificateResultScreen';
+import { GenericDocumentResultScreen } from './pages/GenericDocumentResultScreen';
+import { CheckRecognizerResultScreen } from './pages/CheckRecognizerResultScreen';
+import { BarcodeFormatsScreen } from './pages/BarcodeFormatsScreen';
+import { BarcodeDocumentFormatsScreen } from './pages/BarcodeDocumentFormatsScreen';
+import { BarcodeCameraViewScreen } from './pages/BarcodeCameraViewScreen';
+
+const Stack = createStackNavigator();
+
+// this is for fix the new nativeeventemitter() was called with a non-null argument issue.
+LogBox.ignoreLogs(['new NativeEventEmitter']); // Ignore log notification by message
+LogBox.ignoreAllLogs();
+  
+export class App extends React.Component {
+
+  
+
+  constructor(props: any) {
+    super(props);
+    this.initScanbotSdk();
+  }
+
+  async initScanbotSdk() {
+    const options: InitializationOptions = {
+      licenseKey: SDKUtils.SDK_LICENSE_KEY,
+      loggingEnabled: true, // Consider switching logging OFF in production builds for security and performance reasons!
+      storageImageFormat: SDKUtils.IMAGE_FILE_FORMAT,
+      storageImageQuality: SDKUtils.JPG_IMAGE_QUALITY,
+      storageBaseDirectory: this.getCustomStoragePath(), // Optional custom storage path. See comments below!
+      documentDetectorMode: 'ML_BASED',
+    };
+    if (SDKUtils.FILE_ENCRYPTION_ENABLED && SDKUtils.FILE_ENCRYPTION_PASSWORD) {
+      options.fileEncryptionPassword = SDKUtils.FILE_ENCRYPTION_PASSWORD;
+      options.fileEncryptionMode = SDKUtils.FILE_ENCRYPTION_MODE;
+    }
+    try {
+      const result = await ScanbotSDK.initializeSDK(options);
+      console.log(result);
+    } catch (e: any) {
+      console.error('Error initializing Scanbot SDK:', e.message);
+      ViewUtils.showAlert('Error initializing Scanbot SDK:\n' + e.message);
+    }
+  }
+
+  getCustomStoragePath(): string {
+    // tslint:disable:max-line-length
+    // !! Please note !!
+    // It is strongly recommended to use the default (secure) storage location of the Scanbot SDK.
+    // However, for demo purposes we overwrite the "storageBaseDirectory" of the Scanbot SDK by a custom storage directory.
+    //
+    // On Android we use the "ExternalDirectoryPath" which is a public(!) folder.
+    // All image files and export files (PDF, TIFF, etc) created by the Scanbot SDK in this demo app will be stored
+    // in this public storage directory and will be accessible for every(!) app having external storage permissions!
+    // Again, this is only for demo purposes, which allows us to easily fetch and check the generated files
+    // via Android "adb" CLI tools, Android File Transfer app, Android Studio, etc.
+    //
+    // On iOS we use the "DocumentDirectoryPath" which is accessible via iTunes file sharing.
+    //
+    // For more details about the storage system of the Scanbot SDK RN Module please see our docs:
+    // - https://scanbotsdk.github.io/documentation/react-native/
+    //
+    // For more details about the file system on Android and iOS we also recommend to check out:
+    // - https://developer.android.com/guide/topics/data/data-storage
+    // - https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/FileSystemOverview/FileSystemOverview.html
+    // tslint:enable:max-line-length
+
+    if (Platform.OS === 'ios') {
+      return DocumentDirectoryPath + '/my-custom-storage';
+    } else if (Platform.OS === 'android') {
+      return ExternalDirectoryPath + '/my-custom-storage';
+    }
+    return '';
+  }
+
+  render() {
+    const sharedHeaderProps = {
+      headerStyle: {
+        borderBottomWidth: 0,
+        elevation: 0,
+        shadowColor: 'transparent',
+      },
+    };
+
+    return (
+      <NavigationContainer theme={Styles.ScanbotTheme}> 
+        <Stack.Navigator initialRouteName={Navigation.HOME}>
+          <Stack.Screen name={Navigation.HOME} component={HomeScreen} />
+          <Stack.Screen
+            name={Navigation.IMAGE_RESULTS}
+            component={ImageResultScreen}
+            options={sharedHeaderProps}
+          />
+          <Stack.Screen
+            name={Navigation.IMAGE_DETAILS}
+            component={ImageDetailScreen}
+            options={{
+              headerBackTitleVisible: false,
+              ...sharedHeaderProps,
+            }}
+          />
+          <Stack.Screen
+            name={Navigation.MEDICAL_CERTIFICATE_RESULT}
+            component={MedicalCertificateResultScreen}
+            options={sharedHeaderProps}
+          />
+          <Stack.Screen
+            name={Navigation.GENERIC_DOCUMENT_RESULT}
+            component={GenericDocumentResultScreen}
+            options={sharedHeaderProps}
+          />
+          <Stack.Screen
+            name={Navigation.CHECK_RECOGNIZER_RESULT}
+            component={CheckRecognizerResultScreen}
+            options={sharedHeaderProps}
+          />
+          <Stack.Screen
+            name={Navigation.BARCODE_FORMATS}
+            component={BarcodeFormatsScreen}
+            options={{
+              headerBackTitleVisible: false,
+              ...sharedHeaderProps,
+            }}
+          />
+          <Stack.Screen
+            name={Navigation.BARCODE_DOCUMENT_FORMATS}
+            component={BarcodeDocumentFormatsScreen}
+            options={{
+              headerBackTitleVisible: false,
+              ...sharedHeaderProps,
+            }}
+          />
+          <Stack.Screen
+            name={Navigation.BARCODE_CAMERA_VIEW}
+            component={BarcodeCameraViewScreen}
+            options={{
+              headerBackTitleVisible: false,
+              title: 'Barcode Camera View',
+              ...sharedHeaderProps,
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+    
+  }
+}
+
+// @ts-ignore
+export default App;
