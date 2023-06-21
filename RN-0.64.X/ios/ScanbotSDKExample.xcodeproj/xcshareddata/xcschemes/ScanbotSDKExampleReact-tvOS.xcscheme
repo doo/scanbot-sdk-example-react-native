@@ -17,7 +17,7 @@
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
                BuildableName = "ScanbotSDKExampleReact-tvOS.app"
                BlueprintName = "ScanbotSDKExampleReact-tvOS"
-               ReferencedContainer = "container:ScanbotSDKExampleReact.xcodeproj">
+               ReferencedContainer = "container:ScanbotSDKExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
                BuildableName = "ScanbotSDKExampleReact-tvOSTests.xctest"
                BlueprintName = "ScanbotSDKExampleReact-tvOSTests"
-               ReferencedContainer = "container:ScanbotSDKExampleReact.xcodeproj">
+               ReferencedContainer = "container:ScanbotSDKExample.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,7 +57,7 @@
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
             BuildableName = "ScanbotSDKExampleReact-tvOS.app"
             BlueprintName = "ScanbotSDKExampleReact-tvOS"
-            ReferencedContainer = "container:ScanbotSDKExampleReact.xcodeproj">
+            ReferencedContainer = "container:ScanbotSDKExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -74,7 +74,7 @@
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
             BuildableName = "ScanbotSDKExampleReact-tvOS.app"
             BlueprintName = "ScanbotSDKExampleReact-tvOS"
-            ReferencedContainer = "container:ScanbotSDKExampleReact.xcodeproj">
+            ReferencedContainer = "container:ScanbotSDKExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
