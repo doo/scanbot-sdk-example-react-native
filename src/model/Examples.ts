@@ -27,6 +27,7 @@ export enum FeatureId {
   CheckRecognizer,
   BarcodeCameraViewComponent,
   RecognizeCheckOnImage,
+  ApplyFilterOnImage,
 }
 export class Examples {
   public static list = [
@@ -108,6 +109,10 @@ export class Examples {
     {
       title: 'MISCELLANEOUS',
       data: [
+        {
+          id: FeatureId.ApplyFilterOnImage,
+          title: 'Import Image and Apply Filter',
+        },
         {id: FeatureId.LicenseInfo, title: 'View License Info'},
         {id: FeatureId.OcrConfigs, title: 'View OCR Configs'},
         {

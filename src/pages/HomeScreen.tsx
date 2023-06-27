@@ -35,7 +35,10 @@ import ScanbotSDK, {
   GenericDocumentRecognizerConfiguration,
   LicensePlateScanStrategy,
   CheckRecognizerConfiguration,
+  ImageFilter,
 } from 'react-native-scanbot-sdk';
+// @ts-ignore
+import {ActionSheetCustom as ActionSheet} from 'react-native-custom-actionsheet';
 
 import {Examples, FeatureId} from '../model/Examples';
 import {Styles} from '../model/Styles';
@@ -53,7 +56,21 @@ import {PageStorage} from '../utils/PageStorage';
 import {FileUtils} from '../utils/FileUtils';
 import {Results} from '../model/Results';
 
+const CANCEL_INDEX = 0;
+
 export class HomeScreen extends BaseScreen {
+  filterActionSheet: any;
+  onFilterSelected?: (filter: ImageFilter) => void;
+  getFilterActionSheetRef = (ref: any) => (this.filterActionSheet = ref);
+  handleActionSheetPress = async (index: number) => {
+    const filter = SDKUtils.IMAGE_FILTERS[index];
+    const callback = this.onFilterSelected;
+    if (!callback) {
+      return;
+    }
+    callback(filter);
+  };
+
   constructor(props: any) {
     super(props);
   }
@@ -111,6 +128,14 @@ export class HomeScreen extends BaseScreen {
         <Text style={Styles.INSTANCE.common.copyrightLabel}>
           Copyright {new Date().getFullYear()} doo GmbH. All rights reserved.
         </Text>
+        <ActionSheet
+          ref={this.getFilterActionSheetRef}
+          title={'Filters'}
+          message="Choose an image filter to see how it enhances the document"
+          options={SDKUtils.IMAGE_FILTERS}
+          cancelButtonIndex={CANCEL_INDEX}
+          onPress={this.handleActionSheetPress}
+        />
       </>
     );
   }
@@ -166,6 +191,9 @@ export class HomeScreen extends BaseScreen {
         break;
       case FeatureId.DetectBarcodesOnStillImages:
         this.importImagesAndDetectBarcodes();
+        break;
+      case FeatureId.ApplyFilterOnImage:
+        this.importImageAndApplyFilter();
         break;
       case FeatureId.BarcodeFormatsFilter:
         this.setBarcodeFormats();
@@ -588,25 +616,16 @@ export class HomeScreen extends BaseScreen {
   }
 
   async importImageAndDetectBarcodes() {
-    const pickerResult = await ImageUtils.pickFromGallery();
     this.showProgress();
-
-    if (pickerResult.didCancel || !pickerResult.assets) {
-      this.hideProgress();
-      return;
-    }
-
-    const pickedImage = pickerResult.assets[0];
-
-    if (!pickedImage.uri) {
-      this.hideProgress();
-      ViewUtils.showAlert('Error picking image from gallery!');
+    const uri = (await this.pickImageFromGallery()) as string;
+    this.hideProgress();
+    if (!uri) {
       return;
     }
 
     const result = await ScanbotSDK.detectBarcodesOnImage({
       acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
-      imageFileUri: pickedImage.uri,
+      imageFileUri: uri,
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
       stripCheckDigits: true,
     });
@@ -644,6 +663,30 @@ export class HomeScreen extends BaseScreen {
     if (result.status === 'OK') {
       ViewUtils.showAlert(JSON.stringify(result.results));
     }
+  }
+
+  async importImageAndApplyFilter() {
+    this.showProgress();
+    const uri = (await this.pickImageFromGallery()) as string;
+    this.hideProgress();
+    if (!uri) {
+      return;
+    }
+
+    this.onFilterSelected = async (filter: ImageFilter) => {
+      const result = await ScanbotSDK.applyImageFilter(uri, filter);
+      const filteredImageUri = result.imageFileUri;
+      console.log('Created filtered image: ' + filteredImageUri);
+      console.log('Creating page for filtered image...');
+
+      this.showProgress();
+      const page = await ScanbotSDK.createPage(filteredImageUri);
+      await Pages.add(page);
+      this.hideProgress();
+      this.pushPage(Navigation.IMAGE_RESULTS);
+    };
+
+    this.filterActionSheet.show();
   }
 
   setBarcodeFormats() {
@@ -737,25 +780,16 @@ export class HomeScreen extends BaseScreen {
   }
 
   async detectDocumentFromFile() {
-    const pickerResult = await ImageUtils.pickFromGallery();
     this.showProgress();
+    const uri = (await this.pickImageFromGallery()) as string;
 
-    if (pickerResult.didCancel || !pickerResult.assets) {
+    if (!uri) {
       this.hideProgress();
-      return;
-    }
-
-    const pickedImage = pickerResult.assets[0];
-
-    if (!pickedImage.uri) {
-      this.hideProgress();
-      ViewUtils.showAlert('Error picking image from gallery!');
       return;
     }
 
     var result;
     var blur;
-    const uri = pickedImage.uri;
     try {
       result = await ScanbotSDK.detectDocument(uri);
     } catch (err: any) {
@@ -770,8 +804,27 @@ export class HomeScreen extends BaseScreen {
       console.log(err);
     }
 
-    ViewUtils.showAlert(JSON.stringify({blur, result}));
-
     this.hideProgress();
+    ViewUtils.showAlert(JSON.stringify({blur, result}));
+  }
+
+  private async pickImageFromGallery(): Promise<string | undefined> {
+    const pickerResult = await ImageUtils.pickFromGallery();
+
+    if (pickerResult.didCancel || !pickerResult.assets) {
+      this.hideProgress();
+      return undefined;
+    }
+
+    const pickedImage = pickerResult.assets[0];
+    const imageUri = pickedImage.uri;
+
+    if (!imageUri) {
+      this.hideProgress();
+      ViewUtils.showAlert('Error picking image from gallery!');
+      return undefined;
+    }
+
+    return imageUri;
   }
 }

@@ -13,23 +13,6 @@ import PreviewImage from '../ui/PreviewImage';
 
 const CANCEL_INDEX = 0;
 
-const options = [
-  'NONE',
-  'COLOR_ENHANCED',
-  'GRAYSCALE',
-  'PURE_GRAYSCALE',
-  'BINARIZED',
-  'COLOR_DOCUMENT',
-  'PURE_BINARIZED',
-  'BACKGROUND_CLEAN',
-  'BLACK_AND_WHITE',
-  'OTSU_BINARIZATION',
-  'DEEP_BINARIZATION',
-  'LOW_LIGHT_BINARIZATION',
-  'EDGE_HIGHLIGHT',
-  'LOW_LIGHT_BINARIZATION_2',
-];
-
 export class ImageDetailScreen extends BaseScreen {
   constructor(props: any) {
     super(props);
@@ -41,12 +24,28 @@ export class ImageDetailScreen extends BaseScreen {
 
   handlePress = async (index: number) => {
     this.setState({selected: index});
-    const filter = options[index];
+    const filter = SDKUtils.IMAGE_FILTERS[index];
     const updated = await ScanbotSDK.applyImageFilterOnPage(
       Pages.selectedPage as Page,
-      // @ts-ignore
       filter,
     );
+
+    /* ================================================================= */
+    /*   QA TEST: Uncomment this to test applyImageFilter on page image  */
+    /*      (this will create a new page with the filtered image)        */
+    /* ----------------------------------------------------------------- */
+
+    // const page = Pages.selectedPage as Page;
+    // const result = await ScanbotSDK.applyImageFilter(
+    //   page.originalImageFileUri,
+    //   filter,
+    // );
+    // console.log('Filtered image file URI: ' + result.imageFileUri);
+    // const createdPage = await ScanbotSDK.createPage(result.imageFileUri);
+    // Pages.add(createdPage);
+
+    /* ================================================================= */
+
     this.updateCurrentPage(updated);
   };
 
@@ -85,7 +84,7 @@ export class ImageDetailScreen extends BaseScreen {
           ref={this.getActionSheetRef}
           title={'Filters'}
           message="Choose an image filter to see how it enhances the document"
-          options={options}
+          options={SDKUtils.IMAGE_FILTERS}
           cancelButtonIndex={CANCEL_INDEX}
           onPress={this.handlePress}
         />
