@@ -30,23 +30,6 @@ export class ImageDetailScreen extends BaseScreen {
       filter,
     );
 
-    /* ================================================================= */
-    /*   QA TEST: Uncomment this to test applyImageFilter on page image  */
-    /*      (this will create a new page with the filtered image)        */
-    /* ----------------------------------------------------------------- */
-
-    const page = Pages.selectedPage as Page;
-    const result = await ScanbotSDK.applyImageFilter(
-      page.originalImageFileUri,
-      filter,
-    );
-    console.log('Filtered image file URI: ' + result.imageFileUri);
-    const createdPage = await ScanbotSDK.createPage(result.imageFileUri);
-    const documentPage = await ScanbotSDK.detectDocumentOnPage(createdPage);
-    Pages.add(documentPage);
-
-    /* ================================================================= */
-
     this.updateCurrentPage(updated);
   };
 
