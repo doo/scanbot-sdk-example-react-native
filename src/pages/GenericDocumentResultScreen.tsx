@@ -7,6 +7,7 @@ import {BaseScreen} from '../utils/BaseScreen';
 import {
   GenericDocumentRecognizerResult,
   GenericDocumentField,
+  MrzDocumentResult,
 } from 'react-native-scanbot-sdk';
 
 const styles = StyleSheet.create({
@@ -51,23 +52,51 @@ const styles = StyleSheet.create({
   },
 });
 
+const getMrzFields = (document: MrzDocumentResult) => {
+  return Object.keys(document)
+    .flatMap(key => {
+      let value = '';
+      if (Array.isArray((document as any)[key])) {
+        value = JSON.stringify((document as any)[key]);
+      } else {
+        const field = (document as any)[key] as GenericDocumentField;
+        value = `${field.text} (confidence: ${field.confidence?.toFixed(2)})`;
+      }
+      return JSON.stringify({
+        key: `MRZ.${key}`,
+        value: value,
+      });
+    })
+    .filter(item => item);
+};
+
 const getFieldsData = (document: GenericDocumentRecognizerResult) => {
   if (!document.fields) {
     return [];
   }
 
-  return Object.keys(document.fields)
+  const jsonFields = Object.keys(document.fields)
     .flatMap(key => {
-      const field = (document.fields as any)[key] as GenericDocumentField;
-      if (field.text === undefined) {
-        return undefined;
+      let value: string | undefined;
+      if (key.endsWith('Uri')) {
+        value = (document.fields as any)[key] as string;
+      } else if (key === 'mrz') {
+        value = undefined;
+      } else {
+        const field = (document.fields as any)[key] as GenericDocumentField;
+        value = `${field.text} (confidence: ${field.confidence?.toFixed(2)})`;
       }
-      return JSON.stringify({
-        key: key,
-        value: `${field.text} (confidence: ${field.confidence?.toFixed(2)})`,
-      });
+
+      return value ? JSON.stringify({key: key, value: value}) : undefined;
     })
     .filter(item => item);
+
+  let mrzFields = (document.fields as any).mrz as MrzDocumentResult;
+  if (mrzFields) {
+    getMrzFields(mrzFields).forEach(jsonField => jsonFields.push(jsonField));
+  }
+
+  return jsonFields;
 };
 
 export class GenericDocumentResultScreen extends BaseScreen {
