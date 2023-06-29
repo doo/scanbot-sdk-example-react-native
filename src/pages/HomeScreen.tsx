@@ -681,7 +681,8 @@ export class HomeScreen extends BaseScreen {
 
       this.showProgress();
       const page = await ScanbotSDK.createPage(filteredImageUri);
-      await Pages.add(page);
+      const documentPage = await ScanbotSDK.detectDocumentOnPage(page);
+      await Pages.add(documentPage);
       this.hideProgress();
       this.pushPage(Navigation.IMAGE_RESULTS);
     };
