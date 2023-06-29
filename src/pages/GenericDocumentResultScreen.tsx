@@ -60,10 +60,7 @@ const getFieldsData = (document: GenericDocumentRecognizerResult) => {
     .flatMap(key => {
       const field = (document.fields as any)[key] as GenericDocumentField;
       if (field.text === undefined) {
-        return JSON.stringify({
-          key: key,
-          value: field,
-        });
+        return undefined;
       }
       return JSON.stringify({
         key: key,
