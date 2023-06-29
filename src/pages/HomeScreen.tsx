@@ -674,12 +674,12 @@ export class HomeScreen extends BaseScreen {
     }
 
     this.onFilterSelected = async (filter: ImageFilter) => {
+      this.showProgress();
       const result = await ScanbotSDK.applyImageFilter(uri, filter);
       const filteredImageUri = result.imageFileUri;
       console.log('Created filtered image: ' + filteredImageUri);
       console.log('Creating page for filtered image...');
 
-      this.showProgress();
       const page = await ScanbotSDK.createPage(filteredImageUri);
       const documentPage = await ScanbotSDK.detectDocumentOnPage(page);
       await Pages.add(documentPage);
