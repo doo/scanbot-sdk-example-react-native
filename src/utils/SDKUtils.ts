@@ -1,4 +1,4 @@
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import ScanbotSDK, {ImageFilter} from 'react-native-scanbot-sdk';
 import {
   CameraImageFormat,
   FileEncryptionMode,
@@ -27,6 +27,23 @@ export class SDKUtils {
   static readonly FILE_ENCRYPTION_PASSWORD: string = 'SomeSecretPa$$w0rdForFileEncryption';
 
   static readonly FILE_ENCRYPTION_MODE: FileEncryptionMode = 'AES256';
+
+  static readonly IMAGE_FILTERS = [
+    'NONE',
+    'COLOR_ENHANCED',
+    'GRAYSCALE',
+    'PURE_GRAYSCALE',
+    'BINARIZED',
+    'COLOR_DOCUMENT',
+    'PURE_BINARIZED',
+    'BACKGROUND_CLEAN',
+    'BLACK_AND_WHITE',
+    'OTSU_BINARIZATION',
+    'DEEP_BINARIZATION',
+    'LOW_LIGHT_BINARIZATION',
+    'EDGE_HIGHLIGHT',
+    'LOW_LIGHT_BINARIZATION_2',
+  ] as ImageFilter[];
 
   public static async checkLicense(): Promise<boolean> {
     const info = await ScanbotSDK.getLicenseInfo();
