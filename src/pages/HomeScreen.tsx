@@ -234,6 +234,10 @@ export class HomeScreen extends BaseScreen {
         break;
       case FeatureId.BarcodeCameraViewComponent:
         this.goToBarcodeCameraViewComponentExample();
+        break;
+      case FeatureId.FinderDocumentScanner:
+        this.startFinderDocumentScanner();
+        break;
     }
   }
 
@@ -827,5 +831,24 @@ export class HomeScreen extends BaseScreen {
     }
 
     return imageUri;
+  }
+
+  async startFinderDocumentScanner() {
+    try {
+      const result = await ScanbotSDK.UI.startFinderDocumentScanner({
+        polygonColor: '#00ffff',
+        topBarBackgroundColor: Colors.SCANBOT_RED,
+        cameraBackgroundColor: Colors.SCANBOT_RED,
+        orientationLockMode: 'PORTRAIT',
+        ignoreBadAspectRatio: true,
+        defaultPageFilter: 'ImageFilterTypeBackgroundClean',
+      });
+      if (result.status === 'OK') {
+        await Pages.addList(result.pages);
+        this.pushPage(Navigation.IMAGE_RESULTS);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
 }

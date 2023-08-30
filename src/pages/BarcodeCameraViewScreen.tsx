@@ -6,7 +6,6 @@ import {
   Text,
   TouchableOpacity,
   View,
-  ViewStyle,
 } from 'react-native';
 import {BaseScreen} from '../utils/BaseScreen';
 
@@ -51,7 +50,7 @@ export class BarcodeCameraViewScreen extends BaseScreen {
       cameraView: {
         flex: 1,
         flexDirection: 'column',
-      } as ViewStyle,
+      },
 
       overlayView: {
         borderRadius: 16,
