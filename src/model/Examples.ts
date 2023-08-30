@@ -30,12 +30,18 @@ export enum FeatureId {
   ApplyFilterOnImage,
   FinderDocumentScanner,
 }
+
 export class Examples {
   public static list = [
     {
       title: 'DOCUMENT SCANNER',
       data: [
         {id: FeatureId.DocumentScanner, title: 'Scan Document'},
+        {
+          id: FeatureId.FinderDocumentScanner,
+          title: 'Document Scanner with Finder',
+        },
+
         {
           id: FeatureId.DetectDocumentFromPage,
           title: 'Import Image & Detect Document',
@@ -53,7 +59,6 @@ export class Examples {
           title: 'Extract images from PDF',
         },
         {id: FeatureId.ViewPages, title: 'View Image Results'},
-        {id: FeatureId.FinderDocumentScanner, title: 'Finder Document Scanner'},
       ],
     },
     {
