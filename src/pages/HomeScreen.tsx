@@ -841,7 +841,6 @@ export class HomeScreen extends BaseScreen {
         cameraBackgroundColor: Colors.SCANBOT_RED,
         orientationLockMode: 'PORTRAIT',
         ignoreBadAspectRatio: true,
-        defaultPageFilter: 'ImageFilterTypeBackgroundClean',
       });
       if (result.status === 'OK') {
         await Pages.addList(result.pages);
