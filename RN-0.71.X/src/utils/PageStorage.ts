@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Page} from 'react-native-scanbot-sdk';
 
 export class PageStorage {
