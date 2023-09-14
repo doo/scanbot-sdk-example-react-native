@@ -1,5 +1,5 @@
 import {Page} from 'react-native-scanbot-sdk/src';
-import { PageStorage } from '../utils/PageStorage';
+import {PageStorage} from '../utils/PageStorage';
 
 export class Pages {
   private static list: Page[] = [];

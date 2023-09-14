@@ -6,36 +6,33 @@
  */
 
 import React from 'react';
-import { LogBox, Platform } from 'react-native';
+import {LogBox, Platform} from 'react-native';
 
 import ScanbotSDK, {InitializationOptions} from 'react-native-scanbot-sdk';
-import { SDKUtils } from './utils/SDKUtils';
-import { ViewUtils } from './utils/ViewUtils';
-import { DocumentDirectoryPath, ExternalDirectoryPath } from 'react-native-fs';
-import { NavigationContainer } from '@react-navigation/native';
-import { Styles } from './model/Styles';
-import { createStackNavigator } from '@react-navigation/stack';
-import { Navigation } from './utils/Navigation';
-import { HomeScreen } from './pages/HomeScreen';
-import { ImageResultScreen } from './pages/ImageResultScreen';
-import { ImageDetailScreen } from './pages/ImageDetailScreen';
-import { MedicalCertificateResultScreen } from './pages/MedicalCertificateResultScreen';
-import { GenericDocumentResultScreen } from './pages/GenericDocumentResultScreen';
-import { CheckRecognizerResultScreen } from './pages/CheckRecognizerResultScreen';
-import { BarcodeFormatsScreen } from './pages/BarcodeFormatsScreen';
-import { BarcodeDocumentFormatsScreen } from './pages/BarcodeDocumentFormatsScreen';
-import { BarcodeCameraViewScreen } from './pages/BarcodeCameraViewScreen';
+import {SDKUtils} from './utils/SDKUtils';
+import {ViewUtils} from './utils/ViewUtils';
+import {DocumentDirectoryPath, ExternalDirectoryPath} from 'react-native-fs';
+import {NavigationContainer} from '@react-navigation/native';
+import {Styles} from './model/Styles';
+import {createStackNavigator} from '@react-navigation/stack';
+import {Navigation} from './utils/Navigation';
+import {HomeScreen} from './pages/HomeScreen';
+import {ImageResultScreen} from './pages/ImageResultScreen';
+import {ImageDetailScreen} from './pages/ImageDetailScreen';
+import {MedicalCertificateResultScreen} from './pages/MedicalCertificateResultScreen';
+import {GenericDocumentResultScreen} from './pages/GenericDocumentResultScreen';
+import {CheckRecognizerResultScreen} from './pages/CheckRecognizerResultScreen';
+import {BarcodeFormatsScreen} from './pages/BarcodeFormatsScreen';
+import {BarcodeDocumentFormatsScreen} from './pages/BarcodeDocumentFormatsScreen';
+import {BarcodeCameraViewScreen} from './pages/BarcodeCameraViewScreen';
 
 const Stack = createStackNavigator();
 
 // this is for fix the new nativeeventemitter() was called with a non-null argument issue.
 LogBox.ignoreLogs(['new NativeEventEmitter']); // Ignore log notification by message
 LogBox.ignoreAllLogs();
-  
+
 export class App extends React.Component {
-
-  
-
   constructor(props: any) {
     super(props);
     this.initScanbotSdk();
@@ -103,7 +100,7 @@ export class App extends React.Component {
     };
 
     return (
-      <NavigationContainer theme={Styles.ScanbotTheme}> 
+      <NavigationContainer theme={Styles.ScanbotTheme}>
         <Stack.Navigator initialRouteName={Navigation.HOME}>
           <Stack.Screen name={Navigation.HOME} component={HomeScreen} />
           <Stack.Screen
@@ -162,7 +159,6 @@ export class App extends React.Component {
         </Stack.Navigator>
       </NavigationContainer>
     );
-    
   }
 }
 
