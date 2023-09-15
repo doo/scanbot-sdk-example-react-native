@@ -15,10 +15,10 @@ import ScanbotSDK, {
 import {Styles} from '../model/Styles';
 import {SDKUtils} from '../utils/SDKUtils';
 import {ViewUtils} from '../utils/ViewUtils';
-import {Navigation} from '../utils/Navigation';
 import {BaseScreen} from '../utils/BaseScreen';
 import PreviewImage from '../ui/PreviewImage';
 import {ScrollView} from 'react-native-gesture-handler';
+import {Screens} from '../utils/Navigation';
 
 export class ImageResultScreen extends BaseScreen {
   onScreenFocused() {
@@ -151,6 +151,7 @@ export class ImageResultScreen extends BaseScreen {
       this.refresh();
     }
   }
+
   saveButtonPress() {
     if (Pages.isEmpty()) {
       ViewUtils.showAlert(
@@ -175,7 +176,7 @@ export class ImageResultScreen extends BaseScreen {
   private onGalleryItemClick(page: Page) {
     Pages.selectedPage = page;
     // @ts-ignore
-    this.props.navigation.push(Navigation.IMAGE_DETAILS);
+    this.props.navigation.push(Screens.IMAGE_DETAILS);
   }
 
   private onModalClose() {

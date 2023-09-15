@@ -11,31 +11,31 @@ import {
   View,
 } from 'react-native';
 import ScanbotSDK, {
-  BarcodeScannerConfiguration,
-  DocumentScannerConfiguration,
-  MrzScannerConfiguration,
-  LicensePlateScannerConfiguration,
-  MedicalCertificateRecognizerConfiguration,
-  TextDataScannerConfiguration,
-  BatchBarcodeScannerConfiguration,
-  HealthInsuranceCardScannerConfiguration,
-  GenericDocumentRecognizerResult,
-  MedicalCertificateScannerResult,
-  BarcodeResultField,
-  BaseDocumentFormat,
   AAMVADocumentFormat,
+  BarcodeResultField,
+  BarcodeScannerConfiguration,
+  BaseDocumentFormat,
+  BatchBarcodeScannerConfiguration,
   BoardingPassDocumentFormat,
-  MedicalPlanDocumentFormat,
-  MedicalCertificateDocumentFormat,
+  CheckRecognizerConfiguration,
+  DocumentScannerConfiguration,
+  GenericDocumentRecognizerConfiguration,
+  GenericDocumentRecognizerResult,
+  GS1DocumentFormat,
+  HealthInsuranceCardScannerConfiguration,
   IDCardPDF417DocumentFormat,
+  ImageFilter,
+  LicensePlateScannerConfiguration,
+  LicensePlateScanStrategy,
+  MedicalCertificateDocumentFormat,
+  MedicalCertificateRecognizerConfiguration,
+  MedicalCertificateScannerResult,
+  MedicalPlanDocumentFormat,
+  MrzScannerConfiguration,
   SEPADocumentFormat,
   SwissQRCodeDocumentFormat,
+  TextDataScannerConfiguration,
   VCardDocumentFormat,
-  GS1DocumentFormat,
-  GenericDocumentRecognizerConfiguration,
-  LicensePlateScanStrategy,
-  CheckRecognizerConfiguration,
-  ImageFilter,
 } from 'react-native-scanbot-sdk';
 // @ts-ignore
 import {ActionSheetCustom as ActionSheet} from 'react-native-custom-actionsheet';
@@ -48,13 +48,13 @@ import {Pages} from '../model/Pages';
 import {ViewUtils} from '../utils/ViewUtils';
 import {BarcodeFormats} from '../model/BarcodeFormats';
 import {BarcodeDocumentFormats} from '../model/BarcodeDocumentFormats';
-import {Navigation} from '../utils/Navigation';
 import {BaseScreen} from '../utils/BaseScreen';
 import {Colors} from '../model/Colors';
 import {PageStorage} from '../utils/PageStorage';
 
 import {FileUtils} from '../utils/FileUtils';
 import {Results} from '../model/Results';
+import {Screens} from '../utils/Navigation';
 
 const CANCEL_INDEX = 0;
 
@@ -239,7 +239,7 @@ export class HomeScreen extends BaseScreen {
   }
 
   async goToBarcodeCameraViewComponentExample() {
-    this.pushPage(Navigation.BARCODE_CAMERA_VIEW);
+    this.pushPage(Screens.BARCODE_CAMERA_VIEW);
   }
 
   async startDocumentScanner() {
@@ -261,7 +261,7 @@ export class HomeScreen extends BaseScreen {
     const result = await ScanbotSDK.UI.startDocumentScanner(config);
     if (result.status === 'OK') {
       await Pages.addList(result.pages);
-      this.pushPage(Navigation.IMAGE_RESULTS);
+      this.pushPage(Screens.IMAGE_RESULTS);
     }
   }
 
@@ -311,7 +311,7 @@ export class HomeScreen extends BaseScreen {
 
       Results.lastCheckRecognizerResult = result;
 
-      this.pushPage(Navigation.CHECK_RECOGNIZER_RESULT);
+      this.pushPage(Screens.CHECK_RECOGNIZER_RESULT);
 
       console.log(JSON.stringify(result, undefined, 4));
     } catch (err: any) {
@@ -342,7 +342,7 @@ export class HomeScreen extends BaseScreen {
       Results.lastCheckRecognizerResult = checkResult;
 
       this.hideProgress();
-      this.pushPage(Navigation.CHECK_RECOGNIZER_RESULT);
+      this.pushPage(Screens.CHECK_RECOGNIZER_RESULT);
     } catch (err: any) {
       ViewUtils.showAlert(err.message);
       this.hideProgress();
@@ -391,7 +391,7 @@ export class HomeScreen extends BaseScreen {
       }
 
       await Pages.addList(sdkResult.pages);
-      this.pushPage(Navigation.IMAGE_RESULTS);
+      this.pushPage(Screens.IMAGE_RESULTS);
     } catch (err: any) {
       ViewUtils.showAlert(err.message);
     }
@@ -456,11 +456,11 @@ export class HomeScreen extends BaseScreen {
     page = await ScanbotSDK.detectDocumentOnPage(page);
     await Pages.add(page);
     this.hideProgress();
-    this.pushPage(Navigation.IMAGE_RESULTS);
+    this.pushPage(Screens.IMAGE_RESULTS);
   }
 
   viewImageResults() {
-    this.pushPage('Image Results');
+    this.pushPage(Screens.IMAGE_RESULTS);
   }
 
   async startBarcodeScanner() {
@@ -685,18 +685,18 @@ export class HomeScreen extends BaseScreen {
       const documentPage = await ScanbotSDK.detectDocumentOnPage(page);
       await Pages.add(documentPage);
       this.hideProgress();
-      this.pushPage(Navigation.IMAGE_RESULTS);
+      this.pushPage(Screens.IMAGE_RESULTS);
     };
 
     this.filterActionSheet.show();
   }
 
   setBarcodeFormats() {
-    this.pushPage(Navigation.BARCODE_FORMATS);
+    this.pushPage(Screens.BARCODE_FORMATS);
   }
 
   setBarcodeDocumentFormats() {
-    this.pushPage(Navigation.BARCODE_DOCUMENT_FORMATS);
+    this.pushPage(Screens.BARCODE_DOCUMENT_FORMATS);
   }
 
   async startMedicalCertificateRecognizer() {
@@ -724,7 +724,7 @@ export class HomeScreen extends BaseScreen {
     }
 
     Results.lastMedicalCertificate = result;
-    this.pushPage(Navigation.MEDICAL_CERTIFICATE_RESULT);
+    this.pushPage(Screens.MEDICAL_CERTIFICATE_RESULT);
 
     console.log(JSON.stringify(result, undefined, 4));
   }
@@ -739,7 +739,7 @@ export class HomeScreen extends BaseScreen {
     }
 
     Results.lastGenericDocumentResult = result;
-    this.pushPage(Navigation.GENERIC_DOCUMENT_RESULT);
+    this.pushPage(Screens.GENERIC_DOCUMENT_RESULT);
 
     console.log(JSON.stringify(result, undefined, 4));
   }
