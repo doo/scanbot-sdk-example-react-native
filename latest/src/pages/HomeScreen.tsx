@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   ActivityIndicator,
-  Linking,
   Platform,
   SafeAreaView,
   SectionList,
@@ -40,9 +39,8 @@ import ScanbotSDK, {
 // @ts-ignore
 import {ActionSheetCustom as ActionSheet} from 'react-native-custom-actionsheet';
 
-import {Examples, FeatureId} from '../model/Examples';
+import {examplesList, FeatureId} from '../model/Examples';
 import {Styles} from '../model/Styles';
-import {ImageUtils} from '../utils/ImageUtils';
 import {SDKUtils} from '../utils/SDKUtils';
 import {Pages} from '../model/Pages';
 import {ViewUtils} from '../utils/ViewUtils';
@@ -55,6 +53,7 @@ import {PageStorage} from '../utils/PageStorage';
 import {FileUtils} from '../utils/FileUtils';
 import {Results} from '../model/Results';
 import {Screens} from '../utils/Navigation';
+import {selectImagesFromLibrary} from '../utils/ImageUtils';
 
 const CANCEL_INDEX = 0;
 
@@ -103,7 +102,7 @@ export class HomeScreen extends BaseScreen {
           <SectionList
             stickySectionHeadersEnabled={false}
             style={Styles.INSTANCE.home.list}
-            sections={Examples.list}
+            sections={examplesList}
             keyExtractor={(item, index) => item.title + index}
             renderItem={({item}: any) => {
               return (
@@ -142,11 +141,6 @@ export class HomeScreen extends BaseScreen {
   }
 
   async onListItemClick(item: any) {
-    if (item.id === FeatureId.LearnMore) {
-      await Linking.openURL('https://scanbot.io');
-      return;
-    }
-
     if (item.id === FeatureId.LicenseInfo) {
       const info = await ScanbotSDK.getLicenseInfo();
       const dateStr = info.licenseExpirationDate;
@@ -320,7 +314,7 @@ export class HomeScreen extends BaseScreen {
   }
 
   async importImageAndRecognizeCheck() {
-    const result = await ImageUtils.pickFromGallery();
+    const result = await selectImagesFromLibrary();
     this.showProgress();
 
     if (result.didCancel || !result.assets) {
@@ -436,7 +430,7 @@ export class HomeScreen extends BaseScreen {
   }
 
   async importImageAndDetectDocument() {
-    const result = await ImageUtils.pickFromGallery();
+    const result = await selectImagesFromLibrary();
     this.showProgress();
 
     if (result.didCancel || !result.assets) {
@@ -638,24 +632,30 @@ export class HomeScreen extends BaseScreen {
 
   async importImagesAndDetectBarcodes() {
     this.showProgress();
-    const pickerResult = await ImageUtils.pickMultipleImagesFromGallery();
+    const pickerResult = await selectImagesFromLibrary(true);
 
-    if (pickerResult.isCanceled || pickerResult.imagesUris.length === 0) {
+    if (
+      pickerResult.didCancel ||
+      !pickerResult.assets ||
+      pickerResult.assets?.length === 0
+    ) {
       this.hideProgress();
       return;
     }
 
-    if (pickerResult.error) {
+    if (pickerResult.errorCode) {
       this.hideProgress();
       ViewUtils.showAlert(
-        'Error picking image from gallery! ' + pickerResult.error,
+        'Error picking image from gallery! ' + pickerResult.errorMessage,
       );
       return;
     }
 
     const result = await ScanbotSDK.detectBarcodesOnImages({
       acceptedDocumentFormats: BarcodeDocumentFormats.getAcceptedFormats(),
-      imageFileUris: pickerResult.imagesUris,
+      imageFileUris: pickerResult.assets
+        .map(asset => asset.uri)
+        .filter((item): item is string => typeof item === 'string'),
       barcodeFormats: BarcodeFormats.getAcceptedFormats(),
       stripCheckDigits: true,
     });
@@ -811,7 +811,7 @@ export class HomeScreen extends BaseScreen {
   }
 
   private async pickImageFromGallery(): Promise<string | undefined> {
-    const pickerResult = await ImageUtils.pickFromGallery();
+    const pickerResult = await selectImagesFromLibrary();
 
     if (pickerResult.didCancel || !pickerResult.assets) {
       this.hideProgress();
