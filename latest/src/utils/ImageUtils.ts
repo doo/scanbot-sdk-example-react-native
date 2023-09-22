@@ -1,7 +1,16 @@
 import {launchImageLibrary} from 'react-native-image-picker';
 import {errorMessageAlert} from './Alerts';
 
-export async function selectImagesFromLibrary(multipleImages?: boolean) {
+/**
+ * Select single or multiple images form the Image Library.
+ *
+ * @param multipleImages boolean for switching between multiple image selection or single image selection.
+ * @return {Promise<string[]|undefined>} An array of image URI if the operation is successful or undefined otherwise
+ */
+
+export async function selectImagesFromLibrary(
+  multipleImages?: boolean,
+): Promise<string[] | undefined> {
   const imageResponse = await launchImageLibrary({
     mediaType: 'photo',
     selectionLimit: multipleImages ? 0 : 1,
