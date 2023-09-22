@@ -22,7 +22,7 @@ const initialBarcodeDocumentFormats: Record<BarcodeDocumentFormat, boolean> = {
 interface BarcodeDocumentFormatsValue {
   barcodeDocumentFormats: Record<BarcodeDocumentFormat, boolean>;
   isFilteringEnabled: boolean;
-  getAcceptedFormats: () => Array<{key: BarcodeDocumentFormat; value: boolean}>;
+  acceptedBarcodeDocumentFormats: Array<BarcodeDocumentFormat>;
   toggleBarcodeDocumentFormats: (updated: BarcodeDocumentFormat) => void;
   setIsFilteringEnabled: Dispatch<SetStateAction<boolean>>;
 }
@@ -31,7 +31,7 @@ export const BarcodeDocumentFormatContext =
   createContext<BarcodeDocumentFormatsValue>({
     barcodeDocumentFormats: initialBarcodeDocumentFormats,
     isFilteringEnabled: false,
-    getAcceptedFormats: () => [],
+    acceptedBarcodeDocumentFormats: [],
     toggleBarcodeDocumentFormats: (_updated: BarcodeDocumentFormat) => {},
     setIsFilteringEnabled(
       _value: ((prevState: boolean) => boolean) | boolean,
@@ -44,19 +44,6 @@ export function useBarcodeDocumentFormats() {
   >(initialBarcodeDocumentFormats);
   const [isFilteringEnabled, setIsFilteringEnabled] = useState(false);
 
-  const getAcceptedFormats = useCallback(() => {
-    if (!isFilteringEnabled) {
-      return [];
-    }
-
-    return Object.entries(barcodeDocumentFormats)
-      .map(([key, value]) => ({
-        key: key as BarcodeDocumentFormat,
-        value: value,
-      }))
-      .filter(({value}) => value);
-  }, [barcodeDocumentFormats, isFilteringEnabled]);
-
   const toggleBarcodeDocumentFormats = useCallback(
     (updated: BarcodeDocumentFormat) => {
       setBarcodeDocumentFormats(formats => ({
@@ -67,10 +54,16 @@ export function useBarcodeDocumentFormats() {
     [],
   );
 
+  const acceptedBarcodeDocumentFormats = isFilteringEnabled
+    ? Object.entries(barcodeDocumentFormats)
+        .filter(([_, value]) => value)
+        .map(([key]) => key as BarcodeDocumentFormat)
+    : [];
+
   return {
     barcodeDocumentFormats,
     isFilteringEnabled,
-    getAcceptedFormats,
+    acceptedBarcodeDocumentFormats,
     toggleBarcodeDocumentFormats,
     setIsFilteringEnabled,
   };

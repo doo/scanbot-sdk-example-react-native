@@ -27,11 +27,13 @@ const initialBarcodeFormats: Record<BarcodeFormat, boolean> = {
 interface BarcodeFormatsContextValue {
   barcodeFormats: Record<BarcodeFormat, boolean>;
   toggleBarcodeFormat: (value: BarcodeFormat) => void;
+  acceptedBarcodeFormats: Array<BarcodeFormat>;
 }
 
 export const BarcodeFormatsContext = createContext<BarcodeFormatsContextValue>({
   barcodeFormats: initialBarcodeFormats,
   toggleBarcodeFormat: _barcodeFormat => {},
+  acceptedBarcodeFormats: [],
 });
 
 export function useBarcodeFormats() {
@@ -44,8 +46,13 @@ export function useBarcodeFormats() {
     }));
   }, []);
 
+  const acceptedBarcodeFormats = Object.entries(barcodeFormats)
+    .filter(([_, value]) => value)
+    .map(([key]) => key as BarcodeFormat);
+
   return {
     barcodeFormats,
     toggleBarcodeFormat,
+    acceptedBarcodeFormats,
   };
 }
