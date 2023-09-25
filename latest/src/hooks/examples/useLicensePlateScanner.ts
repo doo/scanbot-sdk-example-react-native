@@ -1,10 +1,10 @@
 import ScanbotSDK, {LicensePlateScanStrategy} from 'react-native-scanbot-sdk';
 import {Colors} from '../../model/Colors';
 import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
-import {useCallback} from 'react';
+import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 
 export function useLicensePlateScanner(scanStrategy: LicensePlateScanStrategy) {
-  return useCallback(async () => {
+  return useLicenseValidityCheckWrapper(async () => {
     try {
       const result = await ScanbotSDK.UI.startLicensePlateScanner({
         topBarBackgroundColor: Colors.SCANBOT_RED,
@@ -17,5 +17,5 @@ export function useLicensePlateScanner(scanStrategy: LicensePlateScanStrategy) {
     } catch (e: any) {
       errorMessageAlert(e.message);
     }
-  }, [scanStrategy]);
+  });
 }

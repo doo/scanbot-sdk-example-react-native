@@ -1,4 +1,4 @@
-import {useCallback, useContext} from 'react';
+import {useContext} from 'react';
 import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
 import ScanbotSDK, {
   BatchBarcodeScannerConfiguration,
@@ -6,6 +6,7 @@ import ScanbotSDK, {
 import {BarcodeFormatsContext} from '../../context/useBarcodeFormats';
 import {logBarcodeDocument} from '../../utils/BarcodeUtils';
 import {BarcodeDocumentFormatContext} from '../../context/useBarcodeDocumentFormats';
+import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 
 export function useScanBatchBarcodes() {
   const {acceptedBarcodeFormats} = useContext(BarcodeFormatsContext);
@@ -13,7 +14,7 @@ export function useScanBatchBarcodes() {
     BarcodeDocumentFormatContext,
   );
 
-  return useCallback(async () => {
+  return useLicenseValidityCheckWrapper(async () => {
     try {
       const config: BatchBarcodeScannerConfiguration = {
         acceptedDocumentFormats: acceptedBarcodeDocumentFormats,
@@ -36,5 +37,5 @@ export function useScanBatchBarcodes() {
     } catch (e: any) {
       errorMessageAlert(e.message);
     }
-  }, [acceptedBarcodeDocumentFormats, acceptedBarcodeFormats]);
+  });
 }

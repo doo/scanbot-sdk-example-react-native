@@ -1,16 +1,17 @@
-import {useCallback, useContext} from 'react';
+import {useContext} from 'react';
 import ScanbotSDK from 'react-native-scanbot-sdk';
 import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
 import {useNavigation} from '@react-navigation/native';
 import {PageContext} from '../../context/usePages';
 import {COLORS} from '../../theme/Theme';
 import {errorMessageAlert} from '../../utils/Alerts';
+import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 
 export function useDocumentScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
   const {addMultiplePages} = useContext(PageContext);
 
-  return useCallback(async () => {
+  return useLicenseValidityCheckWrapper(async () => {
     try {
       const result = await ScanbotSDK.UI.startDocumentScanner({
         polygonColor: '#00ffff',
@@ -29,5 +30,5 @@ export function useDocumentScanner() {
     } catch (e: any) {
       errorMessageAlert(e.message);
     }
-  }, [addMultiplePages, navigation]);
+  });
 }

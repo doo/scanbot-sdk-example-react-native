@@ -1,13 +1,14 @@
-import {useCallback, useContext} from 'react';
+import {useContext} from 'react';
 import ScanbotSDK from 'react-native-scanbot-sdk';
 import {ActivityIndicatorContext} from '../../context/useLoading';
 import {selectImagesFromLibrary} from '../../utils/ImageUtils';
 import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
+import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 
 export function useDetectDocumentFromImage() {
   const {setLoading} = useContext(ActivityIndicatorContext);
 
-  return useCallback(async () => {
+  return useLicenseValidityCheckWrapper(async () => {
     try {
       setLoading(true);
       const selectedImageResult = await selectImagesFromLibrary();
@@ -28,5 +29,5 @@ export function useDetectDocumentFromImage() {
     } finally {
       setLoading(false);
     }
-  }, [setLoading]);
+  });
 }

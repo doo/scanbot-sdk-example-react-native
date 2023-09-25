@@ -1,15 +1,16 @@
-import {useCallback, useContext} from 'react';
+import {useContext} from 'react';
 import ScanbotSDK from 'react-native-scanbot-sdk';
 import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
 import {errorMessageAlert} from '../../utils/Alerts';
 import {LastResultContext} from '../../context/useLastResult';
 import {useNavigation} from '@react-navigation/native';
+import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 
 export function useScanGenericDocument() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
   const {setLastGenericDocumentResult} = useContext(LastResultContext);
 
-  return useCallback(async () => {
+  return useLicenseValidityCheckWrapper(async () => {
     try {
       const result = await ScanbotSDK.UI.startGenericDocumentRecognizer({});
 
@@ -24,5 +25,5 @@ export function useScanGenericDocument() {
     } catch (e: any) {
       errorMessageAlert(e.message);
     }
-  }, [navigation, setLastGenericDocumentResult]);
+  });
 }

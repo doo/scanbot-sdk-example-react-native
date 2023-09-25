@@ -1,12 +1,12 @@
-import {useCallback} from 'react';
 import ScanbotSDK, {
   TextDataScannerConfiguration,
 } from 'react-native-scanbot-sdk';
 import {Colors} from '../../model/Colors';
 import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
+import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 
 export function useTextDataScanner() {
-  return useCallback(async () => {
+  return useLicenseValidityCheckWrapper(async () => {
     try {
       const config: TextDataScannerConfiguration = {
         topBarBackgroundColor: Colors.SCANBOT_RED,
@@ -35,5 +35,5 @@ export function useTextDataScanner() {
     } catch (e: any) {
       errorMessageAlert(e.message);
     }
-  }, []);
+  });
 }

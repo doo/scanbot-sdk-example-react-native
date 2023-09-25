@@ -1,10 +1,10 @@
-import {useCallback} from 'react';
 import ScanbotSDK, {MrzScannerConfiguration} from 'react-native-scanbot-sdk';
 import {Platform} from 'react-native';
 import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
+import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 
 export function useMRZScanner() {
-  return useCallback(async () => {
+  return useLicenseValidityCheckWrapper(async () => {
     try {
       let config: MrzScannerConfiguration = {
         finderTextHint:
@@ -29,5 +29,5 @@ export function useMRZScanner() {
     } catch (e: any) {
       errorMessageAlert(e.message);
     }
-  }, []);
+  });
 }

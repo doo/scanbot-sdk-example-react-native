@@ -1,10 +1,11 @@
-import {useCallback, useContext} from 'react';
+import {useContext} from 'react';
 import ScanbotSDK from 'react-native-scanbot-sdk';
 import {ActivityIndicatorContext} from '../../context/useLoading';
 import {selectImagesFromLibrary} from '../../utils/ImageUtils';
 import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
 import {BarcodeDocumentFormatContext} from '../../context/useBarcodeDocumentFormats';
 import {BarcodeFormatsContext} from '../../context/useBarcodeFormats';
+import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 
 export function useDetectBarcodesOnStillImage() {
   const {setLoading} = useContext(ActivityIndicatorContext);
@@ -13,7 +14,7 @@ export function useDetectBarcodesOnStillImage() {
   );
   const {acceptedBarcodeFormats} = useContext(BarcodeFormatsContext);
 
-  return useCallback(async () => {
+  return useLicenseValidityCheckWrapper(async () => {
     try {
       setLoading(true);
 
@@ -37,5 +38,5 @@ export function useDetectBarcodesOnStillImage() {
     } finally {
       setLoading(false);
     }
-  }, [acceptedBarcodeDocumentFormats, acceptedBarcodeFormats, setLoading]);
+  });
 }

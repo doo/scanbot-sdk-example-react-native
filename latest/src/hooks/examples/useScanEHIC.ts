@@ -1,9 +1,9 @@
-import {useCallback} from 'react';
 import ScanbotSDK from 'react-native-scanbot-sdk';
 import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
+import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 
 export function useScanEHIC() {
-  return useCallback(async () => {
+  return useLicenseValidityCheckWrapper(async () => {
     try {
       const result = await ScanbotSDK.UI.startEHICScanner({
         finderLineColor: '#ff0000',
@@ -18,5 +18,5 @@ export function useScanEHIC() {
     } catch (e: any) {
       errorMessageAlert(e.message);
     }
-  }, []);
+  });
 }

@@ -1,13 +1,14 @@
-import {useCallback, useContext} from 'react';
+import {useContext} from 'react';
 import {selectPDFFileUri} from '../../utils/FileUtils';
 import ScanbotSDK from 'react-native-scanbot-sdk';
 import {ActivityIndicatorContext} from '../../context/useLoading';
 import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
+import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 
 export function useExtractImagesFromPDF() {
   const {setLoading} = useContext(ActivityIndicatorContext);
 
-  return useCallback(async () => {
+  return useLicenseValidityCheckWrapper(async () => {
     try {
       setLoading(true);
 
@@ -39,5 +40,5 @@ export function useExtractImagesFromPDF() {
     } finally {
       setLoading(false);
     }
-  }, [setLoading]);
+  });
 }

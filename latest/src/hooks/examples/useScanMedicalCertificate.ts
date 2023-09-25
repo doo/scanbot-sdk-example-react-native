@@ -1,4 +1,4 @@
-import {useCallback, useContext} from 'react';
+import {useContext} from 'react';
 import ScanbotSDK, {
   MedicalCertificateRecognizerConfiguration,
 } from 'react-native-scanbot-sdk';
@@ -7,12 +7,13 @@ import {useNavigation} from '@react-navigation/native';
 import {LastResultContext} from '../../context/useLastResult';
 import {Colors} from '../../model/Colors';
 import {errorMessageAlert} from '../../utils/Alerts';
+import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 
 export function useScanMedicalCertificate() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
   const {setLastMedicalCertificate} = useContext(LastResultContext);
 
-  return useCallback(async () => {
+  return useLicenseValidityCheckWrapper(async () => {
     try {
       let config: MedicalCertificateRecognizerConfiguration = {
         topBarBackgroundColor: Colors.SCANBOT_RED,
@@ -45,5 +46,5 @@ export function useScanMedicalCertificate() {
     } catch (e: any) {
       errorMessageAlert(e.message);
     }
-  }, [navigation, setLastMedicalCertificate]);
+  });
 }

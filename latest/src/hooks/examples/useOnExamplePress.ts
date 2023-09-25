@@ -20,6 +20,7 @@ import {useLicensePlateScanner} from './useLicensePlateScanner';
 import {useTextDataScanner} from './useTextDataScanner';
 import {useCheckRecognizer} from './useCheckRecognizer';
 import {useRecognizeCheckOnImage} from './useRecognizeCheckOnImage';
+import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 
 export function useOnExamplePress() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -36,12 +37,16 @@ export function useOnExamplePress() {
     [FeatureId.ScanBatchBarcodes]: useScanBatchBarcodes(),
     [FeatureId.DetectBarcodesOnStillImage]: useDetectBarcodesOnStillImage(),
     [FeatureId.DetectBarcodesOnStillImages]: useDetectBarcodesOnStillImages(),
-    [FeatureId.BarcodeFormatsFilter]: function () {
-      navigation.navigate(Screens.BARCODE_FORMATS);
-    },
-    [FeatureId.BarcodeDocumentFormatsFilter]: function () {
-      navigation.navigate(Screens.BARCODE_DOCUMENT_FORMATS);
-    },
+    [FeatureId.BarcodeFormatsFilter]: useLicenseValidityCheckWrapper(
+      function () {
+        navigation.navigate(Screens.BARCODE_FORMATS);
+      },
+    ),
+    [FeatureId.BarcodeDocumentFormatsFilter]: useLicenseValidityCheckWrapper(
+      function () {
+        navigation.navigate(Screens.BARCODE_DOCUMENT_FORMATS);
+      },
+    ),
     [FeatureId.ScanMRZ]: useMRZScanner(),
     [FeatureId.ScanMedicalCertificate]: useScanMedicalCertificate(),
     [FeatureId.ScanGenericDocument]: useScanGenericDocument(),
@@ -52,9 +57,11 @@ export function useOnExamplePress() {
     [FeatureId.LicensePlateScannerClassic]: useLicensePlateScanner('Classic'),
     [FeatureId.TextDataScanner]: useTextDataScanner(),
     [FeatureId.CheckRecognizer]: useCheckRecognizer(),
-    [FeatureId.BarcodeCameraViewComponent]: function () {
-      navigation.navigate(Screens.BARCODE_CAMERA_VIEW);
-    },
+    [FeatureId.BarcodeCameraViewComponent]: useLicenseValidityCheckWrapper(
+      function () {
+        navigation.navigate(Screens.BARCODE_CAMERA_VIEW);
+      },
+    ),
     [FeatureId.RecognizeCheckOnImage]: useRecognizeCheckOnImage(),
     [FeatureId.ApplyFilterOnImage]: function () {},
   };
