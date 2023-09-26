@@ -1,80 +1,55 @@
-import React from 'react';
-import {
-  FlatList,
-  SafeAreaView,
-  Switch,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React, {useContext} from 'react';
+import {StyleSheet, Switch, Text, View} from 'react-native';
+import {BarcodeDocumentFormatContext} from '../context/useBarcodeDocumentFormats';
+import {SwitchOptionsList} from '../components/SwitchOptionsList';
+import {BarcodeDocumentFormat} from 'react-native-scanbot-sdk';
 
-import {BarcodeDocumentFormats} from '../model/BarcodeDocumentFormats';
-import {Styles} from '../model/Styles';
-import {BaseScreen} from '../utils/BaseScreen';
+export function BarcodeDocumentFormatsScreen() {
+  const {
+    barcodeDocumentFormats,
+    toggleBarcodeDocumentFormats,
+    isFilteringEnabled,
+    setIsFilteringEnabled,
+  } = useContext(BarcodeDocumentFormatContext);
 
-export class BarcodeDocumentFormatsScreen extends BaseScreen {
-  constructor(props: any) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <SafeAreaView>
-        <View
-          style={Styles.INSTANCE.barcodeDocumentFormats.headerItemContainer}>
-          <View
-            style={Styles.INSTANCE.barcodeDocumentFormats.headerTextContainer}>
-            <Text style={Styles.INSTANCE.barcodeDocumentFormats.headerItemText}>
-              Enable Document Format Filters
-            </Text>
-          </View>
-          <Switch
-            style={Styles.INSTANCE.barcodeDocumentFormats.headerItemSwitch}
-            value={BarcodeDocumentFormats.isFilteringEnabled}
-            onValueChange={_ => {
-              BarcodeDocumentFormats.isFilteringEnabled =
-                !BarcodeDocumentFormats.isFilteringEnabled;
-              this.refresh();
-            }}
-          />
-        </View>
-        <FlatList
-          style={Styles.INSTANCE.barcodeDocumentFormats.list}
-          data={BarcodeDocumentFormats.list}
-          renderItem={({item}) => (
-            <TouchableOpacity
-              activeOpacity={0.6}
-              onPress={() => this.onListItemClick(item)}>
-              <View
-                style={
-                  Styles.INSTANCE.barcodeDocumentFormats.listItemContainer
-                }>
-                <Text
-                  style={Styles.INSTANCE.barcodeDocumentFormats.listItemText}>
-                  {item.key}
-                </Text>
-                <Switch
-                  style={Styles.INSTANCE.barcodeDocumentFormats.listItemSwitch}
-                  value={item.value}
-                  disabled={!BarcodeDocumentFormats.isFilteringEnabled}
-                  onValueChange={_ => {
-                    this.onListItemClick(item);
-                  }}
-                />
-              </View>
-            </TouchableOpacity>
-          )}
-          keyExtractor={item => item.key}
+  return (
+    <View>
+      <View style={styles.headerContainer}>
+        <Text style={styles.headerItemText}>
+          Enable Document Format Filters
+        </Text>
+        <Switch
+          value={isFilteringEnabled}
+          onValueChange={_ => {
+            setIsFilteringEnabled(filter => !filter);
+          }}
         />
-      </SafeAreaView>
-    );
-  }
-
-  private onListItemClick(item: any) {
-    if (BarcodeDocumentFormats.isFilteringEnabled) {
-      item.value = !item.value;
-      BarcodeDocumentFormats.update(item);
-      this.refresh();
-    }
-  }
+      </View>
+      <SwitchOptionsList
+        data={barcodeDocumentFormats}
+        isFilteringEnabled={!isFilteringEnabled}
+        onPress={format =>
+          toggleBarcodeDocumentFormats(format as BarcodeDocumentFormat)
+        }
+      />
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  headerContainer: {
+    flexDirection: 'row',
+    paddingVertical: 24,
+    paddingHorizontal: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e2e2e2',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: 'white',
+  },
+  headerItemText: {
+    fontSize: 16,
+    textAlignVertical: 'center',
+    fontWeight: 'bold',
+  },
+});
