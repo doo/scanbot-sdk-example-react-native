@@ -1,52 +1,66 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   FlatList,
-  SafeAreaView,
+  StyleSheet,
   Switch,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import {BarcodeFormats} from '../model/BarcodeFormats';
-import {Styles} from '../model/Styles';
-import {BaseScreen} from '../utils/BaseScreen';
+import {BarcodeFormatsContext} from '../context/useBarcodeFormats';
+import {BarcodeFormat} from 'react-native-scanbot-sdk';
 
-export class BarcodeFormatsScreen extends BaseScreen {
-  constructor(props: any) {
-    super(props);
-  }
+export function BarcodeFormatsScreen() {
+  const {barcodeFormats, toggleBarcodeFormat} = useContext(
+    BarcodeFormatsContext,
+  );
 
-  render() {
-    return (
-      <SafeAreaView>
-        <FlatList
-          style={Styles.INSTANCE.barcodeFormats.list}
-          data={BarcodeFormats.list}
-          renderItem={({item}) => (
-            <TouchableOpacity onPress={() => this.onListItemClick(item)}>
-              <View style={Styles.INSTANCE.barcodeFormats.listItemContainer}>
-                <Text style={Styles.INSTANCE.barcodeFormats.listItemText}>
-                  {item.key}
-                </Text>
-                <Switch
-                  style={Styles.INSTANCE.barcodeFormats.listItemSwitch}
-                  value={item.value}
-                  onValueChange={_ => {
-                    this.onListItemClick(item);
-                  }}
-                />
-              </View>
-            </TouchableOpacity>
-          )}
-          keyExtractor={item => item.key}
-        />
-      </SafeAreaView>
-    );
-  }
-
-  private onListItemClick(item: any) {
-    item.value = !item.value;
-    BarcodeFormats.update(item);
-    this.refresh();
-  }
+  return (
+    <View>
+      <FlatList
+        style={styles.list}
+        data={Object.entries(barcodeFormats)}
+        renderItem={({item: [format, value]}) => (
+          <TouchableOpacity
+            onPress={() => toggleBarcodeFormat(format as BarcodeFormat)}>
+            <View style={styles.listItemContainer}>
+              <Text style={styles.listItemText}>{format}</Text>
+              <Switch
+                style={styles.listItemSwitch}
+                value={value}
+                onValueChange={() => {
+                  toggleBarcodeFormat(format as BarcodeFormat);
+                }}
+              />
+            </View>
+          </TouchableOpacity>
+        )}
+        keyExtractor={([format]) => format}
+      />
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  list: {
+    paddingTop: '2%',
+    height: '98%',
+  },
+  listItemContainer: {
+    paddingLeft: 20,
+    flexDirection: 'row',
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: 'gray',
+    marginHorizontal: 10,
+  },
+  listItemText: {
+    fontSize: 12,
+    textAlignVertical: 'center',
+    lineHeight: 40,
+    width: '80%',
+  },
+  listItemSwitch: {
+    marginTop: 5,
+  },
+});

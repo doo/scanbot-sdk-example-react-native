@@ -17,10 +17,10 @@ export enum Screens {
 export const ScreenTitles: Record<Screens, string> = {
   [Screens.HOME]: 'Scanbot SDK Example React',
   [Screens.BARCODE_CAMERA_VIEW]: 'Barcode Camera View ',
-  [Screens.BARCODE_FORMATS]: 'Barcode Document Formats',
-  [Screens.BARCODE_DOCUMENT_FORMATS]: 'Barcode Formats',
+  [Screens.BARCODE_FORMATS]: 'Barcode Formats',
+  [Screens.BARCODE_DOCUMENT_FORMATS]: 'Barcode Document Formats',
   [Screens.CHECK_RECOGNIZER_RESULT]: 'Check Recognizer Result',
-  [Screens.GENERIC_DOCUMENT_RESULT]: 'Check Recognizer Result',
+  [Screens.GENERIC_DOCUMENT_RESULT]: 'Generic Document Recognizer Result',
   [Screens.MEDICAL_CERTIFICATE_RESULT]: 'Medical Certificate Result',
   [Screens.IMAGE_DETAILS]: 'Image Details',
   [Screens.IMAGE_RESULTS]: 'Image Results',
