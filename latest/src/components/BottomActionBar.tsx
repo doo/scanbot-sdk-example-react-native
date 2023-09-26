@@ -2,23 +2,35 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Colors} from '../model/Colors';
 
-export function BottomActionBar(props: {
-  onAdd: () => void;
-  onSave: () => void;
-  onDelete: () => void;
-}) {
+interface BottomActionBarProps {
+  buttonOneTitle: string;
+  buttonTwoTitle: string;
+  buttonThreeTitle: string;
+  onButtonOne: () => void;
+  onButtonTwo: () => void;
+  onButtonThree: () => void;
+}
+
+export function BottomActionBar({
+  buttonOneTitle,
+  buttonTwoTitle,
+  buttonThreeTitle,
+  onButtonOne,
+  onButtonTwo,
+  onButtonThree,
+}: BottomActionBarProps) {
   return (
     <View style={styles.bottomBar}>
-      <Text style={styles.bottomBarButton} onPress={props.onAdd}>
-        ADD
+      <Text style={styles.bottomBarButton} onPress={onButtonOne}>
+        {buttonOneTitle}
       </Text>
-      <Text style={styles.bottomBarButton} onPress={props.onSave}>
-        SAVE
+      <Text style={styles.bottomBarButton} onPress={onButtonTwo}>
+        {buttonTwoTitle}
       </Text>
       <Text
         style={[styles.bottomBarButton, styles.alignRight]}
-        onPress={props.onDelete}>
-        DELETE ALL
+        onPress={onButtonThree}>
+        {buttonThreeTitle}
       </Text>
     </View>
   );

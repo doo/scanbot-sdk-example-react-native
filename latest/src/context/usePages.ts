@@ -1,4 +1,4 @@
-import {createContext, useCallback, useEffect, useState} from 'react';
+import {createContext, useCallback, useState} from 'react';
 import ScanbotSDK, {Page} from 'react-native-scanbot-sdk';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -10,10 +10,9 @@ interface PageContextValue {
   addMultiplePages: (pages: Array<Page>) => void;
   deletePage: (page: Page) => void;
   deleteAllPages: () => void;
+  updatePage: (page: Page) => void;
   loadPages: () => void;
   isPageListEmpty: () => boolean;
-  deleteSelectedPage: () => void;
-  addSelectedPage: (page: Page) => void;
   getImageUriFromPages: () => Array<string>;
 }
 
@@ -23,16 +22,14 @@ export const PageContext = createContext<PageContextValue>({
   addMultiplePages: (_pages: Page[]) => {},
   deletePage: (_page: Page) => {},
   deleteAllPages: () => {},
+  updatePage: () => {},
   loadPages: () => {},
   isPageListEmpty: () => true as boolean,
-  deleteSelectedPage: () => {},
-  addSelectedPage: (_page: Page) => {},
   getImageUriFromPages: () => [] as string[],
 });
 
 export function usePages() {
   const [pageList, setList] = useState<Array<Page>>([]);
-  const [selectedPage, setSelectedPage] = useState<Page | null>(null);
 
   const addPage = useCallback(async (page: Page) => {
     try {
@@ -58,12 +55,11 @@ export function usePages() {
     try {
       await AsyncStorage.removeItem(page.pageId);
       setList(list => {
-        return [
-          ...list.splice(
-            list.findIndex(p => p.pageId === page.pageId),
-            1,
-          ),
-        ];
+        list.splice(
+          list.findIndex(p => p.pageId === page.pageId),
+          1,
+        );
+        return [...list];
       });
     } catch (e: any) {
       console.log(errorMessage, e.message);
@@ -109,15 +105,19 @@ export function usePages() {
     }
   }, []);
 
-  const deleteSelectedPage = useCallback(async () => {
-    if (selectedPage) {
-      await deletePage(selectedPage);
-      setSelectedPage(null);
-    }
-  }, [deletePage, selectedPage]);
+  const updatePage = useCallback(async (page: Page) => {
+    try {
+      setList(prevList => {
+        const index = prevList.findIndex(p => p.pageId === page.pageId);
+        const newPages = prevList.slice();
+        newPages[index] = page;
+        return newPages;
+      });
 
-  const addSelectedPage = useCallback((page: Page) => {
-    setSelectedPage(page);
+      await AsyncStorage.setItem(page.pageId, JSON.stringify(page));
+    } catch (e: any) {
+      console.log(errorMessage, e.message);
+    }
   }, []);
 
   const isPageListEmpty = useCallback(() => {
@@ -134,10 +134,9 @@ export function usePages() {
     addMultiplePages,
     deleteAllPages,
     deletePage,
+    updatePage,
     isPageListEmpty,
     loadPages,
-    deleteSelectedPage,
-    addSelectedPage,
     getImageUriFromPages,
   };
 }

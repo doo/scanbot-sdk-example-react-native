@@ -1,4 +1,6 @@
 import {StackNavigationProp} from '@react-navigation/stack';
+import {Page} from 'react-native-scanbot-sdk/src';
+import {RouteProp} from '@react-navigation/native';
 
 export enum Screens {
   HOME = 'home',
@@ -32,11 +34,16 @@ export type PrimaryRoutesParamList = {
   [Screens.CHECK_RECOGNIZER_RESULT]: undefined;
   [Screens.GENERIC_DOCUMENT_RESULT]: undefined;
   [Screens.MEDICAL_CERTIFICATE_RESULT]: undefined;
-  [Screens.IMAGE_DETAILS]: undefined;
+  [Screens.IMAGE_DETAILS]: Page;
   [Screens.IMAGE_RESULTS]: undefined;
 };
 
 export type PrimaryRouteNavigationProp = StackNavigationProp<
   PrimaryRoutesParamList,
   keyof PrimaryRoutesParamList
+>;
+
+export type ImageDetailScreenRouteProp = RouteProp<
+  PrimaryRoutesParamList,
+  Screens.IMAGE_DETAILS
 >;
