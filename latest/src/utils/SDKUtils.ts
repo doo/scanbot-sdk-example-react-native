@@ -5,6 +5,7 @@ import ScanbotSDK, {
 } from 'react-native-scanbot-sdk';
 import {errorMessageAlert} from './Alerts';
 
+export const IMAGE_FILE_FORMAT: CameraImageFormat = 'JPG';
 export const FILE_ENCRYPTION_ENABLED: boolean = false;
 
 export async function checkLicense(): Promise<boolean> {

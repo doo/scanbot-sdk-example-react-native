@@ -6,7 +6,6 @@ import {
   View,
 } from 'react-native';
 import ScanbotSDK, {Page} from 'react-native-scanbot-sdk/src';
-import PreviewImage from '../ui/PreviewImage';
 import {ScrollView} from 'react-native-gesture-handler';
 import {PageContext} from '../context/usePages';
 import {PrimaryRouteNavigationProp, Screens} from '../utils/Navigation';
@@ -16,6 +15,7 @@ import {errorMessageAlert, infoMessageAlert} from '../utils/Alerts';
 import {SavePagesModal} from '../components/SavePagesModal';
 import {useNavigation} from '@react-navigation/native';
 import {COLORS} from '../theme/Theme';
+import {PreviewImage} from '../components/PreviewImage';
 
 const GALLERY_CELL_PADDING = 20;
 

@@ -2,7 +2,6 @@ import React, {useCallback, useContext, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import ScanbotSDK from 'react-native-scanbot-sdk/src';
 import {Colors} from '../model/Colors';
-import PreviewImage from '../ui/PreviewImage';
 import {BottomActionBar} from '../components/BottomActionBar';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {
@@ -13,6 +12,7 @@ import {PageContext} from '../context/usePages';
 import {useLicenseValidityCheckWrapper} from '../hooks/useLicenseValidityCheck';
 import {ImageFilterModal} from '../components/ImageFilterModal';
 import {ImageFilter} from 'react-native-scanbot-sdk';
+import {PreviewImage} from '../components/PreviewImage';
 
 export function ImageDetailScreen() {
   const route = useRoute<ImageDetailScreenRouteProp>();

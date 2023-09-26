@@ -3,12 +3,12 @@ import React from 'react';
 import {SectionList, StyleSheet, Text, View} from 'react-native';
 import {Colors} from '../model/Colors';
 import {Results} from '../model/Results';
-import PreviewImage from '../ui/PreviewImage';
 import {BaseScreen} from '../utils/BaseScreen';
 import {
   CheckRecognizerResult,
   CheckRecognizerResultField,
 } from 'react-native-scanbot-sdk';
+import {PreviewImage} from '../components/PreviewImage';
 
 const styles = StyleSheet.create({
   container: {

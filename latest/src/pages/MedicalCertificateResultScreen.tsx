@@ -7,8 +7,8 @@ import {
 import {MedicalCertificateScannerResult} from 'react-native-scanbot-sdk';
 import {Colors} from '../model/Colors';
 import {Results} from '../model/Results';
-import PreviewImage from '../ui/PreviewImage';
 import {BaseScreen} from '../utils/BaseScreen';
+import {PreviewImage} from '../components/PreviewImage';
 
 const styles = StyleSheet.create({
   container: {
