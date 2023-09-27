@@ -3,6 +3,7 @@ import {Page} from 'react-native-scanbot-sdk/src';
 import {RouteProp} from '@react-navigation/native';
 import {
   CheckRecognizerResult,
+  GenericDocumentRecognizerResult,
   MedicalCertificateScannerResult,
 } from 'react-native-scanbot-sdk';
 
@@ -36,7 +37,7 @@ export type PrimaryRoutesParamList = {
   [Screens.BARCODE_FORMATS]: undefined;
   [Screens.BARCODE_DOCUMENT_FORMATS]: undefined;
   [Screens.CHECK_RECOGNIZER_RESULT]: CheckRecognizerResult;
-  [Screens.GENERIC_DOCUMENT_RESULT]: undefined;
+  [Screens.GENERIC_DOCUMENT_RESULT]: GenericDocumentRecognizerResult;
   [Screens.MEDICAL_CERTIFICATE_RESULT]: MedicalCertificateScannerResult;
   [Screens.IMAGE_DETAILS]: Page;
   [Screens.IMAGE_RESULTS]: undefined;
@@ -60,4 +61,9 @@ export type CheckRecognizerResultScreenRouteProp = RouteProp<
 export type MedicalCertificateResultScreenRouteProp = RouteProp<
   PrimaryRoutesParamList,
   Screens.MEDICAL_CERTIFICATE_RESULT
+>;
+
+export type GenericDocumentResultScreenRouteProp = RouteProp<
+  PrimaryRoutesParamList,
+  Screens.GENERIC_DOCUMENT_RESULT
 >;

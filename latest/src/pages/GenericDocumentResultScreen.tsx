@@ -1,76 +1,58 @@
 import React from 'react';
-import {SectionList, StyleSheet, Text, View} from 'react-native';
-import {Colors} from '../model/Colors';
-import {Results} from '../model/Results';
-import {BaseScreen} from '../utils/BaseScreen';
+import {StyleSheet, View} from 'react-native';
 import {
   GenericDocumentField,
   GenericDocumentRecognizerResult,
   MrzDocumentResult,
 } from 'react-native-scanbot-sdk';
-import {PreviewImage} from '../components/PreviewImage';
+import {useRoute} from '@react-navigation/native';
+import {GenericDocumentResultScreenRouteProp} from '../utils/Navigation';
+import {ScanResultSectionList} from '../components/ScanResultSectionList';
+
+export function GenericDocumentResultScreen() {
+  const {params: genericDocumentResult} =
+    useRoute<GenericDocumentResultScreenRouteProp>();
+
+  return (
+    <View style={styles.container}>
+      <ScanResultSectionList
+        sectionData={[
+          {
+            title: 'Fields',
+            data: transformData(genericDocumentResult),
+          },
+        ]}
+        imageFileUri={genericDocumentResult.fields.photoImageUri}
+      />
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  headerText: {
-    fontWeight: 'bold',
-    fontSize: 24,
-    marginHorizontal: 16,
-    marginTop: 16,
-  },
-  fieldsText: {
-    fontSize: 20,
-    marginHorizontal: 18,
-    marginVertical: 16,
-  },
-  image: {
-    height: 250,
-    resizeMode: 'cover', //'cover' | 'contain' | 'stretch' | 'repeat' | 'center'
-    backgroundColor: 'black',
-    marginTop: -16,
-  },
-  sectionHeader: {
-    paddingTop: 8,
-    paddingLeft: 16,
-    paddingRight: 16,
-    paddingBottom: 8,
-    fontSize: 22,
-    marginBottom: 16,
-    color: 'white',
-    backgroundColor: Colors.SCANBOT_RED,
-  },
-  item: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    fontSize: 18,
-    lineHeight: 18,
-  },
-  contentContainer: {
-    paddingBottom: 48,
-  },
 });
 
-const getMrzFields = (document: MrzDocumentResult) => {
+const transformMRZFields = (document: MrzDocumentResult) => {
   return Object.keys(document)
     .flatMap(key => {
-      let value = '';
+      let value: string;
       if (Array.isArray((document as any)[key])) {
         value = JSON.stringify((document as any)[key]);
       } else {
         const field = (document as any)[key] as GenericDocumentField;
         value = `${field.text} (confidence: ${field.confidence?.toFixed(2)})`;
       }
-      return JSON.stringify({
+      return {
         key: `MRZ.${key}`,
         value: value,
-      });
+      };
     })
     .filter(item => item);
 };
 
-const getFieldsData = (document: GenericDocumentRecognizerResult) => {
+const transformData = (document: GenericDocumentRecognizerResult) => {
   if (!document.fields) {
     return [];
   }
@@ -84,77 +66,21 @@ const getFieldsData = (document: GenericDocumentRecognizerResult) => {
         value = undefined;
       } else {
         const field = (document.fields as any)[key] as GenericDocumentField;
-        value = `${field.text} (confidence: ${field.confidence?.toFixed(2)})`;
+        value = `${field.text} ${
+          field.confidence ? '(confidence: )' + field.confidence.toFixed(2) : ''
+        }`;
       }
 
-      return value ? JSON.stringify({key: key, value: value}) : undefined;
+      return value ? {key: key, value: value} : undefined;
     })
     .filter(item => item);
 
   let mrzFields = (document.fields as any).mrz as MrzDocumentResult;
   if (mrzFields) {
-    getMrzFields(mrzFields).forEach(jsonField => jsonFields.push(jsonField));
+    transformMRZFields(mrzFields).forEach(jsonField =>
+      jsonFields.push(jsonField),
+    );
   }
 
-  return jsonFields;
+  return jsonFields as Array<{key: string; value: string}>;
 };
-
-export class GenericDocumentResultScreen extends BaseScreen {
-  render() {
-    const documentResult = Results.lastGenericDocumentResult!;
-
-    const B = (props: any) => (
-      // eslint-disable-next-line react-native/no-inline-styles
-      <Text style={{fontWeight: 'bold'}}>{props.children}</Text>
-    );
-    return (
-      <>
-        <View style={styles.container}>
-          <SectionList
-            contentContainerStyle={styles.contentContainer}
-            bounces={false}
-            sections={[
-              {
-                title: 'Snapped Image',
-                data: [
-                  JSON.stringify({
-                    key: 'imageFileUri',
-                    value: '',
-                  }),
-                ],
-              },
-              {title: 'Fields', data: getFieldsData(documentResult)},
-            ]}
-            renderItem={({item}) => {
-              const jsonItem = item;
-              if (!jsonItem) {
-                return null;
-              }
-              const pair: {key: string; value: string} = JSON.parse(jsonItem);
-              if (pair.key === 'imageFileUri') {
-                return (
-                  <PreviewImage
-                    imageUri={documentResult.fields.photoImageUri}
-                    style={styles.image}
-                  />
-                );
-              }
-              return (
-                <>
-                  <Text style={styles.item}>
-                    <B>{pair.key}</B>
-                  </Text>
-                  <Text style={styles.item}>{pair.value}</Text>
-                </>
-              );
-            }}
-            renderSectionHeader={({section}) => (
-              <Text style={styles.sectionHeader}>{section.title}</Text>
-            )}
-            keyExtractor={(item, index) => '' + index}
-          />
-        </View>
-      </>
-    );
-  }
-}

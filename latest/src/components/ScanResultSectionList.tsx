@@ -36,10 +36,14 @@ export function ScanResultSectionList({
         bounces={false}
         sections={sectionData}
         ListHeaderComponent={
-          <View>
-            <Text style={styles.sectionHeader}>Snapped Image</Text>
-            <PreviewImage imageUri={imageFileUri} style={styles.image} />
-          </View>
+          imageFileUri ? (
+            <View>
+              <Text style={styles.sectionHeader}>Snapped Image</Text>
+              <PreviewImage imageUri={imageFileUri} style={styles.image} />
+            </View>
+          ) : (
+            <></>
+          )
         }
         renderItem={ScanResultSectionListItem}
         renderSectionHeader={ScanResultSectionHeader}
@@ -74,8 +78,8 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 250,
-    resizeMode: 'cover',
-    backgroundColor: 'black',
+    resizeMode: 'contain',
+    backgroundColor: Colors.SCANBOT_RED,
     marginTop: -16,
   },
   sectionHeader: {
