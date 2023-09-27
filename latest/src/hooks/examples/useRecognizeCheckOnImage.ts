@@ -5,13 +5,11 @@ import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
 import {ActivityIndicatorContext} from '../../context/useLoading';
 import {errorMessageAlert} from '../../utils/Alerts';
 import {useNavigation} from '@react-navigation/native';
-import {LastResultContext} from '../../context/useLastResult';
 import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 
 export function useRecognizeCheckOnImage() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
   const {setLoading} = useContext(ActivityIndicatorContext);
-  const {setLastCheckRecognizerResult} = useContext(LastResultContext);
 
   return useLicenseValidityCheckWrapper(async () => {
     try {
@@ -24,8 +22,15 @@ export function useRecognizeCheckOnImage() {
 
       const checkResult = await ScanbotSDK.recognizeCheck(result[0]);
 
-      setLastCheckRecognizerResult(checkResult);
+      if (
+        checkResult.status !== 'OK' ||
+        checkResult.checkStatus !== 'SUCCESS'
+      ) {
+        return;
+      }
+
       navigation.navigate(Screens.CHECK_RECOGNIZER_RESULT, checkResult);
+      console.log(JSON.stringify(result, undefined, 4));
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {
