@@ -1,6 +1,7 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Page} from 'react-native-scanbot-sdk/src';
 import {RouteProp} from '@react-navigation/native';
+import {CheckRecognizerResult} from 'react-native-scanbot-sdk';
 
 export enum Screens {
   HOME = 'home',
@@ -31,7 +32,7 @@ export type PrimaryRoutesParamList = {
   [Screens.BARCODE_CAMERA_VIEW]: undefined;
   [Screens.BARCODE_FORMATS]: undefined;
   [Screens.BARCODE_DOCUMENT_FORMATS]: undefined;
-  [Screens.CHECK_RECOGNIZER_RESULT]: undefined;
+  [Screens.CHECK_RECOGNIZER_RESULT]: CheckRecognizerResult;
   [Screens.GENERIC_DOCUMENT_RESULT]: undefined;
   [Screens.MEDICAL_CERTIFICATE_RESULT]: undefined;
   [Screens.IMAGE_DETAILS]: Page;
@@ -46,4 +47,9 @@ export type PrimaryRouteNavigationProp = StackNavigationProp<
 export type ImageDetailScreenRouteProp = RouteProp<
   PrimaryRoutesParamList,
   Screens.IMAGE_DETAILS
+>;
+
+export type CheckRecognizerResultScreenRouteProp = RouteProp<
+  PrimaryRoutesParamList,
+  Screens.CHECK_RECOGNIZER_RESULT
 >;

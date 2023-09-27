@@ -26,7 +26,7 @@ export function useCheckRecognizer() {
       }
 
       setLastCheckRecognizerResult(result);
-      navigation.navigate(Screens.CHECK_RECOGNIZER_RESULT);
+      navigation.navigate(Screens.CHECK_RECOGNIZER_RESULT, result);
 
       console.log(JSON.stringify(result, undefined, 4));
     } catch (e: any) {

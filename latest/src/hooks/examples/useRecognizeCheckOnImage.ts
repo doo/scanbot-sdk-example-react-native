@@ -25,7 +25,7 @@ export function useRecognizeCheckOnImage() {
       const checkResult = await ScanbotSDK.recognizeCheck(result[0]);
 
       setLastCheckRecognizerResult(checkResult);
-      navigation.navigate(Screens.CHECK_RECOGNIZER_RESULT);
+      navigation.navigate(Screens.CHECK_RECOGNIZER_RESULT, checkResult);
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {
