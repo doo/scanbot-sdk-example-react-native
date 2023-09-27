@@ -11,7 +11,6 @@ import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 
 export function useScanMedicalCertificate() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
-  const {setLastMedicalCertificate} = useContext(LastResultContext);
 
   return useLicenseValidityCheckWrapper(async () => {
     try {
@@ -39,10 +38,8 @@ export function useScanMedicalCertificate() {
         return;
       }
 
-      setLastMedicalCertificate(result);
-      navigation.navigate(Screens.MEDICAL_CERTIFICATE_RESULT);
-
       console.log(JSON.stringify(result, undefined, 4));
+      navigation.navigate(Screens.MEDICAL_CERTIFICATE_RESULT, result);
     } catch (e: any) {
       errorMessageAlert(e.message);
     }
