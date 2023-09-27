@@ -1,5 +1,4 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
 import {MedicalCertificateScannerResult} from 'react-native-scanbot-sdk';
 import {ScanResultSectionList} from '../components/ScanResultSectionList';
 import {useRoute} from '@react-navigation/native';
@@ -10,25 +9,23 @@ export function MedicalCertificateResultScreen() {
     useRoute<MedicalCertificateResultScreenRouteProp>();
 
   return (
-    <View style={styles.container}>
-      <ScanResultSectionList
-        sectionData={[
-          {
-            title: 'Patient Data',
-            data: transformPatientData(medicalCertificateResult),
-          },
-          {
-            title: 'Dates',
-            data: transformDatesData(medicalCertificateResult),
-          },
-          {
-            title: 'Checkboxes',
-            data: getCheckboxesData(medicalCertificateResult),
-          },
-        ]}
-        imageFileUri={medicalCertificateResult.imageFileUri}
-      />
-    </View>
+    <ScanResultSectionList
+      sectionData={[
+        {
+          title: 'Patient Data',
+          data: transformPatientData(medicalCertificateResult),
+        },
+        {
+          title: 'Dates',
+          data: transformDatesData(medicalCertificateResult),
+        },
+        {
+          title: 'Checkboxes',
+          data: getCheckboxesData(medicalCertificateResult),
+        },
+      ]}
+      imageFileUri={medicalCertificateResult.imageFileUri}
+    />
   );
 }
 
@@ -131,9 +128,3 @@ const getCheckboxesData = (certificate: MedicalCertificateScannerResult) => {
     };
   });
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

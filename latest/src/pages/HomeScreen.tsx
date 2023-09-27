@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import {examplesList, Section, SectionData} from '../model/Examples';
-import {useOnExamplePress} from '../hooks/examples/useOnExamplePress';
+import {useOnExamplePress} from '../hooks/useOnExamplePress';
 import {
   SectionFooter,
   SectionHeader,

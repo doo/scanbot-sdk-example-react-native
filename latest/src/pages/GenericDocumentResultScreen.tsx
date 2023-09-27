@@ -1,5 +1,4 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
 import {
   GenericDocumentField,
   GenericDocumentRecognizerResult,
@@ -14,25 +13,17 @@ export function GenericDocumentResultScreen() {
     useRoute<GenericDocumentResultScreenRouteProp>();
 
   return (
-    <View style={styles.container}>
-      <ScanResultSectionList
-        sectionData={[
-          {
-            title: 'Fields',
-            data: transformData(genericDocumentResult),
-          },
-        ]}
-        imageFileUri={genericDocumentResult.fields.photoImageUri}
-      />
-    </View>
+    <ScanResultSectionList
+      sectionData={[
+        {
+          title: 'Fields',
+          data: transformData(genericDocumentResult),
+        },
+      ]}
+      imageFileUri={genericDocumentResult.fields.photoImageUri}
+    />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 const transformMRZFields = (document: MrzDocumentResult) => {
   return Object.keys(document)

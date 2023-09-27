@@ -1,5 +1,4 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
 import {CheckRecognizerResult} from 'react-native-scanbot-sdk';
 import {ScanResultSectionList} from '../components/ScanResultSectionList';
 import {useRoute} from '@react-navigation/native';
@@ -10,17 +9,15 @@ export function CheckRecognizerResultScreen() {
     useRoute<CheckRecognizerResultScreenRouteProp>();
 
   return (
-    <View style={styles.container}>
-      <ScanResultSectionList
-        sectionData={[
-          {
-            title: 'Fields',
-            data: transformCheckResult(checkRecognizerResult),
-          },
-        ]}
-        imageFileUri={checkRecognizerResult.imageFileUri}
-      />
-    </View>
+    <ScanResultSectionList
+      sectionData={[
+        {
+          title: 'Fields',
+          data: transformCheckResult(checkRecognizerResult),
+        },
+      ]}
+      imageFileUri={checkRecognizerResult.imageFileUri}
+    />
   );
 }
 
@@ -38,9 +35,3 @@ function transformCheckResult(result: CheckRecognizerResult) {
       value: value.value.text as string,
     }));
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

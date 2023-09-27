@@ -34,12 +34,12 @@ import {
   BarcodeFormatsContext,
   useBarcodeFormats,
 } from './context/useBarcodeFormats';
-import {LastResultContext, useLastResult} from './context/useLastResult';
 import {ScanbotTheme} from './theme/Theme';
 import {ActivityIndicatorContext, useLoading} from './context/useLoading';
 import {ActivityIndicator} from './components/ActivityIndicator';
 import {HomeScreen} from './pages/HomeScreen';
 import {ImageResultScreen} from './pages/ImageResultScreen';
+import {FILE_ENCRYPTION_ENABLED, IMAGE_FILE_FORMAT} from './utils/SDKUtils';
 
 const Stack = createStackNavigator<PrimaryRoutesParamList>();
 
@@ -82,14 +82,18 @@ const storageBaseDirectory = Platform.select({
 export const SDKInitializationOptions: InitializationOptions = {
   licenseKey: '', //The Scanbot SDK License Key
   loggingEnabled: true, // Logging enabled. Consider switching logging OFF in production builds for security and performance reasons!
-  storageImageFormat: 'JPG', // Format of stored images
+  storageImageFormat: IMAGE_FILE_FORMAT, // Format of stored images
   storageImageQuality: 80, // Quality of stored images
   storageBaseDirectory: storageBaseDirectory, // Custom storage path
   documentDetectorMode: 'ML_BASED', // The engine used to detect documents
-  // Set the following properties to enable encryption.
-  // fileEncryptionMode: 'AES256',
-  // fileEncryptionPassword: 'SomeSecretPa$$w0rdForFileEncryption',
 } as const;
+
+// Set the following properties to enable encryption.
+if (FILE_ENCRYPTION_ENABLED) {
+  SDKInitializationOptions.fileEncryptionMode = 'AES256';
+  SDKInitializationOptions.fileEncryptionPassword =
+    'SomeSecretPa$$w0rdForFileEncryption';
+}
 
 function App() {
   useEffect(() => {
@@ -102,73 +106,70 @@ function App() {
   const pageValues = usePages();
   const barcodeDocumentFormatsValues = useBarcodeDocumentFormats();
   const barcodeFormatsValues = useBarcodeFormats();
-  const lastResults = useLastResult();
   const [loading, setLoading] = useLoading();
 
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle="light-content" />
       <ActivityIndicator loading={loading} />
-      <ActivityIndicatorContext.Provider value={{setLoading}}>
-        <PageContext.Provider value={pageValues}>
-          <BarcodeDocumentFormatContext.Provider
-            value={barcodeDocumentFormatsValues}>
-            <BarcodeFormatsContext.Provider value={barcodeFormatsValues}>
-              <LastResultContext.Provider value={lastResults}>
-                <NavigationContainer theme={ScanbotTheme}>
-                  <Stack.Navigator
-                    initialRouteName={Screens.HOME}
-                    screenOptions={navigation => ({
-                      title: ScreenTitles[navigation.route.name],
-                      headerStyle: {
-                        borderBottomWidth: 0,
-                        shadowColor: 'transparent',
-                      },
-                    })}>
-                    <Stack.Screen name={Screens.HOME} component={HomeScreen} />
-                    <Stack.Screen
-                      name={Screens.IMAGE_RESULTS}
-                      component={ImageResultScreen}
-                    />
-                    <Stack.Screen
-                      name={Screens.IMAGE_DETAILS}
-                      component={ImageDetailScreen}
-                      options={{headerBackTitleVisible: false}}
-                    />
-                    <Stack.Screen
-                      name={Screens.MEDICAL_CERTIFICATE_RESULT}
-                      component={MedicalCertificateResultScreen}
-                    />
-                    <Stack.Screen
-                      name={Screens.GENERIC_DOCUMENT_RESULT}
-                      component={GenericDocumentResultScreen}
-                    />
-                    <Stack.Screen
-                      name={Screens.CHECK_RECOGNIZER_RESULT}
-                      component={CheckRecognizerResultScreen}
-                    />
-                    <Stack.Screen
-                      name={Screens.BARCODE_FORMATS}
-                      component={BarcodeFormatsScreen}
-                      options={{headerBackTitleVisible: false}}
-                    />
-                    <Stack.Screen
-                      name={Screens.BARCODE_DOCUMENT_FORMATS}
-                      component={BarcodeDocumentFormatsScreen}
-                      options={{headerBackTitleVisible: false}}
-                    />
-                    <Stack.Screen
-                      name={Screens.BARCODE_CAMERA_VIEW}
-                      component={BarcodeCameraViewScreen}
-                      options={{headerBackTitleVisible: false}}
-                    />
-                  </Stack.Navigator>
-                </NavigationContainer>
-              </LastResultContext.Provider>
-            </BarcodeFormatsContext.Provider>
-          </BarcodeDocumentFormatContext.Provider>
-        </PageContext.Provider>
-      </ActivityIndicatorContext.Provider>
+      <NavigationContainer theme={ScanbotTheme}>
+        <ActivityIndicatorContext.Provider value={{setLoading}}>
+          <PageContext.Provider value={pageValues}>
+            <BarcodeDocumentFormatContext.Provider
+              value={barcodeDocumentFormatsValues}>
+              <BarcodeFormatsContext.Provider value={barcodeFormatsValues}>
+                <Stack.Navigator
+                  initialRouteName={Screens.HOME}
+                  screenOptions={navigation => ({
+                    title: ScreenTitles[navigation.route.name],
+                    headerStyle: {
+                      borderBottomWidth: 0,
+                      shadowColor: 'transparent',
+                    },
+                  })}>
+                  <Stack.Screen name={Screens.HOME} component={HomeScreen} />
+                  <Stack.Screen
+                    name={Screens.IMAGE_RESULTS}
+                    component={ImageResultScreen}
+                  />
+                  <Stack.Screen
+                    name={Screens.IMAGE_DETAILS}
+                    component={ImageDetailScreen}
+                    options={{headerBackTitleVisible: false}}
+                  />
+                  <Stack.Screen
+                    name={Screens.MEDICAL_CERTIFICATE_RESULT}
+                    component={MedicalCertificateResultScreen}
+                  />
+                  <Stack.Screen
+                    name={Screens.GENERIC_DOCUMENT_RESULT}
+                    component={GenericDocumentResultScreen}
+                  />
+                  <Stack.Screen
+                    name={Screens.CHECK_RECOGNIZER_RESULT}
+                    component={CheckRecognizerResultScreen}
+                  />
+                  <Stack.Screen
+                    name={Screens.BARCODE_FORMATS}
+                    component={BarcodeFormatsScreen}
+                    options={{headerBackTitleVisible: false}}
+                  />
+                  <Stack.Screen
+                    name={Screens.BARCODE_DOCUMENT_FORMATS}
+                    component={BarcodeDocumentFormatsScreen}
+                    options={{headerBackTitleVisible: false}}
+                  />
+                  <Stack.Screen
+                    name={Screens.BARCODE_CAMERA_VIEW}
+                    component={BarcodeCameraViewScreen}
+                    options={{headerBackTitleVisible: false}}
+                  />
+                </Stack.Navigator>
+              </BarcodeFormatsContext.Provider>
+            </BarcodeDocumentFormatContext.Provider>
+          </PageContext.Provider>
+        </ActivityIndicatorContext.Provider>
+      </NavigationContainer>
     </SafeAreaView>
   );
 }

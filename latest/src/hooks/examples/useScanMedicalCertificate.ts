@@ -1,10 +1,8 @@
-import {useContext} from 'react';
 import ScanbotSDK, {
   MedicalCertificateRecognizerConfiguration,
 } from 'react-native-scanbot-sdk';
 import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
 import {useNavigation} from '@react-navigation/native';
-import {LastResultContext} from '../../context/useLastResult';
 import {Colors} from '../../model/Colors';
 import {errorMessageAlert} from '../../utils/Alerts';
 import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
