@@ -77,8 +77,12 @@ export function SavePagesModal({
       setLoading(false);
     }
   };
-  const saveTiffOneBit = useLicenseValidityCheckWrapper(onSaveAsTiff, [true]);
-  const saveTiffColor = useLicenseValidityCheckWrapper(onSaveAsTiff, [false]);
+  const saveTiffOneBit = useLicenseValidityCheckWrapper(() =>
+    onSaveAsTiff(true),
+  );
+  const saveTiffColor = useLicenseValidityCheckWrapper(() =>
+    onSaveAsTiff(false),
+  );
 
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible}>

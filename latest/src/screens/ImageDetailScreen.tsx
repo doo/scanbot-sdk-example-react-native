@@ -36,7 +36,7 @@ export function ImageDetailScreen() {
         updatePage(result.page);
       }
     }
-  }, [page]);
+  });
 
   const toggleFilterModal = useCallback(
     () => setFilterModalVisible(p => !p),
@@ -46,7 +46,6 @@ export function ImageDetailScreen() {
   const onFilterSelect = useCallback(
     async (filter: ImageFilter) => {
       try {
-        setFilterModalVisible(false);
         const updated = await ScanbotSDK.applyImageFilterOnPage(page, filter);
         setPage(updated);
         updatePage(updated);
