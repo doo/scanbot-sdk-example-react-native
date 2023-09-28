@@ -1,4 +1,4 @@
-import {FeatureId} from '../model/Examples';
+import {FeatureId} from '../utils/Examples';
 import {useDocumentScanner} from './examples/useDocumentScanner';
 import {useNavigation} from '@react-navigation/native';
 import {PrimaryRouteNavigationProp, Screens} from '../utils/Navigation';
