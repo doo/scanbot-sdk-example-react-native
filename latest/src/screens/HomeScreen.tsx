@@ -66,7 +66,7 @@ export function HomeScreen() {
   );
 
   return (
-    <View>
+    <View style={styles.container}>
       <SectionList
         stickySectionHeadersEnabled={false}
         style={styles.list}
@@ -76,19 +76,22 @@ export function HomeScreen() {
         renderItem={renderItem}
         ListFooterComponent={HomeScreenSectionFooter}
       />
-      <Text style={styles.copyrightLabel}>
-        Copyright {new Date().getFullYear()} doo GmbH. All rights reserved.
-      </Text>
       <ImageFilterModal
         isVisible={isVisible}
         onDismiss={() => setIsVisible(false)}
         onSelect={onFilterSelect}
       />
+      <Text style={styles.copyrightLabel}>
+        Copyright {new Date().getFullYear()} doo GmbH. All rights reserved.
+      </Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   list: {
     marginTop: '1%',
     marginLeft: '5%',

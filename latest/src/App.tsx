@@ -12,6 +12,7 @@ import {
   SafeAreaView,
   StatusBar,
   StyleSheet,
+  View,
 } from 'react-native';
 
 import ScanbotSDK, {InitializationOptions} from 'react-native-scanbot-sdk';
@@ -40,7 +41,7 @@ import {
   BarcodeFormatsContext,
   useBarcodeFormats,
 } from './context/useBarcodeFormats';
-import {ScanbotTheme} from './theme/Theme';
+import {COLORS, ScanbotTheme} from './theme/Theme';
 import {ActivityIndicatorContext, useLoading} from './context/useLoading';
 import {HomeScreen} from './screens/HomeScreen';
 import {ImageResultScreen} from './screens/ImageResultScreen';
@@ -115,70 +116,78 @@ function App() {
   const [loading, setLoading] = useLoading();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" />
-      <ActivityIndicatorContext.Provider value={{setLoading}}>
-        <PageContext.Provider value={pageValues}>
-          <BarcodeDocumentFormatContext.Provider
-            value={barcodeDocumentFormatsValues}>
-            <BarcodeFormatsContext.Provider value={barcodeFormatsValues}>
-              <NavigationContainer theme={ScanbotTheme}>
-                <Stack.Navigator
-                  initialRouteName={Screens.HOME}
-                  screenOptions={navigation => ({
-                    title: ScreenTitles[navigation.route.name],
-                    headerStyle: styles.headerStyle,
-                  })}>
-                  <Stack.Screen name={Screens.HOME} component={HomeScreen} />
-                  <Stack.Screen
-                    name={Screens.IMAGE_RESULTS}
-                    component={ImageResultScreen}
-                  />
-                  <Stack.Screen
-                    name={Screens.IMAGE_DETAILS}
-                    component={ImageDetailScreen}
-                    options={{headerBackTitleVisible: false}}
-                  />
-                  <Stack.Screen
-                    name={Screens.MEDICAL_CERTIFICATE_RESULT}
-                    component={MedicalCertificateResultScreen}
-                  />
-                  <Stack.Screen
-                    name={Screens.GENERIC_DOCUMENT_RESULT}
-                    component={GenericDocumentResultScreen}
-                  />
-                  <Stack.Screen
-                    name={Screens.CHECK_RECOGNIZER_RESULT}
-                    component={CheckRecognizerResultScreen}
-                  />
-                  <Stack.Screen
-                    name={Screens.BARCODE_FORMATS}
-                    component={BarcodeFormatsScreen}
-                    options={{headerBackTitleVisible: false}}
-                  />
-                  <Stack.Screen
-                    name={Screens.BARCODE_DOCUMENT_FORMATS}
-                    component={BarcodeDocumentFormatsScreen}
-                    options={{headerBackTitleVisible: false}}
-                  />
-                  <Stack.Screen
-                    name={Screens.BARCODE_CAMERA_VIEW}
-                    component={BarcodeCameraViewScreen}
-                    options={{headerBackTitleVisible: false}}
-                  />
-                </Stack.Navigator>
-              </NavigationContainer>
-            </BarcodeFormatsContext.Provider>
-          </BarcodeDocumentFormatContext.Provider>
-        </PageContext.Provider>
-      </ActivityIndicatorContext.Provider>
-      <LoadingIndicator loading={loading} />
-    </SafeAreaView>
+    <View style={styles.container}>
+      <StatusBar
+        backgroundColor={COLORS.SCANBOT_RED}
+        barStyle="light-content"
+      />
+      <SafeAreaView style={styles.container}>
+        <ActivityIndicatorContext.Provider value={{setLoading}}>
+          <PageContext.Provider value={pageValues}>
+            <BarcodeDocumentFormatContext.Provider
+              value={barcodeDocumentFormatsValues}>
+              <BarcodeFormatsContext.Provider value={barcodeFormatsValues}>
+                <NavigationContainer theme={ScanbotTheme}>
+                  <Stack.Navigator
+                    initialRouteName={Screens.HOME}
+                    screenOptions={navigation => ({
+                      title: ScreenTitles[navigation.route.name],
+                      headerStyle: styles.headerStyle,
+                    })}>
+                    <Stack.Screen name={Screens.HOME} component={HomeScreen} />
+                    <Stack.Screen
+                      name={Screens.IMAGE_RESULTS}
+                      component={ImageResultScreen}
+                    />
+                    <Stack.Screen
+                      name={Screens.IMAGE_DETAILS}
+                      component={ImageDetailScreen}
+                      options={{headerBackTitleVisible: false}}
+                    />
+                    <Stack.Screen
+                      name={Screens.MEDICAL_CERTIFICATE_RESULT}
+                      component={MedicalCertificateResultScreen}
+                    />
+                    <Stack.Screen
+                      name={Screens.GENERIC_DOCUMENT_RESULT}
+                      component={GenericDocumentResultScreen}
+                    />
+                    <Stack.Screen
+                      name={Screens.CHECK_RECOGNIZER_RESULT}
+                      component={CheckRecognizerResultScreen}
+                    />
+                    <Stack.Screen
+                      name={Screens.BARCODE_FORMATS}
+                      component={BarcodeFormatsScreen}
+                      options={{headerBackTitleVisible: false}}
+                    />
+                    <Stack.Screen
+                      name={Screens.BARCODE_DOCUMENT_FORMATS}
+                      component={BarcodeDocumentFormatsScreen}
+                      options={{headerBackTitleVisible: false}}
+                    />
+                    <Stack.Screen
+                      name={Screens.BARCODE_CAMERA_VIEW}
+                      component={BarcodeCameraViewScreen}
+                      options={{headerBackTitleVisible: false}}
+                    />
+                  </Stack.Navigator>
+                </NavigationContainer>
+              </BarcodeFormatsContext.Provider>
+            </BarcodeDocumentFormatContext.Provider>
+          </PageContext.Provider>
+        </ActivityIndicatorContext.Provider>
+        <LoadingIndicator loading={loading} />
+      </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {flex: 1},
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.SCANBOT_RED,
+  },
   headerStyle: {
     borderBottomWidth: 0,
     shadowColor: 'transparent',
