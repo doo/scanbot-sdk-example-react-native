@@ -68,7 +68,7 @@ LogBox.ignoreAllLogs();
 const storageBaseDirectory = Platform.select({
   ios: DocumentDirectoryPath + '/my-custom-storage',
   android: ExternalDirectoryPath + '/my-custom-storage',
-  default: '',
+  default: undefined,
 });
 
 /*
