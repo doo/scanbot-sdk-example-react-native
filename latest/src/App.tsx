@@ -12,13 +12,13 @@ import ScanbotSDK, {InitializationOptions} from 'react-native-scanbot-sdk';
 import {DocumentDirectoryPath, ExternalDirectoryPath} from 'react-native-fs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {ImageDetailScreen} from './pages/ImageDetailScreen';
-import {MedicalCertificateResultScreen} from './pages/MedicalCertificateResultScreen';
-import {GenericDocumentResultScreen} from './pages/GenericDocumentResultScreen';
-import {CheckRecognizerResultScreen} from './pages/CheckRecognizerResultScreen';
-import {BarcodeFormatsScreen} from './pages/BarcodeFormatsScreen';
-import {BarcodeDocumentFormatsScreen} from './pages/BarcodeDocumentFormatsScreen';
-import {BarcodeCameraViewScreen} from './pages/BarcodeCameraViewScreen';
+import {ImageDetailScreen} from './screens/ImageDetailScreen';
+import {MedicalCertificateResultScreen} from './screens/MedicalCertificateResultScreen';
+import {GenericDocumentResultScreen} from './screens/GenericDocumentResultScreen';
+import {CheckRecognizerResultScreen} from './screens/CheckRecognizerResultScreen';
+import {BarcodeFormatsScreen} from './screens/BarcodeFormatsScreen';
+import {BarcodeDocumentFormatsScreen} from './screens/BarcodeDocumentFormatsScreen';
+import {BarcodeCameraViewScreen} from './screens/BarcodeCameraViewScreen';
 import {errorMessageAlert} from './utils/Alerts';
 import {
   PrimaryRoutesParamList,
@@ -37,8 +37,8 @@ import {
 import {ScanbotTheme} from './theme/Theme';
 import {ActivityIndicatorContext, useLoading} from './context/useLoading';
 import {ActivityIndicator} from './components/ActivityIndicator';
-import {HomeScreen} from './pages/HomeScreen';
-import {ImageResultScreen} from './pages/ImageResultScreen';
+import {HomeScreen} from './screens/HomeScreen';
+import {ImageResultScreen} from './screens/ImageResultScreen';
 import {FILE_ENCRYPTION_ENABLED, IMAGE_FILE_FORMAT} from './utils/SDKUtils';
 
 const Stack = createStackNavigator<PrimaryRoutesParamList>();
