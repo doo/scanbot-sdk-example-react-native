@@ -6,7 +6,13 @@
  */
 
 import React, {useEffect} from 'react';
-import {LogBox, Platform, SafeAreaView, StatusBar} from 'react-native';
+import {
+  LogBox,
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+} from 'react-native';
 
 import ScanbotSDK, {InitializationOptions} from 'react-native-scanbot-sdk';
 import {DocumentDirectoryPath, ExternalDirectoryPath} from 'react-native-fs';
@@ -47,7 +53,7 @@ const Stack = createStackNavigator<PrimaryRoutesParamList>();
 LogBox.ignoreLogs(['new NativeEventEmitter']); // Ignore log notification by message
 LogBox.ignoreAllLogs();
 
-// !! Please note !!
+// !! Please read note !!
 // It is strongly recommended to use the default (secure) storage location of the Scanbot SDK.
 // However, for demo purposes we overwrite the "storageBaseDirectory" of the Scanbot SDK by a custom storage directory.
 //
@@ -109,7 +115,7 @@ function App() {
   const [loading, setLoading] = useLoading();
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
       <ActivityIndicator loading={loading} />
       <NavigationContainer theme={ScanbotTheme}>
@@ -122,10 +128,7 @@ function App() {
                   initialRouteName={Screens.HOME}
                   screenOptions={navigation => ({
                     title: ScreenTitles[navigation.route.name],
-                    headerStyle: {
-                      borderBottomWidth: 0,
-                      shadowColor: 'transparent',
-                    },
+                    headerStyle: styles.headerStyle,
                   })}>
                   <Stack.Screen name={Screens.HOME} component={HomeScreen} />
                   <Stack.Screen
@@ -173,5 +176,13 @@ function App() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {flex: 1},
+  headerStyle: {
+    borderBottomWidth: 0,
+    shadowColor: 'transparent',
+  },
+});
 
 export default App;
