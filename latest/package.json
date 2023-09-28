@@ -10,8 +10,8 @@
     "test": "jest",
     "clean-android": "cd android && ./gradlew app:clean && cd ..",
     "clean-ios": "cd ios && rm -rf Pods/ && rm Podfile.lock && pod install --repo-update && cd ..",
-    "clean-full": "npm run clean-android && npm run clean-ios && npm run reinstall",
-    "reinstall": "rm -rf node_modules/ && rm package-lock.json && npm install --force",
+    "clean-full": "yarn run clean-android && yarn run clean-ios && yarn run reinstall",
+    "reinstall": "rm -rf node_modules/ && rm yarn.lock && yarn",
     "postinstall": "cd ios && pod install"
   },
   "engines": {

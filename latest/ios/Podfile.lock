@@ -495,7 +495,7 @@ PODS:
     - React-Core
   - RNFS (2.16.6):
     - React
-  - RNGestureHandler (2.12.1):
+  - RNGestureHandler (2.13.1):
     - React-Core
   - RNScanbotSDK/ALL (4.15.3):
     - React
@@ -757,7 +757,7 @@ SPEC CHECKSUMS:
   ReactCommon: 4b2bdcb50a3543e1c2b2849ad44533686610826d
   RNCAsyncStorage: c913ede1fa163a71cea118ed4670bbaaa4b511bb
   RNFS: 751428ec3aa24945dad64640903833ad034b6d03
-  RNGestureHandler: c0d04458598fcb26052494ae23dda8f8f5162b13
+  RNGestureHandler: 38aa38413896620338948fbb5c90579a7b1c3fde
   RNScanbotSDK: 797a53df0e2c99f7b040be0cfa96a7c837b2237c
   RNScreens: 85d3880b52d34db7b8eeebe2f1a0e807c05e69fa
   ScanbotSDK: 88ea9100f2d6fe0c0fddc707bff470e7f71387d8
