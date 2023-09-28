@@ -10,10 +10,10 @@ import {
 import {examplesList, Section, SectionData} from '../utils/Examples';
 import {useOnExamplePress} from '../hooks/useOnExamplePress';
 import {
-  SectionFooter,
-  SectionHeader,
-  SectionItem,
-} from '../components/SectionComponents';
+  HomeScreenSectionFooter,
+  HomeScreenSectionHeader,
+  HomeScreenSectionItem,
+} from '../components/HomeScreenSectionComponents';
 import {PageContext} from '../context/usePages';
 
 export function HomeScreen() {
@@ -27,7 +27,7 @@ export function HomeScreen() {
   const renderItem = useCallback(
     (listItem: SectionListRenderItemInfo<SectionData, Section>) => {
       return (
-        <SectionItem
+        <HomeScreenSectionItem
           listItem={listItem}
           onPress={onExamplePress[listItem.item.id]}
         />
@@ -43,9 +43,9 @@ export function HomeScreen() {
         style={styles.list}
         sections={examplesList}
         keyExtractor={(item, index) => item.title + index}
-        renderSectionHeader={SectionHeader}
+        renderSectionHeader={HomeScreenSectionHeader}
         renderItem={renderItem}
-        ListFooterComponent={SectionFooter}
+        ListFooterComponent={HomeScreenSectionFooter}
       />
       <Text style={styles.copyrightLabel}>
         Copyright {new Date().getFullYear()} doo GmbH. All rights reserved.

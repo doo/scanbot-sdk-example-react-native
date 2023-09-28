@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import React, {useCallback} from 'react';
-import {Section, SectionData} from '../model/Examples';
+import {Section, SectionData} from '../utils/Examples';
 import {COLORS} from '../theme/Theme';
 
 interface SectionItemProps {
@@ -16,7 +16,7 @@ interface SectionItemProps {
   onPress(): void;
 }
 
-export function SectionItem({onPress, listItem}: SectionItemProps) {
+export function HomeScreenSectionItem({onPress, listItem}: SectionItemProps) {
   return (
     <View style={styles.sectionItemContainer}>
       <TouchableOpacity onPress={onPress}>
@@ -26,13 +26,13 @@ export function SectionItem({onPress, listItem}: SectionItemProps) {
   );
 }
 
-export function SectionHeader(item: {
+export function HomeScreenSectionHeader(item: {
   section: SectionListData<SectionData, Section>;
 }) {
   return <Text style={styles.sectionHeader}>{item.section.title}</Text>;
 }
 
-export function SectionFooter() {
+export function HomeScreenSectionFooter() {
   const onPress = useCallback(() => {
     Linking.openURL('https://scanbot.io');
   }, []);
