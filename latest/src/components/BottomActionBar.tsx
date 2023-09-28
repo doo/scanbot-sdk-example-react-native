@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {Colors} from '../model/Colors';
+import {COLORS} from '../theme/Theme';
 
 interface BottomActionBarProps {
   buttonOneTitle: string;
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   bottomBar: {
     width: '100%',
     height: 50,
-    backgroundColor: Colors.SCANBOT_RED,
+    backgroundColor: COLORS.SCANBOT_RED,
     position: 'absolute',
     bottom: 0,
     flexDirection: 'row',

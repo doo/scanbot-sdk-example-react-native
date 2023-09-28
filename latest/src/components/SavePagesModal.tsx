@@ -1,12 +1,12 @@
 import {Modal, StyleSheet, Text, View} from 'react-native';
 import React, {useContext} from 'react';
-import {Colors} from '../model/Colors';
 import {FILE_ENCRYPTION_ENABLED} from '../utils/SDKUtils';
 import ScanbotSDK from 'react-native-scanbot-sdk';
 import {errorMessageAlert, infoMessageAlert} from '../utils/Alerts';
 import {ActivityIndicatorContext} from '../context/useLoading';
 import {PageContext} from '../context/usePages';
 import {useLicenseValidityCheckWrapper} from '../hooks/useLicenseValidityCheck';
+import {COLORS} from '../theme/Theme';
 
 export function SavePagesModal({
   isVisible,
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   },
   actionButton: {
     color: 'white',
-    backgroundColor: Colors.SCANBOT_RED,
+    backgroundColor: COLORS.SCANBOT_RED,
     fontWeight: 'bold',
   },
   closeButton: {

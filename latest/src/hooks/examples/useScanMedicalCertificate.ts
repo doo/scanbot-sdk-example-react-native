@@ -3,9 +3,9 @@ import ScanbotSDK, {
 } from 'react-native-scanbot-sdk';
 import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
 import {useNavigation} from '@react-navigation/native';
-import {Colors} from '../../model/Colors';
 import {errorMessageAlert} from '../../utils/Alerts';
 import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
+import {COLORS} from '../../theme/Theme';
 
 export function useScanMedicalCertificate() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -13,7 +13,7 @@ export function useScanMedicalCertificate() {
   return useLicenseValidityCheckWrapper(async () => {
     try {
       let config: MedicalCertificateRecognizerConfiguration = {
-        topBarBackgroundColor: Colors.SCANBOT_RED,
+        topBarBackgroundColor: COLORS.SCANBOT_RED,
         userGuidanceStrings: {
           capturing: 'capturing',
           scanning: 'recognizing',

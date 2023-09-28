@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
-import {Styles} from '../model/Styles';
+import {COLORS} from '../theme/Theme';
 
 export function BarcodeCameraImageButton(props: {
   onPress: () => void;
@@ -23,7 +23,7 @@ export function BarcodeCameraImageButton(props: {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: Styles.SCANBOT_RED,
+    backgroundColor: COLORS.SCANBOT_RED,
     paddingHorizontal: 20,
     paddingVertical: 12,
     borderRadius: 12,

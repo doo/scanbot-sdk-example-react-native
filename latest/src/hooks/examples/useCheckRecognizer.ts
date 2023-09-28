@@ -1,11 +1,11 @@
 import ScanbotSDK, {
   CheckRecognizerConfiguration,
 } from 'react-native-scanbot-sdk';
-import {Colors} from '../../model/Colors';
 import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
 import {errorMessageAlert} from '../../utils/Alerts';
 import {useNavigation} from '@react-navigation/native';
 import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
+import {COLORS} from '../../theme/Theme';
 
 export function useCheckRecognizer() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -13,7 +13,7 @@ export function useCheckRecognizer() {
   return useLicenseValidityCheckWrapper(async () => {
     try {
       const config: CheckRecognizerConfiguration = {
-        topBarBackgroundColor: Colors.SCANBOT_RED,
+        topBarBackgroundColor: COLORS.SCANBOT_RED,
       };
 
       const result = await ScanbotSDK.UI.startCheckRecognizer(config);

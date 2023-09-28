@@ -1,15 +1,15 @@
 import ScanbotSDK, {
   TextDataScannerConfiguration,
 } from 'react-native-scanbot-sdk';
-import {Colors} from '../../model/Colors';
 import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
 import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
+import {COLORS} from '../../theme/Theme';
 
 export function useTextDataScanner() {
   return useLicenseValidityCheckWrapper(async () => {
     try {
       const config: TextDataScannerConfiguration = {
-        topBarBackgroundColor: Colors.SCANBOT_RED,
+        topBarBackgroundColor: COLORS.SCANBOT_RED,
         textDataScannerStep: {
           allowedSymbols: '',
           aspectRatio: {

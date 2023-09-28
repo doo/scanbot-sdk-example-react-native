@@ -1,12 +1,11 @@
 import React, {useContext, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-import {Styles} from '../model/Styles';
-
 import {ScanbotBarcodeCameraView} from 'react-native-scanbot-sdk';
 import {BarcodeFormatsContext} from '../context/useBarcodeFormats';
 import {BarcodeDocumentFormatContext} from '../context/useBarcodeDocumentFormats';
 import {BarcodeCameraImageButton} from '../components/BarcodeCameraImageButton';
+import {COLORS} from '../theme/Theme';
 
 export function BarcodeCameraViewScreen() {
   const {acceptedBarcodeFormats} = useContext(BarcodeFormatsContext);
@@ -81,7 +80,7 @@ const styles = StyleSheet.create({
   },
   resultsView: {
     flex: 1,
-    backgroundColor: Styles.SCANBOT_RED,
+    backgroundColor: COLORS.SCANBOT_RED,
     shadowRadius: 4,
     shadowOpacity: 0.4,
     alignContent: 'center',

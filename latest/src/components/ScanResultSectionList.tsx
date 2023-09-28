@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {PreviewImage} from './PreviewImage';
 import React from 'react';
-import {Colors} from '../model/Colors';
+import {COLORS} from '../theme/Theme';
 
 type ScanResultSectionData = {
   key: string;
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   image: {
     height: 250,
     resizeMode: 'contain',
-    backgroundColor: Colors.SCANBOT_RED,
+    backgroundColor: COLORS.SCANBOT_RED,
     marginTop: -16,
   },
   sectionHeader: {
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     marginBottom: 16,
     color: 'white',
-    backgroundColor: Colors.SCANBOT_RED,
+    backgroundColor: COLORS.SCANBOT_RED,
   },
   item: {
     paddingVertical: 8,
