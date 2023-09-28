@@ -8,37 +8,37 @@ import {
 } from 'react-native';
 import React from 'react';
 
-interface SwitchOptionsList {
-  data: Record<string, boolean>;
-  onPress: (item: string) => void;
+interface SwitchOptionsList<T extends string> {
+  data: Record<T, boolean>;
+  onPress: (item: T) => void;
   isFilteringEnabled?: boolean;
 }
 
-export function SwitchOptionsList({
+export function SwitchOptionsList<T extends string>({
   data,
   onPress,
   isFilteringEnabled = false,
-}: SwitchOptionsList) {
+}: SwitchOptionsList<T>) {
   return (
     <FlatList
       style={styles.list}
-      data={Object.entries(data)}
-      renderItem={({item: [item, value]}) => (
+      data={Object.keys(data)}
+      renderItem={({item}) => (
         <TouchableOpacity
           disabled={isFilteringEnabled}
           activeOpacity={0.6}
-          onPress={() => onPress(item)}>
+          onPress={() => onPress(item as T)}>
           <View style={styles.listItemContainer}>
             <Text style={styles.listItemText}>{item}</Text>
             <Switch
-              value={value}
+              value={data[item as T]}
               disabled={isFilteringEnabled}
-              onValueChange={() => onPress(item)}
+              onValueChange={() => onPress(item as T)}
             />
           </View>
         </TouchableOpacity>
       )}
-      keyExtractor={([item]) => item}
+      keyExtractor={item => item}
     />
   );
 }
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   list: {
     paddingTop: '2%',
     height: '98%',
+    flexGrow: 1,
   },
   listItemContainer: {
     paddingLeft: 20,

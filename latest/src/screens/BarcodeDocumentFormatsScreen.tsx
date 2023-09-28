@@ -2,7 +2,6 @@ import React, {useContext} from 'react';
 import {StyleSheet, Switch, Text, View} from 'react-native';
 import {BarcodeDocumentFormatContext} from '../context/useBarcodeDocumentFormats';
 import {SwitchOptionsList} from '../components/SwitchOptionsList';
-import {BarcodeDocumentFormat} from 'react-native-scanbot-sdk';
 
 export function BarcodeDocumentFormatsScreen() {
   const {
@@ -28,9 +27,7 @@ export function BarcodeDocumentFormatsScreen() {
       <SwitchOptionsList
         data={barcodeDocumentFormats}
         isFilteringEnabled={!isFilteringEnabled}
-        onPress={format =>
-          toggleBarcodeDocumentFormats(format as BarcodeDocumentFormat)
-        }
+        onPress={toggleBarcodeDocumentFormats}
       />
     </View>
   );
