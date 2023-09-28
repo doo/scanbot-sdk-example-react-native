@@ -11,7 +11,7 @@ import {
 import {COLORS} from '../theme/Theme';
 import {ImageFilter} from 'react-native-scanbot-sdk';
 
-const IMAGE_FILTERS = [
+const IMAGE_FILTERS: ImageFilter[] = [
   'NONE',
   'COLOR_ENHANCED',
   'GRAYSCALE',
@@ -26,7 +26,7 @@ const IMAGE_FILTERS = [
   'LOW_LIGHT_BINARIZATION',
   'EDGE_HIGHLIGHT',
   'LOW_LIGHT_BINARIZATION_2',
-] as ImageFilter[];
+];
 
 interface ImageFilterModalProps {
   isVisible: boolean;
@@ -56,7 +56,13 @@ export function ImageFilterModal({
           data={IMAGE_FILTERS}
           contentContainerStyle={styles.flatListContentContainer}
           renderItem={({item}) => (
-            <Item label={item} onPress={() => onSelect(item)} />
+            <Item
+              label={item}
+              onPress={() => {
+                onSelect(item);
+                onDismiss();
+              }}
+            />
           )}
           ListFooterComponent={<Item label={'CLOSE'} onPress={onDismiss} />}
           ListFooterComponentStyle={styles.listFooterStyle}

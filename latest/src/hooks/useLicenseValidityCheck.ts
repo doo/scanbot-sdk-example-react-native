@@ -10,7 +10,7 @@ export function useLicenseValidityCheckWrapper(
         return;
       }
 
-      return fn(args);
+      return fn.apply(fn, args);
     },
     [fn],
   );

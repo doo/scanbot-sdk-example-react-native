@@ -1,4 +1,10 @@
-import React, {useCallback, useContext, useEffect} from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
   SectionList,
   SectionListRenderItemInfo,
@@ -7,7 +13,7 @@ import {
   View,
 } from 'react-native';
 
-import {examplesList, Section, SectionData} from '../utils/Examples';
+import {examplesList, FeatureId, Section, SectionData} from '../utils/Examples';
 import {useOnExamplePress} from '../hooks/useOnExamplePress';
 import {
   HomeScreenSectionFooter,
@@ -15,10 +21,33 @@ import {
   HomeScreenSectionItem,
 } from '../components/HomeScreenSectionComponents';
 import {PageContext} from '../context/usePages';
+import {useImportImageAndApplyFilter} from '../hooks/examples/useImportImageAndApplyFilter';
+import {ImageFilterModal} from '../components/ImageFilterModal';
+import {selectImagesFromLibrary} from '../utils/ImageUtils';
+import {ImageFilter} from 'react-native-scanbot-sdk';
 
 export function HomeScreen() {
-  const onExamplePress = useOnExamplePress();
   const {loadPages} = useContext(PageContext);
+  const onExamplePress = useOnExamplePress();
+  const applyImageOnFilter = useImportImageAndApplyFilter();
+  const [isVisible, setIsVisible] = useState(false);
+  const imageRef = useRef<string>();
+
+  const onFilterSelect = useCallback(
+    async (filter: ImageFilter) => {
+      await applyImageOnFilter(filter, imageRef.current);
+    },
+    [applyImageOnFilter],
+  );
+
+  onExamplePress[FeatureId.ApplyFilterOnImage] = useCallback(async () => {
+    const selectedImage = await selectImagesFromLibrary();
+    if (!selectedImage) {
+      return;
+    }
+    imageRef.current = selectedImage[0];
+    setIsVisible(true);
+  }, []);
 
   useEffect(() => {
     loadPages();
@@ -50,6 +79,11 @@ export function HomeScreen() {
       <Text style={styles.copyrightLabel}>
         Copyright {new Date().getFullYear()} doo GmbH. All rights reserved.
       </Text>
+      <ImageFilterModal
+        isVisible={isVisible}
+        onDismiss={() => setIsVisible(false)}
+        onSelect={onFilterSelect}
+      />
     </View>
   );
 }
