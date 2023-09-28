@@ -42,10 +42,10 @@ import {
 } from './context/useBarcodeFormats';
 import {ScanbotTheme} from './theme/Theme';
 import {ActivityIndicatorContext, useLoading} from './context/useLoading';
-import {ActivityIndicator} from './components/ActivityIndicator';
 import {HomeScreen} from './screens/HomeScreen';
 import {ImageResultScreen} from './screens/ImageResultScreen';
 import {FILE_ENCRYPTION_ENABLED, IMAGE_FILE_FORMAT} from './utils/SDKUtils';
+import {LoadingIndicator} from './components/LoadingIndicator';
 
 const Stack = createStackNavigator<PrimaryRoutesParamList>();
 
@@ -117,13 +117,12 @@ function App() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
-      <ActivityIndicator loading={loading} />
-      <NavigationContainer theme={ScanbotTheme}>
-        <ActivityIndicatorContext.Provider value={{setLoading}}>
-          <PageContext.Provider value={pageValues}>
-            <BarcodeDocumentFormatContext.Provider
-              value={barcodeDocumentFormatsValues}>
-              <BarcodeFormatsContext.Provider value={barcodeFormatsValues}>
+      <ActivityIndicatorContext.Provider value={{setLoading}}>
+        <PageContext.Provider value={pageValues}>
+          <BarcodeDocumentFormatContext.Provider
+            value={barcodeDocumentFormatsValues}>
+            <BarcodeFormatsContext.Provider value={barcodeFormatsValues}>
+              <NavigationContainer theme={ScanbotTheme}>
                 <Stack.Navigator
                   initialRouteName={Screens.HOME}
                   screenOptions={navigation => ({
@@ -168,11 +167,12 @@ function App() {
                     options={{headerBackTitleVisible: false}}
                   />
                 </Stack.Navigator>
-              </BarcodeFormatsContext.Provider>
-            </BarcodeDocumentFormatContext.Provider>
-          </PageContext.Provider>
-        </ActivityIndicatorContext.Provider>
-      </NavigationContainer>
+              </NavigationContainer>
+            </BarcodeFormatsContext.Provider>
+          </BarcodeDocumentFormatContext.Provider>
+        </PageContext.Provider>
+      </ActivityIndicatorContext.Provider>
+      <LoadingIndicator loading={loading} />
     </SafeAreaView>
   );
 }

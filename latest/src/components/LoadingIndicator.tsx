@@ -1,21 +1,20 @@
 import {COLORS} from '../theme/Theme';
 import React from 'react';
-import {ActivityIndicator as Indicator, StyleSheet} from 'react-native';
+import {ActivityIndicator as AI, StyleSheet} from 'react-native';
 
-export function ActivityIndicator({loading}: {loading: boolean}) {
+export function LoadingIndicator({loading}: {loading: boolean}) {
   return (
-    <Indicator
+    <AI
       size="large"
       color={COLORS.SCANBOT_RED}
-      style={styles.progressIndicator}
+      style={styles.loadingIndicator}
       animating={loading}
     />
   );
 }
 
 const styles = StyleSheet.create({
-  progressIndicator: {
-    color: COLORS.SCANBOT_RED,
+  loadingIndicator: {
     elevation: 6,
     position: 'absolute',
     left: '47%',
