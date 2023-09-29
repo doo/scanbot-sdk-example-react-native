@@ -28,13 +28,20 @@ export enum FeatureId {
   BarcodeCameraViewComponent,
   RecognizeCheckOnImage,
   ApplyFilterOnImage,
+  FinderDocumentScanner,
 }
+
 export class Examples {
   public static list = [
     {
       title: 'DOCUMENT SCANNER',
       data: [
         {id: FeatureId.DocumentScanner, title: 'Scan Document'},
+        {
+          id: FeatureId.FinderDocumentScanner,
+          title: 'Document Scanner with Finder',
+        },
+
         {
           id: FeatureId.DetectDocumentFromPage,
           title: 'Import Image & Detect Document',
