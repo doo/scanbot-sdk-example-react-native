@@ -24,6 +24,7 @@ export enum FeatureId {
   BarcodeCameraViewComponent,
   RecognizeCheckOnImage,
   ApplyFilterOnImage,
+  FinderDocumentScanner,
 }
 
 export type SectionData = {
@@ -44,6 +45,11 @@ export const examplesList: Section[] = [
         id: FeatureId.DocumentScanner,
         title: 'Scan Document',
       },
+      {
+        id: FeatureId.FinderDocumentScanner,
+        title: 'Document Scanner with Finder',
+      },
+
       {
         id: FeatureId.DetectDocumentFromPage,
         title: 'Import Image & Detect Document',

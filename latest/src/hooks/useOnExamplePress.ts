@@ -21,11 +21,13 @@ import {useTextDataScanner} from './examples/useTextDataScanner';
 import {useCheckRecognizer} from './examples/useCheckRecognizer';
 import {useRecognizeCheckOnImage} from './examples/useRecognizeCheckOnImage';
 import {useLicenseValidityCheckWrapper} from './useLicenseValidityCheck';
+import {useFinderDocumentScanner} from './examples/useFinderDocumentScanner';
 
 export function useOnExamplePress() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
   const functionsMap: Record<FeatureId, () => Promise<void> | void> = {
     [FeatureId.DocumentScanner]: useDocumentScanner(),
+    [FeatureId.FinderDocumentScanner]: useFinderDocumentScanner(),
     [FeatureId.DetectDocumentFromPage]: useDetectDocumentFromPage(),
     [FeatureId.DetectDocumentFromImage]: useDetectDocumentFromImage(),
     [FeatureId.ExtractPagesFromPdf]: useExtractPagesFromPDF(),

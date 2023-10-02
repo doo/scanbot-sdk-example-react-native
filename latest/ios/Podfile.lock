@@ -497,15 +497,15 @@ PODS:
     - React
   - RNGestureHandler (2.13.1):
     - React-Core
-  - RNScanbotSDK/ALL (4.15.3):
+  - RNScanbotSDK/ALL (4.15.4):
     - React
     - ScanbotSDK/ALL (= 2.2.0)
-    - ScanbotSDKNativeWrapper/ALL (= 2.2.0.2)
+    - ScanbotSDKNativeWrapper/ALL (= 2.2.0.5)
   - RNScreens (3.25.0):
     - React-Core
     - React-RCTImage
   - ScanbotSDK/ALL (2.2.0)
-  - ScanbotSDKNativeWrapper/ALL (2.2.0.2):
+  - ScanbotSDKNativeWrapper/ALL (2.2.0.5):
     - ScanbotSDK/ALL (= 2.2.0)
   - SocketRocket (0.6.1)
   - Yoga (1.14.0)
@@ -758,10 +758,10 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: c913ede1fa163a71cea118ed4670bbaaa4b511bb
   RNFS: 751428ec3aa24945dad64640903833ad034b6d03
   RNGestureHandler: 38aa38413896620338948fbb5c90579a7b1c3fde
-  RNScanbotSDK: 797a53df0e2c99f7b040be0cfa96a7c837b2237c
+  RNScanbotSDK: b01fc8422639ac048eeacf09abf26184a43386fc
   RNScreens: 85d3880b52d34db7b8eeebe2f1a0e807c05e69fa
   ScanbotSDK: 88ea9100f2d6fe0c0fddc707bff470e7f71387d8
-  ScanbotSDKNativeWrapper: b3d4b53b181c3a12faa4201d2cc29a5c42881c7c
+  ScanbotSDKNativeWrapper: 00d941fe9bd87586535ea631be73cd20a513806a
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 3efc43e0d48686ce2e8c60f99d4e6bd349aff981
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
