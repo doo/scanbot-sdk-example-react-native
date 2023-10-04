@@ -9,29 +9,48 @@ import {
   ViewStyle,
 } from 'react-native';
 import {COLORS} from '../theme/Theme';
-import {ImageFilter} from 'react-native-scanbot-sdk';
+import {ImageFilterType} from 'react-native-scanbot-sdk';
 
-const IMAGE_FILTERS: ImageFilter[] = [
-  'NONE',
-  'COLOR_ENHANCED',
-  'GRAYSCALE',
-  'PURE_GRAYSCALE',
-  'BINARIZED',
-  'COLOR_DOCUMENT',
-  'PURE_BINARIZED',
-  'BACKGROUND_CLEAN',
-  'BLACK_AND_WHITE',
-  'OTSU_BINARIZATION',
-  'DEEP_BINARIZATION',
-  'LOW_LIGHT_BINARIZATION',
-  'EDGE_HIGHLIGHT',
-  'LOW_LIGHT_BINARIZATION_2',
+const IMAGE_FILTERS: ImageFilterType[] = [
+  'ImageFilterTypeNone',
+  'ImageFilterTypeColor',
+  'ImageFilterTypeGray',
+  'ImageFilterTypeBinarized',
+  'ImageFilterTypeColorDocument',
+  'ImageFilterTypePureBinarized',
+  'ImageFilterTypeBackgroundClean',
+  'ImageFilterTypeBlackAndWhite',
+  'ImageFilterTypeOtsuBinarization',
+  'ImageFilterTypeDeepBinarization',
+  'ImageFilterTypeEdgeHighlight',
+  'ImageFilterTypeLowLightBinarization',
+  'ImageFilterTypeLowLightBinarization2',
+  'ImageFilterTypeSensitiveBinarization',
+  'ImageFilterTypePureGray',
 ];
+
+const displayItemLabel: Record<ImageFilterType, string> = {
+  ImageFilterTypeBackgroundClean: 'Background Clean',
+  ImageFilterTypeBinarized: 'Binarized',
+  ImageFilterTypeBlackAndWhite: 'Black And White',
+  ImageFilterTypeColor: 'Color',
+  ImageFilterTypeColorDocument: 'Color Document',
+  ImageFilterTypeDeepBinarization: 'Deep Binarization',
+  ImageFilterTypeEdgeHighlight: 'Edge Highlight',
+  ImageFilterTypeGray: 'Gray',
+  ImageFilterTypeLowLightBinarization: 'Low Light Binarization',
+  ImageFilterTypeLowLightBinarization2: 'Low Light Binarization2',
+  ImageFilterTypeNone: 'None',
+  ImageFilterTypeOtsuBinarization: 'Otsu Binarization',
+  ImageFilterTypePureBinarized: 'Pure Binarized',
+  ImageFilterTypePureGray: 'Pure Gray',
+  ImageFilterTypeSensitiveBinarization: 'Sensitive Binarization',
+};
 
 interface ImageFilterModalProps {
   isVisible: boolean;
   onDismiss: () => void;
-  onSelect: (item: ImageFilter) => void;
+  onSelect: (item: ImageFilterType) => void;
 }
 
 function Item(props: {label: string; onPress: () => void; style?: ViewStyle}) {
@@ -57,7 +76,7 @@ export function ImageFilterModal({
           contentContainerStyle={styles.flatListContentContainer}
           renderItem={({item}) => (
             <Item
-              label={item}
+              label={displayItemLabel[item]}
               onPress={() => {
                 onSelect(item);
                 onDismiss();

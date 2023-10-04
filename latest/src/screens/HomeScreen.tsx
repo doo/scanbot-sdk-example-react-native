@@ -24,7 +24,7 @@ import {PageContext} from '../context/usePages';
 import {useImportImageAndApplyFilter} from '../hooks/examples/useImportImageAndApplyFilter';
 import {ImageFilterModal} from '../components/ImageFilterModal';
 import {selectImagesFromLibrary} from '../utils/ImageUtils';
-import {ImageFilter} from 'react-native-scanbot-sdk';
+import {ImageFilterType} from 'react-native-scanbot-sdk';
 
 export function HomeScreen() {
   const {loadPages} = useContext(PageContext);
@@ -34,7 +34,7 @@ export function HomeScreen() {
   const imageRef = useRef<string>();
 
   const onFilterSelect = useCallback(
-    async (filter: ImageFilter) => {
+    async (filter: ImageFilterType) => {
       await applyImageOnFilter(filter, imageRef.current);
     },
     [applyImageOnFilter],

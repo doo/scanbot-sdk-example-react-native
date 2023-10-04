@@ -10,7 +10,7 @@ import {
 import {PageContext} from '../context/usePages';
 import {useLicenseValidityCheckWrapper} from '../hooks/useLicenseValidityCheck';
 import {ImageFilterModal} from '../components/ImageFilterModal';
-import {ImageFilter} from 'react-native-scanbot-sdk';
+import {ImageFilterType} from 'react-native-scanbot-sdk';
 import {PreviewImage} from '../components/PreviewImage';
 import {COLORS} from '../theme/Theme';
 
@@ -44,7 +44,7 @@ export function ImageDetailScreen() {
   );
 
   const onFilterSelect = useCallback(
-    async (filter: ImageFilter) => {
+    async (filter: ImageFilterType) => {
       try {
         const updated = await ScanbotSDK.applyImageFilterOnPage(page, filter);
         setPage(updated);
