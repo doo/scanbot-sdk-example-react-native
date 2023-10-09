@@ -5902,9 +5902,10 @@ react-native-document-picker@^9.0.1:
   dependencies:
     invariant "^2.2.4"
 
-"react-native-fs@github:marcosaia1812/react-native-fs":
-  version "2.16.6"
-  resolved "https://codeload.github.com/marcosaia1812/react-native-fs/tar.gz/9a8e878842b72af9e962d288f46c0cf522106a71"
+react-native-fs@2.20.0:
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/react-native-fs/-/react-native-fs-2.20.0.tgz#05a9362b473bfc0910772c0acbb73a78dbc810f6"
+  integrity sha512-VkTBzs7fIDUiy/XajOSNk0XazFE9l+QlMAce7lGuebZcag5CnjszB+u4BdqzwaQOdcYb5wsJIsqq4kxInIRpJQ==
   dependencies:
     base-64 "^0.1.0"
     utf8 "^3.0.0"
