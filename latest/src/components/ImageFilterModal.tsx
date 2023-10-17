@@ -11,7 +11,12 @@ import {
 import {COLORS} from '../theme/Theme';
 import {ImageFilterType} from 'react-native-scanbot-sdk';
 
-const IMAGE_FILTERS: ImageFilterType[] = [
+type ImageFilterList = Exclude<
+  ImageFilterType,
+  'ImageFilterTypeSensitiveBinarization'
+>;
+
+const IMAGE_FILTERS: ImageFilterList[] = [
   'ImageFilterTypeNone',
   'ImageFilterTypeColor',
   'ImageFilterTypeGray',
@@ -25,11 +30,10 @@ const IMAGE_FILTERS: ImageFilterType[] = [
   'ImageFilterTypeEdgeHighlight',
   'ImageFilterTypeLowLightBinarization',
   'ImageFilterTypeLowLightBinarization2',
-  'ImageFilterTypeSensitiveBinarization',
   'ImageFilterTypePureGray',
 ];
 
-const displayItemLabel: Record<ImageFilterType, string> = {
+const displayItemLabel: Record<ImageFilterList, string> = {
   ImageFilterTypeBackgroundClean: 'Background Clean',
   ImageFilterTypeBinarized: 'Binarized',
   ImageFilterTypeBlackAndWhite: 'Black And White',
@@ -44,7 +48,6 @@ const displayItemLabel: Record<ImageFilterType, string> = {
   ImageFilterTypeOtsuBinarization: 'Otsu Binarization',
   ImageFilterTypePureBinarized: 'Pure Binarized',
   ImageFilterTypePureGray: 'Pure Gray',
-  ImageFilterTypeSensitiveBinarization: 'Sensitive Binarization',
 };
 
 interface ImageFilterModalProps {

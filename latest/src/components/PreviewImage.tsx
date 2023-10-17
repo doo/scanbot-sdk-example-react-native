@@ -45,7 +45,7 @@ export function PreviewImage({imageUri, style}: PreviewImageProps) {
     }
   }, [imageUri, setLoading]);
 
-  if (!imageUri) {
+  if (!imageUri || !uri) {
     return null;
   }
 
