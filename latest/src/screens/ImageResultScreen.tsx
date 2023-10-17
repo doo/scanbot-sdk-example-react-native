@@ -11,7 +11,11 @@ import {PageContext} from '../context/usePages';
 import {PrimaryRouteNavigationProp, Screens} from '../utils/Navigation';
 import {BottomActionBar} from '../components/BottomActionBar';
 import {useDocumentScanner} from '../hooks/examples/useDocumentScanner';
-import {errorMessageAlert, infoMessageAlert} from '../utils/Alerts';
+import {
+  deleteAllConfirmationAlert,
+  errorMessageAlert,
+  infoMessageAlert,
+} from '../utils/Alerts';
 import {SavePagesModal} from '../components/SavePagesModal';
 import {useNavigation} from '@react-navigation/native';
 import {COLORS} from '../theme/Theme';
@@ -43,7 +47,7 @@ export function ImageResultScreen() {
     }
   }, [isPageListEmpty]);
 
-  const onDelete = useCallback(async () => {
+  const deletePages = useCallback(async () => {
     try {
       await ScanbotSDK.cleanup();
       deleteAllPages();
@@ -52,6 +56,10 @@ export function ImageResultScreen() {
       errorMessageAlert('ERROR: ' + JSON.stringify(e));
     }
   }, [deleteAllPages]);
+
+  const onDelete = useCallback(() => {
+    deleteAllConfirmationAlert(deletePages);
+  }, [deletePages]);
 
   const onDismiss = useCallback(() => {
     setModalVisible(false);

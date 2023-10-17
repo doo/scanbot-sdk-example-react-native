@@ -13,6 +13,7 @@ import {ImageFilterModal} from '../components/ImageFilterModal';
 import {ImageFilterType} from 'react-native-scanbot-sdk';
 import {PreviewImage} from '../components/PreviewImage';
 import {COLORS} from '../theme/Theme';
+import {deleteAllConfirmationAlert} from '../utils/Alerts';
 
 export function ImageDetailScreen() {
   const route = useRoute<ImageDetailScreenRouteProp>();
@@ -56,7 +57,7 @@ export function ImageDetailScreen() {
     [page, updatePage],
   );
 
-  const onDelete = useCallback(async () => {
+  const onDeletePage = useCallback(async () => {
     try {
       await ScanbotSDK.removePage(page);
       deletePage(page);
@@ -65,6 +66,10 @@ export function ImageDetailScreen() {
       console.log(e);
     }
   }, [deletePage, navigation, page]);
+
+  const onDelete = useCallback(() => {
+    deleteAllConfirmationAlert(onDeletePage);
+  }, [onDeletePage]);
 
   return (
     <View style={styles.container}>
