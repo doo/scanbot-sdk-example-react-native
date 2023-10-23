@@ -11,31 +11,31 @@ import {
   View,
 } from 'react-native';
 import ScanbotSDK, {
-  BarcodeScannerConfiguration,
-  DocumentScannerConfiguration,
-  MrzScannerConfiguration,
-  LicensePlateScannerConfiguration,
-  MedicalCertificateRecognizerConfiguration,
-  TextDataScannerConfiguration,
-  BatchBarcodeScannerConfiguration,
-  HealthInsuranceCardScannerConfiguration,
-  GenericDocumentRecognizerResult,
-  MedicalCertificateScannerResult,
-  BarcodeResultField,
-  BaseDocumentFormat,
   AAMVADocumentFormat,
+  BarcodeResultField,
+  BarcodeScannerConfiguration,
+  BaseDocumentFormat,
+  BatchBarcodeScannerConfiguration,
   BoardingPassDocumentFormat,
-  MedicalPlanDocumentFormat,
-  MedicalCertificateDocumentFormat,
+  CheckRecognizerConfiguration,
+  DocumentScannerConfiguration,
+  GenericDocumentRecognizerConfiguration,
+  GenericDocumentRecognizerResult,
+  GS1DocumentFormat,
+  HealthInsuranceCardScannerConfiguration,
   IDCardPDF417DocumentFormat,
+  ImageFilterType,
+  LicensePlateScannerConfiguration,
+  LicensePlateScanStrategy,
+  MedicalCertificateDocumentFormat,
+  MedicalCertificateRecognizerConfiguration,
+  MedicalCertificateScannerResult,
+  MedicalPlanDocumentFormat,
+  MrzScannerConfiguration,
   SEPADocumentFormat,
   SwissQRCodeDocumentFormat,
+  TextDataScannerConfiguration,
   VCardDocumentFormat,
-  GS1DocumentFormat,
-  GenericDocumentRecognizerConfiguration,
-  LicensePlateScanStrategy,
-  CheckRecognizerConfiguration,
-  ImageFilter,
 } from 'react-native-scanbot-sdk';
 // @ts-ignore
 import {ActionSheetCustom as ActionSheet} from 'react-native-custom-actionsheet';
@@ -60,7 +60,7 @@ const CANCEL_INDEX = 0;
 
 export class HomeScreen extends BaseScreen {
   filterActionSheet: any;
-  onFilterSelected?: (filter: ImageFilter) => void;
+  onFilterSelected?: (filter: ImageFilterType) => void;
   getFilterActionSheetRef = (ref: any) => (this.filterActionSheet = ref);
   handleActionSheetPress = async (index: number) => {
     const filter = SDKUtils.IMAGE_FILTERS[index];
@@ -235,6 +235,10 @@ export class HomeScreen extends BaseScreen {
         break;
       case FeatureId.BarcodeCameraViewComponent:
         this.goToBarcodeCameraViewComponentExample();
+        break;
+      case FeatureId.FinderDocumentScanner:
+        this.startFinderDocumentScanner();
+        break;
     }
   }
 
@@ -674,7 +678,7 @@ export class HomeScreen extends BaseScreen {
       return;
     }
 
-    this.onFilterSelected = async (filter: ImageFilter) => {
+    this.onFilterSelected = async (filter: ImageFilterType) => {
       this.showProgress();
       const result = await ScanbotSDK.applyImageFilter(uri, filter);
       const filteredImageUri = result.imageFileUri;
@@ -828,5 +832,23 @@ export class HomeScreen extends BaseScreen {
     }
 
     return imageUri;
+  }
+
+  async startFinderDocumentScanner() {
+    try {
+      const result = await ScanbotSDK.UI.startFinderDocumentScanner({
+        polygonColor: '#00ffff',
+        topBarBackgroundColor: Colors.SCANBOT_RED,
+        cameraBackgroundColor: Colors.SCANBOT_RED,
+        orientationLockMode: 'PORTRAIT',
+        ignoreBadAspectRatio: true,
+      });
+      if (result.status === 'OK') {
+        await Pages.addList(result.pages);
+        this.pushPage(Navigation.IMAGE_RESULTS);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
