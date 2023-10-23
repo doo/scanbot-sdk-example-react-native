@@ -6,11 +6,16 @@
 version: 2
 updates:
   - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/" # Location of package manifests
+    directory: "/0.64.X" # Location of package manifests
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
     reviewers:
-      - "rutkayb"
       - "marcosaia1812"
-      - "Sarbjyotsingh"
+  - package-ecosystem: "npm" # See documentation for possible values
+    directory: "/latest" # Location of package manifests
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "marcosaia1812"
