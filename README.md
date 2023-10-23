@@ -47,7 +47,7 @@ When using ReactNative version 0.72.4:
 
 ```
 cd latest
-npm install
+yarn install
 ```
 
 ### Run on Android
