@@ -42,7 +42,6 @@ export class SDKUtils {
     'ImageFilterTypeEdgeHighlight',
     'ImageFilterTypeLowLightBinarization',
     'ImageFilterTypeLowLightBinarization2',
-    'ImageFilterTypeSensitiveBinarization',
     'ImageFilterTypePureGray',
   ] as ImageFilterType[];
 
