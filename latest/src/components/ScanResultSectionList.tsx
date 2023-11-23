@@ -6,13 +6,14 @@ import {
   Text,
   View,
 } from 'react-native';
-import {PreviewImage} from './PreviewImage';
 import React from 'react';
 import {COLORS} from '../theme/Theme';
+import {PreviewImage} from './PreviewImage';
 
 type ScanResultSectionData = {
   key: string;
-  value: string;
+  value?: string;
+  image?: string;
 };
 
 type ScanResultSection = {
@@ -21,12 +22,10 @@ type ScanResultSection = {
 };
 
 interface ScanResultSectionListProps {
-  imageFileUri?: string;
   sectionData: ScanResultSection[];
 }
 
 export function ScanResultSectionList({
-  imageFileUri,
   sectionData,
 }: ScanResultSectionListProps) {
   return (
@@ -35,16 +34,6 @@ export function ScanResultSectionList({
         contentContainerStyle={styles.contentContainer}
         bounces={false}
         sections={sectionData}
-        ListHeaderComponent={
-          imageFileUri ? (
-            <View>
-              <Text style={styles.sectionHeader}>Snapped Image</Text>
-              <PreviewImage imageUri={imageFileUri} style={styles.image} />
-            </View>
-          ) : (
-            <></>
-          )
-        }
         renderItem={ScanResultSectionListItem}
         renderSectionHeader={ScanResultSectionHeader}
         keyExtractor={(_, index) => index.toString()}
@@ -62,12 +51,13 @@ function ScanResultSectionHeader({
 }
 
 function ScanResultSectionListItem({
-  item: {key, value},
+  item: {key, value, image},
 }: SectionListRenderItemInfo<ScanResultSectionData, ScanResultSection>) {
   return (
-    <View>
+    <View style={styles.itemContainer}>
       <Text style={[styles.item, styles.bold]}>{key}</Text>
-      <Text style={styles.item}>{value}</Text>
+      {image ? <PreviewImage imageUri={image} style={[styles.image]} /> : <></>}
+      {value ? <Text style={styles.item}>{value}</Text> : <></>}
     </View>
   );
 }
@@ -75,12 +65,14 @@ function ScanResultSectionListItem({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#e2e2e2',
   },
   image: {
-    height: 250,
+    flex: 1,
+    height: 150,
     resizeMode: 'contain',
-    backgroundColor: COLORS.SCANBOT_RED,
-    marginTop: -16,
+    backgroundColor: '#222222',
+    margin: 16,
   },
   sectionHeader: {
     paddingVertical: 8,
@@ -98,6 +90,10 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingBottom: 48,
+  },
+  itemContainer: {
+    backgroundColor: '#ffffff',
+    marginVertical: 8,
   },
   bold: {
     fontWeight: 'bold',

@@ -15,7 +15,7 @@ import {
   View,
 } from 'react-native';
 
-import ScanbotSDK, {InitializationOptions} from 'react-native-scanbot-sdk';
+import ScanbotSDK, {ScanbotSdkConfiguration} from 'react-native-scanbot-sdk';
 import {DocumentDirectoryPath, ExternalDirectoryPath} from 'react-native-fs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -86,8 +86,9 @@ const storageBaseDirectory = Platform.select({
  * Please submit the trial license form (https://scanbot.io/en/sdk/demo/trial) on our website by using
  * the app identifier "io.scanbot.example.sdk.reactnative" of this example app.
  */
-export const SDKInitializationOptions: InitializationOptions = {
-  licenseKey: '', //The Scanbot SDK License Key
+export const SDKInitializationOptions: ScanbotSdkConfiguration = {
+  //The Scanbot SDK License Key
+  licenseKey: '',
   loggingEnabled: true, // Logging enabled. Consider switching logging OFF in production builds for security and performance reasons!
   storageImageFormat: IMAGE_FILE_FORMAT, // Format of stored images
   storageImageQuality: 80, // Quality of stored images

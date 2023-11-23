@@ -21,10 +21,11 @@ export function useMRZScanner() {
       const result = await ScanbotSDK.UI.startMrzScanner(config);
 
       if (result.status === 'OK') {
-        const fields = result.fields.map(
-          f => `${f.name}: ${f.value} (${f.confidence.toFixed(2)})`,
-        );
-        resultMessageAlert(fields.join('\n'));
+        const fields = result as any;
+        const displayText = Object.keys(fields)
+          .map(key => `${key}: ${JSON.stringify(fields[key])}`)
+          .join('\n');
+        resultMessageAlert(displayText);
       }
     } catch (e: any) {
       errorMessageAlert(e.message);

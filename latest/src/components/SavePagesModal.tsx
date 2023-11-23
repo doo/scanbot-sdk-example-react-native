@@ -1,7 +1,10 @@
 import {Modal, StyleSheet, Text, View} from 'react-native';
 import React, {useContext} from 'react';
 import {FILE_ENCRYPTION_ENABLED} from '../utils/SDKUtils';
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import ScanbotSDK, {
+  CreatePDFArguments,
+  PerformOCRArguments,
+} from 'react-native-scanbot-sdk';
 import {errorMessageAlert, infoMessageAlert} from '../utils/Alerts';
 import {ActivityIndicatorContext} from '../context/useLoading';
 import {PageContext} from '../context/usePages';
@@ -22,10 +25,14 @@ export function SavePagesModal({
     onDismiss();
     try {
       setLoading(true);
-      const result = await ScanbotSDK.createPDF(
-        getImageUriFromPages(),
-        'FIXED_A4',
-      );
+      const config: CreatePDFArguments = {
+        imageFileUris: getImageUriFromPages(),
+        options: {
+          pageSize: 'A4',
+          pageOrientation: 'PORTRAIT',
+        },
+      };
+      const result = await ScanbotSDK.createPDF(config);
       infoMessageAlert('PDF file created: ' + result.pdfFileUri);
     } catch (e) {
       errorMessageAlert('ERROR: ' + JSON.stringify(e));
@@ -38,13 +45,15 @@ export function SavePagesModal({
     onDismiss();
     try {
       setLoading(true);
-      const result = await ScanbotSDK.performOCR(
-        getImageUriFromPages(),
-        ['en'],
-        {
+      const config: PerformOCRArguments = {
+        imageFileUris: getImageUriFromPages(),
+        languages: ['en', 'de'],
+        options: {
           outputFormat: 'FULL_OCR_RESULT',
+          engineMode: 'TLDR',
         },
-      );
+      };
+      const result = await ScanbotSDK.performOCR(config);
       infoMessageAlert('PDF with OCR layer created: ' + result.pdfFileUri);
     } catch (e) {
       errorMessageAlert('ERROR: ' + JSON.stringify(e));
@@ -65,10 +74,13 @@ export function SavePagesModal({
     }
     try {
       setLoading(true);
-      const result = await ScanbotSDK.writeTIFF(getImageUriFromPages(), {
-        oneBitEncoded: binarized, // "true" means create 1-bit binarized black and white TIFF
-        dpi: 300, // optional DPI. default value is 200
-        compression: binarized ? 'CCITT_T6' : 'ADOBE_DEFLATE', // optional compression. see documentation!
+      const result = await ScanbotSDK.writeTIFF({
+        imageFileUris: getImageUriFromPages(),
+        options: {
+          oneBitEncoded: binarized, // "true" means create 1-bit binarized black and white TIFF
+          dpi: 300, // optional DPI. default value is 200
+          compression: binarized ? 'CCITT_T6' : 'ADOBE_DEFLATE', // optional compression. see documentation!
+        },
       });
       infoMessageAlert('TIFF file created: ' + result.tiffFileUri);
     } catch (e) {

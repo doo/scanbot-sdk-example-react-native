@@ -18,12 +18,13 @@ export function useCheckRecognizer() {
 
       const result = await ScanbotSDK.UI.startCheckRecognizer(config);
 
+      console.log(JSON.stringify(result, undefined, 4));
+
       if (result.status !== 'OK' || result.checkStatus !== 'SUCCESS') {
         return;
       }
 
       navigation.navigate(Screens.CHECK_RECOGNIZER_RESULT, result);
-      console.log(JSON.stringify(result, undefined, 4));
     } catch (e: any) {
       errorMessageAlert(e.message);
     }
