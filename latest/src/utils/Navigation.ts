@@ -1,8 +1,7 @@
 import {StackNavigationProp} from '@react-navigation/stack';
-import {Page} from 'react-native-scanbot-sdk/src';
+import {CheckRecognizerResult, Page} from 'react-native-scanbot-sdk/src';
 import {RouteProp} from '@react-navigation/native';
 import {
-  CheckRecognizerResult,
   GenericDocumentRecognizerResult,
   MedicalCertificateScannerResult,
 } from 'react-native-scanbot-sdk';

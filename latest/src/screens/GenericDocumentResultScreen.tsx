@@ -4,11 +4,6 @@ import {useRoute} from '@react-navigation/native';
 import {GenericDocumentResultScreenRouteProp} from '../utils/Navigation';
 import {ScanResultSectionList} from '../components/ScanResultSectionList';
 import {
-  ImageFieldWrapper,
-  TextFieldWrapper,
-  ValidatedTextFieldWrapper,
-} from 'react-native-scanbot-sdk/src/internal/gdr/gdr-base-wrappers';
-import {
   CategoriesDocument,
   DeDriverLicenseFrontDocument,
   DeIdCardBackDocument,
@@ -17,6 +12,8 @@ import {
   GenericDocumentResultType,
   MRZDocument,
 } from 'react-native-scanbot-sdk/src/internal/gdr/gdr-wrappers';
+import {GenericDocumentUtils} from '../utils/GenericDocumentUtils';
+import {TextFieldWrapper} from 'react-native-scanbot-sdk/src/internal/gdr/gdr-base-wrappers';
 
 export function GenericDocumentResultScreen() {
   const {params: genericDocumentResult} =
@@ -67,58 +64,75 @@ const transformData = (result: GenericDocumentResultType) => {
   return fields;
 };
 
-// Common Display Utility Method
-const getImageField = (field: ImageFieldWrapper) => ({
-  key: field.type.name,
-  image: field.image,
-});
-
-const getTextField = (field: TextFieldWrapper | ValidatedTextFieldWrapper) => ({
-  key: field.type.name,
-  value: field.value
-    ? `${field.value.text} (confidence: ${(
-        field.value.confidence * 100.0
-      ).toFixed(0)}%)`
-    : '-',
-  image: field.image,
-});
-
-// Common Display Utility Method - for optional field wrappers
-const getOptTextField = (
-  field: TextFieldWrapper | ValidatedTextFieldWrapper | undefined,
-  defaultName: string,
-) => (field ? getTextField(field) : {key: defaultName, value: 'not detected'});
-
 // MRZ Document Display Utility Method
 const getMrzFields = (document: MRZDocument) =>
   [
-    getTextField(document.birthDate),
-    getTextField(document.givenNames),
-    getTextField(document.surname),
-    getOptTextField(document.issuingAuthority, 'Issuing Authority'),
-    getOptTextField(document.languageCode, 'Language Code'),
-    getOptTextField(document.nationality, 'Nationality'),
-    getOptTextField(document.officeOfIssuance, 'Office Of Issuance'),
-    getOptTextField(document.optional1, 'Optional1'),
-    getOptTextField(document.optional2, 'Optional2'),
-    getOptTextField(document.personalNumber, 'Personal Number'),
-    getOptTextField(document.pinCode, 'Pin Code'),
-    getOptTextField(document.travelDocType, 'Travel Doc Type'),
-    getOptTextField(document.versionNumber, 'Version Number'),
-    getOptTextField(document.checkDigitBirthDate, 'Check Digit Birth Date'),
-    getOptTextField(document.checkDigitGeneral, 'Check Digit General'),
-    getOptTextField(document.travelDocTypeVariant, 'Travel Doc Type Variant'),
-    getOptTextField(document.checkDigitExpiryDate, 'Check Digit Expiry Date'),
-    getOptTextField(document.dateOfIssuance, 'Date Of Issuance'),
-    getOptTextField(document.documentNumber, 'Document Number'),
-    getOptTextField(document.documentTypeCode, 'Document Type Code'),
-    getOptTextField(document.expiryDate, 'Expiry Date'),
-    getOptTextField(document.gender, 'Gender'),
-    getOptTextField(
+    GenericDocumentUtils.getTextField(document.birthDate),
+    GenericDocumentUtils.getTextField(document.givenNames),
+    GenericDocumentUtils.getTextField(document.surname),
+    GenericDocumentUtils.getOptTextField(
+      document.issuingAuthority,
+      'Issuing Authority',
+    ),
+    GenericDocumentUtils.getOptTextField(
+      document.languageCode,
+      'Language Code',
+    ),
+    GenericDocumentUtils.getOptTextField(document.nationality, 'Nationality'),
+    GenericDocumentUtils.getOptTextField(
+      document.officeOfIssuance,
+      'Office Of Issuance',
+    ),
+    GenericDocumentUtils.getOptTextField(document.optional1, 'Optional1'),
+    GenericDocumentUtils.getOptTextField(document.optional2, 'Optional2'),
+    GenericDocumentUtils.getOptTextField(
+      document.personalNumber,
+      'Personal Number',
+    ),
+    GenericDocumentUtils.getOptTextField(document.pinCode, 'Pin Code'),
+    GenericDocumentUtils.getOptTextField(
+      document.travelDocType,
+      'Travel Doc Type',
+    ),
+    GenericDocumentUtils.getOptTextField(
+      document.versionNumber,
+      'Version Number',
+    ),
+    GenericDocumentUtils.getOptTextField(
+      document.checkDigitBirthDate,
+      'Check Digit Birth Date',
+    ),
+    GenericDocumentUtils.getOptTextField(
+      document.checkDigitGeneral,
+      'Check Digit General',
+    ),
+    GenericDocumentUtils.getOptTextField(
+      document.travelDocTypeVariant,
+      'Travel Doc Type Variant',
+    ),
+    GenericDocumentUtils.getOptTextField(
+      document.checkDigitExpiryDate,
+      'Check Digit Expiry Date',
+    ),
+    GenericDocumentUtils.getOptTextField(
+      document.dateOfIssuance,
+      'Date Of Issuance',
+    ),
+    GenericDocumentUtils.getOptTextField(
+      document.documentNumber,
+      'Document Number',
+    ),
+    GenericDocumentUtils.getOptTextField(
+      document.documentTypeCode,
+      'Document Type Code',
+    ),
+    GenericDocumentUtils.getOptTextField(document.expiryDate, 'Expiry Date'),
+    GenericDocumentUtils.getOptTextField(document.gender, 'Gender'),
+    GenericDocumentUtils.getOptTextField(
       document.checkDigitDocumentNumber,
       'Check Digit Document Number',
     ),
-    getOptTextField(
+    GenericDocumentUtils.getOptTextField(
       document.checkDigitPersonalNumber,
       'Check Digit Personal Number',
     ),
@@ -129,48 +143,54 @@ const getMrzFields = (document: MRZDocument) =>
 
 // German Passport - Display Utility Method
 const getDePassportFields = (passportDocument: DePassportDocument) => [
-  getImageField(passportDocument.signature),
-  getImageField(passportDocument.photo),
-  getTextField(passportDocument.birthDate),
-  getTextField(passportDocument.birthplace),
-  getTextField(passportDocument.countryCode),
-  getTextField(passportDocument.expiryDate),
-  getTextField(passportDocument.gender),
-  getTextField(passportDocument.givenNames),
-  getOptTextField(passportDocument.maidenName, 'Maiden Name'),
-  getTextField(passportDocument.surname),
-  getTextField(passportDocument.id),
-  getTextField(passportDocument.issueDate),
-  getTextField(passportDocument.issuingAuthority),
-  getTextField(passportDocument.nationality),
-  getTextField(passportDocument.passportType),
-  getTextField(passportDocument.rawMRZ),
+  GenericDocumentUtils.getImageField(passportDocument.signature),
+  GenericDocumentUtils.getImageField(passportDocument.photo),
+  GenericDocumentUtils.getTextField(passportDocument.birthDate),
+  GenericDocumentUtils.getTextField(passportDocument.birthplace),
+  GenericDocumentUtils.getTextField(passportDocument.countryCode),
+  GenericDocumentUtils.getTextField(passportDocument.expiryDate),
+  GenericDocumentUtils.getTextField(passportDocument.gender),
+  GenericDocumentUtils.getTextField(passportDocument.givenNames),
+  GenericDocumentUtils.getOptTextField(
+    passportDocument.maidenName,
+    'Maiden Name',
+  ),
+  GenericDocumentUtils.getTextField(passportDocument.surname),
+  GenericDocumentUtils.getTextField(passportDocument.id),
+  GenericDocumentUtils.getTextField(passportDocument.issueDate),
+  GenericDocumentUtils.getTextField(passportDocument.issuingAuthority),
+  GenericDocumentUtils.getTextField(passportDocument.nationality),
+  GenericDocumentUtils.getTextField(passportDocument.passportType),
+  GenericDocumentUtils.getTextField(passportDocument.rawMRZ),
   ...getMrzFields(passportDocument.mrz),
 ];
 
 // German ID Card (FRONT) - Display Utility Method
 const getDeIdCardFrontFields = (idCardDocument: DeIdCardFrontDocument) => [
-  getTextField(idCardDocument.birthDate),
-  getTextField(idCardDocument.birthplace),
-  getTextField(idCardDocument.expiryDate),
-  getTextField(idCardDocument.givenNames),
-  getTextField(idCardDocument.id),
-  getTextField(idCardDocument.nationality),
-  getTextField(idCardDocument.pin),
-  getTextField(idCardDocument.surname),
-  getOptTextField(idCardDocument.maidenName, 'Maiden Name'),
-  getImageField(idCardDocument.signature),
-  getImageField(idCardDocument.photo),
+  GenericDocumentUtils.getImageField(idCardDocument.signature),
+  GenericDocumentUtils.getImageField(idCardDocument.photo),
+  GenericDocumentUtils.getTextField(idCardDocument.birthDate),
+  GenericDocumentUtils.getTextField(idCardDocument.birthplace),
+  GenericDocumentUtils.getTextField(idCardDocument.expiryDate),
+  GenericDocumentUtils.getTextField(idCardDocument.givenNames),
+  GenericDocumentUtils.getTextField(idCardDocument.id),
+  GenericDocumentUtils.getTextField(idCardDocument.nationality),
+  GenericDocumentUtils.getTextField(idCardDocument.pin),
+  GenericDocumentUtils.getTextField(idCardDocument.surname),
+  GenericDocumentUtils.getOptTextField(
+    idCardDocument.maidenName,
+    'Maiden Name',
+  ),
 ];
 
 // German ID Card (BACK) - Display Utility Method
 const getDeIdCardBackFields = (idCardDocument: DeIdCardBackDocument) => [
-  getTextField(idCardDocument.address),
-  getTextField(idCardDocument.eyeColor),
-  getTextField(idCardDocument.height),
-  getTextField(idCardDocument.issuingAuthority),
-  getTextField(idCardDocument.pseudonym),
-  getTextField(idCardDocument.rawMRZ),
+  GenericDocumentUtils.getTextField(idCardDocument.address),
+  GenericDocumentUtils.getTextField(idCardDocument.eyeColor),
+  GenericDocumentUtils.getTextField(idCardDocument.height),
+  GenericDocumentUtils.getTextField(idCardDocument.issuingAuthority),
+  GenericDocumentUtils.getTextField(idCardDocument.pseudonym),
+  GenericDocumentUtils.getTextField(idCardDocument.rawMRZ),
   ...getMrzFields(idCardDocument.mrz),
 ];
 
@@ -199,16 +219,16 @@ const getDriverLicenseBackCategoryFields = (categories: CategoriesDocument) => [
 const getDriverLicenseFrontFields = (
   document: DeDriverLicenseFrontDocument,
 ) => [
-  getImageField(document.photo),
-  getImageField(document.signature),
-  getTextField(document.givenNames),
-  getTextField(document.surname),
-  getTextField(document.birthDate),
-  getTextField(document.birthplace),
-  getTextField(document.id),
-  getTextField(document.issueDate),
-  getTextField(document.issuingAuthority),
-  getTextField(document.licenseCategories),
+  GenericDocumentUtils.getImageField(document.photo),
+  GenericDocumentUtils.getImageField(document.signature),
+  GenericDocumentUtils.getTextField(document.givenNames),
+  GenericDocumentUtils.getTextField(document.surname),
+  GenericDocumentUtils.getTextField(document.birthDate),
+  GenericDocumentUtils.getTextField(document.birthplace),
+  GenericDocumentUtils.getTextField(document.id),
+  GenericDocumentUtils.getTextField(document.issueDate),
+  GenericDocumentUtils.getTextField(document.issuingAuthority),
+  GenericDocumentUtils.getTextField(document.licenseCategories),
 ];
 
 // Driver License (BACK) - Display Utility Method
@@ -216,7 +236,7 @@ const getDriverLicenseBackFields = (document: DeDriverLicenseBackDocument) => {
   const fields: Array<{key: string; value: string}> = [];
 
   // Restrictions
-  fields.push(getTextField(document.restrictions));
+  fields.push(GenericDocumentUtils.getTextField(document.restrictions));
 
   // Categories
   const categories = document.categories;

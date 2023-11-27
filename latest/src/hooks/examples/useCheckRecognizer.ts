@@ -20,7 +20,7 @@ export function useCheckRecognizer() {
 
       console.log(JSON.stringify(result, undefined, 4));
 
-      if (result.status !== 'OK' || result.checkStatus !== 'SUCCESS') {
+      if (result.status !== 'OK') {
         return;
       }
 
