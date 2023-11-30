@@ -3,12 +3,15 @@ import ScanbotSDK, {
   BarcodeScannerConfiguration,
 } from 'react-native-scanbot-sdk';
 import {logBarcodeDocument} from '../../utils/BarcodeUtils';
-import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
+import {errorMessageAlert} from '../../utils/Alerts';
 import {BarcodeFormatsContext} from '../../context/useBarcodeFormats';
 import {BarcodeDocumentFormatContext} from '../../context/useBarcodeDocumentFormats';
 import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
+import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
+import {useNavigation} from '@react-navigation/native';
 
 export function useScanBarcodes() {
+  const navigation = useNavigation<PrimaryRouteNavigationProp>();
   const {acceptedBarcodeFormats} = useContext(BarcodeFormatsContext);
   const {acceptedBarcodeDocumentFormats} = useContext(
     BarcodeDocumentFormatContext,
@@ -34,7 +37,9 @@ export function useScanBarcodes() {
         logBarcodeDocument(barcodeItem);
       }
 
-      resultMessageAlert(JSON.stringify(result.barcodes));
+      navigation.navigate(Screens.BARCODE_RESULT, result);
+
+      //resultMessageAlert(JSON.stringify(result.barcodes));
     } catch (e: any) {
       errorMessageAlert(e.message);
     }

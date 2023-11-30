@@ -10,21 +10,30 @@ const getImageField = (field: ImageFieldWrapper) => ({
   image: field.image,
 });
 
-const getTextField = (field: TextFieldWrapper | ValidatedTextFieldWrapper) => ({
-  key: field.type.name,
-  value: field.value
-    ? `${field.value.text} (confidence: ${(
-        field.value.confidence * 100.0
-      ).toFixed(0)}%)`
-    : '-',
-  image: field.image,
-});
+const getTextField = (
+  field: TextFieldWrapper | ValidatedTextFieldWrapper,
+  withConfidence: boolean = true,
+) => {
+  const confidence =
+    field.value && withConfidence
+      ? ` (confidence: ${(field.value.confidence * 100.0).toFixed(0)}%)`
+      : '';
+  return {
+    key: field.type.name,
+    value: field.value ? `${field.value.text}${confidence}` : '-',
+    image: field.image,
+  };
+};
 
 // Common Display Utility Method - for optional field wrappers
 const getOptTextField = (
   field: TextFieldWrapper | ValidatedTextFieldWrapper | undefined,
   defaultName: string,
-) => (field ? getTextField(field) : {key: defaultName, value: 'not detected'});
+  withConfidence: boolean = true,
+) =>
+  field
+    ? getTextField(field, withConfidence)
+    : {key: defaultName, value: 'not detected'};
 
 export const GenericDocumentUtils = {
   getImageField,

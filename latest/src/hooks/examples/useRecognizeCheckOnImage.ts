@@ -22,10 +22,7 @@ export function useRecognizeCheckOnImage() {
 
       const checkResult = await ScanbotSDK.recognizeCheck(result[0]);
 
-      if (
-        checkResult.status !== 'OK' ||
-        checkResult.checkStatus !== 'SUCCESS'
-      ) {
+      if (checkResult.status !== 'OK') {
         return;
       }
 

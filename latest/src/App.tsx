@@ -47,6 +47,8 @@ import {HomeScreen} from './screens/HomeScreen';
 import {ImageResultScreen} from './screens/ImageResultScreen';
 import {FILE_ENCRYPTION_ENABLED, IMAGE_FILE_FORMAT} from './utils/SDKUtils';
 import {LoadingIndicator} from './components/LoadingIndicator';
+import {MrzResultScreen} from './screens/MrzResultScreen';
+import {BarcodeResultScreen} from './screens/BarcodeResultScreen';
 
 const Stack = createStackNavigator<PrimaryRoutesParamList>();
 
@@ -146,8 +148,16 @@ function App() {
                       options={{headerBackTitleVisible: false}}
                     />
                     <Stack.Screen
+                      name={Screens.BARCODE_RESULT}
+                      component={BarcodeResultScreen}
+                    />
+                    <Stack.Screen
                       name={Screens.MEDICAL_CERTIFICATE_RESULT}
                       component={MedicalCertificateResultScreen}
+                    />
+                    <Stack.Screen
+                      name={Screens.MRZ_RESULT}
+                      component={MrzResultScreen}
                     />
                     <Stack.Screen
                       name={Screens.GENERIC_DOCUMENT_RESULT}
