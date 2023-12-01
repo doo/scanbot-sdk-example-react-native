@@ -6,6 +6,7 @@ import {useNavigation} from '@react-navigation/native';
 import {errorMessageAlert} from '../../utils/Alerts';
 import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 import {COLORS} from '../../theme/Theme';
+import {setRtuTimeout} from '../../utils/SDKUtils';
 
 export function useScanMedicalCertificate() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -15,19 +16,22 @@ export function useScanMedicalCertificate() {
       let config: MedicalCertificateRecognizerConfiguration = {
         topBarBackgroundColor: COLORS.SCANBOT_RED,
         userGuidanceStrings: {
-          capturing: 'capturing',
-          scanning: 'recognizing',
-          processing: 'processing',
-          startScanning: 'scanning Started',
-          paused: 'paused',
-          energySaving: 'energySaving',
+          capturing: 'Capturing',
+          scanning: 'Recognizing',
+          processing: 'Processing',
+          startScanning: 'Scanning Started',
+          paused: 'Paused',
+          energySaving: 'Energy Saving',
         },
-        errorDialogMessage: 'error message',
-        errorDialogOkButton: 'button text',
-        errorDialogTitle: 'error title',
+        errorDialogMessage: 'Oops, something went wrong! Please, try again.',
+        errorDialogOkButton: 'OK',
+        errorDialogTitle: 'ERROR',
         cancelButtonHidden: false,
         recognizePatientInfo: true,
       };
+      setRtuTimeout(async () => {
+        await ScanbotSDK.UI.closeMedicalCertificateRecognizer();
+      });
       const result = await ScanbotSDK.UI.startMedicalCertificateRecognizer(
         config,
       );

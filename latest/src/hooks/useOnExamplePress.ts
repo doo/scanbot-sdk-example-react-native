@@ -22,6 +22,7 @@ import {useCheckRecognizer} from './examples/useCheckRecognizer';
 import {useRecognizeCheckOnImage} from './examples/useRecognizeCheckOnImage';
 import {useLicenseValidityCheckWrapper} from './useLicenseValidityCheck';
 import {useFinderDocumentScanner} from './examples/useFinderDocumentScanner';
+import {useVinScanner} from './examples/useVinScanner';
 
 export function useOnExamplePress() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -55,8 +56,9 @@ export function useOnExamplePress() {
     [FeatureId.ScanEHIC]: useScanEHIC(),
     [FeatureId.LicenseInfo]: useLicenseInfo(),
     [FeatureId.OcrConfigs]: useOCRConfigs(),
-    [FeatureId.LicensePlateScannerML]: useLicensePlateScanner('MlBased'),
-    [FeatureId.LicensePlateScannerClassic]: useLicensePlateScanner('Classic'),
+    [FeatureId.LicensePlateScannerML]: useLicensePlateScanner('ML_BASED'),
+    [FeatureId.LicensePlateScannerClassic]: useLicensePlateScanner('CLASSIC'),
+    [FeatureId.VinScanner]: useVinScanner(),
     [FeatureId.TextDataScanner]: useTextDataScanner(),
     [FeatureId.CheckRecognizer]: useCheckRecognizer(),
     [FeatureId.BarcodeCameraViewComponent]: useLicenseValidityCheckWrapper(

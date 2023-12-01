@@ -14,6 +14,7 @@ import {ImageFilterType} from 'react-native-scanbot-sdk';
 import {PreviewImage} from '../components/PreviewImage';
 import {COLORS} from '../theme/Theme';
 import {deleteAllConfirmationAlert} from '../utils/Alerts';
+import {setRtuTimeout} from '../utils/SDKUtils';
 
 export function ImageDetailScreen() {
   const route = useRoute<ImageDetailScreenRouteProp>();
@@ -23,6 +24,9 @@ export function ImageDetailScreen() {
   const [filterModalVisible, setFilterModalVisible] = useState(false);
 
   const onCropAndRotate = useLicenseValidityCheckWrapper(async () => {
+    setRtuTimeout(async () => {
+      await ScanbotSDK.UI.closeCroppingScreen();
+    });
     const result = await ScanbotSDK.UI.startCroppingScreen(page, {
       doneButtonTitle: 'Apply',
       topBarBackgroundColor: COLORS.SCANBOT_RED,

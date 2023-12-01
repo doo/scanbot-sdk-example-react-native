@@ -20,6 +20,7 @@ export enum FeatureId {
   LicensePlateScannerML,
   LicensePlateScannerClassic,
   TextDataScanner,
+  VinScanner,
   CheckRecognizer,
   BarcodeCameraViewComponent,
   RecognizeCheckOnImage,
@@ -47,7 +48,7 @@ export const examplesList: Section[] = [
       },
       {
         id: FeatureId.FinderDocumentScanner,
-        title: 'Document Scanner with Finder',
+        title: 'Scan Document with Finder',
       },
 
       {
@@ -132,6 +133,7 @@ export const examplesList: Section[] = [
         id: FeatureId.LicensePlateScannerClassic,
         title: 'Scan Vehicle License Plate (Classic)',
       },
+      {id: FeatureId.VinScanner, title: 'Start VIN Scanner'},
       {id: FeatureId.TextDataScanner, title: 'Start Text Data Scanner'},
       {
         id: FeatureId.RecognizeCheckOnImage,

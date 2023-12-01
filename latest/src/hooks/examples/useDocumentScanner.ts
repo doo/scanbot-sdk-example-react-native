@@ -6,6 +6,7 @@ import {PageContext} from '../../context/usePages';
 import {COLORS} from '../../theme/Theme';
 import {errorMessageAlert} from '../../utils/Alerts';
 import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
+import {setRtuTimeout} from '../../utils/SDKUtils';
 
 export function useDocumentScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -13,6 +14,9 @@ export function useDocumentScanner() {
 
   return useLicenseValidityCheckWrapper(async () => {
     try {
+      setRtuTimeout(async () => {
+        await ScanbotSDK.UI.closeDocumentScanner();
+      });
       const result = await ScanbotSDK.UI.startDocumentScanner({
         polygonColor: '#00ffff',
         bottomBarBackgroundColor: COLORS.SCANBOT_RED,

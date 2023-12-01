@@ -9,6 +9,7 @@ import {BarcodeDocumentFormatContext} from '../../context/useBarcodeDocumentForm
 import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 import {useNavigation} from '@react-navigation/native';
 import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
+import {setRtuTimeout} from '../../utils/SDKUtils';
 
 export function useScanBatchBarcodes() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -25,6 +26,10 @@ export function useScanBatchBarcodes() {
         finderAspectRatio: {width: 2, height: 1},
         useButtonsAllCaps: false,
       };
+
+      setRtuTimeout(async () => {
+        await ScanbotSDK.UI.closeBatchBarcodeScanner();
+      });
 
       const result = await ScanbotSDK.UI.startBatchBarcodeScanner(config);
       if (result.status !== 'OK' || !result.barcodes) {

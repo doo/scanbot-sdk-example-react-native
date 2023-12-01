@@ -6,12 +6,16 @@ import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
 import {errorMessageAlert} from '../../utils/Alerts';
 import {useNavigation} from '@react-navigation/native';
 import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
+import {setRtuTimeout} from '../../utils/SDKUtils';
 
 export function useScanGenericDocument() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
 
   return useLicenseValidityCheckWrapper(async () => {
     try {
+      setRtuTimeout(async () => {
+        await ScanbotSDK.UI.closeGenericDocumentRecognizer();
+      });
       const result = await ScanbotSDK.UI.startGenericDocumentRecognizer({
         imageResultsConfiguration: new ImageResultsConfiguration({
           resultType: 'STORE_IMAGE',

@@ -12,6 +12,16 @@ export function MedicalCertificateResultScreen() {
     <ScanResultSectionList
       sectionData={[
         {
+          title: 'Medical Certificate Result',
+          data: [
+            {
+              key: 'Snapped Image',
+              image: medicalCertificateResult.imageFileUri,
+            },
+            {key: 'Form Type', value: medicalCertificateResult.formType},
+          ],
+        },
+        {
           title: 'Patient Data',
           data: transformPatientData(medicalCertificateResult),
         },
@@ -24,7 +34,6 @@ export function MedicalCertificateResultScreen() {
           data: getCheckboxesData(medicalCertificateResult),
         },
       ]}
-      imageFileUri={medicalCertificateResult.imageFileUri}
     />
   );
 }

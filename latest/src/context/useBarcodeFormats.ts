@@ -21,7 +21,6 @@ const initialBarcodeFormats: Record<BarcodeFormat, boolean> = {
   MSI_PLESSEY: true,
   IATA_2_OF_5: true,
   INDUSTRIAL_2_OF_5: true,
-  UNKNOWN: false,
 };
 
 interface BarcodeFormatsContextValue {

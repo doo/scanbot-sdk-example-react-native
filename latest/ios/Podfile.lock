@@ -375,6 +375,8 @@ PODS:
   - React-jsinspector (0.72.4)
   - React-logger (0.72.4):
     - glog
+  - react-native-background-timer (2.4.1):
+    - React-Core
   - react-native-document-picker (9.0.1):
     - React-Core
   - react-native-image-picker (7.0.0):
@@ -497,15 +499,15 @@ PODS:
     - React-Core
   - RNGestureHandler (2.13.1):
     - React-Core
-  - RNScanbotSDK/ALL (4.16.0-LOCAL.5):
+  - RNScanbotSDK/ALL (4.16.0-LOCAL.8):
     - React
     - ScanbotSDK/ALL (= 4.0.0)
-    - ScanbotSDKNativeWrapper/ALL (= 4.0.0.0-alpha.3-local.2)
+    - ScanbotSDKNativeWrapper/ALL (= 4.0.0.0-alpha.3-local.4)
   - RNScreens (3.25.0):
     - React-Core
     - React-RCTImage
   - ScanbotSDK/ALL (4.0.0)
-  - ScanbotSDKNativeWrapper/ALL (4.0.0.0-alpha.3-local.2):
+  - ScanbotSDKNativeWrapper/ALL (4.0.0.0-alpha.3-local.4):
     - ScanbotSDK/ALL (= 4.0.0)
   - SocketRocket (0.6.1)
   - Yoga (1.14.0)
@@ -558,6 +560,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
+  - react-native-background-timer (from `../node_modules/react-native-background-timer`)
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
@@ -649,6 +652,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
+  react-native-background-timer:
+    :path: "../node_modules/react-native-background-timer"
   react-native-document-picker:
     :path: "../node_modules/react-native-document-picker"
   react-native-image-picker:
@@ -736,6 +741,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: c7f826e40fa9cab5d37cab6130b1af237332b594
   React-jsinspector: aaed4cf551c4a1c98092436518c2d267b13a673f
   React-logger: da1ebe05ae06eb6db4b162202faeafac4b435e77
+  react-native-background-timer: 17ea5e06803401a379ebf1f20505b793ac44d0fe
   react-native-document-picker: 2b8f18667caee73a96708a82b284a4f40b30a156
   react-native-image-picker: ddbbe4d226d9c82a82360f5de66bf71a657a42e6
   react-native-safe-area-context: 7aa8e6d9d0f3100a820efb1a98af68aa747f9284
@@ -759,10 +765,10 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: c913ede1fa163a71cea118ed4670bbaaa4b511bb
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: 38aa38413896620338948fbb5c90579a7b1c3fde
-  RNScanbotSDK: 0f596dc61037b09e6e08ad8234fd9a30245d6285
+  RNScanbotSDK: 656c3431434ad0e21ee879414486752ee179e941
   RNScreens: 85d3880b52d34db7b8eeebe2f1a0e807c05e69fa
   ScanbotSDK: ad0d2bf12ffa897384757ddcd6d6af38b0f6dad4
-  ScanbotSDKNativeWrapper: 84086d05c9a32c020695c6540a76e752567c50d6
+  ScanbotSDKNativeWrapper: 26041195b79d2985b9d2393e2cc7d8468ab81bbd
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 3efc43e0d48686ce2e8c60f99d4e6bd349aff981
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {CheckRecognizerResult} from 'react-native-scanbot-sdk';
 import {ScanResultSectionList} from '../components/ScanResultSectionList';
 import {useRoute} from '@react-navigation/native';
@@ -17,16 +17,19 @@ export function CheckRecognizerResultScreen() {
   const {params: checkRecognizerResult} =
     useRoute<CheckRecognizerResultScreenRouteProp>();
 
-  useEffect(() => {
-    console.log(
-      'Check Recognizer Document Type: ' +
-        checkRecognizerResult.document?.documentType ?? 'N/A',
-    );
-  });
-
   return (
     <ScanResultSectionList
       sectionData={[
+        {
+          title: 'Check Result',
+          data: [
+            {key: 'Image', image: checkRecognizerResult.image},
+            {
+              key: 'Recognition Status',
+              value: checkRecognizerResult.recognitionStatus,
+            },
+          ],
+        },
         {
           title: checkRecognizerResult.document?.documentType ?? 'NOT DETECTED',
           data: transformData(checkRecognizerResult),

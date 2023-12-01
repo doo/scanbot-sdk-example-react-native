@@ -9,6 +9,7 @@ import {BarcodeDocumentFormatContext} from '../../context/useBarcodeDocumentForm
 import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
 import {useNavigation} from '@react-navigation/native';
+import {setRtuTimeout} from '../../utils/SDKUtils';
 
 export function useScanBarcodes() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -26,6 +27,10 @@ export function useScanBarcodes() {
         useButtonsAllCaps: false,
         barcodeImageGenerationType: 'NONE',
       };
+
+      setRtuTimeout(async () => {
+        await ScanbotSDK.UI.closeBarcodeScanner();
+      });
 
       const result = await ScanbotSDK.UI.startBarcodeScanner(config);
       if (result.status !== 'OK' || !result.barcodes) {
