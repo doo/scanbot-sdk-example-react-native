@@ -9,14 +9,16 @@ import {
 import React from 'react';
 import {COLORS} from '../theme/Theme';
 import {PreviewImage} from './PreviewImage';
+import {Field} from 'react-native-scanbot-sdk';
 
-type ScanResultSectionData = {
+export type ScanResultSectionData = {
   key: string;
   value?: string;
   image?: string;
+  field?: Field;
 };
 
-type ScanResultSection = {
+export type ScanResultSection = {
   title: string;
   data: ScanResultSectionData[];
 };
@@ -51,8 +53,29 @@ function ScanResultSectionHeader({
 }
 
 function ScanResultSectionListItem({
-  item: {key, value, image},
+  item: {key, value, image, field},
 }: SectionListRenderItemInfo<ScanResultSectionData, ScanResultSection>) {
+  if (field) {
+    return (
+      <View style={[styles.itemContainer]}>
+        <Text style={[styles.item, styles.bold]}>{key}</Text>
+        <View>
+          {!!field.value?.text && (
+            <Text style={styles.item}>Value: {field.value?.text}</Text>
+          )}
+          {field.value?.confidence !== undefined && (
+            <Text style={styles.item}>
+              Confidence: {field.value?.confidence}
+            </Text>
+          )}
+          {!!field.validationStatus && (
+            <Text style={styles.item}>{field.validationStatus}</Text>
+          )}
+        </View>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.itemContainer}>
       <Text style={[styles.item, styles.bold]}>{key}</Text>
@@ -94,6 +117,10 @@ const styles = StyleSheet.create({
   itemContainer: {
     backgroundColor: '#ffffff',
     marginVertical: 8,
+  },
+  fieldContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   bold: {
     fontWeight: 'bold',

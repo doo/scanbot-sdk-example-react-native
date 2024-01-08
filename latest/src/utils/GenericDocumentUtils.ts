@@ -1,42 +1,45 @@
-import {
-  ImageFieldWrapper,
-  TextFieldWrapper,
-  ValidatedTextFieldWrapper,
-} from 'react-native-scanbot-sdk/src/internal/gdr/gdr-base-wrappers';
+import {Field, GenericDocumentWrapper} from 'react-native-scanbot-sdk';
 
-// Common Display Utility Method
-const getImageField = (field: ImageFieldWrapper) => ({
-  key: field.type.name,
-  image: field.image,
-});
+function isGenericDocumentField(field: any): field is Field {
+  return (
+    (field as Field).validationStatus !== undefined ||
+    (field as Field).value?.text !== undefined ||
+    (field as Field).value?.confidence !== undefined
+  );
+}
 
-const getTextField = (
-  field: TextFieldWrapper | ValidatedTextFieldWrapper,
-  withConfidence: boolean = true,
-) => {
-  const confidence =
-    field.value && withConfidence
-      ? ` (confidence: ${(field.value.confidence * 100.0).toFixed(0)}%)`
-      : '';
-  return {
-    key: field.type.name,
-    value: field.value ? `${field.value.text}${confidence}` : '-',
-    image: field.image,
-  };
-};
+function sectionValueItem(key: string, value: string) {
+  return {key, value};
+}
 
-// Common Display Utility Method - for optional field wrappers
-const getOptTextField = (
-  field: TextFieldWrapper | ValidatedTextFieldWrapper | undefined,
-  defaultName: string,
-  withConfidence: boolean = true,
-) =>
-  field
-    ? getTextField(field, withConfidence)
-    : {key: defaultName, value: 'not detected'};
+function sectionImageItem(key: string, image?: string) {
+  return {key, image};
+}
+
+function sectionFieldItem(key: string, field: Field) {
+  return {key, field};
+}
+
+function gdrCommonFields(document: GenericDocumentWrapper): Array<{
+  key: string;
+  value?: string;
+}> {
+  return [
+    sectionValueItem('Type', document.type.name),
+    sectionValueItem('Confidence', document.confidence.toString()),
+  ];
+}
+
+function gdrFields(document: GenericDocumentWrapper) {
+  return Object.entries(document)
+    .filter(([_, value]) => isGenericDocumentField(value))
+    .map(([key, value]) => sectionFieldItem(key, value));
+}
 
 export const GenericDocumentUtils = {
-  getImageField,
-  getTextField,
-  getOptTextField,
+  gdrCommonFields,
+  gdrFields,
+  sectionValueItem,
+  sectionImageItem,
+  sectionFieldItem,
 };
