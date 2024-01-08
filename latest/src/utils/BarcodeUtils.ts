@@ -1,6 +1,6 @@
 import {
   AAMVADocumentFormat,
-  BarcodeResultField,
+  BarcodeScannerResultField,
   BaseDocumentFormat,
   BoardingPassDocumentFormat,
   GS1DocumentFormat,
@@ -12,7 +12,7 @@ import {
   VCardDocumentFormat,
 } from 'react-native-scanbot-sdk';
 
-export function logBarcodeDocument(barcodeItem: BarcodeResultField) {
+export function logBarcodeDocument(barcodeItem: BarcodeScannerResultField) {
   const formattedResult = barcodeItem.formattedResult as BaseDocumentFormat;
   if (!formattedResult) {
     return;
