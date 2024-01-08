@@ -4,7 +4,6 @@ import {errorMessageAlert} from '../../utils/Alerts';
 import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 import {useNavigation} from '@react-navigation/native';
 import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
-import {setRtuTimeout} from '../../utils/SDKUtils';
 
 export function useMRZScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -22,9 +21,7 @@ export function useMRZScanner() {
           height: 0.18,
         };
       }
-      setRtuTimeout(async () => {
-        await ScanbotSDK.UI.closeMrzScanner();
-      });
+
       const result = await ScanbotSDK.UI.startMrzScanner(config);
 
       console.log('MRZ Result:\n' + JSON.stringify(result, null, 4));

@@ -12,7 +12,6 @@ import {PageContext} from '../../context/usePages';
 import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
 import {useContext} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {setRtuTimeout} from '../../utils/SDKUtils';
 
 export function useFinderDocumentScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -20,9 +19,6 @@ export function useFinderDocumentScanner() {
 
   return useLicenseValidityCheckWrapper(async () => {
     try {
-      setRtuTimeout(async () => {
-        await ScanbotSDK.UI.closeFinderDocumentScanner();
-      });
       const result = await ScanbotSDK.UI.startFinderDocumentScanner({
         topBarBackgroundColor: COLORS.SCANBOT_RED,
         cameraBackgroundColor: COLORS.SCANBOT_RED,

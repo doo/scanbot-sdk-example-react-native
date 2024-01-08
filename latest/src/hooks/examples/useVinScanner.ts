@@ -3,7 +3,6 @@ import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
 import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 import {COLORS} from '../../theme/Theme';
 import {VinScannerConfiguration} from 'react-native-scanbot-sdk/src/configurations';
-import {setRtuTimeout} from '../../utils/SDKUtils';
 
 export function useVinScanner() {
   return useLicenseValidityCheckWrapper(async () => {
@@ -12,17 +11,14 @@ export function useVinScanner() {
         topBarBackgroundColor: COLORS.SCANBOT_RED,
       };
 
-      setRtuTimeout(async () => {
-        await ScanbotSDK.UI.closeVinScanner();
-      });
-
       const result = await ScanbotSDK.UI.startVinScanner(config);
       if (result.status !== 'OK') {
         return;
       }
       const msg = [
         `- Raw Text: ${result.rawText}`,
-        `- Confidence: ${(result.confidenceValue * 100).toFixed(0)}%`,
+        result.confidenceValue &&
+          `- Confidence: ${(result.confidenceValue * 100).toFixed(0)}%`,
         `- Validation: ${
           result.validationSuccessful ? 'SUCCESSFUL' : 'NOT SUCCESSFUL'
         }`,

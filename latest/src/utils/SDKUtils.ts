@@ -1,33 +1,11 @@
 import ScanbotSDK, {
-  StorageImageFormat,
   LicenseStatus,
+  StorageImageFormat,
 } from 'react-native-scanbot-sdk';
 import {errorMessageAlert} from './Alerts';
-import BackgroundTimer from 'react-native-background-timer';
 
 export const IMAGE_FILE_FORMAT: StorageImageFormat = 'JPG';
 export const FILE_ENCRYPTION_ENABLED: boolean = false;
-
-/**
- * If set to anything different than -1, the Ready-To-Use UI components will
- * be closed automatically after the value of RTU_TIMEOUT in milliseconds.
- */
-export let RTU_TIMEOUT = -1;
-
-/**
- * Sets a timeout based on the RTU_TIMEOUT property in SDKUtils.
- * @param callback The callback to execute after RTU_TIMEOUT milliseconds
- * @returns The promise
- */
-export async function setRtuTimeout(callback: () => Promise<void>) {
-  return RTU_TIMEOUT !== -1
-    ? BackgroundTimer.runBackgroundTimer(async () => {
-        console.log('RTU time-out callback called.');
-        await callback();
-        BackgroundTimer.stopBackgroundTimer();
-      }, RTU_TIMEOUT)
-    : null;
-}
 
 export async function checkLicense(): Promise<boolean> {
   const info = await ScanbotSDK.getLicenseInfo();

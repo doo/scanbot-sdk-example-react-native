@@ -6,7 +6,6 @@ import {errorMessageAlert} from '../../utils/Alerts';
 import {useNavigation} from '@react-navigation/native';
 import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 import {COLORS} from '../../theme/Theme';
-import {setRtuTimeout} from '../../utils/SDKUtils';
 
 export function useCheckRecognizer() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -16,10 +15,6 @@ export function useCheckRecognizer() {
       const config: CheckRecognizerConfiguration = {
         topBarBackgroundColor: COLORS.SCANBOT_RED,
       };
-
-      setRtuTimeout(async () => {
-        await ScanbotSDK.UI.closeCheckRecognizer();
-      });
 
       const result = await ScanbotSDK.UI.startCheckRecognizer(config);
 

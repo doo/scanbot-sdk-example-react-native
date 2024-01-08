@@ -4,7 +4,6 @@ import ScanbotSDK, {
 import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
 import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 import {COLORS} from '../../theme/Theme';
-import {setRtuTimeout} from '../../utils/SDKUtils';
 
 export function useTextDataScanner() {
   return useLicenseValidityCheckWrapper(async () => {
@@ -26,9 +25,6 @@ export function useTextDataScanner() {
         },
       };
 
-      setRtuTimeout(async () => {
-        await ScanbotSDK.UI.closeTextDataScanner();
-      });
       const result = await ScanbotSDK.UI.startTextDataScanner(config);
       const data = result?.result?.text;
       if (result.status !== 'OK' || !data) {

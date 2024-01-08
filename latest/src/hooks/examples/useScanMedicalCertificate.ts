@@ -6,7 +6,6 @@ import {useNavigation} from '@react-navigation/native';
 import {errorMessageAlert} from '../../utils/Alerts';
 import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 import {COLORS} from '../../theme/Theme';
-import {setRtuTimeout} from '../../utils/SDKUtils';
 
 export function useScanMedicalCertificate() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -29,9 +28,7 @@ export function useScanMedicalCertificate() {
         cancelButtonHidden: false,
         recognizePatientInfo: true,
       };
-      setRtuTimeout(async () => {
-        await ScanbotSDK.UI.closeMedicalCertificateRecognizer();
-      });
+
       const result = await ScanbotSDK.UI.startMedicalCertificateRecognizer(
         config,
       );
