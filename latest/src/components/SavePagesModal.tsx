@@ -1,15 +1,9 @@
 import {Modal, StyleSheet, Text, View} from 'react-native';
-import React, {useContext} from 'react';
-import {FILE_ENCRYPTION_ENABLED} from '../utils/SDKUtils';
-import ScanbotSDK, {
-  CreatePDFArguments,
-  PerformOCRArguments,
-} from 'react-native-scanbot-sdk';
-import {errorMessageAlert, infoMessageAlert} from '../utils/Alerts';
-import {ActivityIndicatorContext} from '../context/useLoading';
-import {PageContext} from '../context/usePages';
-import {useLicenseValidityCheckWrapper} from '../hooks/useLicenseValidityCheck';
+import React, {useCallback} from 'react';
 import {COLORS} from '../theme/Theme';
+import {useSavePDF} from '../hooks/examples/useSavePDF';
+import {usePerformOCR} from '../hooks/examples/usePerformOCR';
+import {useWriteTIFF} from '../hooks/examples/useWriteTIFF';
 
 export function SavePagesModal({
   isVisible,
@@ -18,83 +12,29 @@ export function SavePagesModal({
   isVisible: boolean;
   onDismiss: () => void;
 }) {
-  const {setLoading} = useContext(ActivityIndicatorContext);
-  const {getImageUriFromPages} = useContext(PageContext);
+  const savePDF = useSavePDF();
+  const performOCR = usePerformOCR();
+  const writeTiff = useWriteTIFF();
 
-  const onSavePDF = useLicenseValidityCheckWrapper(async () => {
+  const onSavePDF = useCallback(async () => {
     onDismiss();
-    try {
-      setLoading(true);
-      const config: CreatePDFArguments = {
-        imageFileUris: getImageUriFromPages(),
-        options: {
-          pageSize: 'A4',
-          pageOrientation: 'PORTRAIT',
-        },
-      };
-      const result = await ScanbotSDK.createPDF(config);
-      infoMessageAlert('PDF file created: ' + result.pdfFileUri);
-    } catch (e) {
-      errorMessageAlert('ERROR: ' + JSON.stringify(e));
-    } finally {
-      setLoading(false);
-    }
-  });
+    await savePDF();
+  }, [onDismiss, savePDF]);
 
-  const onSavePDFWithOCR = useLicenseValidityCheckWrapper(async () => {
+  const onSavePDFWithOCR = useCallback(async () => {
     onDismiss();
-    try {
-      setLoading(true);
-      const config: PerformOCRArguments = {
-        imageFileUris: getImageUriFromPages(),
-        languages: ['en', 'de'],
-        options: {
-          outputFormat: 'FULL_OCR_RESULT',
-          engineMode: 'TLDR',
-        },
-      };
-      const result = await ScanbotSDK.performOCR(config);
-      infoMessageAlert('PDF with OCR layer created: ' + result.pdfFileUri);
-    } catch (e) {
-      errorMessageAlert('ERROR: ' + JSON.stringify(e));
-    } finally {
-      setLoading(false);
-    }
-  });
+    await performOCR();
+  }, [onDismiss, performOCR]);
 
-  const onSaveAsTiff = async (binarized: boolean) => {
+  const saveTiffOneBit = useCallback(async () => {
     onDismiss();
-    if (FILE_ENCRYPTION_ENABLED) {
-      // TODO encryption for TIFF files currently not supported
-      infoMessageAlert(
-        'Encryption for TIFF files currently not supported. ' +
-          'In order to test TIFF please disable image file encryption.',
-      );
-      return;
-    }
-    try {
-      setLoading(true);
-      const result = await ScanbotSDK.writeTIFF({
-        imageFileUris: getImageUriFromPages(),
-        options: {
-          oneBitEncoded: binarized, // "true" means create 1-bit binarized black and white TIFF
-          dpi: 300, // optional DPI. default value is 200
-          compression: binarized ? 'CCITT_T6' : 'ADOBE_DEFLATE', // optional compression. see documentation!
-        },
-      });
-      infoMessageAlert('TIFF file created: ' + result.tiffFileUri);
-    } catch (e) {
-      errorMessageAlert('ERROR: ' + JSON.stringify(e));
-    } finally {
-      setLoading(false);
-    }
-  };
-  const saveTiffOneBit = useLicenseValidityCheckWrapper(() =>
-    onSaveAsTiff(true),
-  );
-  const saveTiffColor = useLicenseValidityCheckWrapper(() =>
-    onSaveAsTiff(false),
-  );
+    await writeTiff(true);
+  }, [onDismiss, writeTiff]);
+
+  const saveTiffColor = useCallback(async () => {
+    onDismiss();
+    await writeTiff(false);
+  }, [onDismiss, writeTiff]);
 
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible}>
@@ -113,12 +53,12 @@ export function SavePagesModal({
           </Text>
           <Text
             style={[styles.button, styles.actionButton]}
-            onPress={() => saveTiffOneBit()}>
+            onPress={saveTiffOneBit}>
             TIFF (1-bit B&W)
           </Text>
           <Text
             style={[styles.button, styles.actionButton]}
-            onPress={() => saveTiffColor()}>
+            onPress={saveTiffColor}>
             TIFF (color)
           </Text>
           <Text style={[styles.button, styles.closeButton]} onPress={onDismiss}>

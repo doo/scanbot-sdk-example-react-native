@@ -35,7 +35,7 @@ export function HomeScreen() {
 
   const onFilterSelect = useCallback(
     async (filter: ImageFilterType) => {
-      await applyImageOnFilter(filter, imageRef.current);
+      await applyImageOnFilter(filter, imageRef.current!!);
     },
     [applyImageOnFilter],
   );
