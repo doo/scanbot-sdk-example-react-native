@@ -5,6 +5,9 @@ import {errorMessageAlert, infoMessageAlert} from '../../utils/Alerts';
 export function useLicenseInfo() {
   return useCallback(async () => {
     try {
+      /**
+       * Get the license info and display it as an Alert
+       **/
       const info = await ScanbotSDK.getLicenseInfo();
       const text =
         `• The license is ${info.isLicenseValid ? 'VALID' : 'NOT VALID'}` +

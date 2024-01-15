@@ -1,26 +1,40 @@
-import {useContext} from 'react';
+import {useCallback, useContext} from 'react';
 import ScanbotSDK from 'react-native-scanbot-sdk';
 import {ActivityIndicatorContext} from '../../context/useLoading';
 import {selectImagesFromLibrary} from '../../utils/ImageUtils';
 import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
-import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
+import {checkLicense} from '../../utils/SDKUtils';
 
 export function useDetectDocumentFromImage() {
   const {setLoading} = useContext(ActivityIndicatorContext);
 
-  return useLicenseValidityCheckWrapper(async () => {
+  return useCallback(async () => {
     try {
+      /**
+       * Check license status and return early
+       * if the license is not valid
+       */
+      if (!(await checkLicense())) {
+        return;
+      }
+      /**
+       * Select an image from the Image Library
+       * Return early if no image is selected or there is an issue selecting an image
+       **/
       setLoading(true);
       const selectedImageResult = await selectImagesFromLibrary();
-
       if (!selectedImageResult) {
         return;
       }
 
-      const uri = selectedImageResult[0];
-      const result = await ScanbotSDK.detectDocument(uri);
-      const blur = await ScanbotSDK.estimateBlur({imageFileUri: uri});
-
+      const [imageFileUri] = selectedImageResult;
+      // Detect document on selected image
+      const result = await ScanbotSDK.detectDocument(imageFileUri);
+      // Estimate document blur on selected image
+      const blur = await ScanbotSDK.estimateBlur({imageFileUri: imageFileUri});
+      /**
+       * Handle the result by displaying an Alert
+       */
       resultMessageAlert(
         JSON.stringify(result) + '\n' + JSON.stringify(blur, null, 2),
       );
@@ -29,5 +43,5 @@ export function useDetectDocumentFromImage() {
     } finally {
       setLoading(false);
     }
-  });
+  }, [setLoading]);
 }

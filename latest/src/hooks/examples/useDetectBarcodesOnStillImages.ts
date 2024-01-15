@@ -1,13 +1,13 @@
-import {useContext} from 'react';
-import ScanbotSDK, {BarcodeScannerResult} from 'react-native-scanbot-sdk';
+import {useCallback, useContext} from 'react';
+import ScanbotSDK from 'react-native-scanbot-sdk';
 import {ActivityIndicatorContext} from '../../context/useLoading';
 import {selectImagesFromLibrary} from '../../utils/ImageUtils';
 import {errorMessageAlert} from '../../utils/Alerts';
 import {BarcodeDocumentFormatContext} from '../../context/useBarcodeDocumentFormats';
 import {BarcodeFormatsContext} from '../../context/useBarcodeFormats';
-import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 import {useNavigation} from '@react-navigation/native';
 import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
+import {checkLicense} from '../../utils/SDKUtils';
 
 export function useDetectBarcodesOnStillImages() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -17,32 +17,49 @@ export function useDetectBarcodesOnStillImages() {
   );
   const {acceptedBarcodeFormats} = useContext(BarcodeFormatsContext);
 
-  return useLicenseValidityCheckWrapper(async () => {
+  return useCallback(async () => {
     try {
-      setLoading(true);
-
-      const selectedImage = await selectImagesFromLibrary(true);
-      if (!selectedImage) {
+      /**
+       * Check license status and return early
+       * if the license is not valid
+       */
+      if (!(await checkLicense())) {
         return;
       }
-
+      /**
+       * Select an image from the Image Library
+       * Return early if no image is selected or there is an issue selecting an image
+       **/
+      setLoading(true);
+      const selectedImages = await selectImagesFromLibrary(true);
+      if (!selectedImages) {
+        return;
+      }
+      /**
+       * Detect the barcodes on the selected images
+       */
       const result = await ScanbotSDK.detectBarcodesOnImages({
         acceptedDocumentFormats: acceptedBarcodeDocumentFormats,
         barcodeFormats: acceptedBarcodeFormats,
-        imageFileUris: selectedImage,
+        imageFileUris: selectedImages,
         stripCheckDigits: true,
       });
-
-      if (result.status === 'OK') {
-        const barcodeResult: BarcodeScannerResult = {
-          barcodes: result.results.flatMap(entry => entry.barcodeResults),
-        };
-        navigation.navigate(Screens.BARCODE_RESULT, barcodeResult);
-      }
+      /**
+       * Handle the result by navigating to Screens.BARCODE_RESULT
+       */
+      const barcodeResult = {
+        barcodes: result.results.flatMap(entry => entry.barcodeResults),
+      };
+      navigation.navigate(Screens.BARCODE_RESULT, barcodeResult);
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {
       setLoading(false);
     }
-  });
+  }, [
+    acceptedBarcodeDocumentFormats,
+    acceptedBarcodeFormats,
+    navigation,
+    setLoading,
+  ]);
 }

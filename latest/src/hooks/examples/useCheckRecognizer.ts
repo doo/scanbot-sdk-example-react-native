@@ -4,29 +4,38 @@ import ScanbotSDK, {
 import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
 import {errorMessageAlert} from '../../utils/Alerts';
 import {useNavigation} from '@react-navigation/native';
-import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 import {COLORS} from '../../theme/Theme';
+import {useCallback} from 'react';
+import {checkLicense} from '../../utils/SDKUtils';
 
 export function useCheckRecognizer() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
 
-  return useLicenseValidityCheckWrapper(async () => {
+  return useCallback(async () => {
     try {
+      /**
+       * Check license status and return early
+       * if the license is not valid
+       */
+      if (!(await checkLicense())) {
+        return;
+      }
+      /**
+       * Create the check configuration object and
+       * start the check recognizer with the configuration
+       */
       const config: CheckRecognizerConfiguration = {
         topBarBackgroundColor: COLORS.SCANBOT_RED,
       };
-
       const result = await ScanbotSDK.UI.startCheckRecognizer(config);
-
-      console.log(JSON.stringify(result, undefined, 4));
-
-      if (result.status !== 'OK') {
-        return;
+      /**
+       * Handle the result if result status is OK
+       */
+      if (result.status === 'OK') {
+        navigation.navigate(Screens.CHECK_RECOGNIZER_RESULT, result);
       }
-
-      navigation.navigate(Screens.CHECK_RECOGNIZER_RESULT, result);
     } catch (e: any) {
       errorMessageAlert(e.message);
     }
-  });
+  }, [navigation]);
 }
