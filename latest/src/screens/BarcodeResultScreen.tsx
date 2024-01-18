@@ -5,8 +5,8 @@ import {ScanResultSectionList} from '../components/ScanResultSectionList';
 import {
   AAMVADocumentFormat,
   AAMVADocumentSubfile,
+  BarcodeResultField,
   BarcodeScannerResult,
-  BarcodeScannerResultField,
   BoardingPassDocumentFormat,
   GS1DocumentFormat,
   IDCardPDF417DocumentFormat,
@@ -42,9 +42,7 @@ const getTextField = (name: string, value?: string) => {
   return {key: name, value: value && value.trim().length > 0 ? value : '-'};
 };
 
-const transformBarcode = (
-  barcode: BarcodeScannerResultField,
-): KeyValueField[] => {
+const transformBarcode = (barcode: BarcodeResultField): KeyValueField[] => {
   const fields = [
     getTextField('Text (with extension)', barcode.textWithExtension),
     getTextField('Type', barcode.type),
@@ -65,7 +63,7 @@ const transformBarcode = (
 };
 
 const transformFormattedResult = (
-  barcode: BarcodeScannerResultField,
+  barcode: BarcodeResultField,
 ): KeyValueField[] => {
   const formattedResult = barcode.formattedResult;
   if (!formattedResult) {
