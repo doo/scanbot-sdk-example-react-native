@@ -1,7 +1,11 @@
 import ScanbotSDK, {
   HealthInsuranceCardScannerConfiguration,
 } from 'react-native-scanbot-sdk';
-import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
+import {
+  errorMessageAlert,
+  infoMessageAlert,
+  resultMessageAlert,
+} from '../../utils/Alerts';
 import {useCallback} from 'react';
 import {checkLicense} from '../../utils/SDKUtils';
 
@@ -15,6 +19,19 @@ export function useScanEHIC() {
       if (!(await checkLicense())) {
         return;
       }
+      /**
+       * Health Insurance Card Scanner requires OCR blobs.
+       * If OCR blobs are not present, the scanner will fail
+       * Return early if there are no installed languages
+       */
+      const ocrConfigsResult = await ScanbotSDK.getOCRConfigs();
+      if (ocrConfigsResult.installedLanguages.length === 0) {
+        infoMessageAlert(
+          'Scanning is not possible since no OCR blobs were found',
+        );
+        return;
+      }
+
       /**
        * Create the health insurance card scanner configuration object and
        * start the health insurance card scanner with the configuration
