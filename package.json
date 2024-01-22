@@ -35,9 +35,9 @@
     "react-navigation-stack": "2.5.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.1",
+    "@babel/core": "^7.23.7",
     "@babel/traverse": "^7.11.0",
-    "@types/babel__core": "^7.11.0",
+    "@types/babel__core": "^7.20.5",
     "@types/babel__traverse": "^7.11.0",
     "@react-native-community/eslint-config": "^2.0.0",
     "@types/jest": "^24.0.24",
