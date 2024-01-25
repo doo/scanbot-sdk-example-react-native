@@ -30,13 +30,16 @@ export function useDetectDocumentFromImage() {
       const [imageFileUri] = selectedImageResult;
       // Detect document on selected image
       const result = await ScanbotSDK.detectDocument(imageFileUri);
-      // Estimate document blur on selected image
-      const blur = await ScanbotSDK.estimateBlur({imageFileUri: imageFileUri});
+      // Analyze document quality on selected image
+      const quality = await ScanbotSDK.documentQualityAnalyzer({
+        imageFileUri: imageFileUri,
+      });
       /**
        * Handle the result by displaying an Alert
        */
       resultMessageAlert(
-        JSON.stringify(result) + '\n' + JSON.stringify(blur, null, 2),
+        `Detected Document result: ${JSON.stringify(result, null, 2)}\n` +
+          `Document Quality result: ${JSON.stringify(quality, null, 2)}`,
       );
     } catch (e: any) {
       errorMessageAlert(e.message);
