@@ -11,6 +11,7 @@ export function usePerformOCR() {
 
   return useCallback(async () => {
     try {
+      setLoading(true);
       /**
        * Check license status and return early
        * if the license is not valid
@@ -22,7 +23,6 @@ export function usePerformOCR() {
        * Perform optical character recognition with provided configuration and
        * Save the result as PDF
        */
-      setLoading(true);
       const result = await ScanbotSDK.performOCR({
         imageFileUris: getImageUriFromPages(),
         languages: ['en', 'de'],

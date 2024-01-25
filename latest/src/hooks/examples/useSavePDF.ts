@@ -11,6 +11,7 @@ export function useSavePDF() {
 
   return useCallback(async () => {
     try {
+      setLoading(true);
       /**
        * Check license status and return early
        * if the license is not valid
@@ -21,7 +22,6 @@ export function useSavePDF() {
       /**
        * Create a PDF with the provided option
        */
-      setLoading(true);
       const result = await ScanbotSDK.createPDF({
         imageFileUris: getImageUriFromPages(),
         options: {

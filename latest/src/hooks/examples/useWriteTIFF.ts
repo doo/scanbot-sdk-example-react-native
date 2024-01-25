@@ -20,6 +20,7 @@ export function useWriteTIFF() {
         return;
       }
       try {
+        setLoading(true);
         /**
          * Check license status and return early
          * if the license is not valid
@@ -27,7 +28,6 @@ export function useWriteTIFF() {
         if (!(await checkLicense())) {
           return;
         }
-        setLoading(true);
         /**
          * Save images as a tiff file
          */

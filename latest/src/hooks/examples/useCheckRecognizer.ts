@@ -26,6 +26,7 @@ export function useCheckRecognizer() {
        */
       const config: CheckRecognizerConfiguration = {
         topBarBackgroundColor: COLORS.SCANBOT_RED,
+        orientationLockMode: 'LANDSCAPE',
       };
       const result = await ScanbotSDK.UI.startCheckRecognizer(config);
       /**
