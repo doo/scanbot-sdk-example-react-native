@@ -33,7 +33,7 @@ export function useCroppingScreen() {
        * Handle the result
        */
       if (result.status === 'OK') {
-        return page;
+        return result.page;
       }
     } catch (e: any) {
       errorMessageAlert(e.message);
