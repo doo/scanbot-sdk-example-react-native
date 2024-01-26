@@ -40,7 +40,7 @@ export function useTextDataScanner() {
       /**
        * Handle the result if result status is OK
        */
-      if (result.status === 'OK' && result?.result?.text) {
+      if (result.status === 'OK' && result.result?.text) {
         resultMessageAlert(JSON.stringify(result));
       }
     } catch (e: any) {

@@ -41,11 +41,12 @@ export function useScanBarcodes() {
       /**
        * Handle the result if result status is OK
        */
-      if (result.status === 'OK' && result.barcodes) {
-        const barcodeItem = result.barcodes[0];
-        if (barcodeItem) {
-          logBarcodeDocument(barcodeItem);
-        }
+      if (
+        result.status === 'OK' &&
+        result.barcodes &&
+        result.barcodes.length > 0
+      ) {
+        result.barcodes.forEach(barcodeItem => logBarcodeDocument(barcodeItem));
         navigation.navigate(Screens.BARCODE_RESULT, result);
       }
     } catch (e: any) {

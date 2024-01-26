@@ -44,6 +44,7 @@ export function useDetectBarcodesOnStillImage() {
         barcodeFormats: acceptedBarcodeFormats,
         imageFileUri: imageFileUri,
         stripCheckDigits: true,
+        gs1HandlingMode: 'NONE',
       });
       /**
        * Handle the result by navigating to Screens.BARCODE_RESULT

@@ -5,6 +5,7 @@ import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
 import {ActivityIndicatorContext} from '../../context/useLoading';
 import {errorMessageAlert} from '../../utils/Alerts';
 import {useNavigation} from '@react-navigation/native';
+import {checkLicense} from '../../utils/SDKUtils';
 
 export function useRecognizeCheckOnImage() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -12,11 +13,18 @@ export function useRecognizeCheckOnImage() {
 
   return useCallback(async () => {
     try {
+      setLoading(true);
+      /**
+       * Check license status and return early
+       * if the license is not valid
+       */
+      if (!(await checkLicense())) {
+        return;
+      }
       /**
        * Select an image from the Image Library
        * Return early if no image is selected or there is an issue selecting an image
        **/
-      setLoading(true);
       const selectedImage = await selectImagesFromLibrary();
       if (!selectedImage) {
         return;
