@@ -1,22 +1,29 @@
-import {useContext} from 'react';
+import {useCallback, useContext} from 'react';
 import ScanbotSDK from 'react-native-scanbot-sdk';
 import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
 import {useNavigation} from '@react-navigation/native';
 import {PageContext} from '../../context/usePages';
 import {COLORS} from '../../theme/Theme';
 import {errorMessageAlert} from '../../utils/Alerts';
-import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
-import {setRtuTimeout} from '../../utils/SDKUtils';
+import {checkLicense} from '../../utils/SDKUtils';
 
 export function useDocumentScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
   const {addMultiplePages} = useContext(PageContext);
 
-  return useLicenseValidityCheckWrapper(async () => {
+  return useCallback(async () => {
     try {
-      setRtuTimeout(async () => {
-        await ScanbotSDK.UI.closeDocumentScanner();
-      });
+      /**
+       * Check license status and return early
+       * if the license is not valid
+       */
+      if (!(await checkLicense())) {
+        return;
+      }
+      /**
+       * Create the document scanner configuration object and
+       * start the document scanner with the configuration
+       */
       const result = await ScanbotSDK.UI.startDocumentScanner({
         polygonColor: '#00ffff',
         bottomBarBackgroundColor: COLORS.SCANBOT_RED,
@@ -27,6 +34,9 @@ export function useDocumentScanner() {
         multiPageEnabled: false,
         ignoreBadAspectRatio: true,
       });
+      /**
+       * Handle the result if result status is OK
+       */
       if (result.status === 'OK') {
         addMultiplePages(result.pages);
         navigation.navigate(Screens.IMAGE_RESULTS);
@@ -34,5 +44,5 @@ export function useDocumentScanner() {
     } catch (e: any) {
       errorMessageAlert(e.message);
     }
-  });
+  }, [addMultiplePages, navigation]);
 }

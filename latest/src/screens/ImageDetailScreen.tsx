@@ -8,13 +8,12 @@ import {
   PrimaryRouteNavigationProp,
 } from '../utils/Navigation';
 import {PageContext} from '../context/usePages';
-import {useLicenseValidityCheckWrapper} from '../hooks/useLicenseValidityCheck';
 import {ImageFilterModal} from '../components/ImageFilterModal';
 import {ImageFilterType} from 'react-native-scanbot-sdk';
 import {PreviewImage} from '../components/PreviewImage';
-import {COLORS} from '../theme/Theme';
 import {deleteAllConfirmationAlert} from '../utils/Alerts';
-import {setRtuTimeout} from '../utils/SDKUtils';
+import {useCroppingScreen} from '../hooks/examples/useCroppingScreen';
+import {useApplyImageFilterOnPage} from '../hooks/examples/useApplyImageFilterOnPage';
 
 export function ImageDetailScreen() {
   const route = useRoute<ImageDetailScreenRouteProp>();
@@ -22,26 +21,16 @@ export function ImageDetailScreen() {
   const {deletePage, updatePage} = useContext(PageContext);
   const [page, setPage] = useState(route.params);
   const [filterModalVisible, setFilterModalVisible] = useState(false);
+  const cropAndRotate = useCroppingScreen();
+  const applyImageFilterOnPage = useApplyImageFilterOnPage();
 
-  const onCropAndRotate = useLicenseValidityCheckWrapper(async () => {
-    setRtuTimeout(async () => {
-      await ScanbotSDK.UI.closeCroppingScreen();
-    });
-    const result = await ScanbotSDK.UI.startCroppingScreen(page, {
-      doneButtonTitle: 'Apply',
-      topBarBackgroundColor: COLORS.SCANBOT_RED,
-      bottomBarBackgroundColor: COLORS.SCANBOT_RED,
-      orientationLockMode: 'NONE',
-      swapTopBottomButtons: false,
-    });
-
-    if (result.status === 'OK') {
-      if (result.page) {
-        setPage(result.page);
-        updatePage(result.page);
-      }
+  const onCropAndRotate = useCallback(async () => {
+    const result = await cropAndRotate(page);
+    if (result) {
+      setPage(result);
+      updatePage(result);
     }
-  });
+  }, [cropAndRotate, page, updatePage]);
 
   const toggleFilterModal = useCallback(
     () => setFilterModalVisible(p => !p),
@@ -50,15 +39,13 @@ export function ImageDetailScreen() {
 
   const onFilterSelect = useCallback(
     async (filter: ImageFilterType) => {
-      try {
-        const updated = await ScanbotSDK.applyImageFilterOnPage(page, filter);
+      const updated = await applyImageFilterOnPage(page, filter);
+      if (updated) {
         setPage(updated);
         updatePage(updated);
-      } catch (e) {
-        console.log(e);
       }
     },
-    [page, updatePage],
+    [applyImageFilterOnPage, page, updatePage],
   );
 
   const onDeletePage = useCallback(async () => {

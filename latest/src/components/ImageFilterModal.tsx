@@ -11,43 +11,38 @@ import {
 import {COLORS} from '../theme/Theme';
 import {ImageFilterType} from 'react-native-scanbot-sdk';
 
-type ImageFilterList = Exclude<
-  ImageFilterType,
-  'ImageFilterTypeSensitiveBinarization'
->;
-
-const IMAGE_FILTERS: ImageFilterList[] = [
-  'ImageFilterTypeNone',
-  'ImageFilterTypeColor',
-  'ImageFilterTypeGray',
-  'ImageFilterTypeBinarized',
-  'ImageFilterTypeColorDocument',
-  'ImageFilterTypePureBinarized',
-  'ImageFilterTypeBackgroundClean',
-  'ImageFilterTypeBlackAndWhite',
-  'ImageFilterTypeOtsuBinarization',
-  'ImageFilterTypeDeepBinarization',
-  'ImageFilterTypeEdgeHighlight',
-  'ImageFilterTypeLowLightBinarization',
-  'ImageFilterTypeLowLightBinarization2',
-  'ImageFilterTypePureGray',
+const IMAGE_FILTERS: ImageFilterType[] = [
+  'BACKGROUND_CLEAN',
+  'BINARIZED',
+  'BLACK_AND_WHITE',
+  'COLOR',
+  'COLOR_DOCUMENT',
+  'DEEP_BINARIZATION',
+  'EDGE_HIGHLIGHT',
+  'GRAYSCALE',
+  'LOW_LIGHT_BINARIZATION',
+  'LOW_LIGHT_BINARIZATION_2',
+  'NONE',
+  'OTSU_BINARIZATION',
+  'PURE_BINARIZED',
+  'PURE_GRAY',
 ];
 
-const displayItemLabel: Record<ImageFilterList, string> = {
-  ImageFilterTypeBackgroundClean: 'Background Clean',
-  ImageFilterTypeBinarized: 'Binarized',
-  ImageFilterTypeBlackAndWhite: 'Black And White',
-  ImageFilterTypeColor: 'Color',
-  ImageFilterTypeColorDocument: 'Color Document',
-  ImageFilterTypeDeepBinarization: 'Deep Binarization',
-  ImageFilterTypeEdgeHighlight: 'Edge Highlight',
-  ImageFilterTypeGray: 'Gray',
-  ImageFilterTypeLowLightBinarization: 'Low Light Binarization',
-  ImageFilterTypeLowLightBinarization2: 'Low Light Binarization2',
-  ImageFilterTypeNone: 'None',
-  ImageFilterTypeOtsuBinarization: 'Otsu Binarization',
-  ImageFilterTypePureBinarized: 'Pure Binarized',
-  ImageFilterTypePureGray: 'Pure Gray',
+const displayItemLabel: Record<ImageFilterType, string> = {
+  BACKGROUND_CLEAN: 'Background Clean',
+  BINARIZED: 'Binarized',
+  BLACK_AND_WHITE: 'Black And White',
+  COLOR: 'Color',
+  COLOR_DOCUMENT: 'Color Document',
+  DEEP_BINARIZATION: 'Deep Binarization',
+  EDGE_HIGHLIGHT: 'Edge Highlight',
+  GRAYSCALE: 'Gray',
+  LOW_LIGHT_BINARIZATION: 'Low Light Binarization',
+  LOW_LIGHT_BINARIZATION_2: 'Low Light Binarization2',
+  NONE: 'None',
+  OTSU_BINARIZATION: 'Otsu Binarization',
+  PURE_BINARIZED: 'Pure Binarized',
+  PURE_GRAY: 'Pure Gray',
 };
 
 interface ImageFilterModalProps {

@@ -21,6 +21,14 @@ const initialBarcodeFormats: Record<BarcodeFormat, boolean> = {
   MSI_PLESSEY: true,
   IATA_2_OF_5: true,
   INDUSTRIAL_2_OF_5: true,
+  MICRO_QR_CODE: true,
+  USPS_INTELLIGENT_MAIL: true,
+  ROYAL_MAIL: true,
+  ROYAL_TNT_POST: true,
+  JAPAN_POST: true,
+  AUSTRALIA_POST: true,
+  DATABAR_LIMITED: true,
+  GS1_COMPOSITE: true,
 };
 
 interface BarcodeFormatsContextValue {

@@ -489,7 +489,7 @@
 				DEVELOPMENT_TEAM = FRUPYT6KB3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = scanbotsdkexample/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = scanbotsdkexample;
+				INFOPLIST_KEY_CFBundleDisplayName = "ScanbotSDK RN Example";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -517,7 +517,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FRUPYT6KB3;
 				INFOPLIST_FILE = scanbotsdkexample/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = scanbotsdkexample;
+				INFOPLIST_KEY_CFBundleDisplayName = "ScanbotSDK RN Example";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

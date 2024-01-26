@@ -1,10 +1,10 @@
 import {COLORS} from '../theme/Theme';
 import React from 'react';
-import {ActivityIndicator as AI, StyleSheet} from 'react-native';
+import {ActivityIndicator, StyleSheet} from 'react-native';
 
 export function LoadingIndicator({loading}: {loading: boolean}) {
   return (
-    <AI
+    <ActivityIndicator
       size="large"
       color={COLORS.SCANBOT_RED}
       style={styles.loadingIndicator}

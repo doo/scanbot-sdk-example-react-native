@@ -2,13 +2,24 @@ import ScanbotSDK, {
   TextDataScannerConfiguration,
 } from 'react-native-scanbot-sdk';
 import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
-import {useLicenseValidityCheckWrapper} from '../useLicenseValidityCheck';
 import {COLORS} from '../../theme/Theme';
-import {setRtuTimeout} from '../../utils/SDKUtils';
+import {useCallback} from 'react';
+import {checkLicense} from '../../utils/SDKUtils';
 
 export function useTextDataScanner() {
-  return useLicenseValidityCheckWrapper(async () => {
+  return useCallback(async () => {
     try {
+      /**
+       * Check license status and return early
+       * if the license is not valid
+       */
+      if (!(await checkLicense())) {
+        return;
+      }
+      /**
+       * Create the text data scanner configuration object and
+       * start the text data scanner with the configuration
+       */
       const config: TextDataScannerConfiguration = {
         topBarBackgroundColor: COLORS.SCANBOT_RED,
         textDataScannerStep: {
@@ -25,18 +36,15 @@ export function useTextDataScanner() {
           unzoomedFinderHeight: 40,
         },
       };
-
-      setRtuTimeout(async () => {
-        await ScanbotSDK.UI.closeTextDataScanner();
-      });
       const result = await ScanbotSDK.UI.startTextDataScanner(config);
-      const data = result?.result?.text;
-      if (result.status !== 'OK' || !data) {
-        return;
+      /**
+       * Handle the result if result status is OK
+       */
+      if (result.status === 'OK' && result.result?.text) {
+        resultMessageAlert(JSON.stringify(result));
       }
-      resultMessageAlert(JSON.stringify(result));
     } catch (e: any) {
       errorMessageAlert(e.message);
     }
-  });
+  }, []);
 }

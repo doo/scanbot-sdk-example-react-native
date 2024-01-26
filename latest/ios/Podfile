@@ -2,10 +2,6 @@
 # CocoaPods Repo
 source 'https://github.com/CocoaPods/Specs'
 
-# Local Repo
-source 'file:///Users/marco/Scanbot/Projects/local-cocoapods-repo/podspec'
-# source 'git@github.com:marcosaia1812/scanbot-local-cocoapods.git'
-
 # Resolve react_native_pods.rb with node to allow for hoisting
 require Pod::Executable.execute_command('node', ['-p',
   'require.resolve(
