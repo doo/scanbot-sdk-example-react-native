@@ -34,7 +34,7 @@ export function useRecognizeCheckOnImage() {
        * Handle the result by navigating to Screens.CHECK_RECOGNIZER_RESULT
        */
       const [imageFileUri] = selectedImage;
-      const result = await ScanbotSDK.recognizeCheck(imageFileUri);
+      const result = await ScanbotSDK.recognizeCheck({imageFileUri});
       navigation.navigate(Screens.CHECK_RECOGNIZER_RESULT, result);
     } catch (e: any) {
       errorMessageAlert(e.message);

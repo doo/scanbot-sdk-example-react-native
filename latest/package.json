@@ -8,9 +8,7 @@
     "lint": "eslint .",
     "start": "react-native start --reset-cache",
     "test": "jest",
-    "clean-android": "cd android && ./gradlew app:clean && cd ..",
-    "clean-ios": "cd ios && rm -rf Pods/ && rm Podfile.lock && pod install --repo-update && cd ..",
-    "clean-full": "yarn run clean-android && yarn run clean-ios && yarn run reinstall",
+    "clean": "npx react-native-clean-project",
     "reinstall": "rm -rf node_modules/ && rm yarn.lock && yarn",
     "postinstall": "cd ios && pod install"
   },
@@ -28,7 +26,7 @@
     "react-native-gesture-handler": "^2.12.0",
     "react-native-image-picker": "^7.0.0",
     "react-native-safe-area-context": "^4.6.0",
-    "react-native-scanbot-sdk": "^4.16.0-beta.2",
+    "react-native-scanbot-sdk": "^4.16.0-beta.3",
     "react-native-screens": "^3.24.0"
   },
   "devDependencies": {
