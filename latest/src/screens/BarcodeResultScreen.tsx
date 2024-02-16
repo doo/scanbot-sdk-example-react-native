@@ -99,7 +99,7 @@ const transformFormattedResult = (
 };
 
 const transformAAMVA = (document: AAMVADocumentFormat): KeyValueField[] => {
-  let fields = [
+  return [
     getTextField('AAMVA Version Number', document.aamvaVersionNumber),
     getTextField('File Type', document.fileType),
     getTextField('Header Raw String', document.headerRawString),
@@ -113,7 +113,6 @@ const transformAAMVA = (document: AAMVADocumentFormat): KeyValueField[] => {
       transformAAMVASubfile(subfile, index),
     ),
   ];
-  return fields;
 };
 
 const transformAAMVASubfile = (
@@ -136,16 +135,19 @@ const transformBoardingPass = (
     getTextField('Electronic Ticket', document.electronicTicket ? 'YES' : 'NO'),
     getTextField('Security Data', document.securityData),
     getTextField('Number of legs', document.numberOfLegs.toString()),
-    ...document.legs.flatMap((leg, index) =>
-      leg.fields.map(legField =>
-        getTextField(`Leg ${index + 1} ${legField.type}`, legField.value),
-      ),
-    ),
-  ];
+  ].concat(
+    document.legs !== undefined
+      ? document.legs.flatMap((leg, index) =>
+          leg.fields.map(legField =>
+            getTextField(`Leg ${index + 1} ${legField.type}`, legField.value),
+          ),
+        )
+      : [],
+  );
 };
 
 const transformDeMedicalPlan = (document: MedicalPlanDocumentFormat) => {
-  let fields = [
+  return [
     getTextField('GUID', document.GUID),
     getTextField('Current Page', document.currentPage.toString()),
     getTextField(
@@ -163,7 +165,6 @@ const transformDeMedicalPlan = (document: MedicalPlanDocumentFormat) => {
     getTextField('Language Country Code', document.languageCountryCode),
     getTextField('Document Version Number', document.documentVersionNumber),
   ];
-  return fields;
 };
 
 const transformDeMedicalPlanSubheadings = (
@@ -216,7 +217,7 @@ const transformGS1 = (document: GS1DocumentFormat) => {
 
 const transformIdCard = (document: IDCardPDF417DocumentFormat) => {
   return document.fields.flatMap(field => [
-    getTextField(field.type, field.value),
+    getTextField(field.type ?? 'Unknown ID Card Field type', field.value),
   ]);
 };
 
@@ -224,7 +225,10 @@ const transformMedicalCertificate = (
   document: MedicalCertificateDocumentFormat,
 ) => {
   return document.fields.flatMap(field => [
-    getTextField(field.type, field.value),
+    getTextField(
+      field.type ?? 'Unknown Medical certificate Field type',
+      field.value,
+    ),
   ]);
 };
 
