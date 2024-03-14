@@ -200,19 +200,14 @@ const transformDeMedicalPlanSubheadings = (
 };
 
 const transformGS1 = (document: GS1DocumentFormat) => {
-  return document.fields.flatMap((field, index) => [
-    getTextField(`Field #${index + 1} - Data Title`, field.dataTitle),
-    getTextField(`Field #${index + 1} - Description`, field.fieldDescription),
-    getTextField(`Field #${index + 1} - Raw Value`, field.rawValue),
-    getTextField(
-      `Field #${index + 1} - Standard`,
-      field.standard ? 'YES' : 'NO',
-    ),
-    getTextField(
-      `Field #${index + 1} - Validation Status`,
-      field.validationStatus,
-    ),
-  ]);
+  return document.fields.flatMap(field => ({
+    key: `Field ${field.dataTitle}`,
+    value:
+      `Description: ${field.fieldDescription}\n` +
+      `Raw Value: ${field.rawValue}\n` +
+      `Standard: ${field.standard ? 'YES' : 'NO'}\n` +
+      `Validation Status: ${field.validationStatus}`,
+  }));
 };
 
 const transformIdCard = (document: IDCardPDF417DocumentFormat) => {
