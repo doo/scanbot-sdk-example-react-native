@@ -1,7 +1,7 @@
 export const COLORS = {
   SCANBOT_RED: '#c8193c',
-  NEAR_WHITE: 'rgb(250, 250, 250)',
-  LIGHT_GRAY: 'rgb(245, 245, 245)',
+  NEAR_WHITE: '#fafafa',
+  LIGHT_GRAY: '#f5f5f5',
 };
 
 export const ScanbotTheme = {
