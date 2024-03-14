@@ -1,16 +1,16 @@
 import {useCallback, useContext} from 'react';
-import ScanbotSDK, {
-  BarcodeScannerConfiguration,
-} from 'react-native-scanbot-sdk';
-import {logBarcodeDocument} from '../../utils/BarcodeUtils';
 import {errorMessageAlert} from '../../utils/Alerts';
+import ScanbotSDK, {
+  BatchBarcodeScannerConfiguration,
+} from 'react-native-scanbot-sdk';
 import {BarcodeFormatsContext} from '../../context/useBarcodeFormats';
+import {logBarcodeDocument} from '../../utils/BarcodeUtils';
 import {BarcodeDocumentFormatContext} from '../../context/useBarcodeDocumentFormats';
-import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
 import {useNavigation} from '@react-navigation/native';
+import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
 import {checkLicense} from '../../utils/SDKUtils';
 
-export function useScanBarcodes() {
+export function useBatchBarcodesScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
   const {acceptedBarcodeFormats} = useContext(BarcodeFormatsContext);
   const {acceptedBarcodeDocumentFormats} = useContext(
@@ -27,17 +27,16 @@ export function useScanBarcodes() {
         return;
       }
       /**
-       * Create the barcode scanner configuration object and
-       * start the barcode scanner with the configuration
+       * Create the batch barcode scanner configuration object and
+       * start the batch barcode scanner with the configuration
        */
-      const config: BarcodeScannerConfiguration = {
+      const config: BatchBarcodeScannerConfiguration = {
         acceptedDocumentFormats: acceptedBarcodeDocumentFormats,
         barcodeFormats: acceptedBarcodeFormats,
-        finderAspectRatio: {width: 1, height: 1},
+        finderAspectRatio: {width: 2, height: 1},
         useButtonsAllCaps: false,
-        barcodeImageGenerationType: 'NONE',
       };
-      const result = await ScanbotSDK.UI.startBarcodeScanner(config);
+      const result = await ScanbotSDK.UI.startBatchBarcodeScanner(config);
       /**
        * Handle the result if result status is OK
        */

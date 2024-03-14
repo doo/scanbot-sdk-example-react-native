@@ -6,14 +6,14 @@ import {useDetectDocumentFromPage} from './examples/useDetectDocumentFromPage';
 import {useDetectDocumentFromImage} from './examples/useDetectDocumentFromImage';
 import {useExtractPagesFromPDF} from './examples/useExtractPagesFromPDF';
 import {useExtractImagesFromPDF} from './examples/useExtractImagesFromPDF';
-import {useScanBarcodes} from './examples/useScanBarcodes';
-import {useScanBatchBarcodes} from './examples/useScanBatchBarcodes';
+import {useBarcodeScanner} from './examples/useBarcodeScanner';
+import {useBatchBarcodesScanner} from './examples/useBatchBarcodesScanner';
 import {useDetectBarcodesOnStillImage} from './examples/useDetectBarcodesOnStillImage';
 import {useDetectBarcodesOnStillImages} from './examples/useDetectBarcodesOnStillImages';
 import {useMRZScanner} from './examples/useMRZScanner';
-import {useScanMedicalCertificate} from './examples/useScanMedicalCertificate';
-import {useScanGenericDocument} from './examples/useScanGenericDocument';
-import {useScanEHIC} from './examples/useScanEHIC';
+import {useMedicalCertificateScanner} from './examples/useMedicalCertificateScanner';
+import {useGenericDocumentScanner} from './examples/useGenericDocumentScanner';
+import {useEHICScanner} from './examples/useEHICScanner';
 import {useLicenseInfo} from './examples/useLicenseInfo';
 import {useOCRConfigs} from './examples/useOCRConfigs';
 import {useLicensePlateScanner} from './examples/useLicensePlateScanner';
@@ -36,8 +36,8 @@ export function useOnExamplePress() {
     [FeatureId.ViewPages]: function () {
       navigation.navigate(Screens.IMAGE_RESULTS);
     },
-    [FeatureId.ScanBarcodes]: useScanBarcodes(),
-    [FeatureId.ScanBatchBarcodes]: useScanBatchBarcodes(),
+    [FeatureId.ScanBarcodes]: useBarcodeScanner(),
+    [FeatureId.ScanBatchBarcodes]: useBatchBarcodesScanner(),
     [FeatureId.DetectBarcodesOnStillImage]: useDetectBarcodesOnStillImage(),
     [FeatureId.DetectBarcodesOnStillImages]: useDetectBarcodesOnStillImages(),
     [FeatureId.BarcodeFormatsFilter]: useLicenseValidityCheckWrapper(
@@ -51,9 +51,9 @@ export function useOnExamplePress() {
       },
     ),
     [FeatureId.ScanMRZ]: useMRZScanner(),
-    [FeatureId.ScanMedicalCertificate]: useScanMedicalCertificate(),
-    [FeatureId.ScanGenericDocument]: useScanGenericDocument(),
-    [FeatureId.ScanEHIC]: useScanEHIC(),
+    [FeatureId.ScanMedicalCertificate]: useMedicalCertificateScanner(),
+    [FeatureId.ScanGenericDocument]: useGenericDocumentScanner(),
+    [FeatureId.ScanEHIC]: useEHICScanner(),
     [FeatureId.LicenseInfo]: useLicenseInfo(),
     [FeatureId.OcrConfigs]: useOCRConfigs(),
     [FeatureId.LicensePlateScannerML]: useLicensePlateScanner('ML_BASED'),
