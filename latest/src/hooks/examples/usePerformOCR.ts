@@ -28,7 +28,7 @@ export function usePerformOCR() {
         languages: ['en', 'de'],
         options: {
           outputFormat: 'PDF_FILE',
-          engineMode: 'TESSERACT',
+          engineMode: 'SCANBOT_OCR',
         },
       });
       /**
