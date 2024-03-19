@@ -7,7 +7,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useCallback} from 'react';
 import {checkLicense} from '../../utils/SDKUtils';
 
-export function useScanGenericDocument() {
+export function useGenericDocumentScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
 
   return useCallback(async () => {

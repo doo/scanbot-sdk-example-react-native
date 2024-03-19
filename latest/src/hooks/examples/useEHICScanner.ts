@@ -9,7 +9,7 @@ import {
 import {useCallback} from 'react';
 import {checkLicense} from '../../utils/SDKUtils';
 
-export function useScanEHIC() {
+export function useEHICScanner() {
   return useCallback(async () => {
     try {
       /**

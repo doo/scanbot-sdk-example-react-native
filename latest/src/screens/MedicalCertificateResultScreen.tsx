@@ -70,7 +70,12 @@ function transformPatientData(certificate: MedicalCertificateScannerResult) {
     )
     .map(mapKey => ({
       key: displayMap[mapKey as PatientDataKeys],
-      value: certificate.patientData[mapKey as PatientDataKeys] as string,
+      value: `${
+        certificate.patientData[mapKey as PatientDataKeys]!.value
+      } (confidence: ${Math.round(
+        certificate.patientData[mapKey as PatientDataKeys]!
+          .recognitionConfidence * 100,
+      )} %)`,
     }));
 }
 

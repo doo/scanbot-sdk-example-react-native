@@ -8,7 +8,7 @@ import {COLORS} from '../../theme/Theme';
 import {useCallback} from 'react';
 import {checkLicense} from '../../utils/SDKUtils';
 
-export function useScanMedicalCertificate() {
+export function useMedicalCertificateScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
 
   return useCallback(async () => {
