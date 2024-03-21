@@ -5952,10 +5952,10 @@ react-native-safe-area-context@^4.6.0:
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-4.8.2.tgz#e6b3d8acf3c6afcb4b5db03a97f9c37df7668f65"
   integrity sha512-ffUOv8BJQ6RqO3nLml5gxJ6ab3EestPiyWekxdzO/1MQ7NF8fW1Mzh1C5QE9yq573Xefnc7FuzGXjtesZGv7cQ==
 
-react-native-scanbot-sdk@4.16.0-beta.5:
-  version "4.16.0-beta.5"
-  resolved "https://registry.yarnpkg.com/react-native-scanbot-sdk/-/react-native-scanbot-sdk-4.16.0-beta.5.tgz#15dc0b1fafdfcb1e113afe3791256de73091879d"
-  integrity sha512-wYuMa54ZVEYwyPiijxPEd1qhEmMErP+RDdlfQ4z8SjxvoGY4VaFUvwvl866KdwVqVaf2jQTX7z1+OtqqbZ9Xlw==
+react-native-scanbot-sdk@^4.16.0-beta.6:
+  version "4.16.0-beta.6"
+  resolved "https://registry.yarnpkg.com/react-native-scanbot-sdk/-/react-native-scanbot-sdk-4.16.0-beta.6.tgz#e544d8fa46daaaf1f9cc34992e97d57a4485185e"
+  integrity sha512-RkxPS8TEiNnS0hvJEEMB31gZnpePEwgABm1KcTp3B/hRzBRXRCUfnygnZMayXxET7HAFL41T1fbxBeWeVu2KxA==
 
 react-native-screens@^3.24.0:
   version "3.29.0"
