@@ -94,7 +94,7 @@ export const SDKInitializationOptions: ScanbotSdkConfiguration = {
   loggingEnabled: true, // Logging enabled. Consider switching logging OFF in production builds for security and performance reasons!
   storageImageFormat: IMAGE_FILE_FORMAT, // Format of stored images
   storageImageQuality: 80, // Quality of stored images
-  storageBaseDirectory: storageBaseDirectory, // Custom storage path
+  //storageBaseDirectory: storageBaseDirectory, // Uncomment this line to use custom storage path
   documentDetectorMode: 'ML_BASED', // The engine used to detect documents
 } as const;
 
