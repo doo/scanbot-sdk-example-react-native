@@ -5,7 +5,7 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
-import ScanbotSDK, {Page} from 'react-native-scanbot-sdk/src';
+import ScanbotSDK, {Page} from 'react-native-scanbot-sdk';
 import {ScrollView} from 'react-native-gesture-handler';
 import {PageContext} from '../context/usePages';
 import {PrimaryRouteNavigationProp, Screens} from '../utils/Navigation';

@@ -7,7 +7,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import ScanbotSDK from 'react-native-scanbot-sdk/src';
+import ScanbotSDK from 'react-native-scanbot-sdk';
 import {FILE_ENCRYPTION_ENABLED, IMAGE_FILE_FORMAT} from '../utils/SDKUtils';
 
 type PreviewImageProps = {

@@ -2,14 +2,12 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {
   BarcodeScannerResult,
   CheckRecognizerResult,
-  MrzScannerResult,
-  Page,
-} from 'react-native-scanbot-sdk/src';
-import {RouteProp} from '@react-navigation/native';
-import {
   GenericDocumentRecognizerResult,
   MedicalCertificateScannerResult,
+  MrzScannerResult,
+  Page,
 } from 'react-native-scanbot-sdk';
+import {RouteProp} from '@react-navigation/native';
 
 export enum Screens {
   HOME = 'home',

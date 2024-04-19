@@ -1,7 +1,6 @@
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import ScanbotSDK, {VinScannerConfiguration} from 'react-native-scanbot-sdk';
 import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
 import {COLORS} from '../../theme/Theme';
-import {VinScannerConfiguration} from 'react-native-scanbot-sdk/src/configurations';
 import {useCallback} from 'react';
 import {checkLicense} from '../../utils/SDKUtils';
 

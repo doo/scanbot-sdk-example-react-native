@@ -1,6 +1,6 @@
 import React, {useCallback, useContext, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import ScanbotSDK from 'react-native-scanbot-sdk/src';
+import ScanbotSDK, {ImageFilterType} from 'react-native-scanbot-sdk';
 import {BottomActionBar} from '../components/BottomActionBar';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {
@@ -9,7 +9,6 @@ import {
 } from '../utils/Navigation';
 import {PageContext} from '../context/usePages';
 import {ImageFilterModal} from '../components/ImageFilterModal';
-import {ImageFilterType} from 'react-native-scanbot-sdk';
 import {PreviewImage} from '../components/PreviewImage';
 import {deleteAllConfirmationAlert} from '../utils/Alerts';
 import {useCroppingScreen} from '../hooks/examples/useCroppingScreen';
