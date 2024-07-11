@@ -36,15 +36,6 @@ and [CocoaPods](https://cocoapods.org/) installed.
 
 Install node modules:
 
-When using ReactNative version 0.64.4:
-
-```
-cd 0.64.X
-npm install
-```
-
-When using ReactNative version 0.72.4:
-
 ```
 cd latest
 yarn install
