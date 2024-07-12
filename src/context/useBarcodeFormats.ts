@@ -14,8 +14,6 @@ const initialBarcodeFormats: Record<BarcodeFormat, boolean> = {
   ITF: true,
   PDF_417: true,
   QR_CODE: true,
-  RSS_14: true,
-  RSS_EXPANDED: true,
   UPC_A: true,
   UPC_E: true,
   MSI_PLESSEY: true,
@@ -29,6 +27,9 @@ const initialBarcodeFormats: Record<BarcodeFormat, boolean> = {
   AUSTRALIA_POST: true,
   DATABAR_LIMITED: true,
   GS1_COMPOSITE: true,
+  MICRO_PDF_417: true,
+  DATABAR: true,
+  DATABAR_EXPANDED: true,
 };
 
 interface BarcodeFormatsContextValue {
