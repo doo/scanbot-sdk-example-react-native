@@ -5,8 +5,8 @@ import {GenericDocumentUtils} from '../utils/GenericDocumentUtils';
 import {ResultContainer} from '../components/ResultContainer';
 import {ResultHeader} from '../components/ResultHeader';
 import {ResultFieldRow} from '../components/ResultFieldRow';
-import {StyleSheet, View} from 'react-native';
-import {PreviewImage} from '../components/PreviewImage';
+import {View} from 'react-native';
+import {ResultImage} from '../components/ResultImage';
 
 export function CheckRecognizerResultScreen() {
   const {params: checkRecognizerResult} =
@@ -34,10 +34,7 @@ export function CheckRecognizerResultScreen() {
 
   return (
     <ResultContainer>
-      <PreviewImage
-        imageUri={checkRecognizerResult.imageFileUri}
-        style={[styles.image]}
-      />
+      <ResultImage imageUri={checkRecognizerResult.imageFileUri} />
       <ResultHeader title={'Check recognition'} />
       <ResultFieldRow
         title={'Check status'}
@@ -51,13 +48,3 @@ export function CheckRecognizerResultScreen() {
     </ResultContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  image: {
-    flex: 1,
-    height: 150,
-    resizeMode: 'contain',
-    backgroundColor: '#222222',
-    margin: 16,
-  },
-});

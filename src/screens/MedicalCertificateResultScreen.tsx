@@ -1,40 +1,40 @@
 import React from 'react';
 import {MedicalCertificateScannerResult} from 'react-native-scanbot-sdk';
-import {ScanResultSectionList} from '../components/ScanResultSectionList';
 import {useRoute} from '@react-navigation/native';
 import {MedicalCertificateResultScreenRouteProp} from '../utils/Navigation';
+import {ResultContainer} from '../components/ResultContainer';
+import {ResultHeader} from '../components/ResultHeader';
+import {ResultFieldRow} from '../components/ResultFieldRow';
+import {ResultImage} from '../components/ResultImage';
+import {
+  MedicalCertificateCheckboxesInfo,
+  MedicalCertificateCheckboxField,
+  MedicalCertificateDateField,
+  MedicalCertificateDatesInfo,
+  MedicalCertificatePatientDataInfo,
+  MedicalCertificatePatientDataInfoField,
+} from 'react-native-scanbot-sdk/src/types';
+import {View} from 'react-native';
 
 export function MedicalCertificateResultScreen() {
   const {params: medicalCertificateResult} =
     useRoute<MedicalCertificateResultScreenRouteProp>();
 
   return (
-    <ScanResultSectionList
-      sectionData={[
-        {
-          title: 'Medical Certificate Result',
-          data: [
-            {
-              key: 'Snapped Image',
-              image: medicalCertificateResult.imageFileUri,
-            },
-            {key: 'Form Type', value: medicalCertificateResult.formType},
-          ],
-        },
-        {
-          title: 'Patient Data',
-          data: transformPatientData(medicalCertificateResult),
-        },
-        {
-          title: 'Dates',
-          data: transformDatesData(medicalCertificateResult),
-        },
-        {
-          title: 'Checkboxes',
-          data: getCheckboxesData(medicalCertificateResult),
-        },
-      ]}
-    />
+    <ResultContainer>
+      <ResultImage imageUri={medicalCertificateResult.imageFileUri} />
+      <ResultHeader title={'Medical Certificate Result'} />
+      <ResultFieldRow
+        title={'Form Type'}
+        value={medicalCertificateResult.formType}
+      />
+      <ResultHeader title={'Patient Data'} />
+      <PatientDataFields patientData={medicalCertificateResult.patientData} />
+      <ResultHeader title={'Dates'} />
+      <DatesData datesData={medicalCertificateResult.dates} />
+      <ResultHeader title={'Checkboxes'} />
+      <CheckboxesData checkboxes={medicalCertificateResult.checkboxes} />
+    </ResultContainer>
   );
 }
 
@@ -42,9 +42,13 @@ type PatientDataKeys = keyof MedicalCertificateScannerResult['patientData'];
 type DatesKeys = keyof MedicalCertificateScannerResult['dates'];
 type CheckBoxKeys = keyof MedicalCertificateScannerResult['checkboxes'];
 
-function transformPatientData(certificate: MedicalCertificateScannerResult) {
-  if (!certificate.patientData) {
-    return [];
+function PatientDataFields({
+  patientData,
+}: {
+  patientData: MedicalCertificatePatientDataInfo;
+}) {
+  if (!patientData) {
+    return null;
   }
 
   const displayMap: Record<PatientDataKeys, string> = {
@@ -62,29 +66,23 @@ function transformPatientData(certificate: MedicalCertificateScannerResult) {
     unknown: 'Unknown',
   };
 
-  return Object.keys(displayMap)
-    .filter(
-      mapKey =>
-        mapKey in certificate.patientData &&
-        certificate.patientData[mapKey as PatientDataKeys] != null,
-    )
-    .map(mapKey => ({
-      key: displayMap[mapKey as PatientDataKeys],
-      value: `${
-        certificate.patientData[mapKey as PatientDataKeys]!.value
-      } (confidence: ${Math.round(
-        certificate.patientData[mapKey as PatientDataKeys]!
-          .recognitionConfidence * 100,
-      )} %)`,
-    }));
+  return (
+    <View>
+      {Object.entries(patientData).map(([key, data], index) => (
+        <ResultFieldRow
+          title={displayMap[key as PatientDataKeys] ?? key}
+          value={(data as MedicalCertificatePatientDataInfoField).value}
+          key={key + index}
+        />
+      ))}
+    </View>
+  );
 }
 
-const transformDatesData = (certificate: MedicalCertificateScannerResult) => {
-  if (!certificate.dates) {
-    return [];
+const DatesData = ({datesData}: {datesData: MedicalCertificateDatesInfo}) => {
+  if (!datesData) {
+    return null;
   }
-
-  const dates = certificate.dates;
 
   const displayMap = {
     incapableOfWorkSince: 'Incapable of work since',
@@ -97,25 +95,28 @@ const transformDatesData = (certificate: MedicalCertificateScannerResult) => {
     unknown: 'Unknown',
   };
 
-  return Object.keys(dates).map(key => {
-    const returnKey = key in displayMap ? displayMap[key as DatesKeys] : key;
-    let confidence = dates[key as DatesKeys]?.recognitionConfidence ?? 0;
-    confidence = Math.round(confidence * 100);
-    const returnValue = certificate.dates[key as DatesKeys]?.dateString ?? '';
-
-    return {
-      key: returnKey,
-      value: `${returnValue} (confidence: ${confidence} %)`,
-    };
-  });
+  return (
+    <View>
+      {Object.entries(datesData).map(([key, data], index) => (
+        <ResultFieldRow
+          title={displayMap[key as DatesKeys] ?? key}
+          value={(data as MedicalCertificateDateField).dateString}
+          key={key + index}
+        />
+      ))}
+    </View>
+  );
 };
 
-const getCheckboxesData = (certificate: MedicalCertificateScannerResult) => {
-  const checkboxes = certificate.checkboxes;
+const CheckboxesData = ({
+  checkboxes,
+}: {
+  checkboxes: MedicalCertificateCheckboxesInfo;
+}) => {
   if (!checkboxes) {
-    return [];
+    return null;
   }
-  const displayNames: Record<CheckBoxKeys, string> = {
+  const displayMap: Record<CheckBoxKeys, string> = {
     initialCertificate: 'Initial Certificate',
     renewedCertificate: 'Renewed Certificate',
     workAccident: 'Work Accident',
@@ -136,15 +137,15 @@ const getCheckboxesData = (certificate: MedicalCertificateScannerResult) => {
     unknown: 'Unknown',
   };
 
-  return Object.keys(checkboxes).flatMap(key => {
-    const value = checkboxes[key as CheckBoxKeys]?.isChecked;
-    let confidence = checkboxes[key as CheckBoxKeys]?.confidence ?? 0;
-    confidence = Math.round(confidence * 100);
-    const displayName =
-      key in displayNames ? displayNames[key as CheckBoxKeys] : key;
-    return {
-      key: displayName,
-      value: `${value ? 'YES' : 'NO'} (confidence: ${confidence}%)`,
-    };
-  });
+  return (
+    <View>
+      {Object.entries(checkboxes).map(([key, data], index) => (
+        <ResultFieldRow
+          title={displayMap[key as CheckBoxKeys] ?? key}
+          value={(data as MedicalCertificateCheckboxField).isChecked}
+          key={key + index}
+        />
+      ))}
+    </View>
+  );
 };

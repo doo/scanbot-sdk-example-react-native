@@ -7,7 +7,7 @@ export function ResultFieldRow(props: {
   value: Field | string | number | boolean | undefined;
   style?: StyleProp<ViewStyle>;
 }) {
-  if (!props.value) {
+  if (props.value === null || props.value === undefined) {
     return null;
   }
 
