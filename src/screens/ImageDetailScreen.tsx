@@ -11,8 +11,8 @@ import {PageContext} from '../context/usePages';
 import {ImageFilterModal} from '../components/ImageFilterModal';
 import {PreviewImage} from '../components/PreviewImage';
 import {deleteAllConfirmationAlert} from '../utils/Alerts';
-import {useCroppingScreen} from '../hooks/examples/useCroppingScreen';
-import {useApplyImageFilterOnPage} from '../hooks/examples/useApplyImageFilterOnPage';
+import {useCroppingScreen} from '../hooks/RTUUI/useCroppingScreen';
+import {useApplyImageFilterOnPage} from '../hooks/Operations/useApplyImageFilterOnPage';
 
 export function ImageDetailScreen() {
   const route = useRoute<ImageDetailScreenRouteProp>();

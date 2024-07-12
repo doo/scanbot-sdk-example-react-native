@@ -19,36 +19,36 @@ import ScanbotSDK, {ScanbotSdkConfiguration} from 'react-native-scanbot-sdk';
 import {DocumentDirectoryPath, ExternalDirectoryPath} from 'react-native-fs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {ImageDetailScreen} from './screens/ImageDetailScreen';
-import {MedicalCertificateResultScreen} from './screens/MedicalCertificateResultScreen';
-import {GenericDocumentResultScreen} from './screens/GenericDocumentResultScreen';
-import {CheckRecognizerResultScreen} from './screens/CheckRecognizerResultScreen';
-import {BarcodeFormatsScreen} from './screens/BarcodeFormatsScreen';
-import {BarcodeDocumentFormatsScreen} from './screens/BarcodeDocumentFormatsScreen';
-import {BarcodeCameraViewScreen} from './screens/BarcodeCameraViewScreen';
-import {errorMessageAlert} from './utils/Alerts';
+import {ImageDetailScreen} from './src/screens/ImageDetailScreen';
+import {MedicalCertificateResultScreen} from './src/screens/MedicalCertificateResultScreen';
+import {GenericDocumentResultScreen} from './src/screens/GenericDocumentResultScreen';
+import {CheckRecognizerResultScreen} from './src/screens/CheckRecognizerResultScreen';
+import {BarcodeFormatsScreen} from './src/screens/BarcodeFormatsScreen';
+import {BarcodeDocumentFormatsScreen} from './src/screens/BarcodeDocumentFormatsScreen';
+import {BarcodeCameraViewScreen} from './src/screens/BarcodeCameraViewScreen';
+import {errorMessageAlert} from './src/utils/Alerts';
 import {
   PrimaryRoutesParamList,
   Screens,
   ScreenTitles,
-} from './utils/Navigation';
-import {PageContext, usePages} from './context/usePages';
+} from './src/utils/Navigation';
+import {PageContext, usePages} from './src/context/usePages';
 import {
   BarcodeDocumentFormatContext,
   useBarcodeDocumentFormats,
-} from './context/useBarcodeDocumentFormats';
+} from './src/context/useBarcodeDocumentFormats';
 import {
   BarcodeFormatsContext,
   useBarcodeFormats,
-} from './context/useBarcodeFormats';
-import {COLORS, ScanbotTheme} from './theme/Theme';
-import {ActivityIndicatorContext, useLoading} from './context/useLoading';
-import {HomeScreen} from './screens/HomeScreen';
-import {ImageResultScreen} from './screens/ImageResultScreen';
-import {FILE_ENCRYPTION_ENABLED, IMAGE_FILE_FORMAT} from './utils/SDKUtils';
-import {LoadingIndicator} from './components/LoadingIndicator';
-import {MrzResultScreen} from './screens/MrzResultScreen';
-import {BarcodeResultScreen} from './screens/BarcodeResultScreen';
+} from './src/context/useBarcodeFormats';
+import {COLORS, ScanbotTheme} from './src/theme/Theme';
+import {ActivityIndicatorContext, useLoading} from './src/context/useLoading';
+import {HomeScreen} from './src/screens/HomeScreen';
+import {ImageResultScreen} from './src/screens/ImageResultScreen';
+import {FILE_ENCRYPTION_ENABLED, IMAGE_FILE_FORMAT} from './src/utils/SDKUtils';
+import {LoadingIndicator} from './src/components/LoadingIndicator';
+import {MrzResultScreen} from './src/screens/MrzResultScreen';
+import {BarcodeResultScreen} from './src/screens/BarcodeResultScreen';
 
 const Stack = createStackNavigator<PrimaryRoutesParamList>();
 

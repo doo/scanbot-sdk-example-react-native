@@ -3,15 +3,15 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "lint": "eslint .",
+    "android": "react-native run-android --terminal ./",
+    "ios": "react-native run-ios --device 'iPhone 14 Pro (16.2)'",
+    "lint": " eslint --fix --ext .ts,.tsx .",
     "start": "react-native start --reset-cache",
     "test": "jest",
     "clean": "npx react-native-clean-project",
-    "reinstall": "rm -rf node_modules/ && rm yarn.lock && yarn",
-    "postinstall": "cd ios && pod install"
+    "reinstall": "rm -rf node_modules/ && yarn"
   },
+  "packageManager": "yarn@3.6.1",
   "engines": {
     "node": ">=16"
   },
@@ -26,7 +26,7 @@
     "react-native-gesture-handler": "^2.12.0",
     "react-native-image-picker": "^7.0.0",
     "react-native-safe-area-context": "^4.6.0",
-    "react-native-scanbot-sdk": "4.16.0",
+    "react-native-scanbot-sdk": "file:../scanbot-sdk-react-native",
     "react-native-screens": "^3.24.0"
   },
   "devDependencies": {

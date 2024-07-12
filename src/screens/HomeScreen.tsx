@@ -21,7 +21,7 @@ import {
   HomeScreenSectionItem,
 } from '../components/HomeScreenSectionComponents';
 import {PageContext} from '../context/usePages';
-import {useImportImageAndApplyFilter} from '../hooks/examples/useImportImageAndApplyFilter';
+import {useImportImageAndApplyFilter} from '../hooks/Operations/useImportImageAndApplyFilter';
 import {ImageFilterModal} from '../components/ImageFilterModal';
 import {selectImagesFromLibrary} from '../utils/ImageUtils';
 import {ImageFilterType} from 'react-native-scanbot-sdk';

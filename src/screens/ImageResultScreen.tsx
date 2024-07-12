@@ -10,7 +10,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {PageContext} from '../context/usePages';
 import {PrimaryRouteNavigationProp, Screens} from '../utils/Navigation';
 import {BottomActionBar} from '../components/BottomActionBar';
-import {useDocumentScanner} from '../hooks/examples/useDocumentScanner';
+import {useDocumentScanner} from '../hooks/RTUUI/useDocumentScanner';
 import {
   deleteAllConfirmationAlert,
   errorMessageAlert,
