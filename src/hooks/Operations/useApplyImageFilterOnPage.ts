@@ -1,10 +1,10 @@
 import {useCallback} from 'react';
-import ScanbotSDK, {ImageFilterType, Page} from 'react-native-scanbot-sdk';
-import {checkLicense} from '../../utils/SDKUtils';
-import {errorMessageAlert} from '../../utils/Alerts';
+import {checkLicense, errorMessageAlert} from '@utils';
+
+import ScanbotSDK, {Page, ParametricFilter} from 'react-native-scanbot-sdk';
 
 export function useApplyImageFilterOnPage() {
-  return useCallback(async (page: Page, filter: ImageFilterType) => {
+  return useCallback(async (page: Page, filter: ParametricFilter) => {
     try {
       /**
        * Check license status and return early
@@ -14,7 +14,7 @@ export function useApplyImageFilterOnPage() {
         return;
       }
 
-      const updated = await ScanbotSDK.applyImageFilterOnPage(page, filter);
+      const updated = await ScanbotSDK.applyImageFiltersOnPage(page, [filter]);
       /**
        * Handle the result
        */

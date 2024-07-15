@@ -23,7 +23,7 @@ import {
 } from '@components';
 import {PageContext} from '@context';
 import {selectImagesFromLibrary} from '@utils';
-import {ImageFilterType} from 'react-native-scanbot-sdk';
+import {ParametricFilter} from 'react-native-scanbot-sdk';
 
 export function HomeScreen() {
   const {loadPages} = useContext(PageContext);
@@ -33,7 +33,7 @@ export function HomeScreen() {
   const imageRef = useRef<string>();
 
   const onFilterSelect = useCallback(
-    async (filter: ImageFilterType) => {
+    async (filter: ParametricFilter) => {
       await applyImageOnFilter(filter, imageRef.current!!);
     },
     [applyImageOnFilter],

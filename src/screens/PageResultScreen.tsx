@@ -5,27 +5,22 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
-import ScanbotSDK, {Page} from 'react-native-scanbot-sdk';
+import {Page} from 'react-native-scanbot-sdk';
 import {ScrollView} from 'react-native-gesture-handler';
 import {PageContext} from '@context';
-import {
-  deleteAllConfirmationAlert,
-  errorMessageAlert,
-  infoMessageAlert,
-  PrimaryRouteNavigationProp,
-  Screens,
-} from '@utils';
+import {infoMessageAlert, PrimaryRouteNavigationProp, Screens} from '@utils';
 import {BottomActionBar, PreviewImage, SavePagesModal} from '@components';
-import {useDocumentScanner} from '@hooks';
+import {useCleanup, useDocumentScanner} from '@hooks';
 import {useNavigation} from '@react-navigation/native';
 import {COLORS} from '@theme';
 
 const GALLERY_CELL_PADDING = 20;
 
-export function ImageResultScreen() {
+export function PageResultScreen() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
-  const {pageList, deleteAllPages, isPageListEmpty} = useContext(PageContext);
+  const {pageList, isPageListEmpty} = useContext(PageContext);
   const [modalVisible, setModalVisible] = useState(false);
+  const onDelete = useCleanup();
   const documentScanner = useDocumentScanner();
   const dimensions = useWindowDimensions();
 
@@ -45,20 +40,6 @@ export function ImageResultScreen() {
       setModalVisible(true);
     }
   }, [isPageListEmpty]);
-
-  const deletePages = useCallback(async () => {
-    try {
-      await ScanbotSDK.cleanup();
-      deleteAllPages();
-      infoMessageAlert('All pages have been deleted successfully!');
-    } catch (e) {
-      errorMessageAlert('ERROR: ' + JSON.stringify(e));
-    }
-  }, [deleteAllPages]);
-
-  const onDelete = useCallback(() => {
-    deleteAllConfirmationAlert(deletePages);
-  }, [deletePages]);
 
   const onDismiss = useCallback(() => {
     setModalVisible(false);

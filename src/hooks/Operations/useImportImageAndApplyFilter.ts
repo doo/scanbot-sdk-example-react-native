@@ -1,11 +1,14 @@
-import {PageContext} from '../../context/usePages';
+import {ActivityIndicatorContext, PageContext} from '@context';
 import {useNavigation} from '@react-navigation/native';
-import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
+import {
+  checkLicense,
+  errorMessageAlert,
+  PrimaryRouteNavigationProp,
+  Screens,
+} from '@utils';
 import {useCallback, useContext} from 'react';
-import {ActivityIndicatorContext} from '../../context/useLoading';
-import ScanbotSDK, {ImageFilterType} from 'react-native-scanbot-sdk';
-import {errorMessageAlert} from '../../utils/Alerts';
-import {checkLicense} from '../../utils/SDKUtils';
+
+import ScanbotSDK, {ParametricFilter} from 'react-native-scanbot-sdk';
 
 export function useImportImageAndApplyFilter() {
   const {addPage} = useContext(PageContext);
@@ -13,7 +16,7 @@ export function useImportImageAndApplyFilter() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
 
   return useCallback(
-    async (filter: ImageFilterType, selectedImage: string) => {
+    async (filter: ParametricFilter, selectedImage: string) => {
       try {
         /**
          * Check license status and return early
@@ -30,7 +33,9 @@ export function useImportImageAndApplyFilter() {
          * Navigating to Screens.IMAGE_RESULTS
          */
         setLoading(true);
-        const result = await ScanbotSDK.applyImageFilter(selectedImage, filter);
+        const result = await ScanbotSDK.applyImageFilters(selectedImage, [
+          filter,
+        ]);
         if (result.imageFileUri) {
           const page = await ScanbotSDK.createPage(result.imageFileUri);
           const documentPage = await ScanbotSDK.detectDocumentOnPage(page);

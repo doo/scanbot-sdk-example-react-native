@@ -9,47 +9,39 @@ import {
   ViewStyle,
 } from 'react-native';
 import {COLORS} from '@theme';
-import {ImageFilterType} from 'react-native-scanbot-sdk';
+import {
+  BrightnessFilter,
+  ColorDocumentFilter,
+  ContrastFilter,
+  CustomBinarizationFilter,
+  GrayscaleFilter,
+  LegacyFilter,
+  ParametricFilter,
+  ScanbotBinarizationFilter,
+  WhiteBlackPointFilter,
+} from 'react-native-scanbot-sdk';
 
-const IMAGE_FILTERS: ImageFilterType[] = [
-  'BACKGROUND_CLEAN',
-  'BINARIZED',
-  'BLACK_AND_WHITE',
-  'COLOR',
-  'COLOR_DOCUMENT',
-  'DEEP_BINARIZATION',
-  'EDGE_HIGHLIGHT',
-  'GRAYSCALE',
-  'LOW_LIGHT_BINARIZATION',
-  'LOW_LIGHT_BINARIZATION_2',
-  'NONE',
-  'OTSU_BINARIZATION',
-  'PURE_BINARIZED',
-  'PURE_GRAY',
+const IMAGE_FILTERS: ParametricFilter[] = [
+  new BrightnessFilter(),
+  new ColorDocumentFilter(),
+  new ContrastFilter(),
+  new CustomBinarizationFilter(),
+  new GrayscaleFilter(),
+  new ScanbotBinarizationFilter(),
+  new WhiteBlackPointFilter(),
+  new LegacyFilter(),
 ];
 
-const displayItemLabel: Record<ImageFilterType, string> = {
-  BACKGROUND_CLEAN: 'Background Clean',
-  BINARIZED: 'Binarized',
-  BLACK_AND_WHITE: 'Black And White',
-  COLOR: 'Color',
-  COLOR_DOCUMENT: 'Color Document',
-  DEEP_BINARIZATION: 'Deep Binarization',
-  EDGE_HIGHLIGHT: 'Edge Highlight',
-  GRAYSCALE: 'Gray',
-  LOW_LIGHT_BINARIZATION: 'Low Light Binarization',
-  LOW_LIGHT_BINARIZATION_2: 'Low Light Binarization2',
-  NONE: 'None',
-  OTSU_BINARIZATION: 'Otsu Binarization',
-  PURE_BINARIZED: 'Pure Binarized',
-  PURE_GRAY: 'Pure Gray',
+const displayItemLabel: Record<ParametricFilter['_type'], string> = {
+  BrightnessFilter: 'Brightness Filter',
+  ColorDocumentFilter: 'Color Document Filter',
+  ContrastFilter: 'Contrast Filter',
+  CustomBinarizationFilter: 'Custom Binarization Filter',
+  GrayscaleFilter: 'Grayscale Filter',
+  LegacyFilter: 'Legacy Filter',
+  ScanbotBinarizationFilter: 'Scanbot Binarization Filter',
+  WhiteBlackPointFilter: 'White BlackPoint Filter',
 };
-
-interface ImageFilterModalProps {
-  isVisible: boolean;
-  onDismiss: () => void;
-  onSelect: (item: ImageFilterType) => void;
-}
 
 function Item(props: {label: string; onPress: () => void; style?: ViewStyle}) {
   return (
@@ -65,7 +57,11 @@ export function ImageFilterModal({
   isVisible,
   onDismiss,
   onSelect,
-}: ImageFilterModalProps) {
+}: {
+  isVisible: boolean;
+  onDismiss: () => void;
+  onSelect: (item: ParametricFilter) => void;
+}) {
   return (
     <Modal animationType={'slide'} visible={isVisible} transparent={true}>
       <SafeAreaView style={styles.modalContainer}>
@@ -74,7 +70,7 @@ export function ImageFilterModal({
           contentContainerStyle={styles.flatListContentContainer}
           renderItem={({item}) => (
             <Item
-              label={displayItemLabel[item]}
+              label={displayItemLabel[item._type]}
               onPress={() => {
                 onSelect(item);
                 onDismiss();

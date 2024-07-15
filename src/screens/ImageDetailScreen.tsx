@@ -1,6 +1,6 @@
 import React, {useCallback, useContext, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import ScanbotSDK, {ImageFilterType} from 'react-native-scanbot-sdk';
+import ScanbotSDK, {ParametricFilter} from 'react-native-scanbot-sdk';
 import {BottomActionBar, ImageFilterModal, PreviewImage} from '@components';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {
@@ -34,7 +34,7 @@ export function ImageDetailScreen() {
   );
 
   const onFilterSelect = useCallback(
-    async (filter: ImageFilterType) => {
+    async (filter: ParametricFilter) => {
       const updated = await applyImageFilterOnPage(page, filter);
       if (updated) {
         setPage(updated);
