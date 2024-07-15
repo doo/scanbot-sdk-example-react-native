@@ -8,9 +8,12 @@ import {
 } from '@utils';
 import {useCallback, useContext} from 'react';
 
-import ScanbotSDK, {ParametricFilter} from 'react-native-scanbot-sdk';
+import ScanbotSDK, {
+  CustomBinarizationFilter,
+  ParametricFilter,
+} from 'react-native-scanbot-sdk';
 
-export function useImportImageAndApplyFilter() {
+export function useApplyFiltersOnImage() {
   const {addPage} = useContext(PageContext);
   const {setLoading} = useContext(ActivityIndicatorContext);
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -35,6 +38,7 @@ export function useImportImageAndApplyFilter() {
         setLoading(true);
         const result = await ScanbotSDK.applyImageFilters(selectedImage, [
           filter,
+          new CustomBinarizationFilter(),
         ]);
         if (result.imageFileUri) {
           const page = await ScanbotSDK.createPage(result.imageFileUri);

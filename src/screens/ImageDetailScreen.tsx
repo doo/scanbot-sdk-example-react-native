@@ -9,7 +9,7 @@ import {
   PrimaryRouteNavigationProp,
 } from '@utils';
 import {PageContext} from '@context';
-import {useApplyImageFilterOnPage, useCroppingScreen} from '@hooks';
+import {useApplyImageFiltersOnPage, useCroppingScreen} from '@hooks';
 
 export function ImageDetailScreen() {
   const route = useRoute<ImageDetailScreenRouteProp>();
@@ -18,7 +18,7 @@ export function ImageDetailScreen() {
   const [page, setPage] = useState(route.params);
   const [filterModalVisible, setFilterModalVisible] = useState(false);
   const cropAndRotate = useCroppingScreen();
-  const applyImageFilterOnPage = useApplyImageFilterOnPage();
+  const applyImageFilterOnPage = useApplyImageFiltersOnPage();
 
   const onCropAndRotate = useCallback(async () => {
     const result = await cropAndRotate(page);

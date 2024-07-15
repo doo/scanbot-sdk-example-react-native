@@ -22,7 +22,7 @@ import {
 } from 'react-native-scanbot-sdk';
 
 const IMAGE_FILTERS: ParametricFilter[] = [
-  new BrightnessFilter(),
+  new BrightnessFilter({brightness: 0.3}),
   new ColorDocumentFilter(),
   new ContrastFilter(),
   new CustomBinarizationFilter(),
@@ -38,7 +38,7 @@ const displayItemLabel: Record<ParametricFilter['_type'], string> = {
   ContrastFilter: 'Contrast Filter',
   CustomBinarizationFilter: 'Custom Binarization Filter',
   GrayscaleFilter: 'Grayscale Filter',
-  LegacyFilter: 'Legacy Filter',
+  LegacyFilter: 'None',
   ScanbotBinarizationFilter: 'Scanbot Binarization Filter',
   WhiteBlackPointFilter: 'White BlackPoint Filter',
 };

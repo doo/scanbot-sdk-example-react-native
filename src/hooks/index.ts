@@ -14,13 +14,13 @@ import {useMedicalCertificateScanner} from './RTUUI/useMedicalCertificateScanner
 import {useTextDataScanner} from './RTUUI/useTextDataScanner';
 import {useVinScanner} from './RTUUI/useVinScanner';
 
-import {useApplyImageFilterOnPage} from './Operations/useApplyImageFilterOnPage';
+import {useApplyImageFiltersOnPage} from './Operations/useApplyImageFiltersOnPage';
 import {useDetectBarcodesOnStillImage} from './Operations/useDetectBarcodesOnStillImage';
 import {useDetectDocumentFromImage} from './Operations/useDetectDocumentFromImage';
 import {useDetectDocumentFromPage} from './Operations/useDetectDocumentFromPage';
 import {useExtractImagesFromPDF} from './Operations/useExtractImagesFromPDF';
 import {useExtractPagesFromPDF} from './Operations/useExtractPagesFromPDF';
-import {useImportImageAndApplyFilter} from './Operations/useImportImageAndApplyFilter';
+import {useApplyFiltersOnImage} from './Operations/useApplyFiltersOnImage';
 import {useLicenseInfo} from './Operations/useLicenseInfo';
 import {useOCRConfigs} from './Operations/useOCRConfigs';
 import {usePerformOCR} from './Operations/usePerformOCR';
@@ -44,13 +44,13 @@ export {
   useMedicalCertificateScanner,
   useTextDataScanner,
   useVinScanner,
-  useApplyImageFilterOnPage,
+  useApplyImageFiltersOnPage,
   useDetectBarcodesOnStillImage,
   useDetectDocumentFromImage,
   useDetectDocumentFromPage,
   useExtractPagesFromPDF,
   useExtractImagesFromPDF,
-  useImportImageAndApplyFilter,
+  useApplyFiltersOnImage,
   useLicenseInfo,
   useOCRConfigs,
   usePerformOCR,

@@ -3,7 +3,7 @@ import {checkLicense, errorMessageAlert} from '@utils';
 
 import ScanbotSDK, {Page, ParametricFilter} from 'react-native-scanbot-sdk';
 
-export function useApplyImageFilterOnPage() {
+export function useApplyImageFiltersOnPage() {
   return useCallback(async (page: Page, filter: ParametricFilter) => {
     try {
       /**

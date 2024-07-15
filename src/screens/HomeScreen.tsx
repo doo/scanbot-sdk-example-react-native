@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 
 import {examplesList, FeatureId, Section, SectionData} from '../utils/Examples';
-import {useImportImageAndApplyFilter, useOnExamplePress} from '@hooks';
+import {useApplyFiltersOnImage, useOnExamplePress} from '@hooks';
 import {
   HomeScreenSectionFooter,
   HomeScreenSectionHeader,
@@ -28,7 +28,7 @@ import {ParametricFilter} from 'react-native-scanbot-sdk';
 export function HomeScreen() {
   const {loadPages} = useContext(PageContext);
   const onExamplePress = useOnExamplePress();
-  const applyImageOnFilter = useImportImageAndApplyFilter();
+  const applyImageOnFilter = useApplyFiltersOnImage();
   const [isVisible, setIsVisible] = useState(false);
   const imageRef = useRef<string>();
 
