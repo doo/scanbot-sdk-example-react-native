@@ -1,12 +1,14 @@
 import React from 'react';
 import {useRoute} from '@react-navigation/native';
-import {BarcodeResultScreenRouteProp} from '../utils/Navigation';
-import {ResultFieldRow} from '../components/ResultFieldRow';
+import {BarcodeResultScreenRouteProp} from '@utils';
+import {
+  BarcodeDocumentFormatField,
+  ResultFieldRow,
+  ResultHeader,
+} from '@components';
 import {FlatList, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {BarcodeResultField} from 'react-native-scanbot-sdk';
-import {COLORS} from '../theme/Theme';
-import {ResultHeader} from '../components/ResultHeader';
-import {BarcodeDocumentFormatField} from '../components/BarcodeDocumentFormatField';
+import {COLORS} from '@theme';
 
 function BarcodeItemResult({
   item,

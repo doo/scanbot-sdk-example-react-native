@@ -1,11 +1,9 @@
 import React, {useMemo} from 'react';
 import {useRoute} from '@react-navigation/native';
-import {GenericDocumentResultScreenRouteProp} from '../utils/Navigation';
+import {GenericDocumentResultScreenRouteProp} from '@utils';
 import {GenericDocument} from 'react-native-scanbot-sdk';
 import {GenericDocumentUtils} from '../utils/GenericDocumentUtils';
-import {ResultContainer} from '../components/ResultContainer';
-import {ResultHeader} from '../components/ResultHeader';
-import {ResultFieldRow} from '../components/ResultFieldRow';
+import {ResultContainer, ResultFieldRow, ResultHeader} from '@components';
 import {View} from 'react-native';
 
 export function GenericDocumentResultScreen() {

@@ -4,7 +4,7 @@ import ScanbotSDK, {
 import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
 import {errorMessageAlert} from '../../utils/Alerts';
 import {useNavigation} from '@react-navigation/native';
-import {COLORS} from '../../theme/Theme';
+import {COLORS} from '@theme';
 import {useCallback} from 'react';
 import {checkLicense} from '../../utils/SDKUtils';
 

@@ -14,16 +14,15 @@ import {
 } from 'react-native';
 
 import {examplesList, FeatureId, Section, SectionData} from '../utils/Examples';
-import {useOnExamplePress} from '../hooks/useOnExamplePress';
+import {useImportImageAndApplyFilter, useOnExamplePress} from '@hooks';
 import {
   HomeScreenSectionFooter,
   HomeScreenSectionHeader,
   HomeScreenSectionItem,
-} from '../components/HomeScreenSectionComponents';
-import {PageContext} from '../context/usePages';
-import {useImportImageAndApplyFilter} from '../hooks/Operations/useImportImageAndApplyFilter';
-import {ImageFilterModal} from '../components/ImageFilterModal';
-import {selectImagesFromLibrary} from '../utils/ImageUtils';
+  ImageFilterModal,
+} from '@components';
+import {PageContext} from '@context';
+import {selectImagesFromLibrary} from '@utils';
 import {ImageFilterType} from 'react-native-scanbot-sdk';
 
 export function HomeScreen() {

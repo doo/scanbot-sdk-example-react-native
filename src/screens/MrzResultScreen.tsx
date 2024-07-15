@@ -1,11 +1,9 @@
 import React, {useMemo} from 'react';
 import {useRoute} from '@react-navigation/native';
-import {MrzResultScreenRouteProp} from '../utils/Navigation';
-import {ResultContainer} from '../components/ResultContainer';
-import {ResultFieldRow} from '../components/ResultFieldRow';
+import {MrzResultScreenRouteProp} from '@utils';
+import {ResultContainer, ResultFieldRow, ResultHeader} from '@components';
 import {GenericDocumentUtils} from '../utils/GenericDocumentUtils';
 import {View} from 'react-native';
-import {ResultHeader} from '../components/ResultHeader';
 
 export function MrzResultScreen() {
   const {params: mrzScannerResult} = useRoute<MrzResultScreenRouteProp>();

@@ -26,27 +26,28 @@ import {CheckRecognizerResultScreen} from './src/screens/CheckRecognizerResultSc
 import {BarcodeFormatsScreen} from './src/screens/BarcodeFormatsScreen';
 import {BarcodeDocumentFormatsScreen} from './src/screens/BarcodeDocumentFormatsScreen';
 import {BarcodeCameraViewScreen} from './src/screens/BarcodeCameraViewScreen';
-import {errorMessageAlert} from './src/utils/Alerts';
 import {
+  errorMessageAlert,
+  FILE_ENCRYPTION_ENABLED,
+  IMAGE_FILE_FORMAT,
   PrimaryRoutesParamList,
   Screens,
   ScreenTitles,
-} from './src/utils/Navigation';
-import {PageContext, usePages} from './src/context/usePages';
+} from '@utils';
 import {
+  ActivityIndicatorContext,
   BarcodeDocumentFormatContext,
-  useBarcodeDocumentFormats,
-} from './src/context/useBarcodeDocumentFormats';
-import {
   BarcodeFormatsContext,
+  PageContext,
+  useBarcodeDocumentFormats,
   useBarcodeFormats,
-} from './src/context/useBarcodeFormats';
-import {COLORS, ScanbotTheme} from './src/theme/Theme';
-import {ActivityIndicatorContext, useLoading} from './src/context/useLoading';
+  useLoading,
+  usePages,
+} from '@context';
+import {COLORS, ScanbotTheme} from '@theme';
 import {HomeScreen} from './src/screens/HomeScreen';
 import {ImageResultScreen} from './src/screens/ImageResultScreen';
-import {FILE_ENCRYPTION_ENABLED, IMAGE_FILE_FORMAT} from './src/utils/SDKUtils';
-import {LoadingIndicator} from './src/components/LoadingIndicator';
+import {LoadingIndicator} from '@components';
 import {MrzResultScreen} from './src/screens/MrzResultScreen';
 import {BarcodeResultScreen} from './src/screens/BarcodeResultScreen';
 

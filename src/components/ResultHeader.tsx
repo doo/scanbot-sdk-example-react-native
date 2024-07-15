@@ -7,7 +7,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {COLORS} from '../theme/Theme';
+import {COLORS} from '@theme';
 
 export function ResultHeader(props: {
   title: string;

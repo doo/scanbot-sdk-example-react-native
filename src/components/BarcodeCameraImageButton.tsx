@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
-import {COLORS} from '../theme/Theme';
+import {COLORS} from '@theme';
 
 export function BarcodeCameraImageButton(props: {
   onPress: () => void;

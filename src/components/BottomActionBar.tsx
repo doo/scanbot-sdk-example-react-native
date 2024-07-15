@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {COLORS} from '../theme/Theme';
+import {COLORS} from '@theme';
 
 interface BottomActionBarProps {
   buttonOneTitle: string;

@@ -1,11 +1,13 @@
 import React from 'react';
 import {MedicalCertificateScannerResult} from 'react-native-scanbot-sdk';
 import {useRoute} from '@react-navigation/native';
-import {MedicalCertificateResultScreenRouteProp} from '../utils/Navigation';
-import {ResultContainer} from '../components/ResultContainer';
-import {ResultHeader} from '../components/ResultHeader';
-import {ResultFieldRow} from '../components/ResultFieldRow';
-import {ResultImage} from '../components/ResultImage';
+import {MedicalCertificateResultScreenRouteProp} from '@utils';
+import {
+  ResultContainer,
+  ResultFieldRow,
+  ResultHeader,
+  ResultImage,
+} from '@components';
 import {
   MedicalCertificateCheckboxesInfo,
   MedicalCertificateCheckboxField,

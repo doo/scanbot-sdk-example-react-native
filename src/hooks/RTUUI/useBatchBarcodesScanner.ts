@@ -4,7 +4,6 @@ import ScanbotSDK, {
   BatchBarcodeScannerConfiguration,
 } from 'react-native-scanbot-sdk';
 import {BarcodeFormatsContext} from '../../context/useBarcodeFormats';
-import {logBarcodeDocument} from '../../utils/BarcodeUtils';
 import {BarcodeDocumentFormatContext} from '../../context/useBarcodeDocumentFormats';
 import {useNavigation} from '@react-navigation/native';
 import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
@@ -45,7 +44,6 @@ export function useBatchBarcodesScanner() {
         result.barcodes &&
         result.barcodes.length > 0
       ) {
-        result.barcodes.forEach(barcodeItem => logBarcodeDocument(barcodeItem));
         navigation.navigate(Screens.BARCODE_RESULT, result);
       }
     } catch (e: any) {

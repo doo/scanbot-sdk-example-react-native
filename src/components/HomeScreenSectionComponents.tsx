@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React, {useCallback} from 'react';
 import {Section, SectionData} from '../utils/Examples';
-import {COLORS} from '../theme/Theme';
+import {COLORS} from '@theme';
 
 interface SectionItemProps {
   listItem: SectionListRenderItemInfo<SectionData, Section>;

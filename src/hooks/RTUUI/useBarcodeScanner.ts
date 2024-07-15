@@ -2,7 +2,6 @@ import {useCallback, useContext} from 'react';
 import ScanbotSDK, {
   BarcodeScannerConfiguration,
 } from 'react-native-scanbot-sdk';
-import {logBarcodeDocument} from '../../utils/BarcodeUtils';
 import {errorMessageAlert} from '../../utils/Alerts';
 import {BarcodeFormatsContext} from '../../context/useBarcodeFormats';
 import {BarcodeDocumentFormatContext} from '../../context/useBarcodeDocumentFormats';
@@ -45,7 +44,6 @@ export function useBarcodeScanner() {
         result.barcodes &&
         result.barcodes.length > 0
       ) {
-        result.barcodes.forEach(barcodeItem => logBarcodeDocument(barcodeItem));
         navigation.navigate(Screens.BARCODE_RESULT, result);
       }
     } catch (e: any) {

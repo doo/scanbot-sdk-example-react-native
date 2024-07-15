@@ -1,18 +1,15 @@
 import React, {useCallback, useContext, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import ScanbotSDK, {ImageFilterType} from 'react-native-scanbot-sdk';
-import {BottomActionBar} from '../components/BottomActionBar';
+import {BottomActionBar, ImageFilterModal, PreviewImage} from '@components';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {
+  deleteAllConfirmationAlert,
   ImageDetailScreenRouteProp,
   PrimaryRouteNavigationProp,
-} from '../utils/Navigation';
-import {PageContext} from '../context/usePages';
-import {ImageFilterModal} from '../components/ImageFilterModal';
-import {PreviewImage} from '../components/PreviewImage';
-import {deleteAllConfirmationAlert} from '../utils/Alerts';
-import {useCroppingScreen} from '../hooks/RTUUI/useCroppingScreen';
-import {useApplyImageFilterOnPage} from '../hooks/Operations/useApplyImageFilterOnPage';
+} from '@utils';
+import {PageContext} from '@context';
+import {useApplyImageFilterOnPage, useCroppingScreen} from '@hooks';
 
 export function ImageDetailScreen() {
   const route = useRoute<ImageDetailScreenRouteProp>();

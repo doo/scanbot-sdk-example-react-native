@@ -8,7 +8,7 @@ import {
   Text,
   ViewStyle,
 } from 'react-native';
-import {COLORS} from '../theme/Theme';
+import {COLORS} from '@theme';
 import {ImageFilterType} from 'react-native-scanbot-sdk';
 
 const IMAGE_FILTERS: ImageFilterType[] = [

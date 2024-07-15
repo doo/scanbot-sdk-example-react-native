@@ -1,4 +1,4 @@
-import {COLORS} from '../theme/Theme';
+import {COLORS} from '@theme';
 import React from 'react';
 import {ActivityIndicator, StyleSheet} from 'react-native';
 

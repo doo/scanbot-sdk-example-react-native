@@ -6,7 +6,7 @@
 // import {COLORS} from '../../theme/Theme';
 import ScanbotSDK from 'react-native-scanbot-sdk';
 import {errorMessageAlert} from '../../utils/Alerts';
-import {COLORS} from '../../theme/Theme';
+import {COLORS} from '@theme';
 import {PageContext} from '../../context/usePages';
 import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
 import {useCallback, useContext} from 'react';

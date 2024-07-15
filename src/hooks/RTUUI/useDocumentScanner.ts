@@ -3,7 +3,7 @@ import ScanbotSDK from 'react-native-scanbot-sdk';
 import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
 import {useNavigation} from '@react-navigation/native';
 import {PageContext} from '../../context/usePages';
-import {COLORS} from '../../theme/Theme';
+import {COLORS} from '@theme';
 import {errorMessageAlert} from '../../utils/Alerts';
 import {checkLicense} from '../../utils/SDKUtils';
 
