@@ -1,10 +1,14 @@
-import ScanbotSDK, {MrzScannerConfiguration} from 'react-native-scanbot-sdk';
 import {Platform} from 'react-native';
-import {errorMessageAlert} from '../../utils/Alerts';
+import {
+  checkLicense,
+  errorMessageAlert,
+  PrimaryRouteNavigationProp,
+  Screens,
+} from '@utils';
 import {useNavigation} from '@react-navigation/native';
-import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
-import {checkLicense} from '../../utils/SDKUtils';
 import {useCallback} from 'react';
+
+import ScanbotSDK, {MrzScannerConfiguration} from 'react-native-scanbot-sdk';
 
 export function useMRZScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();

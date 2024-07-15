@@ -1,8 +1,8 @@
-import ScanbotSDK, {VinScannerConfiguration} from 'react-native-scanbot-sdk';
-import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
+import {checkLicense, errorMessageAlert, resultMessageAlert} from '@utils';
 import {COLORS} from '@theme';
 import {useCallback} from 'react';
-import {checkLicense} from '../../utils/SDKUtils';
+
+import ScanbotSDK, {VinScannerConfiguration} from 'react-native-scanbot-sdk';
 
 export function useVinScanner() {
   return useCallback(async () => {
@@ -26,15 +26,16 @@ export function useVinScanner() {
        * Handle the result if result status is OK
        */
       if (result.status === 'OK') {
-        const msg = [
-          `- Raw Text: ${result.rawText}`,
-          result.confidenceValue &&
-            `- Confidence: ${(result.confidenceValue * 100).toFixed(0)}%`,
-          `- Validation: ${
-            result.validationSuccessful ? 'SUCCESSFUL' : 'NOT SUCCESSFUL'
-          }`,
-        ].join('\n\n');
-        resultMessageAlert(msg);
+        resultMessageAlert(
+          [
+            `- Raw Text: ${result.rawText}`,
+            result.confidenceValue &&
+              `- Confidence: ${(result.confidenceValue * 100).toFixed(0)}%`,
+            `- Validation: ${
+              result.validationSuccessful ? 'SUCCESSFUL' : 'NOT SUCCESSFUL'
+            }`,
+          ].join('\n\n'),
+        );
       }
     } catch (e: any) {
       errorMessageAlert(e.message);

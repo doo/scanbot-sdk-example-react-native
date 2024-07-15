@@ -1,12 +1,16 @@
-import ScanbotSDK, {
-  CheckRecognizerConfiguration,
-} from 'react-native-scanbot-sdk';
-import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
-import {errorMessageAlert} from '../../utils/Alerts';
+import {
+  checkLicense,
+  errorMessageAlert,
+  PrimaryRouteNavigationProp,
+  Screens,
+} from '@utils';
 import {useNavigation} from '@react-navigation/native';
 import {COLORS} from '@theme';
 import {useCallback} from 'react';
-import {checkLicense} from '../../utils/SDKUtils';
+
+import ScanbotSDK, {
+  CheckRecognizerConfiguration,
+} from 'react-native-scanbot-sdk';
 
 export function useCheckRecognizer() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
