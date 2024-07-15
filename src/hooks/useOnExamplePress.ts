@@ -1,7 +1,7 @@
 import {FeatureId} from '../utils/Examples';
 import {useDocumentScanner} from './RTUUI/useDocumentScanner';
 import {useNavigation} from '@react-navigation/native';
-import {PrimaryRouteNavigationProp, Screens} from '../utils/Navigation';
+import {PrimaryRouteNavigationProp, Screens} from '@utils';
 import {useBarcodeScanner} from './RTUUI/useBarcodeScanner';
 import {useBatchBarcodesScanner} from './RTUUI/useBatchBarcodesScanner';
 import {useMRZScanner} from './RTUUI/useMRZScanner';
@@ -19,7 +19,6 @@ import {useDetectDocumentFromImage} from './Operations/useDetectDocumentFromImag
 import {useExtractPagesFromPDF} from './Operations/useExtractPagesFromPDF';
 import {useExtractImagesFromPDF} from './Operations/useExtractImagesFromPDF';
 import {useDetectBarcodesOnStillImage} from './Operations/useDetectBarcodesOnStillImage';
-import {useDetectBarcodesOnStillImages} from './Operations/useDetectBarcodesOnStillImages';
 import {useLicenseInfo} from './Operations/useLicenseInfo';
 import {useOCRConfigs} from './Operations/useOCRConfigs';
 import {useRecognizeCheckOnImage} from './Operations/useRecognizeCheckOnImage';
@@ -39,7 +38,6 @@ export function useOnExamplePress() {
     [FeatureId.ScanBarcodes]: useBarcodeScanner(),
     [FeatureId.ScanBatchBarcodes]: useBatchBarcodesScanner(),
     [FeatureId.DetectBarcodesOnStillImage]: useDetectBarcodesOnStillImage(),
-    [FeatureId.DetectBarcodesOnStillImages]: useDetectBarcodesOnStillImages(),
     [FeatureId.BarcodeFormatsFilter]: useLicenseValidityCheckWrapper(
       function () {
         navigation.navigate(Screens.BARCODE_FORMATS);

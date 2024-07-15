@@ -16,7 +16,6 @@ import {useVinScanner} from './RTUUI/useVinScanner';
 
 import {useApplyImageFilterOnPage} from './Operations/useApplyImageFilterOnPage';
 import {useDetectBarcodesOnStillImage} from './Operations/useDetectBarcodesOnStillImage';
-import {useDetectBarcodesOnStillImages} from './Operations/useDetectBarcodesOnStillImages';
 import {useDetectDocumentFromImage} from './Operations/useDetectDocumentFromImage';
 import {useDetectDocumentFromPage} from './Operations/useDetectDocumentFromPage';
 import {useExtractImagesFromPDF} from './Operations/useExtractImagesFromPDF';
@@ -46,7 +45,6 @@ export {
   useVinScanner,
   useApplyImageFilterOnPage,
   useDetectBarcodesOnStillImage,
-  useDetectBarcodesOnStillImages,
   useDetectDocumentFromImage,
   useDetectDocumentFromPage,
   useExtractPagesFromPDF,
