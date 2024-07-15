@@ -12,7 +12,7 @@ import {FILE_ENCRYPTION_ENABLED, IMAGE_FILE_FORMAT} from '@utils';
 
 type PreviewImageProps = {
   imageUri?: string;
-  style: StyleProp<ImageStyle>;
+  style?: StyleProp<ImageStyle>;
 };
 
 export function PreviewImage({imageUri, style}: PreviewImageProps) {
@@ -51,7 +51,7 @@ export function PreviewImage({imageUri, style}: PreviewImageProps) {
 
   if (loading) {
     return (
-      <View style={[style, styles.activityIndicator]}>
+      <View style={[style && style, styles.activityIndicator]}>
         <ActivityIndicator animating={loading} size={'small'} />
       </View>
     );

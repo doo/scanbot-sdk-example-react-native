@@ -1,9 +1,8 @@
 import {useCallback, useContext} from 'react';
+import {checkLicense, errorMessageAlert, infoMessageAlert} from '@utils';
+import {ActivityIndicatorContext, PageContext} from '@context';
+
 import ScanbotSDK from 'react-native-scanbot-sdk';
-import {errorMessageAlert, infoMessageAlert} from '../../utils/Alerts';
-import {ActivityIndicatorContext} from '../../context/useLoading';
-import {PageContext} from '../../context/usePages';
-import {checkLicense} from '../../utils/SDKUtils';
 
 export function usePerformOCR() {
   const {setLoading} = useContext(ActivityIndicatorContext);
@@ -27,10 +26,11 @@ export function usePerformOCR() {
         imageFileUris: getImageUriFromPages(),
         languages: ['en', 'de'],
         options: {
-          outputFormat: 'PDF_FILE',
+          outputFormat: 'FULL_OCR_RESULT',
           engineMode: 'SCANBOT_OCR',
         },
       });
+      console.log(JSON.stringify(result, null, 2));
       /**
        * Handle the result by displaying an Alert
        */

@@ -1,7 +1,7 @@
-import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import {checkLicense, errorMessageAlert, resultMessageAlert} from '@utils';
 import {useCallback} from 'react';
-import {checkLicense} from '../../utils/SDKUtils';
+
+import ScanbotSDK from 'react-native-scanbot-sdk';
 
 export function useOCRConfigs() {
   return useCallback(async () => {
@@ -18,7 +18,9 @@ export function useOCRConfigs() {
        * Handle the result by displaying an Alert
        */
       const result = await ScanbotSDK.getOCRConfigs();
-      resultMessageAlert(JSON.stringify(result));
+      resultMessageAlert(
+        `Installed languages: ${result.installedLanguages} at path ${result.languageDataPath}`,
+      );
     } catch (e: any) {
       errorMessageAlert(e.message);
     }

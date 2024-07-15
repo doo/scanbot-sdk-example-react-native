@@ -1,9 +1,13 @@
 import {useCallback, useContext} from 'react';
+import {ActivityIndicatorContext} from '@context';
+import {
+  checkLicense,
+  errorMessageAlert,
+  resultMessageAlert,
+  selectImagesFromLibrary,
+} from '@utils';
+
 import ScanbotSDK from 'react-native-scanbot-sdk';
-import {ActivityIndicatorContext} from '../../context/useLoading';
-import {selectImagesFromLibrary} from '../../utils/ImageUtils';
-import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
-import {checkLicense} from '../../utils/SDKUtils';
 
 export function useDetectDocumentFromImage() {
   const {setLoading} = useContext(ActivityIndicatorContext);

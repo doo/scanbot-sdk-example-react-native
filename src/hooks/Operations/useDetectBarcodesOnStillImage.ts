@@ -1,13 +1,19 @@
 import {useCallback, useContext} from 'react';
-import ScanbotSDK from 'react-native-scanbot-sdk';
-import {ActivityIndicatorContext} from '../../context/useLoading';
-import {selectImagesFromLibrary} from '../../utils/ImageUtils';
-import {errorMessageAlert} from '../../utils/Alerts';
-import {BarcodeDocumentFormatContext} from '../../context/useBarcodeDocumentFormats';
-import {BarcodeFormatsContext} from '../../context/useBarcodeFormats';
+import {
+  ActivityIndicatorContext,
+  BarcodeDocumentFormatContext,
+  BarcodeFormatsContext,
+} from '@context';
+import {
+  checkLicense,
+  errorMessageAlert,
+  PrimaryRouteNavigationProp,
+  Screens,
+  selectImagesFromLibrary,
+} from '@utils';
 import {useNavigation} from '@react-navigation/native';
-import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
-import {checkLicense} from '../../utils/SDKUtils';
+
+import ScanbotSDK from 'react-native-scanbot-sdk';
 
 export function useDetectBarcodesOnStillImage() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -46,6 +52,7 @@ export function useDetectBarcodesOnStillImage() {
         stripCheckDigits: true,
         gs1HandlingMode: 'NONE',
       });
+      console.log(JSON.stringify(result, null, 2));
       /**
        * Handle the result by navigating to Screens.BARCODE_RESULT
        */

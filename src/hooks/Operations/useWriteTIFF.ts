@@ -1,9 +1,13 @@
 import {useCallback, useContext} from 'react';
-import {checkLicense, FILE_ENCRYPTION_ENABLED} from '../../utils/SDKUtils';
-import {errorMessageAlert, infoMessageAlert} from '../../utils/Alerts';
+import {
+  checkLicense,
+  errorMessageAlert,
+  FILE_ENCRYPTION_ENABLED,
+  infoMessageAlert,
+} from '@utils';
 import ScanbotSDK from 'react-native-scanbot-sdk';
-import {ActivityIndicatorContext} from '../../context/useLoading';
-import {PageContext} from '../../context/usePages';
+
+import {ActivityIndicatorContext, PageContext} from '@context';
 
 export function useWriteTIFF() {
   const {setLoading} = useContext(ActivityIndicatorContext);

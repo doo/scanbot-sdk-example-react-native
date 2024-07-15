@@ -1,12 +1,15 @@
 import {useCallback, useContext} from 'react';
-import ScanbotSDK from 'react-native-scanbot-sdk';
-import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
-import {ActivityIndicatorContext} from '../../context/useLoading';
+import {
+  checkLicense,
+  errorMessageAlert,
+  PrimaryRouteNavigationProp,
+  Screens,
+  selectImagesFromLibrary,
+} from '@utils';
+import {ActivityIndicatorContext, PageContext} from '@context';
 import {useNavigation} from '@react-navigation/native';
-import {PageContext} from '../../context/usePages';
-import {selectImagesFromLibrary} from '../../utils/ImageUtils';
-import {errorMessageAlert} from '../../utils/Alerts';
-import {checkLicense} from '../../utils/SDKUtils';
+
+import ScanbotSDK from 'react-native-scanbot-sdk';
 
 export function useDetectDocumentFromPage() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -37,7 +40,9 @@ export function useDetectDocumentFromPage() {
        */
       const [imageFileUri] = selectedImageResult;
       let page = await ScanbotSDK.createPage(imageFileUri);
+      console.log('Created', JSON.stringify(page));
       page = await ScanbotSDK.detectDocumentOnPage(page);
+      console.log('Detected', JSON.stringify(page));
       /**
        * Handle the result by navigating to Screens.IMAGE_RESULTS
        */

@@ -1,12 +1,16 @@
 import {useCallback, useContext} from 'react';
-import {selectPDFFileUri} from '../../utils/FileUtils';
-import ScanbotSDK from 'react-native-scanbot-sdk';
-import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
-import {ActivityIndicatorContext} from '../../context/useLoading';
-import {errorMessageAlert, infoMessageAlert} from '../../utils/Alerts';
+import {
+  checkLicense,
+  errorMessageAlert,
+  infoMessageAlert,
+  PrimaryRouteNavigationProp,
+  Screens,
+  selectPDFFileUri,
+} from '@utils';
+import {ActivityIndicatorContext, PageContext} from '@context';
 import {useNavigation} from '@react-navigation/native';
-import {PageContext} from '../../context/usePages';
-import {checkLicense} from '../../utils/SDKUtils';
+
+import ScanbotSDK from 'react-native-scanbot-sdk';
 
 export function useExtractPagesFromPDF() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -38,7 +42,7 @@ export function useExtractPagesFromPDF() {
       const result = await ScanbotSDK.extractPagesFromPdf({
         pdfFilePath: fileUrl,
       });
-
+      console.log(JSON.stringify(result, null, 2));
       if (!result.pages) {
         infoMessageAlert('No pages were extracted from the document');
         return;

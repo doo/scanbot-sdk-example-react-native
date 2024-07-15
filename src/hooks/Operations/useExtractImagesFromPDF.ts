@@ -1,9 +1,13 @@
 import {useCallback, useContext} from 'react';
-import {selectPDFFileUri} from '../../utils/FileUtils';
+import {
+  checkLicense,
+  errorMessageAlert,
+  resultMessageAlert,
+  selectPDFFileUri,
+} from '@utils';
+import {ActivityIndicatorContext} from '@context';
+
 import ScanbotSDK from 'react-native-scanbot-sdk';
-import {ActivityIndicatorContext} from '../../context/useLoading';
-import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
-import {checkLicense} from '../../utils/SDKUtils';
 
 export function useExtractImagesFromPDF() {
   const {setLoading} = useContext(ActivityIndicatorContext);

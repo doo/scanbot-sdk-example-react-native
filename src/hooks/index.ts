@@ -27,6 +27,7 @@ import {usePerformOCR} from './Operations/usePerformOCR';
 import {useRecognizeCheckOnImage} from './Operations/useRecognizeCheckOnImage';
 import {useSavePDF} from './Operations/useSavePDF';
 import {useWriteTIFF} from './Operations/useWriteTIFF';
+import {useCleanup} from './Operations/useCleanup';
 
 export {
   useLicenseValidityCheckWrapper,
@@ -56,4 +57,5 @@ export {
   useRecognizeCheckOnImage,
   useSavePDF,
   useWriteTIFF,
+  useCleanup,
 };

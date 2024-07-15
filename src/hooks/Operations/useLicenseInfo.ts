@@ -1,6 +1,7 @@
 import {useCallback} from 'react';
+import {errorMessageAlert, infoMessageAlert} from '@utils';
+
 import ScanbotSDK from 'react-native-scanbot-sdk';
-import {errorMessageAlert, infoMessageAlert} from '../../utils/Alerts';
 
 export function useLicenseInfo() {
   return useCallback(async () => {

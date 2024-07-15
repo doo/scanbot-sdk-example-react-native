@@ -1,9 +1,8 @@
 import {useCallback, useContext} from 'react';
-import {ActivityIndicatorContext} from '../../context/useLoading';
-import {PageContext} from '../../context/usePages';
+import {ActivityIndicatorContext, PageContext} from '@context';
+import {checkLicense, errorMessageAlert, infoMessageAlert} from '@utils';
+
 import ScanbotSDK from 'react-native-scanbot-sdk';
-import {errorMessageAlert, infoMessageAlert} from '../../utils/Alerts';
-import {checkLicense} from '../../utils/SDKUtils';
 
 export function useSavePDF() {
   const {setLoading} = useContext(ActivityIndicatorContext);
@@ -26,7 +25,7 @@ export function useSavePDF() {
         imageFileUris: getImageUriFromPages(),
         options: {
           pageSize: 'A4',
-          pageOrientation: 'PORTRAIT',
+          pageDirection: 'PORTRAIT',
         },
       });
       /**

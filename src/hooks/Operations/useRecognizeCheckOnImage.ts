@@ -1,11 +1,15 @@
 import {useCallback, useContext} from 'react';
-import {selectImagesFromLibrary} from '../../utils/ImageUtils';
-import ScanbotSDK from 'react-native-scanbot-sdk';
-import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
-import {ActivityIndicatorContext} from '../../context/useLoading';
-import {errorMessageAlert} from '../../utils/Alerts';
+import {
+  checkLicense,
+  errorMessageAlert,
+  PrimaryRouteNavigationProp,
+  Screens,
+  selectImagesFromLibrary,
+} from '@utils';
+import {ActivityIndicatorContext} from '@context';
 import {useNavigation} from '@react-navigation/native';
-import {checkLicense} from '../../utils/SDKUtils';
+
+import ScanbotSDK from 'react-native-scanbot-sdk';
 
 export function useRecognizeCheckOnImage() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
