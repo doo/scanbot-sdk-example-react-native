@@ -1,17 +1,15 @@
-// import {useContext} from 'react';
-// import ScanbotSDK from 'react-native-scanbot-sdk';
-// import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
-// import {useNavigation} from '@react-navigation/native';
-// import {PageContext} from '../../context/usePages';
-// import {COLORS} from '../../theme/Theme';
-import ScanbotSDK from 'react-native-scanbot-sdk';
-import {errorMessageAlert} from '../../utils/Alerts';
+import {
+  checkLicense,
+  errorMessageAlert,
+  PrimaryRouteNavigationProp,
+  Screens,
+} from '@utils';
 import {COLORS} from '@theme';
-import {PageContext} from '../../context/usePages';
-import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
+import {PageContext} from '@context';
 import {useCallback, useContext} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {checkLicense} from '../../utils/SDKUtils';
+
+import ScanbotSDK from 'react-native-scanbot-sdk';
 
 export function useFinderDocumentScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();

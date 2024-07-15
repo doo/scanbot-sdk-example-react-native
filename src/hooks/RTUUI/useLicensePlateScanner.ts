@@ -1,11 +1,11 @@
+import {checkLicense, errorMessageAlert, resultMessageAlert} from '@utils';
+import {COLORS} from '@theme';
+import {useCallback} from 'react';
+
 import ScanbotSDK, {
   LicensePlateScannerConfiguration,
   LicensePlateScanStrategy,
 } from 'react-native-scanbot-sdk';
-import {errorMessageAlert, resultMessageAlert} from '../../utils/Alerts';
-import {COLORS} from '@theme';
-import {useCallback} from 'react';
-import {checkLicense} from '../../utils/SDKUtils';
 
 export function useLicensePlateScanner(scanStrategy: LicensePlateScanStrategy) {
   return useCallback(async () => {
@@ -30,7 +30,13 @@ export function useLicensePlateScanner(scanStrategy: LicensePlateScanStrategy) {
        * Handle the result if result status is OK
        */
       if (result.status === 'OK') {
-        resultMessageAlert(JSON.stringify(result));
+        resultMessageAlert(
+          [
+            `- License Plate: ${result.licensePlate}`,
+            `- Country code: ${result.countryCode}`,
+            result.confidence && `- Confidence: ${result.confidence}%`,
+          ].join('\n\n'),
+        );
       }
     } catch (e: any) {
       errorMessageAlert(e.message);

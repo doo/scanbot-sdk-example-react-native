@@ -1,11 +1,15 @@
 import {useCallback, useContext} from 'react';
-import ScanbotSDK from 'react-native-scanbot-sdk';
-import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
+import {
+  checkLicense,
+  errorMessageAlert,
+  PrimaryRouteNavigationProp,
+  Screens,
+} from '@utils';
 import {useNavigation} from '@react-navigation/native';
-import {PageContext} from '../../context/usePages';
+import {PageContext} from '@context';
 import {COLORS} from '@theme';
-import {errorMessageAlert} from '../../utils/Alerts';
-import {checkLicense} from '../../utils/SDKUtils';
+
+import ScanbotSDK from 'react-native-scanbot-sdk';
 
 export function useDocumentScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -31,7 +35,7 @@ export function useDocumentScanner() {
         cameraBackgroundColor: COLORS.SCANBOT_RED,
         orientationLockMode: 'PORTRAIT',
         pageCounterButtonTitle: '%d Page(s)',
-        multiPageEnabled: false,
+        multiPageEnabled: true,
         ignoreBadAspectRatio: true,
       });
       /**

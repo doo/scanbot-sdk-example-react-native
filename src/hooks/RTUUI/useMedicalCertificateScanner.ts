@@ -1,3 +1,13 @@
+import {
+  checkLicense,
+  errorMessageAlert,
+  PrimaryRouteNavigationProp,
+  Screens,
+} from '@utils';
+import {useNavigation} from '@react-navigation/native';
+import {COLORS} from '@theme';
+import {useCallback} from 'react';
+
 import ScanbotSDK, {
   MedicalCertificateRecognizerConfiguration,
 } from 'react-native-scanbot-sdk';
@@ -47,7 +57,6 @@ export function useMedicalCertificateScanner() {
        * Handle the result if result status is OK
        */
       if (result.status === 'OK') {
-        console.log(JSON.stringify(result, undefined, 4));
         navigation.navigate(Screens.MEDICAL_CERTIFICATE_RESULT, result);
       }
     } catch (e: any) {

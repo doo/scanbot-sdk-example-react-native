@@ -1,13 +1,16 @@
 import {useCallback, useContext} from 'react';
+import {
+  checkLicense,
+  errorMessageAlert,
+  PrimaryRouteNavigationProp,
+  Screens,
+} from '@utils';
+import {BarcodeDocumentFormatContext, BarcodeFormatsContext} from '@context';
+import {useNavigation} from '@react-navigation/native';
+
 import ScanbotSDK, {
   BarcodeScannerConfiguration,
 } from 'react-native-scanbot-sdk';
-import {errorMessageAlert} from '../../utils/Alerts';
-import {BarcodeFormatsContext} from '../../context/useBarcodeFormats';
-import {BarcodeDocumentFormatContext} from '../../context/useBarcodeDocumentFormats';
-import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
-import {useNavigation} from '@react-navigation/native';
-import {checkLicense} from '../../utils/SDKUtils';
 
 export function useBarcodeScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();

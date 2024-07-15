@@ -1,11 +1,11 @@
+import {COLORS} from '@theme';
+import {useCallback} from 'react';
+import {checkLicense, errorMessageAlert} from '@utils';
+
 import ScanbotSDK, {
   CroppingConfiguration,
   Page,
 } from 'react-native-scanbot-sdk';
-import {COLORS} from '@theme';
-import {useCallback} from 'react';
-import {checkLicense} from '../../utils/SDKUtils';
-import {errorMessageAlert} from '../../utils/Alerts';
 
 export function useCroppingScreen() {
   return useCallback(async (page: Page) => {

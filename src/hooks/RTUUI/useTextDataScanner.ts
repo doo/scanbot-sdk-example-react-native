@@ -1,3 +1,7 @@
+import {checkLicense, errorMessageAlert, resultMessageAlert} from '@utils';
+import {COLORS} from '@theme';
+import {useCallback} from 'react';
+
 import ScanbotSDK, {
   TextDataScannerConfiguration,
 } from 'react-native-scanbot-sdk';
@@ -41,7 +45,9 @@ export function useTextDataScanner() {
        * Handle the result if result status is OK
        */
       if (result.status === 'OK' && result.result?.text) {
-        resultMessageAlert(JSON.stringify(result));
+        resultMessageAlert(
+          `${result.result?.text} : ${result.result.confidence}%`,
+        );
       }
     } catch (e: any) {
       errorMessageAlert(e.message);

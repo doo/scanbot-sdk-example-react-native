@@ -1,13 +1,14 @@
-import ScanbotSDK, {
-  HealthInsuranceCardScannerConfiguration,
-} from 'react-native-scanbot-sdk';
 import {
+  checkLicense,
   errorMessageAlert,
   infoMessageAlert,
   resultMessageAlert,
-} from '../../utils/Alerts';
+} from '@utils';
 import {useCallback} from 'react';
-import {checkLicense} from '../../utils/SDKUtils';
+
+import ScanbotSDK, {
+  HealthInsuranceCardScannerConfiguration,
+} from 'react-native-scanbot-sdk';
 
 export function useEHICScanner() {
   return useCallback(async () => {

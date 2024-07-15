@@ -1,11 +1,16 @@
+import {
+  checkLicense,
+  errorMessageAlert,
+  infoMessageAlert,
+  PrimaryRouteNavigationProp,
+  Screens,
+} from '@utils';
+import {useNavigation} from '@react-navigation/native';
+import {useCallback} from 'react';
+
 import ScanbotSDK, {
   GenericDocumentRecognizerConfiguration,
 } from 'react-native-scanbot-sdk';
-import {PrimaryRouteNavigationProp, Screens} from '../../utils/Navigation';
-import {errorMessageAlert, infoMessageAlert} from '../../utils/Alerts';
-import {useNavigation} from '@react-navigation/native';
-import {useCallback} from 'react';
-import {checkLicense} from '../../utils/SDKUtils';
 
 export function useGenericDocumentScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -46,7 +51,6 @@ export function useGenericDocumentScanner() {
        * Handle the result if result status is OK
        */
       if (result.status === 'OK') {
-        console.log(JSON.stringify(result, undefined, 4));
         navigation.navigate(Screens.GENERIC_DOCUMENT_RESULT, result);
       }
     } catch (e: any) {
