@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {
   useApplyFiltersOnImage,
   useBarcodeScanner,
@@ -24,8 +24,10 @@ import {
   useLicensePlateScanner,
   useLicenseValidityCheckWrapper,
   useMedicalCertificateScanner,
+  useMRZScanner,
   useOCRConfigs,
   useRecognizeCheckOnImage,
+  useRecognizeMRZOnImage,
   useTextDataScanner,
   useVinScanner,
 } from '@hooks';
@@ -37,14 +39,12 @@ import {
 } from '@components';
 import {PageContext} from '@context';
 import {ParametricFilter} from 'react-native-scanbot-sdk';
-import {ScrollView} from 'react-native-gesture-handler';
 import {
   PrimaryRouteNavigationProp,
   Screens,
   selectImagesFromLibrary,
 } from '@utils';
 import {useNavigation} from '@react-navigation/native';
-import {useMRZScanner} from '../hooks/RTUUI/useMRZScanner';
 
 export function HomeScreen() {
   const {loadPages} = useContext(PageContext);
@@ -72,6 +72,7 @@ export function HomeScreen() {
   const onTextDataScanner = useTextDataScanner();
   const onCheckScanner = useCheckRecognizer();
   const onRecognizeCheckOnImage = useRecognizeCheckOnImage();
+  const onRecognizeMRZOnImage = useRecognizeMRZOnImage();
   const onLicenseInfo = useLicenseInfo();
   const onOCRConfigs = useOCRConfigs();
 
@@ -181,6 +182,10 @@ export function HomeScreen() {
         <FeatureItem
           onPress={onRecognizeCheckOnImage}
           title={'Recognize Check on Image'}
+        />
+        <FeatureItem
+          onPress={onRecognizeMRZOnImage}
+          title={'Recognize MRZ on Image'}
         />
 
         <FeatureHeader title={'MISCELLANEOUS'} />

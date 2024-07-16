@@ -1,7 +1,7 @@
 import {Modal, StyleSheet, Text, View} from 'react-native';
 import React, {useCallback} from 'react';
 import {COLORS} from '@theme';
-import {usePerformOCR, useSavePDF, useWriteTIFF} from '@hooks';
+import {usePerformOCR, useCreatePDF, useWriteTIFF} from '@hooks';
 
 export function SavePagesModal({
   isVisible,
@@ -10,7 +10,7 @@ export function SavePagesModal({
   isVisible: boolean;
   onDismiss: () => void;
 }) {
-  const savePDF = useSavePDF();
+  const savePDF = useCreatePDF();
   const performOCR = usePerformOCR();
   const writeTiff = useWriteTIFF();
 

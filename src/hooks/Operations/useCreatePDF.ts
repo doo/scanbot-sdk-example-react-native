@@ -4,7 +4,7 @@ import {checkLicense, errorMessageAlert, infoMessageAlert} from '@utils';
 
 import ScanbotSDK from 'react-native-scanbot-sdk';
 
-export function useSavePDF() {
+export function useCreatePDF() {
   const {setLoading} = useContext(ActivityIndicatorContext);
   const {getImageUriFromPages} = useContext(PageContext);
 

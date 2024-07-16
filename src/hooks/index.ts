@@ -12,6 +12,7 @@ import {useLicensePlateScanner} from './RTUUI/useLicensePlateScanner';
 import {useMedicalCertificateScanner} from './RTUUI/useMedicalCertificateScanner';
 import {useTextDataScanner} from './RTUUI/useTextDataScanner';
 import {useVinScanner} from './RTUUI/useVinScanner';
+import {useMRZScanner} from './RTUUI/useMRZScanner';
 
 import {useApplyImageFiltersOnPage} from './Operations/useApplyImageFiltersOnPage';
 import {useDetectBarcodesOnStillImage} from './Operations/useDetectBarcodesOnStillImage';
@@ -24,7 +25,8 @@ import {useLicenseInfo} from './Operations/useLicenseInfo';
 import {useOCRConfigs} from './Operations/useOCRConfigs';
 import {usePerformOCR} from './Operations/usePerformOCR';
 import {useRecognizeCheckOnImage} from './Operations/useRecognizeCheckOnImage';
-import {useSavePDF} from './Operations/useSavePDF';
+import {useRecognizeMRZOnImage} from './Operations/useRecognizeMRZOnImage';
+import {useCreatePDF} from './Operations/useCreatePDF';
 import {useWriteTIFF} from './Operations/useWriteTIFF';
 import {useCleanup} from './Operations/useCleanup';
 
@@ -38,6 +40,7 @@ export {
   useEHICScanner,
   useFinderDocumentScanner,
   useGenericDocumentScanner,
+  useMRZScanner,
   useLicensePlateScanner,
   useMedicalCertificateScanner,
   useTextDataScanner,
@@ -53,7 +56,8 @@ export {
   useOCRConfigs,
   usePerformOCR,
   useRecognizeCheckOnImage,
-  useSavePDF,
+  useCreatePDF,
+  useRecognizeMRZOnImage,
   useWriteTIFF,
   useCleanup,
 };

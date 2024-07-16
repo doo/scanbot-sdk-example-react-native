@@ -52,7 +52,6 @@ export function useDetectBarcodesOnStillImage() {
         stripCheckDigits: true,
         gs1HandlingMode: 'NONE',
       });
-      console.log(JSON.stringify(result, null, 2));
       /**
        * Handle the result by navigating to Screens.BARCODE_RESULT
        */
