@@ -4,10 +4,9 @@ import {useCallback} from 'react';
 
 import ScanbotSDK, {
   LicensePlateScannerConfiguration,
-  LicensePlateScanStrategy,
 } from 'react-native-scanbot-sdk';
 
-export function useLicensePlateScanner(scanStrategy: LicensePlateScanStrategy) {
+export function useLicensePlateScanner() {
   return useCallback(async () => {
     try {
       /**
@@ -23,7 +22,7 @@ export function useLicensePlateScanner(scanStrategy: LicensePlateScanStrategy) {
        */
       let config: LicensePlateScannerConfiguration = {
         topBarBackgroundColor: COLORS.SCANBOT_RED,
-        scanStrategy: scanStrategy,
+        scanStrategy: 'ML_BASED',
       };
       const result = await ScanbotSDK.UI.startLicensePlateScanner(config);
       /**
@@ -41,5 +40,5 @@ export function useLicensePlateScanner(scanStrategy: LicensePlateScanStrategy) {
     } catch (e: any) {
       errorMessageAlert(e.message);
     }
-  }, [scanStrategy]);
+  }, []);
 }

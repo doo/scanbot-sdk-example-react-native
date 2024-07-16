@@ -40,9 +40,7 @@ export function useDetectDocumentFromPage() {
        */
       const [imageFileUri] = selectedImageResult;
       let page = await ScanbotSDK.createPage(imageFileUri);
-      console.log('Created', JSON.stringify(page));
       page = await ScanbotSDK.detectDocumentOnPage(page);
-      console.log('Detected', JSON.stringify(page));
       /**
        * Handle the result by navigating to Screens.IMAGE_RESULTS
        */

@@ -30,7 +30,6 @@ export function usePerformOCR() {
           engineMode: 'SCANBOT_OCR',
         },
       });
-      console.log(JSON.stringify(result, null, 2));
       /**
        * Handle the result by displaying an Alert
        */

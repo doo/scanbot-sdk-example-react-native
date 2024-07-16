@@ -2,9 +2,9 @@ import {BarcodeCameraImageButton} from './BarcodeCameraImageButton';
 import {BarcodeDocumentFormatField} from './BarcodeDocumentFormatField';
 import {BottomActionBar} from './BottomActionBar';
 import {
-  HomeScreenSectionFooter,
-  HomeScreenSectionHeader,
-  HomeScreenSectionItem,
+  ScanbotLearnMore,
+  FeatureHeader,
+  FeatureItem,
 } from './HomeScreenSectionComponents';
 import {ImageFilterModal} from './ImageFilterModal';
 import {LoadingIndicator} from './LoadingIndicator';
@@ -19,7 +19,7 @@ import {SwitchOptionsList} from './SwitchOptionsList';
 export {
   BarcodeDocumentFormatField,
   BottomActionBar,
-  HomeScreenSectionFooter,
+  ScanbotLearnMore,
   ImageFilterModal,
   LoadingIndicator,
   PreviewImage,
@@ -29,7 +29,7 @@ export {
   ResultImage,
   SavePagesModal,
   SwitchOptionsList,
-  HomeScreenSectionHeader,
-  HomeScreenSectionItem,
+  FeatureHeader,
+  FeatureItem,
   BarcodeCameraImageButton,
 };

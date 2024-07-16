@@ -1,5 +1,4 @@
 import {useLicenseValidityCheckWrapper} from './useLicenseValidityCheck';
-import {useOnExamplePress} from './useOnExamplePress';
 
 import {useBarcodeScanner} from './RTUUI/useBarcodeScanner';
 import {useBatchBarcodesScanner} from './RTUUI/useBatchBarcodesScanner';
@@ -31,7 +30,6 @@ import {useCleanup} from './Operations/useCleanup';
 
 export {
   useLicenseValidityCheckWrapper,
-  useOnExamplePress,
   useBarcodeScanner,
   useBatchBarcodesScanner,
   useCheckRecognizer,

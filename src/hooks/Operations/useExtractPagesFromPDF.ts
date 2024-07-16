@@ -42,7 +42,7 @@ export function useExtractPagesFromPDF() {
       const result = await ScanbotSDK.extractPagesFromPdf({
         pdfFilePath: fileUrl,
       });
-      console.log(JSON.stringify(result, null, 2));
+
       if (!result.pages) {
         infoMessageAlert('No pages were extracted from the document');
         return;

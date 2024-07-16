@@ -1,38 +1,28 @@
-import {
-  Linking,
-  SectionListData,
-  SectionListRenderItemInfo,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Linking, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useCallback} from 'react';
-import {Section, SectionData} from '../utils/Examples';
 import {COLORS} from '@theme';
 
-interface SectionItemProps {
-  listItem: SectionListRenderItemInfo<SectionData, Section>;
+export function FeatureItem({
+  onPress,
+  title,
+}: {
+  title: string;
   onPress(): void;
-}
-
-export function HomeScreenSectionItem({onPress, listItem}: SectionItemProps) {
+}) {
   return (
     <View style={styles.sectionItemContainer}>
       <TouchableOpacity onPress={onPress}>
-        <Text style={styles.sectionItem}>{listItem.item.title}</Text>
+        <Text style={styles.sectionItem}>{title}</Text>
       </TouchableOpacity>
     </View>
   );
 }
 
-export function HomeScreenSectionHeader(item: {
-  section: SectionListData<SectionData, Section>;
-}) {
-  return <Text style={styles.sectionHeader}>{item.section.title}</Text>;
+export function FeatureHeader({title}: {title: string}) {
+  return <Text style={styles.sectionHeader}>{title}</Text>;
 }
 
-export function HomeScreenSectionFooter() {
+export function ScanbotLearnMore() {
   const onPress = useCallback(() => {
     Linking.openURL('https://scanbot.io');
   }, []);

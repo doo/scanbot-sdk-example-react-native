@@ -40,6 +40,7 @@ export function useApplyFiltersOnImage() {
           filter,
           new CustomBinarizationFilter(),
         ]);
+
         if (result.imageFileUri) {
           const page = await ScanbotSDK.createPage(result.imageFileUri);
           const documentPage = await ScanbotSDK.detectDocumentOnPage(page);
