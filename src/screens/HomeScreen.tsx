@@ -7,12 +7,12 @@ import React, {
 } from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {
-  useApplyFiltersOnImage,
+  useApplyFilters,
   useBarcodeScanner,
   useBatchBarcodesScanner,
   useCheckRecognizer,
-  useDetectBarcodesOnStillImage,
-  useDetectDocumentFromImage,
+  useDetectBarcodes,
+  useDetectDocument,
   useDetectDocumentFromPage,
   useDocumentScanner,
   useEHICScanner,
@@ -26,7 +26,10 @@ import {
   useMedicalCertificateScanner,
   useMRZScanner,
   useOCRConfigs,
-  useRecognizeCheckOnImage,
+  useRecognizeCheck,
+  useRecognizeEHIC,
+  useRecognizeGenericDocument,
+  useRecognizeMedicalCertificate,
   useRecognizeMRZOnImage,
   useTextDataScanner,
   useVinScanner,
@@ -55,14 +58,14 @@ export function HomeScreen() {
   /** ScanbotSDK Features */
   const onDocumentScanner = useDocumentScanner();
   const onFinderDocumentScanner = useFinderDocumentScanner();
-  const applyImageOnFilter = useApplyFiltersOnImage();
+  const applyImageOnFilter = useApplyFilters();
   const onDetectDocumentFromPage = useDetectDocumentFromPage();
-  const onDetectDocumentFromImage = useDetectDocumentFromImage();
+  const onDetectDocumentFromImage = useDetectDocument();
   const onExtractPagesFromPDF = useExtractPagesFromPDF();
   const onExtractImagesFromPDF = useExtractImagesFromPDF();
   const onBarcodeScanner = useBarcodeScanner();
   const onBatchBarcodesScanner = useBatchBarcodesScanner();
-  const onDetectBarcodesOnStillImage = useDetectBarcodesOnStillImage();
+  const onDetectBarcodesOnStillImage = useDetectBarcodes();
   const onMRZScanner = useMRZScanner();
   const onMedicalCertificateScanner = useMedicalCertificateScanner();
   const onGenericDocumentScanner = useGenericDocumentScanner();
@@ -71,8 +74,11 @@ export function HomeScreen() {
   const onVinScanner = useVinScanner();
   const onTextDataScanner = useTextDataScanner();
   const onCheckScanner = useCheckRecognizer();
-  const onRecognizeCheckOnImage = useRecognizeCheckOnImage();
+  const onRecognizeCheckOnImage = useRecognizeCheck();
   const onRecognizeMRZOnImage = useRecognizeMRZOnImage();
+  const onRecognizeMedicalCertificateOnImage = useRecognizeMedicalCertificate();
+  const onRecognizeEHICOnImage = useRecognizeEHIC();
+  const onRecognizeGenericDocument = useRecognizeGenericDocument();
   const onLicenseInfo = useLicenseInfo();
   const onOCRConfigs = useOCRConfigs();
 
@@ -186,6 +192,18 @@ export function HomeScreen() {
         <FeatureItem
           onPress={onRecognizeMRZOnImage}
           title={'Recognize MRZ on Image'}
+        />
+        <FeatureItem
+          onPress={onRecognizeMedicalCertificateOnImage}
+          title={'Recognize Medical Certificate on Image'}
+        />
+        <FeatureItem
+          onPress={onRecognizeEHICOnImage}
+          title={'Recognize EHIC on Image'}
+        />
+        <FeatureItem
+          onPress={onRecognizeGenericDocument}
+          title={'Recognize GenericDocument on Image'}
         />
 
         <FeatureHeader title={'MISCELLANEOUS'} />

@@ -1,30 +1,25 @@
 import {useCallback, useContext} from 'react';
 import {
-  ActivityIndicatorContext,
-  BarcodeDocumentFormatContext,
-  BarcodeFormatsContext,
-} from '@context';
-import {
   checkLicense,
   errorMessageAlert,
   PrimaryRouteNavigationProp,
   Screens,
   selectImagesFromLibrary,
 } from '@utils';
+import {ActivityIndicatorContext} from '@context';
 import {useNavigation} from '@react-navigation/native';
 
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import ScanbotSDK, {
+  GenericDocumentRecognizerResult,
+} from 'react-native-scanbot-sdk';
 
-export function useDetectBarcodesOnStillImage() {
+export function useRecognizeGenericDocument() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
   const {setLoading} = useContext(ActivityIndicatorContext);
-  const {acceptedBarcodeDocumentFormats} = useContext(
-    BarcodeDocumentFormatContext,
-  );
-  const {acceptedBarcodeFormats} = useContext(BarcodeFormatsContext);
 
   return useCallback(async () => {
     try {
+      setLoading(true);
       /**
        * Check license status and return early
        * if the license is not valid
@@ -36,35 +31,29 @@ export function useDetectBarcodesOnStillImage() {
        * Select an image from the Image Library
        * Return early if no image is selected or there is an issue selecting an image
        **/
-      setLoading(true);
       const selectedImage = await selectImagesFromLibrary();
       if (!selectedImage) {
         return;
       }
       /**
-       * Detect the barcodes on the selected image
+       * Recognize Generic Document on the selected image and
+       * Handle the result by navigating to Screens.GENERIC_DOCUMENT_RESULT
        */
       const [imageFileUri] = selectedImage;
-      const result = await ScanbotSDK.detectBarcodesOnImage({
-        acceptedDocumentFormats: acceptedBarcodeDocumentFormats,
-        barcodeFormats: acceptedBarcodeFormats,
-        imageFileUri: imageFileUri,
-        stripCheckDigits: true,
-        gs1HandlingMode: 'NONE',
+      const result = await ScanbotSDK.recognizeGenericDocument({
+        imageFileUri,
+        acceptedDocumentFormats: [],
       });
-      /**
-       * Handle the result by navigating to Screens.BARCODE_RESULT
-       */
-      navigation.navigate(Screens.BARCODE_RESULT, result);
+
+      //TODO UpdateGDR Result
+      navigation.navigate(
+        Screens.GENERIC_DOCUMENT_RESULT,
+        result as unknown as GenericDocumentRecognizerResult,
+      );
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {
       setLoading(false);
     }
-  }, [
-    acceptedBarcodeDocumentFormats,
-    acceptedBarcodeFormats,
-    navigation,
-    setLoading,
-  ]);
+  }, [navigation, setLoading]);
 }

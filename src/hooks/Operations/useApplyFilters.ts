@@ -13,7 +13,7 @@ import ScanbotSDK, {
   ParametricFilter,
 } from 'react-native-scanbot-sdk';
 
-export function useApplyFiltersOnImage() {
+export function useApplyFilters() {
   const {addPage} = useContext(PageContext);
   const {setLoading} = useContext(ActivityIndicatorContext);
   const navigation = useNavigation<PrimaryRouteNavigationProp>();

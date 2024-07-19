@@ -15,20 +15,23 @@ import {useVinScanner} from './RTUUI/useVinScanner';
 import {useMRZScanner} from './RTUUI/useMRZScanner';
 
 import {useApplyImageFiltersOnPage} from './Operations/useApplyImageFiltersOnPage';
-import {useDetectBarcodesOnStillImage} from './Operations/useDetectBarcodesOnStillImage';
-import {useDetectDocumentFromImage} from './Operations/useDetectDocumentFromImage';
+import {useDetectBarcodes} from './Operations/useDetectBarcodes';
+import {useDetectDocument} from './Operations/useDetectDocument';
 import {useDetectDocumentFromPage} from './Operations/useDetectDocumentFromPage';
 import {useExtractImagesFromPDF} from './Operations/useExtractImagesFromPDF';
 import {useExtractPagesFromPDF} from './Operations/useExtractPagesFromPDF';
-import {useApplyFiltersOnImage} from './Operations/useApplyFiltersOnImage';
+import {useApplyFilters} from './Operations/useApplyFilters';
 import {useLicenseInfo} from './Operations/useLicenseInfo';
 import {useOCRConfigs} from './Operations/useOCRConfigs';
 import {usePerformOCR} from './Operations/usePerformOCR';
-import {useRecognizeCheckOnImage} from './Operations/useRecognizeCheckOnImage';
+import {useRecognizeCheck} from './Operations/useRecognizeCheck';
 import {useRecognizeMRZOnImage} from './Operations/useRecognizeMRZOnImage';
 import {useCreatePDF} from './Operations/useCreatePDF';
 import {useWriteTIFF} from './Operations/useWriteTIFF';
 import {useCleanup} from './Operations/useCleanup';
+import {useRecognizeEHIC} from './Operations/useRecognizeEHIC';
+import {useRecognizeGenericDocument} from './Operations/useRecognizeGenericDocument';
+import {useRecognizeMedicalCertificate} from './Operations/useRecognizeMedicalCertificate';
 
 export {
   useLicenseValidityCheckWrapper,
@@ -46,18 +49,21 @@ export {
   useTextDataScanner,
   useVinScanner,
   useApplyImageFiltersOnPage,
-  useDetectBarcodesOnStillImage,
-  useDetectDocumentFromImage,
+  useDetectBarcodes,
+  useDetectDocument,
   useDetectDocumentFromPage,
   useExtractPagesFromPDF,
   useExtractImagesFromPDF,
-  useApplyFiltersOnImage,
+  useApplyFilters,
   useLicenseInfo,
   useOCRConfigs,
   usePerformOCR,
-  useRecognizeCheckOnImage,
+  useRecognizeCheck,
   useCreatePDF,
   useRecognizeMRZOnImage,
   useWriteTIFF,
   useCleanup,
+  useRecognizeEHIC,
+  useRecognizeGenericDocument,
+  useRecognizeMedicalCertificate,
 };

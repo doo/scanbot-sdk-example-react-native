@@ -1,19 +1,20 @@
 import {useCallback, useContext} from 'react';
-import {ActivityIndicatorContext} from '@context';
 import {
   checkLicense,
   errorMessageAlert,
   resultMessageAlert,
   selectImagesFromLibrary,
 } from '@utils';
+import {ActivityIndicatorContext} from '@context';
 
 import ScanbotSDK from 'react-native-scanbot-sdk';
 
-export function useDetectDocumentFromImage() {
+export function useRecognizeEHIC() {
   const {setLoading} = useContext(ActivityIndicatorContext);
 
   return useCallback(async () => {
     try {
+      setLoading(true);
       /**
        * Check license status and return early
        * if the license is not valid
@@ -25,26 +26,20 @@ export function useDetectDocumentFromImage() {
        * Select an image from the Image Library
        * Return early if no image is selected or there is an issue selecting an image
        **/
-      setLoading(true);
-      const selectedImageResult = await selectImagesFromLibrary();
-      if (!selectedImageResult) {
+      const selectedImage = await selectImagesFromLibrary();
+      if (!selectedImage) {
         return;
       }
-
-      const [imageFileUri] = selectedImageResult;
-      // Detect document on selected image
-      const result = await ScanbotSDK.detectDocument(imageFileUri);
-      // Analyze document quality on selected image
-      const quality = await ScanbotSDK.documentQualityAnalyzer({
-        imageFileUri: imageFileUri,
-      });
       /**
-       * Handle the result by displaying an Alert
+       * Recognize health insurance card on the selected image and
+       * Handle the result by displaying an alert
        */
-      resultMessageAlert(
-        `Detected Document result: ${JSON.stringify(result, null, 2)}\n` +
-          `Document Quality result: ${JSON.stringify(quality, null, 2)}`,
+      const [imageFileUri] = selectedImage;
+      const result = await ScanbotSDK.recognizeEHIC(imageFileUri);
+      const fields = result.fields.map(
+        f => `${f.type}: ${f.value} (${f.confidence.toFixed(2)})`,
       );
+      resultMessageAlert(fields.join('\n'));
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {

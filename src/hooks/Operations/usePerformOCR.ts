@@ -1,5 +1,5 @@
 import {useCallback, useContext} from 'react';
-import {checkLicense, errorMessageAlert, infoMessageAlert} from '@utils';
+import {checkLicense, errorMessageAlert} from '@utils';
 import {ActivityIndicatorContext, PageContext} from '@context';
 
 import ScanbotSDK from 'react-native-scanbot-sdk';
@@ -20,20 +20,17 @@ export function usePerformOCR() {
       }
       /**
        * Perform optical character recognition with provided configuration and
-       * Save the result as PDF
+       * Display the result
        */
       const result = await ScanbotSDK.performOCR({
         imageFileUris: getImageUriFromPages(),
-        languages: ['en', 'de'],
-        options: {
-          outputFormat: 'FULL_OCR_RESULT',
+        ocrConfiguration: {
           engineMode: 'SCANBOT_OCR',
         },
       });
       /**
-       * Handle the result by displaying an Alert
+       * Handle the result
        */
-      infoMessageAlert('PDF with OCR layer created: ' + result.pdfFileUri);
     } catch (e) {
       errorMessageAlert('ERROR: ' + JSON.stringify(e));
     } finally {
