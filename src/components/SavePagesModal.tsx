@@ -1,7 +1,7 @@
 import {Modal, StyleSheet, Text, View} from 'react-native';
 import React, {useCallback} from 'react';
 import {COLORS} from '@theme';
-import {usePerformOCR, useCreatePDF, useWriteTIFF} from '@hooks';
+import {useCreatePDF, useWriteTIFF} from '@hooks';
 
 export function SavePagesModal({
   isVisible,
@@ -11,28 +11,27 @@ export function SavePagesModal({
   onDismiss: () => void;
 }) {
   const savePDF = useCreatePDF();
-  const performOCR = usePerformOCR();
   const writeTiff = useWriteTIFF();
 
-  const onSavePDF = useCallback(async () => {
-    onDismiss();
-    await savePDF();
-  }, [onDismiss, savePDF]);
+  const onSavePDF = useCallback(
+    (sandwichedPDF: boolean) => {
+      return async () => {
+        onDismiss();
+        await savePDF(sandwichedPDF);
+      };
+    },
+    [onDismiss, savePDF],
+  );
 
-  const onSavePDFWithOCR = useCallback(async () => {
-    onDismiss();
-    await performOCR();
-  }, [onDismiss, performOCR]);
-
-  const saveTiffOneBit = useCallback(async () => {
-    onDismiss();
-    await writeTiff(true);
-  }, [onDismiss, writeTiff]);
-
-  const saveTiffColor = useCallback(async () => {
-    onDismiss();
-    await writeTiff(false);
-  }, [onDismiss, writeTiff]);
+  const saveTiff = useCallback(
+    (binarized: boolean) => {
+      return async () => {
+        onDismiss();
+        await writeTiff(binarized);
+      };
+    },
+    [onDismiss, writeTiff],
+  );
 
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible}>
@@ -41,22 +40,22 @@ export function SavePagesModal({
           <Text style={styles.text}>How would you like to save the pages?</Text>
           <Text
             style={[styles.button, styles.actionButton]}
-            onPress={onSavePDF}>
+            onPress={onSavePDF(false)}>
             PDF
           </Text>
           <Text
             style={[styles.button, styles.actionButton]}
-            onPress={onSavePDFWithOCR}>
-            PDF with OCR
+            onPress={onSavePDF(true)}>
+            PDF with OCR ( SandwichedPDF )
           </Text>
           <Text
             style={[styles.button, styles.actionButton]}
-            onPress={saveTiffOneBit}>
+            onPress={saveTiff(true)}>
             TIFF (1-bit B&W)
           </Text>
           <Text
             style={[styles.button, styles.actionButton]}
-            onPress={saveTiffColor}>
+            onPress={saveTiff(false)}>
             TIFF (color)
           </Text>
           <Text style={[styles.button, styles.closeButton]} onPress={onDismiss}>
