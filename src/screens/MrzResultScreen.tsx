@@ -15,15 +15,16 @@ export function MrzResultScreen() {
     return () => (
       <View>
         <ResultHeader title={'MRZ Document Result'} />
-        {GenericDocumentUtils.extractGenericDocumentFields(
-          mrzScannerResult.mrz,
-        ).map((field, index) => (
-          <ResultFieldRow
-            key={field.type.name + index}
-            title={field.type.name.trim()}
-            value={field.value?.text}
-          />
-        ))}
+        {mrzScannerResult.mrz !== undefined &&
+          GenericDocumentUtils.extractGenericDocumentFields(
+            mrzScannerResult.mrz,
+          ).map((field, index) => (
+            <ResultFieldRow
+              key={field.type.name + index}
+              title={field.type.name.trim()}
+              value={field.value?.text}
+            />
+          ))}
       </View>
     );
   }, [mrzScannerResult]);

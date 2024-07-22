@@ -26,7 +26,6 @@ export function GenericDocumentResultScreen() {
 
   return (
     <ResultContainer>
-      <ResultHeader title={'Generic Document recognition'} />
       <GenericDocuments />
     </ResultContainer>
   );

@@ -45,7 +45,7 @@ export function useDetectDocumentFromPage() {
        * Handle the result by navigating to Screens.IMAGE_RESULTS
        */
       addPage(page);
-      navigation.navigate(Screens.IMAGE_RESULTS);
+      navigation.navigate(Screens.PAGE_RESULTS);
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {

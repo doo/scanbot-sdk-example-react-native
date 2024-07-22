@@ -229,7 +229,7 @@ export function HomeScreen() {
         />
         <FeatureItem
           onPress={onRecognizeGenericDocument}
-          title={'Recognize GenericDocument on Image'}
+          title={'Recognize Generic Document on Image'}
         />
 
         <FeatureHeader title={'MISCELLANEOUS'} />

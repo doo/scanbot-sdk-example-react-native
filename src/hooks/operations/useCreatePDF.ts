@@ -41,8 +41,8 @@ export function useCreatePDF() {
          * Handle the result by displaying an Alert
          */
         infoMessageAlert('PDF file created: ' + result.pdfFileUri);
-      } catch (e) {
-        errorMessageAlert('ERROR: ' + JSON.stringify(e));
+      } catch (e: any) {
+        errorMessageAlert(e.message);
       } finally {
         setLoading(false);
       }

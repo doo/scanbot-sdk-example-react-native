@@ -45,7 +45,7 @@ export function useApplyFilters() {
           const page = await ScanbotSDK.createPage(result.imageFileUri);
           const documentPage = await ScanbotSDK.detectDocumentOnPage(page);
           addPage(documentPage);
-          navigation.navigate(Screens.IMAGE_RESULTS);
+          navigation.navigate(Screens.PAGE_RESULTS);
         }
       } catch (e: any) {
         errorMessageAlert(e.message);

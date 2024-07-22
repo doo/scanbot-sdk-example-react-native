@@ -23,8 +23,8 @@ export const useCleanup = () => {
          */
         deleteAllPages();
         infoMessageAlert('All pages have been deleted successfully!');
-      } catch (e) {
-        errorMessageAlert('ERROR: ' + JSON.stringify(e));
+      } catch (e: any) {
+        errorMessageAlert(e.message);
       }
     });
   }, [deleteAllPages]);

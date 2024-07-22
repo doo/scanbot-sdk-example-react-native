@@ -9,9 +9,7 @@ import {
 import {ActivityIndicatorContext} from '@context';
 import {useNavigation} from '@react-navigation/native';
 
-import ScanbotSDK, {
-  GenericDocumentRecognizerResult,
-} from 'react-native-scanbot-sdk';
+import ScanbotSDK from 'react-native-scanbot-sdk';
 
 export function useRecognizeGenericDocument() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -45,11 +43,9 @@ export function useRecognizeGenericDocument() {
         acceptedDocumentFormats: [],
       });
 
-      //TODO UpdateGDR Result
-      navigation.navigate(
-        Screens.GENERIC_DOCUMENT_RESULT,
-        result as unknown as GenericDocumentRecognizerResult,
-      );
+      navigation.navigate(Screens.GENERIC_DOCUMENT_RESULT, {
+        documents: [result.document],
+      });
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {

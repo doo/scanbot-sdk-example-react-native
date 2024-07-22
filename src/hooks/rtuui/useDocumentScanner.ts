@@ -43,7 +43,7 @@ export function useDocumentScanner() {
        */
       if (result.status === 'OK') {
         addMultiplePages(result.pages);
-        navigation.navigate(Screens.IMAGE_RESULTS);
+        navigation.navigate(Screens.PAGE_RESULTS);
       }
     } catch (e: any) {
       errorMessageAlert(e.message);

@@ -50,8 +50,8 @@ export function useWriteTIFF() {
          * Handle the result by displaying an Alert
          */
         infoMessageAlert('TIFF file created: ' + result.tiffFileUri);
-      } catch (e) {
-        errorMessageAlert('ERROR: ' + JSON.stringify(e));
+      } catch (e: any) {
+        errorMessageAlert(e.message);
       } finally {
         setLoading(false);
       }

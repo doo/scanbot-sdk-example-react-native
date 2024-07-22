@@ -31,8 +31,8 @@ export function usePerformOCR() {
       /**
        * Handle the result
        */
-    } catch (e) {
-      errorMessageAlert('ERROR: ' + JSON.stringify(e));
+    } catch (e: any) {
+      errorMessageAlert(e.message);
     } finally {
       setLoading(false);
     }
