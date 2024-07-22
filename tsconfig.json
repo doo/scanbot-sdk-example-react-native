@@ -2,11 +2,11 @@
   "compilerOptions": {
     "jsx": "react",
     "paths": {
-      "@components": ["src/components"],
-      "@context": ["src/context"],
-      "@hooks": ["src/hooks"],
-      "@utils": ["src/utils"],
-      "@theme": ["src/theme"]
+      "@components": ["./src/components"],
+      "@context": ["./src/context"],
+      "@hooks": ["./src/hooks"],
+      "@utils": ["./src/utils"],
+      "@theme": ["./src/theme"]
     }
   },
   "extends": "@tsconfig/react-native/tsconfig.json"
