@@ -2,6 +2,7 @@ import {useCallback, useContext} from 'react';
 import {
   checkLicense,
   errorMessageAlert,
+  infoMessageAlert,
   PrimaryRouteNavigationProp,
   Screens,
   selectImagesFromLibrary,
@@ -43,9 +44,13 @@ export function useRecognizeGenericDocument() {
         acceptedDocumentFormats: [],
       });
 
-      navigation.navigate(Screens.GENERIC_DOCUMENT_RESULT, {
-        documents: [result.document],
-      });
+      if (result.document) {
+        navigation.navigate(Screens.GENERIC_DOCUMENT_RESULT, {
+          documents: [result.document],
+        });
+      } else {
+        infoMessageAlert('No recognized document found.');
+      }
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {
