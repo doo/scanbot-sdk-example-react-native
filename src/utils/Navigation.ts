@@ -7,6 +7,7 @@ import {
   MrzScannerResult,
   Page,
 } from 'react-native-scanbot-sdk';
+import {BarcodeScannerResult as BarcodeScannerV2Result} from 'react-native-scanbot-sdk/ui_v2';
 import {RouteProp} from '@react-navigation/native';
 
 export enum Screens {
@@ -18,15 +19,17 @@ export enum Screens {
   MRZ_RESULT = 'mrzResult',
   GENERIC_DOCUMENT_RESULT = 'genericDocumentResult',
   BARCODE_RESULT = 'barcodeResult',
+  BARCODE_V2_RESULT = 'barcodeV2Result',
   MEDICAL_CERTIFICATE_RESULT = 'medicalCertificateResult',
   IMAGE_DETAILS = 'imageDetails',
-  IMAGE_RESULTS = 'imageResults',
+  PAGE_RESULTS = 'imageResults',
 }
 
 export const ScreenTitles: Record<Screens, string> = {
   [Screens.HOME]: 'Scanbot SDK Example React',
   [Screens.BARCODE_CAMERA_VIEW]: 'Barcode Camera View ',
   [Screens.BARCODE_RESULT]: 'Barcode Result',
+  [Screens.BARCODE_V2_RESULT]: 'Barcode Result',
   [Screens.BARCODE_FORMATS]: 'Barcode Formats',
   [Screens.BARCODE_DOCUMENT_FORMATS]: 'Barcode Document Formats',
   [Screens.CHECK_RECOGNIZER_RESULT]: 'Check Recognizer Result',
@@ -34,13 +37,14 @@ export const ScreenTitles: Record<Screens, string> = {
   [Screens.GENERIC_DOCUMENT_RESULT]: 'Generic Document Recognizer Result',
   [Screens.MEDICAL_CERTIFICATE_RESULT]: 'Medical Certificate Result',
   [Screens.IMAGE_DETAILS]: 'Image Details',
-  [Screens.IMAGE_RESULTS]: 'Image Results',
+  [Screens.PAGE_RESULTS]: 'Page Results',
 };
 
 export type PrimaryRoutesParamList = {
   [Screens.HOME]: undefined;
   [Screens.BARCODE_CAMERA_VIEW]: undefined;
   [Screens.BARCODE_RESULT]: BarcodeScannerResult;
+  [Screens.BARCODE_V2_RESULT]: BarcodeScannerV2Result;
   [Screens.BARCODE_FORMATS]: undefined;
   [Screens.BARCODE_DOCUMENT_FORMATS]: undefined;
   [Screens.CHECK_RECOGNIZER_RESULT]: CheckRecognizerResult;
@@ -48,7 +52,7 @@ export type PrimaryRoutesParamList = {
   [Screens.GENERIC_DOCUMENT_RESULT]: GenericDocumentRecognizerResult;
   [Screens.MEDICAL_CERTIFICATE_RESULT]: MedicalCertificateScannerResult;
   [Screens.IMAGE_DETAILS]: Page;
-  [Screens.IMAGE_RESULTS]: undefined;
+  [Screens.PAGE_RESULTS]: undefined;
 };
 
 export type PrimaryRouteNavigationProp = StackNavigationProp<
@@ -84,4 +88,9 @@ export type GenericDocumentResultScreenRouteProp = RouteProp<
 export type BarcodeResultScreenRouteProp = RouteProp<
   PrimaryRoutesParamList,
   Screens.BARCODE_RESULT
+>;
+
+export type BarcodeV2ResultScreenRouteProp = RouteProp<
+  PrimaryRoutesParamList,
+  Screens.BARCODE_V2_RESULT
 >;

@@ -9,10 +9,10 @@ import {BarcodeDocumentFormatContext, BarcodeFormatsContext} from '@context';
 import {useNavigation} from '@react-navigation/native';
 
 import ScanbotSDK, {
-  BatchBarcodeScannerConfiguration,
+  BarcodeScannerConfiguration,
 } from 'react-native-scanbot-sdk';
 
-export function useBatchBarcodesScanner() {
+export function useLegacyBarcodeScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
   const {acceptedBarcodeFormats} = useContext(BarcodeFormatsContext);
   const {acceptedBarcodeDocumentFormats} = useContext(
@@ -29,16 +29,16 @@ export function useBatchBarcodesScanner() {
         return;
       }
       /**
-       * Create the batch barcode scanner configuration object and
-       * start the batch barcode scanner with the configuration
+       * Create the barcode scanner configuration object and
+       * start the barcode scanner with the configuration
        */
-      const config: BatchBarcodeScannerConfiguration = {
+      const config: BarcodeScannerConfiguration = {
         acceptedDocumentFormats: acceptedBarcodeDocumentFormats,
         barcodeFormats: acceptedBarcodeFormats,
-        finderAspectRatio: {width: 2, height: 1},
+        finderAspectRatio: {width: 1, height: 1},
         useButtonsAllCaps: false,
       };
-      const result = await ScanbotSDK.UI.startBatchBarcodeScanner(config);
+      const result = await ScanbotSDK.UI.startBarcodeScanner(config);
       /**
        * Handle the result if result status is OK
        */

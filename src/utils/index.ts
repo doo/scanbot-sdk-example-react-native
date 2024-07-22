@@ -13,6 +13,7 @@ import {
 } from './SDKUtils';
 import {
   BarcodeResultScreenRouteProp,
+  BarcodeV2ResultScreenRouteProp,
   CheckRecognizerResultScreenRouteProp,
   GenericDocumentResultScreenRouteProp,
   ImageDetailScreenRouteProp,
@@ -47,4 +48,5 @@ export type {
   MedicalCertificateResultScreenRouteProp,
   GenericDocumentResultScreenRouteProp,
   BarcodeResultScreenRouteProp,
+  BarcodeV2ResultScreenRouteProp,
 };

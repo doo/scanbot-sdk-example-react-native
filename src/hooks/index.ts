@@ -1,42 +1,47 @@
 import {useLicenseValidityCheckWrapper} from './useLicenseValidityCheck';
 
-import {useBarcodeScanner} from './RTUUI/useBarcodeScanner';
-import {useBatchBarcodesScanner} from './RTUUI/useBatchBarcodesScanner';
-import {useCheckRecognizer} from './RTUUI/useCheckRecognizer';
-import {useCroppingScreen} from './RTUUI/useCroppingScreen';
-import {useDocumentScanner} from './RTUUI/useDocumentScanner';
-import {useEHICScanner} from './RTUUI/useEHICScanner';
-import {useFinderDocumentScanner} from './RTUUI/useFinderDocumentScanner';
-import {useGenericDocumentScanner} from './RTUUI/useGenericDocumentScanner';
-import {useLicensePlateScanner} from './RTUUI/useLicensePlateScanner';
-import {useMedicalCertificateScanner} from './RTUUI/useMedicalCertificateScanner';
-import {useTextDataScanner} from './RTUUI/useTextDataScanner';
-import {useVinScanner} from './RTUUI/useVinScanner';
-import {useMRZScanner} from './RTUUI/useMRZScanner';
+import {useCheckRecognizer} from './rtuui/useCheckRecognizer';
+import {useCroppingScreen} from './rtuui/useCroppingScreen';
+import {useDocumentScanner} from './rtuui/useDocumentScanner';
+import {useEHICScanner} from './rtuui/useEHICScanner';
+import {useFinderDocumentScanner} from './rtuui/useFinderDocumentScanner';
+import {useGenericDocumentScanner} from './rtuui/useGenericDocumentScanner';
+import {useLicensePlateScanner} from './rtuui/useLicensePlateScanner';
+import {useMedicalCertificateScanner} from './rtuui/useMedicalCertificateScanner';
+import {useTextDataScanner} from './rtuui/useTextDataScanner';
+import {useVinScanner} from './rtuui/useVinScanner';
+import {useMRZScanner} from './rtuui/useMRZScanner';
 
-import {useApplyImageFiltersOnPage} from './Operations/useApplyImageFiltersOnPage';
-import {useDetectBarcodes} from './Operations/useDetectBarcodes';
-import {useDetectDocument} from './Operations/useDetectDocument';
-import {useDetectDocumentFromPage} from './Operations/useDetectDocumentFromPage';
-import {useExtractImagesFromPDF} from './Operations/useExtractImagesFromPDF';
-import {useExtractPagesFromPDF} from './Operations/useExtractPagesFromPDF';
-import {useApplyFilters} from './Operations/useApplyFilters';
-import {useLicenseInfo} from './Operations/useLicenseInfo';
-import {useOCRConfigs} from './Operations/useOCRConfigs';
-import {usePerformOCR} from './Operations/usePerformOCR';
-import {useRecognizeCheck} from './Operations/useRecognizeCheck';
-import {useRecognizeMRZOnImage} from './Operations/useRecognizeMRZOnImage';
-import {useCreatePDF} from './Operations/useCreatePDF';
-import {useWriteTIFF} from './Operations/useWriteTIFF';
-import {useCleanup} from './Operations/useCleanup';
-import {useRecognizeEHIC} from './Operations/useRecognizeEHIC';
-import {useRecognizeGenericDocument} from './Operations/useRecognizeGenericDocument';
-import {useRecognizeMedicalCertificate} from './Operations/useRecognizeMedicalCertificate';
+import {useFindAndPickScanning} from './rtuui/barcode/useFindAndPickScanning';
+import {useMultiScanning} from './rtuui/barcode/useMultiScanning';
+import {useMultiScanningAR} from './rtuui/barcode/useMultiScanningAR';
+import {useSingleScanning} from './rtuui/barcode/useSingleScanning';
+import {useLegacyBarcodeScanner} from './rtuui/barcode/useLegacyBarcodeScanner';
+import {useLegacyBatchBarcodesScanner} from './rtuui/barcode/useLegacyBatchBarcodesScanner';
+
+import {useApplyImageFiltersOnPage} from './operations/useApplyImageFiltersOnPage';
+import {useDetectBarcodes} from './operations/useDetectBarcodes';
+import {useDetectDocument} from './operations/useDetectDocument';
+import {useDetectDocumentFromPage} from './operations/useDetectDocumentFromPage';
+import {useExtractImagesFromPDF} from './operations/useExtractImagesFromPDF';
+import {useExtractPagesFromPDF} from './operations/useExtractPagesFromPDF';
+import {useApplyFilters} from './operations/useApplyFilters';
+import {useLicenseInfo} from './operations/useLicenseInfo';
+import {useOCRConfigs} from './operations/useOCRConfigs';
+import {usePerformOCR} from './operations/usePerformOCR';
+import {useRecognizeCheck} from './operations/useRecognizeCheck';
+import {useRecognizeMRZOnImage} from './operations/useRecognizeMRZOnImage';
+import {useCreatePDF} from './operations/useCreatePDF';
+import {useWriteTIFF} from './operations/useWriteTIFF';
+import {useCleanup} from './operations/useCleanup';
+import {useRecognizeEHIC} from './operations/useRecognizeEHIC';
+import {useRecognizeGenericDocument} from './operations/useRecognizeGenericDocument';
+import {useRecognizeMedicalCertificate} from './operations/useRecognizeMedicalCertificate';
 
 export {
   useLicenseValidityCheckWrapper,
-  useBarcodeScanner,
-  useBatchBarcodesScanner,
+  useLegacyBarcodeScanner,
+  useLegacyBatchBarcodesScanner,
   useCheckRecognizer,
   useCroppingScreen,
   useDocumentScanner,
@@ -66,4 +71,8 @@ export {
   useRecognizeEHIC,
   useRecognizeGenericDocument,
   useRecognizeMedicalCertificate,
+  useFindAndPickScanning,
+  useMultiScanning,
+  useMultiScanningAR,
+  useSingleScanning,
 };

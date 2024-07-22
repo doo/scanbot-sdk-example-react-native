@@ -1,10 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React, {useEffect} from 'react';
 import {
   LogBox,
@@ -19,13 +12,6 @@ import ScanbotSDK, {ScanbotSdkConfiguration} from 'react-native-scanbot-sdk';
 import {DocumentDirectoryPath, ExternalDirectoryPath} from 'react-native-fs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {ImageDetailScreen} from './src/screens/ImageDetailScreen';
-import {MedicalCertificateResultScreen} from './src/screens/MedicalCertificateResultScreen';
-import {GenericDocumentResultScreen} from './src/screens/GenericDocumentResultScreen';
-import {CheckRecognizerResultScreen} from './src/screens/CheckRecognizerResultScreen';
-import {BarcodeFormatsScreen} from './src/screens/BarcodeFormatsScreen';
-import {BarcodeDocumentFormatsScreen} from './src/screens/BarcodeDocumentFormatsScreen';
-import {BarcodeCameraViewScreen} from './src/screens/BarcodeCameraViewScreen';
 import {
   errorMessageAlert,
   FILE_ENCRYPTION_ENABLED,
@@ -45,11 +31,20 @@ import {
   usePages,
 } from '@context';
 import {COLORS, ScanbotTheme} from '@theme';
-import {HomeScreen} from './src/screens/HomeScreen';
-import {ImageResultScreen} from './src/screens/ImageResultScreen';
 import {LoadingIndicator} from '@components';
+
+import {HomeScreen} from './src/screens/HomeScreen';
+import {PageResultScreen} from './src/screens/PageResultScreen';
 import {MrzResultScreen} from './src/screens/MrzResultScreen';
 import {BarcodeResultScreen} from './src/screens/BarcodeResultScreen';
+import {BarcodeV2ResultsScreen} from './src/screens/BarcodeV2ResultScreen';
+import {ImageDetailScreen} from './src/screens/ImageDetailScreen';
+import {MedicalCertificateResultScreen} from './src/screens/MedicalCertificateResultScreen';
+import {GenericDocumentResultScreen} from './src/screens/GenericDocumentResultScreen';
+import {CheckRecognizerResultScreen} from './src/screens/CheckRecognizerResultScreen';
+import {BarcodeFormatsScreen} from './src/screens/BarcodeFormatsScreen';
+import {BarcodeDocumentFormatsScreen} from './src/screens/BarcodeDocumentFormatsScreen';
+import {BarcodeCameraViewScreen} from './src/screens/BarcodeCameraViewScreen';
 
 const Stack = createStackNavigator<PrimaryRoutesParamList>();
 
@@ -140,8 +135,8 @@ function App() {
                     })}>
                     <Stack.Screen name={Screens.HOME} component={HomeScreen} />
                     <Stack.Screen
-                      name={Screens.IMAGE_RESULTS}
-                      component={ImageResultScreen}
+                      name={Screens.PAGE_RESULTS}
+                      component={PageResultScreen}
                     />
                     <Stack.Screen
                       name={Screens.IMAGE_DETAILS}
@@ -151,6 +146,10 @@ function App() {
                     <Stack.Screen
                       name={Screens.BARCODE_RESULT}
                       component={BarcodeResultScreen}
+                    />
+                    <Stack.Screen
+                      name={Screens.BARCODE_V2_RESULT}
+                      component={BarcodeV2ResultsScreen}
                     />
                     <Stack.Screen
                       name={Screens.MEDICAL_CERTIFICATE_RESULT}

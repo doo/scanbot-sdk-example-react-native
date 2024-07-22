@@ -19,7 +19,7 @@ export function FeatureItem({
 }
 
 export function FeatureHeader({title}: {title: string}) {
-  return <Text style={styles.sectionHeader}>{title}</Text>;
+  return <Text style={styles.sectionHeader}>{title.toUpperCase()}</Text>;
 }
 
 export function ScanbotLearnMore() {
@@ -38,7 +38,7 @@ export function ScanbotLearnMore() {
 
 const styles = StyleSheet.create({
   sectionItem: {
-    fontSize: 17,
+    fontSize: 16,
     marginTop: 14,
     marginBottom: 5,
   },
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   sectionHeader: {
-    fontSize: 13,
+    fontSize: 18,
     marginTop: 25,
     marginBottom: 0,
     fontWeight: 'bold',

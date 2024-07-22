@@ -8,8 +8,8 @@ import React, {
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {
   useApplyFilters,
-  useBarcodeScanner,
-  useBatchBarcodesScanner,
+  useLegacyBarcodeScanner,
+  useLegacyBatchBarcodesScanner,
   useCheckRecognizer,
   useDetectBarcodes,
   useDetectDocument,
@@ -18,6 +18,7 @@ import {
   useEHICScanner,
   useExtractImagesFromPDF,
   useExtractPagesFromPDF,
+  useFindAndPickScanning,
   useFinderDocumentScanner,
   useGenericDocumentScanner,
   useLicenseInfo,
@@ -25,12 +26,15 @@ import {
   useLicenseValidityCheckWrapper,
   useMedicalCertificateScanner,
   useMRZScanner,
+  useMultiScanning,
+  useMultiScanningAR,
   useOCRConfigs,
   useRecognizeCheck,
   useRecognizeEHIC,
   useRecognizeGenericDocument,
   useRecognizeMedicalCertificate,
   useRecognizeMRZOnImage,
+  useSingleScanning,
   useTextDataScanner,
   useVinScanner,
 } from '@hooks';
@@ -63,8 +67,12 @@ export function HomeScreen() {
   const onDetectDocumentFromImage = useDetectDocument();
   const onExtractPagesFromPDF = useExtractPagesFromPDF();
   const onExtractImagesFromPDF = useExtractImagesFromPDF();
-  const onBarcodeScanner = useBarcodeScanner();
-  const onBatchBarcodesScanner = useBatchBarcodesScanner();
+  const onBarcodeScanner = useLegacyBarcodeScanner();
+  const onBatchBarcodesScanner = useLegacyBatchBarcodesScanner();
+  const onSingleScanPress = useSingleScanning();
+  const onMultiScanPress = useMultiScanning();
+  const onMultiScanARPress = useMultiScanningAR();
+  const onFindAndPickScanPress = useFindAndPickScanning();
   const onDetectBarcodesOnStillImage = useDetectBarcodes();
   const onMRZScanner = useMRZScanner();
   const onMedicalCertificateScanner = useMedicalCertificateScanner();
@@ -132,15 +140,26 @@ export function HomeScreen() {
           title={'Extract images from PDF'}
         />
         <FeatureItem
-          onPress={() => navigation.navigate(Screens.IMAGE_RESULTS)}
-          title={'View Image Results'}
+          onPress={() => navigation.navigate(Screens.PAGE_RESULTS)}
+          title={'View Page Results'}
         />
 
         <FeatureHeader title={'BARCODE DETECTOR'} />
-        <FeatureItem onPress={onBarcodeScanner} title={'Scan QR-/Barcode'} />
         <FeatureItem
-          onPress={onBatchBarcodesScanner}
-          title={'Scan Multiple QR-/Barcode'}
+          title={'Single Scanning use case'}
+          onPress={onSingleScanPress}
+        />
+        <FeatureItem
+          title={'Multi Scanning use case'}
+          onPress={onMultiScanPress}
+        />
+        <FeatureItem
+          title={'Multi AR Scanning use case'}
+          onPress={onMultiScanARPress}
+        />
+        <FeatureItem
+          title={'Find And Pick Scanning use case'}
+          onPress={onFindAndPickScanPress}
         />
         <FeatureItem
           onPress={onClassicComponentScanner}
@@ -157,6 +176,13 @@ export function HomeScreen() {
         <FeatureItem
           onPress={() => navigation.navigate(Screens.BARCODE_DOCUMENT_FORMATS)}
           title={'Set Barcode Document Formats Filter'}
+        />
+
+        <FeatureHeader title={'LEGACY BARCODE DETECTOR'} />
+        <FeatureItem onPress={onBarcodeScanner} title={'Scan QR-/Barcode'} />
+        <FeatureItem
+          onPress={onBatchBarcodesScanner}
+          title={'Scan Multiple QR-/Barcode'}
         />
 
         <FeatureHeader title={'DATA DETECTORS'} />
