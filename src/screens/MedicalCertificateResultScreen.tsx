@@ -140,7 +140,7 @@ const CheckboxesData = ({
   };
 
   return (
-    <View>
+    <ResultContainer>
       {Object.entries(checkboxes).map(([key, data], index) => (
         <ResultFieldRow
           title={displayMap[key as CheckBoxKeys] ?? key}
@@ -148,6 +148,6 @@ const CheckboxesData = ({
           key={key + index}
         />
       ))}
-    </View>
+    </ResultContainer>
   );
 };

@@ -41,7 +41,7 @@ export function useRecognizeMedicalCertificate() {
       const result = await ScanbotSDK.recognizeMedicalCertificate({
         imageFileUri,
         options: {
-          returnCroppedDocumentImage: true,
+          returnCroppedDocumentUri: true,
           patientInfoRecognitionEnabled: true,
           barcodeRecognitionEnabled: true,
         },

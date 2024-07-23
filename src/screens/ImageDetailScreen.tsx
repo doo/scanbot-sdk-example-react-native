@@ -1,5 +1,5 @@
 import React, {useCallback, useContext, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import ScanbotSDK, {ParametricFilter} from 'react-native-scanbot-sdk';
 import {BottomActionBar, ImageFilterModal, PreviewImage} from '@components';
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -59,7 +59,7 @@ export function ImageDetailScreen() {
   }, [onDeletePage]);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <PreviewImage
         imageUri={page.documentPreviewImageFileUri}
         style={styles.imageDetails}
@@ -77,7 +77,7 @@ export function ImageDetailScreen() {
         onDismiss={toggleFilterModal}
         onSelect={onFilterSelect}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 

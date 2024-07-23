@@ -42,10 +42,6 @@ export function CheckRecognizerResultScreen() {
         title={'Check status'}
         value={checkRecognizerResult.checkStatus}
       />
-      <ResultFieldRow
-        title={'Check type'}
-        value={checkRecognizerResult.checkType}
-      />
       <CheckDocument />
     </ResultContainer>
   );

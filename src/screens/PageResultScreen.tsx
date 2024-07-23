@@ -1,5 +1,6 @@
 import React, {useCallback, useContext, useState} from 'react';
 import {
+  SafeAreaView,
   StyleSheet,
   TouchableOpacity,
   useWindowDimensions,
@@ -46,7 +47,7 @@ export function PageResultScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.gallery}>
           {pageList.map(page => (
@@ -75,7 +76,7 @@ export function PageResultScreen() {
         onButtonThree={onDelete}
       />
       <SavePagesModal onDismiss={onDismiss} isVisible={modalVisible} />
-    </View>
+    </SafeAreaView>
   );
 }
 

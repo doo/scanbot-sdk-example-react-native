@@ -6,6 +6,23 @@ import {GenericDocumentUtils} from '../utils/GenericDocumentUtils';
 import {ResultContainer, ResultFieldRow, ResultHeader} from '@components';
 import {View} from 'react-native';
 
+function GenericDocumentResult({document}: {document: GenericDocument}) {
+  return (
+    <View>
+      <ResultHeader title={'Generic Document'} />
+      {GenericDocumentUtils.extractGenericDocumentFields(document).map(
+        (field, index) => (
+          <ResultFieldRow
+            key={field.type.name + index}
+            title={field.type.name.trim()}
+            value={field.value?.text}
+          />
+        ),
+      )}
+    </View>
+  );
+}
+
 export function GenericDocumentResultScreen() {
   const {params: genericDocumentResult} =
     useRoute<GenericDocumentResultScreenRouteProp>();
@@ -28,22 +45,5 @@ export function GenericDocumentResultScreen() {
     <ResultContainer>
       <GenericDocuments />
     </ResultContainer>
-  );
-}
-
-function GenericDocumentResult({document}: {document: GenericDocument}) {
-  return (
-    <View>
-      <ResultHeader title={'Generic Document'} />
-      {GenericDocumentUtils.extractGenericDocumentFields(document).map(
-        (field, index) => (
-          <ResultFieldRow
-            key={field.type.name + index}
-            title={field.type.name.trim()}
-            value={field.value?.text}
-          />
-        ),
-      )}
-    </View>
   );
 }

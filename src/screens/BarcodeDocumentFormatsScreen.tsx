@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {StyleSheet, Switch, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Switch, Text, View} from 'react-native';
 import {BarcodeDocumentFormatContext} from '@context';
 import {SwitchOptionsList} from '@components';
 
@@ -12,7 +12,7 @@ export function BarcodeDocumentFormatsScreen() {
   } = useContext(BarcodeDocumentFormatContext);
 
   return (
-    <View>
+    <SafeAreaView>
       <View style={styles.headerContainer}>
         <Text style={styles.headerItemText}>
           Enable Document Format Filters
@@ -29,7 +29,7 @@ export function BarcodeDocumentFormatsScreen() {
         isFilteringEnabled={!isFilteringEnabled}
         onPress={toggleBarcodeDocumentFormats}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 
