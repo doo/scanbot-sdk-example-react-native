@@ -1,7 +1,12 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, useWindowDimensions, View} from 'react-native';
 import {useRoute} from '@react-navigation/native';
-import {PreviewImage, ResultFieldRow, ResultHeader} from '@components';
+import {
+  PreviewImage,
+  ResultContainer,
+  ResultFieldRow,
+  ResultHeader,
+} from '@components';
 import {PlainDataResultParam, PlainDataResultScreenRouteProp} from '@utils';
 
 function PlainImageResult({
@@ -9,6 +14,7 @@ function PlainImageResult({
 }: {
   imageUris: PlainDataResultParam['imageUris'];
 }) {
+  const {width, height} = useWindowDimensions();
   if (!imageUris || imageUris.length === 0) {
     return null;
   }
@@ -16,7 +22,11 @@ function PlainImageResult({
   return (
     <View>
       {imageUris.map(url => (
-        <PreviewImage imageUri={url} key={url} style={styles.image} />
+        <PreviewImage
+          imageUri={url}
+          key={url}
+          style={{width, height, resizeMode: 'contain'}}
+        />
       ))}
     </View>
   );
@@ -52,12 +62,10 @@ export function PlainDataResultScreen() {
   const {params} = useRoute<PlainDataResultScreenRouteProp>();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={{flex: 1}}>
-        <PlainImageResult imageUris={params.imageUris} />
-        <PlainDataResult data={params.data} />
-      </ScrollView>
-    </SafeAreaView>
+    <ResultContainer>
+      <PlainImageResult imageUris={params.imageUris} />
+      <PlainDataResult data={params.data} />
+    </ResultContainer>
   );
 }
 
@@ -72,10 +80,5 @@ const styles = StyleSheet.create({
   textDataContainer: {
     paddingHorizontal: 12,
     paddingVertical: 12,
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'contain',
   },
 });

@@ -3,14 +3,17 @@ import {ActivityIndicatorContext} from '@context';
 import {
   checkLicense,
   errorMessageAlert,
-  resultMessageAlert,
+  PrimaryRouteNavigationProp,
+  Screens,
   selectImagesFromLibrary,
 } from '@utils';
 
 import ScanbotSDK from 'react-native-scanbot-sdk';
+import {useNavigation} from '@react-navigation/native';
 
 export function useDetectDocument() {
   const {setLoading} = useContext(ActivityIndicatorContext);
+  const navigation = useNavigation<PrimaryRouteNavigationProp>();
 
   return useCallback(async () => {
     try {
@@ -39,16 +42,20 @@ export function useDetectDocument() {
         imageFileUri: imageFileUri,
       });
       /**
-       * Handle the result by displaying an Alert
+       * Handle the result by navigating to result screen
        */
-      resultMessageAlert(
-        `Detected Document result: ${JSON.stringify(result, null, 2)}\n` +
-          `Document Quality result: ${JSON.stringify(quality, null, 2)}`,
-      );
+      navigation.navigate(Screens.PLAIN_DATA_RESULT, {
+        imageUris: result.documentImageFileUri
+          ? [result.documentImageFileUri]
+          : undefined,
+        data:
+          `Detected Document result: ${JSON.stringify(result, null, 2)}\n` +
+          `Document Quality result: ${quality.result}`,
+      });
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {
       setLoading(false);
     }
-  }, [setLoading]);
+  }, [navigation, setLoading]);
 }
