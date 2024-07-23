@@ -1,4 +1,4 @@
-import {ActivityIndicatorContext, PageContext} from '@context';
+import {ActivityIndicatorContext} from '@context';
 import {useNavigation} from '@react-navigation/native';
 import {
   checkLicense,
@@ -8,13 +8,9 @@ import {
 } from '@utils';
 import {useCallback, useContext} from 'react';
 
-import ScanbotSDK, {
-  CustomBinarizationFilter,
-  ParametricFilter,
-} from 'react-native-scanbot-sdk';
+import ScanbotSDK, {ParametricFilter} from 'react-native-scanbot-sdk';
 
 export function useApplyFilters() {
-  const {addPage} = useContext(PageContext);
   const {setLoading} = useContext(ActivityIndicatorContext);
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
 
@@ -30,29 +26,23 @@ export function useApplyFilters() {
         }
         /**
          * Apply the selected image filer on the selected image
-         * Handle the result by
-         * Creating a page of the returned result from applyImageFilter
-         * Detect the document on the page
-         * Navigating to Screens.IMAGE_RESULTS
          */
         setLoading(true);
         const result = await ScanbotSDK.applyImageFilters(selectedImage, [
           filter,
-          new CustomBinarizationFilter(),
         ]);
-
-        if (result.imageFileUri) {
-          const page = await ScanbotSDK.createPage(result.imageFileUri);
-          const documentPage = await ScanbotSDK.detectDocumentOnPage(page);
-          addPage(documentPage);
-          navigation.navigate(Screens.PAGE_RESULTS);
-        }
+        /**
+         * Handle the result by navigating to result screen
+         */
+        navigation.navigate(Screens.PLAIN_DATA_RESULT, {
+          imageUris: [result.imageFileUri],
+        });
       } catch (e: any) {
         errorMessageAlert(e.message);
       } finally {
         setLoading(false);
       }
     },
-    [addPage, navigation, setLoading],
+    [navigation, setLoading],
   );
 }

@@ -45,6 +45,7 @@ import {CheckRecognizerResultScreen} from './src/screens/CheckRecognizerResultSc
 import {BarcodeFormatsScreen} from './src/screens/BarcodeFormatsScreen';
 import {BarcodeDocumentFormatsScreen} from './src/screens/BarcodeDocumentFormatsScreen';
 import {BarcodeCameraViewScreen} from './src/screens/BarcodeCameraViewScreen';
+import {PlainDataResultScreen} from './src/screens/PlainDataResultScreen';
 
 const Stack = createStackNavigator<PrimaryRoutesParamList>();
 
@@ -128,7 +129,6 @@ function App() {
               <BarcodeFormatsContext.Provider value={barcodeFormatsValues}>
                 <NavigationContainer theme={ScanbotTheme}>
                   <Stack.Navigator
-                    initialRouteName={Screens.HOME}
                     screenOptions={navigation => ({
                       title: ScreenTitles[navigation.route.name],
                       headerStyle: styles.headerStyle,
@@ -166,6 +166,10 @@ function App() {
                     <Stack.Screen
                       name={Screens.CHECK_RECOGNIZER_RESULT}
                       component={CheckRecognizerResultScreen}
+                    />
+                    <Stack.Screen
+                      name={Screens.PLAIN_DATA_RESULT}
+                      component={PlainDataResultScreen}
                     />
                     <Stack.Screen
                       name={Screens.BARCODE_FORMATS}

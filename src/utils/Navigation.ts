@@ -23,6 +23,7 @@ export enum Screens {
   MEDICAL_CERTIFICATE_RESULT = 'medicalCertificateResult',
   IMAGE_DETAILS = 'imageDetails',
   PAGE_RESULTS = 'imageResults',
+  PLAIN_DATA_RESULT = 'plainDataResult',
 }
 
 export const ScreenTitles: Record<Screens, string> = {
@@ -38,6 +39,7 @@ export const ScreenTitles: Record<Screens, string> = {
   [Screens.MEDICAL_CERTIFICATE_RESULT]: 'Medical Certificate Result',
   [Screens.IMAGE_DETAILS]: 'Image Details',
   [Screens.PAGE_RESULTS]: 'Page Results',
+  [Screens.PLAIN_DATA_RESULT]: 'Result',
 };
 
 export type PrimaryRoutesParamList = {
@@ -53,6 +55,7 @@ export type PrimaryRoutesParamList = {
   [Screens.MEDICAL_CERTIFICATE_RESULT]: MedicalCertificateScannerResult;
   [Screens.IMAGE_DETAILS]: Page;
   [Screens.PAGE_RESULTS]: undefined;
+  [Screens.PLAIN_DATA_RESULT]: PlainDataResultParam;
 };
 
 export type PrimaryRouteNavigationProp = StackNavigationProp<
@@ -94,3 +97,18 @@ export type BarcodeV2ResultScreenRouteProp = RouteProp<
   PrimaryRoutesParamList,
   Screens.BARCODE_V2_RESULT
 >;
+
+export type PlainDataResultScreenRouteProp = RouteProp<
+  PrimaryRoutesParamList,
+  Screens.PLAIN_DATA_RESULT
+>;
+
+export type PlainDataResultParam = {
+  imageUris?: string[];
+  data?:
+    | Array<{
+        key: string;
+        value: string;
+      }>
+    | string;
+};

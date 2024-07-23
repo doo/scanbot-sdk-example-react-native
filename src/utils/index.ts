@@ -23,6 +23,8 @@ import {
   PrimaryRoutesParamList,
   Screens,
   ScreenTitles,
+  PlainDataResultScreenRouteProp,
+  PlainDataResultParam,
 } from './Navigation';
 
 export {
@@ -49,4 +51,6 @@ export type {
   GenericDocumentResultScreenRouteProp,
   BarcodeResultScreenRouteProp,
   BarcodeV2ResultScreenRouteProp,
+  PlainDataResultScreenRouteProp,
+  PlainDataResultParam,
 };

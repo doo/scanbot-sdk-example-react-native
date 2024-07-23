@@ -5,11 +5,9 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, Text} from 'react-native';
 import {
   useApplyFilters,
-  useLegacyBarcodeScanner,
-  useLegacyBatchBarcodesScanner,
   useCheckRecognizer,
   useDetectBarcodes,
   useDetectDocument,
@@ -21,6 +19,8 @@ import {
   useFindAndPickScanning,
   useFinderDocumentScanner,
   useGenericDocumentScanner,
+  useLegacyBarcodeScanner,
+  useLegacyBatchBarcodesScanner,
   useLicenseInfo,
   useLicensePlateScanner,
   useLicenseValidityCheckWrapper,
@@ -29,6 +29,7 @@ import {
   useMultiScanning,
   useMultiScanningAR,
   useOCRConfigs,
+  usePerformOCR,
   useRecognizeCheck,
   useRecognizeEHIC,
   useRecognizeGenericDocument,
@@ -87,6 +88,7 @@ export function HomeScreen() {
   const onRecognizeMedicalCertificateOnImage = useRecognizeMedicalCertificate();
   const onRecognizeEHICOnImage = useRecognizeEHIC();
   const onRecognizeGenericDocument = useRecognizeGenericDocument();
+  const onPerformOCR = usePerformOCR();
   const onLicenseInfo = useLicenseInfo();
   const onOCRConfigs = useOCRConfigs();
 
@@ -115,7 +117,7 @@ export function HomeScreen() {
   );
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ScrollView style={styles.list} showsVerticalScrollIndicator={false}>
         <FeatureHeader title={'DOCUMENT SCANNING'} />
         <FeatureItem onPress={onDocumentScanner} title={'Scan Document'} />
@@ -134,10 +136,6 @@ export function HomeScreen() {
         <FeatureItem
           onPress={onExtractPagesFromPDF}
           title={'Extract pages from PDF'}
-        />
-        <FeatureItem
-          onPress={onExtractImagesFromPDF}
-          title={'Extract images from PDF'}
         />
         <FeatureItem
           onPress={() => navigation.navigate(Screens.PAGE_RESULTS)}
@@ -204,11 +202,8 @@ export function HomeScreen() {
           onPress={onLicensePlateScanner}
           title={'Scan Vehicle License Plate'}
         />
-        <FeatureItem onPress={onVinScanner} title={'Start VIN Scanner'} />
-        <FeatureItem
-          onPress={onTextDataScanner}
-          title={'Start Text Data Scanner'}
-        />
+        <FeatureItem onPress={onVinScanner} title={'Scan VIN'} />
+        <FeatureItem onPress={onTextDataScanner} title={'Scan Text Data'} />
 
         <FeatureHeader title={'DATA DETECTORS ON IMAGES'} />
         <FeatureItem
@@ -235,7 +230,12 @@ export function HomeScreen() {
         <FeatureHeader title={'MISCELLANEOUS'} />
         <FeatureItem
           onPress={onApplyFilterOnImage}
-          title={'Import Image and Apply Filter'}
+          title={'Apply Image Filter'}
+        />
+        <FeatureItem title={'Perform OCR on image'} onPress={onPerformOCR} />
+        <FeatureItem
+          onPress={onExtractImagesFromPDF}
+          title={'Extract images from PDF'}
         />
         <FeatureItem onPress={onLicenseInfo} title={'License Info'} />
         <FeatureItem onPress={onOCRConfigs} title={'OCR Configs'} />
@@ -249,7 +249,7 @@ export function HomeScreen() {
       <Text style={styles.copyrightLabel}>
         Copyright {new Date().getFullYear()} doo GmbH. All rights reserved.
       </Text>
-    </View>
+    </SafeAreaView>
   );
 }
 

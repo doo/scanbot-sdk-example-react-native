@@ -2,15 +2,18 @@ import {useCallback, useContext} from 'react';
 import {
   checkLicense,
   errorMessageAlert,
-  resultMessageAlert,
+  PrimaryRouteNavigationProp,
+  Screens,
   selectPDFFileUri,
 } from '@utils';
 import {ActivityIndicatorContext} from '@context';
 
 import ScanbotSDK from 'react-native-scanbot-sdk';
+import {useNavigation} from '@react-navigation/native';
 
 export function useExtractImagesFromPDF() {
   const {setLoading} = useContext(ActivityIndicatorContext);
+  const navigation = useNavigation<PrimaryRouteNavigationProp>();
 
   return useCallback(async () => {
     try {
@@ -43,13 +46,15 @@ export function useExtractImagesFromPDF() {
         return;
       }
       /**
-       * Handle the result by displaying an Alert
+       * Handle the result by navigating to result screen
        */
-      resultMessageAlert(JSON.stringify(imageFilesUrls, null, 2));
+      navigation.navigate(Screens.PLAIN_DATA_RESULT, {
+        imageUris: imageFilesUrls,
+      });
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {
       setLoading(false);
     }
-  }, [setLoading]);
+  }, [navigation, setLoading]);
 }
