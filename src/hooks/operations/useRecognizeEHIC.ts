@@ -2,15 +2,18 @@ import {useCallback, useContext} from 'react';
 import {
   checkLicense,
   errorMessageAlert,
-  resultMessageAlert,
+  PrimaryRouteNavigationProp,
+  Screens,
   selectImagesFromLibrary,
 } from '@utils';
 import {ActivityIndicatorContext} from '@context';
 
 import ScanbotSDK from 'react-native-scanbot-sdk';
+import {useNavigation} from '@react-navigation/native';
 
 export function useRecognizeEHIC() {
   const {setLoading} = useContext(ActivityIndicatorContext);
+  const navigation = useNavigation<PrimaryRouteNavigationProp>();
 
   return useCallback(async () => {
     try {
@@ -36,14 +39,19 @@ export function useRecognizeEHIC() {
        */
       const [imageFileUri] = selectedImage;
       const result = await ScanbotSDK.recognizeEHIC(imageFileUri);
-      const fields = result.fields.map(
-        f => `${f.type}: ${f.value} (${f.confidence.toFixed(2)})`,
-      );
-      resultMessageAlert(fields.join('\n'));
+      /**
+       * Handle the result by navigating to result screen
+       */
+      navigation.navigate(Screens.PLAIN_DATA_RESULT, {
+        data: result.fields.map(field => ({
+          key: field.type,
+          value: `${field.value} (${field.confidence.toFixed(2)})`,
+        })),
+      });
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {
       setLoading(false);
     }
-  }, [setLoading]);
+  }, [navigation, setLoading]);
 }

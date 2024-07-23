@@ -45,9 +45,7 @@ export function useDetectDocument() {
        * Handle the result by navigating to result screen
        */
       navigation.navigate(Screens.PLAIN_DATA_RESULT, {
-        imageUris: result.documentImageFileUri
-          ? [result.documentImageFileUri]
-          : undefined,
+        imageUris: [result.documentImageFileUri],
         data:
           `Detected Document result: ${JSON.stringify(result, null, 2)}\n` +
           `Document Quality result: ${quality.result}`,

@@ -2,15 +2,19 @@ import {
   checkLicense,
   errorMessageAlert,
   infoMessageAlert,
-  resultMessageAlert,
+  PrimaryRouteNavigationProp,
+  Screens,
 } from '@utils';
 import {useCallback} from 'react';
 
 import ScanbotSDK, {
   HealthInsuranceCardScannerConfiguration,
 } from 'react-native-scanbot-sdk';
+import {useNavigation} from '@react-navigation/native';
 
 export function useEHICScanner() {
+  const navigation = useNavigation<PrimaryRouteNavigationProp>();
+
   return useCallback(async () => {
     try {
       /**
@@ -42,16 +46,16 @@ export function useEHICScanner() {
       };
       const result = await ScanbotSDK.UI.startEHICScanner(config);
       /**
-       * Handle the result if result status is OK
+       * Handle the result by navigating to result screen
        */
-      if (result.status === 'OK') {
-        const fields = result.fields.map(
-          f => `${f.type}: ${f.value} (${f.confidence.toFixed(2)})`,
-        );
-        resultMessageAlert(fields.join('\n'));
-      }
+      navigation.navigate(Screens.PLAIN_DATA_RESULT, {
+        data: result.fields.map(field => ({
+          key: field.type,
+          value: `${field.value} (${field.confidence.toFixed(2)})`,
+        })),
+      });
     } catch (e: any) {
       errorMessageAlert(e.message);
     }
-  }, []);
+  }, [navigation]);
 }

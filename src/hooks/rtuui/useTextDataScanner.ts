@@ -40,9 +40,9 @@ export function useTextDataScanner() {
       /**
        * Handle the result if result status is OK
        */
-      if (result.status === 'OK' && result.result?.text) {
+      if (result.status === 'OK') {
         resultMessageAlert(
-          `${result.result?.text} : ${result.result.confidence}%`,
+          `${result.result.text} : ${result.result.confidence}%`,
         );
       }
     } catch (e: any) {

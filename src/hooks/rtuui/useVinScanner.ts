@@ -29,8 +29,7 @@ export function useVinScanner() {
         resultMessageAlert(
           [
             `- Raw Text: ${result.rawText}`,
-            result.confidenceValue &&
-              `- Confidence: ${(result.confidenceValue * 100).toFixed(0)}%`,
+            `- Confidence: ${(result.confidenceValue * 100).toFixed(0)}%`,
             `- Validation: ${
               result.validationSuccessful ? 'SUCCESSFUL' : 'NOT SUCCESSFUL'
             }`,
