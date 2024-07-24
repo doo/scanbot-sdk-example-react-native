@@ -12,6 +12,27 @@ export function MrzResultScreen() {
     if (!mrzScannerResult.mrz) {
       return () => null;
     }
+
+    /**
+     *  MRZ Document fields can be used from the GenericDocument as shown below,
+     *  or by utilizing the wrappers to encapsulate the result,
+     *  thereby enabling property access to the desired field.
+     *
+     *  For example:
+     *      import {MRZ} from 'react-native-scanbot-sdk';
+     *
+     *      const mrz = new MRZ(mrzScannerResult.mrz);
+     *
+     *      return () => (
+     *        <View>
+     *          <ResultHeader title={'MRZ Document Result'} />
+     *          <ResultFieldRow title={'Given name'} value={mrz.givenNames} />
+     *          <ResultFieldRow title={'Birthdate'} value={mrz.birthDate} />
+     *          <ResultFieldRow title={'Surname'} value={mrz.surname} />
+     *        </View>
+     *      );
+     */
+
     return () => (
       <View>
         <ResultHeader title={'MRZ Document Result'} />

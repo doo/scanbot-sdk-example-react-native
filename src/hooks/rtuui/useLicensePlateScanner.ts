@@ -33,7 +33,7 @@ export function useLicensePlateScanner() {
           [
             `- License Plate: ${result.licensePlate}`,
             `- Country code: ${result.countryCode}`,
-            result.confidence && `- Confidence: ${result.confidence}%`,
+            `- Confidence: ${result.confidence}%`,
           ].join('\n\n'),
         );
       }

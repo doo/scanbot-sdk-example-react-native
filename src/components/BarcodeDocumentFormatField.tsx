@@ -6,7 +6,6 @@ import {
   AAMVA,
   BarcodeDocumentModelRootType,
   BoardingPass,
-  Field,
   GenericDocument,
   GS1,
   IDCardPDF417,
@@ -15,6 +14,7 @@ import {
   SwissQR,
   VCard,
 } from 'react-native-scanbot-sdk';
+import {GenericDocumentUtils} from '../utils/GenericDocumentUtils.ts';
 
 function AAMVADocumentFields({document}: {document: AAMVA}) {
   return (
@@ -155,22 +155,6 @@ function VCardFields({document}: {document: VCard}) {
   );
 }
 
-function extractGenericDocumentFields(document: GenericDocument) {
-  let fields: Field[] = [];
-
-  if (document.fields.length > 0) {
-    fields = fields.concat(document.fields);
-  }
-
-  if (document.children.length > 0) {
-    document.children.forEach(child => {
-      fields = fields.concat(extractGenericDocumentFields(child));
-    });
-  }
-
-  return fields;
-}
-
 export function BarcodeDocumentFormatField({
   document,
   staticFields = false,
@@ -194,13 +178,15 @@ export function BarcodeDocumentFormatField({
   if (!staticFields) {
     Document = (
       <View>
-        {extractGenericDocumentFields(document).map((field, index) => (
-          <ResultFieldRow
-            key={field.type.name + index}
-            title={field.type.name.trim()}
-            value={field.value?.text}
-          />
-        ))}
+        {GenericDocumentUtils.extractGenericDocumentFields(document).map(
+          (field, index) => (
+            <ResultFieldRow
+              key={field.type.name + index}
+              title={field.type.name.trim()}
+              value={field.value?.text}
+            />
+          ),
+        )}
       </View>
     );
   } else {

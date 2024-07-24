@@ -7,6 +7,55 @@ import {ResultContainer, ResultFieldRow, ResultHeader} from '@components';
 import {View} from 'react-native';
 
 function GenericDocumentResult({document}: {document: GenericDocument}) {
+  /**
+   *  Generic Document fields can be used from the GenericDocument as shown below,
+   *  or by utilizing the wrappers to encapsulate the result,
+   *  thereby enabling property access to the desired field.
+   *
+   *  For example:
+   *
+   *   import {
+   *    DeDriverLicenseBack,
+   *    DeDriverLicenseBackDocumentType,
+   *    DeDriverLicenseFront,
+   *    DeDriverLicenseFrontDocumentType,
+   *    DeIdCardBack,
+   *    DeIdCardBackDocumentType,
+   *    DeIdCardFront,
+   *    DeIdCardFrontDocumentType,
+   *    DePassport,
+   *    DePassportDocumentType,
+   *    DeResidencePermitBack,
+   *    DeResidencePermitBackDocumentType,
+   *    DeResidencePermitFront,
+   *    DeResidencePermitFrontDocumentType,
+   *    GenericDocument,
+   *  } from 'react-native-scanbot-sdk';
+   *
+   *   switch (document.type.name) {
+   *     case DeIdCardFrontDocumentType: {
+   *       const deIdCardFront = new DeIdCardFront(document);
+   *       return (
+   *         <View>
+   *           <ResultHeader title={'DE ID Card Result'} />
+   *           <ResultFieldRow
+   *             title={'Given Name'}
+   *             value={deIdCardFront.givenNames}
+   *           />
+   *           <ResultFieldRow title={'Surname'} value={deIdCardFront.surname} />
+   *           <ResultFieldRow title={'Birthdate'} value={deIdCardFront.birthDate} />
+   *         </View>
+   *       );
+   *     }
+   *     case DeIdCardBackDocumentType: // const deIDCard = new DeIdCardBack(document);
+   *     case DePassportDocumentType: // const dePassport = new DePassport(document);
+   *     case DeDriverLicenseFrontDocumentType: // const deDriverLicenseFront = new DeDriverLicenseFront(document);
+   *     case DeDriverLicenseBackDocumentType: // const deDriverLicenseBack = new DeDriverLicenseBack(document);
+   *     case DeResidencePermitFrontDocumentType: // const deResidencePermitFront = new DeResidencePermitFront(document);
+   *     case DeResidencePermitBackDocumentType: //  const deResidencePermitBack = new DeResidencePermitBack(document);
+   *   }
+   **/
+
   return (
     <View>
       <ResultHeader title={'Generic Document'} />

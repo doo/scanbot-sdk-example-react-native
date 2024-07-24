@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {
-  LogBox,
   Platform,
   SafeAreaView,
   StatusBar,
@@ -48,10 +47,6 @@ import {BarcodeCameraViewScreen} from './src/screens/BarcodeCameraViewScreen';
 import {PlainDataResultScreen} from './src/screens/PlainDataResultScreen';
 
 const Stack = createStackNavigator<PrimaryRoutesParamList>();
-
-// this is for fix the new nativeeventemitter() was called with a non-null argument issue.
-LogBox.ignoreLogs(['new NativeEventEmitter']); // Ignore log notification by message
-LogBox.ignoreAllLogs();
 
 // !! Please read note !!
 // It is strongly recommended to use the default (secure) storage location of the Scanbot SDK.
