@@ -108,6 +108,12 @@ function App() {
       console.error('Error initializing Scanbot SDK:', error.message);
       errorMessageAlert('Error initializing Scanbot SDK:\n' + error.message);
     });
+
+    console.log(
+      `Using ${
+        (global as any)?.nativeFabricUIManager ? 'New' : 'Old'
+      } Architecture`,
+    );
   }, []);
 
   const pageValues = usePages();
