@@ -97,7 +97,7 @@ export function HomeScreen() {
   }, [loadPages]);
 
   const onClassicComponentScanner = useLicenseValidityCheckWrapper(function () {
-    navigation.navigate(Screens.BARCODE_DOCUMENT_FORMATS);
+    navigation.navigate(Screens.BARCODE_CAMERA_VIEW);
   });
 
   const onApplyFilterOnImage = useCallback(async () => {
@@ -130,10 +130,6 @@ export function HomeScreen() {
           title={'Import Image & Detect Document'}
         />
         <FeatureItem
-          onPress={onDetectDocumentFromImage}
-          title={'Import Image & Detect Document (JSON)'}
-        />
-        <FeatureItem
           onPress={onExtractPagesFromPDF}
           title={'Extract pages from PDF'}
         />
@@ -160,12 +156,12 @@ export function HomeScreen() {
           onPress={onFindAndPickScanPress}
         />
         <FeatureItem
-          onPress={onClassicComponentScanner}
-          title={'Barcode Camera View (EXPERIMENTAL)'}
-        />
-        <FeatureItem
           onPress={onDetectBarcodesOnStillImage}
           title={'Detect Barcodes on image'}
+        />
+        <FeatureItem
+          onPress={onClassicComponentScanner}
+          title={'Barcode Camera View'}
         />
         <FeatureItem
           onPress={() => navigation.navigate(Screens.BARCODE_FORMATS)}
@@ -232,11 +228,15 @@ export function HomeScreen() {
           onPress={onApplyFilterOnImage}
           title={'Apply Image Filter'}
         />
-        <FeatureItem title={'Perform OCR on image'} onPress={onPerformOCR} />
+        <FeatureItem
+          onPress={onDetectDocumentFromImage}
+          title={'Detect document from image'}
+        />
         <FeatureItem
           onPress={onExtractImagesFromPDF}
           title={'Extract images from PDF'}
         />
+        <FeatureItem title={'Perform OCR on image'} onPress={onPerformOCR} />
         <FeatureItem onPress={onLicenseInfo} title={'License Info'} />
         <FeatureItem onPress={onOCRConfigs} title={'OCR Configs'} />
         <ScanbotLearnMore />

@@ -2,9 +2,9 @@ import {BarcodeCameraImageButton} from './BarcodeCameraImageButton';
 import {BarcodeDocumentFormatField} from './BarcodeDocumentFormatField';
 import {BottomActionBar} from './BottomActionBar';
 import {
-  ScanbotLearnMore,
   FeatureHeader,
   FeatureItem,
+  ScanbotLearnMore,
 } from './HomeScreenSectionComponents';
 import {ImageFilterModal} from './ImageFilterModal';
 import {LoadingIndicator} from './LoadingIndicator';
@@ -15,6 +15,7 @@ import {ResultHeader} from './ResultHeader';
 import {ResultImage} from './ResultImage';
 import {SavePagesModal} from './SavePagesModal';
 import {SwitchOptionsList} from './SwitchOptionsList';
+import {BarcodeCameraViewResult} from './BarcodeCameraViewResult';
 
 export {
   BarcodeDocumentFormatField,
@@ -32,4 +33,5 @@ export {
   FeatureHeader,
   FeatureItem,
   BarcodeCameraImageButton,
+  BarcodeCameraViewResult,
 };
