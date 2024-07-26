@@ -1,7 +1,6 @@
 import {
   checkLicense,
   errorMessageAlert,
-  infoMessageAlert,
   PrimaryRouteNavigationProp,
   Screens,
 } from '@utils';
@@ -24,19 +23,6 @@ export function useEHICScanner() {
       if (!(await checkLicense())) {
         return;
       }
-      /**
-       * Health Insurance Card Scanner requires OCR blobs.
-       * If OCR blobs are not present, the scanner will fail
-       * Return early if there are no installed languages
-       */
-      const ocrConfigsResult = await ScanbotSDK.getOCRConfigs();
-      if (ocrConfigsResult.installedLanguages.length === 0) {
-        infoMessageAlert(
-          'Scanning is not possible since no OCR blobs were found',
-        );
-        return;
-      }
-
       /**
        * Create the health insurance card scanner configuration object and
        * start the health insurance card scanner with the configuration
