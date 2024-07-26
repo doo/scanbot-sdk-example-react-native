@@ -5,11 +5,11 @@ import {
   Screens,
 } from '@utils';
 import {useCallback} from 'react';
+import {useNavigation} from '@react-navigation/native';
 
 import ScanbotSDK, {
   HealthInsuranceCardScannerConfiguration,
 } from 'react-native-scanbot-sdk';
-import {useNavigation} from '@react-navigation/native';
 
 export function useEHICScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();

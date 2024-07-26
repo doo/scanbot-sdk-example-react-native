@@ -34,7 +34,7 @@ import {
   useRecognizeEHIC,
   useRecognizeGenericDocument,
   useRecognizeMedicalCertificate,
-  useRecognizeMRZOnImage,
+  useRecognizeMRZ,
   useSingleScanning,
   useTextDataScanner,
   useVinScanner,
@@ -84,7 +84,7 @@ export function HomeScreen() {
   const onTextDataScanner = useTextDataScanner();
   const onCheckScanner = useCheckRecognizer();
   const onRecognizeCheckOnImage = useRecognizeCheck();
-  const onRecognizeMRZOnImage = useRecognizeMRZOnImage();
+  const onRecognizeMRZOnImage = useRecognizeMRZ();
   const onRecognizeMedicalCertificateOnImage = useRecognizeMedicalCertificate();
   const onRecognizeEHICOnImage = useRecognizeEHIC();
   const onRecognizeGenericDocument = useRecognizeGenericDocument();

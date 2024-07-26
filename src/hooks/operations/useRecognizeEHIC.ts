@@ -7,9 +7,9 @@ import {
   selectImagesFromLibrary,
 } from '@utils';
 import {ActivityIndicatorContext} from '@context';
+import {useNavigation} from '@react-navigation/native';
 
 import ScanbotSDK from 'react-native-scanbot-sdk';
-import {useNavigation} from '@react-navigation/native';
 
 export function useRecognizeEHIC() {
   const {setLoading} = useContext(ActivityIndicatorContext);

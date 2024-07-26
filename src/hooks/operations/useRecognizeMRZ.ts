@@ -1,8 +1,5 @@
 import {useCallback, useContext} from 'react';
-
 import {useNavigation} from '@react-navigation/native';
-
-import ScanbotSDK from 'react-native-scanbot-sdk';
 import {
   checkLicense,
   errorMessageAlert,
@@ -12,7 +9,9 @@ import {
 } from '@utils';
 import {ActivityIndicatorContext} from '@context';
 
-export function useRecognizeMRZOnImage() {
+import ScanbotSDK from 'react-native-scanbot-sdk';
+
+export function useRecognizeMRZ() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
   const {setLoading} = useContext(ActivityIndicatorContext);
 

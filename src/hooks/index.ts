@@ -30,7 +30,7 @@ import {useLicenseInfo} from './operations/useLicenseInfo';
 import {useOCRConfigs} from './operations/useOCRConfigs';
 import {usePerformOCR} from './operations/usePerformOCR';
 import {useRecognizeCheck} from './operations/useRecognizeCheck';
-import {useRecognizeMRZOnImage} from './operations/useRecognizeMRZOnImage';
+import {useRecognizeMRZ} from './operations/useRecognizeMRZ.ts';
 import {useCreatePDF} from './operations/useCreatePDF';
 import {useWriteTIFF} from './operations/useWriteTIFF';
 import {useCleanup} from './operations/useCleanup';
@@ -65,7 +65,7 @@ export {
   usePerformOCR,
   useRecognizeCheck,
   useCreatePDF,
-  useRecognizeMRZOnImage,
+  useRecognizeMRZ,
   useWriteTIFF,
   useCleanup,
   useRecognizeEHIC,
