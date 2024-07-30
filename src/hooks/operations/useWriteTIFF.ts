@@ -5,10 +5,9 @@ import {
   FILE_ENCRYPTION_ENABLED,
   infoMessageAlert,
 } from '@utils';
+import {ActivityIndicatorContext, PageContext} from '@context';
 
 import ScanbotSDK, {ScanbotBinarizationFilter} from 'react-native-scanbot-sdk';
-
-import {ActivityIndicatorContext, PageContext} from '@context';
 
 export function useWriteTIFF() {
   const {setLoading} = useContext(ActivityIndicatorContext);
@@ -41,9 +40,9 @@ export function useWriteTIFF() {
           options: {
             binarizationFilter: binarized
               ? new ScanbotBinarizationFilter()
-              : undefined, // "true" means create 1-bit binarized black and white TIFF
+              : undefined,
             dpi: 300,
-            compression: binarized ? 'CCITT_T6' : 'ADOBE_DEFLATE', // optional compression. see documentation!
+            compression: binarized ? 'CCITT_T6' : 'ADOBE_DEFLATE', // optional compression
           },
         });
         /**

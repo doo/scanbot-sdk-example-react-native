@@ -12,6 +12,7 @@ import {
   useDetectBarcodes,
   useDetectDocument,
   useDetectDocumentFromPage,
+  useDocumentQualityAnalyzer,
   useDocumentScanner,
   useEHICScanner,
   useExtractImagesFromPDF,
@@ -89,6 +90,7 @@ export function HomeScreen() {
   const onRecognizeEHICOnImage = useRecognizeEHIC();
   const onRecognizeGenericDocument = useRecognizeGenericDocument();
   const onPerformOCR = usePerformOCR();
+  const onDocumentQualityAnalyzer = useDocumentQualityAnalyzer();
   const onLicenseInfo = useLicenseInfo();
   const onOCRConfigs = useOCRConfigs();
 
@@ -190,10 +192,7 @@ export function HomeScreen() {
           title={'Scan Generic Document'}
         />
         <FeatureItem onPress={onCheckScanner} title={'Scan Check'} />
-        <FeatureItem
-          onPress={onEHICScanner}
-          title={'Scan Health Insurance Card'}
-        />
+        <FeatureItem onPress={onEHICScanner} title={'Scan EHIC'} />
         <FeatureItem
           onPress={onLicensePlateScanner}
           title={'Scan Vehicle License Plate'}
@@ -231,6 +230,10 @@ export function HomeScreen() {
         <FeatureItem
           onPress={onDetectDocumentFromImage}
           title={'Detect document from image'}
+        />
+        <FeatureItem
+          onPress={onDocumentQualityAnalyzer}
+          title={'Document Quality Analyzer'}
         />
         <FeatureItem
           onPress={onExtractImagesFromPDF}

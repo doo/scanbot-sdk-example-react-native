@@ -7,9 +7,9 @@ import {
   Screens,
   selectImagesFromLibrary,
 } from '@utils';
+import {useNavigation} from '@react-navigation/native';
 
 import ScanbotSDK from 'react-native-scanbot-sdk';
-import {useNavigation} from '@react-navigation/native';
 
 export function useDetectDocument() {
   const {setLoading} = useContext(ActivityIndicatorContext);
@@ -37,18 +37,14 @@ export function useDetectDocument() {
       const [imageFileUri] = selectedImageResult;
       // Detect document on selected image
       const result = await ScanbotSDK.detectDocument(imageFileUri);
-      // Analyze document quality on selected image
-      const quality = await ScanbotSDK.documentQualityAnalyzer({
-        imageFileUri: imageFileUri,
-      });
       /**
        * Handle the result by navigating to result screen
        */
       navigation.navigate(Screens.PLAIN_DATA_RESULT, {
         imageUris: [result.documentImageFileUri],
         data:
-          `Detected Document result: ${JSON.stringify(result, null, 2)}\n` +
-          `Document Quality result: ${quality.result}`,
+          `Detection Result : ${result.detectionResult} \n` +
+          `Polygon : ${JSON.stringify(result.polygon, null, 2)} \n`,
       });
     } catch (e: any) {
       errorMessageAlert(e.message);

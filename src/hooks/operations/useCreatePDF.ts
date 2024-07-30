@@ -2,7 +2,7 @@ import {useCallback, useContext} from 'react';
 import {ActivityIndicatorContext, PageContext} from '@context';
 import {checkLicense, errorMessageAlert, infoMessageAlert} from '@utils';
 
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import ScanbotSDK, {OCRConfiguration} from 'react-native-scanbot-sdk';
 
 export function useCreatePDF() {
   const {setLoading} = useContext(ActivityIndicatorContext);
@@ -22,7 +22,7 @@ export function useCreatePDF() {
         /**
          * Create a PDF with the provided option
          */
-        const ocrConfiguration = sandwichedPDF
+        const ocrConfiguration: OCRConfiguration | undefined = sandwichedPDF
           ? {
               engineMode: 'SCANBOT_OCR',
             }
@@ -33,7 +33,6 @@ export function useCreatePDF() {
           options: {
             pageSize: 'A4',
             pageDirection: 'PORTRAIT',
-            // @ts-ignore
             ocrConfiguration: ocrConfiguration,
           },
         });

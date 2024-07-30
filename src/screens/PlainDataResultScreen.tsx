@@ -25,7 +25,7 @@ function PlainImageResult({
         <PreviewImage
           imageUri={url}
           key={url}
-          style={{width, height, resizeMode: 'contain'}}
+          style={{width, height: height - height * 0.25, resizeMode: 'contain'}}
         />
       ))}
     </View>
