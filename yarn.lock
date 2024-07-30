@@ -8268,6 +8268,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-share@npm:^10.2.1":
+  version: 10.2.1
+  resolution: "react-native-share@npm:10.2.1"
+  checksum: 9dd4e0329b344668e04ff5421ab982e319dc3ba988d0b7990a619bd1c551beb6012623abe238a80e427f86f2bb03dd21b7afc0e957ee7348e0bd9fb39956912e
+  languageName: node
+  linkType: hard
+
 "react-native@npm:0.74.3":
   version: 0.74.3
   resolution: "react-native@npm:0.74.3"
@@ -8737,6 +8744,7 @@ __metadata:
     react-native-safe-area-context: 4.10.8
     react-native-scanbot-sdk: ./cccc.tgz
     react-native-screens: ^3.24.0
+    react-native-share: ^10.2.1
     react-test-renderer: 18.2.0
     typescript: 5.0.4
   languageName: unknown

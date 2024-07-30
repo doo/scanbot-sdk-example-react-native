@@ -1,6 +1,7 @@
 import {useCallback, useContext} from 'react';
 import {ActivityIndicatorContext, PageContext} from '@context';
-import {checkLicense, errorMessageAlert, infoMessageAlert} from '@utils';
+import {checkLicense, errorMessageAlert} from '@utils';
+import Share from 'react-native-share';
 
 import ScanbotSDK, {OCRConfiguration} from 'react-native-scanbot-sdk';
 
@@ -37,9 +38,13 @@ export function useCreatePDF() {
           },
         });
         /**
-         * Handle the result by displaying an Alert
+         * Handle the result by displaying an action sheet
          */
-        infoMessageAlert('PDF file created: ' + result.pdfFileUri);
+        Share.open({
+          title: 'Share PDF file',
+          url: result.pdfFileUri,
+          failOnCancel: false,
+        });
       } catch (e: any) {
         errorMessageAlert(e.message);
       } finally {

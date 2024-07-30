@@ -6,6 +6,7 @@ import {
   infoMessageAlert,
 } from '@utils';
 import {ActivityIndicatorContext, PageContext} from '@context';
+import Share from 'react-native-share';
 
 import ScanbotSDK, {ScanbotBinarizationFilter} from 'react-native-scanbot-sdk';
 
@@ -46,9 +47,13 @@ export function useWriteTIFF() {
           },
         });
         /**
-         * Handle the result by displaying an Alert
+         * Handle the result by displaying an action sheet
          */
-        infoMessageAlert('TIFF file created: ' + result.tiffFileUri);
+        Share.open({
+          title: 'Share TIFF file',
+          url: result.tiffFileUri,
+          failOnCancel: false,
+        });
       } catch (e: any) {
         errorMessageAlert(e.message);
       } finally {
