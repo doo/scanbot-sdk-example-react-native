@@ -37,6 +37,7 @@ import {useCleanup} from './operations/useCleanup';
 import {useRecognizeEHIC} from './operations/useRecognizeEHIC';
 import {useRecognizeGenericDocument} from './operations/useRecognizeGenericDocument';
 import {useRecognizeMedicalCertificate} from './operations/useRecognizeMedicalCertificate';
+import {useDocumentQualityAnalyzer} from './operations/useDocumentQualityAnalyzer.ts';
 
 export {
   useLicenseValidityCheckWrapper,
@@ -75,4 +76,5 @@ export {
   useMultiScanning,
   useMultiScanningAR,
   useSingleScanning,
+  useDocumentQualityAnalyzer,
 };
