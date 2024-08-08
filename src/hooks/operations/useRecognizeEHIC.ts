@@ -42,12 +42,14 @@ export function useRecognizeEHIC() {
       /**
        * Handle the result by navigating to result screen
        */
-      navigation.navigate(Screens.PLAIN_DATA_RESULT, {
-        data: result.fields.map(field => ({
-          key: field.type,
-          value: `${field.value} (${field.confidence.toFixed(2)})`,
-        })),
-      });
+      if (result.detectionStatus !== 'FAILED_DETECTION') {
+        navigation.navigate(Screens.PLAIN_DATA_RESULT, {
+          data: result.fields.map(field => ({
+            key: field.type,
+            value: `${field.value} (${field.confidence.toFixed(2)})`,
+          })),
+        });
+      }
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {
