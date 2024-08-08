@@ -2,6 +2,7 @@ import {useCallback, useContext} from 'react';
 import {
   checkLicense,
   errorMessageAlert,
+  infoMessageAlert,
   PrimaryRouteNavigationProp,
   Screens,
   selectImagesFromLibrary,
@@ -49,6 +50,8 @@ export function useRecognizeEHIC() {
             value: `${field.value} (${field.confidence.toFixed(2)})`,
           })),
         });
+      } else {
+        infoMessageAlert('No EHIC found.');
       }
     } catch (e: any) {
       errorMessageAlert(e.message);
