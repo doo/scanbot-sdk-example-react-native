@@ -32,14 +32,16 @@ export function useEHICScanner() {
       };
       const result = await ScanbotSDK.UI.startEHICScanner(config);
       /**
-       * Handle the result by navigating to result screen
+       * Handle the result if result status is OK
        */
-      navigation.navigate(Screens.PLAIN_DATA_RESULT, {
-        data: result.fields.map(field => ({
-          key: field.type,
-          value: `${field.value} (${field.confidence.toFixed(2)})`,
-        })),
-      });
+      if (result.status === 'OK') {
+        navigation.navigate(Screens.PLAIN_DATA_RESULT, {
+          data: result.fields.map(field => ({
+            key: field.type,
+            value: `${field.value} (${field.confidence.toFixed(2)})`,
+          })),
+        });
+      }
     } catch (e: any) {
       errorMessageAlert(e.message);
     }

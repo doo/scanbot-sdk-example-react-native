@@ -1,8 +1,7 @@
 import React, {useMemo} from 'react';
 import {useRoute} from '@react-navigation/native';
-import {MrzResultScreenRouteProp} from '@utils';
+import {GenericDocumentUtils, MrzResultScreenRouteProp} from '@utils';
 import {ResultContainer, ResultFieldRow, ResultHeader} from '@components';
-import {GenericDocumentUtils} from '../utils/GenericDocumentUtils';
 import {View} from 'react-native';
 
 export function MrzResultScreen() {

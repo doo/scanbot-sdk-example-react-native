@@ -68,8 +68,8 @@ function GS1Fields({document}: {document: GS1}) {
             value={field.applicationIdentifier}
           />
           <ResultFieldRow
-            title={'Validation Errors'}
-            value={field.validationErrors.length > 0}
+            title={'Validation Status'}
+            value={field.validationStatus}
           />
         </View>
       ))}
@@ -162,10 +162,6 @@ export function BarcodeDocumentFormatField({
   document: GenericDocument;
   staticFields?: boolean;
 }) {
-  if (!document) {
-    return null;
-  }
-
   /**
    * Fields from Generic Document could be managed in the following ways:
    *

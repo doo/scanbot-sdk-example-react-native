@@ -40,7 +40,6 @@ function PlainDataResult({data}: {data?: PlainDataResultParam['data']}) {
   if (Array.isArray(data)) {
     return (
       <View>
-        <ResultHeader title={'Result'} />
         {data.map(i => (
           <ResultFieldRow title={i.key} value={i.value} key={i.key} />
         ))}
@@ -50,7 +49,6 @@ function PlainDataResult({data}: {data?: PlainDataResultParam['data']}) {
 
   return (
     <View>
-      <ResultHeader title={'Result'} />
       <View style={styles.textDataContainer}>
         <Text style={styles.dataTextResult}>{data}</Text>
       </View>

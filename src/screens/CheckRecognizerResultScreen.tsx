@@ -1,6 +1,9 @@
 import React, {useMemo} from 'react';
 import {useRoute} from '@react-navigation/native';
-import {CheckRecognizerResultScreenRouteProp} from '@utils';
+import {
+  CheckRecognizerResultScreenRouteProp,
+  GenericDocumentUtils,
+} from '@utils';
 import {
   ResultContainer,
   ResultFieldRow,
@@ -8,7 +11,6 @@ import {
   ResultImage,
 } from '@components';
 import {View} from 'react-native';
-import {GenericDocumentUtils} from '../utils/GenericDocumentUtils.ts';
 
 export function CheckRecognizerResultScreen() {
   const {params: checkRecognizerResult} =

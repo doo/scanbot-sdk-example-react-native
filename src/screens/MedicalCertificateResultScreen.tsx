@@ -25,7 +25,6 @@ export function MedicalCertificateResultScreen() {
   return (
     <ResultContainer>
       <ResultImage imageUri={medicalCertificateResult.imageFileUri} />
-      <ResultHeader title={'Medical Certificate Result'} />
       <ResultFieldRow
         title={'Form Type'}
         value={medicalCertificateResult.formType}

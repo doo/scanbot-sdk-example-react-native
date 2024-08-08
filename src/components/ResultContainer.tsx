@@ -1,5 +1,4 @@
-import {SafeAreaView, StyleSheet, ViewStyle} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
+import {SafeAreaView, ScrollView, StyleSheet, ViewStyle} from 'react-native';
 import React from 'react';
 
 export function ResultContainer(props: {

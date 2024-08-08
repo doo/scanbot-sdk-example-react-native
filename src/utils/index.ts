@@ -11,6 +11,7 @@ import {
   FILE_ENCRYPTION_ENABLED,
   IMAGE_FILE_FORMAT,
 } from './SDKUtils';
+import {GenericDocumentUtils} from './GenericDocumentUtils';
 import {
   BarcodeResultScreenRouteProp,
   BarcodeV2ResultScreenRouteProp,
@@ -19,12 +20,12 @@ import {
   ImageDetailScreenRouteProp,
   MedicalCertificateResultScreenRouteProp,
   MrzResultScreenRouteProp,
+  PlainDataResultParam,
+  PlainDataResultScreenRouteProp,
   PrimaryRouteNavigationProp,
   PrimaryRoutesParamList,
   Screens,
   ScreenTitles,
-  PlainDataResultScreenRouteProp,
-  PlainDataResultParam,
 } from './Navigation';
 
 export {
@@ -39,6 +40,7 @@ export {
   checkLicense,
   Screens,
   ScreenTitles,
+  GenericDocumentUtils,
 };
 
 export type {
