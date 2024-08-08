@@ -67,15 +67,13 @@ export function useFindAndPickScanning() {
           barcodeValue: '123456',
           title: 'numeric barcode',
           count: 4,
-          image:
-            'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
+          image: 'https://avatars.githubusercontent.com/u/1454920',
         }),
         new ExpectedBarcode({
           barcodeValue: 'SCANBOT',
           title: 'value barcode',
           count: 3,
-          image:
-            'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
+          image: 'https://avatars.githubusercontent.com/u/1454920',
         }),
       ];
 
