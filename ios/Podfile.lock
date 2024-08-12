@@ -1236,7 +1236,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ScanbotSDKNativeWrapper/ALL (= 5.1.4.0)
     - Yoga
-  - RNScreens (3.34.0):
+  - RNScreens (3.32.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1476,7 +1476,7 @@ SPEC CHECKSUMS:
   glog: fdfdfe5479092de0c4bdbebedd9056951f092c4f
   hermes-engine: 1f547997900dd0752dc0cc0ae6dd16173c49e09b
   RCT-Folly: 02617c592a293bd6d418e0a88ff4ee1f88329b47
-  RCTDeprecation: 9db9faca3e832ec057b106c5c74f95cd2535e510
+  RCTDeprecation: 4c7eeb42be0b2e95195563c49be08d0b839d22b4
   RCTRequired: d530a0f489699c8500e944fde963102c42dcd0c2
   RCTTypeSafety: b20878506b094fa3d9007d7b9e4be0faa3562499
   React: 2f9da0177233f60fa3462d83fcccde245759f81a
@@ -1529,7 +1529,7 @@ SPEC CHECKSUMS:
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: efed690b8493a00b99654043daeb1335276ac4a2
   RNScanbotSDK: bfb759e6da936836d3d83bc83537461b1a3b44a5
-  RNScreens: aa943ad421c3ced3ef5a47ede02b0cbfc43a012e
+  RNScreens: 5aeecbb09aa7285379b6e9f3c8a3c859bb16401c
   RNShare: 0fad69ae2d71de9d1f7b9a43acf876886a6cb99c
   ScanbotSDK: af2b386a0cb9e3d460073727adfe5d0c2e9f40d1
   ScanbotSDKNativeWrapper: 72143c718a6fb1c1df3e63f93c53f3eedfb3e60a
@@ -1538,4 +1538,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 30423a57d88ee1adeaa987284d23a6fab42649ad
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.14.3
