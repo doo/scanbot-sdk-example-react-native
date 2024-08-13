@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import {
   Platform,
   SafeAreaView,
-  StatusBar,
   StyleSheet,
   View,
 } from 'react-native';
@@ -118,10 +117,6 @@ function App() {
 
   return (
     <View style={styles.container}>
-      <StatusBar
-        backgroundColor={COLORS.SCANBOT_RED}
-        barStyle="light-content"
-      />
       <SafeAreaView style={styles.container}>
         <ActivityIndicatorContext.Provider value={{setLoading}}>
           <PageContext.Provider value={pageValues}>
