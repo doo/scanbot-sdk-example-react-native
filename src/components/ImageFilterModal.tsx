@@ -22,13 +22,13 @@ import {
 } from 'react-native-scanbot-sdk';
 
 const IMAGE_FILTERS: ParametricFilter[] = [
-  new BrightnessFilter({brightness: 0.3}),
+  new BrightnessFilter({brightness: 0.2}),
   new ColorDocumentFilter(),
-  new ContrastFilter(),
+  new ContrastFilter({contrast: 2}),
   new CustomBinarizationFilter(),
   new GrayscaleFilter(),
   new ScanbotBinarizationFilter(),
-  new WhiteBlackPointFilter(),
+  new WhiteBlackPointFilter({blackPoint: 0.2, whitePoint: 0.8}),
   new LegacyFilter(),
 ];
 
