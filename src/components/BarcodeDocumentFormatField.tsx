@@ -14,7 +14,7 @@ import {
   SwissQR,
   VCard,
 } from 'react-native-scanbot-sdk';
-import {GenericDocumentUtils} from '../utils/GenericDocumentUtils.ts';
+import {GenericDocumentUtils} from '@utils';
 
 function AAMVADocumentFields({document}: {document: AAMVA}) {
   return (

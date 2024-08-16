@@ -30,14 +30,14 @@ import {useLicenseInfo} from './operations/useLicenseInfo';
 import {useOCRConfigs} from './operations/useOCRConfigs';
 import {usePerformOCR} from './operations/usePerformOCR';
 import {useRecognizeCheck} from './operations/useRecognizeCheck';
-import {useRecognizeMRZ} from './operations/useRecognizeMRZ.ts';
+import {useRecognizeMRZ} from './operations/useRecognizeMRZ';
 import {useCreatePDF} from './operations/useCreatePDF';
 import {useWriteTIFF} from './operations/useWriteTIFF';
 import {useCleanup} from './operations/useCleanup';
 import {useRecognizeEHIC} from './operations/useRecognizeEHIC';
 import {useRecognizeGenericDocument} from './operations/useRecognizeGenericDocument';
 import {useRecognizeMedicalCertificate} from './operations/useRecognizeMedicalCertificate';
-import {useDocumentQualityAnalyzer} from './operations/useDocumentQualityAnalyzer.ts';
+import {useDocumentQualityAnalyzer} from './operations/useDocumentQualityAnalyzer';
 
 export {
   useLicenseValidityCheckWrapper,

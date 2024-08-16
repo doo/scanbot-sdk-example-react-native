@@ -56,7 +56,7 @@ rm -rf Pods
 if [ "$NEW_VALUE" = "$TRUE_VALUE" ]; then
     RCT_NEW_ARCH_ENABLED=1 bundle exec pod install --repo-update
 else
-    pod install --repo-update
+    bundle exec pod install --repo-update
 fi
 
 cd ..

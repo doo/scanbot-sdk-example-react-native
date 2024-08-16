@@ -1,10 +1,5 @@
 import {useCallback, useContext} from 'react';
-import {
-  checkLicense,
-  errorMessageAlert,
-  FILE_ENCRYPTION_ENABLED,
-  infoMessageAlert,
-} from '@utils';
+import {checkLicense, errorMessageAlert} from '@utils';
 import {ActivityIndicatorContext, PageContext} from '@context';
 import Share from 'react-native-share';
 
@@ -16,14 +11,6 @@ export function useWriteTIFF() {
 
   return useCallback(
     async (binarized: boolean) => {
-      if (FILE_ENCRYPTION_ENABLED) {
-        // TODO encryption for TIFF files currently not supported
-        infoMessageAlert(
-          'Encryption for TIFF files currently not supported. ' +
-            'In order to test TIFF please disable image file encryption.',
-        );
-        return;
-      }
       try {
         setLoading(true);
         /**

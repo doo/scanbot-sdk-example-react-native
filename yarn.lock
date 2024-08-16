@@ -8240,13 +8240,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-scanbot-sdk@npm:5.1.0-beta.2":
-  version: 5.1.0-beta.2
-  resolution: "react-native-scanbot-sdk@npm:5.1.0-beta.2"
+"react-native-scanbot-sdk@npm:5.1.0-beta.3":
+  version: 5.1.0-beta.3
+  resolution: "react-native-scanbot-sdk@npm:5.1.0-beta.3"
   peerDependencies:
     react: "*"
     react-native: ">=0.68"
-  checksum: 697037eb1f2ee9f586f8e7d31659855854ee487068cd72d173af5001047d5c4dd340d3040a4df3f98d18e78c80ce66b661af447d8eec373654133d647351189e
+  checksum: 869904d512d7feb749cbece34785430a0c64117b73de2dc897230917439e261cc51d9038cf7ae5abf0a18ed718f7dfd4fbb2140571364f25210c92ed08e4ed5c
   languageName: node
   linkType: hard
 
@@ -8737,7 +8737,7 @@ __metadata:
     react-native-gesture-handler: ^2.12.0
     react-native-image-picker: ^7.0.0
     react-native-safe-area-context: 4.10.8
-    react-native-scanbot-sdk: 5.1.0-beta.2
+    react-native-scanbot-sdk: 5.1.0-beta.3
     react-native-screens: 3.32.0
     react-native-share: ^10.2.1
     react-test-renderer: 18.2.0
