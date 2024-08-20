@@ -25,7 +25,7 @@ const IMAGE_FILTERS: ParametricFilter[] = [
   new BrightnessFilter({brightness: 0.2}),
   new ColorDocumentFilter(),
   new ContrastFilter({contrast: 2}),
-  new CustomBinarizationFilter(),
+  new CustomBinarizationFilter({preset: 'PRESET_1'}),
   new GrayscaleFilter(),
   new ScanbotBinarizationFilter(),
   new WhiteBlackPointFilter({blackPoint: 0.2, whitePoint: 0.8}),
