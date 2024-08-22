@@ -43,6 +43,9 @@ export function useFindAndPickScanning() {
       // Set the sheet mode for the barcodes preview.
       config.useCase.sheet.mode = 'COLLAPSED_SHEET';
 
+      // Enable the AR Overlay.
+      config.useCase.arOverlay.visible = true;
+
       // Enable/Disable the automatic selection.
       config.useCase.arOverlay.automaticSelectionEnabled = false;
 
