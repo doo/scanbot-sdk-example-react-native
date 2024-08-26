@@ -8176,9 +8176,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-document-picker@npm:9.1.1":
-  version: 9.1.1
-  resolution: "react-native-document-picker@npm:9.1.1"
+"react-native-document-picker@npm:9.3.1":
+  version: 9.3.1
+  resolution: "react-native-document-picker@npm:9.3.1"
   dependencies:
     invariant: ^2.2.4
   peerDependencies:
@@ -8188,7 +8188,7 @@ __metadata:
   peerDependenciesMeta:
     react-native-windows:
       optional: true
-  checksum: e29b9406dd77e16f461e64035a5f7056b1fcb0d05fb26b23f0073ff2211520a7ac9b57da7e58e61ff03bcbe1120d2e104fb1c90282412736feeb12abe96e2d3b
+  checksum: 5979e4b93f15e0568ae70b70cc2304cd727f20939a58412d483517942df6d3cf3821319b3b7934bcaa2866ed1918ef9e8de9933ce6953209340abe3455403e0d
   languageName: node
   linkType: hard
 
@@ -8735,7 +8735,7 @@ __metadata:
     prettier: 2.8.8
     react: 18.2.0
     react-native: 0.74.3
-    react-native-document-picker: 9.1.1
+    react-native-document-picker: 9.3.1
     react-native-fs: 2.20.0
     react-native-gesture-handler: ^2.12.0
     react-native-image-picker: ^7.0.0
