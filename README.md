@@ -31,40 +31,52 @@ framework or features, please visit our [Support Page](https://docs.scanbot.io/s
 
 ## How to run this app
 
-Make sure you have the latest versions of [React Native CLI](https://facebook.github.io/react-native/)
-and [CocoaPods](https://cocoapods.org/) installed.
+### Set up Environment 
 
-Install node modules:
+>**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/set-up-your-environment) before proceeding.
 
-When using ReactNative version 0.64.4:
+Testing on an actual device is essential, so ensure you have one available.
 
-```
-cd 0.64.X
-npm install
-```
-
-When using ReactNative version 0.72.4:
-
-```
-cd latest
+### Install node modules
+```bash 
 yarn install
 ```
 
-### Run on Android
+### Prepare iOS
 
+If Cocoapods are not installed locally the following command should be run
+```bash 
+bundle install
 ```
+and then we can install the pods
+```bash 
+cd ios
+bundle exec pod install
+```
+or if pods are installed
+```bash 
+cd ios
+pod install
+```
+
+#### Signing
+- Open the **workspace** file `ScanbotBarcodeExampleReact.xcworkspace` (not .xcodeproj) from the `ios` directory in Xcode.
+- Adjust *Provisioning* and *Signing* settings.
+
+### Run on Android
+```bash
 react-native run-android
 ```
 
 ### Run on iOS
-
-Install CocoaPods dependencies:
-
-```
-cd ios/
-pod install --repo-update
+```bash
+react-native run-ios
 ```
 
-- Open the **workspace** file `ScanbotSDKExampleReactNative.xcworkspace` (not .xcodeproj) from the `ios` directory in Xcode.
-- Adjust *Provisioning* and *Signing* settings.
-- And run the app in Xcode or via `react-native run-ios`.
+###### Still at a loss? It is probably a cache issue
+
+```bash
+yarn run clean
+```
+* `npm cache clean --force && watchman watch-del-all`
+* Restart metro server!
