@@ -8233,13 +8233,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:4.10.8":
-  version: 4.10.8
-  resolution: "react-native-safe-area-context@npm:4.10.8"
+"react-native-safe-area-context@npm:4.10.9":
+  version: 4.10.9
+  resolution: "react-native-safe-area-context@npm:4.10.9"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: eced388ae7cc712f75e43cba302b612c8fecceb8ec8b39cff21b6bc29debe2fdc24423f67609af244d919c3ed871dd1d36c6adc97a8960a938984d333490e653
+  checksum: 150bf4fa7607e8de565cce0c45d321048a3c982f4c82cc2a49eb342def968559f538d4554c30c20fa8b2e6dc716c24846745b129dc25396e083d98c2a29962a2
   languageName: node
   linkType: hard
 
@@ -8739,7 +8739,7 @@ __metadata:
     react-native-fs: 2.20.0
     react-native-gesture-handler: ^2.12.0
     react-native-image-picker: ^7.0.0
-    react-native-safe-area-context: 4.10.8
+    react-native-safe-area-context: 4.10.9
     react-native-scanbot-sdk: 5.1.0
     react-native-screens: 3.32.0
     react-native-share: ^10.2.1
