@@ -63,12 +63,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 4,
   },
   noBarcode: {
+    top: '50%',
     alignSelf: 'center',
     fontSize: 18,
     fontWeight: 'bold',
-    color: 'white',
-    flex: 1,
-    verticalAlign: 'middle',
   },
   titleText: {
     fontSize: 18,
