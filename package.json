@@ -22,7 +22,7 @@
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/stack": "^6.3.17",
     "react": "18.2.0",
-    "react-native": "0.74.3",
+    "react-native": "0.75.3",
     "react-native-document-picker": "9.1.1",
     "react-native-fs": "2.20.0",
     "react-native-gesture-handler": "^2.12.0",
