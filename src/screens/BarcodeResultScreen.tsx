@@ -66,12 +66,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   noBarcode: {
+    top: '50%',
     alignSelf: 'center',
     fontSize: 18,
     fontWeight: 'bold',
-    color: 'white',
-    flex: 1,
-    verticalAlign: 'middle',
   },
   barcodeContainer: {
     backgroundColor: '#ffffff',
