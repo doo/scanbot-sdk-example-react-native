@@ -39,6 +39,10 @@ import {useRecognizeGenericDocument} from './operations/useRecognizeGenericDocum
 import {useRecognizeMedicalCertificate} from './operations/useRecognizeMedicalCertificate';
 import {useDocumentQualityAnalyzer} from './operations/useDocumentQualityAnalyzer';
 
+import {useSinglePageScanning} from './rtuui/document/useSinglePageScanning.ts';
+import {useSinglePageScanningWithFinder} from './rtuui/document/useSinglePageScanningWithFinder.ts';
+import {useMultiplePageScanning} from './rtuui/document/useMultiplePageScanning.ts';
+
 export {
   useLicenseValidityCheckWrapper,
   useLegacyBarcodeScanner,
@@ -77,4 +81,7 @@ export {
   useMultiScanningAR,
   useSingleScanning,
   useDocumentQualityAnalyzer,
+  useSinglePageScanning,
+  useSinglePageScanningWithFinder,
+  useMultiplePageScanning,
 };

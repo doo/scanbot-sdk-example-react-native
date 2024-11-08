@@ -24,6 +24,8 @@ export enum Screens {
   IMAGE_DETAILS = 'imageDetails',
   PAGE_RESULTS = 'imageResults',
   PLAIN_DATA_RESULT = 'plainDataResult',
+  DOCUMENT_V2_RESULT = 'documentV2Result',
+  DOCUMENT_V2_PAGE_RESULT = 'documentV2PageResult',
 }
 
 export const ScreenTitles: Record<Screens, string> = {
@@ -40,6 +42,8 @@ export const ScreenTitles: Record<Screens, string> = {
   [Screens.IMAGE_DETAILS]: 'Image Details',
   [Screens.PAGE_RESULTS]: 'Page Results',
   [Screens.PLAIN_DATA_RESULT]: 'Result',
+  [Screens.DOCUMENT_V2_RESULT]: 'Document Result',
+  [Screens.DOCUMENT_V2_PAGE_RESULT]: 'Document Page Result',
 };
 
 export type PrimaryRoutesParamList = {
@@ -56,6 +60,8 @@ export type PrimaryRoutesParamList = {
   [Screens.IMAGE_DETAILS]: Page;
   [Screens.PAGE_RESULTS]: undefined;
   [Screens.PLAIN_DATA_RESULT]: PlainDataResultParam;
+  [Screens.DOCUMENT_V2_RESULT]: undefined;
+  [Screens.DOCUMENT_V2_PAGE_RESULT]: {pageID: string};
 };
 
 export type PrimaryRouteNavigationProp = StackNavigationProp<
@@ -101,6 +107,11 @@ export type BarcodeV2ResultScreenRouteProp = RouteProp<
 export type PlainDataResultScreenRouteProp = RouteProp<
   PrimaryRoutesParamList,
   Screens.PLAIN_DATA_RESULT
+>;
+
+export type DocumentV2PageResultScreenRouteProp = RouteProp<
+  PrimaryRoutesParamList,
+  Screens.DOCUMENT_V2_PAGE_RESULT
 >;
 
 export type PlainDataResultParam = {

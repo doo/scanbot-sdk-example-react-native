@@ -30,6 +30,10 @@ const initialBarcodeFormats: Record<BarcodeFormat, boolean> = {
   MICRO_PDF_417: true,
   DATABAR: true,
   DATABAR_EXPANDED: true,
+  CODE_11: true,
+  CODE_32: true,
+  MAXI_CODE: true,
+  RMQR_CODE: true,
 };
 
 interface BarcodeFormatsContextValue {

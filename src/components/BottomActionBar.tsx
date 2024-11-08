@@ -1,6 +1,22 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {COLORS} from '@theme';
+
+function BottomActionBarButton({
+  title,
+  onPress,
+}: {
+  title: string;
+  onPress: () => void;
+}) {
+  return (
+    <TouchableOpacity style={styles.bottomBarButton} onPress={onPress}>
+      <Text style={styles.bottomBarButtonText} numberOfLines={2}>
+        {title.toUpperCase()}
+      </Text>
+    </TouchableOpacity>
+  );
+}
 
 interface BottomActionBarProps {
   buttonOneTitle: string;
@@ -21,17 +37,9 @@ export function BottomActionBar({
 }: BottomActionBarProps) {
   return (
     <View style={styles.bottomBar}>
-      <Text style={styles.bottomBarButton} onPress={onButtonOne}>
-        {buttonOneTitle}
-      </Text>
-      <Text style={styles.bottomBarButton} onPress={onButtonTwo}>
-        {buttonTwoTitle}
-      </Text>
-      <Text
-        style={[styles.bottomBarButton, styles.alignRight]}
-        onPress={onButtonThree}>
-        {buttonThreeTitle}
-      </Text>
+      <BottomActionBarButton title={buttonOneTitle} onPress={onButtonOne} />
+      <BottomActionBarButton title={buttonTwoTitle} onPress={onButtonTwo} />
+      <BottomActionBarButton title={buttonThreeTitle} onPress={onButtonThree} />
     </View>
   );
 }
@@ -39,25 +47,25 @@ export function BottomActionBar({
 const styles = StyleSheet.create({
   bottomBar: {
     width: '100%',
-    height: 50,
+    paddingVertical: 12,
     backgroundColor: COLORS.SCANBOT_RED,
     position: 'absolute',
     bottom: 0,
     flexDirection: 'row',
+    gap: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   bottomBarButton: {
-    flex: 0,
-    height: 50,
-    lineHeight: 50,
+    flex: 1,
+    paddingHorizontal: 10,
+    paddingVertical: 16,
+  },
+  bottomBarButtonText: {
     textAlignVertical: 'center',
     textAlign: 'center',
-    color: 'white',
-    paddingHorizontal: 10,
-    marginRight: 10,
     fontWeight: 'bold',
     fontSize: 13,
-  },
-  alignRight: {
-    marginLeft: 'auto',
+    color: 'white',
   },
 });

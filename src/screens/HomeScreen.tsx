@@ -27,6 +27,7 @@ import {
   useLicenseValidityCheckWrapper,
   useMedicalCertificateScanner,
   useMRZScanner,
+  useMultiplePageScanning,
   useMultiScanning,
   useMultiScanningAR,
   useOCRConfigs,
@@ -36,6 +37,8 @@ import {
   useRecognizeGenericDocument,
   useRecognizeMedicalCertificate,
   useRecognizeMRZ,
+  useSinglePageScanning,
+  useSinglePageScanningWithFinder,
   useSingleScanning,
   useTextDataScanner,
   useVinScanner,
@@ -54,6 +57,7 @@ import {
   selectImagesFromLibrary,
 } from '@utils';
 import {useNavigation} from '@react-navigation/native';
+import {useCreateDocumentWithPage} from '../hooks/operations/document/useCreateDocumentWithPage.ts';
 
 export function HomeScreen() {
   const {loadPages} = useContext(PageContext);
@@ -93,6 +97,10 @@ export function HomeScreen() {
   const onDocumentQualityAnalyzer = useDocumentQualityAnalyzer();
   const onLicenseInfo = useLicenseInfo();
   const onOCRConfigs = useOCRConfigs();
+  const onSinglePageScanning = useSinglePageScanning();
+  const onSinglePageScanningWithFinder = useSinglePageScanningWithFinder();
+  const onMultiplePageScanning = useMultiplePageScanning();
+  const onCreateDocument = useCreateDocumentWithPage();
 
   useEffect(() => {
     loadPages();
@@ -121,6 +129,20 @@ export function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.list} showsVerticalScrollIndicator={false}>
+        <FeatureHeader title={'DOCUMENT SCANNING V2'} />
+        <FeatureItem
+          onPress={onSinglePageScanning}
+          title={'Single Page Scanning'}
+        />
+        <FeatureItem
+          onPress={onSinglePageScanningWithFinder}
+          title={'Single Page Scanning with Finder'}
+        />
+        <FeatureItem
+          onPress={onMultiplePageScanning}
+          title={'Multi Page Scanning'}
+        />
+        <FeatureItem title={'Pick from gallery'} onPress={onCreateDocument} />
         <FeatureHeader title={'DOCUMENT SCANNING'} />
         <FeatureItem onPress={onDocumentScanner} title={'Scan Document'} />
         <FeatureItem
