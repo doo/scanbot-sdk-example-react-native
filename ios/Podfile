@@ -18,8 +18,6 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-# Pod for Scanbot SDK React Native Module
-pod 'RNScanbotSDK/ALL', :path => '../node_modules/react-native-scanbot-sdk'
 
 target 'scanbotsdkexample' do
   config = use_native_modules!

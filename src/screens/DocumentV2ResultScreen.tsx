@@ -8,12 +8,15 @@ import {
   View,
 } from 'react-native';
 import {COLORS} from '@theme';
-import {BottomActionBar, LoadingIndicator, PreviewImage} from '@components';
+import {
+  BottomActionBar,
+  ExportDocumentModal,
+  LoadingIndicator,
+  PreviewImage,
+} from '@components';
 import {useNavigation} from '@react-navigation/native';
 import {PrimaryRouteNavigationProp, Screens} from '@utils';
-import {ExportDocumentModal} from '../components/SaveDocumentModal.tsx';
-import {useContinueDocumentScanning} from '../hooks/rtuui/document/useContinueDocumentScanning.ts';
-import {useAddDocumentPage} from '../hooks/operations/document/useAddDocumentPage.ts';
+import {useAddDocumentPage, useContinueDocumentScanning} from '@hooks';
 import {PageData} from 'react-native-scanbot-sdk';
 import {DocumentContext} from '../context/useDocument.ts';
 

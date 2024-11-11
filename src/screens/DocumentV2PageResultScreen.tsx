@@ -2,12 +2,12 @@ import React, {useCallback, useContext, useMemo, useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import {BottomActionBar, ImageFilterModal, PreviewImage} from '@components';
 import {ParametricFilter} from 'react-native-scanbot-sdk';
-import {deleteAllConfirmationAlert} from '@utils';
-import {DocumentV2PageResultScreenRouteProp} from '../utils/Navigation.ts';
+import {
+  DocumentV2PageResultScreenRouteProp,
+  removePageConfirmationAlert,
+} from '@utils';
 import {useRoute} from '@react-navigation/native';
-import {useCropDocumentPage} from '../hooks/rtuui/document/useCropDocumentPage.ts';
-import {useModifyPage} from '../hooks/operations/document/useModifyPage.ts';
-import {useRemovePage} from '../hooks/operations/document/useRemovePage.ts';
+import {useCropDocumentPage, useModifyPage, useRemovePage} from '@hooks';
 import {DocumentContext} from '../context/useDocument.ts';
 
 export function DocumentV2PageResultScreen() {
@@ -57,7 +57,7 @@ export function DocumentV2PageResultScreen() {
   }, [document, pageID, removePage]);
 
   const onDelete = useCallback(() => {
-    deleteAllConfirmationAlert(onRemovePage);
+    removePageConfirmationAlert(onRemovePage);
   }, [onRemovePage]);
 
   if (!page) {

@@ -3,6 +3,7 @@ import {
   errorMessageAlert,
   infoMessageAlert,
   resultMessageAlert,
+  removePageConfirmationAlert,
 } from './Alerts';
 import {selectPDFFileUri} from './FileUtils';
 import {selectImagesFromLibrary} from './ImageUtils';
@@ -13,17 +14,15 @@ import {
 } from './SDKUtils';
 import {GenericDocumentUtils} from './GenericDocumentUtils';
 import {
-  BarcodeResultScreenRouteProp,
-  BarcodeV2ResultScreenRouteProp,
   CheckRecognizerResultScreenRouteProp,
   GenericDocumentResultScreenRouteProp,
-  ImageDetailScreenRouteProp,
   MedicalCertificateResultScreenRouteProp,
   MrzResultScreenRouteProp,
   PlainDataResultParam,
   PlainDataResultScreenRouteProp,
   PrimaryRouteNavigationProp,
   PrimaryRoutesParamList,
+  DocumentV2PageResultScreenRouteProp,
   Screens,
   ScreenTitles,
 } from './Navigation';
@@ -33,6 +32,7 @@ export {
   resultMessageAlert,
   infoMessageAlert,
   deleteAllConfirmationAlert,
+  removePageConfirmationAlert,
   selectPDFFileUri,
   selectImagesFromLibrary,
   IMAGE_FILE_FORMAT,
@@ -46,13 +46,11 @@ export {
 export type {
   PrimaryRoutesParamList,
   PrimaryRouteNavigationProp,
-  ImageDetailScreenRouteProp,
   CheckRecognizerResultScreenRouteProp,
   MrzResultScreenRouteProp,
   MedicalCertificateResultScreenRouteProp,
   GenericDocumentResultScreenRouteProp,
-  BarcodeResultScreenRouteProp,
-  BarcodeV2ResultScreenRouteProp,
   PlainDataResultScreenRouteProp,
   PlainDataResultParam,
+  DocumentV2PageResultScreenRouteProp,
 };

@@ -1,35 +1,17 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, Text} from 'react-native';
 import {
-  useApplyFilters,
   useCheckRecognizer,
-  useDetectBarcodes,
-  useDetectDocument,
-  useDetectDocumentFromPage,
+  useCleanup,
+  useCreateDocumentWithPage,
   useDocumentQualityAnalyzer,
-  useDocumentScanner,
   useEHICScanner,
-  useExtractImagesFromPDF,
-  useExtractPagesFromPDF,
-  useFindAndPickScanning,
-  useFinderDocumentScanner,
   useGenericDocumentScanner,
-  useLegacyBarcodeScanner,
-  useLegacyBatchBarcodesScanner,
   useLicenseInfo,
   useLicensePlateScanner,
-  useLicenseValidityCheckWrapper,
   useMedicalCertificateScanner,
   useMRZScanner,
   useMultiplePageScanning,
-  useMultiScanning,
-  useMultiScanningAR,
   useOCRConfigs,
   usePerformOCR,
   useRecognizeCheck,
@@ -39,47 +21,13 @@ import {
   useRecognizeMRZ,
   useSinglePageScanning,
   useSinglePageScanningWithFinder,
-  useSingleScanning,
   useTextDataScanner,
   useVinScanner,
 } from '@hooks';
-import {
-  FeatureHeader,
-  FeatureItem,
-  ImageFilterModal,
-  ScanbotLearnMore,
-} from '@components';
-import {PageContext} from '@context';
-import {ParametricFilter} from 'react-native-scanbot-sdk';
-import {
-  PrimaryRouteNavigationProp,
-  Screens,
-  selectImagesFromLibrary,
-} from '@utils';
-import {useNavigation} from '@react-navigation/native';
-import {useCreateDocumentWithPage} from '../hooks/operations/document/useCreateDocumentWithPage.ts';
+import {FeatureHeader, FeatureItem, ScanbotLearnMore} from '@components';
 
 export function HomeScreen() {
-  const {loadPages} = useContext(PageContext);
-  const [isVisible, setIsVisible] = useState(false);
-  const imageRef = useRef<string>();
-  const navigation = useNavigation<PrimaryRouteNavigationProp>();
-
   /** ScanbotSDK Features */
-  const onDocumentScanner = useDocumentScanner();
-  const onFinderDocumentScanner = useFinderDocumentScanner();
-  const applyImageOnFilter = useApplyFilters();
-  const onDetectDocumentFromPage = useDetectDocumentFromPage();
-  const onDetectDocumentFromImage = useDetectDocument();
-  const onExtractPagesFromPDF = useExtractPagesFromPDF();
-  const onExtractImagesFromPDF = useExtractImagesFromPDF();
-  const onBarcodeScanner = useLegacyBarcodeScanner();
-  const onBatchBarcodesScanner = useLegacyBatchBarcodesScanner();
-  const onSingleScanPress = useSingleScanning();
-  const onMultiScanPress = useMultiScanning();
-  const onMultiScanARPress = useMultiScanningAR();
-  const onFindAndPickScanPress = useFindAndPickScanning();
-  const onDetectBarcodesOnStillImage = useDetectBarcodes();
   const onMRZScanner = useMRZScanner();
   const onMedicalCertificateScanner = useMedicalCertificateScanner();
   const onGenericDocumentScanner = useGenericDocumentScanner();
@@ -97,34 +45,11 @@ export function HomeScreen() {
   const onDocumentQualityAnalyzer = useDocumentQualityAnalyzer();
   const onLicenseInfo = useLicenseInfo();
   const onOCRConfigs = useOCRConfigs();
+  const onCleanup = useCleanup();
   const onSinglePageScanning = useSinglePageScanning();
   const onSinglePageScanningWithFinder = useSinglePageScanningWithFinder();
   const onMultiplePageScanning = useMultiplePageScanning();
   const onCreateDocument = useCreateDocumentWithPage();
-
-  useEffect(() => {
-    loadPages();
-  }, [loadPages]);
-
-  const onClassicComponentScanner = useLicenseValidityCheckWrapper(function () {
-    navigation.navigate(Screens.BARCODE_CAMERA_VIEW);
-  });
-
-  const onApplyFilterOnImage = useCallback(async () => {
-    const selectedImage = await selectImagesFromLibrary();
-    if (!selectedImage) {
-      return;
-    }
-    imageRef.current = selectedImage[0];
-    setIsVisible(true);
-  }, []);
-
-  const onFilterSelect = useCallback(
-    async (filter: ParametricFilter) => {
-      await applyImageOnFilter(filter, imageRef.current!!);
-    },
-    [applyImageOnFilter],
-  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -143,65 +68,6 @@ export function HomeScreen() {
           title={'Multi Page Scanning'}
         />
         <FeatureItem title={'Pick from gallery'} onPress={onCreateDocument} />
-        <FeatureHeader title={'DOCUMENT SCANNING'} />
-        <FeatureItem onPress={onDocumentScanner} title={'Scan Document'} />
-        <FeatureItem
-          onPress={onFinderDocumentScanner}
-          title={'Scan Document with Finder'}
-        />
-        <FeatureItem
-          onPress={onDetectDocumentFromPage}
-          title={'Import Image & Detect Document'}
-        />
-        <FeatureItem
-          onPress={onExtractPagesFromPDF}
-          title={'Extract pages from PDF'}
-        />
-        <FeatureItem
-          onPress={() => navigation.navigate(Screens.PAGE_RESULTS)}
-          title={'View Page Results'}
-        />
-
-        <FeatureHeader title={'BARCODE DETECTOR'} />
-        <FeatureItem
-          title={'Single Scanning use case'}
-          onPress={onSingleScanPress}
-        />
-        <FeatureItem
-          title={'Multi Scanning use case'}
-          onPress={onMultiScanPress}
-        />
-        <FeatureItem
-          title={'Multi AR Scanning use case'}
-          onPress={onMultiScanARPress}
-        />
-        <FeatureItem
-          title={'Find And Pick Scanning use case'}
-          onPress={onFindAndPickScanPress}
-        />
-        <FeatureItem
-          onPress={onDetectBarcodesOnStillImage}
-          title={'Detect Barcodes on image'}
-        />
-        <FeatureItem
-          onPress={onClassicComponentScanner}
-          title={'Barcode Camera View'}
-        />
-        <FeatureItem
-          onPress={() => navigation.navigate(Screens.BARCODE_FORMATS)}
-          title={'Set Barcode Formats Filter'}
-        />
-        <FeatureItem
-          onPress={() => navigation.navigate(Screens.BARCODE_DOCUMENT_FORMATS)}
-          title={'Set Barcode Document Formats Filter'}
-        />
-
-        <FeatureHeader title={'LEGACY BARCODE DETECTOR'} />
-        <FeatureItem onPress={onBarcodeScanner} title={'Scan QR-/Barcode'} />
-        <FeatureItem
-          onPress={onBatchBarcodesScanner}
-          title={'Scan Multiple QR-/Barcode'}
-        />
 
         <FeatureHeader title={'DATA DETECTORS'} />
         <FeatureItem onPress={onMRZScanner} title={'Scan MRZ'} />
@@ -246,31 +112,15 @@ export function HomeScreen() {
 
         <FeatureHeader title={'MISCELLANEOUS'} />
         <FeatureItem
-          onPress={onApplyFilterOnImage}
-          title={'Apply Image Filter'}
-        />
-        <FeatureItem
-          onPress={onDetectDocumentFromImage}
-          title={'Detect document from image'}
-        />
-        <FeatureItem
           onPress={onDocumentQualityAnalyzer}
           title={'Document Quality Analyzer'}
         />
-        <FeatureItem
-          onPress={onExtractImagesFromPDF}
-          title={'Extract images from PDF'}
-        />
         <FeatureItem title={'Perform OCR on image'} onPress={onPerformOCR} />
-        <FeatureItem onPress={onLicenseInfo} title={'License Info'} />
         <FeatureItem onPress={onOCRConfigs} title={'OCR Configs'} />
+        <FeatureItem onPress={onLicenseInfo} title={'License Info'} />
+        <FeatureItem onPress={onCleanup} title={'Clear storage'} />
         <ScanbotLearnMore />
       </ScrollView>
-      <ImageFilterModal
-        isVisible={isVisible}
-        onDismiss={() => setIsVisible(false)}
-        onSelect={onFilterSelect}
-      />
       <Text style={styles.copyrightLabel}>
         Copyright {new Date().getFullYear()} doo GmbH. All rights reserved.
       </Text>

@@ -1,5 +1,3 @@
-import {BarcodeCameraImageButton} from './BarcodeCameraImageButton';
-import {BarcodeDocumentFormatField} from './BarcodeDocumentFormatField';
 import {BottomActionBar} from './BottomActionBar';
 import {
   FeatureHeader,
@@ -13,12 +11,9 @@ import {ResultContainer} from './ResultContainer';
 import {ResultFieldRow} from './ResultFieldRow';
 import {ResultHeader} from './ResultHeader';
 import {ResultImage} from './ResultImage';
-import {SavePagesModal} from './SavePagesModal';
-import {SwitchOptionsList} from './SwitchOptionsList';
-import {BarcodeCameraViewResult} from './BarcodeCameraViewResult';
+import {ExportDocumentModal} from './ExportDocumentModal.tsx';
 
 export {
-  BarcodeDocumentFormatField,
   BottomActionBar,
   ScanbotLearnMore,
   ImageFilterModal,
@@ -28,10 +23,7 @@ export {
   ResultFieldRow,
   ResultHeader,
   ResultImage,
-  SavePagesModal,
-  SwitchOptionsList,
   FeatureHeader,
   FeatureItem,
-  BarcodeCameraImageButton,
-  BarcodeCameraViewResult,
+  ExportDocumentModal,
 };
