@@ -5,13 +5,14 @@ import {
   PrimaryRouteNavigationProp,
   Screens,
 } from '@utils';
+import {useNavigation} from '@react-navigation/native';
+import {DocumentContext} from '@context';
+import {COLORS} from '@theme';
+
 import {
   DocumentScanningFlow,
   startDocumentScanner,
 } from 'react-native-scanbot-sdk/ui_v2';
-import {useNavigation} from '@react-navigation/native';
-import {DocumentContext} from '../../../context/useDocument.ts';
-import {COLORS} from '@theme';
 
 export function useMultiplePageScanning() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();

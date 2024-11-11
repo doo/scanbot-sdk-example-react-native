@@ -6,9 +6,9 @@ import {
   Screens,
 } from '@utils';
 import {useNavigation} from '@react-navigation/native';
+import {DocumentContext} from '@context';
 
 import ScanbotSDK from 'react-native-scanbot-sdk';
-import {DocumentContext} from '../../../context/useDocument.ts';
 
 export function useRemovePage() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();

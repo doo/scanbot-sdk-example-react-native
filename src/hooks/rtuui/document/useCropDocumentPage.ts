@@ -1,11 +1,11 @@
 import {checkLicense, errorMessageAlert} from '@utils';
 import {useCallback, useContext} from 'react';
+import {DocumentContext} from '@context';
 
 import {
   CroppingConfiguration,
   startCroppingScreen,
 } from 'react-native-scanbot-sdk/ui_v2';
-import {DocumentContext} from '../../../context/useDocument.ts';
 
 export function useCropDocumentPage() {
   const {setDocument} = useContext(DocumentContext);

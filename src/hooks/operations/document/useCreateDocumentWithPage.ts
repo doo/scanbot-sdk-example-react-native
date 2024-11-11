@@ -6,11 +6,10 @@ import {
   Screens,
   selectImagesFromLibrary,
 } from '@utils';
+import {ActivityIndicatorContext, DocumentContext} from '@context';
+import {useNavigation} from '@react-navigation/native';
 
 import ScanbotSDK from 'react-native-scanbot-sdk';
-import {ActivityIndicatorContext} from '@context';
-import {useNavigation} from '@react-navigation/native';
-import {DocumentContext} from '../../../context/useDocument.ts';
 
 export function useCreateDocumentWithPage() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();

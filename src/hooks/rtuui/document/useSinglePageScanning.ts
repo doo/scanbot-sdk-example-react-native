@@ -9,13 +9,14 @@ import {
   DocumentScanningFlow,
   startDocumentScanner,
 } from 'react-native-scanbot-sdk/ui_v2';
+import {useNavigation} from '@react-navigation/native';
+import {DocumentContext} from '@context';
+import {COLORS} from '@theme';
+
 import {
   PageSnapCheckMarkAnimation,
   PageSnapFunnelAnimation,
 } from 'react-native-scanbot-sdk/src/ui_v2/document/CameraScreenConfiguration.ts';
-import {useNavigation} from '@react-navigation/native';
-import {DocumentContext} from '../../../context/useDocument.ts';
-import {COLORS} from '@theme';
 
 export function useSinglePageScanning() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();

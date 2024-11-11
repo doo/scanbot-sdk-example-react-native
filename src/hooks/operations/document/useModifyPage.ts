@@ -1,8 +1,8 @@
 import {useCallback, useContext} from 'react';
 import {checkLicense, errorMessageAlert} from '@utils';
+import {DocumentContext} from '@context';
 
 import ScanbotSDK, {ParametricFilter} from 'react-native-scanbot-sdk';
-import {DocumentContext} from '../../../context/useDocument.ts';
 
 export function useModifyPage() {
   const {setDocument} = useContext(DocumentContext);

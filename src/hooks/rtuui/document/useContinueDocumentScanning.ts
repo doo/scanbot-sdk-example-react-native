@@ -6,12 +6,12 @@ import {
   Screens,
 } from '@utils';
 import {useCallback, useContext} from 'react';
+import {DocumentContext} from '@context';
 
 import {
   DocumentScanningFlow,
   startDocumentScanner,
 } from 'react-native-scanbot-sdk/ui_v2';
-import {DocumentContext} from '../../../context/useDocument.ts';
 
 export function useContinueDocumentScanning() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
