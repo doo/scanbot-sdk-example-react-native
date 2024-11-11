@@ -1,11 +1,21 @@
-import {useCallback} from 'react';
-import {checkLicense, errorMessageAlert} from '@utils';
-import {useAddDocumentPage} from './useAddDocumentPage.ts';
+import {useCallback, useContext} from 'react';
+import {
+  checkLicense,
+  errorMessageAlert,
+  PrimaryRouteNavigationProp,
+  Screens,
+  selectImagesFromLibrary,
+} from '@utils';
 
 import ScanbotSDK from 'react-native-scanbot-sdk';
+import {ActivityIndicatorContext} from '@context';
+import {useNavigation} from '@react-navigation/native';
+import {DocumentContext} from '../../../context/useDocument.ts';
 
 export function useCreateDocumentWithPage() {
-  const addDocumentPage = useAddDocumentPage();
+  const navigation = useNavigation<PrimaryRouteNavigationProp>();
+  const {setLoading} = useContext(ActivityIndicatorContext);
+  const {setDocument} = useContext(DocumentContext);
 
   return useCallback(async () => {
     try {
@@ -16,15 +26,30 @@ export function useCreateDocumentWithPage() {
       if (!(await checkLicense())) {
         return;
       }
+      /**
+       * Select an image from the Image Library
+       * Return early if no image is selected or there is an issue selecting an image
+       **/
+      setLoading(true);
+      const selectedImageResult = await selectImagesFromLibrary(true);
+      if (!selectedImageResult) {
+        return;
+      }
       /** Create a document object */
-      const documentResult = await ScanbotSDK.Document.createDocument();
+      const documentResult = await ScanbotSDK.Document.createDocument({
+        imageFileUris: selectedImageResult,
+        documentDetection: true,
+      });
 
       /** Add pages if status is OK */
       if (documentResult.status === 'OK') {
-        await addDocumentPage(documentResult.uuid);
+        setDocument(documentResult);
+        navigation.navigate(Screens.DOCUMENT_V2_RESULT);
       }
     } catch (e: any) {
       errorMessageAlert(e.message);
+    } finally {
+      setLoading(false);
     }
-  }, [addDocumentPage]);
+  }, [setDocument, setLoading, navigation]);
 }
