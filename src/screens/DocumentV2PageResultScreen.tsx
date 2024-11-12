@@ -67,10 +67,8 @@ export function DocumentV2PageResultScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <PreviewImage
-        imageUri={
-          `${page.documentImageURI + '?' + Date.now()}` ??
-          `${page.originalImageURI + '?' + Date.now()}`
-        }
+        key={`${page.uuid}?${Date.now()}`}
+        imageUri={page.documentImageURI ?? page.originalImageURI}
         style={styles.imageDetails}
       />
       <BottomActionBar
