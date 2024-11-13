@@ -1,12 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, useWindowDimensions, View} from 'react-native';
 import {useRoute} from '@react-navigation/native';
-import {
-  PreviewImage,
-  ResultContainer,
-  ResultFieldRow,
-  ResultHeader,
-} from '@components';
+import {PreviewImage, ResultContainer, ResultFieldRow} from '@components';
 import {PlainDataResultParam, PlainDataResultScreenRouteProp} from '@utils';
 
 function PlainImageResult({
@@ -15,6 +10,7 @@ function PlainImageResult({
   imageUris: PlainDataResultParam['imageUris'];
 }) {
   const {width, height} = useWindowDimensions();
+
   if (!imageUris || imageUris.length === 0) {
     return null;
   }

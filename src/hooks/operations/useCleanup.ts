@@ -1,16 +1,13 @@
-import {useCallback, useContext} from 'react';
+import {useCallback} from 'react';
 import {
   deleteAllConfirmationAlert,
   errorMessageAlert,
   infoMessageAlert,
 } from '@utils';
-import {PageContext} from '@context';
 
 import ScanbotSDK from 'react-native-scanbot-sdk';
 
 export const useCleanup = () => {
-  const {deleteAllPages} = useContext(PageContext);
-
   return useCallback(() => {
     deleteAllConfirmationAlert(async () => {
       try {
@@ -21,11 +18,10 @@ export const useCleanup = () => {
         /**
          * Remove the Pages from device/server storage if any
          */
-        deleteAllPages();
-        infoMessageAlert('All pages have been deleted successfully!');
+        infoMessageAlert('Storage has been cleaned successfully!');
       } catch (e: any) {
         errorMessageAlert(e.message);
       }
     });
-  }, [deleteAllPages]);
+  }, []);
 };

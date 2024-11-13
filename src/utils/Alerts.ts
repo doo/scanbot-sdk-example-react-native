@@ -63,9 +63,31 @@ export function infoMessageAlert(message: string) {
   );
 }
 
+export function removePageConfirmationAlert(onDelete: () => void) {
+  Alert.alert(
+    'Removing page',
+    'Are you sure you want to proceed?',
+    [
+      {
+        text: 'Close',
+        style: 'cancel',
+        onPress: () => {},
+      },
+      {
+        text: 'OK',
+        style: 'default',
+        onPress: onDelete,
+      },
+    ],
+    {
+      cancelable: true,
+    },
+  );
+}
+
 export function deleteAllConfirmationAlert(onDelete: () => void) {
   Alert.alert(
-    'Deleting pages',
+    'Clearing storage',
     'Are you sure you want to proceed?',
     [
       {

@@ -1,10 +1,5 @@
 import React, {useEffect} from 'react';
-import {
-  Platform,
-  SafeAreaView,
-  StyleSheet,
-  View,
-} from 'react-native';
+import {Platform, SafeAreaView, StyleSheet, View} from 'react-native';
 
 import ScanbotSDK, {ScanbotSdkConfiguration} from 'react-native-scanbot-sdk';
 import {DocumentDirectoryPath, ExternalDirectoryPath} from 'react-native-fs';
@@ -20,30 +15,21 @@ import {
 } from '@utils';
 import {
   ActivityIndicatorContext,
-  BarcodeDocumentFormatContext,
-  BarcodeFormatsContext,
-  PageContext,
-  useBarcodeDocumentFormats,
-  useBarcodeFormats,
+  DocumentContext,
+  useDocument,
   useLoading,
-  usePages,
 } from '@context';
 import {COLORS, ScanbotTheme} from '@theme';
 import {LoadingIndicator} from '@components';
 
 import {HomeScreen} from './src/screens/HomeScreen';
-import {PageResultScreen} from './src/screens/PageResultScreen';
 import {MrzResultScreen} from './src/screens/MrzResultScreen';
-import {BarcodeResultScreen} from './src/screens/BarcodeResultScreen';
-import {BarcodeV2ResultsScreen} from './src/screens/BarcodeV2ResultScreen';
-import {ImageDetailScreen} from './src/screens/ImageDetailScreen';
 import {MedicalCertificateResultScreen} from './src/screens/MedicalCertificateResultScreen';
 import {GenericDocumentResultScreen} from './src/screens/GenericDocumentResultScreen';
 import {CheckRecognizerResultScreen} from './src/screens/CheckRecognizerResultScreen';
-import {BarcodeFormatsScreen} from './src/screens/BarcodeFormatsScreen';
-import {BarcodeDocumentFormatsScreen} from './src/screens/BarcodeDocumentFormatsScreen';
-import {BarcodeCameraViewScreen} from './src/screens/BarcodeCameraViewScreen';
 import {PlainDataResultScreen} from './src/screens/PlainDataResultScreen';
+import {DocumentResultScreen} from './src/screens/DocumentResultScreen';
+import {DocumentPageResultScreen} from './src/screens/DocumentPageResultScreen';
 
 const Stack = createStackNavigator<PrimaryRoutesParamList>();
 
@@ -98,10 +84,14 @@ if (FILE_ENCRYPTION_ENABLED) {
 
 function App() {
   useEffect(() => {
-    ScanbotSDK.initializeSDK(SDKInitializationOptions).catch(error => {
-      console.error('Error initializing Scanbot SDK:', error.message);
-      errorMessageAlert('Error initializing Scanbot SDK:\n' + error.message);
-    });
+    ScanbotSDK.initializeSDK(SDKInitializationOptions)
+      .then(message => {
+        console.log(message);
+      })
+      .catch(error => {
+        console.error('Error initializing Scanbot SDK:', error.message);
+        errorMessageAlert('Error initializing Scanbot SDK:\n' + error.message);
+      });
 
     console.log(
       `Using ${
@@ -110,83 +100,53 @@ function App() {
     );
   }, []);
 
-  const pageValues = usePages();
-  const barcodeDocumentFormatsValues = useBarcodeDocumentFormats();
-  const barcodeFormatsValues = useBarcodeFormats();
+  const documentValues = useDocument();
   const [loading, setLoading] = useLoading();
 
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.container}>
         <ActivityIndicatorContext.Provider value={{setLoading}}>
-          <PageContext.Provider value={pageValues}>
-            <BarcodeDocumentFormatContext.Provider
-              value={barcodeDocumentFormatsValues}>
-              <BarcodeFormatsContext.Provider value={barcodeFormatsValues}>
-                <NavigationContainer theme={ScanbotTheme}>
-                  <Stack.Navigator
-                    screenOptions={navigation => ({
-                      title: ScreenTitles[navigation.route.name],
-                      headerStyle: styles.headerStyle,
-                    })}>
-                    <Stack.Screen name={Screens.HOME} component={HomeScreen} />
-                    <Stack.Screen
-                      name={Screens.PAGE_RESULTS}
-                      component={PageResultScreen}
-                    />
-                    <Stack.Screen
-                      name={Screens.IMAGE_DETAILS}
-                      component={ImageDetailScreen}
-                      options={{headerBackTitleVisible: false}}
-                    />
-                    <Stack.Screen
-                      name={Screens.BARCODE_RESULT}
-                      component={BarcodeResultScreen}
-                    />
-                    <Stack.Screen
-                      name={Screens.BARCODE_V2_RESULT}
-                      component={BarcodeV2ResultsScreen}
-                    />
-                    <Stack.Screen
-                      name={Screens.MEDICAL_CERTIFICATE_RESULT}
-                      component={MedicalCertificateResultScreen}
-                    />
-                    <Stack.Screen
-                      name={Screens.MRZ_RESULT}
-                      component={MrzResultScreen}
-                    />
-                    <Stack.Screen
-                      name={Screens.GENERIC_DOCUMENT_RESULT}
-                      component={GenericDocumentResultScreen}
-                    />
-                    <Stack.Screen
-                      name={Screens.CHECK_RECOGNIZER_RESULT}
-                      component={CheckRecognizerResultScreen}
-                    />
-                    <Stack.Screen
-                      name={Screens.PLAIN_DATA_RESULT}
-                      component={PlainDataResultScreen}
-                    />
-                    <Stack.Screen
-                      name={Screens.BARCODE_FORMATS}
-                      component={BarcodeFormatsScreen}
-                      options={{headerBackTitleVisible: false}}
-                    />
-                    <Stack.Screen
-                      name={Screens.BARCODE_DOCUMENT_FORMATS}
-                      component={BarcodeDocumentFormatsScreen}
-                      options={{headerBackTitleVisible: false}}
-                    />
-                    <Stack.Screen
-                      name={Screens.BARCODE_CAMERA_VIEW}
-                      component={BarcodeCameraViewScreen}
-                      options={{headerBackTitleVisible: false}}
-                    />
-                  </Stack.Navigator>
-                </NavigationContainer>
-              </BarcodeFormatsContext.Provider>
-            </BarcodeDocumentFormatContext.Provider>
-          </PageContext.Provider>
+          <DocumentContext.Provider value={documentValues}>
+            <NavigationContainer theme={ScanbotTheme}>
+              <Stack.Navigator
+                screenOptions={navigation => ({
+                  title: ScreenTitles[navigation.route.name],
+                  headerStyle: styles.headerStyle,
+                  headerBackTitleVisible: false,
+                })}>
+                <Stack.Screen name={Screens.HOME} component={HomeScreen} />
+                <Stack.Screen
+                  name={Screens.MEDICAL_CERTIFICATE_RESULT}
+                  component={MedicalCertificateResultScreen}
+                />
+                <Stack.Screen
+                  name={Screens.MRZ_RESULT}
+                  component={MrzResultScreen}
+                />
+                <Stack.Screen
+                  name={Screens.GENERIC_DOCUMENT_RESULT}
+                  component={GenericDocumentResultScreen}
+                />
+                <Stack.Screen
+                  name={Screens.CHECK_RECOGNIZER_RESULT}
+                  component={CheckRecognizerResultScreen}
+                />
+                <Stack.Screen
+                  name={Screens.PLAIN_DATA_RESULT}
+                  component={PlainDataResultScreen}
+                />
+                <Stack.Screen
+                  name={Screens.DOCUMENT_RESULT}
+                  component={DocumentResultScreen}
+                />
+                <Stack.Screen
+                  name={Screens.DOCUMENT_PAGE_RESULT}
+                  component={DocumentPageResultScreen}
+                />
+              </Stack.Navigator>
+            </NavigationContainer>
+          </DocumentContext.Provider>
         </ActivityIndicatorContext.Provider>
         <LoadingIndicator loading={loading} />
       </SafeAreaView>
