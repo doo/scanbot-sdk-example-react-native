@@ -76,7 +76,9 @@ export function DocumentResultScreen() {
           {document.pages.map(page => (
             <TouchableOpacity key={page.uuid} onPress={onPagePress(page)}>
               <PreviewImage
-                key={`${page.uuid}?${Date.now()}`}
+                key={`${page.uuid}?${page.filters
+                  ?.map(f => f._type)
+                  .join(',')}`}
                 imageUri={page.documentImageURI ?? page.originalImageURI}
                 style={[
                   styles.galleryCell,

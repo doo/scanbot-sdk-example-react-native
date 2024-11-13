@@ -67,7 +67,7 @@ export function DocumentPageResultScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <PreviewImage
-        key={`${page.uuid}?${Date.now()}`}
+        key={`${page.uuid}?${page.filters?.map(f => f._type).join(',')}`}
         imageUri={page.documentImageURI ?? page.originalImageURI}
         style={styles.imageDetails}
       />
