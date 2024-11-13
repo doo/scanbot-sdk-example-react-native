@@ -18,7 +18,7 @@ import {useNavigation} from '@react-navigation/native';
 import {PrimaryRouteNavigationProp, Screens} from '@utils';
 import {useAddDocumentPage, useContinueDocumentScanning} from '@hooks';
 import {PageData} from 'react-native-scanbot-sdk';
-import {DocumentContext} from '../context/useDocument.ts';
+import {DocumentContext} from '@context';
 
 const GALLERY_CELL_PADDING = 20;
 

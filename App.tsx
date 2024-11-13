@@ -13,7 +13,12 @@ import {
   Screens,
   ScreenTitles,
 } from '@utils';
-import {ActivityIndicatorContext, useLoading} from '@context';
+import {
+  ActivityIndicatorContext,
+  DocumentContext,
+  useDocument,
+  useLoading,
+} from '@context';
 import {COLORS, ScanbotTheme} from '@theme';
 import {LoadingIndicator} from '@components';
 
@@ -23,9 +28,8 @@ import {MedicalCertificateResultScreen} from './src/screens/MedicalCertificateRe
 import {GenericDocumentResultScreen} from './src/screens/GenericDocumentResultScreen';
 import {CheckRecognizerResultScreen} from './src/screens/CheckRecognizerResultScreen';
 import {PlainDataResultScreen} from './src/screens/PlainDataResultScreen';
-import {DocumentResultScreen} from './src/screens/DocumentResultScreen.tsx';
-import {DocumentPageResultScreen} from './src/screens/DocumentPageResultScreen.tsx';
-import {DocumentContext, useDocument} from './src/context/useDocument.ts';
+import {DocumentResultScreen} from './src/screens/DocumentResultScreen';
+import {DocumentPageResultScreen} from './src/screens/DocumentPageResultScreen';
 
 const Stack = createStackNavigator<PrimaryRoutesParamList>();
 

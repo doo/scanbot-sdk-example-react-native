@@ -8,7 +8,7 @@ import {
 } from '@utils';
 import {useRoute} from '@react-navigation/native';
 import {useCropDocumentPage, useModifyPage, useRemovePage} from '@hooks';
-import {DocumentContext} from '../context/useDocument.ts';
+import {DocumentContext} from '@context';
 
 export function DocumentPageResultScreen() {
   const {pageID} = useRoute<DocumentPageResultScreenRouteProp>().params;
