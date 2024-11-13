@@ -65,7 +65,7 @@ export function infoMessageAlert(message: string) {
 
 export function removePageConfirmationAlert(onDelete: () => void) {
   Alert.alert(
-    'Removing page,',
+    'Removing page',
     'Are you sure you want to proceed?',
     [
       {

@@ -3,15 +3,15 @@ import {SafeAreaView, StyleSheet} from 'react-native';
 import {BottomActionBar, ImageFilterModal, PreviewImage} from '@components';
 import {ParametricFilter} from 'react-native-scanbot-sdk';
 import {
-  DocumentV2PageResultScreenRouteProp,
+  DocumentPageResultScreenRouteProp,
   removePageConfirmationAlert,
 } from '@utils';
 import {useRoute} from '@react-navigation/native';
 import {useCropDocumentPage, useModifyPage, useRemovePage} from '@hooks';
 import {DocumentContext} from '../context/useDocument.ts';
 
-export function DocumentV2PageResultScreen() {
-  const {pageID} = useRoute<DocumentV2PageResultScreenRouteProp>().params;
+export function DocumentPageResultScreen() {
+  const {pageID} = useRoute<DocumentPageResultScreenRouteProp>().params;
   const {document} = useContext(DocumentContext);
   const [filterModalVisible, setFilterModalVisible] = useState(false);
   const cropDocumentPage = useCropDocumentPage();

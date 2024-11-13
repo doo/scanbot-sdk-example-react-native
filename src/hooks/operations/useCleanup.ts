@@ -18,7 +18,7 @@ export const useCleanup = () => {
         /**
          * Remove the Pages from device/server storage if any
          */
-        infoMessageAlert('All pages have been deleted successfully!');
+        infoMessageAlert('Storage has been cleaned successfully!');
       } catch (e: any) {
         errorMessageAlert(e.message);
       }

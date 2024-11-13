@@ -43,7 +43,7 @@ export function useCreateDocumentWithPage() {
       /** Add pages if status is OK */
       if (documentResult.status === 'OK') {
         setDocument(documentResult);
-        navigation.navigate(Screens.DOCUMENT_V2_RESULT);
+        navigation.navigate(Screens.DOCUMENT_RESULT);
       }
     } catch (e: any) {
       errorMessageAlert(e.message);

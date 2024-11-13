@@ -74,7 +74,7 @@ export function useSinglePageScanningWithFinder() {
        */
       if (documentResult.status === 'OK') {
         setDocument(documentResult);
-        navigation.navigate(Screens.DOCUMENT_V2_RESULT);
+        navigation.navigate(Screens.DOCUMENT_RESULT);
       }
     } catch (e: any) {
       errorMessageAlert(e.message);

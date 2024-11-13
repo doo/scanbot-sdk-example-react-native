@@ -40,7 +40,7 @@ export function useContinueDocumentScanning() {
          * Handle the result if result status is OK
          */
         loadDocument(documentID);
-        navigation.navigate(Screens.DOCUMENT_V2_RESULT);
+        navigation.navigate(Screens.DOCUMENT_RESULT);
       } catch (e: any) {
         errorMessageAlert(e.message);
       }

@@ -22,7 +22,7 @@ import {
   PlainDataResultScreenRouteProp,
   PrimaryRouteNavigationProp,
   PrimaryRoutesParamList,
-  DocumentV2PageResultScreenRouteProp,
+  DocumentPageResultScreenRouteProp,
   Screens,
   ScreenTitles,
 } from './Navigation';
@@ -52,5 +52,5 @@ export type {
   GenericDocumentResultScreenRouteProp,
   PlainDataResultScreenRouteProp,
   PlainDataResultParam,
-  DocumentV2PageResultScreenRouteProp,
+  DocumentPageResultScreenRouteProp,
 };

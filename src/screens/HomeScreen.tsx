@@ -54,7 +54,7 @@ export function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.list} showsVerticalScrollIndicator={false}>
-        <FeatureHeader title={'DOCUMENT SCANNING V2'} />
+        <FeatureHeader title={'DOCUMENT SCANNING'} />
         <FeatureItem
           onPress={onSinglePageScanning}
           title={'Single Page Scanning'}

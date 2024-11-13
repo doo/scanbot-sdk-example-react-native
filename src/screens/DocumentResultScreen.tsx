@@ -22,7 +22,7 @@ import {DocumentContext} from '../context/useDocument.ts';
 
 const GALLERY_CELL_PADDING = 20;
 
-export function DocumentV2ResultScreen() {
+export function DocumentResultScreen() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
   const {document} = useContext(DocumentContext);
   const [modalVisible, setModalVisible] = useState(false);
@@ -52,7 +52,7 @@ export function DocumentV2ResultScreen() {
     (page: PageData) => {
       return function () {
         if (document !== undefined) {
-          navigation.navigate(Screens.DOCUMENT_V2_PAGE_RESULT, {
+          navigation.navigate(Screens.DOCUMENT_PAGE_RESULT, {
             pageID: page.uuid,
           });
         }

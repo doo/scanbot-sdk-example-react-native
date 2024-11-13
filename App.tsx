@@ -23,8 +23,8 @@ import {MedicalCertificateResultScreen} from './src/screens/MedicalCertificateRe
 import {GenericDocumentResultScreen} from './src/screens/GenericDocumentResultScreen';
 import {CheckRecognizerResultScreen} from './src/screens/CheckRecognizerResultScreen';
 import {PlainDataResultScreen} from './src/screens/PlainDataResultScreen';
-import {DocumentV2ResultScreen} from './src/screens/DocumentV2ResultScreen.tsx';
-import {DocumentV2PageResultScreen} from './src/screens/DocumentV2PageResultScreen.tsx';
+import {DocumentResultScreen} from './src/screens/DocumentResultScreen.tsx';
+import {DocumentPageResultScreen} from './src/screens/DocumentPageResultScreen.tsx';
 import {DocumentContext, useDocument} from './src/context/useDocument.ts';
 
 const Stack = createStackNavigator<PrimaryRoutesParamList>();
@@ -133,12 +133,12 @@ function App() {
                   component={PlainDataResultScreen}
                 />
                 <Stack.Screen
-                  name={Screens.DOCUMENT_V2_RESULT}
-                  component={DocumentV2ResultScreen}
+                  name={Screens.DOCUMENT_RESULT}
+                  component={DocumentResultScreen}
                 />
                 <Stack.Screen
-                  name={Screens.DOCUMENT_V2_PAGE_RESULT}
-                  component={DocumentV2PageResultScreen}
+                  name={Screens.DOCUMENT_PAGE_RESULT}
+                  component={DocumentPageResultScreen}
                 />
               </Stack.Navigator>
             </NavigationContainer>

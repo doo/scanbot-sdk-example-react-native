@@ -16,7 +16,7 @@ import {COLORS} from '@theme';
 import {
   PageSnapCheckMarkAnimation,
   PageSnapFunnelAnimation,
-} from 'react-native-scanbot-sdk/src/ui_v2/document/CameraScreenConfiguration.ts';
+} from 'react-native-scanbot-sdk/src/ui_v2';
 
 export function useSinglePageScanning() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -84,7 +84,7 @@ export function useSinglePageScanning() {
        */
       if (documentResult.status === 'OK') {
         setDocument(documentResult);
-        navigation.navigate(Screens.DOCUMENT_V2_RESULT);
+        navigation.navigate(Screens.DOCUMENT_RESULT);
       }
     } catch (e: any) {
       errorMessageAlert(e.message);

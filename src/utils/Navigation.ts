@@ -14,8 +14,8 @@ export enum Screens {
   GENERIC_DOCUMENT_RESULT = 'genericDocumentResult',
   MEDICAL_CERTIFICATE_RESULT = 'medicalCertificateResult',
   PLAIN_DATA_RESULT = 'plainDataResult',
-  DOCUMENT_V2_RESULT = 'documentV2Result',
-  DOCUMENT_V2_PAGE_RESULT = 'documentV2PageResult',
+  DOCUMENT_RESULT = 'documentResult',
+  DOCUMENT_PAGE_RESULT = 'documentPageResult',
 }
 
 export const ScreenTitles: Record<Screens, string> = {
@@ -25,8 +25,8 @@ export const ScreenTitles: Record<Screens, string> = {
   [Screens.GENERIC_DOCUMENT_RESULT]: 'Generic Document Recognizer Result',
   [Screens.MEDICAL_CERTIFICATE_RESULT]: 'Medical Certificate Result',
   [Screens.PLAIN_DATA_RESULT]: 'Result',
-  [Screens.DOCUMENT_V2_RESULT]: 'Document Result',
-  [Screens.DOCUMENT_V2_PAGE_RESULT]: 'Document Page Result',
+  [Screens.DOCUMENT_RESULT]: 'Document',
+  [Screens.DOCUMENT_PAGE_RESULT]: 'Document Page',
 };
 
 export type PrimaryRoutesParamList = {
@@ -36,8 +36,8 @@ export type PrimaryRoutesParamList = {
   [Screens.GENERIC_DOCUMENT_RESULT]: GenericDocumentRecognizerResult;
   [Screens.MEDICAL_CERTIFICATE_RESULT]: MedicalCertificateScannerResult;
   [Screens.PLAIN_DATA_RESULT]: PlainDataResultParam;
-  [Screens.DOCUMENT_V2_RESULT]: undefined;
-  [Screens.DOCUMENT_V2_PAGE_RESULT]: {pageID: string};
+  [Screens.DOCUMENT_RESULT]: undefined;
+  [Screens.DOCUMENT_PAGE_RESULT]: {pageID: string};
 };
 
 export type PrimaryRouteNavigationProp = StackNavigationProp<
@@ -70,9 +70,9 @@ export type PlainDataResultScreenRouteProp = RouteProp<
   Screens.PLAIN_DATA_RESULT
 >;
 
-export type DocumentV2PageResultScreenRouteProp = RouteProp<
+export type DocumentPageResultScreenRouteProp = RouteProp<
   PrimaryRoutesParamList,
-  Screens.DOCUMENT_V2_PAGE_RESULT
+  Screens.DOCUMENT_PAGE_RESULT
 >;
 
 export type PlainDataResultParam = {
