@@ -1,20 +1,13 @@
 import {useCallback, useContext} from 'react';
-import {
-  checkLicense,
-  errorMessageAlert,
-  PrimaryRouteNavigationProp,
-  Screens,
-  selectImagesFromLibrary,
-} from '@utils';
-import {ActivityIndicatorContext, DocumentContext} from '@context';
-import {useNavigation} from '@react-navigation/native';
+import {checkLicense, errorMessageAlert, selectImagesFromLibrary} from '@utils';
+import {ActivityIndicatorContext} from '@context';
+import {useContinueDocumentScanning} from '@hooks';
 
 import ScanbotSDK from 'react-native-scanbot-sdk';
 
 export function useCreateDocumentWithPage() {
-  const navigation = useNavigation<PrimaryRouteNavigationProp>();
   const {setLoading} = useContext(ActivityIndicatorContext);
-  const {setDocument} = useContext(DocumentContext);
+  const continueScanning = useContinueDocumentScanning();
 
   return useCallback(async () => {
     try {
@@ -40,15 +33,14 @@ export function useCreateDocumentWithPage() {
         documentDetection: true,
       });
 
-      /** Add pages if status is OK */
+      /** Continue scanning  */
       if (documentResult.status === 'OK') {
-        setDocument(documentResult);
-        navigation.navigate(Screens.DOCUMENT_RESULT);
+        await continueScanning(documentResult.uuid);
       }
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {
       setLoading(false);
     }
-  }, [setDocument, setLoading, navigation]);
+  }, [setLoading, continueScanning]);
 }
