@@ -6,7 +6,7 @@ import {
   removePageConfirmationAlert,
 } from './Alerts';
 import {selectPDFFileUri} from './FileUtils';
-import {selectImagesFromLibrary} from './ImageUtils';
+import {selectImagesFromLibrary, selectImageFromLibrary} from './ImageUtils';
 import {
   checkLicense,
   FILE_ENCRYPTION_ENABLED,
@@ -35,6 +35,7 @@ export {
   removePageConfirmationAlert,
   selectPDFFileUri,
   selectImagesFromLibrary,
+  selectImageFromLibrary,
   IMAGE_FILE_FORMAT,
   FILE_ENCRYPTION_ENABLED,
   checkLicense,
