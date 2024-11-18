@@ -1,11 +1,12 @@
 import {useCallback, useContext} from 'react';
 import {checkLicense, errorMessageAlert} from '@utils';
-import {DocumentContext} from '@context';
+import {ActivityIndicatorContext, DocumentContext} from '@context';
 
 import ScanbotSDK, {ParametricFilter} from 'react-native-scanbot-sdk';
 
 export function useModifyPage() {
   const {setDocument} = useContext(DocumentContext);
+  const {setLoading} = useContext(ActivityIndicatorContext);
 
   return useCallback(
     async ({
@@ -18,6 +19,7 @@ export function useModifyPage() {
       documentID: string;
     }) => {
       try {
+        setLoading(true);
         /**
          * Check license status and return early
          * if the license is not valid
@@ -39,8 +41,10 @@ export function useModifyPage() {
         }
       } catch (e: any) {
         errorMessageAlert(e.message);
+      } finally {
+        setLoading(false);
       }
     },
-    [setDocument],
+    [setDocument, setLoading],
   );
 }

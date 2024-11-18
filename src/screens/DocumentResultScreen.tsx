@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useMemo, useState} from 'react';
+import React, {useCallback, useContext, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -12,7 +12,7 @@ import {
   BottomActionBar,
   ExportDocumentModal,
   LoadingIndicator,
-  PreviewImage,
+  PageImagePreview,
 } from '@components';
 import {useNavigation} from '@react-navigation/native';
 import {PrimaryRouteNavigationProp, Screens} from '@utils';
@@ -61,10 +61,6 @@ export function DocumentResultScreen() {
     [document, navigation],
   );
 
-  const pageImageKey = useMemo(() => {
-    return `${document?.uuid}_${Date.now()}`;
-  }, [document]);
-
   if (document === undefined) {
     return (
       <SafeAreaView style={styles.container}>
@@ -79,9 +75,8 @@ export function DocumentResultScreen() {
         <View style={styles.gallery}>
           {document.pages.map(page => (
             <TouchableOpacity key={page.uuid} onPress={onPagePress(page)}>
-              <PreviewImage
-                key={pageImageKey}
-                imageUri={page.documentImageURI ?? page.originalImageURI}
+              <PageImagePreview
+                page={page}
                 style={[
                   styles.galleryCell,
                   {

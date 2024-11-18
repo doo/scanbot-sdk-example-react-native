@@ -1,6 +1,6 @@
 import React, {useCallback, useContext, useMemo, useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
-import {BottomActionBar, ImageFilterModal, PreviewImage} from '@components';
+import {BottomActionBar, ImageFilterModal, PageImagePreview} from '@components';
 import {ParametricFilter} from 'react-native-scanbot-sdk';
 import {
   DocumentPageResultScreenRouteProp,
@@ -60,21 +60,13 @@ export function DocumentPageResultScreen() {
     removePageConfirmationAlert(onRemovePage);
   }, [onRemovePage]);
 
-  const pageImageKey = useMemo(() => {
-    return `${page?.uuid}_${Date.now()}`;
-  }, [page]);
-
   if (!page) {
     return null;
   }
 
   return (
     <SafeAreaView style={styles.container}>
-      <PreviewImage
-        key={pageImageKey}
-        imageUri={page.documentImageURI ?? page.originalImageURI}
-        style={styles.imageDetails}
-      />
+      <PageImagePreview page={page} style={styles.imageDetails} />
       <BottomActionBar
         buttonOneTitle={'CROP & ROTATE'}
         buttonTwoTitle={'FILTER'}
