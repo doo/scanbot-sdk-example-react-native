@@ -12,8 +12,8 @@ async function documentScanner() {
   // Equivalent to ignoreBadAspectRatio: true
   cameraScreenConfiguration.cameraConfiguration.ignoreBadAspectRatio = true;
 
-  // Equivalent to autoSnappingSensitivity: 0.67 = 0.75
-  cameraScreenConfiguration.cameraConfiguration.autoSnappingSensitivity = 0.75;
+  // Equivalent to autoSnappingSensitivity: 0.67
+  cameraScreenConfiguration.cameraConfiguration.autoSnappingSensitivity = 0.67;
 
   // Ready-to-Use UI v2 contains an acknowledgment screen to
   // verify the captured document with the built-in Document Quality Analyzer.

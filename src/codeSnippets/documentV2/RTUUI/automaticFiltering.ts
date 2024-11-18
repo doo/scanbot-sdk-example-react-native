@@ -8,7 +8,7 @@ async function startScanning() {
   try {
     /** Create the default configuration instance */
     const configuration = new DocumentScanningFlow();
-    /** dsa */
+    /** Set any `ParametricFilter` type to default filter.*/
     configuration.outputSettings.defaultFilter =
       new ScanbotBinarizationFilter();
     /** Start the Document Scanner UI */
