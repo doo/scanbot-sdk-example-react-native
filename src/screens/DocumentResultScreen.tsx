@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useState} from 'react';
+import React, {useCallback, useContext, useMemo, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -61,6 +61,10 @@ export function DocumentResultScreen() {
     [document, navigation],
   );
 
+  const pageImageKey = useMemo(() => {
+    return `${document?.uuid}_${Date.now()}`;
+  }, [document]);
+
   if (document === undefined) {
     return (
       <SafeAreaView style={styles.container}>
@@ -76,9 +80,7 @@ export function DocumentResultScreen() {
           {document.pages.map(page => (
             <TouchableOpacity key={page.uuid} onPress={onPagePress(page)}>
               <PreviewImage
-                key={`${page.uuid}?${page.filters
-                  ?.map(f => f._type)
-                  .join(',')}`}
+                key={pageImageKey}
                 imageUri={page.documentImageURI ?? page.originalImageURI}
                 style={[
                   styles.galleryCell,

@@ -60,6 +60,10 @@ export function DocumentPageResultScreen() {
     removePageConfirmationAlert(onRemovePage);
   }, [onRemovePage]);
 
+  const pageImageKey = useMemo(() => {
+    return `${page?.uuid}_${Date.now()}`;
+  }, [page]);
+
   if (!page) {
     return null;
   }
@@ -67,7 +71,7 @@ export function DocumentPageResultScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <PreviewImage
-        key={`${page.uuid}?${page.filters?.map(f => f._type).join(',')}`}
+        key={pageImageKey}
         imageUri={page.documentImageURI ?? page.originalImageURI}
         style={styles.imageDetails}
       />
