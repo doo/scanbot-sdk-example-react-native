@@ -46,10 +46,8 @@ export function useAddDocumentPage() {
         /**
          * Handle the result by navigating to result screen
          */
-        if (documentResult.status === 'OK') {
-          setDocument(documentResult);
-          navigation.navigate(Screens.DOCUMENT_RESULT);
-        }
+        setDocument(documentResult);
+        navigation.navigate(Screens.DOCUMENT_RESULT);
       } catch (e: any) {
         errorMessageAlert(e.message);
       } finally {

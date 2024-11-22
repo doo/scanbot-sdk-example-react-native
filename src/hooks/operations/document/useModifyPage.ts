@@ -32,11 +32,9 @@ export function useModifyPage() {
           filters: [parametricFilter],
         });
         /**
-         * Handle the result if result status is OK
+         * Handle the result
          */
-        if (documentResult.status === 'OK') {
-          setDocument(documentResult);
-        }
+        setDocument(documentResult);
       } catch (e: any) {
         errorMessageAlert(e.message);
       }

@@ -30,12 +30,10 @@ export function useRemovePage() {
           pageID: pageID,
         });
         /**
-         * Handle the result if result status is OK
+         * Handle the result
          */
-        if (documentResult.status === 'OK') {
-          setDocument(documentResult);
-          navigation.navigate(Screens.DOCUMENT_RESULT);
-        }
+        setDocument(documentResult);
+        navigation.navigate(Screens.DOCUMENT_RESULT);
       } catch (e: any) {
         errorMessageAlert(e.message);
       }
