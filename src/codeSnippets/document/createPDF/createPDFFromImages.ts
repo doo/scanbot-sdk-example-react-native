@@ -1,7 +1,7 @@
 import {selectImagesFromLibrary} from '@utils';
 import ScanbotSDK from 'react-native-scanbot-sdk';
 
-async function createTIFFFromImages() {
+async function createPDFFromImages() {
   try {
     /**
      * Select images from the Image Library
@@ -11,15 +11,19 @@ async function createTIFFFromImages() {
     if (!selectedImagesResult) {
       return;
     }
-    /** Create a TIFF file with the provided options */
-    const tiffCreationResult = await ScanbotSDK.writeTIFF({
+    /** Create a PDF file with the provided options */
+    const pdfCreationResult = await ScanbotSDK.createPDF({
       imageFileUris: selectedImagesResult,
       options: {
-        dpi: 300,
+        pageSize: 'A4',
+        pageDirection: 'PORTRAIT',
+        ocrConfiguration: {
+          engineMode: 'SCANBOT_OCR',
+        },
       },
     });
-    /** Handle the result if the status is 'OK' */
-    if (tiffCreationResult.status === 'OK') {
-    }
-  } catch (e: any) {}
+    /** Handle the result */
+  } catch (e: any) {
+    console.error(e.message);
+  }
 }

@@ -15,6 +15,14 @@ async function createDocumentWithPages(imageFileUris: string[]) {
   });
 }
 
+async function createDocumentFromPDF(pdfUri: string) {
+  /**
+   * Create a document with an uuid
+   * Extract images from the PDF file and add them as document pages
+   */
+  const document = ScanbotSDK.Document.createDocumentFromPDF(pdfUri);
+}
+
 async function loadDocument(documentID: string) {
   /** Load a document from storage by ID */
   const document = await ScanbotSDK.Document.loadDocument(documentID);
@@ -46,6 +54,11 @@ async function removeAllPagesFromDocument(documentID: string) {
 async function deleteDocument(documentID: string) {
   /** Delete a document from storage along with the document's PDF and TIFF files */
   await ScanbotSDK.Document.deleteDocument(documentID);
+}
+
+async function deleteAllDocuments() {
+  /** Delete all documents from storage along with the document's PDF and TIFF files */
+  await ScanbotSDK.Document.deleteAllDocuments();
 }
 
 async function cleanup() {

@@ -20,9 +20,7 @@ async function applyFiltersAndRotateScannedPage() {
         rotation: 'CLOCKWISE_90',
       },
     );
-    /** Handle the document if the status is 'OK' */
-    if (documentResultWithModifiedPage.status === 'OK') {
-    }
+    /** Handle the document */
   } catch (e: any) {
     console.error(e.message);
   }

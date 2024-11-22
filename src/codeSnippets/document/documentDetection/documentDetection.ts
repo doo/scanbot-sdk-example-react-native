@@ -15,9 +15,7 @@ async function detectDocumentDetection() {
     const documentDetectionResult = await ScanbotSDK.detectDocument(
       selectedImageResult,
     );
-    /** Handle the result if the status is 'OK' */
-    if (documentDetectionResult.status === 'OK') {
-    }
+    /** Handle the result */
   } catch (e: any) {
     console.error(e.message);
   }

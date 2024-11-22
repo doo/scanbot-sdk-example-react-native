@@ -17,9 +17,7 @@ async function createDocumentPDF() {
         },
       },
     });
-    /** Handle the result if the status is 'OK' */
-    if (pdfUriResult.status === 'OK') {
-    }
+    /** Handle the result */
   } catch (e: any) {
     console.error(e.message);
   }

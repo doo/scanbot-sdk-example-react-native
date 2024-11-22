@@ -18,9 +18,7 @@ async function extractImagesFromPDF() {
     const imagesResult = await ScanbotSDK.extractImagesFromPdf({
       pdfFilePath: fileUrl,
     });
-    /** Handle the  result if the status is 'OK' */
-    if (imagesResult.status === 'OK') {
-    }
+    /** Handle the result */
   } catch (e: any) {
     console.error(e.message);
   }
