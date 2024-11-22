@@ -36,9 +36,7 @@ export function useContinueDocumentScanning() {
         configuration.cleanScanningSession = false;
 
         await startDocumentScanner(configuration);
-        /**
-         * Handle the result if result status is OK
-         */
+        
         loadDocument(documentID);
         navigation.navigate(Screens.DOCUMENT_RESULT);
       } catch (e: any) {

@@ -30,7 +30,7 @@ export function useCreateDocumentWithPage() {
        * Return early if no image is selected or there is an issue selecting an image
        **/
       setLoading(true);
-      const selectedImageResult = await selectImagesFromLibrary(true);
+      const selectedImageResult = await selectImagesFromLibrary();
       if (!selectedImageResult) {
         return;
       }
@@ -40,11 +40,9 @@ export function useCreateDocumentWithPage() {
         documentDetection: true,
       });
 
-      /** Add pages if status is OK */
-      if (documentResult.status === 'OK') {
-        setDocument(documentResult);
-        navigation.navigate(Screens.DOCUMENT_RESULT);
-      }
+      /** Add pages */
+      setDocument(documentResult);
+      navigation.navigate(Screens.DOCUMENT_RESULT);
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {
