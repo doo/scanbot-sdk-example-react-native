@@ -13,6 +13,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8A983BBE6332DC2AE0ECB853 /* libPods-scanbotsdkexample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B8625DEAE21803943780C3 /* libPods-scanbotsdkexample.a */; };
+		8ECAAE9D2CF08F240054DC66 /* ScanbotSDKOCRData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8ECAAE9C2CF08F240054DC66 /* ScanbotSDKOCRData.bundle */; };
 		CF5B283B73BAD31CFFA76857 /* libPods-scanbotsdkexample-scanbotsdkexampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D1755372520E2F1673F31A /* libPods-scanbotsdkexample-scanbotsdkexampleTests.a */; };
 		F46D468FC26EEB0164F830C7 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = D50519A300A583E57E80210A /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
@@ -40,12 +41,13 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = scanbotsdkexample/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = RnDiffApp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = scanbotsdkexample/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8ECAAE9C2CF08F240054DC66 /* ScanbotSDKOCRData.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ScanbotSDKOCRData.bundle; sourceTree = "<group>"; };
 		93D1755372520E2F1673F31A /* libPods-scanbotsdkexample-scanbotsdkexampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-scanbotsdkexample-scanbotsdkexampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		942F05AA2D0F8AC8FBF6C1F0 /* Pods-scanbotsdkexample-scanbotsdkexampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scanbotsdkexample-scanbotsdkexampleTests.debug.xcconfig"; path = "Target Support Files/Pods-scanbotsdkexample-scanbotsdkexampleTests/Pods-scanbotsdkexample-scanbotsdkexampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9C40B64445401F5B8F72F4FD /* Pods-scanbotsdkexample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scanbotsdkexample.release.xcconfig"; path = "Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample.release.xcconfig"; sourceTree = "<group>"; };
 		ADD259961DE3926EB901247A /* Pods-scanbotsdkexample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scanbotsdkexample.debug.xcconfig"; path = "Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample.debug.xcconfig"; sourceTree = "<group>"; };
 		D2D4BCB901081AF06545946D /* Pods-scanbotsdkexample-scanbotsdkexampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scanbotsdkexample-scanbotsdkexampleTests.release.xcconfig"; path = "Target Support Files/Pods-scanbotsdkexample-scanbotsdkexampleTests/Pods-scanbotsdkexample-scanbotsdkexampleTests.release.xcconfig"; sourceTree = "<group>"; };
-		D50519A300A583E57E80210A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = scanbotsdkexample/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		D50519A300A583E57E80210A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = scanbotsdkexample/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -121,6 +123,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				8ECAAE9C2CF08F240054DC66 /* ScanbotSDKOCRData.bundle */,
 				13B07FAE1A68108700A75B9A /* scanbotsdkexample */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* scanbotsdkexampleTests */,
@@ -248,6 +251,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				8ECAAE9D2CF08F240054DC66 /* ScanbotSDKOCRData.bundle in Resources */,
 				F46D468FC26EEB0164F830C7 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -586,10 +590,7 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_CFLAGS = "$(inherited)  ";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-DFOLLY_NO_CONFIG",
@@ -598,10 +599,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -665,10 +663,7 @@
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_CFLAGS = "$(inherited)  ";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-DFOLLY_NO_CONFIG",
@@ -677,10 +672,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
