@@ -2,7 +2,7 @@ import ScanbotSDK, {Page} from 'react-native-scanbot-sdk';
 
 async function createDocument() {
   /** Create a document with an uuid */
-  const document = ScanbotSDK.Document.createDocument({});
+  const document = await ScanbotSDK.Document.createDocument({});
 }
 
 async function createDocumentWithPages(imageFileUris: string[]) {
@@ -10,17 +10,9 @@ async function createDocumentWithPages(imageFileUris: string[]) {
    * Create a document with an uuid
    * Add images from `imageFileUris` as document pages
    */
-  const document = ScanbotSDK.Document.createDocument({
+  const document = await ScanbotSDK.Document.createDocument({
     imageFileUris: imageFileUris,
   });
-}
-
-async function createDocumentFromPDF(pdfUri: string) {
-  /**
-   * Create a document with an uuid
-   * Extract images from the PDF file and add them as document pages
-   */
-  const document = ScanbotSDK.Document.createDocumentFromPDF(pdfUri);
 }
 
 async function loadDocument(documentID: string) {
