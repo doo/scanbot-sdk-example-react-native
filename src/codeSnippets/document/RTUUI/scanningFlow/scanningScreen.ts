@@ -1,11 +1,9 @@
 import {
   DocumentScanningFlow,
   startDocumentScanner,
-} from 'react-native-scanbot-sdk/ui_v2';
-import {
   PageSnapCheckMarkAnimation,
   PageSnapFunnelAnimation,
-} from 'react-native-scanbot-sdk/src/ui_v2';
+} from 'react-native-scanbot-sdk/ui_v2';
 
 async function startScanning() {
   try {

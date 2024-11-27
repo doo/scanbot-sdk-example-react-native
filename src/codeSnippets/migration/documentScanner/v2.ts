@@ -1,8 +1,8 @@
 import {
   DocumentScanningFlow,
   startDocumentScanner,
+  PageSnapFunnelAnimation,
 } from 'react-native-scanbot-sdk/ui_v2';
-import {PageSnapFunnelAnimation} from 'react-native-scanbot-sdk/src/ui_v2/document/CameraScreenConfiguration.ts';
 
 async function documentScanner() {
   const configuration = new DocumentScanningFlow();
