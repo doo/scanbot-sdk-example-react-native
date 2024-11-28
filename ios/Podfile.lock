@@ -1214,7 +1214,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScanbotSDK (6.1.0-rc.1):
+  - RNScanbotSDK (6.1.0-rc.2):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1234,9 +1234,9 @@ PODS:
     - React-utils
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNScanbotSDK/NONE (= 6.1.0-rc.1)
+    - RNScanbotSDK/NONE (= 6.1.0-rc.2)
     - Yoga
-  - RNScanbotSDK/NONE (6.1.0-rc.1):
+  - RNScanbotSDK/NONE (6.1.0-rc.2):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1256,7 +1256,7 @@ PODS:
     - React-utils
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - ScanbotSDKNativeWrapper (= 6.1.0.0)
+    - ScanbotSDKNativeWrapper (= 6.1.1.1)
     - Yoga
   - RNScreens (3.32.0):
     - DoubleConversion
@@ -1282,13 +1282,13 @@ PODS:
     - Yoga
   - RNShare (10.2.1):
     - React-Core
-  - ScanbotSDK (6.1.1-RC1):
-    - ScanbotSDK/NONE (= 6.1.1-RC1)
-  - ScanbotSDK/NONE (6.1.1-RC1)
-  - ScanbotSDKNativeWrapper (6.1.0.0):
-    - ScanbotSDKNativeWrapper/NONE (= 6.1.0.0)
-  - ScanbotSDKNativeWrapper/NONE (6.1.0.0):
-    - ScanbotSDK (= 6.1.1-RC1)
+  - ScanbotSDK (6.1.1):
+    - ScanbotSDK/NONE (= 6.1.1)
+  - ScanbotSDK/NONE (6.1.1)
+  - ScanbotSDKNativeWrapper (6.1.1.1):
+    - ScanbotSDKNativeWrapper/NONE (= 6.1.1.1)
+  - ScanbotSDKNativeWrapper/NONE (6.1.1.1):
+    - ScanbotSDK (= 6.1.1)
   - SocketRocket (0.7.0)
   - Yoga (0.0.0)
 
@@ -1554,11 +1554,11 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: ec53e44dc3e75b44aa2a9f37618a49c3bc080a7a
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: 67e78f16895947f7e57ab91e75e914d3e9ef7239
-  RNScanbotSDK: efe4cc10946692a86cd10eca0620afd829900377
+  RNScanbotSDK: f6810e776a7a7f636ca53caed39905029a142866
   RNScreens: 5aeecbb09aa7285379b6e9f3c8a3c859bb16401c
   RNShare: 0fad69ae2d71de9d1f7b9a43acf876886a6cb99c
-  ScanbotSDK: c5ef877bbf9f42b227196d48ca9f4abdfff4787d
-  ScanbotSDKNativeWrapper: 92511dbe19f59f0b63d40f259b285b0bae2ddd34
+  ScanbotSDK: f789b97f4e0fd9c5a5622f52d3ec728bbdb97970
+  ScanbotSDKNativeWrapper: 769604365a56eae7e0c6e6328274ae4518946bd1
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   Yoga: 88480008ccacea6301ff7bf58726e27a72931c8d
 
