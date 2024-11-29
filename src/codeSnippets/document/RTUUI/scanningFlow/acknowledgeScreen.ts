@@ -30,7 +30,7 @@ async function startScanning() {
     configuration.screens.camera.acknowledgement.backgroundColor = '#EFEFEF';
     /**
      * You can also configure the buttons in the bottom bar of the acknowledgment screen.
-     * e.g To force the user to retake, if the captured document is not OK.
+     * E.g., to force the user to retake if the captured document is not OK.
      */
     configuration.screens.camera.acknowledgement.bottomBar.acceptWhenNotOkButton.visible =
       false;
