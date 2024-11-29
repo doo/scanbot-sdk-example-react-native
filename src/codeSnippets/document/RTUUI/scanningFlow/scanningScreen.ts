@@ -48,7 +48,7 @@ async function startScanning() {
       'Ready to capture';
     cameraScreenConfig.userGuidance.statesTitles.capturing =
       'Capturing the document';
-    /** The title of the user guidance when the document ready to be captured in manual mode. */
+    /** The title of the user guidance when the document is ready to be captured in manual mode. */
     cameraScreenConfig.userGuidance.statesTitles.captureManual =
       'The document is ready to be captured';
     /**
