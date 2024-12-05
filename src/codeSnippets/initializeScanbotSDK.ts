@@ -1,4 +1,3 @@
-/* eslint @typescript-eslint/no-unused-vars: 0 */
 import {FILE_ENCRYPTION_ENABLED, IMAGE_FILE_FORMAT} from '@utils';
 
 import ScanbotSDK, {ScanbotSdkConfiguration} from 'react-native-scanbot-sdk';
@@ -38,7 +37,6 @@ async function initializeScanbotSDK() {
     }
 
     const sdkInit = await ScanbotSDK.initializeSDK(SDKInitializationOptions);
-    console.log(sdkInit.result);
   } catch (error: any) {
     console.error(error);
   }

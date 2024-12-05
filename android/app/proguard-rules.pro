@@ -8,7 +8,3 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # Add any project specific keep options here:
-
-# Scanbot SDK React Native Plugin
--keeppackagenames io.scanbot.sdk.reactnative.**
--keep public class io.scanbot.sdk.reactnative.**{ *; }

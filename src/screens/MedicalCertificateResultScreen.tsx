@@ -15,7 +15,7 @@ import {
   MedicalCertificateDatesInfo,
   MedicalCertificatePatientDataInfo,
   MedicalCertificatePatientDataInfoField,
-} from 'react-native-scanbot-sdk/src/types';
+} from 'react-native-scanbot-sdk';
 import {View} from 'react-native';
 
 export function MedicalCertificateResultScreen() {

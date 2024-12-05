@@ -27,21 +27,6 @@ export function useRecognizeGenericDocument() {
         return;
       }
       /**
-       * Generic Document Recognizer requires OCR blobs.
-       * If OCR blobs are not present or there is no 'de' language data, the scanner will fail
-       * Return early if there are no installed languages
-       */
-      const ocrConfigsResult = await ScanbotSDK.getOCRConfigs();
-      if (
-        ocrConfigsResult.installedLanguages.length === 0 ||
-        !ocrConfigsResult.installedLanguages.find(l => l === 'de')
-      ) {
-        infoMessageAlert(
-          'Scanning is not possible since no OCR blobs were found',
-        );
-        return;
-      }
-      /**
        * Select an image from the Image Library
        * Return early if no image is selected or there is an issue selecting an image
        **/

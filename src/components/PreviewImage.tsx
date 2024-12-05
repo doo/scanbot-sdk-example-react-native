@@ -41,7 +41,7 @@ export function PreviewImage({imageUri, style}: PreviewImageProps) {
       // as base64 from SDK. The SDK decrypts the image data under the hood.
       loadDecryptedImageData();
     } else {
-      setUri(imageUri!);
+      setUri(`${imageUri!}?=${Date.now()}`);
     }
   }, [imageUri, setLoading]);
 
