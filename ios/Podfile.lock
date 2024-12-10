@@ -937,7 +937,7 @@ PODS:
     - React-debug
   - react-native-document-picker (9.1.1):
     - React-Core
-  - react-native-image-picker (7.1.2):
+  - react-native-image-picker (7.2.3):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1193,7 +1193,7 @@ PODS:
     - React-Core
   - RNFS (2.20.0):
     - React-Core
-  - RNGestureHandler (2.19.0):
+  - RNGestureHandler (2.21.2):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1214,7 +1214,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScanbotSDK (6.1.0):
+  - RNScanbotSDK (6.1.1-rc.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1234,9 +1234,9 @@ PODS:
     - React-utils
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNScanbotSDK/NONE (= 6.1.0)
+    - RNScanbotSDK/NONE (= 6.1.1-rc.1)
     - Yoga
-  - RNScanbotSDK/NONE (6.1.0):
+  - RNScanbotSDK/NONE (6.1.1-rc.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1526,7 +1526,7 @@ SPEC CHECKSUMS:
   React-logger: fa92ba4d3a5d39ac450f59be2a3cec7b099f0304
   React-Mapbuffer: 9f68550e7c6839d01411ac8896aea5c868eff63a
   react-native-document-picker: 3599b238843369026201d2ef466df53f77ae0452
-  react-native-image-picker: c3afe5472ef870d98a4b28415fc0b928161ee5f7
+  react-native-image-picker: fb0c2b3adc3eff6caa3cd6a507a34b9dcc9238dd
   react-native-safe-area-context: b7daa1a8df36095a032dff095a1ea8963cb48371
   React-nativeconfig: fa5de9d8f4dbd5917358f8ad3ad1e08762f01dcb
   React-NativeModulesApple: 585d1b78e0597de364d259cb56007052d0bda5e5
@@ -1553,14 +1553,14 @@ SPEC CHECKSUMS:
   ReactCommon: f00e436b3925a7ae44dfa294b43ef360fbd8ccc4
   RNCAsyncStorage: ec53e44dc3e75b44aa2a9f37618a49c3bc080a7a
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
-  RNGestureHandler: 67e78f16895947f7e57ab91e75e914d3e9ef7239
-  RNScanbotSDK: 275007387acefb9925a05476e926985e5937cc98
+  RNGestureHandler: 6fee3422fd8c81c5ee756fa72e3d1780e9943d9d
+  RNScanbotSDK: 25404b8a6346ef79fe9dbad6d9f9b2529925998e
   RNScreens: 5aeecbb09aa7285379b6e9f3c8a3c859bb16401c
   RNShare: 0fad69ae2d71de9d1f7b9a43acf876886a6cb99c
   ScanbotSDK: f789b97f4e0fd9c5a5622f52d3ec728bbdb97970
   ScanbotSDKNativeWrapper: 769604365a56eae7e0c6e6328274ae4518946bd1
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
-  Yoga: 88480008ccacea6301ff7bf58726e27a72931c8d
+  Yoga: 04f1db30bb810187397fa4c37dd1868a27af229c
 
 PODFILE CHECKSUM: 7e4a36237e9830b9cbed673f70673fad7d95b7bb
 
