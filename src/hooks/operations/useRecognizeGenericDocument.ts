@@ -5,7 +5,7 @@ import {
   infoMessageAlert,
   PrimaryRouteNavigationProp,
   Screens,
-  selectImagesFromLibrary,
+  selectImageFromLibrary,
 } from '@utils';
 import {ActivityIndicatorContext} from '@context';
 import {useNavigation} from '@react-navigation/native';
@@ -30,7 +30,7 @@ export function useRecognizeGenericDocument() {
        * Select an image from the Image Library
        * Return early if no image is selected or there is an issue selecting an image
        **/
-      const selectedImage = await selectImagesFromLibrary();
+      const selectedImage = await selectImageFromLibrary();
       if (!selectedImage) {
         return;
       }
@@ -38,9 +38,8 @@ export function useRecognizeGenericDocument() {
        * Recognize Generic Document on the selected image and
        * Handle the result by navigating to Screens.GENERIC_DOCUMENT_RESULT
        */
-      const [imageFileUri] = selectedImage;
       const result = await ScanbotSDK.recognizeGenericDocument({
-        imageFileUri,
+        imageFileUri: selectedImage,
         acceptedDocumentFormats: [],
       });
 

@@ -29,8 +29,8 @@ export function usePerformOCR() {
        * Select an image from the Image Library
        * Return early if no image is selected or there is an issue selecting an image
        **/
-      const selectedImage = await selectImagesFromLibrary();
-      if (!selectedImage) {
+      const selectedImages = await selectImagesFromLibrary();
+      if (!selectedImages) {
         return;
       }
       /**
@@ -38,7 +38,7 @@ export function usePerformOCR() {
        * Display the result
        */
       const result = await ScanbotSDK.performOCR({
-        imageFileUris: selectedImage,
+        imageFileUris: selectedImages,
         ocrConfiguration: {
           engineMode: 'SCANBOT_OCR',
         },
