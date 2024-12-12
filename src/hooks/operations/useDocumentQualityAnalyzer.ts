@@ -4,7 +4,7 @@ import {
   checkLicense,
   errorMessageAlert,
   infoMessageAlert,
-  selectImagesFromLibrary,
+  selectImageFromLibrary,
 } from '@utils';
 
 import ScanbotSDK from 'react-native-scanbot-sdk';
@@ -26,15 +26,14 @@ export function useDocumentQualityAnalyzer() {
        * Return early if no image is selected or there is an issue selecting an image
        **/
       setLoading(true);
-      const selectedImageResult = await selectImagesFromLibrary();
-      if (!selectedImageResult) {
+      const selectedImage = await selectImageFromLibrary();
+      if (!selectedImage) {
         return;
       }
 
-      const [imageFileUri] = selectedImageResult;
       // Detect document quality on selected image
       const quality = await ScanbotSDK.documentQualityAnalyzer({
-        imageFileUri: imageFileUri,
+        imageFileUri: selectedImage,
       });
       /**
        * Handle the result by displaying an alert

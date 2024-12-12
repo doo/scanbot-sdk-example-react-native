@@ -5,7 +5,7 @@ import {
   infoMessageAlert,
   PrimaryRouteNavigationProp,
   Screens,
-  selectImagesFromLibrary,
+  selectImageFromLibrary,
 } from '@utils';
 import {ActivityIndicatorContext} from '@context';
 import {useNavigation} from '@react-navigation/native';
@@ -30,7 +30,7 @@ export function useRecognizeEHIC() {
        * Select an image from the Image Library
        * Return early if no image is selected or there is an issue selecting an image
        **/
-      const selectedImage = await selectImagesFromLibrary();
+      const selectedImage = await selectImageFromLibrary();
       if (!selectedImage) {
         return;
       }
@@ -38,8 +38,7 @@ export function useRecognizeEHIC() {
        * Recognize health insurance card on the selected image and
        * Handle the result by displaying an alert
        */
-      const [imageFileUri] = selectedImage;
-      const result = await ScanbotSDK.recognizeEHIC(imageFileUri);
+      const result = await ScanbotSDK.recognizeEHIC(selectedImage);
       /**
        * Handle the result by navigating to result screen
        */

@@ -4,7 +4,7 @@ import {
   errorMessageAlert,
   PrimaryRouteNavigationProp,
   Screens,
-  selectImagesFromLibrary,
+  selectImageFromLibrary,
 } from '@utils';
 import {ActivityIndicatorContext, DocumentContext} from '@context';
 import {useNavigation} from '@react-navigation/native';
@@ -31,16 +31,15 @@ export function useAddDocumentPage() {
          * Return early if no image is selected or there is an issue selecting an image
          **/
         setLoading(true);
-        const selectedImageResult = await selectImagesFromLibrary();
+        const selectedImageResult = await selectImageFromLibrary();
         if (!selectedImageResult) {
           return;
         }
 
-        const [imageFileUri] = selectedImageResult;
         /** Add a page to the document */
         const documentResult = await ScanbotSDK.Document.addPage({
           documentID,
-          imageFileUri,
+          imageFileUri: selectedImageResult,
           documentDetection: true,
         });
         /**
