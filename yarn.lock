@@ -8289,9 +8289,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-gesture-handler@npm:^2.12.0":
-  version: 2.21.2
-  resolution: "react-native-gesture-handler@npm:2.21.2"
+"react-native-gesture-handler@npm:2.19.0":
+  version: 2.19.0
+  resolution: "react-native-gesture-handler@npm:2.19.0"
   dependencies:
     "@egjs/hammerjs": ^2.0.17
     hoist-non-react-statics: ^3.3.0
@@ -8300,7 +8300,7 @@ __metadata:
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 0a42cedb8860a326b465085d0f7622ba03f038b0f0bdd1b1fe5703e58d62cb08bfb82a686c069a1a1410705c2ae0d82971b0449d83796fdd6d071131cf88e68b
+  checksum: ce9b9fc6537debf962e6b8d84f1c4cf18fe00f39bd86498e84a203ebb26bf3543c2642ed247d974537840407b7ddb602939fd8c817c00a3416e87bddc8f2088f
   languageName: node
   linkType: hard
 
@@ -8846,7 +8846,7 @@ __metadata:
     react-native: 0.74.3
     react-native-document-picker: 9.1.1
     react-native-fs: 2.20.0
-    react-native-gesture-handler: ^2.12.0
+    react-native-gesture-handler: 2.19.0
     react-native-image-picker: ^7.0.0
     react-native-safe-area-context: 4.10.8
     react-native-scanbot-sdk: 6.1.1
