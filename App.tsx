@@ -4,7 +4,7 @@ import {Platform, SafeAreaView, StyleSheet, View} from 'react-native';
 import ScanbotSDK, {ScanbotSdkConfiguration} from 'react-native-scanbot-sdk';
 import {DocumentDirectoryPath, ExternalDirectoryPath} from 'react-native-fs';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
   errorMessageAlert,
   FILE_ENCRYPTION_ENABLED,
@@ -31,7 +31,7 @@ import {PlainDataResultScreen} from './src/screens/PlainDataResultScreen';
 import {DocumentResultScreen} from './src/screens/DocumentResultScreen';
 import {DocumentPageResultScreen} from './src/screens/DocumentPageResultScreen';
 
-const Stack = createStackNavigator<PrimaryRoutesParamList>();
+const Stack = createNativeStackNavigator<PrimaryRoutesParamList>();
 
 // !! Please read note !!
 // It is strongly recommended to use the default (secure) storage location of the Scanbot SDK.
@@ -110,10 +110,8 @@ function App() {
           <DocumentContext.Provider value={documentValues}>
             <NavigationContainer theme={ScanbotTheme}>
               <Stack.Navigator
-                screenOptions={navigation => ({
-                  title: ScreenTitles[navigation.route.name],
-                  headerStyle: styles.headerStyle,
-                  headerBackTitleVisible: false,
+                screenOptions={(navigation: any) => ({
+                  title: ScreenTitles[navigation.route.name as Screens],
                 })}>
                 <Stack.Screen name={Screens.HOME} component={HomeScreen} />
                 <Stack.Screen
@@ -158,10 +156,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.SCANBOT_RED,
-  },
-  headerStyle: {
-    borderBottomWidth: 0,
-    shadowColor: 'transparent',
   },
 });
 
