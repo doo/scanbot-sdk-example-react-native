@@ -30,6 +30,7 @@ import {CheckRecognizerResultScreen} from './src/screens/CheckRecognizerResultSc
 import {PlainDataResultScreen} from './src/screens/PlainDataResultScreen';
 import {DocumentResultScreen} from './src/screens/DocumentResultScreen';
 import {DocumentPageResultScreen} from './src/screens/DocumentPageResultScreen';
+import {DocumentScannerViewScreen} from './src/screens/DocumentScannerViewScreen.tsx';
 
 const Stack = createNativeStackNavigator<PrimaryRoutesParamList>();
 
@@ -141,6 +142,10 @@ function App() {
                 <Stack.Screen
                   name={Screens.DOCUMENT_PAGE_RESULT}
                   component={DocumentPageResultScreen}
+                />
+                <Stack.Screen
+                  name={Screens.DOCUMENT_SCANNER_VIEW}
+                  component={DocumentScannerViewScreen}
                 />
               </Stack.Navigator>
             </NavigationContainer>

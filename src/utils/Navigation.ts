@@ -1,4 +1,4 @@
-import {StackNavigationProp} from '@react-navigation/stack';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {
   CheckRecognizerResult,
   GenericDocumentRecognizerResult,
@@ -16,6 +16,7 @@ export enum Screens {
   PLAIN_DATA_RESULT = 'plainDataResult',
   DOCUMENT_RESULT = 'documentResult',
   DOCUMENT_PAGE_RESULT = 'documentPageResult',
+  DOCUMENT_SCANNER_VIEW = 'documentScannerView',
 }
 
 export const ScreenTitles: Record<Screens, string> = {
@@ -27,6 +28,7 @@ export const ScreenTitles: Record<Screens, string> = {
   [Screens.PLAIN_DATA_RESULT]: 'Result',
   [Screens.DOCUMENT_RESULT]: 'Document',
   [Screens.DOCUMENT_PAGE_RESULT]: 'Document Page',
+  [Screens.DOCUMENT_SCANNER_VIEW]: 'Document Scanner View',
 };
 
 export type PrimaryRoutesParamList = {
@@ -38,9 +40,10 @@ export type PrimaryRoutesParamList = {
   [Screens.PLAIN_DATA_RESULT]: PlainDataResultParam;
   [Screens.DOCUMENT_RESULT]: undefined;
   [Screens.DOCUMENT_PAGE_RESULT]: {pageID: string};
+  [Screens.DOCUMENT_SCANNER_VIEW]: undefined;
 };
 
-export type PrimaryRouteNavigationProp = StackNavigationProp<
+export type PrimaryRouteNavigationProp = NativeStackNavigationProp<
   PrimaryRoutesParamList,
   keyof PrimaryRoutesParamList
 >;
