@@ -25,8 +25,11 @@ import {
   useVinScanner,
 } from '@hooks';
 import {FeatureHeader, FeatureItem, ScanbotLearnMore} from '@components';
+import {PrimaryRouteNavigationProp, Screens} from '@utils';
+import {useNavigation} from '@react-navigation/native';
 
 export function HomeScreen() {
+  const navigation = useNavigation<PrimaryRouteNavigationProp>();
   /** ScanbotSDK Features */
   const onMRZScanner = useMRZScanner();
   const onMedicalCertificateScanner = useMedicalCertificateScanner();
@@ -68,6 +71,10 @@ export function HomeScreen() {
           title={'Multi Page Scanning'}
         />
         <FeatureItem title={'Pick from gallery'} onPress={onCreateDocument} />
+        <FeatureItem
+          title={'Document Scanner View (Classic UI)'}
+          onPress={() => navigation.navigate(Screens.DOCUMENT_SCANNER_VIEW)}
+        />
 
         <FeatureHeader title={'DATA DETECTORS'} />
         <FeatureItem onPress={onMRZScanner} title={'Scan MRZ'} />
@@ -122,7 +129,8 @@ export function HomeScreen() {
         <ScanbotLearnMore />
       </ScrollView>
       <Text style={styles.copyrightLabel}>
-        Copyright {new Date().getFullYear()} doo GmbH. All rights reserved.
+        Copyright {new Date().getFullYear()} Scanbot SDK GmbH. All rights
+        reserved.
       </Text>
     </SafeAreaView>
   );

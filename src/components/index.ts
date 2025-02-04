@@ -12,7 +12,8 @@ import {ResultFieldRow} from './ResultFieldRow';
 import {ResultHeader} from './ResultHeader';
 import {ResultImage} from './ResultImage';
 import {ExportDocumentModal} from './ExportDocumentModal';
-import {PageImagePreview} from './PageImagePreview.tsx';
+import {PageImagePreview} from './PageImagePreview';
+import {ActionButton} from './ActionButton';
 
 export {
   BottomActionBar,
@@ -28,4 +29,5 @@ export {
   FeatureItem,
   ExportDocumentModal,
   PageImagePreview,
+  ActionButton,
 };
