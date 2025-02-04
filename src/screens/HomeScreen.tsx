@@ -72,7 +72,7 @@ export function HomeScreen() {
         />
         <FeatureItem title={'Pick from gallery'} onPress={onCreateDocument} />
         <FeatureItem
-          title={'Document Scanner View ( Classic Component )'}
+          title={'Document Scanner View (Classic UI)'}
           onPress={() => navigation.navigate(Screens.DOCUMENT_SCANNER_VIEW)}
         />
 

@@ -1,6 +1,6 @@
-# Scanbot Barcode & Document Scanning Example App for React Native
+# Scanbot Document Scanning Example App for React Native
 
-This example app shows how to integrate the [Scanbot Barcode Scanner SDK](https://scanbot.io/developer/react-native-barcode-scanner/), [Scanbot Document Scanner SDK](https://scanbot.io/developer/react-native-document-scanner/), and [Scanbot Data Capture SDK](https://scanbot.io/developer/react-native-data-capture/) for React Native.
+This example app shows how to integrate the [Scanbot Document Scanner SDK](https://scanbot.io/developer/react-native-document-scanner/) and [Scanbot Data Capture SDK](https://scanbot.io/developer/react-native-data-capture/) for React Native.
 
 The Scanbot SDK React Native Module is available as an [npm package](https://www.npmjs.com/package/react-native-scanbot-sdk).
 
@@ -84,7 +84,7 @@ npm run ios
 yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in new app running on your device.
+If everything is set up correctly, you should see your new app running on your device.
 
 This is not the only way to run your app — you can also run it directly from within Android Studio and Xcode respectively:
 

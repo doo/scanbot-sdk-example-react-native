@@ -1,18 +1,11 @@
 import React, {useCallback, useRef, useState} from 'react';
-import {
-  Button,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {
   DocumentDetectionStatus,
   ScanbotDocumentScannerView,
   ScanbotDocumentScannerViewHandle,
 } from 'react-native-scanbot-sdk';
-import {COLORS} from '@theme';
+import {ActionButton} from '@components';
 
 export function DocumentScannerViewScreen() {
   const ref = useRef<ScanbotDocumentScannerViewHandle>(null);
@@ -50,14 +43,14 @@ export function DocumentScannerViewScreen() {
 
   if (result) {
     return (
-      <View style={styles.container}>
+      <View style={styles.resultContainer}>
         <Image
           resizeMode={'contain'}
           style={styles.result}
           source={{uri: 'data:image/jpeg;base64,' + result}}
         />
-        <Button
-          title={'Back to scanning'}
+        <ActionButton
+          label={'Scan Again'}
           onPress={() => setResult(undefined)}
         />
       </View>
@@ -88,19 +81,11 @@ export function DocumentScannerViewScreen() {
         <View />
         <Text style={styles.detectionStatusText}>{detectionState}</Text>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.actionButtonContainer}
-            onPress={onToggleFinder}>
-            <Text style={styles.actionButtonText}>Toggle Finder</Text>
-          </TouchableOpacity>
+          <ActionButton onPress={onToggleFinder} label={'Toggle Finder'} />
           <TouchableOpacity onPress={onSnap}>
             <View style={styles.snapButton} />
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.actionButtonContainer}
-            onPress={onToggleFlash}>
-            <Text style={styles.actionButtonText}>Toggle Flash</Text>
-          </TouchableOpacity>
+          <ActionButton onPress={onToggleFlash} label={'Toggle Flash'} />
         </View>
       </View>
     </View>
@@ -110,6 +95,12 @@ export function DocumentScannerViewScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  resultContainer: {
+    flex: 1,
+    paddingVertical: '4%',
+    paddingHorizontal: '4%',
+    gap: '2%',
   },
   overlayContainer: {
     position: 'absolute',
@@ -132,16 +123,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     backgroundColor: '#fff',
   },
-  actionButtonContainer: {
-    backgroundColor: COLORS.SCANBOT_RED,
-    padding: '4%',
-    borderRadius: 8,
-  },
-  actionButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
+
   detectionStatusText: {
     color: '#fff',
     fontSize: 16,
@@ -149,5 +131,6 @@ const styles = StyleSheet.create({
   },
   result: {
     flex: 1,
+    maxHeight: '90%',
   },
 });
