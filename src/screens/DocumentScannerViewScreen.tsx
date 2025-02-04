@@ -71,10 +71,10 @@ export function DocumentScannerViewScreen() {
         finderLineWidth={3}
         finderCornerRadius={20}
         polygonEnabled={!finderEnabled}
-        polygonBackgroundColor={'#C8193CBF'}
-        polygonBackgroundColorOK={'#FFFFFF00'}
+        polygonBackgroundColor={'#C8193C'}
+        polygonBackgroundColorOK={'#FFFFFF'}
         polygonColor={'#C8193C'}
-        polygonAutoSnapProgressColor={'#ffffff'}
+        polygonAutoSnapProgressColor={'#FFFFFF'}
         polygonAutoSnapProgressEnabled={!finderEnabled}
       />
       <View pointerEvents={'box-none'} style={styles.overlayContainer}>
