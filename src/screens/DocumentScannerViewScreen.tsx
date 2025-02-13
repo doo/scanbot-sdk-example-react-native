@@ -123,11 +123,11 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     backgroundColor: '#fff',
   },
-
   detectionStatusText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+    fontFamily: 'Roboto',
   },
   result: {
     flex: 1,
