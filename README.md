@@ -1,6 +1,6 @@
-# Scanbot Barcode & Document Scanning Example App for React Native
+# Scanbot Document Scanning Example App for React Native
 
-This example app shows how to integrate the [Scanbot Barcode Scanner SDK](https://scanbot.io/developer/react-native-barcode-scanner/), [Scanbot Document Scanner SDK](https://scanbot.io/developer/react-native-document-scanner/), and [Scanbot Data Capture SDK](https://scanbot.io/developer/react-native-data-capture/) for React Native.
+This example app shows how to integrate the [Scanbot Document Scanner SDK](https://scanbot.io/developer/react-native-document-scanner/) and [Scanbot Data Capture SDK](https://scanbot.io/developer/react-native-data-capture/) for React Native.
 
 The Scanbot SDK React Native Module is available as an [npm package](https://www.npmjs.com/package/react-native-scanbot-sdk).
 
@@ -33,30 +33,33 @@ framework or features, please visit our [Support Page](https://docs.scanbot.io/s
 
 ### Set up Environment 
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/set-up-your-environment) before proceeding.
+> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
 
 Testing on an actual device is essential, so ensure you have one available.
 
 ### Install node modules
 ```bash 
+# Install the required dependencies
 yarn install
+# OR using npm
+npm install
 ```
 
 ### Prepare iOS
 
-If Cocoapods are not installed locally the following command should be run
-```bash 
+For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+
+The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+
+```sh
 bundle install
 ```
-and then we can install the pods
-```bash 
-cd ios
+
+Then, and every time you update your native dependencies, run:
+
+```sh
+cd ios 
 bundle exec pod install
-```
-or if pods are installed
-```bash 
-cd ios
-pod install
 ```
 
 #### Signing
@@ -64,14 +67,26 @@ pod install
 - Adjust *Provisioning* and *Signing* settings.
 
 ### Run on Android
-```bash
-react-native run-android
+```sh
+# Using npm
+npm run android
+
+# OR using Yarn
+yarn android
 ```
 
 ### Run on iOS
-```bash
-react-native run-ios
+```sh
+# Using npm
+npm run ios
+
+# OR using Yarn
+yarn ios
 ```
+
+If everything is set up correctly, you should see your new app running on your device.
+
+This is not the only way to run your app — you can also run it directly from within Android Studio and Xcode respectively:
 
 ###### Still at a loss? It is probably a cache issue
 

@@ -1,7 +1,7 @@
-Open Source libraries used in the Scanbot SDK for React Native version 6.1.1
+Open Source libraries used in the Scanbot SDK for React Native version 6.2.0
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-Open Source libraries used in the Scanbot SDK for Android version 6.1.2
+Open Source libraries used in the Scanbot SDK for Android version 6.2.1
 
 CWAC-Camera
 
@@ -2921,7 +2921,7 @@ Version 1.1.0
 
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-Open Source libraries used in ScanbotSDK for iOS version 6.1.1:
+Open Source libraries used in ScanbotSDK for iOS version 6.2.0:
 
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
