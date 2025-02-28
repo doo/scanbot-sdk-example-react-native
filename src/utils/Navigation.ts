@@ -1,15 +1,16 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RouteProp} from '@react-navigation/native';
 import {
-  CheckRecognizerResult,
-  GenericDocumentRecognizerResult,
-  MedicalCertificateScannerResult,
+  CheckScanningResult,
+  DeepPartial,
+  DocumentDataExtractionResult,
+  MedicalCertificateScanningResult,
   MrzScannerResult,
 } from 'react-native-scanbot-sdk';
-import {RouteProp} from '@react-navigation/native';
 
 export enum Screens {
   HOME = 'home',
-  CHECK_RECOGNIZER_RESULT = 'checkRecognizerResult',
+  CHECK_SCANNER_RESULT = 'checkScannerResult',
   MRZ_RESULT = 'mrzResult',
   GENERIC_DOCUMENT_RESULT = 'genericDocumentResult',
   MEDICAL_CERTIFICATE_RESULT = 'medicalCertificateResult',
@@ -21,7 +22,7 @@ export enum Screens {
 
 export const ScreenTitles: Record<Screens, string> = {
   [Screens.HOME]: 'Scanbot SDK Example React',
-  [Screens.CHECK_RECOGNIZER_RESULT]: 'Check Recognizer Result',
+  [Screens.CHECK_SCANNER_RESULT]: 'Check Scanner Result',
   [Screens.MRZ_RESULT]: 'MRZ Result',
   [Screens.GENERIC_DOCUMENT_RESULT]: 'Generic Document Recognizer Result',
   [Screens.MEDICAL_CERTIFICATE_RESULT]: 'Medical Certificate Result',
@@ -33,10 +34,18 @@ export const ScreenTitles: Record<Screens, string> = {
 
 export type PrimaryRoutesParamList = {
   [Screens.HOME]: undefined;
-  [Screens.CHECK_RECOGNIZER_RESULT]: CheckRecognizerResult;
-  [Screens.MRZ_RESULT]: MrzScannerResult;
-  [Screens.GENERIC_DOCUMENT_RESULT]: GenericDocumentRecognizerResult;
-  [Screens.MEDICAL_CERTIFICATE_RESULT]: MedicalCertificateScannerResult;
+  [Screens.CHECK_SCANNER_RESULT]: {
+    check: ReturnType<CheckScanningResult['serialize']>;
+  };
+  [Screens.MRZ_RESULT]: {
+    mrz: ReturnType<MrzScannerResult['serialize']>;
+  };
+  [Screens.GENERIC_DOCUMENT_RESULT]: {
+    documents: DeepPartial<DocumentDataExtractionResult>[];
+  };
+  [Screens.MEDICAL_CERTIFICATE_RESULT]: {
+    certificate: ReturnType<MedicalCertificateScanningResult['serialize']>;
+  };
   [Screens.PLAIN_DATA_RESULT]: PlainDataResultParam;
   [Screens.DOCUMENT_RESULT]: undefined;
   [Screens.DOCUMENT_PAGE_RESULT]: {pageID: string};
@@ -50,7 +59,7 @@ export type PrimaryRouteNavigationProp = NativeStackNavigationProp<
 
 export type CheckRecognizerResultScreenRouteProp = RouteProp<
   PrimaryRoutesParamList,
-  Screens.CHECK_RECOGNIZER_RESULT
+  Screens.CHECK_SCANNER_RESULT
 >;
 
 export type MrzResultScreenRouteProp = RouteProp<
