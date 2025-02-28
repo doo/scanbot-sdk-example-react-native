@@ -8,7 +8,10 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {useCallback} from 'react';
 
-import ScanbotSDK, {MrzScannerConfiguration} from 'react-native-scanbot-sdk';
+import ScanbotSDK, {
+  autorelease,
+  MrzScannerConfiguration,
+} from 'react-native-scanbot-sdk';
 
 export function useMRZScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -26,7 +29,7 @@ export function useMRZScanner() {
        * Create the machine-readable zone scanner configuration object and
        * start the machine-readable zone scanner with the configuration
        */
-      let config: MrzScannerConfiguration = {
+      const config: MrzScannerConfiguration = {
         finderTextHint:
           'Please hold your phone over the 2- or 3-line MRZ code at the front of your passport.',
       };
@@ -36,13 +39,18 @@ export function useMRZScanner() {
           height: 0.18,
         };
       }
-      const result = await ScanbotSDK.UI.startMrzScanner(config);
-      /**
-       * Handle the result if result status is OK
-       */
-      if (result.status === 'OK') {
-        navigation.navigate(Screens.MRZ_RESULT, result);
-      }
+
+      await autorelease(async () => {
+        const result = await ScanbotSDK.UI.startMrzScanner(config);
+        /**
+         * Handle the result if result status is OK
+         */
+        if (result.status === 'OK' && result.data !== undefined) {
+          navigation.navigate(Screens.MRZ_RESULT, {
+            mrz: result.data.serialize(),
+          });
+        }
+      });
     } catch (e: any) {
       errorMessageAlert(e.message);
     }

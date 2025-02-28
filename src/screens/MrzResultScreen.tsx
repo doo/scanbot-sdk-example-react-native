@@ -1,16 +1,20 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useRoute} from '@react-navigation/native';
-import {GenericDocumentUtils, MrzResultScreenRouteProp} from '@utils';
-import {ResultContainer, ResultFieldRow, ResultHeader} from '@components';
-import {View} from 'react-native';
-import {MrzScannerResult} from 'react-native-scanbot-sdk';
+import {MrzResultScreenRouteProp} from '@utils';
+import {
+  GenericDocumentResult,
+  ResultContainer,
+  ResultFieldRow,
+  ResultHeader,
+} from '@components';
+import {autorelease, MrzScannerResult} from 'react-native-scanbot-sdk';
 
 const MRZDocument = ({
   mrzScannerResult,
 }: {
-  mrzScannerResult: MrzScannerResult;
+  mrzScannerResult?: MrzScannerResult;
 }) => {
-  if (!mrzScannerResult.mrz) {
+  if (!mrzScannerResult?.document) {
     return null;
   }
 
@@ -34,49 +38,28 @@ const MRZDocument = ({
    *      );
    */
 
-  return (
-    <View>
-      <ResultHeader title={'MRZ Document Result'} />
-      {GenericDocumentUtils.extractGenericDocumentFields(
-        mrzScannerResult.mrz,
-      ).map((field, index) => (
-        <ResultFieldRow
-          key={field.type.name + index}
-          title={field.type.name.trim()}
-          value={field.value?.text}
-        />
-      ))}
-    </View>
-  );
+  return <GenericDocumentResult genericDocument={mrzScannerResult?.document} />;
 };
 
 export function MrzResultScreen() {
-  const {params: mrzScannerResult} = useRoute<MrzResultScreenRouteProp>();
+  const route = useRoute<MrzResultScreenRouteProp>();
+  const [mrzResult, setMRZResult] = useState<MrzScannerResult>();
+
+  useEffect(() => {
+    autorelease(async () => {
+      setMRZResult(new MrzScannerResult(route.params.mrz));
+    });
+  }, [route.params.mrz]);
 
   return (
     <ResultContainer>
       <ResultHeader title={'MRZ'} />
       <ResultFieldRow
         title={'Successful recognition'}
-        value={mrzScannerResult.recognitionSuccessful}
+        value={mrzResult?.success}
       />
-      <ResultFieldRow
-        title={'Document type'}
-        value={mrzScannerResult.documentType}
-      />
-      <ResultFieldRow
-        title={'Raw MRZ string'}
-        value={mrzScannerResult.rawString}
-      />
-      <ResultFieldRow
-        title={'Check digit count'}
-        value={mrzScannerResult.checkDigitsCount}
-      />
-      <ResultFieldRow
-        title={'Valid check digit count'}
-        value={mrzScannerResult.validCheckDigitsCount}
-      />
-      <MRZDocument mrzScannerResult={mrzScannerResult} />
+      <ResultFieldRow title={'Raw MRZ string'} value={mrzResult?.rawMRZ} />
+      <MRZDocument mrzScannerResult={mrzResult} />
     </ResultContainer>
   );
 }

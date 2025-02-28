@@ -25,13 +25,17 @@ export function useVinScanner() {
       /**
        * Handle the result if result status is OK
        */
-      if (result.status === 'OK') {
+      if (result.status === 'OK' && result.data !== undefined) {
         resultMessageAlert(
           [
-            `- Raw Text: ${result.rawText}`,
-            `- Confidence: ${(result.confidenceValue * 100).toFixed(0)}%`,
+            `- Raw Text: ${result.data.textResult.rawText}`,
+            `- Confidence: ${(result.data.textResult.confidence * 100).toFixed(
+              0,
+            )}%`,
             `- Validation: ${
-              result.validationSuccessful ? 'SUCCESSFUL' : 'NOT SUCCESSFUL'
+              result.data.textResult.validationSuccessful
+                ? 'SUCCESSFUL'
+                : 'NOT SUCCESSFUL'
             }`,
           ].join('\n\n'),
         );
