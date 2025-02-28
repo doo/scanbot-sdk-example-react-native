@@ -87,8 +87,8 @@ export function useMultiplePageScanning() {
       /**
        * Handle the result if result status is OK
        */
-      if (documentResult.status === 'OK') {
-        setDocument(documentResult);
+      if (documentResult.status === 'OK' && documentResult.data !== undefined) {
+        setDocument(documentResult.data);
         navigation.navigate(Screens.DOCUMENT_RESULT);
       }
     } catch (e: any) {
