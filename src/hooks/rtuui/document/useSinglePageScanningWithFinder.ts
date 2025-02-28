@@ -10,10 +10,10 @@ import {DocumentContext} from '@context';
 import {COLORS} from '@theme';
 
 import {
-  AspectRatio,
   DocumentScanningFlow,
   startDocumentScanner,
 } from 'react-native-scanbot-sdk/ui_v2';
+import {AspectRatio} from 'react-native-scanbot-sdk';
 
 export function useSinglePageScanningWithFinder() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -72,8 +72,8 @@ export function useSinglePageScanningWithFinder() {
       /**
        * Handle the result if result status is OK
        */
-      if (documentResult.status === 'OK') {
-        setDocument(documentResult);
+      if (documentResult.status === 'OK' && documentResult.data !== undefined) {
+        setDocument(documentResult.data);
         navigation.navigate(Screens.DOCUMENT_RESULT);
       }
     } catch (e: any) {

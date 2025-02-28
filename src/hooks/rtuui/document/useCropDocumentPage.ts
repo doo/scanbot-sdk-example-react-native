@@ -33,8 +33,11 @@ export function useCropDocumentPage() {
         /**
          * Handle the result if result status is OK
          */
-        if (documentResult.status === 'OK') {
-          setDocument(documentResult);
+        if (
+          documentResult.status === 'OK' &&
+          documentResult.data !== undefined
+        ) {
+          setDocument(documentResult.data);
         }
       } catch (e: any) {
         errorMessageAlert(e.message);

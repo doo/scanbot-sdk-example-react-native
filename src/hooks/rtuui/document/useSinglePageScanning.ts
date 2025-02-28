@@ -7,9 +7,9 @@ import {
 } from '@utils';
 import {
   DocumentScanningFlow,
-  startDocumentScanner,
   PageSnapCheckMarkAnimation,
   PageSnapFunnelAnimation,
+  startDocumentScanner,
 } from 'react-native-scanbot-sdk/ui_v2';
 import {useNavigation} from '@react-navigation/native';
 import {DocumentContext} from '@context';
@@ -79,8 +79,8 @@ export function useSinglePageScanning() {
       /**
        * Handle the result if result status is OK
        */
-      if (documentResult.status === 'OK') {
-        setDocument(documentResult);
+      if (documentResult.status === 'OK' && documentResult.data !== undefined) {
+        setDocument(documentResult.data);
         navigation.navigate(Screens.DOCUMENT_RESULT);
       }
     } catch (e: any) {
