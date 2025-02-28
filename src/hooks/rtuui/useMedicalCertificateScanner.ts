@@ -10,7 +10,8 @@ import {COLORS} from '@theme';
 import {useCallback} from 'react';
 
 import ScanbotSDK, {
-  MedicalCertificateRecognizerConfiguration,
+  autorelease,
+  MedicalCertificateScannerConfiguration,
 } from 'react-native-scanbot-sdk';
 
 export function useMedicalCertificateScanner() {
@@ -44,7 +45,7 @@ export function useMedicalCertificateScanner() {
        * Create the medical certificate recognizer configuration object and
        * start the medical certificate recognizer with the configuration
        */
-      let config: MedicalCertificateRecognizerConfiguration = {
+      const config: MedicalCertificateScannerConfiguration = {
         topBarBackgroundColor: COLORS.SCANBOT_RED,
         userGuidanceStrings: {
           capturing: 'Capturing',
@@ -60,15 +61,20 @@ export function useMedicalCertificateScanner() {
         cancelButtonHidden: false,
         recognizePatientInfo: true,
       };
-      const result = await ScanbotSDK.UI.startMedicalCertificateRecognizer(
-        config,
-      );
-      /**
-       * Handle the result if result status is OK
-       */
-      if (result.status === 'OK') {
-        navigation.navigate(Screens.MEDICAL_CERTIFICATE_RESULT, result);
-      }
+
+      await autorelease(async () => {
+        const result = await ScanbotSDK.UI.startMedicalCertificateScanner(
+          config,
+        );
+        /**
+         * Handle the result if result status is OK
+         */
+        if (result.status === 'OK' && result.data !== undefined) {
+          navigation.navigate(Screens.MEDICAL_CERTIFICATE_RESULT, {
+            certificate: result.data.serialize(),
+          });
+        }
+      });
     } catch (e: any) {
       errorMessageAlert(e.message);
     }

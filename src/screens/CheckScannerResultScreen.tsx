@@ -1,24 +1,25 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useRoute} from '@react-navigation/native';
+import {CheckRecognizerResultScreenRouteProp} from '@utils';
 import {
-  CheckRecognizerResultScreenRouteProp,
-  GenericDocumentUtils,
-} from '@utils';
-import {
+  GenericDocumentResult,
   ResultContainer,
   ResultFieldRow,
   ResultHeader,
   ResultImage,
 } from '@components';
-import {View} from 'react-native';
-import {CheckRecognizerResult} from 'react-native-scanbot-sdk';
+import {
+  autorelease,
+  CheckScanningResult,
+  EncodeImageOptions,
+} from 'react-native-scanbot-sdk';
 
 const CheckDocument = ({
-  checkRecognizerResult,
+  checkScannerResult,
 }: {
-  checkRecognizerResult: CheckRecognizerResult;
+  checkScannerResult?: CheckScanningResult;
 }) => {
-  if (!checkRecognizerResult.check) {
+  if (!checkScannerResult?.check) {
     return null;
   }
 
@@ -90,35 +91,34 @@ const CheckDocument = ({
    *     }
    */
 
-  return (
-    <View>
-      <ResultHeader title={'Check Document Result'} />
-      {GenericDocumentUtils.extractGenericDocumentFields(
-        checkRecognizerResult.check,
-      ).map((field, index) => (
-        <ResultFieldRow
-          key={field.type.name + index}
-          title={field.type.name.trim()}
-          value={field.value?.text}
-        />
-      ))}
-    </View>
-  );
+  return <GenericDocumentResult genericDocument={checkScannerResult?.check} />;
 };
 
-export function CheckRecognizerResultScreen() {
-  const {params: checkRecognizerResult} =
-    useRoute<CheckRecognizerResultScreenRouteProp>();
+export function CheckScannerResultScreen() {
+  const route = useRoute<CheckRecognizerResultScreenRouteProp>();
+  const [checkResult, setCheckResult] = useState<CheckScanningResult>();
+  const [image, setImage] = useState<string>();
+
+  useEffect(() => {
+    autorelease(async () => {
+      const result = new CheckScanningResult(route.params.check);
+      const imageData = await result.croppedImage?.encodeImage(
+        new EncodeImageOptions(),
+      );
+      if (imageData) {
+        setImage(`data:image/jpeg;base64,${imageData}`);
+      }
+
+      setCheckResult(result);
+    });
+  }, [route.params.check]);
 
   return (
     <ResultContainer>
-      <ResultImage imageUri={checkRecognizerResult.imageFileUri} />
+      <ResultImage imageUri={image} />
       <ResultHeader title={'Check recognition'} />
-      <ResultFieldRow
-        title={'Check status'}
-        value={checkRecognizerResult.checkStatus}
-      />
-      <CheckDocument checkRecognizerResult={checkRecognizerResult} />
+      <ResultFieldRow title={'Check status'} value={checkResult?.status} />
+      <CheckDocument checkScannerResult={checkResult} />
     </ResultContainer>
   );
 }
