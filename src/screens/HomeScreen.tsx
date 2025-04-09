@@ -1,27 +1,28 @@
 import React from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, Text} from 'react-native';
 import {
-  useCheckRecognizer,
+  useCheckScanner,
   useCleanup,
   useCreateDocumentWithPage,
+  useCreditCardScanner,
+  useDocumentDataExtractor,
+  useDocumentDataExtractorOnImage,
   useDocumentQualityAnalyzer,
   useEHICScanner,
-  useGenericDocumentScanner,
   useLicenseInfo,
-  useLicensePlateScanner,
   useMedicalCertificateScanner,
   useMRZScanner,
   useMultiplePageScanning,
   useOCRConfigs,
   usePerformOCR,
   useRecognizeCheck,
+  useRecognizeCreditCard,
   useRecognizeEHIC,
-  useRecognizeGenericDocument,
   useRecognizeMedicalCertificate,
   useRecognizeMRZ,
   useSinglePageScanning,
   useSinglePageScanningWithFinder,
-  useTextDataScanner,
+  useTextPatternScanner,
   useVinScanner,
 } from '@hooks';
 import {FeatureHeader, FeatureItem, ScanbotLearnMore} from '@components';
@@ -33,17 +34,18 @@ export function HomeScreen() {
   /** ScanbotSDK Features */
   const onMRZScanner = useMRZScanner();
   const onMedicalCertificateScanner = useMedicalCertificateScanner();
-  const onGenericDocumentScanner = useGenericDocumentScanner();
+  const onDocumentDataExtractor = useDocumentDataExtractor();
   const onEHICScanner = useEHICScanner();
-  const onLicensePlateScanner = useLicensePlateScanner();
   const onVinScanner = useVinScanner();
-  const onTextDataScanner = useTextDataScanner();
-  const onCheckScanner = useCheckRecognizer();
+  const onCheckScanner = useCheckScanner();
+  const onCreditCardScanner = useCreditCardScanner();
+  const onTextPatternScanner = useTextPatternScanner();
   const onRecognizeCheckOnImage = useRecognizeCheck();
   const onRecognizeMRZOnImage = useRecognizeMRZ();
   const onRecognizeMedicalCertificateOnImage = useRecognizeMedicalCertificate();
   const onRecognizeEHICOnImage = useRecognizeEHIC();
-  const onRecognizeGenericDocument = useRecognizeGenericDocument();
+  const onDocumentDataExtractorOnImage = useDocumentDataExtractorOnImage();
+  const onRecognizeCreditCard = useRecognizeCreditCard();
   const onPerformOCR = usePerformOCR();
   const onDocumentQualityAnalyzer = useDocumentQualityAnalyzer();
   const onLicenseInfo = useLicenseInfo();
@@ -82,24 +84,20 @@ export function HomeScreen() {
           onPress={onMedicalCertificateScanner}
           title={'Scan Medical Certificate'}
         />
-        <FeatureItem
-          onPress={onGenericDocumentScanner}
-          title={'Scan Generic Document'}
-        />
         <FeatureItem onPress={onCheckScanner} title={'Scan Check'} />
         <FeatureItem onPress={onEHICScanner} title={'Scan EHIC'} />
-        <FeatureItem
-          onPress={onLicensePlateScanner}
-          title={'Scan Vehicle License Plate'}
-        />
         <FeatureItem onPress={onVinScanner} title={'Scan VIN'} />
-        <FeatureItem onPress={onTextDataScanner} title={'Scan Text Data'} />
+        <FeatureItem onPress={onCreditCardScanner} title={'Scan Credit Card'} />
+        <FeatureItem
+          onPress={onTextPatternScanner}
+          title={'Scan Text Pattern'}
+        />
+        <FeatureItem
+          onPress={onDocumentDataExtractor}
+          title={'Extract Document Data Extractor'}
+        />
 
         <FeatureHeader title={'DATA DETECTORS ON IMAGES'} />
-        <FeatureItem
-          onPress={onRecognizeCheckOnImage}
-          title={'Recognize Check on Image'}
-        />
         <FeatureItem
           onPress={onRecognizeMRZOnImage}
           title={'Recognize MRZ on Image'}
@@ -109,12 +107,20 @@ export function HomeScreen() {
           title={'Recognize Medical Certificate on Image'}
         />
         <FeatureItem
+          onPress={onRecognizeCheckOnImage}
+          title={'Recognize Check on Image'}
+        />
+        <FeatureItem
           onPress={onRecognizeEHICOnImage}
           title={'Recognize EHIC on Image'}
         />
         <FeatureItem
-          onPress={onRecognizeGenericDocument}
-          title={'Recognize Generic Document on Image'}
+          onPress={onRecognizeCreditCard}
+          title={'Recognize Credit Card on Image'}
+        />
+        <FeatureItem
+          onPress={onDocumentDataExtractorOnImage}
+          title={'Extract Document Data from Image'}
         />
 
         <FeatureHeader title={'MISCELLANEOUS'} />

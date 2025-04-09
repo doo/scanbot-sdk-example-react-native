@@ -10,7 +10,7 @@ import {useCallback} from 'react';
 
 import ScanbotSDK, {
   autorelease,
-  CheckScannerConfiguration,
+  CheckScannerScreenConfiguration,
 } from 'react-native-scanbot-sdk';
 
 export function useCheckScanner() {
@@ -29,17 +29,20 @@ export function useCheckScanner() {
        * Create the check configuration object and
        * start the check recognizer with the configuration
        */
-      const config: CheckScannerConfiguration = {
+      const config: CheckScannerScreenConfiguration = {
         topBarBackgroundColor: COLORS.SCANBOT_RED,
       };
+
       await autorelease(async () => {
         const result = await ScanbotSDK.UI.startCheckScanner(config);
         /**
          * Handle the result if result status is OK
          */
         if (result.status === 'OK' && result.data) {
+          const checkScannerNavigationObject = await result.data.serialize();
+
           navigation.navigate(Screens.CHECK_SCANNER_RESULT, {
-            check: result.data.serialize(),
+            check: checkScannerNavigationObject,
           });
         }
       });

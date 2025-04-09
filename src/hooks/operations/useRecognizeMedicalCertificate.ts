@@ -10,7 +10,10 @@ import {
 import {useCallback, useContext} from 'react';
 import {ActivityIndicatorContext} from '@context';
 
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import ScanbotSDK, {
+  autorelease,
+  MedicalCertificateScanningParameters,
+} from 'react-native-scanbot-sdk';
 
 export function useRecognizeMedicalCertificate() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -49,19 +52,25 @@ export function useRecognizeMedicalCertificate() {
       if (!selectedImage) {
         return;
       }
-      /**
-       * Recognize Medical Certificate on the selected image and
-       * Handle the result by navigating to Screens.MEDICAL_CERTIFICATE_RESULT
-       */
-      const result = await ScanbotSDK.recognizeMedicalCertificate({
-        imageFileUri: selectedImage,
-        options: {
-          returnCroppedDocumentUri: true,
-          patientInfoRecognitionEnabled: true,
-          barcodeRecognitionEnabled: true,
-        },
+
+      await autorelease(async () => {
+        /**
+         * Recognize Medical Certificate on the selected image and
+         * Handle the result by navigating to Screens.MEDICAL_CERTIFICATE_RESULT
+         */
+        const result = await ScanbotSDK.recognizeMedicalCertificate({
+          imageFileUri: selectedImage,
+          configuration: new MedicalCertificateScanningParameters({
+            extractCroppedImage: true,
+          }),
+        });
+
+        const medicalCertificateNavigationObject = await result.serialize();
+
+        navigation.navigate(Screens.MEDICAL_CERTIFICATE_RESULT, {
+          certificate: medicalCertificateNavigationObject,
+        });
       });
-      navigation.navigate(Screens.MEDICAL_CERTIFICATE_RESULT, result);
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {

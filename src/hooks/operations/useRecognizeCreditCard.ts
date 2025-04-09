@@ -2,17 +2,19 @@ import {useCallback, useContext} from 'react';
 import {
   checkLicense,
   errorMessageAlert,
-  infoMessageAlert,
   PrimaryRouteNavigationProp,
   Screens,
   selectImageFromLibrary,
 } from '@utils';
 import {ActivityIndicatorContext} from '@context';
+
+import ScanbotSDK, {
+  CreditCardScannerConfiguration,
+} from 'react-native-scanbot-sdk';
 import {useNavigation} from '@react-navigation/native';
+import {CreditCardScannerUiResult} from 'react-native-scanbot-sdk/ui_v2';
 
-import ScanbotSDK from 'react-native-scanbot-sdk';
-
-export function useRecognizeGenericDocument() {
+export function useRecognizeCreditCard() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
   const {setLoading} = useContext(ActivityIndicatorContext);
 
@@ -35,21 +37,23 @@ export function useRecognizeGenericDocument() {
         return;
       }
       /**
-       * Recognize Generic Document on the selected image and
-       * Handle the result by navigating to Screens.GENERIC_DOCUMENT_RESULT
+       * Recognize Check on the selected image and
+       * Handle the result by navigating to Screens.CHECK_RECOGNIZER_RESULT
        */
-      const result = await ScanbotSDK.recognizeGenericDocument({
+      const result = await ScanbotSDK.recognizeCreditCard({
         imageFileUri: selectedImage,
-        acceptedDocumentFormats: [],
+        configuration: new CreditCardScannerConfiguration(),
       });
 
-      if (result.document) {
-        navigation.navigate(Screens.GENERIC_DOCUMENT_RESULT, {
-          documents: [result.document],
-        });
-      } else {
-        infoMessageAlert('No recognized document found.');
-      }
+      /**
+       * Handle the result if result status is OK
+       */
+      navigation.navigate(Screens.CREDIT_CARD_RESULT, {
+        card: new CreditCardScannerUiResult({
+          creditCard: result.creditCard,
+          recognitionStatus: result.scanningStatus,
+        }),
+      });
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {

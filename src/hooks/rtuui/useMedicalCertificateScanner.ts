@@ -70,8 +70,11 @@ export function useMedicalCertificateScanner() {
          * Handle the result if result status is OK
          */
         if (result.status === 'OK' && result.data !== undefined) {
+          const medicalCertificateNavigationObject =
+            await result.data.serialize();
+
           navigation.navigate(Screens.MEDICAL_CERTIFICATE_RESULT, {
-            certificate: result.data.serialize(),
+            certificate: medicalCertificateNavigationObject,
           });
         }
       });
