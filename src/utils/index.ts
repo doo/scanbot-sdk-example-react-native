@@ -15,11 +15,12 @@ import {
 import {GenericDocumentUtils} from './GenericDocumentUtils';
 import {
   CheckRecognizerResultScreenRouteProp,
-  GenericDocumentResultScreenRouteProp,
+  DocumentDataExtractionResultScreenRouteProp,
   MedicalCertificateResultScreenRouteProp,
   MrzResultScreenRouteProp,
   PlainDataResultParam,
   PlainDataResultScreenRouteProp,
+  CreditCardResultScreenRouteProp,
   PrimaryRouteNavigationProp,
   PrimaryRoutesParamList,
   DocumentPageResultScreenRouteProp,
@@ -50,8 +51,9 @@ export type {
   CheckRecognizerResultScreenRouteProp,
   MrzResultScreenRouteProp,
   MedicalCertificateResultScreenRouteProp,
-  GenericDocumentResultScreenRouteProp,
+  DocumentDataExtractionResultScreenRouteProp,
   PlainDataResultScreenRouteProp,
   PlainDataResultParam,
   DocumentPageResultScreenRouteProp,
+  CreditCardResultScreenRouteProp,
 };

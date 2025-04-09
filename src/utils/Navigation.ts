@@ -2,21 +2,22 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RouteProp} from '@react-navigation/native';
 import {
   CheckScanningResult,
-  DeepPartial,
   DocumentDataExtractionResult,
   MedicalCertificateScanningResult,
   MrzScannerResult,
 } from 'react-native-scanbot-sdk';
+import {CreditCardScannerUiResult} from 'react-native-scanbot-sdk/ui_v2';
 
 export enum Screens {
   HOME = 'home',
   CHECK_SCANNER_RESULT = 'checkScannerResult',
   MRZ_RESULT = 'mrzResult',
-  GENERIC_DOCUMENT_RESULT = 'genericDocumentResult',
+  DOCUMENT_DATA_EXTRACTOR_RESULT = 'documentDataExtractorResult',
   MEDICAL_CERTIFICATE_RESULT = 'medicalCertificateResult',
   PLAIN_DATA_RESULT = 'plainDataResult',
   DOCUMENT_RESULT = 'documentResult',
   DOCUMENT_PAGE_RESULT = 'documentPageResult',
+  CREDIT_CARD_RESULT = 'creditCardResult',
   DOCUMENT_SCANNER_VIEW = 'documentScannerView',
 }
 
@@ -24,28 +25,30 @@ export const ScreenTitles: Record<Screens, string> = {
   [Screens.HOME]: 'Scanbot SDK Example React',
   [Screens.CHECK_SCANNER_RESULT]: 'Check Scanner Result',
   [Screens.MRZ_RESULT]: 'MRZ Result',
-  [Screens.GENERIC_DOCUMENT_RESULT]: 'Generic Document Recognizer Result',
+  [Screens.DOCUMENT_DATA_EXTRACTOR_RESULT]: 'Document Data Extractor Result',
   [Screens.MEDICAL_CERTIFICATE_RESULT]: 'Medical Certificate Result',
   [Screens.PLAIN_DATA_RESULT]: 'Result',
   [Screens.DOCUMENT_RESULT]: 'Document',
   [Screens.DOCUMENT_PAGE_RESULT]: 'Document Page',
+  [Screens.CREDIT_CARD_RESULT]: 'Credit Card Result',
   [Screens.DOCUMENT_SCANNER_VIEW]: 'Document Scanner View',
 };
 
 export type PrimaryRoutesParamList = {
   [Screens.HOME]: undefined;
   [Screens.CHECK_SCANNER_RESULT]: {
-    check: ReturnType<CheckScanningResult['serialize']>;
+    check: Awaited<ReturnType<CheckScanningResult['serialize']>>;
   };
-  [Screens.MRZ_RESULT]: {
-    mrz: ReturnType<MrzScannerResult['serialize']>;
-  };
-  [Screens.GENERIC_DOCUMENT_RESULT]: {
-    documents: DeepPartial<DocumentDataExtractionResult>[];
+  [Screens.DOCUMENT_DATA_EXTRACTOR_RESULT]: {
+    documents: Awaited<ReturnType<DocumentDataExtractionResult['serialize']>>[];
   };
   [Screens.MEDICAL_CERTIFICATE_RESULT]: {
-    certificate: ReturnType<MedicalCertificateScanningResult['serialize']>;
+    certificate: Awaited<
+      ReturnType<MedicalCertificateScanningResult['serialize']>
+    >;
   };
+  [Screens.MRZ_RESULT]: {mrz: MrzScannerResult};
+  [Screens.CREDIT_CARD_RESULT]: {card: CreditCardScannerUiResult};
   [Screens.PLAIN_DATA_RESULT]: PlainDataResultParam;
   [Screens.DOCUMENT_RESULT]: undefined;
   [Screens.DOCUMENT_PAGE_RESULT]: {pageID: string};
@@ -72,9 +75,9 @@ export type MedicalCertificateResultScreenRouteProp = RouteProp<
   Screens.MEDICAL_CERTIFICATE_RESULT
 >;
 
-export type GenericDocumentResultScreenRouteProp = RouteProp<
+export type DocumentDataExtractionResultScreenRouteProp = RouteProp<
   PrimaryRoutesParamList,
-  Screens.GENERIC_DOCUMENT_RESULT
+  Screens.DOCUMENT_DATA_EXTRACTOR_RESULT
 >;
 
 export type PlainDataResultScreenRouteProp = RouteProp<
@@ -85,6 +88,11 @@ export type PlainDataResultScreenRouteProp = RouteProp<
 export type DocumentPageResultScreenRouteProp = RouteProp<
   PrimaryRoutesParamList,
   Screens.DOCUMENT_PAGE_RESULT
+>;
+
+export type CreditCardResultScreenRouteProp = RouteProp<
+  PrimaryRoutesParamList,
+  Screens.CREDIT_CARD_RESULT
 >;
 
 export type PlainDataResultParam = {

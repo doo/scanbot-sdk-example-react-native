@@ -17,7 +17,7 @@ export function PageImagePreview({
   return (
     <PreviewImage
       key={pageImageKey}
-      imageUri={page.documentImageURI ?? page.originalImageURI}
+      imageSource={page.documentImageURI ?? page.originalImageURI}
       style={style}
     />
   );

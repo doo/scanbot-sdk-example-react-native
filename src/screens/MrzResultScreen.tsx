@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {useRoute} from '@react-navigation/native';
 import {MrzResultScreenRouteProp} from '@utils';
 import {
@@ -7,14 +7,10 @@ import {
   ResultFieldRow,
   ResultHeader,
 } from '@components';
-import {autorelease, MrzScannerResult} from 'react-native-scanbot-sdk';
+import {GenericDocument} from 'react-native-scanbot-sdk';
 
-const MRZDocument = ({
-  mrzScannerResult,
-}: {
-  mrzScannerResult?: MrzScannerResult;
-}) => {
-  if (!mrzScannerResult?.document) {
+const MRZDocument = ({mrzDocument}: {mrzDocument?: GenericDocument | null}) => {
+  if (!mrzDocument) {
     return null;
   }
 
@@ -24,42 +20,31 @@ const MRZDocument = ({
    *  thereby enabling property access to the desired field.
    *
    *  For example:
-   *      import {MRZ} from 'react-native-scanbot-sdk';
+   *   import {MRZ} from 'react-native-scanbot-sdk';
    *
-   *      const mrz = new MRZ(mrzScannerResult.mrz);
+   *   const mrz = new MRZ(mrzDocument);
    *
-   *      return (
-   *        <View>
-   *          <ResultHeader title={'MRZ Document Result'} />
-   *          <ResultFieldRow title={'Given name'} value={mrz.givenNames} />
-   *          <ResultFieldRow title={'Birthdate'} value={mrz.birthDate} />
-   *          <ResultFieldRow title={'Surname'} value={mrz.surname} />
-   *        </View>
-   *      );
+   *   return (
+   *     <View>
+   *       <ResultHeader title={'MRZ Document Result'} />
+   *       <ResultFieldRow title={'Given name'} value={mrz.givenNames} />
+   *       <ResultFieldRow title={'Birthdate'} value={mrz.birthDate} />
+   *       <ResultFieldRow title={'Surname'} value={mrz.surname} />
+   *     </View>
+   *   );
    */
 
-  return <GenericDocumentResult genericDocument={mrzScannerResult?.document} />;
+  return <GenericDocumentResult genericDocument={mrzDocument} />;
 };
 
 export function MrzResultScreen() {
-  const route = useRoute<MrzResultScreenRouteProp>();
-  const [mrzResult, setMRZResult] = useState<MrzScannerResult>();
-
-  useEffect(() => {
-    autorelease(async () => {
-      setMRZResult(new MrzScannerResult(route.params.mrz));
-    });
-  }, [route.params.mrz]);
+  const {params} = useRoute<MrzResultScreenRouteProp>();
 
   return (
     <ResultContainer>
       <ResultHeader title={'MRZ'} />
-      <ResultFieldRow
-        title={'Successful recognition'}
-        value={mrzResult?.success}
-      />
-      <ResultFieldRow title={'Raw MRZ string'} value={mrzResult?.rawMRZ} />
-      <MRZDocument mrzScannerResult={mrzResult} />
+      <ResultFieldRow title={'Raw MRZ string'} value={params.mrz.rawMRZ} />
+      <MRZDocument mrzDocument={params.mrz.document} />
     </ResultContainer>
   );
 }

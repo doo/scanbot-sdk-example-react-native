@@ -44,51 +44,51 @@ const CheckDocument = ({
    *        USACheckDocumentType,
    *      } from 'react-native-scanbot-sdk';
    *
-   *     switch (checkRecognizerResult.check.type.name) {
-   *       case USACheckDocumentType: {
-   *         const check = new USACheck(checkRecognizerResult.check);
-   *         return (
-   *           <View>
-   *             <ResultHeader title={'Check Document Result'} />
-   *             <ResultFieldRow
-   *               title={'Transit number'}
-   *               value={check.transitNumber}
-   *             />
-   *             <ResultFieldRow
-   *               title={'Account number'}
-   *               value={check.accountNumber}
-   *             />
-   *             <ResultFieldRow
-   *               title={'Auxiliary On Us'}
-   *               value={check.auxiliaryOnUs}
-   *             />
-   *           </View>
-   *         );
-   *       }
-   *       case INDCheckDocumentType: {
-   *         const check = new INDCheck(checkRecognizerResult.check);
-   *         return () => (
-   *           <View>
-   *             <ResultHeader title={'Check Document Result'} />
-   *             <ResultFieldRow title={'Sort number'} value={check.sortNumber} />
-   *             <ResultFieldRow
-   *               title={'Account number'}
-   *               value={check.accountNumber}
-   *             />
-   *             <ResultFieldRow
-   *               title={'Transaction code'}
-   *               value={check.transactionCode}
-   *             />
-   *           </View>
-   *         );
-   *       }
-   *       case FRACheckDocumentType: // const check = new FRACheck(checkRecognizerResult.check);
-   *       case ISRCheckDocumentType: // const check = new ISRCheck(checkRecognizerResult.check);
-   *       case KWTCheckDocumentType: // const check = new KWTCheck(checkRecognizerResult.check);
-   *       case AUSCheckDocumentType: // const check = new AUSCheck(checkRecognizerResult.check);
-   *       case UAECheckDocumentType: // const check = new UAECheck(checkRecognizerResult.check);
-   *       case CANCheckDocumentType: // const check = new CANCheck(checkRecognizerResult.check);
-   *     }
+   *      switch (checkScannerResult.check.type.name) {
+   *      case USACheckDocumentType: {
+   *      const check = new USACheck(checkScannerResult.check);
+   *      return (
+   *      <View>
+   *      <ResultHeader title={'Check Document Result'} />
+   *      <ResultFieldRow
+   *      title={'Transit number'}
+   *      value={check.transitNumber}
+   *      />
+   *      <ResultFieldRow
+   *      title={'Account number'}
+   *      value={check.accountNumber}
+   *      />
+   *      <ResultFieldRow
+   *      title={'Auxiliary On Us'}
+   *      value={check.auxiliaryOnUs}
+   *      />
+   *      </View>
+   *      );
+   *      }
+   *      case INDCheckDocumentType: {
+   *      const check = new INDCheck(checkScannerResult.check);
+   *      return (
+   *      <View>
+   *      <ResultHeader title={'Check Document Result'} />
+   *      <ResultFieldRow title={'Sort number'} value={check.sortNumber} />
+   *      <ResultFieldRow
+   *      title={'Account number'}
+   *      value={check.accountNumber}
+   *      />
+   *      <ResultFieldRow
+   *      title={'Transaction code'}
+   *      value={check.transactionCode}
+   *      />
+   *      </View>
+   *      );
+   *      }
+   *      case FRACheckDocumentType: // const check = new FRACheck(checkRecognizerResult.check);
+   *      case ISRCheckDocumentType: // const check = new ISRCheck(checkRecognizerResult.check);
+   *      case KWTCheckDocumentType: // const check = new KWTCheck(checkRecognizerResult.check);
+   *      case AUSCheckDocumentType: // const check = new AUSCheck(checkRecognizerResult.check);
+   *      case UAECheckDocumentType: // const check = new UAECheck(checkRecognizerResult.check);
+   *      case CANCheckDocumentType: // const check = new CANCheck(checkRecognizerResult.check);
+   *      }
    */
 
   return <GenericDocumentResult genericDocument={checkScannerResult?.check} />;

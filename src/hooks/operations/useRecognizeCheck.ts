@@ -9,7 +9,7 @@ import {
 import {ActivityIndicatorContext} from '@context';
 import {useNavigation} from '@react-navigation/native';
 
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import ScanbotSDK, {CheckScannerConfiguration} from 'react-native-scanbot-sdk';
 
 export function useRecognizeCheck() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -39,8 +39,14 @@ export function useRecognizeCheck() {
        */
       const result = await ScanbotSDK.recognizeCheck({
         imageFileUri: selectedImage,
+        configuration: new CheckScannerConfiguration(),
       });
-      navigation.navigate(Screens.CHECK_RECOGNIZER_RESULT, result);
+
+      const navigationCheckObject = await result.serialize();
+
+      navigation.navigate(Screens.CHECK_SCANNER_RESULT, {
+        check: navigationCheckObject,
+      });
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {

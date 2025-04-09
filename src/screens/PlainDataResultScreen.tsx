@@ -19,7 +19,7 @@ function PlainImageResult({
     <View>
       {imageUris.map(url => (
         <PreviewImage
-          imageUri={url}
+          imageSource={url}
           key={url}
           style={{width, height: height - height * 0.25, resizeMode: 'contain'}}
         />

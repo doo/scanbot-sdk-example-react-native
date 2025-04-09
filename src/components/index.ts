@@ -14,6 +14,7 @@ import {ResultImage} from './ResultImage';
 import {ExportDocumentModal} from './ExportDocumentModal';
 import {PageImagePreview} from './PageImagePreview';
 import {ActionButton} from './ActionButton';
+import {GenericDocumentResult} from './GenericDocumentResult';
 
 export {
   BottomActionBar,
@@ -30,4 +31,5 @@ export {
   ExportDocumentModal,
   PageImagePreview,
   ActionButton,
+  GenericDocumentResult,
 };

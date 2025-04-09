@@ -8,10 +8,11 @@ import {useNavigation} from '@react-navigation/native';
 import {useCallback} from 'react';
 
 import ScanbotSDK, {
-  GenericDocumentRecognizerConfiguration,
+  autorelease,
+  DocumentDataExtractorScreenConfiguration,
 } from 'react-native-scanbot-sdk';
 
-export function useGenericDocumentScanner() {
+export function useDocumentDataExtractor() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
 
   return useCallback(async () => {
@@ -27,16 +28,25 @@ export function useGenericDocumentScanner() {
        * Create the generic document scanner configuration object and
        * start the generic document scanner with the configuration
        */
-      const config: GenericDocumentRecognizerConfiguration = {
+      const config: DocumentDataExtractorScreenConfiguration = {
         finderLineColor: '#ff0000',
       };
-      const result = await ScanbotSDK.UI.startGenericDocumentRecognizer(config);
-      /**
-       * Handle the result if result status is OK
-       */
-      if (result.status === 'OK') {
-        navigation.navigate(Screens.GENERIC_DOCUMENT_RESULT, result);
-      }
+
+      await autorelease(async () => {
+        const result = await ScanbotSDK.UI.startDocumentDataExtractor(config);
+        /**
+         * Handle the result if result status is OK
+         */
+        if (result.status === 'OK' && result.data) {
+          const navigationObject = await Promise.all(
+            result.data.map(document => document.serialize()),
+          );
+
+          navigation.navigate(Screens.DOCUMENT_DATA_EXTRACTOR_RESULT, {
+            documents: navigationObject,
+          });
+        }
+      });
     } catch (e: any) {
       errorMessageAlert(e.message);
     }

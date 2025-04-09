@@ -10,7 +10,9 @@ import {
 import {ActivityIndicatorContext} from '@context';
 import {useNavigation} from '@react-navigation/native';
 
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import ScanbotSDK, {
+  EuropeanHealthInsuranceCardRecognizerConfiguration,
+} from 'react-native-scanbot-sdk';
 
 export function useRecognizeEHIC() {
   const {setLoading} = useContext(ActivityIndicatorContext);
@@ -38,11 +40,14 @@ export function useRecognizeEHIC() {
        * Recognize health insurance card on the selected image and
        * Handle the result by displaying an alert
        */
-      const result = await ScanbotSDK.recognizeEHIC(selectedImage);
+      const result = await ScanbotSDK.recognizeEHIC({
+        imageFileUri: selectedImage,
+        configuration: new EuropeanHealthInsuranceCardRecognizerConfiguration(),
+      });
       /**
        * Handle the result by navigating to result screen
        */
-      if (result.detectionStatus !== 'FAILED_DETECTION') {
+      if (result.status !== 'FAILED_DETECTION') {
         navigation.navigate(Screens.PLAIN_DATA_RESULT, {
           data: result.fields.map(field => ({
             key: field.type,

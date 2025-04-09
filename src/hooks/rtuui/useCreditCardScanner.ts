@@ -5,17 +5,16 @@ import {
   Screens,
 } from '@utils';
 import {useNavigation} from '@react-navigation/native';
-import {COLORS} from '@theme';
 import {useCallback} from 'react';
+import {COLORS} from '@theme';
 
-import {MrzScannerResult} from 'react-native-scanbot-sdk';
 import {
-  MrzScannerScreenConfiguration,
-  startMRZScanner,
+  CreditCardScannerScreenConfiguration,
+  startCreditCardScanner,
   StyledText,
 } from 'react-native-scanbot-sdk/ui_v2';
 
-export function useMRZScanner() {
+export function useCreditCardScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
 
   return useCallback(async () => {
@@ -28,10 +27,10 @@ export function useMRZScanner() {
         return;
       }
       /**
-       * Create the machine-readable zone scanner configuration object and
-       * start the machine-readable zone scanner with the configuration
+       * Create the credit card scanner configuration object and
+       * start the credit card scanner with the configuration
        */
-      const configuration = new MrzScannerScreenConfiguration();
+      const configuration = new CreditCardScannerScreenConfiguration();
 
       // Set colors
       configuration.palette.sbColorPrimary = COLORS.SCANBOT_RED;
@@ -39,7 +38,7 @@ export function useMRZScanner() {
 
       // Add a top guidance title
       configuration.topUserGuidance.title = new StyledText({
-        text: 'Scan MRZ',
+        text: 'Scan Credit Card',
         color: COLORS.SCANBOT_RED,
         useShadow: true,
       });
@@ -49,21 +48,12 @@ export function useMRZScanner() {
       configuration.actionBar.flashButton.activeForegroundColor =
         COLORS.SCANBOT_RED;
 
-      // Configure the scanner
-      configuration.scannerConfiguration.incompleteResultHandling = 'ACCEPT';
-
-      const result = await startMRZScanner(configuration);
+      const result = await startCreditCardScanner(configuration);
       /**
        * Handle the result if result status is OK
        */
-      if (result.status === 'OK' && result.data !== undefined) {
-        navigation.navigate(Screens.MRZ_RESULT, {
-          mrz: new MrzScannerResult({
-            document: result.data.mrzDocument,
-            rawMRZ: result.data.rawMRZ,
-            success: !!result.data.rawMRZ,
-          }),
-        });
+      if (result.status === 'OK' && result.data) {
+        navigation.navigate(Screens.CREDIT_CARD_RESULT, {card: result.data});
       }
     } catch (e: any) {
       errorMessageAlert(e.message);

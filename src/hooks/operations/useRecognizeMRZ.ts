@@ -9,7 +9,7 @@ import {
 } from '@utils';
 import {ActivityIndicatorContext} from '@context';
 
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import ScanbotSDK, {MrzScannerConfiguration} from 'react-native-scanbot-sdk';
 
 export function useRecognizeMRZ() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -37,8 +37,14 @@ export function useRecognizeMRZ() {
        * Recognize MRZ on the selected image and
        * Handle the result by navigating to Screens.MRZ_RESULT
        */
-      const result = await ScanbotSDK.recognizeMrz(selectedImage);
-      navigation.navigate(Screens.MRZ_RESULT, result);
+      const result = await ScanbotSDK.recognizeMrz({
+        imageFileUri: selectedImage,
+        configuration: new MrzScannerConfiguration(),
+      });
+
+      navigation.navigate(Screens.MRZ_RESULT, {
+        mrz: result,
+      });
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {
