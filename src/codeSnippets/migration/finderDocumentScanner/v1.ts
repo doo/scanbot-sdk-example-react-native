@@ -1,14 +1,15 @@
 import ScanbotSDK, {
+  AspectRatio,
   FinderDocumentScannerConfiguration,
 } from 'react-native-scanbot-sdk';
 
 async function finderDocumentScanner() {
   const configuration: FinderDocumentScannerConfiguration = {
     topBarBackgroundColor: '#ffffff',
-    finderAspectRatio: {
+    finderAspectRatio: new AspectRatio({
       width: 3,
       height: 4,
-    },
+    }),
     shutterButtonHidden: true,
   };
 

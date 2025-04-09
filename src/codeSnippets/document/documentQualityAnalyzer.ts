@@ -1,5 +1,7 @@
 import {selectImageFromLibrary} from '@utils';
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import ScanbotSDK, {
+  DocumentQualityAnalyzerConfiguration,
+} from 'react-native-scanbot-sdk';
 
 async function documentQualityAnalyzer() {
   try {
@@ -15,6 +17,7 @@ async function documentQualityAnalyzer() {
     /** Detect the quality of the document on image **/
     const quality = await ScanbotSDK.documentQualityAnalyzer({
       imageFileUri: selectedImageResult,
+      configuration: new DocumentQualityAnalyzerConfiguration(),
     });
   } catch (e: any) {
     console.error(e.message);

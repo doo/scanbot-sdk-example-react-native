@@ -1,10 +1,10 @@
 import {
-  AspectRatio,
   DocumentScanningFlow,
   NoButtonMode,
   PageSnapFunnelAnimation,
   startDocumentScanner,
 } from 'react-native-scanbot-sdk/ui_v2';
+import {AspectRatio} from 'react-native-scanbot-sdk';
 
 async function finderDocumentScanner() {
   const configuration = new DocumentScanningFlow();

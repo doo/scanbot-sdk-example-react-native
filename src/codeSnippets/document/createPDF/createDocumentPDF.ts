@@ -1,4 +1,4 @@
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import ScanbotSDK, {PdfConfiguration} from 'react-native-scanbot-sdk';
 
 async function createDocumentPDF() {
   try {
@@ -9,13 +9,7 @@ async function createDocumentPDF() {
     /** Create a PDF file with the provided options */
     const pdfUriResult = await ScanbotSDK.Document.createPDF({
       documentID: document.uuid,
-      options: {
-        pageSize: 'A4',
-        pageDirection: 'PORTRAIT',
-        ocrConfiguration: {
-          engineMode: 'SCANBOT_OCR',
-        },
-      },
+      pdfConfiguration: new PdfConfiguration(),
     });
     /** Handle the result */
   } catch (e: any) {
