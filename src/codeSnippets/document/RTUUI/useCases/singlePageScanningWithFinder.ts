@@ -1,9 +1,9 @@
 import {
-  AspectRatio,
   DocumentScanningFlow,
   FinderCorneredStyle,
   startDocumentScanner,
 } from 'react-native-scanbot-sdk/ui_v2';
+import {AspectRatio} from 'react-native-scanbot-sdk';
 
 async function startScanning() {
   try {
