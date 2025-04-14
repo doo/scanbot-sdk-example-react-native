@@ -27,7 +27,7 @@ export function useMedicalCertificateScanner() {
         return;
       }
       /**
-       * Medical Certificate Recognizer requires OCR blobs.
+       * Medical Certificate Scanner requires OCR blobs.
        * If OCR blobs are not present or there is no 'de' language data, the scanner will fail
        * Return early if there are no installed languages
        */
@@ -42,8 +42,8 @@ export function useMedicalCertificateScanner() {
         return;
       }
       /**
-       * Create the medical certificate recognizer configuration object and
-       * start the medical certificate recognizer with the configuration
+       * Create the medical certificate scanner configuration object and
+       * start the medical certificate scanner with the configuration
        */
       const config: MedicalCertificateScannerConfiguration = {
         topBarBackgroundColor: COLORS.SCANBOT_RED,

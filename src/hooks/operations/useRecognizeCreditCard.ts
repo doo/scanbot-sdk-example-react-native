@@ -37,8 +37,8 @@ export function useRecognizeCreditCard() {
         return;
       }
       /**
-       * Recognize Check on the selected image and
-       * Handle the result by navigating to Screens.CHECK_RECOGNIZER_RESULT
+       * Recognize Credit card on the selected image and
+       * Handle the result by navigating to Screens.CREDIT_CARD_RESULT
        */
       const result = await ScanbotSDK.recognizeCreditCard({
         imageFileUri: selectedImage,

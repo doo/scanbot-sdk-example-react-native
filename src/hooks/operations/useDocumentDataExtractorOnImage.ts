@@ -12,25 +12,6 @@ import {useNavigation} from '@react-navigation/native';
 
 import ScanbotSDK, {
   autorelease,
-  DeDriverLicenseBackCategoriesA1DocumentType,
-  DeDriverLicenseBackCategoriesA2DocumentType,
-  DeDriverLicenseBackCategoriesADocumentType,
-  DeDriverLicenseBackCategoriesAMDocumentType,
-  DeDriverLicenseBackCategoriesB1DocumentType,
-  DeDriverLicenseBackCategoriesBDocumentType,
-  DeDriverLicenseBackCategoriesBEDocumentType,
-  DeDriverLicenseBackCategoriesC1DocumentType,
-  DeDriverLicenseBackCategoriesC1EDocumentType,
-  DeDriverLicenseBackCategoriesCDocumentType,
-  DeDriverLicenseBackCategoriesCEDocumentType,
-  DeDriverLicenseBackCategoriesD1DocumentType,
-  DeDriverLicenseBackCategoriesD1EDocumentType,
-  DeDriverLicenseBackCategoriesDDocumentType,
-  DeDriverLicenseBackCategoriesDEDocumentType,
-  DeDriverLicenseBackCategoriesDocumentType,
-  DeDriverLicenseBackCategoriesLDocumentType,
-  DeDriverLicenseBackCategoriesTDocumentType,
-  DeDriverLicenseBackCategoryDocumentType,
   DeDriverLicenseBackDocumentType,
   DeDriverLicenseFrontDocumentType,
   DeHealthInsuranceCardFrontDocumentType,
@@ -68,7 +49,7 @@ export function useDocumentDataExtractorOnImage() {
         return;
       }
       /**
-       * Recognize Generic Document on the selected image
+       * Extract document data on the selected image
        * Add the desired document types that data extraction should be done
        * Handle the result by navigating to Screens.DOCUMENT_DATA_EXTRACTOR_RESULT
        */
@@ -85,25 +66,6 @@ export function useDocumentDataExtractorOnImage() {
                   DePassportDocumentType,
                   DeDriverLicenseFrontDocumentType,
                   DeDriverLicenseBackDocumentType,
-                  DeDriverLicenseBackCategoryDocumentType,
-                  DeDriverLicenseBackCategoriesDocumentType,
-                  DeDriverLicenseBackCategoriesADocumentType,
-                  DeDriverLicenseBackCategoriesA1DocumentType,
-                  DeDriverLicenseBackCategoriesA2DocumentType,
-                  DeDriverLicenseBackCategoriesAMDocumentType,
-                  DeDriverLicenseBackCategoriesBDocumentType,
-                  DeDriverLicenseBackCategoriesB1DocumentType,
-                  DeDriverLicenseBackCategoriesBEDocumentType,
-                  DeDriverLicenseBackCategoriesCDocumentType,
-                  DeDriverLicenseBackCategoriesC1DocumentType,
-                  DeDriverLicenseBackCategoriesC1EDocumentType,
-                  DeDriverLicenseBackCategoriesCEDocumentType,
-                  DeDriverLicenseBackCategoriesDDocumentType,
-                  DeDriverLicenseBackCategoriesD1DocumentType,
-                  DeDriverLicenseBackCategoriesD1EDocumentType,
-                  DeDriverLicenseBackCategoriesDEDocumentType,
-                  DeDriverLicenseBackCategoriesLDocumentType,
-                  DeDriverLicenseBackCategoriesTDocumentType,
                   DeResidencePermitFrontDocumentType,
                   DeResidencePermitBackDocumentType,
                   EuropeanHealthInsuranceCardDocumentType,

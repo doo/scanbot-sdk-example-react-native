@@ -36,10 +36,7 @@ export function useRecognizeEHIC() {
       if (!selectedImage) {
         return;
       }
-      /**
-       * Recognize health insurance card on the selected image and
-       * Handle the result by displaying an alert
-       */
+      /** Recognize health insurance card on the selected image */
       const result = await ScanbotSDK.recognizeEHIC({
         imageFileUri: selectedImage,
         configuration: new EuropeanHealthInsuranceCardRecognizerConfiguration(),

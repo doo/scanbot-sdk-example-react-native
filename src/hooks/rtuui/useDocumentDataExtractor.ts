@@ -25,8 +25,8 @@ export function useDocumentDataExtractor() {
         return;
       }
       /**
-       * Create the generic document scanner configuration object and
-       * start the generic document scanner with the configuration
+       * Create the document data extractor configuration object and
+       * start the document data extractor with the configuration
        */
       const config: DocumentDataExtractorScreenConfiguration = {
         finderLineColor: '#ff0000',
