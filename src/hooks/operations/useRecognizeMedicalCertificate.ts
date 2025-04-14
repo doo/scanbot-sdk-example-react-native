@@ -30,7 +30,7 @@ export function useRecognizeMedicalCertificate() {
         return;
       }
       /**
-       * Medical Certificate Recognizer requires OCR blobs.
+       * Medical Certificate Scanner requires OCR blobs.
        * If OCR blobs are not present or there is no 'de' language data, the scanner will fail
        * Return early if there are no installed languages
        */

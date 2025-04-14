@@ -27,7 +27,7 @@ export function useCheckScanner() {
       }
       /**
        * Create the check configuration object and
-       * start the check recognizer with the configuration
+       * start the check scanner with the configuration
        */
       const config: CheckScannerScreenConfiguration = {
         topBarBackgroundColor: COLORS.SCANBOT_RED,

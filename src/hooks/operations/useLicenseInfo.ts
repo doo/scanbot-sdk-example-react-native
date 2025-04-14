@@ -17,7 +17,8 @@ export function useLicenseInfo() {
             ? new Date(info.licenseExpirationDate)
             : 'N/A'
         }` +
-        `\n\n• Status: ${info.licenseStatus}`;
+        `\n\n• Status: ${info.licenseStatus}` +
+        `\n\n• ${info.licenseStatusMessage}`;
 
       infoMessageAlert(text);
     } catch (e: any) {
