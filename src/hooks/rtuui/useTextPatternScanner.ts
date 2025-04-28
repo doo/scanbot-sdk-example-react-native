@@ -36,7 +36,7 @@ export function useTextPatternScanner() {
 
       const result = await startTextPatternScanner(configuration);
       /**
-       * Handle the result if result status is OK
+       * Handle the result if the result status is OK
        */
       if (result.status === 'OK' && result.data) {
         resultMessageAlert(

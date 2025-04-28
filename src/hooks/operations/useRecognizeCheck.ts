@@ -30,7 +30,7 @@ export function useRecognizeCheck() {
       }
       /**
        * Select an image from the Image Library
-       * Return early if no image is selected or there is an issue selecting an image
+       * Return early if no image is selected, or there is an issue selecting an image
        **/
       const selectedImage = await selectImageFromLibrary();
       if (!selectedImage) {

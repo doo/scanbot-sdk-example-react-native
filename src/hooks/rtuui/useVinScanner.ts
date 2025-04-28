@@ -24,7 +24,7 @@ export function useVinScanner() {
       };
       const result = await ScanbotSDK.UI.startVinScanner(config);
       /**
-       * Handle the result if result status is OK
+       * Handle the result if the result status is OK
        */
       if (result.status === 'OK' && result.data !== undefined) {
         if (result.data.barcodeResult.extractedVIN) {

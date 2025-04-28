@@ -20,7 +20,6 @@ async function startScanning() {
     const textPatternResult = await startTextPatternScanner(configuration);
     /** Handle the result if the status is 'OK' */
     if (textPatternResult.status === 'OK') {
-      // textPatternResult.data.rawText;
     }
   } catch (e: any) {
     console.error(e.message);

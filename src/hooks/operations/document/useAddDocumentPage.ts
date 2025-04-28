@@ -28,7 +28,7 @@ export function useAddDocumentPage() {
         }
         /**
          * Select an image from the Image Library
-         * Return early if no image is selected or there is an issue selecting an image
+         * Return early if no image is selected, or there is an issue selecting an image
          **/
         setLoading(true);
         const selectedImageResult = await selectImageFromLibrary();
@@ -43,7 +43,7 @@ export function useAddDocumentPage() {
           documentDetection: true,
         });
         /**
-         * Handle the result by navigating to result screen
+         * Handle the result by navigating to the result screen
          */
         setDocument(documentResult);
         navigation.navigate(Screens.DOCUMENT_RESULT);

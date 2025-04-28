@@ -30,19 +30,19 @@ export function useRecognizeEHIC() {
       }
       /**
        * Select an image from the Image Library
-       * Return early if no image is selected or there is an issue selecting an image
+       * Return early if no image is selected, or there is an issue selecting an image
        **/
       const selectedImage = await selectImageFromLibrary();
       if (!selectedImage) {
         return;
       }
-      /** Recognize health insurance card on the selected image */
+      /** Recognize the health insurance card on the selected image */
       const result = await ScanbotSDK.recognizeEHIC({
         imageFileUri: selectedImage,
         configuration: new EuropeanHealthInsuranceCardRecognizerConfiguration(),
       });
       /**
-       * Handle the result by navigating to result screen
+       * Handle the result by navigating to the result screen
        */
       if (result.status !== 'FAILED_DETECTION') {
         navigation.navigate(Screens.PLAIN_DATA_RESULT, {

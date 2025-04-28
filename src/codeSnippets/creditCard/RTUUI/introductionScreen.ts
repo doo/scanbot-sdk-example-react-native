@@ -30,9 +30,9 @@ async function startScanning() {
     configuration.introScreen.doneButton.text = 'Start Scanning';
     configuration.introScreen.doneButton.background.fillColor = '#C8193C';
     /** Start the Credit Card Scanner **/
-    const textPatternResult = await startCreditCardScanner(configuration);
+    const creditCardResult = await startCreditCardScanner(configuration);
     /** Handle the result if the status is 'OK' */
-    if (textPatternResult.status === 'OK') {
+    if (creditCardResult.status === 'OK') {
     }
   } catch (e: any) {
     console.error(e.message);

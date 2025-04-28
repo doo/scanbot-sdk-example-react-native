@@ -25,7 +25,7 @@ export function useDocumentQualityAnalyzer() {
       }
       /**
        * Select an image from the Image Library
-       * Return early if no image is selected or there is an issue selecting an image
+       * Return early if no image is selected, or there is an issue selecting an image
        **/
       setLoading(true);
       const selectedImage = await selectImageFromLibrary();
@@ -33,7 +33,7 @@ export function useDocumentQualityAnalyzer() {
         return;
       }
 
-      // Detect document quality on selected image
+      // Detect document quality on a selected image
       const result = await ScanbotSDK.documentQualityAnalyzer({
         imageFileUri: selectedImage,
         configuration: new DocumentQualityAnalyzerConfiguration(),

@@ -36,7 +36,7 @@ export function useCheckScanner() {
       await autorelease(async () => {
         const result = await ScanbotSDK.UI.startCheckScanner(config);
         /**
-         * Handle the result if result status is OK
+         * Handle the result if the result status is OK
          */
         if (result.status === 'OK' && result.data) {
           const checkScannerNavigationObject = await result.data.serialize();
