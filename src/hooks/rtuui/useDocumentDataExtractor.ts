@@ -35,7 +35,7 @@ export function useDocumentDataExtractor() {
       await autorelease(async () => {
         const result = await ScanbotSDK.UI.startDocumentDataExtractor(config);
         /**
-         * Handle the result if result status is OK
+         * Handle the result if the result status is OK
          */
         if (result.status === 'OK' && result.data) {
           const navigationObject = await Promise.all(

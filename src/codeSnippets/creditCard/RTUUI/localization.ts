@@ -18,9 +18,9 @@ async function startScanning() {
     localization.creditCardUserGuidanceNoCardFound =
       'Localized creditCardUserGuidanceNoCardFound';
     /** Start the Credit Card Scanner **/
-    const textPatternResult = await startCreditCardScanner(configuration);
+    const creditCardResult = await startCreditCardScanner(configuration);
     /** Handle the result if the status is 'OK' */
-    if (textPatternResult.status === 'OK') {
+    if (creditCardResult.status === 'OK') {
     }
   } catch (e: any) {
     console.error(e.message);

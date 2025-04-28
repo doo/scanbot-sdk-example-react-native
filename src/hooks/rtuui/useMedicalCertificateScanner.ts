@@ -67,7 +67,7 @@ export function useMedicalCertificateScanner() {
           config,
         );
         /**
-         * Handle the result if result status is OK
+         * Handle the result if the result status is OK
          */
         if (result.status === 'OK' && result.data !== undefined) {
           const medicalCertificateNavigationObject =

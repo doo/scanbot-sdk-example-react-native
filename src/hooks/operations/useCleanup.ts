@@ -12,7 +12,7 @@ export const useCleanup = () => {
     deleteAllConfirmationAlert(async () => {
       try {
         /**
-         * Remove the Pages,Images,PDFs & TIFF files created with ScanbotSDK
+         * Remove the Pages, Images, PDFs & TIFF files created with ScanbotSDK
          */
         await ScanbotSDK.cleanup();
         /**

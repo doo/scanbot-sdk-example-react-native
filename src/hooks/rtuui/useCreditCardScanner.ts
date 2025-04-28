@@ -50,7 +50,7 @@ export function useCreditCardScanner() {
 
       const result = await startCreditCardScanner(configuration);
       /**
-       * Handle the result if result status is OK
+       * Handle the result if the result status is OK
        */
       if (result.status === 'OK' && result.data) {
         navigation.navigate(Screens.CREDIT_CARD_RESULT, {card: result.data});

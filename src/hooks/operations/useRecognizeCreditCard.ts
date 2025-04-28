@@ -30,7 +30,7 @@ export function useRecognizeCreditCard() {
       }
       /**
        * Select an image from the Image Library
-       * Return early if no image is selected or there is an issue selecting an image
+       * Return early if no image is selected, or there is an issue selecting an image
        **/
       const selectedImage = await selectImageFromLibrary();
       if (!selectedImage) {
@@ -46,7 +46,7 @@ export function useRecognizeCreditCard() {
       });
 
       /**
-       * Handle the result if result status is OK
+       * Handle the result if the result status is OK
        */
       navigation.navigate(Screens.CREDIT_CARD_RESULT, {
         card: new CreditCardScannerUiResult({

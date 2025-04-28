@@ -15,9 +15,9 @@ async function startScanning() {
     configuration.topBar.cancelButton.text = 'Cancel';
     configuration.topBar.cancelButton.foreground.color = '#C8193C';
     /** Start the Credit Card Scanner **/
-    const textPatternResult = await startCreditCardScanner(configuration);
+    const creditCardResult = await startCreditCardScanner(configuration);
     /** Handle the result if the status is 'OK' */
-    if (textPatternResult.status === 'OK') {
+    if (creditCardResult.status === 'OK') {
     }
   } catch (e: any) {
     console.error(e.message);

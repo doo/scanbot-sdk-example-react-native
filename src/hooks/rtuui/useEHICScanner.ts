@@ -32,7 +32,7 @@ export function useEHICScanner() {
       };
       const result = await ScanbotSDK.UI.startEHICScanner(config);
       /**
-       * Handle the result if result status is OK
+       * Handle the result if the result status is OK
        */
       if (result.status === 'OK' && result.data !== undefined) {
         navigation.navigate(Screens.PLAIN_DATA_RESULT, {

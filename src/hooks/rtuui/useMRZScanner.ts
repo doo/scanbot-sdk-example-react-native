@@ -54,7 +54,7 @@ export function useMRZScanner() {
 
       const result = await startMRZScanner(configuration);
       /**
-       * Handle the result if result status is OK
+       * Handle the result if the result status is OK
        */
       if (result.status === 'OK' && result.data !== undefined) {
         navigation.navigate(Screens.MRZ_RESULT, {

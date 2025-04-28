@@ -27,9 +27,9 @@ async function startScanning() {
     /** Customize the status user guidance background */
     scanStatusUserGuidance.background.fillColor = '#C8193C';
     /** Start the Credit Card Scanner **/
-    const textPatternResult = await startCreditCardScanner(configuration);
+    const creditCardResult = await startCreditCardScanner(configuration);
     /** Handle the result if the status is 'OK' */
-    if (textPatternResult.status === 'OK') {
+    if (creditCardResult.status === 'OK') {
     }
   } catch (e: any) {
     console.error(e.message);
