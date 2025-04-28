@@ -72,7 +72,10 @@ export function HomeScreen() {
           onPress={onMultiplePageScanning}
           title={'Multi Page Scanning'}
         />
-        <FeatureItem title={'Pick from gallery'} onPress={onCreateDocument} />
+        <FeatureItem
+          title={'Create Document from Image'}
+          onPress={onCreateDocument}
+        />
         <FeatureItem
           title={'Document Scanner View (Classic UI)'}
           onPress={() => navigation.navigate(Screens.DOCUMENT_SCANNER_VIEW)}
