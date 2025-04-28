@@ -38,7 +38,7 @@ export function useCheckScanner() {
         /**
          * Handle the result if the result status is OK
          */
-        if (result.status === 'OK' && result.data) {
+        if (result.status === 'OK') {
           const checkScannerNavigationObject = await result.data.serialize();
 
           navigation.navigate(Screens.CHECK_SCANNER_RESULT, {

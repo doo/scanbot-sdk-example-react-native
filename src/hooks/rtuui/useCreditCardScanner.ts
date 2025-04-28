@@ -52,7 +52,7 @@ export function useCreditCardScanner() {
       /**
        * Handle the result if the result status is OK
        */
-      if (result.status === 'OK' && result.data) {
+      if (result.status === 'OK') {
         navigation.navigate(Screens.CREDIT_CARD_RESULT, {card: result.data});
       }
     } catch (e: any) {

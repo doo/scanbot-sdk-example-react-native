@@ -34,7 +34,7 @@ export function useEHICScanner() {
       /**
        * Handle the result if the result status is OK
        */
-      if (result.status === 'OK' && result.data !== undefined) {
+      if (result.status === 'OK') {
         navigation.navigate(Screens.PLAIN_DATA_RESULT, {
           data: result.data.fields.map(field => ({
             key: field.type,

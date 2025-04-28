@@ -37,7 +37,7 @@ export function useDocumentDataExtractor() {
         /**
          * Handle the result if the result status is OK
          */
-        if (result.status === 'OK' && result.data) {
+        if (result.status === 'OK') {
           const navigationObject = await Promise.all(
             result.data.map(document => document.serialize()),
           );

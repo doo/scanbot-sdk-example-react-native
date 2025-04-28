@@ -26,7 +26,7 @@ export function useVinScanner() {
       /**
        * Handle the result if the result status is OK
        */
-      if (result.status === 'OK' && result.data !== undefined) {
+      if (result.status === 'OK') {
         if (result.data.barcodeResult.extractedVIN) {
           resultMessageAlert(
             `Extracted Barcode VIN: ${result.data.barcodeResult.extractedVIN}`,
