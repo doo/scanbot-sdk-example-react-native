@@ -38,7 +38,7 @@ export function useTextPatternScanner() {
       /**
        * Handle the result if the result status is OK
        */
-      if (result.status === 'OK' && result.data) {
+      if (result.status === 'OK') {
         resultMessageAlert(
           `${result.data.rawText} : ${result.data.confidence}%`,
         );

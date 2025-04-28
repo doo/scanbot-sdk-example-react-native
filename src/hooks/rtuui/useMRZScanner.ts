@@ -56,7 +56,7 @@ export function useMRZScanner() {
       /**
        * Handle the result if the result status is OK
        */
-      if (result.status === 'OK' && result.data !== undefined) {
+      if (result.status === 'OK') {
         navigation.navigate(Screens.MRZ_RESULT, {
           mrz: new MrzScannerResult({
             document: result.data.mrzDocument,

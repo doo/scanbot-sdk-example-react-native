@@ -72,7 +72,7 @@ export function useSinglePageScanningWithFinder() {
       /**
        * Handle the result if the result status is OK
        */
-      if (documentResult.status === 'OK' && documentResult.data !== undefined) {
+      if (documentResult.status === 'OK') {
         setDocument(documentResult.data);
         navigation.navigate(Screens.DOCUMENT_RESULT);
       }
