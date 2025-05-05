@@ -10,6 +10,6 @@ export async function checkLicense(): Promise<boolean> {
     return true;
   }
 
-  errorMessageAlert(info.licenseStatus ?? 'License is not valid');
+  errorMessageAlert(info.licenseStatusMessage ?? 'License is not valid');
   return false;
 }
