@@ -15,7 +15,7 @@
   },
   "packageManager": "yarn@3.6.4",
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "dependencies": {
     "@react-native-documents/picker": "^10.1.2",
@@ -26,7 +26,7 @@
     "react-native-fs": "2.20.0",
     "react-native-image-picker": "^8.2.0",
     "react-native-safe-area-context": "^5.4.0",
-    "react-native-scanbot-sdk": "6.2.1",
+    "react-native-scanbot-sdk": "7.0.0-rc.1",
     "react-native-screens": "^4.10.0",
     "react-native-share": "^12.0.3"
   },
