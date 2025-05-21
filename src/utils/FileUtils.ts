@@ -24,17 +24,17 @@ export async function selectPDFFileUri(): Promise<string | undefined> {
   } catch (e) {
     if (isErrorWithCode(e)) {
       switch (e.code) {
-        case errorCodes.OPERATION_CANCELED:
-          return undefined;
         case errorCodes.UNABLE_TO_OPEN_FILE_TYPE: {
           infoMessageAlert('Unable to open file');
-          return undefined;
+          break;
         }
         case errorCodes.IN_PROGRESS: {
           infoMessageAlert(e.message);
-          return undefined;
+          break;
         }
       }
     }
+
+    return undefined;
   }
 }

@@ -11,7 +11,7 @@ import {useNavigation} from '@react-navigation/native';
 
 import ScanbotSDK, {
   autorelease,
-  CheckScannerConfiguration,
+  CheckScannerConfiguration, ToJsonConfiguration,
 } from 'react-native-scanbot-sdk';
 
 export function useRecognizeCheck() {
@@ -36,17 +36,32 @@ export function useRecognizeCheck() {
       if (!selectedImage) {
         return;
       }
-      /**
-       * Recognize Check on the selected image and
-       * Handle the result by navigating to Screens.CHECK_SCANNER_RESULT
-       */
+
+      /** An autorelease pool is required because the result object contains image references. */
       await autorelease(async () => {
+        /**
+         * Recognize Check on the selected image and
+         * Handle the result by navigating to Screens.CHECK_SCANNER_RESULT
+         */
         const result = await ScanbotSDK.recognizeCheck({
           imageFileUri: selectedImage,
-          configuration: new CheckScannerConfiguration(),
+          configuration: new CheckScannerConfiguration({
+            documentDetectionMode: 'DETECT_AND_CROP_DOCUMENT',
+          }),
         });
 
-        const navigationCheckObject = await result.serialize();
+        /**
+         * The check is serialized for use in navigation parameters.
+         *
+         * By default, images are serialized as references.
+         * When using image references, it's important to manage memory correctly.
+         * Ensure image references are released appropriately by using an autorelease pool.
+         */
+        const navigationCheckObject = await result.serialize(
+          new ToJsonConfiguration({
+            imageSerializationMode: 'BUFFER',
+          }),
+        );
 
         navigation.navigate(Screens.CHECK_SCANNER_RESULT, {
           check: navigationCheckObject,

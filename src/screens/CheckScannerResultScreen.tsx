@@ -5,13 +5,11 @@ import {
   GenericDocumentResult,
   ResultContainer,
   ResultFieldRow,
-  ResultHeader,
   ResultImage,
 } from '@components';
 import {
   autorelease,
   CheckScanningResult,
-  EncodeImageOptions,
 } from 'react-native-scanbot-sdk';
 
 const CheckDocument = ({
@@ -100,11 +98,18 @@ export function CheckScannerResultScreen() {
   const [image, setImage] = useState<string>();
 
   useEffect(() => {
-    autorelease(async () => {
+    /**
+     * Since the result contains an image reference, an autorelease pool is required to manage memory correctly.
+     * Referencing the image allows flexibility:
+     *  * The image can be encoded (e.g., as a base64 buffer),
+     *  * The image can be saved on disk.
+     *  * Information about the image can be extracted,
+     * In this example, the image reference has already been encoded as a base64 buffer.
+     */
+    autorelease(() => {
       const result = new CheckScanningResult(route.params.check);
-      const imageData = await result.croppedImage?.encodeImage(
-        new EncodeImageOptions(),
-      );
+      const imageData = result.croppedImage?.buffer;
+
       if (imageData) {
         setImage(`data:image/jpeg;base64,${imageData}`);
       }
@@ -116,7 +121,6 @@ export function CheckScannerResultScreen() {
   return (
     <ResultContainer>
       <ResultImage imageUri={image} />
-      <ResultHeader title={'Check recognition'} />
       <ResultFieldRow title={'Check status'} value={checkResult?.status} />
       <CheckDocument checkScannerResult={checkResult} />
     </ResultContainer>

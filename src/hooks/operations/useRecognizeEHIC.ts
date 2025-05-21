@@ -36,10 +36,15 @@ export function useRecognizeEHIC() {
       if (!selectedImage) {
         return;
       }
+
+      const configuration = new EuropeanHealthInsuranceCardRecognizerConfiguration();
+      configuration.maxExpirationYear = 2100;
+      // Configure other parameters as needed.
+
       /** Recognize the health insurance card on the selected image */
       const result = await ScanbotSDK.recognizeEHIC({
         imageFileUri: selectedImage,
-        configuration: new EuropeanHealthInsuranceCardRecognizerConfiguration(),
+        configuration: configuration,
       });
       /**
        * Handle the result by navigating to the result screen

@@ -10,15 +10,17 @@ export function useLicenseInfo() {
        * Get the license info and display it as an Alert
        **/
       const info = await ScanbotSDK.getLicenseInfo();
+
+      const licenseMessage = info.licenseStatusMessage ?? `The license is ${info.isLicenseValid ? 'VALID' : 'NOT VALID'}`;
+
       const text =
-        `• The license is ${info.isLicenseValid ? 'VALID' : 'NOT VALID'}` +
+        `• ${licenseMessage}` +
         `\n\n• Expiration Date: ${
           info.licenseExpirationDate
             ? new Date(info.licenseExpirationDate)
             : 'N/A'
         }` +
-        `\n\n• Status: ${info.licenseStatus}` +
-        `\n\n• ${info.licenseStatusMessage}`;
+        `\n\n• Status: ${info.licenseStatus}`;
 
       infoMessageAlert(text);
     } catch (e: any) {

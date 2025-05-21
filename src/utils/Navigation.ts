@@ -2,11 +2,11 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RouteProp} from '@react-navigation/native';
 import {
   CheckScanningResult,
+  CreditCardScanningStatus,
   DocumentDataExtractionResult,
+  GenericDocument,
   MedicalCertificateScanningResult,
-  MrzScannerResult,
 } from 'react-native-scanbot-sdk';
-import {CreditCardScannerUiResult} from 'react-native-scanbot-sdk/ui_v2';
 
 export enum Screens {
   HOME = 'home',
@@ -47,8 +47,14 @@ export type PrimaryRoutesParamList = {
       ReturnType<MedicalCertificateScanningResult['serialize']>
     >;
   };
-  [Screens.MRZ_RESULT]: {mrz: MrzScannerResult};
-  [Screens.CREDIT_CARD_RESULT]: {card: CreditCardScannerUiResult};
+  [Screens.MRZ_RESULT]: {
+    mrzDocument: GenericDocument | null;
+    rawMRZ: string;
+  };
+  [Screens.CREDIT_CARD_RESULT]: {
+    creditCardDocument: GenericDocument | null;
+    recognitionStatus: CreditCardScanningStatus;
+  };
   [Screens.PLAIN_DATA_RESULT]: PlainDataResultParam;
   [Screens.DOCUMENT_RESULT]: undefined;
   [Screens.DOCUMENT_PAGE_RESULT]: {pageID: string};

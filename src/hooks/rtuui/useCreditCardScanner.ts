@@ -53,7 +53,10 @@ export function useCreditCardScanner() {
        * Handle the result if the result status is OK
        */
       if (result.status === 'OK') {
-        navigation.navigate(Screens.CREDIT_CARD_RESULT, {card: result.data});
+        navigation.navigate(Screens.CREDIT_CARD_RESULT, {
+          creditCardDocument: result.data.creditCard,
+          recognitionStatus: result.data.recognitionStatus,
+        });
       }
     } catch (e: any) {
       errorMessageAlert(e.message);

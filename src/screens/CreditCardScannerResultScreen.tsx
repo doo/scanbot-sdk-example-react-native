@@ -3,7 +3,6 @@ import {
   GenericDocumentResult,
   ResultContainer,
   ResultFieldRow,
-  ResultHeader,
 } from '@components';
 import {useRoute} from '@react-navigation/native';
 import {CreditCardResultScreenRouteProp} from '@utils';
@@ -48,12 +47,11 @@ export function CreditCardScannerResultScreen() {
 
   return (
     <ResultContainer>
-      <ResultHeader title={'Credit Card'} />
       <ResultFieldRow
         title={'Recognition status'}
-        value={params.card.recognitionStatus}
+        value={params.recognitionStatus}
       />
-      <CreditCardDocument creditCardDocument={params.card.creditCard} />
+      <CreditCardDocument creditCardDocument={params.creditCardDocument} />
     </ResultContainer>
   );
 }
