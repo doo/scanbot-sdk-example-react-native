@@ -8,7 +8,6 @@ import {useNavigation} from '@react-navigation/native';
 import {COLORS} from '@theme';
 import {useCallback} from 'react';
 
-import {MrzScannerResult} from 'react-native-scanbot-sdk';
 import {
   MrzScannerScreenConfiguration,
   startMRZScanner,
@@ -58,11 +57,8 @@ export function useMRZScanner() {
        */
       if (result.status === 'OK') {
         navigation.navigate(Screens.MRZ_RESULT, {
-          mrz: new MrzScannerResult({
-            document: result.data.mrzDocument,
-            rawMRZ: result.data.rawMRZ,
-            success: !!result.data.rawMRZ,
-          }),
+          mrzDocument: result.data.mrzDocument,
+          rawMRZ: result.data.rawMRZ,
         });
       }
     } catch (e: any) {

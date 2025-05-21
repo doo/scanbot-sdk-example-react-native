@@ -40,7 +40,7 @@ export function useTextPatternScanner() {
        */
       if (result.status === 'OK') {
         resultMessageAlert(
-          `${result.data.rawText} : ${result.data.confidence}%`,
+          `${result.data.rawText} : ${(result.data.confidence * 100).toFixed(0)}%`,
         );
       }
     } catch (e: any) {

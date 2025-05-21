@@ -18,8 +18,8 @@ export function PageImagePreview({
     async function loadDecryptedImageData() {
       try {
         setLoading(true);
-        if (page.documentImageURI != null) {
-          const result = await ScanbotSDK.getImageData(page.documentImageURI);
+        if (page.documentImagePreviewURI || page.originalImageURI) {
+          const result = await ScanbotSDK.getImageData(page.documentImagePreviewURI || page.originalImageURI);
           const imgMimeType =
             IMAGE_FILE_FORMAT === 'JPG' ? 'image/jpeg' : 'image/png';
           setUri(`data:${imgMimeType};base64,${result.base64ImageData}`);
@@ -36,9 +36,9 @@ export function PageImagePreview({
       // as base64 from SDK. The SDK decrypts the image data under the hood.
       loadDecryptedImageData();
     } else {
-      setUri(`${page.documentImageURI}?=${Date.now()}`);
+      setUri(`${page.documentImagePreviewURI || page.originalImageURI}?=${Date.now()}`);
     }
-  }, [page.documentImageURI, setLoading]);
+  }, [page.documentImagePreviewURI, page.originalImageURI, setLoading]);
 
   const pageImageKey = useMemo(() => {
     return `${page?.uuid}_${Date.now()}`;

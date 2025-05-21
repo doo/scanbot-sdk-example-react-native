@@ -97,7 +97,7 @@ export function HomeScreen() {
         />
         <FeatureItem
           onPress={onDocumentDataExtractor}
-          title={'Extract Document Data Extractor'}
+          title={'Document Data Extractor'}
         />
 
         <FeatureHeader title={'DATA DETECTORS ON IMAGES'} />

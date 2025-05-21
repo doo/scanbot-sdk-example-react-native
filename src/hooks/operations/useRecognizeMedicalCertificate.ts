@@ -53,6 +53,7 @@ export function useRecognizeMedicalCertificate() {
         return;
       }
 
+      /* An autorelease pool is required because the result object may contain image references. */
       await autorelease(async () => {
         /**
          * Recognize Medical Certificate on the selected image and
@@ -65,11 +66,22 @@ export function useRecognizeMedicalCertificate() {
           }),
         });
 
-        const medicalCertificateNavigationObject = await result.serialize();
+        if (result.scanningSuccessful) {
+          /**
+           * The medical certificate is serialized for use in navigation parameters.
+           *
+           * By default, images are serialized as references.
+           * When using image references, it's important to manage memory correctly.
+           * Ensure image references are released appropriately by using an autorelease pool.
+           */
+          const medicalCertificateNavigationObject = await result.serialize();
 
-        navigation.navigate(Screens.MEDICAL_CERTIFICATE_RESULT, {
-          certificate: medicalCertificateNavigationObject,
-        });
+          navigation.navigate(Screens.MEDICAL_CERTIFICATE_RESULT, {
+            certificate: medicalCertificateNavigationObject,
+          });
+        } else {
+          infoMessageAlert('No medical certificate detected');
+        }
       });
     } catch (e: any) {
       errorMessageAlert(e.message);

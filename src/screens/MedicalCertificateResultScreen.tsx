@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {
   autorelease,
-  EncodeImageOptions,
-  MedicalCertificateScanningResult,
-  MedicalCertificatePatientInfoBox,
-  MedicalCertificateDateRecord,
   MedicalCertificateCheckBox,
+  MedicalCertificateDateRecord,
+  MedicalCertificatePatientInfoBox,
+  MedicalCertificateScanningResult,
 } from 'react-native-scanbot-sdk';
 import {useRoute} from '@react-navigation/native';
 import {MedicalCertificateResultScreenRouteProp} from '@utils';
@@ -24,13 +23,20 @@ export function MedicalCertificateResultScreen() {
   const [image, setImage] = useState<string>();
 
   useEffect(() => {
+    /**
+     * Since the result contains an image reference, an autorelease pool is required to manage memory correctly.
+     * Referencing the image allows flexibility:
+     *  * The image can be encoded (e.g., as a base64 buffer),
+     *  * The image can be saved on disk.
+     *  * Information about the image can be extracted,
+     * In this example, we encode the image as a base64 buffer.
+     */
     autorelease(async () => {
       const result = new MedicalCertificateScanningResult(
         route.params.certificate,
       );
-      const imageData = await result.croppedImage?.encodeImage(
-        new EncodeImageOptions(),
-      );
+      const imageData = await result.croppedImage?.encodeImage();
+
       if (imageData) {
         setImage(`data:image/jpeg;base64,${imageData}`);
       }

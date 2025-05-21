@@ -52,6 +52,8 @@ export function useDocumentDataExtractorOnImage() {
        * Extract document data on the selected image
        * Add the desired document types that data extraction should be done
        * Handle the result by navigating to Screens.DOCUMENT_DATA_EXTRACTOR_RESULT
+       *
+       * An autorelease pool is required because the result object may contain image references.
        */
       await autorelease(async () => {
         const result = await ScanbotSDK.documentDataExtractor({
@@ -76,13 +78,20 @@ export function useDocumentDataExtractorOnImage() {
           }),
         });
         if (result.document) {
+          /**
+           * The extracted document is serialized for use in navigation parameters.
+           *
+           * By default, images are serialized as references.
+           * If the destination screen does not require image data, you can disable image serialization
+           * by passing the optional flag.
+           */
           const navigationObject = await result.serialize();
 
           navigation.navigate(Screens.DOCUMENT_DATA_EXTRACTOR_RESULT, {
             documents: [navigationObject],
           });
         } else {
-          infoMessageAlert('No recognized document found.');
+          infoMessageAlert('No document detected');
         }
       });
     } catch (e: any) {

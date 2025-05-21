@@ -36,7 +36,9 @@ export function useDocumentQualityAnalyzer() {
       // Detect document quality on a selected image
       const result = await ScanbotSDK.documentQualityAnalyzer({
         imageFileUri: selectedImage,
-        configuration: new DocumentQualityAnalyzerConfiguration(),
+        configuration: new DocumentQualityAnalyzerConfiguration({
+          maxImageSize: 2100,
+        }),
       });
       /**
        * Handle the result by displaying an alert

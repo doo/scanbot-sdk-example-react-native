@@ -5,7 +5,6 @@ import {
   GenericDocumentResult,
   ResultContainer,
   ResultFieldRow,
-  ResultHeader,
 } from '@components';
 import {GenericDocument} from 'react-native-scanbot-sdk';
 
@@ -42,9 +41,8 @@ export function MrzResultScreen() {
 
   return (
     <ResultContainer>
-      <ResultHeader title={'MRZ'} />
-      <ResultFieldRow title={'Raw MRZ string'} value={params.mrz.rawMRZ} />
-      <MRZDocument mrzDocument={params.mrz.document} />
+      <ResultFieldRow title={'Raw MRZ string'} value={params.rawMRZ} />
+      <MRZDocument mrzDocument={params.mrzDocument} />
     </ResultContainer>
   );
 }

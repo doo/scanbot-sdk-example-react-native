@@ -12,7 +12,6 @@ import ScanbotSDK, {
   CreditCardScannerConfiguration,
 } from 'react-native-scanbot-sdk';
 import {useNavigation} from '@react-navigation/native';
-import {CreditCardScannerUiResult} from 'react-native-scanbot-sdk/ui_v2';
 
 export function useRecognizeCreditCard() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -36,23 +35,26 @@ export function useRecognizeCreditCard() {
       if (!selectedImage) {
         return;
       }
+
+      const configuration = new CreditCardScannerConfiguration();
+      configuration.requireCardholderName = true;
+      // Configure other parameters as needed.
+
       /**
        * Recognize Credit card on the selected image and
        * Handle the result by navigating to Screens.CREDIT_CARD_RESULT
        */
       const result = await ScanbotSDK.recognizeCreditCard({
         imageFileUri: selectedImage,
-        configuration: new CreditCardScannerConfiguration(),
+        configuration: configuration,
       });
 
       /**
        * Handle the result if the result status is OK
        */
       navigation.navigate(Screens.CREDIT_CARD_RESULT, {
-        card: new CreditCardScannerUiResult({
-          creditCard: result.creditCard,
-          recognitionStatus: result.scanningStatus,
-        }),
+        creditCardDocument: result.creditCard,
+        recognitionStatus: result.scanningStatus,
       });
     } catch (e: any) {
       errorMessageAlert(e.message);
