@@ -17,7 +17,6 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {PrimaryRouteNavigationProp, Screens} from '@utils';
 import {useAddDocumentPage, useContinueDocumentScanning} from '@hooks';
-import {PageData} from 'react-native-scanbot-sdk';
 import {DocumentContext} from '@context';
 
 const GALLERY_CELL_PADDING = 20;
@@ -49,11 +48,11 @@ export function DocumentResultScreen() {
   }, [document, addDocumentPage]);
 
   const onPagePress = useCallback(
-    (page: PageData) => {
+    (pageID: string) => {
       return function () {
         if (document !== undefined) {
           navigation.navigate(Screens.DOCUMENT_PAGE_RESULT, {
-            pageID: page.uuid,
+            pageID: pageID,
           });
         }
       };
@@ -74,9 +73,9 @@ export function DocumentResultScreen() {
       <ScrollView>
         <View style={styles.gallery}>
           {document.pages.map(page => (
-            <TouchableOpacity key={page.uuid} onPress={onPagePress(page)}>
+            <TouchableOpacity key={page.uuid} onPress={onPagePress(page.uuid)}>
               <PageImagePreview
-                page={page}
+                pageID={page.uuid}
                 style={[
                   styles.galleryCell,
                   {

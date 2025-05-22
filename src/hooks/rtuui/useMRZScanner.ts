@@ -1,4 +1,3 @@
-import {Platform} from 'react-native';
 import {
   checkLicense,
   errorMessageAlert,
@@ -6,9 +5,14 @@ import {
   Screens,
 } from '@utils';
 import {useNavigation} from '@react-navigation/native';
+import {COLORS} from '@theme';
 import {useCallback} from 'react';
 
-import ScanbotSDK, {MrzScannerConfiguration} from 'react-native-scanbot-sdk';
+import {
+  MrzScannerScreenConfiguration,
+  startMRZScanner,
+  StyledText,
+} from 'react-native-scanbot-sdk/ui_v2';
 
 export function useMRZScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -26,22 +30,36 @@ export function useMRZScanner() {
        * Create the machine-readable zone scanner configuration object and
        * start the machine-readable zone scanner with the configuration
        */
-      let config: MrzScannerConfiguration = {
-        finderTextHint:
-          'Please hold your phone over the 2- or 3-line MRZ code at the front of your passport.',
-      };
-      if (Platform.OS === 'ios') {
-        config.finderAspectRatio = {
-          width: 0.9,
-          height: 0.18,
-        };
-      }
-      const result = await ScanbotSDK.UI.startMrzScanner(config);
+      const configuration = new MrzScannerScreenConfiguration();
+
+      // Set colors
+      configuration.palette.sbColorPrimary = COLORS.SCANBOT_RED;
+      configuration.palette.sbColorOnPrimary = '#ffffff';
+
+      // Add a top guidance title
+      configuration.topUserGuidance.title = new StyledText({
+        text: 'Scan MRZ',
+        color: COLORS.SCANBOT_RED,
+        useShadow: true,
+      });
+
+      // Modify the action bar
+      configuration.actionBar.flipCameraButton.visible = false;
+      configuration.actionBar.flashButton.activeForegroundColor =
+        COLORS.SCANBOT_RED;
+
+      // Configure the scanner
+      configuration.scannerConfiguration.incompleteResultHandling = 'ACCEPT';
+
+      const result = await startMRZScanner(configuration);
       /**
-       * Handle the result if result status is OK
+       * Handle the result if the result status is OK
        */
       if (result.status === 'OK') {
-        navigation.navigate(Screens.MRZ_RESULT, result);
+        navigation.navigate(Screens.MRZ_RESULT, {
+          mrzDocument: result.data.mrzDocument,
+          rawMRZ: result.data.rawMRZ,
+        });
       }
     } catch (e: any) {
       errorMessageAlert(e.message);

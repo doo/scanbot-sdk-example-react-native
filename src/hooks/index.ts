@@ -1,13 +1,13 @@
 import {useLicenseValidityCheckWrapper} from './useLicenseValidityCheck';
 
-import {useCheckRecognizer} from './rtuui/useCheckRecognizer';
+import {useCheckScanner} from './rtuui/useCheckScanner.ts';
 import {useEHICScanner} from './rtuui/useEHICScanner';
-import {useGenericDocumentScanner} from './rtuui/useGenericDocumentScanner';
-import {useLicensePlateScanner} from './rtuui/useLicensePlateScanner';
 import {useMedicalCertificateScanner} from './rtuui/useMedicalCertificateScanner';
-import {useTextDataScanner} from './rtuui/useTextDataScanner';
 import {useVinScanner} from './rtuui/useVinScanner';
 import {useMRZScanner} from './rtuui/useMRZScanner';
+import {useCreditCardScanner} from './rtuui/useCreditCardScanner.ts';
+import {useTextPatternScanner} from './rtuui/useTextPatternScanner.ts';
+import {useDocumentDataExtractor} from './rtuui/useDocumentDataExtractor.ts';
 
 import {useSinglePageScanning} from './rtuui/document/useSinglePageScanning.ts';
 import {useSinglePageScanningWithFinder} from './rtuui/document/useSinglePageScanningWithFinder.ts';
@@ -18,13 +18,15 @@ import {useCropDocumentPage} from './rtuui/document/useCropDocumentPage.ts';
 import {useLicenseInfo} from './operations/useLicenseInfo';
 import {useOCRConfigs} from './operations/useOCRConfigs';
 import {usePerformOCR} from './operations/usePerformOCR';
+import {useCleanup} from './operations/useCleanup';
+
+import {useDocumentQualityAnalyzer} from './operations/useDocumentQualityAnalyzer';
 import {useRecognizeCheck} from './operations/useRecognizeCheck';
 import {useRecognizeMRZ} from './operations/useRecognizeMRZ';
-import {useCleanup} from './operations/useCleanup';
 import {useRecognizeEHIC} from './operations/useRecognizeEHIC';
-import {useRecognizeGenericDocument} from './operations/useRecognizeGenericDocument';
+import {useDocumentDataExtractorOnImage} from './operations/useDocumentDataExtractorOnImage.ts';
 import {useRecognizeMedicalCertificate} from './operations/useRecognizeMedicalCertificate';
-import {useDocumentQualityAnalyzer} from './operations/useDocumentQualityAnalyzer';
+import {useRecognizeCreditCard} from './operations/useRecognizeCreditCard.ts';
 
 import {useAddDocumentPage} from './operations/document/useAddDocumentPage.ts';
 import {useCreateDocumentPDF} from './operations/document/useCreateDocumentPDF.ts';
@@ -35,14 +37,14 @@ import {useRemovePage} from './operations/document/useRemovePage.ts';
 
 export {
   useLicenseValidityCheckWrapper,
-  useCheckRecognizer,
+  useCheckScanner,
   useEHICScanner,
-  useGenericDocumentScanner,
+  useCreditCardScanner,
+  useTextPatternScanner,
   useMRZScanner,
-  useLicensePlateScanner,
   useMedicalCertificateScanner,
-  useTextDataScanner,
   useVinScanner,
+  useDocumentDataExtractor,
   useLicenseInfo,
   useOCRConfigs,
   usePerformOCR,
@@ -50,8 +52,9 @@ export {
   useRecognizeMRZ,
   useCleanup,
   useRecognizeEHIC,
-  useRecognizeGenericDocument,
+  useDocumentDataExtractorOnImage,
   useRecognizeMedicalCertificate,
+  useRecognizeCreditCard,
   useDocumentQualityAnalyzer,
   useSinglePageScanning,
   useSinglePageScanningWithFinder,

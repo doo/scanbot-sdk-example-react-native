@@ -10,10 +10,10 @@ import {DocumentContext} from '@context';
 import {COLORS} from '@theme';
 
 import {
-  AspectRatio,
   DocumentScanningFlow,
   startDocumentScanner,
 } from 'react-native-scanbot-sdk/ui_v2';
+import {AspectRatio} from 'react-native-scanbot-sdk';
 
 export function useSinglePageScanningWithFinder() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -33,7 +33,7 @@ export function useSinglePageScanningWithFinder() {
        * start the document scanner with the configuration
        */
       const configuration = new DocumentScanningFlow();
-      // Disable the multiple page behavior
+      // Disable the multiple-page behavior
       configuration.outputSettings.pagesScanLimit = 1;
 
       // Enable view finder
@@ -50,7 +50,7 @@ export function useSinglePageScanningWithFinder() {
       configuration.screens.camera.cameraConfiguration.autoSnappingEnabled =
         true;
 
-      // Hide the auto snapping enable/disable button
+      // Hide the auto-snapping enable/disable button
       configuration.screens.camera.bottomBar.autoSnappingModeButton.visible =
         false;
       configuration.screens.camera.bottomBar.manualSnappingModeButton.visible =
@@ -70,10 +70,10 @@ export function useSinglePageScanningWithFinder() {
 
       const documentResult = await startDocumentScanner(configuration);
       /**
-       * Handle the result if result status is OK
+       * Handle the result if the result status is OK
        */
       if (documentResult.status === 'OK') {
-        setDocument(documentResult);
+        setDocument(documentResult.data);
         navigation.navigate(Screens.DOCUMENT_RESULT);
       }
     } catch (e: any) {

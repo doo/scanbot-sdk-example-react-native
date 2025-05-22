@@ -7,15 +7,15 @@ export function ResultImage({imageUri}: {imageUri: string | undefined}) {
     return null;
   }
 
-  return <PreviewImage imageUri={imageUri} style={styles.image} />;
+  return <PreviewImage imageSource={imageUri} style={styles.image} />;
 }
 
 const styles = StyleSheet.create({
   image: {
-    flex: 1,
-    height: 150,
+    width: '100%',
+    height: 260,
     resizeMode: 'contain',
     backgroundColor: '#222222',
-    margin: 16,
+    paddingHorizontal: 12,
   },
 });

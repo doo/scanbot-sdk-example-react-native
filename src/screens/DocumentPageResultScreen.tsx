@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useMemo, useState} from 'react';
+import React, {useCallback, useContext, useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import {BottomActionBar, ImageFilterModal, PageImagePreview} from '@components';
 import {ParametricFilter} from 'react-native-scanbot-sdk';
@@ -17,11 +17,6 @@ export function DocumentPageResultScreen() {
   const cropDocumentPage = useCropDocumentPage();
   const modifyPage = useModifyPage();
   const removePage = useRemovePage();
-
-  const page = useMemo(
-    () => document?.pages.find(p => p.uuid === pageID),
-    [document?.pages, pageID],
-  );
 
   const onCropAndRotate = useCallback(async () => {
     if (document?.uuid !== undefined) {
@@ -60,13 +55,9 @@ export function DocumentPageResultScreen() {
     removePageConfirmationAlert(onRemovePage);
   }, [onRemovePage]);
 
-  if (!page) {
-    return null;
-  }
-
   return (
     <SafeAreaView style={styles.container}>
-      <PageImagePreview page={page} style={styles.imageDetails} />
+      <PageImagePreview pageID={pageID} style={styles.imageDetails} />
       <BottomActionBar
         buttonOneTitle={'CROP & ROTATE'}
         buttonTwoTitle={'FILTER'}

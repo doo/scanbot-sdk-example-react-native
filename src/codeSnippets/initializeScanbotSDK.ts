@@ -24,7 +24,7 @@ async function initializeScanbotSDK() {
       enableNativeLogging: false,
       storageImageFormat: IMAGE_FILE_FORMAT,
       storageImageQuality: 80,
-      documentDetectorMode: 'ML_BASED',
+      documentScannerEngineMode: 'ML',
       allowGpuAcceleration: true,
       allowXnnpackAcceleration: true,
     } as const;

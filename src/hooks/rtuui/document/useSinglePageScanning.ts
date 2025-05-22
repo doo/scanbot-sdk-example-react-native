@@ -7,9 +7,9 @@ import {
 } from '@utils';
 import {
   DocumentScanningFlow,
-  startDocumentScanner,
   PageSnapCheckMarkAnimation,
   PageSnapFunnelAnimation,
+  startDocumentScanner,
 } from 'react-native-scanbot-sdk/ui_v2';
 import {useNavigation} from '@react-navigation/native';
 import {DocumentContext} from '@context';
@@ -33,7 +33,7 @@ export function useSinglePageScanning() {
        * start the document scanner with the configuration
        */
       const configuration = new DocumentScanningFlow();
-      // Disable the multiple page behavior
+      // Disable the multiple-page behavior
       configuration.outputSettings.pagesScanLimit = 1;
       // Enable/Disable the review screen.
       configuration.screens.review.enabled = false;
@@ -53,7 +53,7 @@ export function useSinglePageScanning() {
       configuration.screens.camera.captureFeedback.snapFeedbackMode =
         new PageSnapCheckMarkAnimation({});
 
-      // Hide the auto snapping enable/disable button
+      // Hide the auto-snapping enable/disable button
       configuration.screens.camera.bottomBar.autoSnappingModeButton.visible =
         false;
       configuration.screens.camera.bottomBar.manualSnappingModeButton.visible =
@@ -77,10 +77,10 @@ export function useSinglePageScanning() {
 
       const documentResult = await startDocumentScanner(configuration);
       /**
-       * Handle the result if result status is OK
+       * Handle the result if the result status is OK
        */
       if (documentResult.status === 'OK') {
-        setDocument(documentResult);
+        setDocument(documentResult.data);
         navigation.navigate(Screens.DOCUMENT_RESULT);
       }
     } catch (e: any) {

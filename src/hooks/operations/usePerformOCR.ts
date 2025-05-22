@@ -27,14 +27,14 @@ export function usePerformOCR() {
       }
       /**
        * Select an image from the Image Library
-       * Return early if no image is selected or there is an issue selecting an image
+       * Return early if no image is selected, or there is an issue selecting an image
        **/
       const selectedImages = await selectImagesFromLibrary();
       if (!selectedImages) {
         return;
       }
       /**
-       * Perform optical character recognition with provided configuration and
+       * Perform optical character recognition with the provided configuration and
        * Display the result
        */
       const result = await ScanbotSDK.performOCR({
@@ -44,9 +44,11 @@ export function usePerformOCR() {
         },
       });
       /**
-       * Handle the result by navigating to result screen
+       * Handle the result by navigating to the result screen
        */
-      navigation.navigate(Screens.PLAIN_DATA_RESULT, {data: result.plainText});
+      navigation.navigate(Screens.PLAIN_DATA_RESULT, {
+        data: result.plainText,
+      });
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {

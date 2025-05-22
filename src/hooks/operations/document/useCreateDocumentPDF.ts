@@ -3,7 +3,10 @@ import {ActivityIndicatorContext} from '@context';
 import {checkLicense, errorMessageAlert} from '@utils';
 import Share from 'react-native-share';
 
-import ScanbotSDK, {OCRConfiguration} from 'react-native-scanbot-sdk';
+import ScanbotSDK, {
+  OCRConfiguration,
+  PdfConfiguration,
+} from 'react-native-scanbot-sdk';
 
 export function useCreateDocumentPDF() {
   const {setLoading} = useContext(ActivityIndicatorContext);
@@ -30,11 +33,8 @@ export function useCreateDocumentPDF() {
 
         const result = await ScanbotSDK.Document.createPDF({
           documentID: documentID,
-          options: {
-            pageSize: 'A4',
-            pageDirection: 'PORTRAIT',
-            ocrConfiguration: ocrConfiguration,
-          },
+          pdfConfiguration: new PdfConfiguration(),
+          ocrConfiguration: ocrConfiguration,
         });
         /**
          * Handle the result by displaying an action sheet
