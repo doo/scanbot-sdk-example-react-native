@@ -8,7 +8,6 @@ import {
   ResultImage,
 } from '@components';
 import {
-  autorelease,
   CheckScanningResult,
 } from 'react-native-scanbot-sdk';
 
@@ -99,23 +98,16 @@ export function CheckScannerResultScreen() {
 
   useEffect(() => {
     /**
-     * Since the result contains an image reference, an autorelease pool is required to manage memory correctly.
-     * Referencing the image allows flexibility:
-     *  * The image can be encoded (e.g., as a base64 buffer),
-     *  * The image can be saved on disk.
-     *  * Information about the image can be extracted,
-     * In this example, the image reference has already been encoded as a base64 buffer.
+     * In this example, the image reference has already been serialized as a base64 buffer, therefore we don't need autorelease pool.
      */
-    autorelease(() => {
-      const result = new CheckScanningResult(route.params.check);
-      const imageData = result.croppedImage?.buffer;
+    const result = new CheckScanningResult(route.params.check);
+    const imageData = result.croppedImage?.buffer;
 
-      if (imageData) {
-        setImage(`data:image/jpeg;base64,${imageData}`);
-      }
+    if (imageData) {
+      setImage(`data:image/jpeg;base64,${imageData}`);
+    }
 
-      setCheckResult(result);
-    });
+    setCheckResult(result);
   }, [route.params.check]);
 
   return (
