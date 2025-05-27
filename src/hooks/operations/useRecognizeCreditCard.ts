@@ -37,7 +37,7 @@ export function useRecognizeCreditCard() {
       }
 
       const configuration = new CreditCardScannerConfiguration();
-      configuration.requireCardholderName = true;
+      configuration.scanningMode = 'SINGLE_SHOT';
       // Configure other parameters as needed.
 
       /**
