@@ -10,6 +10,7 @@ import {useCallback} from 'react';
 import ScanbotSDK, {
   autorelease,
   DocumentDataExtractorScreenConfiguration,
+  ToJsonConfiguration,
 } from 'react-native-scanbot-sdk';
 
 export function useDocumentDataExtractor() {
@@ -47,7 +48,9 @@ export function useDocumentDataExtractor() {
            * by passing the optional flag.
            */
           const navigationObject = await Promise.all(
-            result.data.map(document => document.serialize()),
+            result.data.map(document => document.serialize(new ToJsonConfiguration({
+              serializeImages: false,
+            }))),
           );
 
           navigation.navigate(Screens.DOCUMENT_DATA_EXTRACTOR_RESULT, {

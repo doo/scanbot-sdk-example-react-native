@@ -19,17 +19,15 @@ export function DocumentDataExtractorResultScreen() {
   );
 
   useEffect(() => {
-    autorelease(() => {
-      try {
-        if (params.documents !== undefined) {
-          setDocuments(
-            params.documents.map(d => new DocumentDataExtractionResult(d)),
-          );
-        }
-      } catch (e) {
-        console.error(e);
+    try {
+      if (params.documents !== undefined) {
+        setDocuments(
+          params.documents.map(d => new DocumentDataExtractionResult(d)),
+        );
       }
-    });
+    } catch (e) {
+      console.error(e);
+    }
   }, [params.documents]);
 
   if (!(params.documents.length > 0)) {

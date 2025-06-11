@@ -24,6 +24,7 @@ import ScanbotSDK, {
   DocumentDataExtractorConfiguration,
   EuropeanHealthInsuranceCardDocumentType,
   MRZDocumentType,
+  ToJsonConfiguration,
 } from 'react-native-scanbot-sdk';
 
 export function useDocumentDataExtractorOnImage() {
@@ -85,7 +86,9 @@ export function useDocumentDataExtractorOnImage() {
            * If the destination screen does not require image data, you can disable image serialization
            * by passing the optional flag.
            */
-          const navigationObject = await result.serialize();
+          const navigationObject = await result.serialize(new ToJsonConfiguration({
+            serializeImages: false,
+          }));
 
           navigation.navigate(Screens.DOCUMENT_DATA_EXTRACTOR_RESULT, {
             documents: [navigationObject],
