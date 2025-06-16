@@ -1,10 +1,10 @@
 import ScanbotSDK, {
-  DocumentScannerConfiguration,
+  DocumentScannerScreenConfiguration,
 } from 'react-native-scanbot-sdk';
 
 async function documentScanner() {
-  const configuration: DocumentScannerConfiguration = {
-    ignoreBadAspectRatio: true,
+  const configuration: DocumentScannerScreenConfiguration = {
+    ignoreOrientationMismatch: true,
     autoSnappingSensitivity: 0.67,
     topBarBackgroundColor: '#ffffff',
     bottomBarBackgroundColor: '#ffffff',

@@ -64,7 +64,6 @@ export function DocumentScannerViewScreen() {
         onDocumentScannerResult={onDocumentResult}
         onDetectionResult={onDetectionResult}
         autoSnappingEnabled={true}
-        ignoreBadAspectRatio={true}
         flashEnabled={flashEnabled}
         finderEnabled={finderEnabled}
         finderLineColor={'#C8193C'}

@@ -3,7 +3,10 @@ import {ActivityIndicatorContext} from '@context';
 import {checkLicense, errorMessageAlert} from '@utils';
 import Share from 'react-native-share';
 
-import ScanbotSDK, {ScanbotBinarizationFilter} from 'react-native-scanbot-sdk';
+import ScanbotSDK, {
+  ScanbotBinarizationFilter,
+  TiffGeneratorParameters,
+} from 'react-native-scanbot-sdk';
 
 export function useCreateDocumentTIFF() {
   const {setLoading} = useContext(ActivityIndicatorContext);
@@ -24,13 +27,12 @@ export function useCreateDocumentTIFF() {
          */
         const result = await ScanbotSDK.Document.createTIFF({
           documentID,
-          options: {
+          configuration: new TiffGeneratorParameters({
             binarizationFilter: binarized
               ? new ScanbotBinarizationFilter()
               : undefined,
-            dpi: 300,
-            compression: binarized ? 'CCITT_T6' : 'ADOBE_DEFLATE', // optional compression
-          },
+            compression: binarized ? 'CCITT_T6' : 'ADOBE_DEFLATE',
+          }),
         });
         /**
          * Handle the result by displaying an action sheet

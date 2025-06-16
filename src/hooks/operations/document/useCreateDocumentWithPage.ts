@@ -27,7 +27,7 @@ export function useCreateDocumentWithPage() {
       }
       /**
        * Select an image from the Image Library
-       * Return early if no image is selected or there is an issue selecting an image
+       * Return early if no image is selected, or there is an issue selecting an image
        **/
       setLoading(true);
       const selectedImageResult = await selectImagesFromLibrary();

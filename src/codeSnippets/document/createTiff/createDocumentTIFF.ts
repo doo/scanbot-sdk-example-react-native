@@ -1,4 +1,7 @@
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import ScanbotSDK, {
+  ScanbotBinarizationFilter,
+  TiffGeneratorParameters,
+} from 'react-native-scanbot-sdk';
 
 async function createDocumentTIFF() {
   try {
@@ -9,9 +12,10 @@ async function createDocumentTIFF() {
     /** Create a TIFF file with the provided options */
     const tiffUriResult = await ScanbotSDK.Document.createTIFF({
       documentID: document.uuid,
-      options: {
+      configuration: new TiffGeneratorParameters({
+        binarizationFilter: new ScanbotBinarizationFilter(),
         dpi: 300,
-      },
+      }),
     });
     /** Handle the result */
   } catch (e: any) {

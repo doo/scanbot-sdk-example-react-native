@@ -2,17 +2,18 @@ import {useCallback, useContext} from 'react';
 import {
   checkLicense,
   errorMessageAlert,
-  infoMessageAlert,
   PrimaryRouteNavigationProp,
   Screens,
   selectImageFromLibrary,
 } from '@utils';
 import {ActivityIndicatorContext} from '@context';
+
+import ScanbotSDK, {
+  CreditCardScannerConfiguration,
+} from 'react-native-scanbot-sdk';
 import {useNavigation} from '@react-navigation/native';
 
-import ScanbotSDK from 'react-native-scanbot-sdk';
-
-export function useRecognizeGenericDocument() {
+export function useRecognizeCreditCard() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
   const {setLoading} = useContext(ActivityIndicatorContext);
 
@@ -28,28 +29,33 @@ export function useRecognizeGenericDocument() {
       }
       /**
        * Select an image from the Image Library
-       * Return early if no image is selected or there is an issue selecting an image
+       * Return early if no image is selected, or there is an issue selecting an image
        **/
       const selectedImage = await selectImageFromLibrary();
       if (!selectedImage) {
         return;
       }
+
+      const configuration = new CreditCardScannerConfiguration();
+      configuration.requireCardholderName = true;
+      // Configure other parameters as needed.
+
       /**
-       * Recognize Generic Document on the selected image and
-       * Handle the result by navigating to Screens.GENERIC_DOCUMENT_RESULT
+       * Recognize Credit card on the selected image and
+       * Handle the result by navigating to Screens.CREDIT_CARD_RESULT
        */
-      const result = await ScanbotSDK.recognizeGenericDocument({
+      const result = await ScanbotSDK.recognizeCreditCard({
         imageFileUri: selectedImage,
-        acceptedDocumentFormats: [],
+        configuration: configuration,
       });
 
-      if (result.document) {
-        navigation.navigate(Screens.GENERIC_DOCUMENT_RESULT, {
-          documents: [result.document],
-        });
-      } else {
-        infoMessageAlert('No recognized document found.');
-      }
+      /**
+       * Handle the result if the result status is OK
+       */
+      navigation.navigate(Screens.CREDIT_CARD_RESULT, {
+        creditCardDocument: result.creditCard,
+        recognitionStatus: result.scanningStatus,
+      });
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {

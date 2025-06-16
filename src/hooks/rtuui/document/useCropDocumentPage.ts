@@ -31,10 +31,10 @@ export function useCropDocumentPage() {
 
         const documentResult = await startCroppingScreen(configuration);
         /**
-         * Handle the result if result status is OK
+         * Handle the result if the result status is OK
          */
         if (documentResult.status === 'OK') {
-          setDocument(documentResult);
+          setDocument(documentResult.data);
         }
       } catch (e: any) {
         errorMessageAlert(e.message);

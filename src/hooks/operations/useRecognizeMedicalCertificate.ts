@@ -10,7 +10,10 @@ import {
 import {useCallback, useContext} from 'react';
 import {ActivityIndicatorContext} from '@context';
 
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import ScanbotSDK, {
+  autorelease,
+  MedicalCertificateScanningParameters,
+} from 'react-native-scanbot-sdk';
 
 export function useRecognizeMedicalCertificate() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -27,7 +30,7 @@ export function useRecognizeMedicalCertificate() {
         return;
       }
       /**
-       * Medical Certificate Recognizer requires OCR blobs.
+       * Medical Certificate Scanner requires OCR blobs.
        * If OCR blobs are not present or there is no 'de' language data, the scanner will fail
        * Return early if there are no installed languages
        */
@@ -49,19 +52,37 @@ export function useRecognizeMedicalCertificate() {
       if (!selectedImage) {
         return;
       }
-      /**
-       * Recognize Medical Certificate on the selected image and
-       * Handle the result by navigating to Screens.MEDICAL_CERTIFICATE_RESULT
-       */
-      const result = await ScanbotSDK.recognizeMedicalCertificate({
-        imageFileUri: selectedImage,
-        options: {
-          returnCroppedDocumentUri: true,
-          patientInfoRecognitionEnabled: true,
-          barcodeRecognitionEnabled: true,
-        },
+
+      /* An autorelease pool is required because the result object may contain image references. */
+      await autorelease(async () => {
+        /**
+         * Recognize Medical Certificate on the selected image and
+         * Handle the result by navigating to Screens.MEDICAL_CERTIFICATE_RESULT
+         */
+        const result = await ScanbotSDK.recognizeMedicalCertificate({
+          imageFileUri: selectedImage,
+          configuration: new MedicalCertificateScanningParameters({
+            extractCroppedImage: true,
+          }),
+        });
+
+        if (result.scanningSuccessful) {
+          /**
+           * The medical certificate is serialized for use in navigation parameters.
+           *
+           * By default, images are serialized as references.
+           * When using image references, it's important to manage memory correctly.
+           * Ensure image references are released appropriately by using an autorelease pool.
+           */
+          const medicalCertificateNavigationObject = await result.serialize();
+
+          navigation.navigate(Screens.MEDICAL_CERTIFICATE_RESULT, {
+            certificate: medicalCertificateNavigationObject,
+          });
+        } else {
+          infoMessageAlert('No medical certificate detected');
+        }
       });
-      navigation.navigate(Screens.MEDICAL_CERTIFICATE_RESULT, result);
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {

@@ -25,12 +25,13 @@ import {LoadingIndicator} from '@components';
 import {HomeScreen} from './src/screens/HomeScreen';
 import {MrzResultScreen} from './src/screens/MrzResultScreen';
 import {MedicalCertificateResultScreen} from './src/screens/MedicalCertificateResultScreen';
-import {GenericDocumentResultScreen} from './src/screens/GenericDocumentResultScreen';
-import {CheckRecognizerResultScreen} from './src/screens/CheckRecognizerResultScreen';
+import {DocumentDataExtractorResultScreen} from './src/screens/DocumentDataExtractorResultScreen.tsx';
+import {CheckScannerResultScreen} from './src/screens/CheckScannerResultScreen.tsx';
 import {PlainDataResultScreen} from './src/screens/PlainDataResultScreen';
 import {DocumentResultScreen} from './src/screens/DocumentResultScreen';
 import {DocumentPageResultScreen} from './src/screens/DocumentPageResultScreen';
 import {DocumentScannerViewScreen} from './src/screens/DocumentScannerViewScreen.tsx';
+import {CreditCardScannerResultScreen} from './src/screens/CreditCardScannerResultScreen.tsx';
 
 const Stack = createNativeStackNavigator<PrimaryRoutesParamList>();
 
@@ -73,7 +74,6 @@ export const SDKInitializationOptions: ScanbotSdkConfiguration = {
   storageImageFormat: IMAGE_FILE_FORMAT, // Format of stored images
   storageImageQuality: 80, // Quality of stored images
   //storageBaseDirectory: storageBaseDirectory, // Uncomment this line to use custom storage path
-  documentDetectorMode: 'ML_BASED', // The engine used to detect documents
 } as const;
 
 // Set the following properties to enable encryption.
@@ -124,12 +124,12 @@ function App() {
                   component={MrzResultScreen}
                 />
                 <Stack.Screen
-                  name={Screens.GENERIC_DOCUMENT_RESULT}
-                  component={GenericDocumentResultScreen}
+                  name={Screens.DOCUMENT_DATA_EXTRACTOR_RESULT}
+                  component={DocumentDataExtractorResultScreen}
                 />
                 <Stack.Screen
-                  name={Screens.CHECK_RECOGNIZER_RESULT}
-                  component={CheckRecognizerResultScreen}
+                  name={Screens.CHECK_SCANNER_RESULT}
+                  component={CheckScannerResultScreen}
                 />
                 <Stack.Screen
                   name={Screens.PLAIN_DATA_RESULT}
@@ -142,6 +142,10 @@ function App() {
                 <Stack.Screen
                   name={Screens.DOCUMENT_PAGE_RESULT}
                   component={DocumentPageResultScreen}
+                />
+                <Stack.Screen
+                  name={Screens.CREDIT_CARD_RESULT}
+                  component={CreditCardScannerResultScreen}
                 />
                 <Stack.Screen
                   name={Screens.DOCUMENT_SCANNER_VIEW}

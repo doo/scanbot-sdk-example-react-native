@@ -10,7 +10,8 @@ import {COLORS} from '@theme';
 import {useCallback} from 'react';
 
 import ScanbotSDK, {
-  MedicalCertificateRecognizerConfiguration,
+  autorelease,
+  MedicalCertificateScannerConfiguration,
 } from 'react-native-scanbot-sdk';
 
 export function useMedicalCertificateScanner() {
@@ -26,7 +27,7 @@ export function useMedicalCertificateScanner() {
         return;
       }
       /**
-       * Medical Certificate Recognizer requires OCR blobs.
+       * Medical Certificate Scanner requires OCR blobs.
        * If OCR blobs are not present or there is no 'de' language data, the scanner will fail
        * Return early if there are no installed languages
        */
@@ -41,10 +42,10 @@ export function useMedicalCertificateScanner() {
         return;
       }
       /**
-       * Create the medical certificate recognizer configuration object and
-       * start the medical certificate recognizer with the configuration
+       * Create the medical certificate scanner configuration object and
+       * start the medical certificate scanner with the configuration
        */
-      let config: MedicalCertificateRecognizerConfiguration = {
+      const config: MedicalCertificateScannerConfiguration = {
         topBarBackgroundColor: COLORS.SCANBOT_RED,
         userGuidanceStrings: {
           capturing: 'Capturing',
@@ -60,15 +61,31 @@ export function useMedicalCertificateScanner() {
         cancelButtonHidden: false,
         recognizePatientInfo: true,
       };
-      const result = await ScanbotSDK.UI.startMedicalCertificateRecognizer(
-        config,
-      );
-      /**
-       * Handle the result if result status is OK
-       */
-      if (result.status === 'OK') {
-        navigation.navigate(Screens.MEDICAL_CERTIFICATE_RESULT, result);
-      }
+
+      /* An autorelease pool is required because the result object may contain image references. */
+      await autorelease(async () => {
+        const result = await ScanbotSDK.UI.startMedicalCertificateScanner(
+          config,
+        );
+        /**
+         * Handle the result if the result status is OK
+         */
+        if (result.status === 'OK') {
+          /**
+           * The medical certificate is serialized for use in navigation parameters.
+           *
+           * By default, images are serialized as references.
+           * When using image references, it's important to manage memory correctly.
+           * Ensure image references are released appropriately by using an autorelease pool.
+           */
+          const medicalCertificateNavigationObject =
+            await result.data.serialize();
+
+          navigation.navigate(Screens.MEDICAL_CERTIFICATE_RESULT, {
+            certificate: medicalCertificateNavigationObject,
+          });
+        }
+      });
     } catch (e: any) {
       errorMessageAlert(e.message);
     }

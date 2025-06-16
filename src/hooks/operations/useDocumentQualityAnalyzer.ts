@@ -7,7 +7,9 @@ import {
   selectImageFromLibrary,
 } from '@utils';
 
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import ScanbotSDK, {
+  DocumentQualityAnalyzerConfiguration,
+} from 'react-native-scanbot-sdk';
 
 export function useDocumentQualityAnalyzer() {
   const {setLoading} = useContext(ActivityIndicatorContext);
@@ -23,7 +25,7 @@ export function useDocumentQualityAnalyzer() {
       }
       /**
        * Select an image from the Image Library
-       * Return early if no image is selected or there is an issue selecting an image
+       * Return early if no image is selected, or there is an issue selecting an image
        **/
       setLoading(true);
       const selectedImage = await selectImageFromLibrary();
@@ -31,16 +33,23 @@ export function useDocumentQualityAnalyzer() {
         return;
       }
 
-      // Detect document quality on selected image
-      const quality = await ScanbotSDK.documentQualityAnalyzer({
+      // Detect document quality on a selected image
+      const result = await ScanbotSDK.documentQualityAnalyzer({
         imageFileUri: selectedImage,
+        configuration: new DocumentQualityAnalyzerConfiguration({
+          maxImageSize: 2100,
+        }),
       });
       /**
        * Handle the result by displaying an alert
        */
-      infoMessageAlert(
-        `Document Quality for selected image: ${quality.result}`,
-      );
+      if (result.documentFound) {
+        infoMessageAlert(
+          `Document Quality for selected image: ${result.quality}`,
+        );
+      } else {
+        errorMessageAlert('Document was not found on selected image');
+      }
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {
