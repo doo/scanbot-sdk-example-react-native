@@ -1,4 +1,4 @@
-Open Source libraries used in the Scanbot SDK for React Native version 7.0.0
+Open Source libraries used in the Scanbot SDK for React Native version 7.0.1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
 Open Source libraries used in the Scanbot SDK for Android version 7.0.2
@@ -3045,7 +3045,7 @@ Version 1.1.0
 
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-Open Source libraries used in ScanbotSDK for iOS version 7.0.2:
+Open Source libraries used in ScanbotSDK for iOS version 7.0.3:
 
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
