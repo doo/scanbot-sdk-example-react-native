@@ -7852,15 +7852,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-scanbot-sdk@npm:7.0.0":
-  version: 7.0.0
-  resolution: "react-native-scanbot-sdk@npm:7.0.0"
+"react-native-scanbot-sdk@npm:7.0.1":
+  version: 7.0.1
+  resolution: "react-native-scanbot-sdk@npm:7.0.1"
   dependencies:
     "@expo/config-plugins": 9.0.14
   peerDependencies:
     react: "*"
     react-native: ">=0.73"
-  checksum: aa29142fe36325c5fff9016b5898c2d0b1cd783f03a28e5c9d627ef45ba713c38691222f60c41a61c6489b167d230319c18d603ae1f3d013f792ec358abdc081
+  checksum: 4b1b6cdf4e3538ae5010ddf1cfb33da341297b2a8ad870e4337a31dfe459919a5c6c0f1e5c42ae3f39eb374589a9934d2f02519f964b269f0a2641c3e44004cc
   languageName: node
   linkType: hard
 
@@ -8310,7 +8310,7 @@ __metadata:
     react-native-fs: 2.20.0
     react-native-image-picker: ^8.2.0
     react-native-safe-area-context: ^5.4.0
-    react-native-scanbot-sdk: 7.0.0
+    react-native-scanbot-sdk: 7.0.1
     react-native-screens: ^4.10.0
     react-native-share: ^12.0.3
     react-test-renderer: 19.0.0
