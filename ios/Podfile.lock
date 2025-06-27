@@ -1779,7 +1779,7 @@ PODS:
     - React-utils (= 0.79.0)
   - RNFS (2.20.0):
     - React-Core
-  - RNScanbotSDK (7.0.1-rc.1):
+  - RNScanbotSDK (7.0.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2205,7 +2205,7 @@ SPEC CHECKSUMS:
   ReactCodegen: daf57f5314369a4ad607ee77516d45aad03b10d7
   ReactCommon: c07346679f14c0b62ad02b20e18e984da3b575ce
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
-  RNScanbotSDK: c3b2da50e250f18596e7906549e082ad9d30bc1b
+  RNScanbotSDK: cb04a1b407e8b8207c7d2514e84dadbb18d669b6
   RNScreens: c5c07a86e4088ce92f0d3854082250dfa9c61f75
   RNShare: d30f784f79ec377b12f06ee12cb171eb96f8d518
   ScanbotSDK: b9829af93ba43a4661fbe85e5d7ed49991620fa8
