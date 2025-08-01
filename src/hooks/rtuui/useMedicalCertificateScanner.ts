@@ -1,7 +1,6 @@
 import {
   checkLicense,
   errorMessageAlert,
-  infoMessageAlert,
   PrimaryRouteNavigationProp,
   Screens,
 } from '@utils';
@@ -20,25 +19,10 @@ export function useMedicalCertificateScanner() {
   return useCallback(async () => {
     try {
       /**
-       * Check license status and return early
+       * Check the license status and return early
        * if the license is not valid
        */
       if (!(await checkLicense())) {
-        return;
-      }
-      /**
-       * Medical Certificate Scanner requires OCR blobs.
-       * If OCR blobs are not present or there is no 'de' language data, the scanner will fail
-       * Return early if there are no installed languages
-       */
-      const ocrConfigsResult = await ScanbotSDK.getOCRConfigs();
-      if (
-        ocrConfigsResult.installedLanguages.length === 0 ||
-        !ocrConfigsResult.installedLanguages.find(l => l === 'de')
-      ) {
-        infoMessageAlert(
-          'Scanning is not possible since no OCR blobs were found',
-        );
         return;
       }
       /**

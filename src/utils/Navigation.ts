@@ -1,9 +1,9 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RouteProp} from '@react-navigation/native';
 import {
-  CheckScanningResult,
+  CheckMagneticInkStripScanningStatus,
   CreditCardScanningStatus,
-  DocumentDataExtractionResult,
+  DocumentDataExtractionStatus,
   GenericDocument,
   MedicalCertificateScanningResult,
 } from 'react-native-scanbot-sdk';
@@ -37,10 +37,13 @@ export const ScreenTitles: Record<Screens, string> = {
 export type PrimaryRoutesParamList = {
   [Screens.HOME]: undefined;
   [Screens.CHECK_SCANNER_RESULT]: {
-    check: Awaited<ReturnType<CheckScanningResult['serialize']>>;
+    checkDocument: GenericDocument | null;
+    status?: CheckMagneticInkStripScanningStatus;
+    buffer?: string | null;
   };
   [Screens.DOCUMENT_DATA_EXTRACTOR_RESULT]: {
-    documents: Awaited<ReturnType<DocumentDataExtractionResult['serialize']>>[];
+    document: GenericDocument | null;
+    extractionStatus: DocumentDataExtractionStatus;
   };
   [Screens.MEDICAL_CERTIFICATE_RESULT]: {
     certificate: Awaited<

@@ -1,7 +1,6 @@
 import {useLicenseValidityCheckWrapper} from './useLicenseValidityCheck';
 
 import {useCheckScanner} from './rtuui/useCheckScanner.ts';
-import {useEHICScanner} from './rtuui/useEHICScanner';
 import {useMedicalCertificateScanner} from './rtuui/useMedicalCertificateScanner';
 import {useVinScanner} from './rtuui/useVinScanner';
 import {useMRZScanner} from './rtuui/useMRZScanner';
@@ -23,7 +22,6 @@ import {useCleanup} from './operations/useCleanup';
 import {useDocumentQualityAnalyzer} from './operations/useDocumentQualityAnalyzer';
 import {useRecognizeCheck} from './operations/useRecognizeCheck';
 import {useRecognizeMRZ} from './operations/useRecognizeMRZ';
-import {useRecognizeEHIC} from './operations/useRecognizeEHIC';
 import {useDocumentDataExtractorOnImage} from './operations/useDocumentDataExtractorOnImage.ts';
 import {useRecognizeMedicalCertificate} from './operations/useRecognizeMedicalCertificate';
 import {useRecognizeCreditCard} from './operations/useRecognizeCreditCard.ts';
@@ -38,7 +36,6 @@ import {useRemovePage} from './operations/document/useRemovePage.ts';
 export {
   useLicenseValidityCheckWrapper,
   useCheckScanner,
-  useEHICScanner,
   useCreditCardScanner,
   useTextPatternScanner,
   useMRZScanner,
@@ -51,7 +48,6 @@ export {
   useRecognizeCheck,
   useRecognizeMRZ,
   useCleanup,
-  useRecognizeEHIC,
   useDocumentDataExtractorOnImage,
   useRecognizeMedicalCertificate,
   useRecognizeCreditCard,

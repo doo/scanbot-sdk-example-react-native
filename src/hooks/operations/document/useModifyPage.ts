@@ -21,7 +21,7 @@ export function useModifyPage() {
       try {
         setLoading(true);
         /**
-         * Check license status and return early
+         * Check the license status and return early
          * if the license is not valid
          */
         if (!(await checkLicense())) {
