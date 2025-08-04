@@ -19,6 +19,7 @@ export enum Screens {
   DOCUMENT_PAGE_RESULT = 'documentPageResult',
   CREDIT_CARD_RESULT = 'creditCardResult',
   DOCUMENT_SCANNER_VIEW = 'documentScannerView',
+  CROPPING_VIEW = 'croppingView',
 }
 
 export const ScreenTitles: Record<Screens, string> = {
@@ -32,6 +33,7 @@ export const ScreenTitles: Record<Screens, string> = {
   [Screens.DOCUMENT_PAGE_RESULT]: 'Document Page',
   [Screens.CREDIT_CARD_RESULT]: 'Credit Card Result',
   [Screens.DOCUMENT_SCANNER_VIEW]: 'Document Scanner View',
+  [Screens.CROPPING_VIEW]: 'Cropping View',
 };
 
 export type PrimaryRoutesParamList = {
@@ -62,6 +64,7 @@ export type PrimaryRoutesParamList = {
   [Screens.DOCUMENT_RESULT]: undefined;
   [Screens.DOCUMENT_PAGE_RESULT]: {pageID: string};
   [Screens.DOCUMENT_SCANNER_VIEW]: undefined;
+  [Screens.CROPPING_VIEW]: {fileURI: string};
 };
 
 export type PrimaryRouteNavigationProp = NativeStackNavigationProp<
@@ -102,6 +105,11 @@ export type DocumentPageResultScreenRouteProp = RouteProp<
 export type CreditCardResultScreenRouteProp = RouteProp<
   PrimaryRoutesParamList,
   Screens.CREDIT_CARD_RESULT
+>;
+
+export type CroppingViewScreenRouteProp = RouteProp<
+  PrimaryRoutesParamList,
+  Screens.CROPPING_VIEW
 >;
 
 export type PlainDataResultParam = {

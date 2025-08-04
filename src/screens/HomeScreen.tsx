@@ -5,6 +5,7 @@ import {
   useCleanup,
   useCreateDocumentWithPage,
   useCreditCardScanner,
+  useCroppingView,
   useDocumentDataExtractor,
   useDocumentDataExtractorOnImage,
   useDocumentQualityAnalyzer,
@@ -51,6 +52,7 @@ export function HomeScreen() {
   const onSinglePageScanningWithFinder = useSinglePageScanningWithFinder();
   const onMultiplePageScanning = useMultiplePageScanning();
   const onCreateDocument = useCreateDocumentWithPage();
+  const onCroppingView = useCroppingView();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -75,6 +77,10 @@ export function HomeScreen() {
         <FeatureItem
           title={'Document Scanner View (Classic UI)'}
           onPress={() => navigation.navigate(Screens.DOCUMENT_SCANNER_VIEW)}
+        />
+        <FeatureItem
+          title={'Cropping View (Classic UI)'}
+          onPress={onCroppingView}
         />
 
         <FeatureHeader title={'DATA DETECTORS'} />

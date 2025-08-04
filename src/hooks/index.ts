@@ -33,6 +33,8 @@ import {useCreateDocumentWithPage} from './operations/document/useCreateDocument
 import {useModifyPage} from './operations/document/useModifyPage.ts';
 import {useRemovePage} from './operations/document/useRemovePage.ts';
 
+import {useCroppingView} from './useCroppingView.ts';
+
 export {
   useLicenseValidityCheckWrapper,
   useCheckScanner,
@@ -63,4 +65,5 @@ export {
   useCreateDocumentWithPage,
   useModifyPage,
   useRemovePage,
+  useCroppingView,
 };
