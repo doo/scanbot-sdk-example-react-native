@@ -31,6 +31,7 @@ import {PlainDataResultScreen} from './src/screens/PlainDataResultScreen';
 import {DocumentResultScreen} from './src/screens/DocumentResultScreen';
 import {DocumentPageResultScreen} from './src/screens/DocumentPageResultScreen';
 import {DocumentScannerViewScreen} from './src/screens/DocumentScannerViewScreen.tsx';
+import {CroppingScreen} from './src/screens/CroppingScreen.tsx';
 import {CreditCardScannerResultScreen} from './src/screens/CreditCardScannerResultScreen.tsx';
 
 const Stack = createNativeStackNavigator<PrimaryRoutesParamList>();
