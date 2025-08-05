@@ -11,7 +11,8 @@ import {useNavigation} from '@react-navigation/native';
 
 import ScanbotSDK, {
   autorelease,
-  CheckScannerConfiguration, ToJsonConfiguration,
+  CheckScannerConfiguration,
+  ToJsonConfiguration,
 } from 'react-native-scanbot-sdk';
 
 export function useRecognizeCheck() {
@@ -22,7 +23,7 @@ export function useRecognizeCheck() {
     try {
       setLoading(true);
       /**
-       * Check license status and return early
+       * Check the license status and return early
        * if the license is not valid
        */
       if (!(await checkLicense())) {
@@ -64,7 +65,9 @@ export function useRecognizeCheck() {
         );
 
         navigation.navigate(Screens.CHECK_SCANNER_RESULT, {
-          check: navigationCheckObject,
+          checkDocument: result.check,
+          status: result.status,
+          buffer: navigationCheckObject.croppedImage?.buffer,
         });
       });
     } catch (e: any) {

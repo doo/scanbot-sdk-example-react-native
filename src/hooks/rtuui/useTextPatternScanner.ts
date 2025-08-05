@@ -11,7 +11,7 @@ export function useTextPatternScanner() {
   return useCallback(async () => {
     try {
       /**
-       * Check license status and return early
+       * Check the license status and return early
        * if the license is not valid
        */
       if (!(await checkLicense())) {
@@ -40,7 +40,9 @@ export function useTextPatternScanner() {
        */
       if (result.status === 'OK') {
         resultMessageAlert(
-          `${result.data.rawText} : ${(result.data.confidence * 100).toFixed(0)}%`,
+          `${result.data.rawText} : ${(result.data.confidence * 100).toFixed(
+            0,
+          )}%`,
         );
       }
     } catch (e: any) {

@@ -1,9 +1,9 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RouteProp} from '@react-navigation/native';
 import {
-  CheckScanningResult,
+  CheckMagneticInkStripScanningStatus,
   CreditCardScanningStatus,
-  DocumentDataExtractionResult,
+  DocumentDataExtractionStatus,
   GenericDocument,
   MedicalCertificateScanningResult,
 } from 'react-native-scanbot-sdk';
@@ -19,6 +19,7 @@ export enum Screens {
   DOCUMENT_PAGE_RESULT = 'documentPageResult',
   CREDIT_CARD_RESULT = 'creditCardResult',
   DOCUMENT_SCANNER_VIEW = 'documentScannerView',
+  CROPPING_VIEW = 'croppingView',
 }
 
 export const ScreenTitles: Record<Screens, string> = {
@@ -32,15 +33,19 @@ export const ScreenTitles: Record<Screens, string> = {
   [Screens.DOCUMENT_PAGE_RESULT]: 'Document Page',
   [Screens.CREDIT_CARD_RESULT]: 'Credit Card Result',
   [Screens.DOCUMENT_SCANNER_VIEW]: 'Document Scanner View',
+  [Screens.CROPPING_VIEW]: 'Cropping View',
 };
 
 export type PrimaryRoutesParamList = {
   [Screens.HOME]: undefined;
   [Screens.CHECK_SCANNER_RESULT]: {
-    check: Awaited<ReturnType<CheckScanningResult['serialize']>>;
+    checkDocument: GenericDocument | null;
+    status?: CheckMagneticInkStripScanningStatus;
+    buffer?: string | null;
   };
   [Screens.DOCUMENT_DATA_EXTRACTOR_RESULT]: {
-    documents: Awaited<ReturnType<DocumentDataExtractionResult['serialize']>>[];
+    document: GenericDocument | null;
+    extractionStatus: DocumentDataExtractionStatus;
   };
   [Screens.MEDICAL_CERTIFICATE_RESULT]: {
     certificate: Awaited<
@@ -59,6 +64,7 @@ export type PrimaryRoutesParamList = {
   [Screens.DOCUMENT_RESULT]: undefined;
   [Screens.DOCUMENT_PAGE_RESULT]: {pageID: string};
   [Screens.DOCUMENT_SCANNER_VIEW]: undefined;
+  [Screens.CROPPING_VIEW]: {fileURI: string};
 };
 
 export type PrimaryRouteNavigationProp = NativeStackNavigationProp<
@@ -99,6 +105,11 @@ export type DocumentPageResultScreenRouteProp = RouteProp<
 export type CreditCardResultScreenRouteProp = RouteProp<
   PrimaryRoutesParamList,
   Screens.CREDIT_CARD_RESULT
+>;
+
+export type CroppingViewScreenRouteProp = RouteProp<
+  PrimaryRoutesParamList,
+  Screens.CROPPING_VIEW
 >;
 
 export type PlainDataResultParam = {

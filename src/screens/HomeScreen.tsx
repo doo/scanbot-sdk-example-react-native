@@ -5,10 +5,10 @@ import {
   useCleanup,
   useCreateDocumentWithPage,
   useCreditCardScanner,
+  useCroppingView,
   useDocumentDataExtractor,
   useDocumentDataExtractorOnImage,
   useDocumentQualityAnalyzer,
-  useEHICScanner,
   useLicenseInfo,
   useMedicalCertificateScanner,
   useMRZScanner,
@@ -17,7 +17,6 @@ import {
   usePerformOCR,
   useRecognizeCheck,
   useRecognizeCreditCard,
-  useRecognizeEHIC,
   useRecognizeMedicalCertificate,
   useRecognizeMRZ,
   useSinglePageScanning,
@@ -35,7 +34,6 @@ export function HomeScreen() {
   const onMRZScanner = useMRZScanner();
   const onMedicalCertificateScanner = useMedicalCertificateScanner();
   const onDocumentDataExtractor = useDocumentDataExtractor();
-  const onEHICScanner = useEHICScanner();
   const onVinScanner = useVinScanner();
   const onCheckScanner = useCheckScanner();
   const onCreditCardScanner = useCreditCardScanner();
@@ -43,7 +41,6 @@ export function HomeScreen() {
   const onRecognizeCheckOnImage = useRecognizeCheck();
   const onRecognizeMRZOnImage = useRecognizeMRZ();
   const onRecognizeMedicalCertificateOnImage = useRecognizeMedicalCertificate();
-  const onRecognizeEHICOnImage = useRecognizeEHIC();
   const onDocumentDataExtractorOnImage = useDocumentDataExtractorOnImage();
   const onRecognizeCreditCard = useRecognizeCreditCard();
   const onPerformOCR = usePerformOCR();
@@ -55,6 +52,7 @@ export function HomeScreen() {
   const onSinglePageScanningWithFinder = useSinglePageScanningWithFinder();
   const onMultiplePageScanning = useMultiplePageScanning();
   const onCreateDocument = useCreateDocumentWithPage();
+  const onCroppingView = useCroppingView();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -80,6 +78,10 @@ export function HomeScreen() {
           title={'Document Scanner View (Classic UI)'}
           onPress={() => navigation.navigate(Screens.DOCUMENT_SCANNER_VIEW)}
         />
+        <FeatureItem
+          title={'Cropping View (Classic UI)'}
+          onPress={onCroppingView}
+        />
 
         <FeatureHeader title={'DATA DETECTORS'} />
         <FeatureItem onPress={onMRZScanner} title={'Scan MRZ'} />
@@ -88,7 +90,6 @@ export function HomeScreen() {
           title={'Scan Medical Certificate'}
         />
         <FeatureItem onPress={onCheckScanner} title={'Scan Check'} />
-        <FeatureItem onPress={onEHICScanner} title={'Scan EHIC'} />
         <FeatureItem onPress={onVinScanner} title={'Scan VIN'} />
         <FeatureItem onPress={onCreditCardScanner} title={'Scan Credit Card'} />
         <FeatureItem
@@ -112,10 +113,6 @@ export function HomeScreen() {
         <FeatureItem
           onPress={onRecognizeCheckOnImage}
           title={'Recognize Check on Image'}
-        />
-        <FeatureItem
-          onPress={onRecognizeEHICOnImage}
-          title={'Recognize EHIC on Image'}
         />
         <FeatureItem
           onPress={onRecognizeCreditCard}

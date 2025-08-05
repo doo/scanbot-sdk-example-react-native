@@ -2,9 +2,9 @@
 
 This example app shows how to integrate the [Scanbot Document Scanner SDK](https://scanbot.io/developer/react-native-document-scanner/) and [Scanbot Data Capture SDK](https://scanbot.io/developer/react-native-data-capture/) for React Native.
 
-The Scanbot SDK React Native Module is available as an [npm package](https://www.npmjs.com/package/react-native-scanbot-sdk).
+The Scanbot SDK React Native Module is available as a [npm package](https://www.npmjs.com/package/react-native-scanbot-sdk).
 
-For more details please see this [documentation](https://docs.scanbot.io/document-scanner-sdk/react-native/introduction/).
+For more details, please see this [documentation](https://docs.scanbot.io/react-native/document-scanner-sdk/introduction/?utm_source=github.com&utm_medium=referral&utm_campaign=dev_sites).
 
 
 ## What is the Scanbot SDK?
@@ -18,7 +18,7 @@ The Scanbot SDK will run without a license for one minute per session!
 
 After the trial period has expired, all SDK functions and UI components will stop working. You have to restart the app to get another one-minute trial period.
 
-To try the Scanbot SDK without a one-minute limit, you can get a free “no-strings-attached” trial license. Please submit the [Trial License Form](https://scanbot.io/trial/) on our website.
+To try the Scanbot SDK without a one-minute limit, you can get a free “no-strings-attached” trial license. Please submit the [Trial License Form](https://docs.scanbot.io/trial/?utm_source=github.com&utm_medium=referral&utm_campaign=dev_sites) on our website.
 
 ## Free Developer Support
 
@@ -27,7 +27,7 @@ If you encounter technical issues with integrating the Scanbot SDK or need advic
 framework or features, please visit our [Support Page](https://docs.scanbot.io/support/).
 
 ## Documentation
-👉 [Scanbot SDK documentation](https://docs.scanbot.io/document-scanner-sdk/react-native/introduction/)
+👉 [Scanbot SDK documentation](https://docs.scanbot.io/react-native/document-scanner-sdk/introduction/?utm_source=github.com&utm_medium=referral&utm_campaign=dev_sites)
 
 ## How to run this app
 
