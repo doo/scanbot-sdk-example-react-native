@@ -30,7 +30,7 @@ export function useCheckScanner() {
        * Create the check configuration object and
        * start the check scanner with the configuration
        */
-      const configuration = new CheckScannerScreenConfiguration({});
+      const configuration = new CheckScannerScreenConfiguration();
 
       // Modify behaviors
       configuration.exampleOverlayVisible = true;
@@ -54,6 +54,7 @@ export function useCheckScanner() {
            * By default, images are serialized as references.
            * When using image references, it's important to manage memory correctly.
            * Ensure image references are released appropriately by using an autorelease pool.
+           * Set the `imageSerializationMode` to `"BUFFER"` to serialize the image data as a base64-encoded string instead of a reference.
            */
           const checkScannerNavigationObject = await result.data.serialize(
             new ToJsonConfiguration({

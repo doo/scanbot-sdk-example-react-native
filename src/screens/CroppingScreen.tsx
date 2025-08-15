@@ -90,7 +90,7 @@ export function CroppingScreen() {
         onError={onError}
         edgeColor={'#C8193C'}
         anchorPointsColor={'#ff00aa'}
-        edgeLineWidth={20}
+        edgeLineWidth={5}
       />
       <View style={styles.buttonContainer}>
         <View style={styles.buttonRow}>
@@ -137,6 +137,7 @@ export function CroppingScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginBottom: 20,
   },
   containerLandscape: {
     flexDirection: 'row',

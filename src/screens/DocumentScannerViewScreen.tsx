@@ -25,7 +25,7 @@ export function DocumentScannerViewScreen() {
   }, []);
 
   const onSnap = useCallback(() => {
-    ref.current?.snapDocument(false);
+    ref.current?.snapDocument();
   }, []);
 
   const onDocumentResult = useCallback((base64Image: string) => {

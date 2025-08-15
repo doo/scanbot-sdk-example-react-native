@@ -57,6 +57,7 @@ export function useRecognizeCheck() {
          * By default, images are serialized as references.
          * When using image references, it's important to manage memory correctly.
          * Ensure image references are released appropriately by using an autorelease pool.
+         * Set the `imageSerializationMode` to `"BUFFER"` to serialize the image data as a base64-encoded string instead of a reference.
          */
         const navigationCheckObject = await result.serialize(
           new ToJsonConfiguration({

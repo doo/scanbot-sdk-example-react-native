@@ -11,19 +11,7 @@ import {ActivityIndicatorContext} from '@context';
 import {useNavigation} from '@react-navigation/native';
 
 import ScanbotSDK, {
-  autorelease,
-  DeHealthInsuranceCardFrontDocumentType,
-  DeIdCardBackDocumentType,
-  DeIdCardFrontDocumentType,
-  DePassportDocumentType,
-  DeResidencePermitBackDocumentType,
-  DeResidencePermitFrontDocumentType,
-  DocumentDataExtractorCommonConfiguration,
   DocumentDataExtractorConfiguration,
-  EuropeanDriverLicenseBackDocumentType,
-  EuropeanDriverLicenseFrontDocumentType,
-  EuropeanHealthInsuranceCardDocumentType,
-  MRZDocumentType,
 } from 'react-native-scanbot-sdk';
 
 export function useDocumentDataExtractorOnImage() {
@@ -49,43 +37,22 @@ export function useDocumentDataExtractorOnImage() {
         return;
       }
       /**
-       * Extract document data on the selected image
-       * Add the desired document types that data extraction should be done
+       * Extract document data from the selected image and
        * Handle the result by navigating to Screens.DOCUMENT_DATA_EXTRACTOR_RESULT
-       *
-       * An autorelease pool is required because the result object may contain image references.
        */
-      await autorelease(async () => {
-        const result = await ScanbotSDK.documentDataExtractor({
-          imageFileUri: selectedImage,
-          configuration: new DocumentDataExtractorConfiguration({
-            configurations: [
-              new DocumentDataExtractorCommonConfiguration({
-                acceptedDocumentTypes: [
-                  MRZDocumentType,
-                  DeIdCardFrontDocumentType,
-                  DeIdCardBackDocumentType,
-                  DePassportDocumentType,
-                  EuropeanDriverLicenseFrontDocumentType,
-                  EuropeanDriverLicenseBackDocumentType,
-                  DeResidencePermitFrontDocumentType,
-                  DeResidencePermitBackDocumentType,
-                  EuropeanHealthInsuranceCardDocumentType,
-                  DeHealthInsuranceCardFrontDocumentType,
-                ],
-              }),
-            ],
-          }),
-        });
-        if (result.document) {
-          navigation.navigate(Screens.DOCUMENT_DATA_EXTRACTOR_RESULT, {
-            document: result.document,
-            extractionStatus: result.status,
-          });
-        } else {
-          infoMessageAlert('No document detected');
-        }
+      const result = await ScanbotSDK.documentDataExtractor({
+        imageFileUri: selectedImage,
+        configuration: new DocumentDataExtractorConfiguration({}),
       });
+
+      if (result.document) {
+        navigation.navigate(Screens.DOCUMENT_DATA_EXTRACTOR_RESULT, {
+          document: result.document,
+          extractionStatus: result.status,
+        });
+      } else {
+        infoMessageAlert('No document detected');
+      }
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {
