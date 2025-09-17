@@ -16,7 +16,7 @@ async function startScanning() {
     /** Configure the title for the intro screen. */
     introductionConfiguration.title = new StyledText({
       color: '#000000',
-      text: 'Text Pattern Scanner',
+      text: 'Credit Card Scanner',
     });
     /** Configure the image for the introduction screen. */
     introductionConfiguration.image = new CreditCardIntroCustomImage({
