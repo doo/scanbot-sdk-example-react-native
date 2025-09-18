@@ -7,11 +7,11 @@ import {
   selectImageFromLibrary,
 } from '@utils';
 import {ActivityIndicatorContext} from '@context';
+import {useNavigation} from '@react-navigation/native';
 
 import ScanbotSDK, {
   CreditCardScannerConfiguration,
 } from 'react-native-scanbot-sdk';
-import {useNavigation} from '@react-navigation/native';
 
 export function useRecognizeCreditCard() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -21,7 +21,7 @@ export function useRecognizeCreditCard() {
     try {
       setLoading(true);
       /**
-       * Check license status and return early
+       * Check the license status and return early
        * if the license is not valid
        */
       if (!(await checkLicense())) {

@@ -5,15 +5,16 @@ import {
   PrimaryRouteNavigationProp,
   Screens,
 } from '@utils';
+import {useNavigation} from '@react-navigation/native';
+import {DocumentContext} from '@context';
+import {COLORS} from '@theme';
+
 import {
   DocumentScanningFlow,
   PageSnapCheckMarkAnimation,
   PageSnapFunnelAnimation,
   startDocumentScanner,
 } from 'react-native-scanbot-sdk/ui_v2';
-import {useNavigation} from '@react-navigation/native';
-import {DocumentContext} from '@context';
-import {COLORS} from '@theme';
 
 export function useSinglePageScanning() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -22,7 +23,7 @@ export function useSinglePageScanning() {
   return useCallback(async () => {
     try {
       /**
-       * Check license status and return early
+       * Check the license status and return early
        * if the license is not valid
        */
       if (!(await checkLicense())) {

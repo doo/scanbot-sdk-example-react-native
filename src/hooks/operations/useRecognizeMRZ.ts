@@ -20,7 +20,7 @@ export function useRecognizeMRZ() {
     try {
       setLoading(true);
       /**
-       * Check license status and return early
+       * Check the license status and return early
        * if the license is not valid
        */
       if (!(await checkLicense())) {
@@ -48,7 +48,7 @@ export function useRecognizeMRZ() {
         configuration: configuration,
       });
 
-      if(result.document) {
+      if (result.document) {
         navigation.navigate(Screens.MRZ_RESULT, {
           mrzDocument: result.document,
           rawMRZ: result.rawMRZ,

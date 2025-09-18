@@ -1,28 +1,29 @@
 import {checkLicense, errorMessageAlert, resultMessageAlert} from '@utils';
-import {COLORS} from '@theme';
 import {useCallback} from 'react';
 
-import ScanbotSDK, {VinScannerConfiguration} from 'react-native-scanbot-sdk';
+import {
+  startVINScanner,
+  VinScannerScreenConfiguration,
+} from 'react-native-scanbot-sdk/ui_v2';
 
 export function useVinScanner() {
   return useCallback(async () => {
     try {
       /**
-       * Check license status and return early
+       * Check the license status and return early
        * if the license is not valid
        */
       if (!(await checkLicense())) {
         return;
       }
       /**
-       * Create the text data scanner configuration object and
-       * start the text data scanner with the configuration
+       * Create the VIN scanner configuration object and
+       * start the VIN scanner with the configuration
        */
-      const config: VinScannerConfiguration = {
-        topBarBackgroundColor: COLORS.SCANBOT_RED,
-        extractVINFromBarcode: true,
-      };
-      const result = await ScanbotSDK.UI.startVinScanner(config);
+      const configuration = new VinScannerScreenConfiguration();
+      configuration.confirmationAlertDialogEnabled = false;
+
+      const result = await startVINScanner(configuration);
       /**
        * Handle the result if the result status is OK
        */

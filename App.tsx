@@ -31,13 +31,14 @@ import {PlainDataResultScreen} from './src/screens/PlainDataResultScreen';
 import {DocumentResultScreen} from './src/screens/DocumentResultScreen';
 import {DocumentPageResultScreen} from './src/screens/DocumentPageResultScreen';
 import {DocumentScannerViewScreen} from './src/screens/DocumentScannerViewScreen.tsx';
+import {CroppingScreen} from './src/screens/CroppingScreen.tsx';
 import {CreditCardScannerResultScreen} from './src/screens/CreditCardScannerResultScreen.tsx';
 
 const Stack = createNativeStackNavigator<PrimaryRoutesParamList>();
 
-// !! Please read note !!
+// !! Please read the note!!
 // It is strongly recommended to use the default (secure) storage location of the Scanbot SDK.
-// However, for demo purposes we overwrite the "storageBaseDirectory" of the Scanbot SDK by a custom storage directory.
+// However, for demo purposes, we overwrite the "storageBaseDirectory" of the Scanbot SDK by a custom storage directory.
 //
 // On Android we use the "ExternalDirectoryPath" which is a public(!) folder.
 // All image files and export files (PDF, TIFF, etc.) created by the Scanbot SDK in this demo app will be stored
@@ -64,7 +65,7 @@ const storageBaseDirectory = Platform.select({
  * Please note: The Scanbot SDK will run without a license key for one minute per session!
  * After the trial period is over all Scanbot SDK functions as well as the UI components will stop working
  * or may be terminated. You can get an unrestricted "no-strings-attached" 30 day trial license key for free.
- * Please submit the trial license form (https://scanbot.io/en/sdk/demo/trial) on our website by using
+ * Please submit the trial license form (https://docs.scanbot.io/trial/) on our website by using
  * the app identifier "io.scanbot.example.sdk.reactnative" of this example app.
  */
 export const SDKInitializationOptions: ScanbotSdkConfiguration = {
@@ -73,7 +74,7 @@ export const SDKInitializationOptions: ScanbotSdkConfiguration = {
   loggingEnabled: true, // Logging enabled. Consider switching logging OFF in production builds for security and performance reasons!
   storageImageFormat: IMAGE_FILE_FORMAT, // Format of stored images
   storageImageQuality: 80, // Quality of stored images
-  //storageBaseDirectory: storageBaseDirectory, // Uncomment this line to use custom storage path
+  //storageBaseDirectory: storageBaseDirectory, // Uncomment this line to use a custom storage path
 } as const;
 
 // Set the following properties to enable encryption.
@@ -150,6 +151,10 @@ function App() {
                 <Stack.Screen
                   name={Screens.DOCUMENT_SCANNER_VIEW}
                   component={DocumentScannerViewScreen}
+                />
+                <Stack.Screen
+                  name={Screens.CROPPING_VIEW}
+                  component={CroppingScreen}
                 />
               </Stack.Navigator>
             </NavigationContainer>

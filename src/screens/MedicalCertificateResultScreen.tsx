@@ -28,7 +28,7 @@ export function MedicalCertificateResultScreen() {
      * Referencing the image allows flexibility:
      *  * The image can be encoded (e.g., as a base64 buffer),
      *  * The image can be saved on disk.
-     *  * Information about the image can be extracted,
+     *  * Information about the image can be extracted.
      * In this example, we encode the image as a base64 buffer.
      */
     autorelease(async () => {

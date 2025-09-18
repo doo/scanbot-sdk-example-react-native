@@ -6,12 +6,11 @@ import {
 } from '@utils';
 import {useNavigation} from '@react-navigation/native';
 import {useCallback} from 'react';
-
-import ScanbotSDK, {
-  autorelease,
+import {
   DocumentDataExtractorScreenConfiguration,
-  ToJsonConfiguration,
-} from 'react-native-scanbot-sdk';
+  startDocumentDataExtractor,
+} from 'react-native-scanbot-sdk/ui_v2';
+import {COLORS} from '@theme';
 
 export function useDocumentDataExtractor() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -19,7 +18,7 @@ export function useDocumentDataExtractor() {
   return useCallback(async () => {
     try {
       /**
-       * Check license status and return early
+       * Check the license status and return early
        * if the license is not valid
        */
       if (!(await checkLicense())) {
@@ -29,35 +28,20 @@ export function useDocumentDataExtractor() {
        * Create the document data extractor configuration object and
        * start the document data extractor with the configuration
        */
-      const config: DocumentDataExtractorScreenConfiguration = {
-        finderLineColor: '#ff0000',
-      };
+      const configuration = new DocumentDataExtractorScreenConfiguration();
+      configuration.introScreen.explanation.visible = true;
+      configuration.extractionProgress.progressColor = COLORS.SCANBOT_RED;
 
-      /* An autorelease pool is required because the result object may contain image references. */
-      await autorelease(async () => {
-        const result = await ScanbotSDK.UI.startDocumentDataExtractor(config);
-        /**
-         * Handle the result if the result status is OK
-         */
-        if (result.status === 'OK') {
-          /**
-           * The extracted document is serialized for use in navigation parameters.
-           *
-           * By default, images are serialized as references.
-           * If the destination screen does not require image data, you can disable image serialization
-           * by passing the optional flag.
-           */
-          const navigationObject = await Promise.all(
-            result.data.map(document => document.serialize(new ToJsonConfiguration({
-              serializeImages: false,
-            }))),
-          );
-
-          navigation.navigate(Screens.DOCUMENT_DATA_EXTRACTOR_RESULT, {
-            documents: navigationObject,
-          });
-        }
-      });
+      const result = await startDocumentDataExtractor(configuration);
+      /**
+       * Handle the result if the result status is OK
+       */
+      if (result.status === 'OK' && result.data.document) {
+        navigation.navigate(Screens.DOCUMENT_DATA_EXTRACTOR_RESULT, {
+          document: result.data.document,
+          extractionStatus: result.data.recognitionStatus,
+        });
+      }
     } catch (e: any) {
       errorMessageAlert(e.message);
     }

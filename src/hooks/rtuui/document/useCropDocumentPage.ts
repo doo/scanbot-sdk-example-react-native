@@ -14,7 +14,7 @@ export function useCropDocumentPage() {
     async ({pageID, documentID}: {pageID: string; documentID: string}) => {
       try {
         /**
-         * Check license status and return early
+         * Check the license status and return early
          * if the license is not valid
          */
         if (!(await checkLicense())) {

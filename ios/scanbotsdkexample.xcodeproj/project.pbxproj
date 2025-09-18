@@ -11,21 +11,21 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8EAC6DD32D4A68F1002751B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAC6DD22D4A68F1002751B9 /* AppDelegate.swift */; };
 		8ECAAE9D2CF08F240054DC66 /* ScanbotSDKOCRData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8ECAAE9C2CF08F240054DC66 /* ScanbotSDKOCRData.bundle */; };
-		919DCC0376B5CB210D82608E /* libPods-scanbotsdkexample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E712D748F3395E7DE73BFBDD /* libPods-scanbotsdkexample.a */; };
 		F46D468FC26EEB0164F830C7 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = D50519A300A583E57E80210A /* PrivacyInfo.xcprivacy */; };
+		F62E5434C83112F751180B31 /* libPods-scanbotsdkexample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D868D54C3FEE0E5227D52A57 /* libPods-scanbotsdkexample.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		13B07F961A680F5B00A75B9A /* scanbotsdkexample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = scanbotsdkexample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = scanbotsdkexample/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = scanbotsdkexample/Info.plist; sourceTree = "<group>"; };
-		4FA5BF029A8322504E15415B /* Pods-scanbotsdkexample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scanbotsdkexample.release.xcconfig"; path = "Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample.release.xcconfig"; sourceTree = "<group>"; };
+		238B630F347ADE3BF63A9644 /* Pods-scanbotsdkexample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scanbotsdkexample.debug.xcconfig"; path = "Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = scanbotsdkexample/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8EAC6DD22D4A68F1002751B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8ECAAE9C2CF08F240054DC66 /* ScanbotSDKOCRData.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ScanbotSDKOCRData.bundle; sourceTree = "<group>"; };
-		964637495DE867E92E1A7E47 /* Pods-scanbotsdkexample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scanbotsdkexample.debug.xcconfig"; path = "Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample.debug.xcconfig"; sourceTree = "<group>"; };
+		A011C5E770C5F1848382EBBE /* Pods-scanbotsdkexample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scanbotsdkexample.release.xcconfig"; path = "Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample.release.xcconfig"; sourceTree = "<group>"; };
 		D50519A300A583E57E80210A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = scanbotsdkexample/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		E712D748F3395E7DE73BFBDD /* libPods-scanbotsdkexample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-scanbotsdkexample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D868D54C3FEE0E5227D52A57 /* libPods-scanbotsdkexample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-scanbotsdkexample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -34,7 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				919DCC0376B5CB210D82608E /* libPods-scanbotsdkexample.a in Frameworks */,
+				F62E5434C83112F751180B31 /* libPods-scanbotsdkexample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,7 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				E712D748F3395E7DE73BFBDD /* libPods-scanbotsdkexample.a */,
+				D868D54C3FEE0E5227D52A57 /* libPods-scanbotsdkexample.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -95,8 +95,8 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				964637495DE867E92E1A7E47 /* Pods-scanbotsdkexample.debug.xcconfig */,
-				4FA5BF029A8322504E15415B /* Pods-scanbotsdkexample.release.xcconfig */,
+				238B630F347ADE3BF63A9644 /* Pods-scanbotsdkexample.debug.xcconfig */,
+				A011C5E770C5F1848382EBBE /* Pods-scanbotsdkexample.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -108,13 +108,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "scanbotsdkexample" */;
 			buildPhases = (
-				15A32BC4D2AF556CB174475D /* [CP] Check Pods Manifest.lock */,
+				F5957AB5B35CE917013E415C /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				885A847F0CAED673CE02E120 /* [CP] Embed Pods Frameworks */,
-				3DF844283E2017511E391EEC /* [CP] Copy Pods Resources */,
+				EF7615D72768CE98802F0A44 /* [CP] Embed Pods Frameworks */,
+				27775872B2A562145B0B35CB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -187,7 +187,41 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		15A32BC4D2AF556CB174475D /* [CP] Check Pods Manifest.lock */ = {
+		27775872B2A562145B0B35CB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF7615D72768CE98802F0A44 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F5957AB5B35CE917013E415C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -209,40 +243,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3DF844283E2017511E391EEC /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		885A847F0CAED673CE02E120 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -259,7 +259,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 964637495DE867E92E1A7E47 /* Pods-scanbotsdkexample.debug.xcconfig */;
+			baseConfigurationReference = 238B630F347ADE3BF63A9644 /* Pods-scanbotsdkexample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -289,7 +289,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4FA5BF029A8322504E15415B /* Pods-scanbotsdkexample.release.xcconfig */;
+			baseConfigurationReference = A011C5E770C5F1848382EBBE /* Pods-scanbotsdkexample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

@@ -15,7 +15,7 @@ The Scanbot SDK is a set of high-level APIs that lets you integrate document sca
 
 With our Ready-To-Use UI (RTU UI) components, you can integrate the Scanbot SDK into your React Native app in less than an hour.
 
-💡 For more details about the Scanbot Document Scanner SDK and Data Capture Modules, please check out our [documentation](https://docs.scanbot.io/document-scanner-sdk/react-native/introduction/?utm_source=github.com&utm_medium=referral&utm_campaign=dev_sites).
+💡 For more details about the Scanbot Document Scanner SDK and Data Capture Modules, please check out our [documentation](https://docs.scanbot.io/react-native/document-scanner-sdk/introduction/?utm_source=github.com&utm_medium=referral&utm_campaign=dev_sites).
 
 ## How to run this example app?
 
@@ -26,8 +26,7 @@ With our Ready-To-Use UI (RTU UI) components, you can integrate the Scanbot SDK 
 Testing on an actual device is essential, so ensure you have one available, for both iOS or Android platforms.
 
 ### Install node modules 
-
-```
+```bash 
 # Install the required dependencies
 yarn install
 
@@ -41,13 +40,13 @@ For iOS, remember to install CocoaPods dependencies (this only needs to be run o
 
 The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
 
-```
+```sh
 bundle install
 ```
 
 Then, and every time you update your native dependencies, run:
 
-```
+```sh
 cd ios 
 bundle exec pod install
 ```
@@ -109,7 +108,7 @@ The Scanbot React Native Document Scanner SDK offers the following features:
 
 * **Custom image filters:** Every use case has specific image requirements. The SDK’s custom filters allow you to transform the captured image into optimal input for your backend systems. They include several color, grayscale, and binarization options.
 
-* **Document Quality Analyzer:**  This feature automatically rates the quality of the scanned pages from “very poor” to “excellent.” If it is low, it can prompt the user to rescan.
+* **Document Quality Analyzer:** This feature automatically rates the quality of the scanned pages from “very poor” to “excellent.” If it is low, it can prompt the user to rescan.
 
 * **Export formats:** The Scanbot React Native Document Scanner SDK supports several formats for exporting digitized documents (JPG, PDF, TIFF, and PNG).
 
@@ -143,7 +142,7 @@ Through this feature, our SDK offers document detection and data capture capabil
 
 ### Free integration support
 
-Need help integrating or testing our React Native Document Scanner SDK? We offer [free developer support](https://docs.scanbot.io/support/?utm_source=github.com&utm_medium=referral&utm_campaign=dev_sites) via Slack, MS Teams, or email.
+Need help integrating or testing our React Native Document Scanner SDK? We offer [free developer support](https://docs.scanbot.io/support/?utm_source=github.com&utm_medium=referral&utm_campaign=dev_sites) via Slack, MS Teams, or email.
 
 As a customer, you also get access to a dedicated support Slack or Microsoft Teams channel to talk directly to your Customer Success Manager and our engineers.
 
@@ -151,11 +150,11 @@ As a customer, you also get access to a dedicated support Slack or Microsoft Tea
 
 The Scanbot SDK examples will run for one minute per session without a license. After that, all functionalities and UI components will stop working. 
 
-To try the Scanbot React Native SDK without the one-minute limit, you can request a free, no-strings-attached [7-day trial license](https://scanbot.io/trial/?utm_source=github.com&utm_medium=referral&utm_campaign=dev_sites) for your React Native project.
+To try the Scanbot React Native SDK without the one-minute limit, you can request a free, no-strings-attached [7-day trial license](https://docs.scanbot.io/trial/?utm_source=github.com&utm_medium=referral&utm_campaign=dev_sites) for your React Native project.
 
 Alternatively, check out our [demo apps](https://scanbot.io/demo-apps/?utm_source=github.com&utm_medium=referral&utm_campaign=dev_sites) to test the SDK.
 
-Our pricing model is simple: Unlimited document scanning for a flat annual license fee, full support included. There are no tiers, usage charges, or extra fees. [Contact](https://scanbot.io/contact-sales/?utm_source=github.com&utm_medium=referral&utm_campaign=dev_sites) our team to receive your quote.
+Our pricing model is simple: Unlimited document scanning for a flat annual license fee, full support included. There are no tiers, usage charges, or extra fees. [Contact](https://scanbot.io/contact-sales/?utm_source=github.com&utm_medium=referral&utm_campaign=dev_sites) our team to receive your quote.
 
 ### Other supported platforms
 

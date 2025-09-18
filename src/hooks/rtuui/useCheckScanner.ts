@@ -1,5 +1,4 @@
 import {useNavigation} from '@react-navigation/native';
-import {COLORS} from '@theme';
 import {
   checkLicense,
   errorMessageAlert,
@@ -7,12 +6,13 @@ import {
   Screens,
 } from '@utils';
 import {useCallback} from 'react';
+import {COLORS} from '@theme';
 
-import ScanbotSDK, {
-  autorelease,
+import {autorelease, ToJsonConfiguration} from 'react-native-scanbot-sdk';
+import {
   CheckScannerScreenConfiguration,
-  ToJsonConfiguration,
-} from 'react-native-scanbot-sdk';
+  startCheckScanner,
+} from 'react-native-scanbot-sdk/ui_v2';
 
 export function useCheckScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -20,7 +20,7 @@ export function useCheckScanner() {
   return useCallback(async () => {
     try {
       /**
-       * Check license status and return early
+       * Check the license status and return early
        * if the license is not valid
        */
       if (!(await checkLicense())) {
@@ -30,13 +30,20 @@ export function useCheckScanner() {
        * Create the check configuration object and
        * start the check scanner with the configuration
        */
-      const config: CheckScannerScreenConfiguration = {
-        topBarBackgroundColor: COLORS.SCANBOT_RED,
-      };
+      const configuration = new CheckScannerScreenConfiguration();
+
+      // Modify behaviors
+      configuration.exampleOverlayVisible = true;
+      configuration.captureHighResolutionImage = true;
+      configuration.scanningProgress.progressColor = COLORS.SCANBOT_RED;
+
+      // Set colors
+      configuration.palette.sbColorPrimary = COLORS.SCANBOT_RED;
+      configuration.palette.sbColorOnPrimary = '#ffffff';
 
       /** An autorelease pool is required because the result object contains image references. */
       await autorelease(async () => {
-        const result = await ScanbotSDK.UI.startCheckScanner(config);
+        const result = await startCheckScanner(configuration);
         /**
          * Handle the result if the result status is OK
          */
@@ -47,6 +54,7 @@ export function useCheckScanner() {
            * By default, images are serialized as references.
            * When using image references, it's important to manage memory correctly.
            * Ensure image references are released appropriately by using an autorelease pool.
+           * Set the `imageSerializationMode` to `"BUFFER"` to serialize the image data as a base64-encoded string instead of a reference.
            */
           const checkScannerNavigationObject = await result.data.serialize(
             new ToJsonConfiguration({
@@ -55,7 +63,9 @@ export function useCheckScanner() {
           );
 
           navigation.navigate(Screens.CHECK_SCANNER_RESULT, {
-            check: checkScannerNavigationObject,
+            checkDocument: result.data.check,
+            status: result.data.recognitionStatus,
+            buffer: checkScannerNavigationObject.croppedImage?.buffer,
           });
         }
       });

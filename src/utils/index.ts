@@ -26,6 +26,7 @@ import {
   DocumentPageResultScreenRouteProp,
   Screens,
   ScreenTitles,
+  CroppingViewScreenRouteProp,
 } from './Navigation';
 
 export {
@@ -56,4 +57,5 @@ export type {
   PlainDataResultParam,
   DocumentPageResultScreenRouteProp,
   CreditCardResultScreenRouteProp,
+  CroppingViewScreenRouteProp,
 };
