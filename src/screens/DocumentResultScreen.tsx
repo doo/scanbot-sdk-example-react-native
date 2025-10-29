@@ -1,6 +1,5 @@
 import React, {useCallback, useContext, useState} from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
@@ -62,14 +61,14 @@ export function DocumentResultScreen() {
 
   if (document === undefined) {
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <LoadingIndicator loading={true} />
-      </SafeAreaView>
+      </View>
     );
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView>
         <View style={styles.gallery}>
           {document.pages.map(page => (
@@ -101,7 +100,7 @@ export function DocumentResultScreen() {
         documentID={document.uuid}
         onDismiss={onDisplayModal(false)}
       />
-    </SafeAreaView>
+    </View>
   );
 }
 

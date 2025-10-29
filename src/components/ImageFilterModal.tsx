@@ -3,9 +3,9 @@ import {
   FlatList,
   Modal,
   Pressable,
-  SafeAreaView,
   StyleSheet,
   Text,
+  View,
   ViewStyle,
 } from 'react-native';
 import {COLORS} from '@theme';
@@ -64,7 +64,7 @@ export function ImageFilterModal({
 }) {
   return (
     <Modal animationType={'slide'} visible={isVisible} transparent={true}>
-      <SafeAreaView style={styles.modalContainer}>
+      <View style={styles.modalContainer}>
         <FlatList
           data={IMAGE_FILTERS}
           contentContainerStyle={styles.flatListContentContainer}
@@ -80,7 +80,7 @@ export function ImageFilterModal({
           ListFooterComponent={<Item label={'CLOSE'} onPress={onDismiss} />}
           ListFooterComponentStyle={styles.listFooterStyle}
         />
-      </SafeAreaView>
+      </View>
     </Modal>
   );
 }

@@ -1,5 +1,5 @@
 import React, {useCallback, useContext, useState} from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {BottomActionBar, ImageFilterModal, PageImagePreview} from '@components';
 import {ParametricFilter} from 'react-native-scanbot-sdk';
 import {
@@ -56,7 +56,7 @@ export function DocumentPageResultScreen() {
   }, [onRemovePage]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <PageImagePreview pageID={pageID} style={styles.imageDetails} />
       <BottomActionBar
         buttonOneTitle={'CROP & ROTATE'}
@@ -71,7 +71,7 @@ export function DocumentPageResultScreen() {
         onDismiss={toggleFilterModal}
         onSelect={onFilterSelect}
       />
-    </SafeAreaView>
+    </View>
   );
 }
 

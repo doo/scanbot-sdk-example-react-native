@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, Text} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {
   useCheckScanner,
   useCleanup,
@@ -55,7 +55,7 @@ export function HomeScreen() {
   const onCroppingView = useCroppingView();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView style={styles.list} showsVerticalScrollIndicator={false}>
         <FeatureHeader title={'DOCUMENT SCANNING'} />
         <FeatureItem
@@ -138,7 +138,7 @@ export function HomeScreen() {
         Copyright {new Date().getFullYear()} Scanbot SDK GmbH. All rights
         reserved.
       </Text>
-    </SafeAreaView>
+    </View>
   );
 }
 
