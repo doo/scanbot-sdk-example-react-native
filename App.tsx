@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {Platform, StyleSheet} from 'react-native';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
 import ScanbotSDK, {ScanbotSdkConfiguration} from 'react-native-scanbot-sdk';
 import {DocumentDirectoryPath, ExternalDirectoryPath} from 'react-native-fs';
@@ -26,14 +26,14 @@ import {LoadingIndicator} from '@components';
 import {HomeScreen} from './src/screens/HomeScreen';
 import {MrzResultScreen} from './src/screens/MrzResultScreen';
 import {MedicalCertificateResultScreen} from './src/screens/MedicalCertificateResultScreen';
-import {DocumentDataExtractorResultScreen} from './src/screens/DocumentDataExtractorResultScreen.tsx';
-import {CheckScannerResultScreen} from './src/screens/CheckScannerResultScreen.tsx';
+import {DocumentDataExtractorResultScreen} from './src/screens/DocumentDataExtractorResultScreen';
+import {CheckScannerResultScreen} from './src/screens/CheckScannerResultScreen';
 import {PlainDataResultScreen} from './src/screens/PlainDataResultScreen';
 import {DocumentResultScreen} from './src/screens/DocumentResultScreen';
 import {DocumentPageResultScreen} from './src/screens/DocumentPageResultScreen';
-import {DocumentScannerViewScreen} from './src/screens/DocumentScannerViewScreen.tsx';
-import {CroppingScreen} from './src/screens/CroppingScreen.tsx';
-import {CreditCardScannerResultScreen} from './src/screens/CreditCardScannerResultScreen.tsx';
+import {DocumentScannerViewScreen} from './src/screens/DocumentScannerViewScreen';
+import {CroppingScreen} from './src/screens/CroppingScreen';
+import {CreditCardScannerResultScreen} from './src/screens/CreditCardScannerResultScreen';
 
 const Stack = createNativeStackNavigator<PrimaryRoutesParamList>();
 
@@ -108,59 +108,63 @@ function App() {
 
   return (
     <SafeAreaProvider style={styles.container}>
-      <ActivityIndicatorContext.Provider value={{setLoading}}>
-        <DocumentContext.Provider value={documentValues}>
-          <NavigationContainer theme={ScanbotTheme}>
-            <Stack.Navigator
-              screenOptions={(navigation: any) => ({
-                title: ScreenTitles[navigation.route.name as Screens],
-              })}>
-              <Stack.Screen name={Screens.HOME} component={HomeScreen} />
-              <Stack.Screen
-                name={Screens.MEDICAL_CERTIFICATE_RESULT}
-                component={MedicalCertificateResultScreen}
-              />
-              <Stack.Screen
-                name={Screens.MRZ_RESULT}
-                component={MrzResultScreen}
-              />
-              <Stack.Screen
-                name={Screens.DOCUMENT_DATA_EXTRACTOR_RESULT}
-                component={DocumentDataExtractorResultScreen}
-              />
-              <Stack.Screen
-                name={Screens.CHECK_SCANNER_RESULT}
-                component={CheckScannerResultScreen}
-              />
-              <Stack.Screen
-                name={Screens.PLAIN_DATA_RESULT}
-                component={PlainDataResultScreen}
-              />
-              <Stack.Screen
-                name={Screens.DOCUMENT_RESULT}
-                component={DocumentResultScreen}
-              />
-              <Stack.Screen
-                name={Screens.DOCUMENT_PAGE_RESULT}
-                component={DocumentPageResultScreen}
-              />
-              <Stack.Screen
-                name={Screens.CREDIT_CARD_RESULT}
-                component={CreditCardScannerResultScreen}
-              />
-              <Stack.Screen
-                name={Screens.DOCUMENT_SCANNER_VIEW}
-                component={DocumentScannerViewScreen}
-              />
-              <Stack.Screen
-                name={Screens.CROPPING_VIEW}
-                component={CroppingScreen}
-              />
-            </Stack.Navigator>
-          </NavigationContainer>
-        </DocumentContext.Provider>
-      </ActivityIndicatorContext.Provider>
-      <LoadingIndicator loading={loading} />
+      <SafeAreaView
+        style={styles.container}
+        edges={['bottom', 'right', 'left']}>
+        <ActivityIndicatorContext.Provider value={{setLoading}}>
+          <DocumentContext.Provider value={documentValues}>
+            <NavigationContainer theme={ScanbotTheme}>
+              <Stack.Navigator
+                screenOptions={(navigation: any) => ({
+                  title: ScreenTitles[navigation.route.name as Screens],
+                })}>
+                <Stack.Screen name={Screens.HOME} component={HomeScreen} />
+                <Stack.Screen
+                  name={Screens.MEDICAL_CERTIFICATE_RESULT}
+                  component={MedicalCertificateResultScreen}
+                />
+                <Stack.Screen
+                  name={Screens.MRZ_RESULT}
+                  component={MrzResultScreen}
+                />
+                <Stack.Screen
+                  name={Screens.DOCUMENT_DATA_EXTRACTOR_RESULT}
+                  component={DocumentDataExtractorResultScreen}
+                />
+                <Stack.Screen
+                  name={Screens.CHECK_SCANNER_RESULT}
+                  component={CheckScannerResultScreen}
+                />
+                <Stack.Screen
+                  name={Screens.PLAIN_DATA_RESULT}
+                  component={PlainDataResultScreen}
+                />
+                <Stack.Screen
+                  name={Screens.DOCUMENT_RESULT}
+                  component={DocumentResultScreen}
+                />
+                <Stack.Screen
+                  name={Screens.DOCUMENT_PAGE_RESULT}
+                  component={DocumentPageResultScreen}
+                />
+                <Stack.Screen
+                  name={Screens.CREDIT_CARD_RESULT}
+                  component={CreditCardScannerResultScreen}
+                />
+                <Stack.Screen
+                  name={Screens.DOCUMENT_SCANNER_VIEW}
+                  component={DocumentScannerViewScreen}
+                />
+                <Stack.Screen
+                  name={Screens.CROPPING_VIEW}
+                  component={CroppingScreen}
+                />
+              </Stack.Navigator>
+            </NavigationContainer>
+          </DocumentContext.Provider>
+        </ActivityIndicatorContext.Provider>
+        <LoadingIndicator loading={loading} />
+      </SafeAreaView>
     </SafeAreaProvider>
   );
 }
