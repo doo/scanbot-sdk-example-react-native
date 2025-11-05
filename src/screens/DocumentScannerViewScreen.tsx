@@ -1,11 +1,12 @@
 import React, {useCallback, useRef, useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {ActionButton} from '@components';
+
 import {
   DocumentDetectionStatus,
   ScanbotDocumentScannerView,
   ScanbotDocumentScannerViewHandle,
 } from 'react-native-scanbot-sdk';
-import {ActionButton} from '@components';
 
 export function DocumentScannerViewScreen() {
   const ref = useRef<ScanbotDocumentScannerViewHandle>(null);

@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
-import {Platform, SafeAreaView, StyleSheet, View} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
+import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
 import ScanbotSDK, {ScanbotSdkConfiguration} from 'react-native-scanbot-sdk';
 import {DocumentDirectoryPath, ExternalDirectoryPath} from 'react-native-fs';
@@ -25,14 +26,14 @@ import {LoadingIndicator} from '@components';
 import {HomeScreen} from './src/screens/HomeScreen';
 import {MrzResultScreen} from './src/screens/MrzResultScreen';
 import {MedicalCertificateResultScreen} from './src/screens/MedicalCertificateResultScreen';
-import {DocumentDataExtractorResultScreen} from './src/screens/DocumentDataExtractorResultScreen.tsx';
-import {CheckScannerResultScreen} from './src/screens/CheckScannerResultScreen.tsx';
+import {DocumentDataExtractorResultScreen} from './src/screens/DocumentDataExtractorResultScreen';
+import {CheckScannerResultScreen} from './src/screens/CheckScannerResultScreen';
 import {PlainDataResultScreen} from './src/screens/PlainDataResultScreen';
 import {DocumentResultScreen} from './src/screens/DocumentResultScreen';
 import {DocumentPageResultScreen} from './src/screens/DocumentPageResultScreen';
-import {DocumentScannerViewScreen} from './src/screens/DocumentScannerViewScreen.tsx';
-import {CroppingScreen} from './src/screens/CroppingScreen.tsx';
-import {CreditCardScannerResultScreen} from './src/screens/CreditCardScannerResultScreen.tsx';
+import {DocumentScannerViewScreen} from './src/screens/DocumentScannerViewScreen';
+import {CroppingScreen} from './src/screens/CroppingScreen';
+import {CreditCardScannerResultScreen} from './src/screens/CreditCardScannerResultScreen';
 
 const Stack = createNativeStackNavigator<PrimaryRoutesParamList>();
 
@@ -106,8 +107,10 @@ function App() {
   const [loading, setLoading] = useLoading();
 
   return (
-    <View style={styles.container}>
-      <SafeAreaView style={styles.container}>
+    <SafeAreaProvider style={styles.container}>
+      <SafeAreaView
+        style={styles.container}
+        edges={['bottom', 'right', 'left']}>
         <ActivityIndicatorContext.Provider value={{setLoading}}>
           <DocumentContext.Provider value={documentValues}>
             <NavigationContainer theme={ScanbotTheme}>
@@ -162,7 +165,7 @@ function App() {
         </ActivityIndicatorContext.Provider>
         <LoadingIndicator loading={loading} />
       </SafeAreaView>
-    </View>
+    </SafeAreaProvider>
   );
 }
 
