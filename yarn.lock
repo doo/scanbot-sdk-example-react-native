@@ -1430,6 +1430,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.26.10":
+  version: 7.28.4
+  resolution: "@babel/runtime@npm:7.28.4"
+  checksum: 934b0a0460f7d06637d93fcd1a44ac49adc33518d17253b5a0b55ff4cb90a45d8fe78bf034b448911dbec7aff2a90b918697559f78d21c99ff8dbadae9565b55
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.25.0, @babel/template@npm:^7.27.1, @babel/template@npm:^7.27.2, @babel/template@npm:^7.3.3":
   version: 7.27.2
   resolution: "@babel/template@npm:7.27.2"
@@ -2025,65 +2032,65 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-clean@npm:18.0.0":
-  version: 18.0.0
-  resolution: "@react-native-community/cli-clean@npm:18.0.0"
+"@react-native-community/cli-clean@npm:18.0.1":
+  version: 18.0.1
+  resolution: "@react-native-community/cli-clean@npm:18.0.1"
   dependencies:
-    "@react-native-community/cli-tools": 18.0.0
+    "@react-native-community/cli-tools": 18.0.1
     chalk: ^4.1.2
     execa: ^5.0.0
     fast-glob: ^3.3.2
-  checksum: 901f9ba9c124447de7da76b4e4a52dd6c374ffd117def571368e23393e2a4591e907076d937f8a6a6a81d97a24fcc6f73b7d026d327d9319bf3c4e83f84a79c5
+  checksum: f2bd017b172e1ea23f91c717eefad145deb175c501b1b041bf91efffdfebfeedef7f33ac1cd5ab98dde8d4ccde520b3060422840cd6e6e24efb70b1b0aa72a9e
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-config-android@npm:18.0.0":
-  version: 18.0.0
-  resolution: "@react-native-community/cli-config-android@npm:18.0.0"
+"@react-native-community/cli-config-android@npm:18.0.1":
+  version: 18.0.1
+  resolution: "@react-native-community/cli-config-android@npm:18.0.1"
   dependencies:
-    "@react-native-community/cli-tools": 18.0.0
+    "@react-native-community/cli-tools": 18.0.1
     chalk: ^4.1.2
     fast-glob: ^3.3.2
     fast-xml-parser: ^4.4.1
-  checksum: 60baf6f009f2ecbfa28c9320a83f32682336e4718697d18ac63530cebba7df7040a9209871ddf96c90cf8047f23b49cac11e8fc67c0cb3419f1f4758e8cc3efc
+  checksum: 5343fef8b5feb32e8104a416048e7675dcf5a83de3af2ed0f00dcb5bbb3360dca665d93a973a7379de2f6ff8e0bc6608f763cc272784b6dc1dace6b97b947af2
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-config-apple@npm:18.0.0":
-  version: 18.0.0
-  resolution: "@react-native-community/cli-config-apple@npm:18.0.0"
+"@react-native-community/cli-config-apple@npm:18.0.1":
+  version: 18.0.1
+  resolution: "@react-native-community/cli-config-apple@npm:18.0.1"
   dependencies:
-    "@react-native-community/cli-tools": 18.0.0
+    "@react-native-community/cli-tools": 18.0.1
     chalk: ^4.1.2
     execa: ^5.0.0
     fast-glob: ^3.3.2
-  checksum: 2b085ccfb615d37cfb68389ee7534e76d8d277bb2966ee0497fd06ece372c00da05d677d72a7f50d759c7500ba380bd4f64f18c96a53bbbc2feab9d03a1ee9ba
+  checksum: 4c8716a0941af2c5f9910df71245df1f4cbce37cdbca55baa5b6aaff55f0b5fee5f24488146df0d225c157b0d339f76df94ddcf0f19e4374c67f72383ebd0fd7
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-config@npm:18.0.0":
-  version: 18.0.0
-  resolution: "@react-native-community/cli-config@npm:18.0.0"
+"@react-native-community/cli-config@npm:18.0.1":
+  version: 18.0.1
+  resolution: "@react-native-community/cli-config@npm:18.0.1"
   dependencies:
-    "@react-native-community/cli-tools": 18.0.0
+    "@react-native-community/cli-tools": 18.0.1
     chalk: ^4.1.2
     cosmiconfig: ^9.0.0
     deepmerge: ^4.3.0
     fast-glob: ^3.3.2
     joi: ^17.2.1
-  checksum: d4df3fdce60753667f654da6029577d7cfecaaf7eb193ee6ff437a90fa594cbbf0afe3894c938eb120b47f2b97a6e57729c1ffc46daff8f504bf7022da4068b4
+  checksum: b67d691e8ef47307a9079d42243e6126f780a16730ffedd3fca000cfb5719966f6d409b284012bd8b424df9af12d3f188fe57e64c6880c9e61ba51192ff78742
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-doctor@npm:18.0.0":
-  version: 18.0.0
-  resolution: "@react-native-community/cli-doctor@npm:18.0.0"
+"@react-native-community/cli-doctor@npm:18.0.1":
+  version: 18.0.1
+  resolution: "@react-native-community/cli-doctor@npm:18.0.1"
   dependencies:
-    "@react-native-community/cli-config": 18.0.0
-    "@react-native-community/cli-platform-android": 18.0.0
-    "@react-native-community/cli-platform-apple": 18.0.0
-    "@react-native-community/cli-platform-ios": 18.0.0
-    "@react-native-community/cli-tools": 18.0.0
+    "@react-native-community/cli-config": 18.0.1
+    "@react-native-community/cli-platform-android": 18.0.1
+    "@react-native-community/cli-platform-apple": 18.0.1
+    "@react-native-community/cli-platform-ios": 18.0.1
+    "@react-native-community/cli-tools": 18.0.1
     chalk: ^4.1.2
     command-exists: ^1.2.8
     deepmerge: ^4.3.0
@@ -2094,50 +2101,50 @@ __metadata:
     semver: ^7.5.2
     wcwidth: ^1.0.1
     yaml: ^2.2.1
-  checksum: bcf703aabf63cf9f06b2fa1b6a1f7b1bbfd50f2d0486621a718718ccd8a1ad5ebd47335e9d8b9809d354684d8836c495606b77f49552698970ef5dd9dedcd8b5
+  checksum: 605b08c443456a65a44540aad224b282206f872fef4b43e0027a162eef5f2dddc028d20268241c862618175b27c5718ffbd22b0d3d73aee0b252589cc145b6eb
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-platform-android@npm:18.0.0":
-  version: 18.0.0
-  resolution: "@react-native-community/cli-platform-android@npm:18.0.0"
+"@react-native-community/cli-platform-android@npm:18.0.1":
+  version: 18.0.1
+  resolution: "@react-native-community/cli-platform-android@npm:18.0.1"
   dependencies:
-    "@react-native-community/cli-config-android": 18.0.0
-    "@react-native-community/cli-tools": 18.0.0
+    "@react-native-community/cli-config-android": 18.0.1
+    "@react-native-community/cli-tools": 18.0.1
     chalk: ^4.1.2
     execa: ^5.0.0
     logkitty: ^0.7.1
-  checksum: 9ea334d9add268faa33a9e346d0df21718e8c99306a13560380d734d8562688dd25486483735ab33d8caccc34f1eea07f2837932ab7d335d5d918b20902458fa
+  checksum: 25a413e68cc2d41367a0445861fca37142ffd5c475a7983b4423e1d12d0014389ba632035bcd92ef5cd99df1087ce3554c275422fcb1b2197eb29b747e2aa978
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-platform-apple@npm:18.0.0":
-  version: 18.0.0
-  resolution: "@react-native-community/cli-platform-apple@npm:18.0.0"
+"@react-native-community/cli-platform-apple@npm:18.0.1":
+  version: 18.0.1
+  resolution: "@react-native-community/cli-platform-apple@npm:18.0.1"
   dependencies:
-    "@react-native-community/cli-config-apple": 18.0.0
-    "@react-native-community/cli-tools": 18.0.0
+    "@react-native-community/cli-config-apple": 18.0.1
+    "@react-native-community/cli-tools": 18.0.1
     chalk: ^4.1.2
     execa: ^5.0.0
     fast-xml-parser: ^4.4.1
-  checksum: ef3381bfeabe83e75820c9e4e560791b9fd98ed9ca109ab11b7e70ff7f687fad11d301952060d60b2c2ffe91345a024cc024fa9c9d2f5973bf704d3dddef0c15
+  checksum: 8efaa76b43521afca9bc6eb423b758839e38cee7b4cf3927bc0b6b3d348ad9c98bc8f33366f780f59c8604d02e487de2f4554814ca354700cff01e09430ba365
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-platform-ios@npm:18.0.0":
-  version: 18.0.0
-  resolution: "@react-native-community/cli-platform-ios@npm:18.0.0"
+"@react-native-community/cli-platform-ios@npm:18.0.1":
+  version: 18.0.1
+  resolution: "@react-native-community/cli-platform-ios@npm:18.0.1"
   dependencies:
-    "@react-native-community/cli-platform-apple": 18.0.0
-  checksum: 9d0786e41f5f1e8853c0fa43005f7a12b7926dde583163b8dd5b79c95df1a1e0cfdc3e80665c0646aa398f6a1b1bf82e952caeb2c56170204926421e7f5fcbea
+    "@react-native-community/cli-platform-apple": 18.0.1
+  checksum: 2eb0b662e9371721f524f242cfa04bccc62785d841ab110a3eef162a632216f7a5546d59afa0647bc4c3f7e0de305c030f96fd07119509df3cdef35e5f01f997
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-server-api@npm:18.0.0":
-  version: 18.0.0
-  resolution: "@react-native-community/cli-server-api@npm:18.0.0"
+"@react-native-community/cli-server-api@npm:18.0.1":
+  version: 18.0.1
+  resolution: "@react-native-community/cli-server-api@npm:18.0.1"
   dependencies:
-    "@react-native-community/cli-tools": 18.0.0
+    "@react-native-community/cli-tools": 18.0.1
     body-parser: ^1.20.3
     compression: ^1.7.1
     connect: ^3.6.5
@@ -2147,13 +2154,13 @@ __metadata:
     pretty-format: ^26.6.2
     serve-static: ^1.13.1
     ws: ^6.2.3
-  checksum: 839e9a97b8cb8b875d00ca8a3743ad125beb7a85b74ee07adc9b712896b78d9ed5a35b46c2b7ea5dbfc312a797f9ee96af1bf3462d315252f10375aa22315fe8
+  checksum: ba0543bd6b7debdd2ca6e04075959ca1b04a9f4b5d883638112d0dbab2ee6b6f187880a44fb171ab3d59281dbd951914ada765811e089365f76abbcc8485c22c
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-tools@npm:18.0.0":
-  version: 18.0.0
-  resolution: "@react-native-community/cli-tools@npm:18.0.0"
+"@react-native-community/cli-tools@npm:18.0.1":
+  version: 18.0.1
+  resolution: "@react-native-community/cli-tools@npm:18.0.1"
   dependencies:
     "@vscode/sudo-prompt": ^9.0.0
     appdirsjs: ^1.2.4
@@ -2165,29 +2172,29 @@ __metadata:
     ora: ^5.4.1
     prompts: ^2.4.2
     semver: ^7.5.2
-  checksum: 96a941c4b62da75dccd2fb09dc859dbc724e46be7ca2a9061a2235d58bb2a2c1d6040b203efcdc03dd0c8dbe9306b47a903073abc9fe2f300dcce9f8cd4afd84
+  checksum: b2f40e9d8e442aacb5914ebb1ca00a729878184b2da96a3fb21c51d0050fb5b1f97789e6d6dfd39af269e840b74027de5716cab17b5ef983aa6a778e03e77f2c
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-types@npm:18.0.0":
-  version: 18.0.0
-  resolution: "@react-native-community/cli-types@npm:18.0.0"
+"@react-native-community/cli-types@npm:18.0.1":
+  version: 18.0.1
+  resolution: "@react-native-community/cli-types@npm:18.0.1"
   dependencies:
     joi: ^17.2.1
-  checksum: 92768eb2dd74549069230b6b594b3ae4cdeae03f938504a642fcaed564c22b2b2bb516c4b6cd880a5b419f408206404d88034795e369f8bb8765bdb1f38ed07d
+  checksum: 26c5a92d31021fb54ec4ea700736105e24b48db8369ef5c75de9490faeaef96fa9f6a39fa298466854f63d71941c85404c2713ed1c4323c8b04cd519de511699
   languageName: node
   linkType: hard
 
-"@react-native-community/cli@npm:18.0.0":
-  version: 18.0.0
-  resolution: "@react-native-community/cli@npm:18.0.0"
+"@react-native-community/cli@npm:18.0.1":
+  version: 18.0.1
+  resolution: "@react-native-community/cli@npm:18.0.1"
   dependencies:
-    "@react-native-community/cli-clean": 18.0.0
-    "@react-native-community/cli-config": 18.0.0
-    "@react-native-community/cli-doctor": 18.0.0
-    "@react-native-community/cli-server-api": 18.0.0
-    "@react-native-community/cli-tools": 18.0.0
-    "@react-native-community/cli-types": 18.0.0
+    "@react-native-community/cli-clean": 18.0.1
+    "@react-native-community/cli-config": 18.0.1
+    "@react-native-community/cli-doctor": 18.0.1
+    "@react-native-community/cli-server-api": 18.0.1
+    "@react-native-community/cli-tools": 18.0.1
+    "@react-native-community/cli-types": 18.0.1
     chalk: ^4.1.2
     commander: ^9.4.1
     deepmerge: ^4.3.0
@@ -2199,7 +2206,7 @@ __metadata:
     semver: ^7.5.2
   bin:
     rnc-cli: build/bin.js
-  checksum: bd4d4142c95339393f35509038042fa854b4dd2d7dd458fcb2226d2e63d947cff561f20ce47253249bde310db35c071f836195377761dd7a8e64cb1ce1e35217
+  checksum: 86b3154ce5fb27b654888e55529dab21ca0625b9c47143071d09bd3ee7741f63e8524b07c6c901734d7c9e33790990f1d63da541adf60f1279631cc33e9b25c2
   languageName: node
   linkType: hard
 
@@ -8399,10 +8406,10 @@ __metadata:
   dependencies:
     "@babel/core": ^7.25.2
     "@babel/preset-env": ^7.25.3
-    "@babel/runtime": ^7.25.0
-    "@react-native-community/cli": 18.0.0
-    "@react-native-community/cli-platform-android": 18.0.0
-    "@react-native-community/cli-platform-ios": 18.0.0
+    "@babel/runtime": ^7.26.10
+    "@react-native-community/cli": 18.0.1
+    "@react-native-community/cli-platform-android": 18.0.1
+    "@react-native-community/cli-platform-ios": 18.0.1
     "@react-native-documents/picker": ^10.1.2
     "@react-native/babel-preset": 0.79.0
     "@react-native/eslint-config": 0.79.0
