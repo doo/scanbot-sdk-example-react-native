@@ -3,7 +3,7 @@ import {
   startDocumentScanner,
 } from 'react-native-scanbot-sdk/ui_v2';
 
-async function useSinglePageScanning() {
+async function singlePageScanning() {
   try {
     /** Create the configuration object for single page scanning */
     const configuration = new DocumentScanningFlow();
@@ -12,7 +12,7 @@ async function useSinglePageScanning() {
     /** See further customization configs... */
 
     const documentResult = await startDocumentScanner(configuration);
-    
+
     /** Handle the document if the status is 'OK' */
     if (documentResult.status === 'OK') {
     }
