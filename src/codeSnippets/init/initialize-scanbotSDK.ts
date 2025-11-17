@@ -17,7 +17,7 @@ async function initializeScanbotSDK() {
       '2FuYm90LmRlbW8ueGFtYXJpbgoxNDg0NjExMTk5CjcxNjc' +
       'KMw==\n';
 
-    const SDKInitializationOptions: ScanbotSdkConfiguration = {
+    const initializationOptions: ScanbotSdkConfiguration = {
       //The Scanbot SDK License Key
       licenseKey: myLicenseKey,
       loggingEnabled: true,
@@ -31,12 +31,12 @@ async function initializeScanbotSDK() {
 
     // Set the following properties to enable encryption.
     if (FILE_ENCRYPTION_ENABLED) {
-      SDKInitializationOptions.fileEncryptionMode = 'AES256';
-      SDKInitializationOptions.fileEncryptionPassword =
+      initializationOptions.fileEncryptionMode = 'AES256';
+      initializationOptions.fileEncryptionPassword =
         'SomeSecretPa$$w0rdForFileEncryption';
     }
 
-    const sdkInit = await ScanbotSDK.initializeSDK(SDKInitializationOptions);
+    const sdkInit = await ScanbotSDK.initializeSDK(initializationOptions);
   } catch (error: any) {
     console.error(error);
   }
