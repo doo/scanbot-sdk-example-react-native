@@ -7,24 +7,9 @@ async function startScanning() {
   try {
     /** Create the default configuration instance */
     const configuration = new DocumentScanningFlow();
-    /**
-     * Set the acknowledgment mode
-     * Modes:
-     * - `ALWAYS`: Runs the quality analyzer on the captured document and always displays the acknowledgment screen.
-     * - `BAD_QUALITY`: Runs the quality analyzer and displays the acknowledgment screen only if the quality is poor.
-     * - `NONE`: Skips the quality check entirely.
-     */
+    /** Set the acknowledgment mode */
     configuration.screens.camera.acknowledgement.acknowledgementMode = 'ALWAYS';
-    /**
-     * Set the minimum acceptable document quality.
-     * Options:
-     * - 'EXCELLENT',
-     * - 'GOOD',
-     * - 'REASONABLE',
-     * - 'POOR',
-     * - 'VERY_POOR',
-     * - 'NO_DOCUMENT'.
-     */
+    /** Set the minimum acceptable document quality. */
     configuration.screens.camera.acknowledgement.minimumQuality = 'REASONABLE';
     /** Set the background color for the acknowledgment screen. */
     configuration.screens.camera.acknowledgement.backgroundColor = '#EFEFEF';
