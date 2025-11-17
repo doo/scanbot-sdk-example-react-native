@@ -3,7 +3,7 @@ import ScanbotSDK, {
   TiffGeneratorParameters,
 } from 'react-native-scanbot-sdk';
 
-async function createDocumentTIFF() {
+async function createDocumentTiff() {
   try {
     /** Load a document from storage or create a new one */
     const document = await ScanbotSDK.Document.loadDocument(

@@ -4,7 +4,7 @@ import ScanbotSDK, {
   TiffGeneratorParameters,
 } from 'react-native-scanbot-sdk';
 
-async function createTIFFFromImages() {
+async function createTiffFromImages() {
   try {
     /**
      * Select images from the Image Library

@@ -1,6 +1,6 @@
 import ScanbotSDK, {PdfConfiguration} from 'react-native-scanbot-sdk';
 
-async function createDocumentPDF() {
+async function createSearchableDocumentPdf() {
   try {
     /** Load a document from storage or create a new one */
     const document = await ScanbotSDK.Document.loadDocument(
@@ -9,7 +9,10 @@ async function createDocumentPDF() {
     /** Create a PDF file with the provided options */
     const pdfUriResult = await ScanbotSDK.Document.createPDF({
       documentID: document.uuid,
-      pdfConfiguration: new PdfConfiguration(),
+      pdfConfiguration: new PdfConfiguration({}),
+      ocrConfiguration: {
+        engineMode: 'SCANBOT_OCR',
+      },
     });
     /** Handle the result */
   } catch (e: any) {
