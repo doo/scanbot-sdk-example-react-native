@@ -8,10 +8,7 @@ import {
 import {useCallback, useContext} from 'react';
 import {DocumentContext} from '@context';
 
-import {
-  DocumentScanningFlow,
-  startDocumentScanner,
-} from 'react-native-scanbot-sdk/ui_v2';
+import {DocumentScanningFlow, ScanbotDocument} from 'react-native-scanbot-sdk';
 
 export function useContinueDocumentScanning() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -35,7 +32,7 @@ export function useContinueDocumentScanning() {
         configuration.documentUuid = documentID;
         configuration.cleanScanningSession = false;
 
-        await startDocumentScanner(configuration);
+        await ScanbotDocument.startScanner(configuration);
         loadDocument(documentID);
         navigation.navigate(Screens.DOCUMENT_RESULT);
       } catch (e: any) {

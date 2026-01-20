@@ -8,11 +8,12 @@ import {
 import {useCallback} from 'react';
 import {COLORS} from '@theme';
 
-import {autorelease, ToJsonConfiguration} from 'react-native-scanbot-sdk';
 import {
+  autorelease,
   CheckScannerScreenConfiguration,
-  startCheckScanner,
-} from 'react-native-scanbot-sdk/ui_v2';
+  ScanbotCheck,
+  ToJsonConfiguration,
+} from 'react-native-scanbot-sdk';
 
 export function useCheckScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -43,7 +44,7 @@ export function useCheckScanner() {
 
       /** An autorelease pool is required because the result object contains image references. */
       await autorelease(async () => {
-        const result = await startCheckScanner(configuration);
+        const result = await ScanbotCheck.startScanner(configuration);
         /**
          * Handle the result if the result status is OK
          */

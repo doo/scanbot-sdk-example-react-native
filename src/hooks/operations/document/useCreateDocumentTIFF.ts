@@ -3,8 +3,9 @@ import {ActivityIndicatorContext} from '@context';
 import {checkLicense, errorMessageAlert} from '@utils';
 import Share from 'react-native-share';
 
-import ScanbotSDK, {
+import {
   ScanbotBinarizationFilter,
+  ScanbotTiffGenerator,
   TiffGeneratorParameters,
 } from 'react-native-scanbot-sdk';
 
@@ -25,7 +26,7 @@ export function useCreateDocumentTIFF() {
         /**
          * Create a tiff file from the document
          */
-        const result = await ScanbotSDK.Document.createTIFF({
+        const tiffFileUri = await ScanbotTiffGenerator.generateFromDocument({
           documentID,
           configuration: new TiffGeneratorParameters({
             binarizationFilter: binarized
@@ -37,9 +38,9 @@ export function useCreateDocumentTIFF() {
         /**
          * Handle the result by displaying an action sheet
          */
-        Share.open({
+        await Share.open({
           title: 'Share TIFF file',
-          url: result.tiffFileUri,
+          url: tiffFileUri,
           failOnCancel: false,
         });
       } catch (e: any) {

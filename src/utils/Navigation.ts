@@ -5,7 +5,6 @@ import {
   CreditCardScanningStatus,
   DocumentDataExtractionStatus,
   GenericDocument,
-  MedicalCertificateScanningResult,
 } from 'react-native-scanbot-sdk';
 
 export enum Screens {
@@ -13,7 +12,6 @@ export enum Screens {
   CHECK_SCANNER_RESULT = 'checkScannerResult',
   MRZ_RESULT = 'mrzResult',
   DOCUMENT_DATA_EXTRACTOR_RESULT = 'documentDataExtractorResult',
-  MEDICAL_CERTIFICATE_RESULT = 'medicalCertificateResult',
   PLAIN_DATA_RESULT = 'plainDataResult',
   DOCUMENT_RESULT = 'documentResult',
   DOCUMENT_PAGE_RESULT = 'documentPageResult',
@@ -27,7 +25,6 @@ export const ScreenTitles: Record<Screens, string> = {
   [Screens.CHECK_SCANNER_RESULT]: 'Check Scanner Result',
   [Screens.MRZ_RESULT]: 'MRZ Result',
   [Screens.DOCUMENT_DATA_EXTRACTOR_RESULT]: 'Document Data Extractor Result',
-  [Screens.MEDICAL_CERTIFICATE_RESULT]: 'Medical Certificate Result',
   [Screens.PLAIN_DATA_RESULT]: 'Result',
   [Screens.DOCUMENT_RESULT]: 'Document',
   [Screens.DOCUMENT_PAGE_RESULT]: 'Document Page',
@@ -46,11 +43,6 @@ export type PrimaryRoutesParamList = {
   [Screens.DOCUMENT_DATA_EXTRACTOR_RESULT]: {
     document: GenericDocument | null;
     extractionStatus: DocumentDataExtractionStatus;
-  };
-  [Screens.MEDICAL_CERTIFICATE_RESULT]: {
-    certificate: Awaited<
-      ReturnType<MedicalCertificateScanningResult['serialize']>
-    >;
   };
   [Screens.MRZ_RESULT]: {
     mrzDocument: GenericDocument | null;
@@ -80,11 +72,6 @@ export type CheckRecognizerResultScreenRouteProp = RouteProp<
 export type MrzResultScreenRouteProp = RouteProp<
   PrimaryRoutesParamList,
   Screens.MRZ_RESULT
->;
-
-export type MedicalCertificateResultScreenRouteProp = RouteProp<
-  PrimaryRoutesParamList,
-  Screens.MEDICAL_CERTIFICATE_RESULT
 >;
 
 export type DocumentDataExtractionResultScreenRouteProp = RouteProp<

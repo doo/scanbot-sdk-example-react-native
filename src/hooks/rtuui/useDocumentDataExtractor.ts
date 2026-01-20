@@ -6,11 +6,12 @@ import {
 } from '@utils';
 import {useNavigation} from '@react-navigation/native';
 import {useCallback} from 'react';
+import {COLORS} from '@theme';
+
 import {
   DocumentDataExtractorScreenConfiguration,
-  startDocumentDataExtractor,
-} from 'react-native-scanbot-sdk/ui_v2';
-import {COLORS} from '@theme';
+  ScanbotDocumentDataExtractor,
+} from 'react-native-scanbot-sdk';
 
 export function useDocumentDataExtractor() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -32,7 +33,9 @@ export function useDocumentDataExtractor() {
       configuration.introScreen.explanation.visible = true;
       configuration.extractionProgress.progressColor = COLORS.SCANBOT_RED;
 
-      const result = await startDocumentDataExtractor(configuration);
+      const result = await ScanbotDocumentDataExtractor.startExtractorScreen(
+        configuration,
+      );
       /**
        * Handle the result if the result status is OK
        */

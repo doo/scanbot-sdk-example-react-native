@@ -9,13 +9,14 @@ import {
 import {ActivityIndicatorContext} from '@context';
 import {useNavigation} from '@react-navigation/native';
 
-import ScanbotSDK, {
+import {
   autorelease,
   CheckScannerConfiguration,
+  ScanbotCheck,
   ToJsonConfiguration,
 } from 'react-native-scanbot-sdk';
 
-export function useRecognizeCheck() {
+export function useScanCheckFromImage() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
   const {setLoading} = useContext(ActivityIndicatorContext);
 
@@ -44,8 +45,8 @@ export function useRecognizeCheck() {
          * Recognize Check on the selected image and
          * Handle the result by navigating to Screens.CHECK_SCANNER_RESULT
          */
-        const result = await ScanbotSDK.recognizeCheck({
-          imageFileUri: selectedImage,
+        const result = await ScanbotCheck.scanFromImage({
+          image: selectedImage,
           configuration: new CheckScannerConfiguration({
             documentDetectionMode: 'DETECT_AND_CROP_DOCUMENT',
           }),

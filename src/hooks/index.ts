@@ -1,7 +1,6 @@
 import {useLicenseValidityCheckWrapper} from './useLicenseValidityCheck';
 
 import {useCheckScanner} from './rtuui/useCheckScanner.ts';
-import {useMedicalCertificateScanner} from './rtuui/useMedicalCertificateScanner';
 import {useVinScanner} from './rtuui/useVinScanner';
 import {useMRZScanner} from './rtuui/useMRZScanner';
 import {useCreditCardScanner} from './rtuui/useCreditCardScanner.ts';
@@ -20,11 +19,10 @@ import {usePerformOCR} from './operations/usePerformOCR';
 import {useCleanup} from './operations/useCleanup';
 
 import {useDocumentQualityAnalyzer} from './operations/useDocumentQualityAnalyzer';
-import {useRecognizeCheck} from './operations/useRecognizeCheck';
-import {useRecognizeMRZ} from './operations/useRecognizeMRZ';
+import {useScanCheckFromImage} from './operations/useScanCheckFromImage.ts';
+import {useScanMRZFromImage} from './operations/useScanMRZFromImage.ts';
 import {useDocumentDataExtractorOnImage} from './operations/useDocumentDataExtractorOnImage.ts';
-import {useRecognizeMedicalCertificate} from './operations/useRecognizeMedicalCertificate';
-import {useRecognizeCreditCard} from './operations/useRecognizeCreditCard.ts';
+import {useScanCreditCardFromImage} from './operations/useScanCreditCardFromImage.ts';
 
 import {useAddDocumentPage} from './operations/document/useAddDocumentPage.ts';
 import {useCreateDocumentPDF} from './operations/document/useCreateDocumentPDF.ts';
@@ -41,18 +39,16 @@ export {
   useCreditCardScanner,
   useTextPatternScanner,
   useMRZScanner,
-  useMedicalCertificateScanner,
   useVinScanner,
   useDocumentDataExtractor,
   useLicenseInfo,
   useOCRConfigs,
   usePerformOCR,
-  useRecognizeCheck,
-  useRecognizeMRZ,
+  useScanCheckFromImage,
+  useScanMRZFromImage,
   useCleanup,
   useDocumentDataExtractorOnImage,
-  useRecognizeMedicalCertificate,
-  useRecognizeCreditCard,
+  useScanCreditCardFromImage,
   useDocumentQualityAnalyzer,
   useSinglePageScanning,
   useSinglePageScanningWithFinder,

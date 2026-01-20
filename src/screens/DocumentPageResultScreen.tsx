@@ -4,7 +4,7 @@ import {BottomActionBar, ImageFilterModal, PageImagePreview} from '@components';
 import {ParametricFilter} from 'react-native-scanbot-sdk';
 import {
   DocumentPageResultScreenRouteProp,
-  removePageConfirmationAlert,
+  deleteConfirmationAlert,
 } from '@utils';
 import {useRoute} from '@react-navigation/native';
 import {useCropDocumentPage, useModifyPage, useRemovePage} from '@hooks';
@@ -52,7 +52,11 @@ export function DocumentPageResultScreen() {
   }, [document, pageID, removePage]);
 
   const onDelete = useCallback(() => {
-    removePageConfirmationAlert(onRemovePage);
+    deleteConfirmationAlert(
+      'Removing page',
+      'Are you sure you want to proceed?',
+      onRemovePage,
+    );
   }, [onRemovePage]);
 
   return (

@@ -1,11 +1,10 @@
 import {
-  deleteAllConfirmationAlert,
+  deleteConfirmationAlert,
   errorMessageAlert,
   infoMessageAlert,
   resultMessageAlert,
-  removePageConfirmationAlert,
 } from './Alerts';
-import {selectPDFFileUri} from './FileUtils';
+import {selectPDFFile} from './FileUtils';
 import {selectImagesFromLibrary, selectImageFromLibrary} from './ImageUtils';
 import {
   checkLicense,
@@ -16,7 +15,6 @@ import {GenericDocumentUtils} from './GenericDocumentUtils';
 import {
   CheckRecognizerResultScreenRouteProp,
   DocumentDataExtractionResultScreenRouteProp,
-  MedicalCertificateResultScreenRouteProp,
   MrzResultScreenRouteProp,
   PlainDataResultParam,
   PlainDataResultScreenRouteProp,
@@ -33,9 +31,8 @@ export {
   errorMessageAlert,
   resultMessageAlert,
   infoMessageAlert,
-  deleteAllConfirmationAlert,
-  removePageConfirmationAlert,
-  selectPDFFileUri,
+  deleteConfirmationAlert,
+  selectPDFFile,
   selectImagesFromLibrary,
   selectImageFromLibrary,
   IMAGE_FILE_FORMAT,
@@ -51,7 +48,6 @@ export type {
   PrimaryRouteNavigationProp,
   CheckRecognizerResultScreenRouteProp,
   MrzResultScreenRouteProp,
-  MedicalCertificateResultScreenRouteProp,
   DocumentDataExtractionResultScreenRouteProp,
   PlainDataResultScreenRouteProp,
   PlainDataResultParam,

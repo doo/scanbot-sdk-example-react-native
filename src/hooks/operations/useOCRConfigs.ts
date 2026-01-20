@@ -17,7 +17,7 @@ export function useOCRConfigs() {
        * Get the OCR Configs
        * Handle the result by displaying an Alert
        */
-      const result = await ScanbotSDK.getOCRConfigs();
+      const result = await ScanbotSDK.getOcrConfigs();
       resultMessageAlert(
         `Installed languages: ${result.installedLanguages} at path ${result.languageDataPath}`,
       );

@@ -10,9 +10,9 @@ import {COLORS} from '@theme';
 
 import {
   CreditCardScannerScreenConfiguration,
-  startCreditCardScanner,
+  ScanbotCreditCard,
   StyledText,
-} from 'react-native-scanbot-sdk/ui_v2';
+} from 'react-native-scanbot-sdk';
 
 export function useCreditCardScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -48,7 +48,7 @@ export function useCreditCardScanner() {
       configuration.actionBar.flashButton.activeForegroundColor =
         COLORS.SCANBOT_RED;
 
-      const result = await startCreditCardScanner(configuration);
+      const result = await ScanbotCreditCard.startScanner(configuration);
       /**
        * Handle the result if the result status is OK
        */

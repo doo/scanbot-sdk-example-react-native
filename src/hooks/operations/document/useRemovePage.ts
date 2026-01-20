@@ -8,7 +8,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {DocumentContext} from '@context';
 
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import {ScanbotDocument} from 'react-native-scanbot-sdk';
 
 export function useRemovePage() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -25,9 +25,9 @@ export function useRemovePage() {
           return;
         }
         /** Remove the document page */
-        const documentResult = await ScanbotSDK.Document.removePage({
+        const documentResult = await ScanbotDocument.removePages({
+          pageIDs: [pageID],
           documentID: documentID,
-          pageID: pageID,
         });
         /**
          * Handle the result

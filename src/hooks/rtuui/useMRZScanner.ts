@@ -10,9 +10,9 @@ import {useCallback} from 'react';
 
 import {
   MrzScannerScreenConfiguration,
-  startMRZScanner,
+  ScanbotMrz,
   StyledText,
-} from 'react-native-scanbot-sdk/ui_v2';
+} from 'react-native-scanbot-sdk';
 
 export function useMRZScanner() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -40,7 +40,6 @@ export function useMRZScanner() {
       configuration.topUserGuidance.title = new StyledText({
         text: 'Scan MRZ',
         color: COLORS.SCANBOT_RED,
-        useShadow: true,
       });
 
       // Modify the action bar
@@ -51,7 +50,7 @@ export function useMRZScanner() {
       // Configure the scanner
       configuration.scannerConfiguration.incompleteResultHandling = 'ACCEPT';
 
-      const result = await startMRZScanner(configuration);
+      const result = await ScanbotMrz.startScanner(configuration);
       /**
        * Handle the result if the result status is OK
        */

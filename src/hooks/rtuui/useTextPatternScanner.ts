@@ -3,9 +3,9 @@ import {useCallback} from 'react';
 import {COLORS} from '@theme';
 
 import {
-  startTextPatternScanner,
+  ScanbotTextPattern,
   TextPatternScannerScreenConfiguration,
-} from 'react-native-scanbot-sdk/ui_v2';
+} from 'react-native-scanbot-sdk';
 
 export function useTextPatternScanner() {
   return useCallback(async () => {
@@ -34,7 +34,7 @@ export function useTextPatternScanner() {
 
       configuration.scannerConfiguration.minimumNumberOfRequiredFramesWithEqualScanningResult = 4;
 
-      const result = await startTextPatternScanner(configuration);
+      const result = await ScanbotTextPattern.startScanner(configuration);
       /**
        * Handle the result if the result status is OK
        */

@@ -8,11 +8,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {DocumentContext} from '@context';
 import {COLORS} from '@theme';
-
-import {
-  DocumentScanningFlow,
-  startDocumentScanner,
-} from 'react-native-scanbot-sdk/ui_v2';
+import {DocumentScanningFlow, ScanbotDocument} from 'react-native-scanbot-sdk';
 
 export function useMultiplePageScanning() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -83,7 +79,7 @@ export function useMultiplePageScanning() {
       configuration.screens.cropping.bottomBar.rotateButton.visible = true;
       configuration.screens.cropping.bottomBar.detectButton.visible = true;
 
-      const documentResult = await startDocumentScanner(configuration);
+      const documentResult = await ScanbotDocument.startScanner(configuration);
       /**
        * Handle the result if the result status is OK
        */

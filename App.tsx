@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {Platform, StyleSheet} from 'react-native';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
-import ScanbotSDK, {ScanbotSdkConfiguration} from 'react-native-scanbot-sdk';
+import ScanbotSDK, {SdkConfiguration} from 'react-native-scanbot-sdk';
 import {DocumentDirectoryPath, ExternalDirectoryPath} from 'react-native-fs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -25,7 +25,6 @@ import {LoadingIndicator} from '@components';
 
 import {HomeScreen} from './src/screens/HomeScreen';
 import {MrzResultScreen} from './src/screens/MrzResultScreen';
-import {MedicalCertificateResultScreen} from './src/screens/MedicalCertificateResultScreen';
 import {DocumentDataExtractorResultScreen} from './src/screens/DocumentDataExtractorResultScreen';
 import {CheckScannerResultScreen} from './src/screens/CheckScannerResultScreen';
 import {PlainDataResultScreen} from './src/screens/PlainDataResultScreen';
@@ -69,27 +68,27 @@ const storageBaseDirectory = Platform.select({
  * Please submit the trial license form (https://docs.scanbot.io/trial/) on our website by using
  * the app identifier "io.scanbot.example.sdk.reactnative" of this example app.
  */
-export const SDKInitializationOptions: ScanbotSdkConfiguration = {
+export const initializationConfiguration = new SdkConfiguration({
   //The Scanbot SDK License Key
   licenseKey: '',
   loggingEnabled: true, // Logging enabled. Consider switching logging OFF in production builds for security and performance reasons!
   storageImageFormat: IMAGE_FILE_FORMAT, // Format of stored images
   storageImageQuality: 80, // Quality of stored images
   //storageBaseDirectory: storageBaseDirectory, // Uncomment this line to use a custom storage path
-} as const;
+});
 
 // Set the following properties to enable encryption.
 if (FILE_ENCRYPTION_ENABLED) {
-  SDKInitializationOptions.fileEncryptionMode = 'AES256';
-  SDKInitializationOptions.fileEncryptionPassword =
+  initializationConfiguration.fileEncryptionMode = 'AES256';
+  initializationConfiguration.fileEncryptionPassword =
     'SomeSecretPa$$w0rdForFileEncryption';
 }
 
 function App() {
   useEffect(() => {
-    ScanbotSDK.initializeSDK(SDKInitializationOptions)
-      .then(message => {
-        console.log(message);
+    ScanbotSDK.initialize(initializationConfiguration)
+      .then(licenseInfo => {
+        console.log(licenseInfo);
       })
       .catch(error => {
         console.error('Error initializing Scanbot SDK:', error.message);
@@ -119,10 +118,6 @@ function App() {
                   title: ScreenTitles[navigation.route.name as Screens],
                 })}>
                 <Stack.Screen name={Screens.HOME} component={HomeScreen} />
-                <Stack.Screen
-                  name={Screens.MEDICAL_CERTIFICATE_RESULT}
-                  component={MedicalCertificateResultScreen}
-                />
                 <Stack.Screen
                   name={Screens.MRZ_RESULT}
                   component={MrzResultScreen}

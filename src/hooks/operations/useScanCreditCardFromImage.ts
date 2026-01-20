@@ -1,18 +1,20 @@
 import {useCallback, useContext} from 'react';
-import {useNavigation} from '@react-navigation/native';
 import {
   checkLicense,
   errorMessageAlert,
-  infoMessageAlert,
   PrimaryRouteNavigationProp,
   Screens,
   selectImageFromLibrary,
 } from '@utils';
 import {ActivityIndicatorContext} from '@context';
+import {useNavigation} from '@react-navigation/native';
 
-import ScanbotSDK, {MrzScannerConfiguration} from 'react-native-scanbot-sdk';
+import {
+  CreditCardScannerConfiguration,
+  ScanbotCreditCard,
+} from 'react-native-scanbot-sdk';
 
-export function useRecognizeMRZ() {
+export function useScanCreditCardFromImage() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
   const {setLoading} = useContext(ActivityIndicatorContext);
 
@@ -35,27 +37,26 @@ export function useRecognizeMRZ() {
         return;
       }
 
-      const configuration = new MrzScannerConfiguration();
-      configuration.incompleteResultHandling = 'REJECT';
+      const configuration = new CreditCardScannerConfiguration();
+      configuration.requireCardholderName = true;
       // Configure other parameters as needed.
 
       /**
-       * Recognize MRZ on the selected image and
-       * Handle the result by navigating to Screens.MRZ_RESULT
+       * Recognize Credit card on the selected image and
+       * Handle the result by navigating to Screens.CREDIT_CARD_RESULT
        */
-      const result = await ScanbotSDK.recognizeMrz({
-        imageFileUri: selectedImage,
+      const result = await ScanbotCreditCard.scanFromImage({
+        image: selectedImage,
         configuration: configuration,
       });
 
-      if (result.document) {
-        navigation.navigate(Screens.MRZ_RESULT, {
-          mrzDocument: result.document,
-          rawMRZ: result.rawMRZ,
-        });
-      } else {
-        infoMessageAlert('No MRZ found.');
-      }
+      /**
+       * Handle the result if the result status is OK
+       */
+      navigation.navigate(Screens.CREDIT_CARD_RESULT, {
+        creditCardDocument: result.creditCard,
+        recognitionStatus: result.scanningStatus,
+      });
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {

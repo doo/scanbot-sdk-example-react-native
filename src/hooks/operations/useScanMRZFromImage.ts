@@ -1,19 +1,18 @@
 import {useCallback, useContext} from 'react';
+import {useNavigation} from '@react-navigation/native';
 import {
   checkLicense,
   errorMessageAlert,
+  infoMessageAlert,
   PrimaryRouteNavigationProp,
   Screens,
   selectImageFromLibrary,
 } from '@utils';
 import {ActivityIndicatorContext} from '@context';
-import {useNavigation} from '@react-navigation/native';
 
-import ScanbotSDK, {
-  CreditCardScannerConfiguration,
-} from 'react-native-scanbot-sdk';
+import {MrzScannerConfiguration, ScanbotMrz} from 'react-native-scanbot-sdk';
 
-export function useRecognizeCreditCard() {
+export function useScanMRZFromImage() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
   const {setLoading} = useContext(ActivityIndicatorContext);
 
@@ -36,26 +35,27 @@ export function useRecognizeCreditCard() {
         return;
       }
 
-      const configuration = new CreditCardScannerConfiguration();
-      configuration.requireCardholderName = true;
+      const configuration = new MrzScannerConfiguration();
+      configuration.incompleteResultHandling = 'REJECT';
       // Configure other parameters as needed.
 
       /**
-       * Recognize Credit card on the selected image and
-       * Handle the result by navigating to Screens.CREDIT_CARD_RESULT
+       * Recognize MRZ on the selected image and
+       * Handle the result by navigating to Screens.MRZ_RESULT
        */
-      const result = await ScanbotSDK.recognizeCreditCard({
-        imageFileUri: selectedImage,
+      const result = await ScanbotMrz.scanFromImage({
+        image: selectedImage,
         configuration: configuration,
       });
 
-      /**
-       * Handle the result if the result status is OK
-       */
-      navigation.navigate(Screens.CREDIT_CARD_RESULT, {
-        creditCardDocument: result.creditCard,
-        recognitionStatus: result.scanningStatus,
-      });
+      if (result.document) {
+        navigation.navigate(Screens.MRZ_RESULT, {
+          mrzDocument: result.document,
+          rawMRZ: result.rawMRZ,
+        });
+      } else {
+        infoMessageAlert('No MRZ found.');
+      }
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {

@@ -2,10 +2,7 @@ import {checkLicense, errorMessageAlert} from '@utils';
 import {useCallback, useContext} from 'react';
 import {DocumentContext} from '@context';
 
-import {
-  CroppingConfiguration,
-  startCroppingScreen,
-} from 'react-native-scanbot-sdk/ui_v2';
+import {CroppingConfiguration, ScanbotDocument} from 'react-native-scanbot-sdk';
 
 export function useCropDocumentPage() {
   const {setDocument} = useContext(DocumentContext);
@@ -22,14 +19,16 @@ export function useCropDocumentPage() {
         }
         /**
          * Create the Cropping configuration object and
-         * start the Cropping UI with the configuration, documentUUID and pageUUID
+         * start the Cropping Screen with the configuration, documentUUID and pageUUID
          */
         const configuration = new CroppingConfiguration({
           documentUuid: documentID,
           pageUuid: pageID,
         });
 
-        const documentResult = await startCroppingScreen(configuration);
+        const documentResult = await ScanbotDocument.startCroppingScreen(
+          configuration,
+        );
         /**
          * Handle the result if the result status is OK
          */

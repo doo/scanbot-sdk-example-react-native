@@ -1,4 +1,4 @@
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import {ScanbotImageProcessor} from 'react-native-scanbot-sdk';
 import {ImageStyle, StyleProp} from 'react-native';
 import React, {useContext, useEffect, useMemo, useState} from 'react';
 import {PreviewImage} from './PreviewImage.tsx';
@@ -30,12 +30,12 @@ export function PageImagePreview({
       try {
         setLoading(true);
         if (page && (page.documentImagePreviewURI || page.originalImageURI)) {
-          const result = await ScanbotSDK.getImageData(
+          const base64ImageData = await ScanbotImageProcessor.readImageData(
             page.documentImagePreviewURI || page.originalImageURI,
           );
           const imgMimeType =
             IMAGE_FILE_FORMAT === 'JPG' ? 'image/jpeg' : 'image/png';
-          setUri(`data:${imgMimeType};base64,${result.base64ImageData}`);
+          setUri(`data:${imgMimeType};base64,${base64ImageData}`);
         }
       } catch (e) {
         console.log(e);

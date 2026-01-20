@@ -11,16 +11,13 @@ export function useLicenseInfo() {
        **/
       const info = await ScanbotSDK.getLicenseInfo();
 
-      const licenseMessage = info.licenseStatusMessage ?? `The license is ${info.isLicenseValid ? 'VALID' : 'NOT VALID'}`;
-
-      const text =
-        `• ${licenseMessage}` +
-        `\n\n• Expiration Date: ${
-          info.licenseExpirationDate
-            ? new Date(info.licenseExpirationDate)
-            : 'N/A'
-        }` +
-        `\n\n• Status: ${info.licenseStatus}`;
+      const text = [
+        `• ${info.licenseStatusMessage}`,
+        `• Expiration Date: ${new Date(
+          info.expirationTimestamp * 1000,
+        ).toDateString()}`,
+        `• Status: ${info.status}`,
+      ].join('\n');
 
       infoMessageAlert(text);
     } catch (e: any) {

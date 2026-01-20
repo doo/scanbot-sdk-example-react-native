@@ -13,8 +13,8 @@ import {
   DocumentScanningFlow,
   PageSnapCheckMarkAnimation,
   PageSnapFunnelAnimation,
-  startDocumentScanner,
-} from 'react-native-scanbot-sdk/ui_v2';
+  ScanbotDocument,
+} from 'react-native-scanbot-sdk';
 
 export function useSinglePageScanning() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -76,7 +76,7 @@ export function useSinglePageScanning() {
       configuration.screens.camera.userGuidance.statesTitles.noDocumentFound =
         'Could not detect a document';
 
-      const documentResult = await startDocumentScanner(configuration);
+      const documentResult = await ScanbotDocument.startScanner(configuration);
       /**
        * Handle the result if the result status is OK
        */

@@ -9,7 +9,7 @@ import {
 import {ActivityIndicatorContext} from '@context';
 import {useNavigation} from '@react-navigation/native';
 
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import {ScanbotOcrEngine} from 'react-native-scanbot-sdk';
 
 export function usePerformOCR() {
   const {setLoading} = useContext(ActivityIndicatorContext);
@@ -37,9 +37,9 @@ export function usePerformOCR() {
        * Perform optical character recognition with the provided configuration and
        * Display the result
        */
-      const result = await ScanbotSDK.performOCR({
-        imageFileUris: selectedImages,
-        ocrConfiguration: {
+      const result = await ScanbotOcrEngine.recognizeOnImages({
+        images: selectedImages,
+        configuration: {
           engineMode: 'SCANBOT_OCR',
         },
       });
@@ -47,7 +47,7 @@ export function usePerformOCR() {
        * Handle the result by navigating to the result screen
        */
       navigation.navigate(Screens.PLAIN_DATA_RESULT, {
-        data: result.plainText,
+        data: result.recognizedText,
       });
     } catch (e: any) {
       errorMessageAlert(e.message);
