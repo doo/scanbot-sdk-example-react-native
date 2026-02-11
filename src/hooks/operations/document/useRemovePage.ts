@@ -26,8 +26,8 @@ export function useRemovePage() {
         }
         /** Remove the document page */
         const documentResult = await ScanbotDocument.removePages({
-          pageIDs: [pageID],
-          documentID: documentID,
+          pageUuids: [pageID],
+          documentUuid: documentID,
         });
         /**
          * Handle the result

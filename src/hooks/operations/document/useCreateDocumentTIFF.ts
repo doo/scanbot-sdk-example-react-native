@@ -27,8 +27,8 @@ export function useCreateDocumentTIFF() {
          * Create a tiff file from the document
          */
         const tiffFileUri = await ScanbotTiffGenerator.generateFromDocument({
-          documentID,
-          configuration: new TiffGeneratorParameters({
+          documentUuid: documentID,
+          tiffGeneratorParameters: new TiffGeneratorParameters({
             binarizationFilter: binarized
               ? new ScanbotBinarizationFilter()
               : undefined,

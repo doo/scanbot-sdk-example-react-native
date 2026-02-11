@@ -33,8 +33,8 @@ export function useModifyPage() {
         }
         /** Modify the document page */
         const documentResult = await ScanbotDocument.modifyPage({
-          documentID: documentID,
-          pageID: pageID,
+          documentUuid: documentID,
+          pageUuid: pageID,
           options: new ModifyPageOptions({
             filters: [parametricFilter],
           }),

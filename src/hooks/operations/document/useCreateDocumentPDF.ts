@@ -33,7 +33,7 @@ export function useCreateDocumentPDF() {
           : undefined;
 
         const pdfFileUri = await ScanbotPdfGenerator.generateFromDocument({
-          documentID: documentID,
+          documentUuid: documentID,
           pdfConfiguration: new PdfConfiguration(),
           ocrConfiguration: ocrConfiguration,
         });

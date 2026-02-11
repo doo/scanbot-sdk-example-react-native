@@ -38,7 +38,7 @@ export function useAddDocumentPage() {
 
         /** Add a page to the document */
         const documentResult = await ScanbotDocument.addPages({
-          documentID,
+          documentUuid: documentID,
           images: [selectedImageResult],
           options: new AddPageOptions({
             documentDetection: true,
