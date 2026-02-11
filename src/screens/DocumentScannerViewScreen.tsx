@@ -3,7 +3,10 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {ActionButton} from '@components';
 
 import {
+  DocumentDetectionResult,
   DocumentDetectionStatus,
+  ImageRef,
+  SBError,
   ScanbotDocumentScannerView,
   ScanbotDocumentScannerViewHandle,
 } from 'react-native-scanbot-sdk';
@@ -29,18 +32,36 @@ export function DocumentScannerViewScreen() {
     ref.current?.snapDocument();
   }, []);
 
-  const onDocumentResult = useCallback((base64Image: string) => {
-    setResult(base64Image);
-  }, []);
+  const onDocumentResult = useCallback(
+    async (
+      original: ImageRef,
+      documentImage?: ImageRef,
+      _documentDetectionResult?: DocumentDetectionResult,
+    ) => {
+      try {
+        const image = await (documentImage ?? original).encodeImage();
+        if (image) {
+          setResult(image);
+        }
+      } catch (error) {
+        console.warn('Failed to encode image', error);
+      }
+    },
+    [],
+  );
 
   const onDetectionResult = useCallback(
-    (status: DocumentDetectionStatus) => {
-      if (status !== detectionState) {
-        setDetectionState(status);
+    (detectionResult: DocumentDetectionResult) => {
+      if (detectionResult.status !== detectionState) {
+        setDetectionState(detectionResult.status);
       }
     },
     [detectionState],
   );
+
+  const onError = useCallback((error: SBError) => {
+    console.warn('Document scanner error', error.type);
+  }, []);
 
   if (result) {
     return (
@@ -62,8 +83,9 @@ export function DocumentScannerViewScreen() {
     <View style={styles.container}>
       <ScanbotDocumentScannerView
         ref={ref}
-        onDocumentScannerResult={onDocumentResult}
-        onDetectionResult={onDetectionResult}
+        onSnappedDocumentResult={onDocumentResult}
+        onFrameDetectionResult={onDetectionResult}
+        onError={onError}
         autoSnappingEnabled={true}
         flashEnabled={flashEnabled}
         finderEnabled={finderEnabled}
