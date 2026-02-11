@@ -1,14 +1,11 @@
-import {
-  DocumentScanningFlow,
-  startDocumentScanner,
-} from 'react-native-scanbot-sdk/ui_v2';
+import {DocumentScanningFlow, ScanbotDocument} from 'react-native-scanbot-sdk';
 
 async function startScanning() {
   try {
     /** Create the default configuration instance */
     const configuration = new DocumentScanningFlow();
     /** Start the Document Scanner UI */
-    const documentResult = await startDocumentScanner(configuration);
+    const documentResult = await ScanbotDocument.startScanner(configuration);
     /** Handle the document if the status is 'OK' */
     if (documentResult.status === 'OK') {
     }

@@ -1,7 +1,7 @@
 import {
-  startVINScanner,
+  ScanbotVin,
   VinScannerScreenConfiguration,
-} from 'react-native-scanbot-sdk/ui_v2';
+} from 'react-native-scanbot-sdk';
 
 async function startScanning() {
   try {
@@ -17,7 +17,7 @@ async function startScanning() {
       'Localized completionOverlaySuccessMessage';
     localization.introScreenText = 'Localized introScreenText';
     /** Start the VIN Scanner UI */
-    const vinScannerResult = await startVINScanner(configuration);
+    const vinScannerResult = await ScanbotVin.startScanner(configuration);
     /** Handle the result if the status is 'OK' */
     if (vinScannerResult.status === 'OK') {
     }

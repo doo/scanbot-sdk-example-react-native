@@ -1,7 +1,7 @@
 import {
   CheckScannerScreenConfiguration,
-  startCheckScanner,
-} from 'react-native-scanbot-sdk/ui_v2';
+  ScanbotCheck,
+} from 'react-native-scanbot-sdk';
 
 async function startScanning() {
   try {
@@ -20,7 +20,7 @@ async function startScanning() {
     /** Hide the flip camera button */
     actionBar.flipCameraButton.visible = false;
     /** Start the Check Scanner UI */
-    const checkScannerResult = await startCheckScanner(configuration);
+    const checkScannerResult = await ScanbotCheck.startScanner(configuration);
     /** Handle the result if the status is 'OK' */
     if (checkScannerResult.status === 'OK') {
     }

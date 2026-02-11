@@ -1,14 +1,14 @@
 import {
-  startVINScanner,
+  ScanbotVin,
   VinScannerScreenConfiguration,
-} from 'react-native-scanbot-sdk/ui_v2';
+} from 'react-native-scanbot-sdk';
 
 async function startScanning() {
   try {
     /** Create an instance of the default configuration */
     const configuration = new VinScannerScreenConfiguration();
     /** Start the VIN Scanner UI */
-    const vinScannerResult = await startVINScanner(configuration);
+    const vinScannerResult = await ScanbotVin.startScanner(configuration);
     /** Handle the result if the status is 'OK' */
     if (vinScannerResult.status === 'OK') {
     }

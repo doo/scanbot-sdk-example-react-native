@@ -1,7 +1,4 @@
-import {
-  DocumentScanningFlow,
-  startDocumentScanner,
-} from 'react-native-scanbot-sdk/ui_v2';
+import {DocumentScanningFlow, ScanbotDocument} from 'react-native-scanbot-sdk';
 
 async function startScanning() {
   try {
@@ -18,7 +15,7 @@ async function startScanning() {
     /** Set the color for the page number text. */
     reorderScreenConfiguration.pageTextStyle.color = '#000000';
     /** Start the Document Scanner UI */
-    const documentResult = await startDocumentScanner(configuration);
+    const documentResult = await ScanbotDocument.startScanner(configuration);
     /** Handle the document if the status is 'OK' */
     if (documentResult.status === 'OK') {
     }

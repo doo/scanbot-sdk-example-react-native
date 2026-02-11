@@ -1,9 +1,9 @@
 import {
   DocumentDataExtractorScreenConfiguration,
   DocumentDataIntroCustomImage,
-  startDocumentDataExtractor,
+  ScanbotDocumentDataExtractor,
   StyledText,
-} from 'react-native-scanbot-sdk/ui_v2';
+} from 'react-native-scanbot-sdk';
 
 async function startScanning() {
   try {
@@ -33,7 +33,8 @@ async function startScanning() {
     configuration.introScreen.doneButton.text = 'Start Scanning';
     configuration.introScreen.doneButton.background.fillColor = '#C8193C';
     /** Start the DDE Scanner UI */
-    const ddeScannerResult = await startDocumentDataExtractor(configuration);
+    const ddeScannerResult =
+      await ScanbotDocumentDataExtractor.startExtractorScreen(configuration);
     /** Handle the result if the status is 'OK' */
     if (ddeScannerResult.status === 'OK') {
     }

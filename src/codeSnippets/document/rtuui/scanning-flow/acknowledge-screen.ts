@@ -1,7 +1,4 @@
-import {
-  DocumentScanningFlow,
-  startDocumentScanner,
-} from 'react-native-scanbot-sdk/ui_v2';
+import {DocumentScanningFlow, ScanbotDocument} from 'react-native-scanbot-sdk';
 
 async function startScanning() {
   try {
@@ -29,7 +26,7 @@ async function startScanning() {
     /** Configure the acknowledgment screen's hint message which is shown if the least acceptable quality is not met. */
     configuration.screens.camera.acknowledgement.badImageHint.visible = true;
     /** Start the Document Scanner UI */
-    const documentResult = await startDocumentScanner(configuration);
+    const documentResult = await ScanbotDocument.startScanner(configuration);
     /** Handle the document if the status is 'OK' */
     if (documentResult.status === 'OK') {
     }

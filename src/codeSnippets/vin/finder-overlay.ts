@@ -1,9 +1,9 @@
 import {
+  AspectRatio,
   FinderCorneredStyle,
-  startVINScanner,
+  ScanbotVin,
   VinScannerScreenConfiguration,
-} from 'react-native-scanbot-sdk/ui_v2';
-import {AspectRatio} from 'react-native-scanbot-sdk';
+} from 'react-native-scanbot-sdk';
 
 async function startScanning() {
   try {
@@ -22,7 +22,7 @@ async function startScanning() {
       strokeWidth: 2,
     });
     /** Start the VIN Scanner UI */
-    const vinScannerResult = await startVINScanner(configuration);
+    const vinScannerResult = await ScanbotVin.startScanner(configuration);
     /** Handle the result if the status is 'OK' */
     if (vinScannerResult.status === 'OK') {
     }

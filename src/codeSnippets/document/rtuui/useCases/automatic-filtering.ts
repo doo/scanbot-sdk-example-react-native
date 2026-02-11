@@ -1,8 +1,8 @@
 import {
   DocumentScanningFlow,
-  startDocumentScanner,
-} from 'react-native-scanbot-sdk/ui_v2';
-import {ScanbotBinarizationFilter} from 'react-native-scanbot-sdk';
+  ScanbotBinarizationFilter,
+  ScanbotDocument,
+} from 'react-native-scanbot-sdk';
 
 async function startScanning() {
   try {
@@ -12,7 +12,7 @@ async function startScanning() {
     configuration.outputSettings.defaultFilter =
       new ScanbotBinarizationFilter();
     /** Start the Document Scanner UI */
-    const documentResult = await startDocumentScanner(configuration);
+    const documentResult = await ScanbotDocument.startScanner(configuration);
     /** Handle the document if the status is 'OK' */
     if (documentResult.status === 'OK') {
     }

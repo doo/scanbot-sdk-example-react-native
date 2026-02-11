@@ -1,8 +1,8 @@
 import {
   DocumentScanningFlow,
-  startDocumentScanner,
   PageSnapFunnelAnimation,
-} from 'react-native-scanbot-sdk/ui_v2';
+  ScanbotDocument,
+} from 'react-native-scanbot-sdk';
 
 async function documentScanner() {
   const configuration = new DocumentScanningFlow();
@@ -49,5 +49,5 @@ async function documentScanner() {
   // Equivalent to multiPageEnabled: false
   configuration.outputSettings.pagesScanLimit = 1;
 
-  const documentData = await startDocumentScanner(configuration);
+  const documentData = await ScanbotDocument.startScanner(configuration);
 }

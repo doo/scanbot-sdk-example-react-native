@@ -2,9 +2,9 @@ import {
   FinderCorneredStyle,
   MrzScannerScreenConfiguration,
   NoLayoutPreset,
-  startMRZScanner,
+  ScanbotMrz,
   ThreeLineMrzFinderLayoutPreset,
-} from 'react-native-scanbot-sdk/ui_v2';
+} from 'react-native-scanbot-sdk';
 
 async function startScanning() {
   try {
@@ -27,7 +27,7 @@ async function startScanning() {
       strokeWidth: 2,
     });
     /** Start the MRZ Scanner UI */
-    const mrzScannerResult = await startMRZScanner(configuration);
+    const mrzScannerResult = await ScanbotMrz.startScanner(configuration);
     /** Handle the result if the status is 'OK' */
     if (mrzScannerResult.status === 'OK') {
     }

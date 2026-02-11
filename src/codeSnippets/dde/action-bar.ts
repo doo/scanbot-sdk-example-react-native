@@ -1,7 +1,7 @@
 import {
   DocumentDataExtractorScreenConfiguration,
-  startDocumentDataExtractor,
-} from 'react-native-scanbot-sdk/ui_v2';
+  ScanbotDocumentDataExtractor,
+} from 'react-native-scanbot-sdk';
 
 async function startScanning() {
   try {
@@ -20,7 +20,8 @@ async function startScanning() {
     /** Hide the flip camera button */
     actionBar.flipCameraButton.visible = false;
     /** Start the DDE Scanner UI */
-    const ddeScannerResult = await startDocumentDataExtractor(configuration);
+    const ddeScannerResult =
+      await ScanbotDocumentDataExtractor.startExtractorScreen(configuration);
     /** Handle the result if the status is 'OK' */
     if (ddeScannerResult.status === 'OK') {
     }

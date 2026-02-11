@@ -1,7 +1,7 @@
 import {
-  startVINScanner,
+  ScanbotVin,
   VinScannerScreenConfiguration,
-} from 'react-native-scanbot-sdk/ui_v2';
+} from 'react-native-scanbot-sdk';
 
 async function startScanning() {
   try {
@@ -27,7 +27,7 @@ async function startScanning() {
     palette.sbColorSurfaceHigh = '#7A000000';
     palette.sbColorModalOverlay = '#A3000000';
     /** Start the VIN Scanner UI */
-    const vinScannerResult = await startVINScanner(configuration);
+    const vinScannerResult = await ScanbotVin.startScanner(configuration);
     /** Handle the result if the status is 'OK' */
     if (vinScannerResult.status === 'OK') {
     }

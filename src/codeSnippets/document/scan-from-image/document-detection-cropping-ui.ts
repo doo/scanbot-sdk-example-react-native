@@ -1,9 +1,5 @@
-import ScanbotSDK from 'react-native-scanbot-sdk';
-import {
-  CroppingConfiguration,
-  startCroppingScreen,
-} from 'react-native-scanbot-sdk/ui_v2';
 import {selectImagesFromLibrary} from '@utils';
+import {CroppingConfiguration, ScanbotDocument} from 'react-native-scanbot-sdk';
 
 async function startDocumentDetectionWithCroppingScreen() {
   try {
@@ -16,8 +12,8 @@ async function startDocumentDetectionWithCroppingScreen() {
       return;
     }
     /** Create a new document with the provided imageFileUri. */
-    const document = await ScanbotSDK.Document.createDocument({
-      imageFileUris: selectedImagesResult,
+    const document = await ScanbotDocument.createDocumentFromImages({
+      images: selectedImagesResult,
     });
     /** Create a new configuration with the document and the document's first page. */
     const configuration = new CroppingConfiguration({
@@ -30,7 +26,9 @@ async function startDocumentDetectionWithCroppingScreen() {
     configuration.cropping.topBarConfirmButton.foreground.color = '#ffffff';
     configuration.localization.croppingTopBarCancelButtonTitle = 'Cancel';
     /** Start the cropping UI Screen */
-    const documentResult = await startCroppingScreen(configuration);
+    const documentResult = await ScanbotDocument.startCroppingScreen(
+      configuration,
+    );
     /** Handle the document if the status is 'OK' */
     if (documentResult.status === 'OK') {
     }

@@ -1,5 +1,5 @@
 import {selectImagesFromLibrary} from '@utils';
-import ScanbotSDK, {PdfConfiguration} from 'react-native-scanbot-sdk';
+import {PdfConfiguration, ScanbotPdfGenerator} from 'react-native-scanbot-sdk';
 
 async function createSearchablePDFFromImages() {
   try {
@@ -12,8 +12,8 @@ async function createSearchablePDFFromImages() {
       return;
     }
     /** Create a PDF file with the provided options */
-    const pdfCreationResult = await ScanbotSDK.createPDF({
-      imageFileUris: selectedImagesResult,
+    const pdfCreationResult = await ScanbotPdfGenerator.generateFromImages({
+      images: selectedImagesResult,
       pdfConfiguration: new PdfConfiguration({
         pageSize: 'A4',
         pageDirection: 'PORTRAIT',

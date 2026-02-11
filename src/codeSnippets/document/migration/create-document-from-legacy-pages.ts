@@ -1,11 +1,11 @@
-import ScanbotSDK, {Page} from 'react-native-scanbot-sdk';
+import {Page, ScanbotDocument} from 'react-native-scanbot-sdk';
 
 async function createDocumentWithLegacyPages(pages: Page[]) {
   /**
    * Create a document with a UUID
    * Add pages to the document from 'legacy' pages
    */
-  const documentData = ScanbotSDK.Document.createDocumentFromLegacyPages({
+  const documentData = ScanbotDocument.createDocumentFromLegacyPages({
     pages: pages,
   });
 

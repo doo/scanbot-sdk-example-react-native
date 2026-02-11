@@ -1,8 +1,9 @@
-import ScanbotSDK, {ScanbotSdkConfiguration} from 'react-native-scanbot-sdk';
+import ScanbotSDK, {SdkConfiguration} from 'react-native-scanbot-sdk';
 
-const config: ScanbotSdkConfiguration = {
+const configuration = new SdkConfiguration({
+  licenseKey: '<YOUR_LICENSE_KEY_HERE>',
   storageImageFormat: 'JPG',
   storageImageQuality: 80,
-};
+});
 
-const result = await ScanbotSDK.initializeSDK(config);
+const result = await ScanbotSDK.initialize(configuration);

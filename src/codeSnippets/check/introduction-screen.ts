@@ -1,9 +1,9 @@
 import {
   CheckIntroCustomImage,
   CheckScannerScreenConfiguration,
-  startCheckScanner,
+  ScanbotCheck,
   StyledText,
-} from 'react-native-scanbot-sdk/ui_v2';
+} from 'react-native-scanbot-sdk';
 
 async function startScanning() {
   try {
@@ -32,7 +32,7 @@ async function startScanning() {
     configuration.introScreen.doneButton.text = 'Start Scanning';
     configuration.introScreen.doneButton.background.fillColor = '#C8193C';
     /** Start the Check Scanner UI */
-    const checkScannerResult = await startCheckScanner(configuration);
+    const checkScannerResult = await ScanbotCheck.startScanner(configuration);
     /** Handle the result if the status is 'OK' */
     if (checkScannerResult.status === 'OK') {
     }

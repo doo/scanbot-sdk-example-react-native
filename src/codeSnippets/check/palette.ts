@@ -1,7 +1,7 @@
 import {
   CheckScannerScreenConfiguration,
-  startCheckScanner,
-} from 'react-native-scanbot-sdk/ui_v2';
+  ScanbotCheck,
+} from 'react-native-scanbot-sdk';
 
 async function startScanning() {
   try {
@@ -27,7 +27,7 @@ async function startScanning() {
     palette.sbColorSurfaceHigh = '#7A000000';
     palette.sbColorModalOverlay = '#A3000000';
     /** Start the Check Scanner UI */
-    const checkScannerResult = await startCheckScanner(configuration);
+    const checkScannerResult = await ScanbotCheck.startScanner(configuration);
     /** Handle the result if the status is 'OK' */
     if (checkScannerResult.status === 'OK') {
     }

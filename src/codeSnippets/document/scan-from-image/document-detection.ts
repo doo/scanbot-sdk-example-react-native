@@ -1,4 +1,7 @@
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import ScanbotSDK, {
+  DocumentScannerConfiguration,
+  ScanbotDocument,
+} from 'react-native-scanbot-sdk';
 import {selectImageFromLibrary} from '@utils';
 
 async function detectDocumentDetection() {
@@ -12,9 +15,10 @@ async function detectDocumentDetection() {
       return;
     }
     /** Detect the document */
-    const documentDetectionResult = await ScanbotSDK.detectDocument(
-      selectedImageResult,
-    );
+    const documentDetectionResult = await ScanbotDocument.scanFromImage({
+      image: selectedImageResult,
+      configuration: new DocumentScannerConfiguration(),
+    });
     /** Handle the result */
   } catch (e: any) {
     console.error(e.message);

@@ -1,7 +1,7 @@
 import {
-  startTextPatternScanner,
+  ScanbotTextPattern,
   TextPatternScannerScreenConfiguration,
-} from 'react-native-scanbot-sdk/ui_v2';
+} from 'react-native-scanbot-sdk';
 
 async function startScanning() {
   try {
@@ -27,7 +27,9 @@ async function startScanning() {
     palette.sbColorSurfaceHigh = '#7A000000';
     palette.sbColorModalOverlay = '#A3000000';
     /** Start the Text Pattern Scanner **/
-    const textPatternResult = await startTextPatternScanner(configuration);
+    const textPatternResult = await ScanbotTextPattern.startScanner(
+      configuration,
+    );
     /** Handle the result if the status is 'OK' */
     if (textPatternResult.status === 'OK') {
     }

@@ -1,7 +1,7 @@
 import {
   MrzScannerScreenConfiguration,
-  startMRZScanner,
-} from 'react-native-scanbot-sdk/ui_v2';
+  ScanbotMrz,
+} from 'react-native-scanbot-sdk';
 
 async function startScanning() {
   try {
@@ -17,7 +17,7 @@ async function startScanning() {
       'Localized completionOverlaySuccessMessage';
     localization.finderViewUserGuidance = 'Localized finderViewUserGuidance';
     /** Start the MRZ Scanner UI */
-    const mrzScannerResult = await startMRZScanner(configuration);
+    const mrzScannerResult = await ScanbotMrz.startScanner(configuration);
     /** Handle the result if the status is 'OK' */
     if (mrzScannerResult.status === 'OK') {
     }

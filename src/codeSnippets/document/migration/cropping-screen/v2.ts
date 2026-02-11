@@ -1,7 +1,4 @@
-import {
-  CroppingConfiguration,
-  startCroppingScreen,
-} from 'react-native-scanbot-sdk/ui_v2';
+import {CroppingConfiguration, ScanbotDocument} from 'react-native-scanbot-sdk';
 
 async function croppingScreen(documentID: string, pageID: string) {
   const configuration = new CroppingConfiguration({
@@ -13,5 +10,5 @@ async function croppingScreen(documentID: string, pageID: string) {
   // Equivalent to doneButtonTitle: 'Apply',
   configuration.localization.croppingTopBarConfirmButtonTitle = 'Apply';
 
-  const documentData = await startCroppingScreen(configuration);
+  const documentData = await ScanbotDocument.startCroppingScreen(configuration);
 }

@@ -1,5 +1,8 @@
 import {selectImageFromLibrary} from '@utils';
-import ScanbotSDK, {ScanbotBinarizationFilter} from 'react-native-scanbot-sdk';
+import {
+  ScanbotBinarizationFilter,
+  ScanbotImageProcessor,
+} from 'react-native-scanbot-sdk';
 
 export async function applyFiltersOnImage() {
   try {
@@ -11,18 +14,21 @@ export async function applyFiltersOnImage() {
     if (!selectedImageResult) {
       return;
     }
-    /** Apply ScanbotBinarizationFilter to the image */
-    const imageWithFilters = await ScanbotSDK.applyImageFilters(
-      selectedImageResult,
-      [new ScanbotBinarizationFilter()],
-    );
-    /** Rotate the page counterclockwise by 90 degrees */
-    const rotatedImage = await ScanbotSDK.rotateImage(
-      imageWithFilters.imageFileUri,
-      90,
-    );
 
-    return rotatedImage.imageFileUri;
+    /** Apply ScanbotBinarizationFilter to the image */
+    const imageWithFilters =
+      await ScanbotImageProcessor.applyFiltersOnImageFile({
+        imageFileUri: selectedImageResult,
+        filters: [new ScanbotBinarizationFilter()],
+      });
+
+    /** Rotate the page counterclockwise by 90 degrees */
+    const rotatedImage = await ScanbotImageProcessor.rotateImageFile({
+      imageFileUri: imageWithFilters,
+      rotation: 'CLOCKWISE_90',
+    });
+
+    return rotatedImage;
   } catch (e: any) {
     console.error(e.message);
   }

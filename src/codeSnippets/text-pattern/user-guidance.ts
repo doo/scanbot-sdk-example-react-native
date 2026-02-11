@@ -1,7 +1,7 @@
 import {
-  startTextPatternScanner,
+  ScanbotTextPattern,
   TextPatternScannerScreenConfiguration,
-} from 'react-native-scanbot-sdk/ui_v2';
+} from 'react-native-scanbot-sdk';
 
 async function startScanning() {
   try {
@@ -26,7 +26,9 @@ async function startScanning() {
     /** Customize the finder user guidance background */
     finderUserGuidance.background.fillColor = '#C8193C';
     /** Start the Text Pattern Scanner **/
-    const textPatternResult = await startTextPatternScanner(configuration);
+    const textPatternResult = await ScanbotTextPattern.startScanner(
+      configuration,
+    );
     /** Handle the result if the status is 'OK' */
     if (textPatternResult.status === 'OK') {
     }

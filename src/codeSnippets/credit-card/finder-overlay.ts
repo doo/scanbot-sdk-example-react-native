@@ -1,8 +1,8 @@
 import {
   CreditCardScannerScreenConfiguration,
   FinderCorneredStyle,
-  startCreditCardScanner,
-} from 'react-native-scanbot-sdk/ui_v2';
+  ScanbotCreditCard,
+} from 'react-native-scanbot-sdk';
 
 async function startScanning() {
   try {
@@ -16,7 +16,9 @@ async function startScanning() {
       strokeWidth: 2,
     });
     /** Start the Credit Card Scanner **/
-    const creditCardResult = await startCreditCardScanner(configuration);
+    const creditCardResult = await ScanbotCreditCard.startScanner(
+      configuration,
+    );
     /** Handle the result if the status is 'OK' */
     if (creditCardResult.status === 'OK') {
     }

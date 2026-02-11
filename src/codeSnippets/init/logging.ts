@@ -1,8 +1,9 @@
-import ScanbotSDK, {ScanbotSdkConfiguration} from 'react-native-scanbot-sdk';
+import ScanbotSDK, {SdkConfiguration} from 'react-native-scanbot-sdk';
 
-const config: ScanbotSdkConfiguration = {
-  licenseKey: '',
+const configuration = new SdkConfiguration({
+  licenseKey: '<YOUR_LICENSE_KEY_HERE>',
   loggingEnabled: true,
-};
+  enableNativeLogging: true,
+});
 
-const result = await ScanbotSDK.initializeSDK(config);
+const initResult = await ScanbotSDK.initialize(configuration);
