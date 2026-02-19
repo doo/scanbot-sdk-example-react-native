@@ -16,13 +16,14 @@ async function applyFiltersAndRotateScannedPage() {
      * Apply ScanbotBinarizationFilter to the page
      * Rotate the page clockwise by 90 degrees
      */
+    const options = new ModifyPageOptions();
+    options.filters = [new ScanbotBinarizationFilter()];
+    options.rotation = 'CLOCKWISE_90';
+
     const documentResultWithModifiedPage = await ScanbotDocument.modifyPage({
       documentUuid: document.uuid,
       pageUuid: page.uuid,
-      options: new ModifyPageOptions({
-        filters: [new ScanbotBinarizationFilter()],
-        rotation: 'CLOCKWISE_90',
-      }),
+      options: options,
     });
     /** Handle the document */
   } catch (e: any) {

@@ -1,10 +1,7 @@
 import {CroppingConfiguration, ScanbotDocument} from 'react-native-scanbot-sdk';
 
-async function croppingScreen(documentID: string, pageID: string) {
-  const configuration = new CroppingConfiguration({
-    documentUuid: documentID,
-    pageUuid: pageID,
-  });
+async function croppingScreen(documentUuid: string, pageUuid: string) {
+  const configuration = new CroppingConfiguration({documentUuid, pageUuid});
   // Equivalent to topBarBackgroundColor & bottomBarBackgroundColor: '#ffffff'
   configuration.palette.sbColorPrimary = '#ffffff';
   // Equivalent to doneButtonTitle: 'Apply',

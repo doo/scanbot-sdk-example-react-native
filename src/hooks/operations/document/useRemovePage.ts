@@ -15,7 +15,7 @@ export function useRemovePage() {
   const {setDocument} = useContext(DocumentContext);
 
   return useCallback(
-    async ({pageID, documentID}: {pageID: string; documentID: string}) => {
+    async ({pageUuid, documentUuid}: {pageUuid: string; documentUuid: string}) => {
       try {
         /**
          * Check the license status and return early
@@ -26,8 +26,8 @@ export function useRemovePage() {
         }
         /** Remove the document page */
         const documentResult = await ScanbotDocument.removePages({
-          pageUuids: [pageID],
-          documentUuid: documentID,
+          pageUuids: [pageUuid],
+          documentUuid: documentUuid,
         });
         /**
          * Handle the result

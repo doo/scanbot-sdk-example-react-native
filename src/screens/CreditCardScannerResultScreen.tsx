@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   GenericDocumentResult,
   ResultContainer,
   ResultFieldRow,
+  ResultImage,
 } from '@components';
 import {useRoute} from '@react-navigation/native';
 import {CreditCardResultScreenRouteProp} from '@utils';
-import {GenericDocument} from 'react-native-scanbot-sdk';
+import {autorelease, GenericDocument, ImageRef} from 'react-native-scanbot-sdk';
 
 const CreditCardDocument = ({
   creditCardDocument,
@@ -44,9 +45,28 @@ const CreditCardDocument = ({
 
 export function CreditCardScannerResultScreen() {
   const {params} = useRoute<CreditCardResultScreenRouteProp>();
+  const [image, setImage] = useState<string>();
+
+  useEffect(() => {
+    /**
+     * In this example, the image is serialized as a reference, therefore we need to use an autorelease pool to manage memory correctly.
+     */
+    if (params.imageRefId) {
+      autorelease(async () => {
+        const imageData = await ImageRef.from({
+          uniqueId: params.imageRefId!,
+        }).encodeImage();
+
+        if (imageData) {
+          setImage(`data:image/jpeg;base64,${imageData}`);
+        }
+      });
+    }
+  }, [params.imageRefId]);
 
   return (
     <ResultContainer>
+      <ResultImage imageUri={image} />
       <ResultFieldRow
         title={'Recognition status'}
         value={params.recognitionStatus}

@@ -10,7 +10,12 @@ import {
 } from '@utils';
 import {ActivityIndicatorContext} from '@context';
 
-import {MrzScannerConfiguration, ScanbotMrz} from 'react-native-scanbot-sdk';
+import {
+  autorelease,
+  ImageRef,
+  MrzScannerConfiguration,
+  ScanbotMrz,
+} from 'react-native-scanbot-sdk';
 
 export function useScanMRZFromImage() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -40,22 +45,30 @@ export function useScanMRZFromImage() {
       // Configure other parameters as needed.
 
       /**
-       * Recognize MRZ on the selected image and
-       * Handle the result by navigating to Screens.MRZ_RESULT
+       * Note: ImageRef is used as an input here just to showcase its usage.
+       * Passing the image file URI directly to ScanbotMrz.scanFromImage() will work the same way.
+       * The autorelease pool is only necessary when working with ImageRef to manage native resources.
        */
-      const result = await ScanbotMrz.scanFromImage({
-        image: selectedImage,
-        configuration: configuration,
-      });
+      await autorelease(async () => {
+        const imageRef = await ImageRef.fromImageFileUri(selectedImage);
+        if (!imageRef) {
+          return;
+        }
 
-      if (result.document) {
-        navigation.navigate(Screens.MRZ_RESULT, {
-          mrzDocument: result.document,
-          rawMRZ: result.rawMRZ,
+        const result = await ScanbotMrz.scanFromImage({
+          image: imageRef,
+          configuration,
         });
-      } else {
-        infoMessageAlert('No MRZ found.');
-      }
+
+        if (result.document) {
+          navigation.navigate(Screens.MRZ_RESULT, {
+            mrzDocument: result.document,
+            rawMRZ: result.rawMRZ,
+          });
+        } else {
+          infoMessageAlert('No MRZ found.');
+        }
+      });
     } catch (e: any) {
       errorMessageAlert(e.message);
     } finally {

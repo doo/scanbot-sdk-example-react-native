@@ -6,11 +6,11 @@ import {useCreateDocumentPDF, useCreateDocumentTIFF} from '@hooks';
 export function ExportDocumentModal({
   isVisible,
   onDismiss,
-  documentID,
+  documentUuid,
 }: {
   isVisible: boolean;
   onDismiss: () => void;
-  documentID: string;
+  documentUuid: string;
 }) {
   const savePDF = useCreateDocumentPDF();
   const writeTiff = useCreateDocumentTIFF();
@@ -19,20 +19,20 @@ export function ExportDocumentModal({
     (sandwichedPDF: boolean) => {
       return async () => {
         onDismiss();
-        await savePDF(documentID, sandwichedPDF);
+        await savePDF(documentUuid, sandwichedPDF);
       };
     },
-    [documentID, onDismiss, savePDF],
+    [documentUuid, onDismiss, savePDF],
   );
 
   const saveTiff = useCallback(
     (binarized: boolean) => {
       return async () => {
         onDismiss();
-        await writeTiff(documentID, binarized);
+        await writeTiff(documentUuid, binarized);
       };
     },
-    [documentID, onDismiss, writeTiff],
+    [documentUuid, onDismiss, writeTiff],
   );
 
   return (

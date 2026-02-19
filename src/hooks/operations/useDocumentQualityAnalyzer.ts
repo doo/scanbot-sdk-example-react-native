@@ -34,12 +34,15 @@ export function useDocumentQualityAnalyzer() {
         return;
       }
 
+      const configuration = new DocumentQualityAnalyzerConfiguration();
+      configuration.maxImageSize = 2100;
+
+      // Configure other parameters as needed.
+
       // Detect document quality on a selected image
       const result = await ScanbotDocument.analyzeQualityOnImage({
         image: selectedImage,
-        configuration: new DocumentQualityAnalyzerConfiguration({
-          maxImageSize: 2100,
-        }),
+        configuration: configuration,
       });
       /**
        * Handle the result by displaying an alert

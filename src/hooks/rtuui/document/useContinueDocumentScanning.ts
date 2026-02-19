@@ -15,7 +15,7 @@ export function useContinueDocumentScanning() {
   const {loadDocument} = useContext(DocumentContext);
 
   return useCallback(
-    async (documentID: string) => {
+    async (documentUuid: string) => {
       try {
         /**
          * Check the license status and return early
@@ -29,11 +29,11 @@ export function useContinueDocumentScanning() {
          * start the document scanner with the configuration and documentUUID
          */
         const configuration = new DocumentScanningFlow();
-        configuration.documentUuid = documentID;
+        configuration.documentUuid = documentUuid;
         configuration.cleanScanningSession = false;
 
         await ScanbotDocument.startScanner(configuration);
-        loadDocument(documentID);
+        loadDocument(documentUuid);
         navigation.navigate(Screens.DOCUMENT_RESULT);
       } catch (e: any) {
         errorMessageAlert(e.message);

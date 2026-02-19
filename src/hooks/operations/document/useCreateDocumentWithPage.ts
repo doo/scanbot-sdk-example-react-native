@@ -9,10 +9,7 @@ import {
 import {ActivityIndicatorContext, DocumentContext} from '@context';
 import {useNavigation} from '@react-navigation/native';
 
-import ScanbotSDK, {
-  CreateDocumentOptions,
-  ScanbotDocument,
-} from 'react-native-scanbot-sdk';
+import {CreateDocumentOptions, ScanbotDocument} from 'react-native-scanbot-sdk';
 
 export function useCreateDocumentWithPage() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();

@@ -3,7 +3,7 @@ import {Platform, StyleSheet} from 'react-native';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
 import ScanbotSDK, {SdkConfiguration} from 'react-native-scanbot-sdk';
-import {DocumentDirectoryPath, ExternalDirectoryPath} from 'react-native-fs';
+import {DocumentDirectoryPath} from 'react-native-fs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
@@ -56,7 +56,7 @@ const Stack = createNativeStackNavigator<PrimaryRoutesParamList>();
 // - https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/FileSystemOverview/FileSystemOverview.html
 const storageBaseDirectory = Platform.select({
   ios: DocumentDirectoryPath + '/my-custom-storage',
-  android: ExternalDirectoryPath + '/my-custom-storage',
+  android: DocumentDirectoryPath + '/my-custom-storage',
   default: undefined,
 });
 
@@ -74,7 +74,8 @@ export const initializationConfiguration = new SdkConfiguration({
   loggingEnabled: true, // Logging enabled. Consider switching logging OFF in production builds for security and performance reasons!
   storageImageFormat: IMAGE_FILE_FORMAT, // Format of stored images
   storageImageQuality: 80, // Quality of stored images
-  //storageBaseDirectory: storageBaseDirectory, // Uncomment this line to use a custom storage path
+  // Optional custom storage directory
+  // storageBaseDirectory: storageBaseDirectory,
 });
 
 // Set the following properties to enable encryption.

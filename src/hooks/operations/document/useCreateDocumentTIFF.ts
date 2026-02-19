@@ -13,7 +13,7 @@ export function useCreateDocumentTIFF() {
   const {setLoading} = useContext(ActivityIndicatorContext);
 
   return useCallback(
-    async (documentID: string, binarized: boolean) => {
+    async (documentUuid: string, binarized: boolean) => {
       try {
         setLoading(true);
         /**
@@ -23,17 +23,19 @@ export function useCreateDocumentTIFF() {
         if (!(await checkLicense())) {
           return;
         }
+
+        const tiffGeneratorParameters = new TiffGeneratorParameters();
+        tiffGeneratorParameters.binarizationFilter = binarized
+          ? new ScanbotBinarizationFilter()
+          : null;
+        tiffGeneratorParameters.compression = binarized ? 'CCITT_T6' : 'ADOBE_DEFLATE'; // optional compression
+
         /**
          * Create a tiff file from the document
          */
         const tiffFileUri = await ScanbotTiffGenerator.generateFromDocument({
-          documentUuid: documentID,
-          tiffGeneratorParameters: new TiffGeneratorParameters({
-            binarizationFilter: binarized
-              ? new ScanbotBinarizationFilter()
-              : undefined,
-            compression: binarized ? 'CCITT_T6' : 'ADOBE_DEFLATE',
-          }),
+          documentUuid: documentUuid,
+          tiffGeneratorParameters: tiffGeneratorParameters,
         });
         /**
          * Handle the result by displaying an action sheet

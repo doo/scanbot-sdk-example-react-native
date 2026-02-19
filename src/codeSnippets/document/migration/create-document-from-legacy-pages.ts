@@ -11,6 +11,6 @@ async function createDocumentWithLegacyPages(pages: Page[]) {
 
   /**
    * Now you may delete the files corresponding to the Page to free up storage.
-   * Use ScanbotSDK.removePage(page) to remove the old pages
+   * Use ScanbotSDK.LegacyPage.removePage(page) to remove the old pages
    */
 }

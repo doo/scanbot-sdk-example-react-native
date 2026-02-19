@@ -51,10 +51,11 @@ export type PrimaryRoutesParamList = {
   [Screens.CREDIT_CARD_RESULT]: {
     creditCardDocument: GenericDocument | null;
     recognitionStatus: CreditCardScanningStatus;
+    imageRefId?: string | null;
   };
   [Screens.PLAIN_DATA_RESULT]: PlainDataResultParam;
   [Screens.DOCUMENT_RESULT]: undefined;
-  [Screens.DOCUMENT_PAGE_RESULT]: {pageID: string};
+  [Screens.DOCUMENT_PAGE_RESULT]: {pageUuid: string};
   [Screens.DOCUMENT_SCANNER_VIEW]: undefined;
   [Screens.CROPPING_VIEW]: {fileURI: string};
 };

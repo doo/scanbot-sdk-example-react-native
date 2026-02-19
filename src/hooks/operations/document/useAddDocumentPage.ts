@@ -17,7 +17,7 @@ export function useAddDocumentPage() {
   const {setLoading} = useContext(ActivityIndicatorContext);
 
   return useCallback(
-    async (documentID: string) => {
+    async (documentUuid: string) => {
       try {
         /**
          * Check the license status and return early
@@ -38,7 +38,7 @@ export function useAddDocumentPage() {
 
         /** Add a page to the document */
         const documentResult = await ScanbotDocument.addPages({
-          documentUuid: documentID,
+          documentUuid: documentUuid,
           images: [selectedImageResult],
           options: new AddPageOptions({
             documentDetection: true,

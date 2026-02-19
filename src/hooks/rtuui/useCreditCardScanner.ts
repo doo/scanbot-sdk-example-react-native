@@ -9,6 +9,7 @@ import {useCallback} from 'react';
 import {COLORS} from '@theme';
 
 import {
+  autorelease,
   CreditCardScannerScreenConfiguration,
   ScanbotCreditCard,
   StyledText,
@@ -48,16 +49,34 @@ export function useCreditCardScanner() {
       configuration.actionBar.flashButton.activeForegroundColor =
         COLORS.SCANBOT_RED;
 
-      const result = await ScanbotCreditCard.startScanner(configuration);
-      /**
-       * Handle the result if the result status is OK
-       */
-      if (result.status === 'OK') {
-        navigation.navigate(Screens.CREDIT_CARD_RESULT, {
-          creditCardDocument: result.data.creditCard,
-          recognitionStatus: result.data.recognitionStatus,
-        });
-      }
+      configuration.scannerConfiguration.returnCreditCardImage = true;
+
+      /** An autorelease pool is required because the result object contains image references. */
+      await autorelease(async () => {
+        const result = await ScanbotCreditCard.startScanner(configuration);
+        /**
+         * Handle the result if the result status is OK
+         */
+        if (result.status === 'OK') {
+          /**
+           * The credit card result is serialized for use in navigation parameters.
+           *
+           * By default, images are serialized as references.
+           * When using image references, it's important to manage memory correctly.
+           * Ensure image references are released appropriately by using an autorelease pool.
+           * Set the `imageSerializationMode` to `"BUFFER"` to serialize the image data as a base64-encoded string instead of a reference.
+           */
+          const creditCardScannerNavigationObject =
+            await result.data.serialize();
+
+          navigation.navigate(Screens.CREDIT_CARD_RESULT, {
+            creditCardDocument: result.data.creditCard,
+            recognitionStatus: result.data.recognitionStatus,
+            imageRefId:
+              creditCardScannerNavigationObject.creditCard?.crop?.uniqueId,
+          });
+        }
+      });
     } catch (e: any) {
       errorMessageAlert(e.message);
     }

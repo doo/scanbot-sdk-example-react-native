@@ -11,13 +11,16 @@ async function createDocumentTiff() {
     const document = await ScanbotDocument.loadDocument(
       'SOME_STORED_DOCUMENT_ID',
     );
+
+    const tiffGeneratorParameters = new TiffGeneratorParameters();
+    tiffGeneratorParameters.binarizationFilter = new ScanbotBinarizationFilter();
+    tiffGeneratorParameters.dpi = 300;
+    /** Configure params as needed **/
+
     /** Create a TIFF file with the provided options */
     const tiffUriResult = await ScanbotTiffGenerator.generateFromDocument({
       documentUuid: document.uuid,
-      tiffGeneratorParameters: new TiffGeneratorParameters({
-        binarizationFilter: new ScanbotBinarizationFilter(),
-        dpi: 300,
-      }),
+      tiffGeneratorParameters: tiffGeneratorParameters,
     });
     /** Handle the result */
   } catch (e: any) {

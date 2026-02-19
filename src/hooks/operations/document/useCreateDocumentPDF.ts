@@ -13,7 +13,7 @@ export function useCreateDocumentPDF() {
   const {setLoading} = useContext(ActivityIndicatorContext);
 
   return useCallback(
-    async (documentID: string, sandwichedPDF: boolean = false) => {
+    async (documentUuid: string, sandwichedPDF: boolean = false) => {
       try {
         setLoading(true);
         /**
@@ -33,7 +33,7 @@ export function useCreateDocumentPDF() {
           : undefined;
 
         const pdfFileUri = await ScanbotPdfGenerator.generateFromDocument({
-          documentUuid: documentID,
+          documentUuid: documentUuid,
           pdfConfiguration: new PdfConfiguration(),
           ocrConfiguration: ocrConfiguration,
         });

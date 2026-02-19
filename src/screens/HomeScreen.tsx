@@ -79,7 +79,7 @@ export function HomeScreen() {
           onPress={onCroppingView}
         />
 
-        <FeatureHeader title={'DATA DETECTORS'} />
+        <FeatureHeader title={'DATA SCANNERS'} />
         <FeatureItem onPress={onMRZScanner} title={'Scan MRZ'} />
         <FeatureItem onPress={onCheckScanner} title={'Scan Check'} />
         <FeatureItem onPress={onVinScanner} title={'Scan VIN'} />
@@ -94,14 +94,14 @@ export function HomeScreen() {
         />
 
         <FeatureHeader title={'Scan data from Image'} />
-        <FeatureItem onPress={onScanMRZOnImage} title={'Scan MRZ on Image'} />
+        <FeatureItem onPress={onScanMRZOnImage} title={'Scan MRZ from Image'} />
         <FeatureItem
           onPress={onScanCheckOnImage}
-          title={'Scan Check on Image'}
+          title={'Scan Check from Image'}
         />
         <FeatureItem
           onPress={onScanCreditCard}
-          title={'Scan Credit Card on Image'}
+          title={'Scan Credit Card from Image'}
         />
         <FeatureItem
           onPress={onDocumentDataExtractorOnImage}

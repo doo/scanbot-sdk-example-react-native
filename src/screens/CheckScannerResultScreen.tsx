@@ -26,20 +26,18 @@ const CheckDocument = ({
 
     For example:
     import {
-      AUSCheckDocumentType,
-      CANCheckDocumentType,
-      FRACheckDocumentType,
+      AUSCheck,
+      CANCheck,
+      FRACheck,
       GenericDocument,
       INDCheck,
-      INDCheckDocumentType,
-      ISRCheckDocumentType,
-      KWTCheckDocumentType,
-      UAECheckDocumentType,
+      ISRCheck,
+      KWTCheck,
+      UAECheck,
       USACheck,
-      USACheckDocumentType,
     } from 'react-native-scanbot-sdk';
    switch (checkDocument.type.name) {
-     case USACheckDocumentType: {
+     case USACheck.DOCUMENT_TYPE: {
        const check = new USACheck(checkDocument);
        return (
          <View>
@@ -59,7 +57,7 @@ const CheckDocument = ({
          </View>
        );
      }
-     case INDCheckDocumentType: {
+     case INDCheck.DOCUMENT_TYPE: {
        const check = new INDCheck(checkDocument);
        return (
          <View>
@@ -76,12 +74,12 @@ const CheckDocument = ({
          </View>
        );
      }
-     case FRACheckDocumentType: // const check = new FRACheck(checkDocument);
-     case ISRCheckDocumentType: // const check = new ISRCheck(checkDocument);
-     case KWTCheckDocumentType: // const check = new KWTCheck(checkDocument);
-     case AUSCheckDocumentType: // const check = new AUSCheck(checkDocument);
-     case UAECheckDocumentType: // const check = new UAECheck(checkDocument);
-     case CANCheckDocumentType: // const check = new CANCheck(checkDocument);
+     case FRACheck.DOCUMENT_TYPE: // const check = new FRACheck(checkDocument);
+     case ISRCheck.DOCUMENT_TYPE: // const check = new ISRCheck(checkDocument);
+     case KWTCheck.DOCUMENT_TYPE: // const check = new KWTCheck(checkDocument);
+     case AUSCheck.DOCUMENT_TYPE: // const check = new AUSCheck(checkDocument);
+     case UAECheck.DOCUMENT_TYPE: // const check = new UAECheck(checkDocument);
+     case CANCheck.DOCUMENT_TYPE: // const check = new CANCheck(checkDocument);
    }
    */
 

@@ -15,19 +15,19 @@ async function createDocumentWithPages(imageFileUris: string[]) {
   });
 }
 
-async function loadDocument(documentID: string) {
+async function loadDocument(documentUuid: string) {
   /** Load a document from storage by ID */
-  const document = await ScanbotDocument.loadDocument(documentID);
+  const document = await ScanbotDocument.loadDocument(documentUuid);
 }
 
 async function storedDocumentUUIDs() {
-  /** Retrieve all the document IDs from the storage */
-  const documentIDs = await ScanbotDocument.getStoredDocumentUuids();
+  /** Retrieve all the document UUIDs from the storage */
+  const documentUuids = await ScanbotDocument.getStoredDocumentUuids();
 }
 
-async function reorderDocumentPages(documentID: string) {
-  /** Load a document from storage by ID */
-  const document = await ScanbotDocument.loadDocument(documentID);
+async function reorderDocumentPages(documentUuid: string) {
+  /** Load a document from storage by UUID */
+  const document = await ScanbotDocument.loadDocument(documentUuid);
   /** Swap the first and last page of the document */
   const documentWithReorderedPages = await ScanbotDocument.movePage({
     documentUuid: document.uuid,
@@ -36,16 +36,16 @@ async function reorderDocumentPages(documentID: string) {
   });
 }
 
-async function removeAllPagesFromDocument(documentID: string) {
+async function removeAllPagesFromDocument(documentUuid: string) {
   /** Remove all the pages from a document */
   const documentWithRemovedPages = await ScanbotDocument.removeAllPages(
-    documentID,
+    documentUuid,
   );
 }
 
-async function deleteDocument(documentID: string) {
+async function deleteDocument(documentUuid: string) {
   /** Delete a document from storage along with the document's PDF and TIFF files */
-  await ScanbotDocument.deleteDocument(documentID);
+  await ScanbotDocument.deleteDocument(documentUuid);
 }
 
 async function deleteAllDocuments() {

@@ -6,10 +6,10 @@ import {FILE_ENCRYPTION_ENABLED, IMAGE_FILE_FORMAT} from '@utils';
 import {DocumentContext} from '@context';
 
 export function PageImagePreview({
-  pageID,
+  pageUuid,
   style,
 }: {
-  pageID: string;
+  pageUuid: string;
   style: StyleProp<ImageStyle>;
 }) {
   const {document} = useContext(DocumentContext);
@@ -17,8 +17,8 @@ export function PageImagePreview({
   const [loading, setLoading] = useState(false);
 
   const page = useMemo(
-    () => document?.pages.find(p => p.uuid === pageID),
-    [document?.pages, pageID],
+    () => document?.pages.find(p => p.uuid === pageUuid),
+    [document?.pages, pageUuid],
   );
 
   useEffect(() => {

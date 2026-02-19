@@ -8,7 +8,7 @@ export function useCropDocumentPage() {
   const {setDocument} = useContext(DocumentContext);
 
   return useCallback(
-    async ({pageID, documentID}: {pageID: string; documentID: string}) => {
+    async ({pageUuid, documentUuid}: {pageUuid: string; documentUuid: string}) => {
       try {
         /**
          * Check the license status and return early
@@ -22,8 +22,8 @@ export function useCropDocumentPage() {
          * start the Cropping Screen with the configuration, documentUUID and pageUUID
          */
         const configuration = new CroppingConfiguration({
-          documentUuid: documentID,
-          pageUuid: pageID,
+          documentUuid: documentUuid,
+          pageUuid: pageUuid,
         });
 
         const documentResult = await ScanbotDocument.startCroppingScreen(

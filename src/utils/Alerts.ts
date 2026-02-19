@@ -10,7 +10,7 @@ export function errorMessageAlert(message: string | undefined) {
     message ?? '',
     [
       {
-        text: 'Cancel',
+        text: 'Close',
         style: 'cancel',
         onPress: () => {},
       },
@@ -65,20 +65,21 @@ export function infoMessageAlert(message: string) {
 
 export function deleteConfirmationAlert(
   title: string,
-  message: string | undefined,
+  confirmText: string,
   onDelete: () => void,
+  message?: string | undefined,
 ) {
   Alert.alert(
     title,
     message,
     [
       {
-        text: 'Close',
+        text: 'Cancel',
         style: 'cancel',
         onPress: () => {},
       },
       {
-        text: 'OK',
+        text: confirmText,
         style: 'default',
         onPress: onDelete,
       },

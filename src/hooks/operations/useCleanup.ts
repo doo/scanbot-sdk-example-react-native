@@ -10,8 +10,8 @@ import ScanbotSDK from 'react-native-scanbot-sdk';
 export const useCleanup = () => {
   return useCallback(() => {
     deleteConfirmationAlert(
-      'Clearing storage',
-      'Are you sure you want to proceed?',
+      'Cleanup SDK storage ?',
+      'Cleanup',
       async () => {
         try {
           /**

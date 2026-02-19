@@ -15,12 +15,12 @@ export function useModifyPage() {
   return useCallback(
     async ({
       parametricFilter,
-      pageID,
-      documentID,
+      pageUuid,
+      documentUuid,
     }: {
       parametricFilter: ParametricFilter;
-      pageID: string;
-      documentID: string;
+      pageUuid: string;
+      documentUuid: string;
     }) => {
       try {
         setLoading(true);
@@ -32,12 +32,13 @@ export function useModifyPage() {
           return;
         }
         /** Modify the document page */
+        const options = new ModifyPageOptions();
+        options.filters = [parametricFilter];
+
         const documentResult = await ScanbotDocument.modifyPage({
-          documentUuid: documentID,
-          pageUuid: pageID,
-          options: new ModifyPageOptions({
-            filters: [parametricFilter],
-          }),
+          documentUuid,
+          pageUuid,
+          options,
         });
         /**
          * Handle the result
