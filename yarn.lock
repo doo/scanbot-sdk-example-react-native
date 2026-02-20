@@ -8029,15 +8029,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-scanbot-sdk@npm:8.0.0-beta.1":
-  version: 8.0.0-beta.1
-  resolution: "react-native-scanbot-sdk@npm:8.0.0-beta.1"
+"react-native-scanbot-sdk@npm:8.0.0-rc.1":
+  version: 8.0.0-rc.1
+  resolution: "react-native-scanbot-sdk@npm:8.0.0-rc.1"
   dependencies:
     "@expo/config-plugins": 9.0.14
   peerDependencies:
     react: "*"
     react-native: ">=0.73"
-  checksum: 381efb2c3205300d40ffa9848d83428c24dba368e26a69bc33c8bd4ec556b3076a5e23989b14b14c92b72c81db5cbc2b8db5cdf553357927abe341f17625ed44
+  checksum: f53bfa1c8842651bf03a48b2710f9d69765f0c7f0cbbb1d3767a8e60d92b879e2933604ea9185cabe08cbf232e229ef6e857e0660f7e565b6289d1dd60b9efab
   languageName: node
   linkType: hard
 
@@ -8054,10 +8054,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-share@npm:^12.0.3":
-  version: 12.2.2
-  resolution: "react-native-share@npm:12.2.2"
-  checksum: 44f0276110fdf6f45697ccefb2aa6b0dec90dc29a9b0114d3cbbbd6850cb2a0c0b9375d4a566fca4e605833f2859988bef019e4331ee483b4c7e5260935abb40
+"react-native-share@npm:12.2.5":
+  version: 12.2.5
+  resolution: "react-native-share@npm:12.2.5"
+  checksum: 585c1ace5f224e98b95e62308c8e9b02fae93b8bbcd3c397bd1b8bbd3936c674401df458fa8c87da1d5dba98a5d94080d9b768f7c3bffe908996d2ac91156562
   languageName: node
   linkType: hard
 
@@ -8473,9 +8473,9 @@ __metadata:
     react-native-fs: 2.20.0
     react-native-image-picker: ^8.2.0
     react-native-safe-area-context: ^5.4.0
-    react-native-scanbot-sdk: 8.0.0-beta.1
+    react-native-scanbot-sdk: 8.0.0-rc.1
     react-native-screens: ~4.10.0
-    react-native-share: ^12.0.3
+    react-native-share: 12.2.5
     react-test-renderer: 19.0.0
     typescript: 5.0.4
   languageName: unknown

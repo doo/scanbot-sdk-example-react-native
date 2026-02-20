@@ -1779,7 +1779,7 @@ PODS:
     - React-utils (= 0.79.0)
   - RNFS (2.20.0):
     - React-Core
-  - RNScanbotSDK (8.0.0-beta.1):
+  - RNScanbotSDK (8.0.0-rc.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1802,7 +1802,7 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - ScanbotSDKNativeWrapper (= 8.0.0.3)
+    - ScanbotSDKNativeWrapper (= 8.0.2.1)
     - Yoga
   - RNScreens (4.10.0):
     - DoubleConversion
@@ -1855,7 +1855,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNShare (12.2.2):
+  - RNShare (12.2.5):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1879,11 +1879,11 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - ScanbotSDK (8.0.1-RC1):
-    - ScanbotSDK/NONE (= 8.0.1-RC1)
-  - ScanbotSDK/NONE (8.0.1-RC1)
-  - ScanbotSDKNativeWrapper (8.0.0.3):
-    - ScanbotSDK (= 8.0.1-RC1)
+  - ScanbotSDK (8.0.2):
+    - ScanbotSDK/NONE (= 8.0.2)
+  - ScanbotSDK/NONE (8.0.2)
+  - ScanbotSDKNativeWrapper (8.0.2.1):
+    - ScanbotSDK (= 8.0.2)
   - SocketRocket (0.7.1)
   - Yoga (0.0.0)
 
@@ -2205,11 +2205,11 @@ SPEC CHECKSUMS:
   ReactCodegen: daf57f5314369a4ad607ee77516d45aad03b10d7
   ReactCommon: c07346679f14c0b62ad02b20e18e984da3b575ce
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
-  RNScanbotSDK: 59192544ae121c082f778b3ef25c5676aa3b6f88
+  RNScanbotSDK: 4363cc9386e741503f52bf9231bf099767cdf59a
   RNScreens: c5c07a86e4088ce92f0d3854082250dfa9c61f75
-  RNShare: aa3b7160f47183e85bbea2b14d4caf55699cb627
-  ScanbotSDK: 11246bc7e6e33e69f037d84052363fa415f33ae7
-  ScanbotSDKNativeWrapper: a5b7564ac914634222a388a3e607b674cad065e0
+  RNShare: efd10c48a1c2fa193eac169c4b7798215c16f58d
+  ScanbotSDK: 63f47408395b9ef3e59913ffdb279b5992ca4104
+  ScanbotSDKNativeWrapper: d0f3a78d877eb3f3459a56bc04dcede945a45352
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 7fb3f48a328f20ea5d5eecd862e91798bd76b255
 
