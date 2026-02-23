@@ -1,7 +1,9 @@
-import {autorelease, ImageRef} from 'react-native-scanbot-sdk';
+import {autorelease, DeepPartial, ImageRef} from 'react-native-scanbot-sdk';
 
-async function imageRefReferenceSerialization(imageFileUri: string) {
-  await autorelease(async () => {
+async function serializeImageRefAsReference(
+  imageFileUri: string,
+): Promise<DeepPartial<ImageRef> | undefined | null> {
+  return await autorelease(async () => {
     /*
      * An example ref created from an image file URI, an image buffer or, obtained from a previous operation.
      * This is just an example, you can create an image reference from various sources as needed.
@@ -20,12 +22,7 @@ async function imageRefReferenceSerialization(imageFileUri: string) {
        */
       console.log('Serialized Ref UUID', serializedRef?.uniqueId);
 
-      if (serializedRef !== null) {
-        /*
-         * The `ImageRef.from()` method allows you to create an image reference from the serialized data.
-         */
-        const ref = ImageRef.from(serializedRef);
-      }
+      return serializedRef;
     }
   });
 }
