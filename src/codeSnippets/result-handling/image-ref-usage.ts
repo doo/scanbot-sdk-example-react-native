@@ -7,14 +7,13 @@ import {
   SaveImageOptions,
 } from 'react-native-scanbot-sdk';
 
-export async function imageRefUsage(imageFileUri: string) {
+async function imageRefUsage(imageFileUri: string) {
   await autorelease(async () => {
     const ref = await ImageRef.fromImageFileUri(imageFileUri);
     if (ref !== null) {
       /*
        * The `info()` method retrieves information about the image reference.
-       * - Returns details such as dimensions, format, and file size.
-       * - Useful for validating the image or for further processing steps.
+       * - Returns details such as dimensions and file size.
        */
       const imageInfo = await ref.info();
       console.log('Image size', imageInfo?.maxByteSize);
