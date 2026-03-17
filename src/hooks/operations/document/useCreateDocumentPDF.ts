@@ -3,16 +3,17 @@ import {ActivityIndicatorContext} from '@context';
 import {checkLicense, errorMessageAlert} from '@utils';
 import Share from 'react-native-share';
 
-import ScanbotSDK, {
-  OCRConfiguration,
+import {
+  OcrConfiguration,
   PdfConfiguration,
+  ScanbotPdfGenerator,
 } from 'react-native-scanbot-sdk';
 
 export function useCreateDocumentPDF() {
   const {setLoading} = useContext(ActivityIndicatorContext);
 
   return useCallback(
-    async (documentID: string, sandwichedPDF: boolean = false) => {
+    async (documentUuid: string, sandwichedPDF: boolean = false) => {
       try {
         setLoading(true);
         /**
@@ -25,23 +26,23 @@ export function useCreateDocumentPDF() {
         /**
          * Create a PDF with the provided option
          */
-        const ocrConfiguration: OCRConfiguration | undefined = sandwichedPDF
+        const ocrConfiguration: OcrConfiguration | undefined = sandwichedPDF
           ? {
               engineMode: 'SCANBOT_OCR',
             }
           : undefined;
 
-        const result = await ScanbotSDK.Document.createPDF({
-          documentID: documentID,
+        const pdfFileUri = await ScanbotPdfGenerator.generateFromDocument({
+          documentUuid: documentUuid,
           pdfConfiguration: new PdfConfiguration(),
           ocrConfiguration: ocrConfiguration,
         });
         /**
          * Handle the result by displaying an action sheet
          */
-        Share.open({
+        await Share.open({
           title: 'Share PDF file',
-          url: result.pdfFileUri,
+          url: pdfFileUri,
           failOnCancel: false,
         });
       } catch (e: any) {

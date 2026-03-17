@@ -1,10 +1,6 @@
-import ScanbotSDK, {MockCameraParams} from 'react-native-scanbot-sdk';
+import ScanbotSDK from 'react-native-scanbot-sdk';
 
 async function mockCamera() {
-  const config: MockCameraParams = {
-    imageFileUri: '{path to your image file}',
-  };
-
   try {
     /**
      * For Android:
@@ -12,7 +8,9 @@ async function mockCamera() {
      *  API < 33, READ_EXTERNAL_STORAGE permission is required.
      *  The image must have even values for both width and height.
      */
-    await ScanbotSDK.mockCamera(config);
+    await ScanbotSDK.mockCamera({
+      imageFileUri: '{path to your image file}',
+    });
   } catch (error: any) {
     console.error(error);
   }

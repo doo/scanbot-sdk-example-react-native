@@ -3,8 +3,9 @@ import {ActivityIndicatorContext} from '@context';
 import {checkLicense, errorMessageAlert} from '@utils';
 import Share from 'react-native-share';
 
-import ScanbotSDK, {
+import {
   ScanbotBinarizationFilter,
+  ScanbotTiffGenerator,
   TiffGeneratorParameters,
 } from 'react-native-scanbot-sdk';
 
@@ -12,7 +13,7 @@ export function useCreateDocumentTIFF() {
   const {setLoading} = useContext(ActivityIndicatorContext);
 
   return useCallback(
-    async (documentID: string, binarized: boolean) => {
+    async (documentUuid: string, binarized: boolean) => {
       try {
         setLoading(true);
         /**
@@ -22,24 +23,26 @@ export function useCreateDocumentTIFF() {
         if (!(await checkLicense())) {
           return;
         }
+
+        const tiffGeneratorParameters = new TiffGeneratorParameters();
+        tiffGeneratorParameters.binarizationFilter = binarized
+          ? new ScanbotBinarizationFilter()
+          : null;
+        tiffGeneratorParameters.compression = binarized ? 'CCITT_T6' : 'ADOBE_DEFLATE'; // optional compression
+
         /**
          * Create a tiff file from the document
          */
-        const result = await ScanbotSDK.Document.createTIFF({
-          documentID,
-          configuration: new TiffGeneratorParameters({
-            binarizationFilter: binarized
-              ? new ScanbotBinarizationFilter()
-              : undefined,
-            compression: binarized ? 'CCITT_T6' : 'ADOBE_DEFLATE',
-          }),
+        const tiffFileUri = await ScanbotTiffGenerator.generateFromDocument({
+          documentUuid: documentUuid,
+          tiffGeneratorParameters: tiffGeneratorParameters,
         });
         /**
          * Handle the result by displaying an action sheet
          */
-        Share.open({
+        await Share.open({
           title: 'Share TIFF file',
-          url: result.tiffFileUri,
+          url: tiffFileUri,
           failOnCancel: false,
         });
       } catch (e: any) {

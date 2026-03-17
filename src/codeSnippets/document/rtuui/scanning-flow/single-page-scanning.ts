@@ -1,0 +1,19 @@
+import {DocumentScanningFlow, ScanbotDocument} from 'react-native-scanbot-sdk';
+
+async function singlePageScanning() {
+  try {
+    /** Create the configuration object for single page scanning */
+    const configuration = new DocumentScanningFlow();
+    configuration.outputSettings.pagesScanLimit = 1;
+
+    /** See further customization configs... */
+
+    const documentResult = await ScanbotDocument.startScanner(configuration);
+
+    /** Handle the document if the status is 'OK' */
+    if (documentResult.status === 'OK') {
+    }
+  } catch (e: any) {
+    console.error(e.message);
+  }
+}

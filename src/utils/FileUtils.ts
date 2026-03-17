@@ -4,14 +4,14 @@ import {
   pick,
   types,
 } from '@react-native-documents/picker';
-import {infoMessageAlert} from './Alerts.ts';
+import {errorMessageAlert} from './Alerts.ts';
 
 /**
  * Select a local PDF file and retrieve the file's URI.
  * @return {Promise<string|undefined>} URI of the selected PDF if the operation is successful or undefined otherwise
  */
 
-export async function selectPDFFileUri(): Promise<string | undefined> {
+export async function selectPDFFile(): Promise<string | undefined> {
   try {
     const [pdfFile] = await pick({
       mode: 'import',
@@ -25,11 +25,11 @@ export async function selectPDFFileUri(): Promise<string | undefined> {
     if (isErrorWithCode(e)) {
       switch (e.code) {
         case errorCodes.UNABLE_TO_OPEN_FILE_TYPE: {
-          infoMessageAlert('Unable to open file');
+          errorMessageAlert('Unable to open file');
           break;
         }
         case errorCodes.IN_PROGRESS: {
-          infoMessageAlert(e.message);
+          errorMessageAlert(e.message);
           break;
         }
       }

@@ -4,14 +4,14 @@ import {BottomActionBar, ImageFilterModal, PageImagePreview} from '@components';
 import {ParametricFilter} from 'react-native-scanbot-sdk';
 import {
   DocumentPageResultScreenRouteProp,
-  removePageConfirmationAlert,
+  deleteConfirmationAlert,
 } from '@utils';
 import {useRoute} from '@react-navigation/native';
 import {useCropDocumentPage, useModifyPage, useRemovePage} from '@hooks';
 import {DocumentContext} from '@context';
 
 export function DocumentPageResultScreen() {
-  const {pageID} = useRoute<DocumentPageResultScreenRouteProp>().params;
+  const {pageUuid} = useRoute<DocumentPageResultScreenRouteProp>().params;
   const {document} = useContext(DocumentContext);
   const [filterModalVisible, setFilterModalVisible] = useState(false);
   const cropDocumentPage = useCropDocumentPage();
@@ -21,11 +21,11 @@ export function DocumentPageResultScreen() {
   const onCropAndRotate = useCallback(async () => {
     if (document?.uuid !== undefined) {
       await cropDocumentPage({
-        documentID: document.uuid,
-        pageID: pageID,
+        documentUuid: document.uuid,
+        pageUuid: pageUuid,
       });
     }
-  }, [cropDocumentPage, document, pageID]);
+  }, [cropDocumentPage, document, pageUuid]);
 
   const toggleFilterModal = useCallback(
     () => setFilterModalVisible(p => !p),
@@ -36,28 +36,32 @@ export function DocumentPageResultScreen() {
     async (filter: ParametricFilter) => {
       if (document?.uuid !== undefined) {
         await modifyPage({
-          documentID: document.uuid,
-          pageID: pageID,
+          documentUuid: document.uuid,
+          pageUuid: pageUuid,
           parametricFilter: filter,
         });
       }
     },
-    [document, modifyPage, pageID],
+    [document, modifyPage, pageUuid],
   );
 
   const onRemovePage = useCallback(async () => {
     if (document?.uuid !== undefined) {
-      await removePage({documentID: document.uuid, pageID: pageID});
+      await removePage({documentUuid: document.uuid, pageUuid: pageUuid});
     }
-  }, [document, pageID, removePage]);
+  }, [document, pageUuid, removePage]);
 
   const onDelete = useCallback(() => {
-    removePageConfirmationAlert(onRemovePage);
+    deleteConfirmationAlert(
+      'Remove page ?',
+      'Remove',
+      onRemovePage,
+    );
   }, [onRemovePage]);
 
   return (
     <View style={styles.container}>
-      <PageImagePreview pageID={pageID} style={styles.imageDetails} />
+      <PageImagePreview pageUuid={pageUuid} style={styles.imageDetails} />
       <BottomActionBar
         buttonOneTitle={'CROP & ROTATE'}
         buttonTwoTitle={'FILTER'}

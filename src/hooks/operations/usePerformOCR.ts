@@ -4,12 +4,16 @@ import {
   errorMessageAlert,
   PrimaryRouteNavigationProp,
   Screens,
-  selectImagesFromLibrary,
+  selectImageFromLibrary,
 } from '@utils';
 import {ActivityIndicatorContext} from '@context';
 import {useNavigation} from '@react-navigation/native';
 
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import {
+  autorelease,
+  ImageRef,
+  ScanbotOcrEngine,
+} from 'react-native-scanbot-sdk';
 
 export function usePerformOCR() {
   const {setLoading} = useContext(ActivityIndicatorContext);
@@ -29,25 +33,35 @@ export function usePerformOCR() {
        * Select an image from the Image Library
        * Return early if no image is selected, or there is an issue selecting an image
        **/
-      const selectedImages = await selectImagesFromLibrary();
-      if (!selectedImages) {
+      const selectedImage = await selectImageFromLibrary();
+      if (!selectedImage) {
         return;
       }
+
       /**
-       * Perform optical character recognition with the provided configuration and
-       * Display the result
+       * Note: ImageRef is used as an input here just to showcase its usage.
+       * Passing the image file URI directly to ScanbotOcrEngine.recognizeOnImages will work the same way.
+       * The autorelease pool is only necessary when working with ImageRef to manage native resources.
        */
-      const result = await ScanbotSDK.performOCR({
-        imageFileUris: selectedImages,
-        ocrConfiguration: {
-          engineMode: 'SCANBOT_OCR',
-        },
-      });
-      /**
-       * Handle the result by navigating to the result screen
-       */
-      navigation.navigate(Screens.PLAIN_DATA_RESULT, {
-        data: result.plainText,
+      await autorelease(async () => {
+        const imageRef = await ImageRef.fromImageFileUri(selectedImage);
+        if (!imageRef) {
+          return;
+        }
+
+        const result = await ScanbotOcrEngine.recognizeOnImages({
+          images: [imageRef],
+          configuration: {
+            engineMode: 'SCANBOT_OCR',
+          },
+        });
+
+        /**
+         * Handle the result by navigating to the result screen
+         */
+        navigation.navigate(Screens.PLAIN_DATA_RESULT, {
+          data: result.recognizedText,
+        });
       });
     } catch (e: any) {
       errorMessageAlert(e.message);

@@ -10,15 +10,13 @@ import {
   useDocumentDataExtractorOnImage,
   useDocumentQualityAnalyzer,
   useLicenseInfo,
-  useMedicalCertificateScanner,
   useMRZScanner,
   useMultiplePageScanning,
   useOCRConfigs,
   usePerformOCR,
-  useRecognizeCheck,
-  useRecognizeCreditCard,
-  useRecognizeMedicalCertificate,
-  useRecognizeMRZ,
+  useScanCheckFromImage,
+  useScanCreditCardFromImage,
+  useScanMRZFromImage,
   useSinglePageScanning,
   useSinglePageScanningWithFinder,
   useTextPatternScanner,
@@ -32,17 +30,15 @@ export function HomeScreen() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
   /** ScanbotSDK Features */
   const onMRZScanner = useMRZScanner();
-  const onMedicalCertificateScanner = useMedicalCertificateScanner();
   const onDocumentDataExtractor = useDocumentDataExtractor();
   const onVinScanner = useVinScanner();
   const onCheckScanner = useCheckScanner();
   const onCreditCardScanner = useCreditCardScanner();
   const onTextPatternScanner = useTextPatternScanner();
-  const onRecognizeCheckOnImage = useRecognizeCheck();
-  const onRecognizeMRZOnImage = useRecognizeMRZ();
-  const onRecognizeMedicalCertificateOnImage = useRecognizeMedicalCertificate();
+  const onScanCheckOnImage = useScanCheckFromImage();
+  const onScanMRZOnImage = useScanMRZFromImage();
   const onDocumentDataExtractorOnImage = useDocumentDataExtractorOnImage();
-  const onRecognizeCreditCard = useRecognizeCreditCard();
+  const onScanCreditCard = useScanCreditCardFromImage();
   const onPerformOCR = usePerformOCR();
   const onDocumentQualityAnalyzer = useDocumentQualityAnalyzer();
   const onLicenseInfo = useLicenseInfo();
@@ -83,12 +79,8 @@ export function HomeScreen() {
           onPress={onCroppingView}
         />
 
-        <FeatureHeader title={'DATA DETECTORS'} />
+        <FeatureHeader title={'DATA SCANNERS'} />
         <FeatureItem onPress={onMRZScanner} title={'Scan MRZ'} />
-        <FeatureItem
-          onPress={onMedicalCertificateScanner}
-          title={'Scan Medical Certificate'}
-        />
         <FeatureItem onPress={onCheckScanner} title={'Scan Check'} />
         <FeatureItem onPress={onVinScanner} title={'Scan VIN'} />
         <FeatureItem onPress={onCreditCardScanner} title={'Scan Credit Card'} />
@@ -101,22 +93,15 @@ export function HomeScreen() {
           title={'Document Data Extractor'}
         />
 
-        <FeatureHeader title={'DATA DETECTORS ON IMAGES'} />
+        <FeatureHeader title={'Scan data from Image'} />
+        <FeatureItem onPress={onScanMRZOnImage} title={'Scan MRZ from Image'} />
         <FeatureItem
-          onPress={onRecognizeMRZOnImage}
-          title={'Recognize MRZ on Image'}
+          onPress={onScanCheckOnImage}
+          title={'Scan Check from Image'}
         />
         <FeatureItem
-          onPress={onRecognizeMedicalCertificateOnImage}
-          title={'Recognize Medical Certificate on Image'}
-        />
-        <FeatureItem
-          onPress={onRecognizeCheckOnImage}
-          title={'Recognize Check on Image'}
-        />
-        <FeatureItem
-          onPress={onRecognizeCreditCard}
-          title={'Recognize Credit Card on Image'}
+          onPress={onScanCreditCard}
+          title={'Scan Credit Card from Image'}
         />
         <FeatureItem
           onPress={onDocumentDataExtractorOnImage}

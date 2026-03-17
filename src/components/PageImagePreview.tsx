@@ -1,4 +1,4 @@
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import {ScanbotImageProcessor} from 'react-native-scanbot-sdk';
 import {ImageStyle, StyleProp} from 'react-native';
 import React, {useContext, useEffect, useMemo, useState} from 'react';
 import {PreviewImage} from './PreviewImage.tsx';
@@ -6,10 +6,10 @@ import {FILE_ENCRYPTION_ENABLED, IMAGE_FILE_FORMAT} from '@utils';
 import {DocumentContext} from '@context';
 
 export function PageImagePreview({
-  pageID,
+  pageUuid,
   style,
 }: {
-  pageID: string;
+  pageUuid: string;
   style: StyleProp<ImageStyle>;
 }) {
   const {document} = useContext(DocumentContext);
@@ -17,8 +17,8 @@ export function PageImagePreview({
   const [loading, setLoading] = useState(false);
 
   const page = useMemo(
-    () => document?.pages.find(p => p.uuid === pageID),
-    [document?.pages, pageID],
+    () => document?.pages.find(p => p.uuid === pageUuid),
+    [document?.pages, pageUuid],
   );
 
   useEffect(() => {
@@ -30,12 +30,12 @@ export function PageImagePreview({
       try {
         setLoading(true);
         if (page && (page.documentImagePreviewURI || page.originalImageURI)) {
-          const result = await ScanbotSDK.getImageData(
+          const base64ImageData = await ScanbotImageProcessor.readImageData(
             page.documentImagePreviewURI || page.originalImageURI,
           );
           const imgMimeType =
             IMAGE_FILE_FORMAT === 'JPG' ? 'image/jpeg' : 'image/png';
-          setUri(`data:${imgMimeType};base64,${result.base64ImageData}`);
+          setUri(`data:${imgMimeType};base64,${base64ImageData}`);
         }
       } catch (e) {
         console.log(e);

@@ -9,7 +9,7 @@ import {
 import {ActivityIndicatorContext, DocumentContext} from '@context';
 import {useNavigation} from '@react-navigation/native';
 
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import {CreateDocumentOptions, ScanbotDocument} from 'react-native-scanbot-sdk';
 
 export function useCreateDocumentWithPage() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
@@ -35,9 +35,11 @@ export function useCreateDocumentWithPage() {
         return;
       }
       /** Create a document object */
-      const documentResult = await ScanbotSDK.Document.createDocument({
-        imageFileUris: selectedImageResult,
-        documentDetection: true,
+      const documentResult = await ScanbotDocument.createDocumentFromImages({
+        images: selectedImageResult,
+        options: new CreateDocumentOptions({
+          documentDetection: true,
+        }),
       });
 
       /** Add pages */

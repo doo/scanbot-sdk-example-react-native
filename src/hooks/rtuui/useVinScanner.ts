@@ -2,9 +2,9 @@ import {checkLicense, errorMessageAlert, resultMessageAlert} from '@utils';
 import {useCallback} from 'react';
 
 import {
-  startVINScanner,
+  ScanbotVin,
   VinScannerScreenConfiguration,
-} from 'react-native-scanbot-sdk/ui_v2';
+} from 'react-native-scanbot-sdk';
 
 export function useVinScanner() {
   return useCallback(async () => {
@@ -23,7 +23,7 @@ export function useVinScanner() {
       const configuration = new VinScannerScreenConfiguration();
       configuration.confirmationAlertDialogEnabled = false;
 
-      const result = await startVINScanner(configuration);
+      const result = await ScanbotVin.startScanner(configuration);
       /**
        * Handle the result if the result status is OK
        */

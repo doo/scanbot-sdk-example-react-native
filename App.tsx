@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
-import {Platform, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
-import ScanbotSDK, {ScanbotSdkConfiguration} from 'react-native-scanbot-sdk';
-import {DocumentDirectoryPath, ExternalDirectoryPath} from 'react-native-fs';
+import ScanbotSDK, {SdkConfiguration} from 'react-native-scanbot-sdk';
+import {DocumentDirectoryPath} from 'react-native-fs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
@@ -25,7 +25,6 @@ import {LoadingIndicator} from '@components';
 
 import {HomeScreen} from './src/screens/HomeScreen';
 import {MrzResultScreen} from './src/screens/MrzResultScreen';
-import {MedicalCertificateResultScreen} from './src/screens/MedicalCertificateResultScreen';
 import {DocumentDataExtractorResultScreen} from './src/screens/DocumentDataExtractorResultScreen';
 import {CheckScannerResultScreen} from './src/screens/CheckScannerResultScreen';
 import {PlainDataResultScreen} from './src/screens/PlainDataResultScreen';
@@ -37,30 +36,6 @@ import {CreditCardScannerResultScreen} from './src/screens/CreditCardScannerResu
 
 const Stack = createNativeStackNavigator<PrimaryRoutesParamList>();
 
-// !! Please read the note!!
-// It is strongly recommended to use the default (secure) storage location of the Scanbot SDK.
-// However, for demo purposes, we overwrite the "storageBaseDirectory" of the Scanbot SDK by a custom storage directory.
-//
-// On Android we use the "ExternalDirectoryPath" which is a public(!) folder.
-// All image files and export files (PDF, TIFF, etc.) created by the Scanbot SDK in this demo app will be stored
-// in this public storage directory and will be accessible for every(!) app having external storage permissions!
-// Again, this is only for demo purposes, which allows us to easily fetch and check the generated files
-// via Android "adb" CLI tools, Android File Transfer app, Android Studio, etc.
-//
-// On iOS, we use the "DocumentDirectoryPath" which is accessible via iTunes file sharing.
-//
-// For more details about the storage system of the Scanbot SDK RN Module please see our docs:
-// - https://scanbotsdk.github.io/documentation/react-native/
-//
-// For more details about the file system on Android and iOS we also recommend to check out:
-// - https://developer.android.com/guide/topics/data/data-storage
-// - https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/FileSystemOverview/FileSystemOverview.html
-const storageBaseDirectory = Platform.select({
-  ios: DocumentDirectoryPath + '/my-custom-storage',
-  android: ExternalDirectoryPath + '/my-custom-storage',
-  default: undefined,
-});
-
 /*
  * TODO Add the Scanbot SDK license key here.
  * Please note: The Scanbot SDK will run without a license key for one minute per session!
@@ -69,27 +44,28 @@ const storageBaseDirectory = Platform.select({
  * Please submit the trial license form (https://docs.scanbot.io/trial/) on our website by using
  * the app identifier "io.scanbot.example.sdk.reactnative" of this example app.
  */
-export const SDKInitializationOptions: ScanbotSdkConfiguration = {
+export const initializationConfiguration = new SdkConfiguration({
   //The Scanbot SDK License Key
   licenseKey: '',
   loggingEnabled: true, // Logging enabled. Consider switching logging OFF in production builds for security and performance reasons!
   storageImageFormat: IMAGE_FILE_FORMAT, // Format of stored images
   storageImageQuality: 80, // Quality of stored images
-  //storageBaseDirectory: storageBaseDirectory, // Uncomment this line to use a custom storage path
-} as const;
+  // Optional custom storage directory
+  // storageBaseDirectory: DocumentDirectoryPath + '/my-custom-storage',
+});
 
 // Set the following properties to enable encryption.
 if (FILE_ENCRYPTION_ENABLED) {
-  SDKInitializationOptions.fileEncryptionMode = 'AES256';
-  SDKInitializationOptions.fileEncryptionPassword =
+  initializationConfiguration.fileEncryptionMode = 'AES256';
+  initializationConfiguration.fileEncryptionPassword =
     'SomeSecretPa$$w0rdForFileEncryption';
 }
 
 function App() {
   useEffect(() => {
-    ScanbotSDK.initializeSDK(SDKInitializationOptions)
-      .then(message => {
-        console.log(message);
+    ScanbotSDK.initialize(initializationConfiguration)
+      .then(licenseInfo => {
+        console.log(licenseInfo);
       })
       .catch(error => {
         console.error('Error initializing Scanbot SDK:', error.message);
@@ -119,10 +95,6 @@ function App() {
                   title: ScreenTitles[navigation.route.name as Screens],
                 })}>
                 <Stack.Screen name={Screens.HOME} component={HomeScreen} />
-                <Stack.Screen
-                  name={Screens.MEDICAL_CERTIFICATE_RESULT}
-                  component={MedicalCertificateResultScreen}
-                />
                 <Stack.Screen
                   name={Screens.MRZ_RESULT}
                   component={MrzResultScreen}

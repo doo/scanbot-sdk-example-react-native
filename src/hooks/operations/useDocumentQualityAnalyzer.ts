@@ -7,8 +7,9 @@ import {
   selectImageFromLibrary,
 } from '@utils';
 
-import ScanbotSDK, {
+import {
   DocumentQualityAnalyzerConfiguration,
+  ScanbotDocument,
 } from 'react-native-scanbot-sdk';
 
 export function useDocumentQualityAnalyzer() {
@@ -33,12 +34,15 @@ export function useDocumentQualityAnalyzer() {
         return;
       }
 
+      const configuration = new DocumentQualityAnalyzerConfiguration();
+      configuration.maxImageSize = 2100;
+
+      // Configure other parameters as needed.
+
       // Detect document quality on a selected image
-      const result = await ScanbotSDK.documentQualityAnalyzer({
-        imageFileUri: selectedImage,
-        configuration: new DocumentQualityAnalyzerConfiguration({
-          maxImageSize: 2100,
-        }),
+      const result = await ScanbotDocument.analyzeQualityOnImage({
+        image: selectedImage,
+        configuration: configuration,
       });
       /**
        * Handle the result by displaying an alert

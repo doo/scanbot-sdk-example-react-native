@@ -4,13 +4,13 @@ import ScanbotSDK, {DocumentData} from 'react-native-scanbot-sdk';
 interface DocumentContext {
   document?: DocumentData;
   setDocument: (document: DocumentData) => void;
-  loadDocument: (documentID: string) => void;
+  loadDocument: (documentUuid: string) => void;
 }
 
 export const DocumentContext = createContext<DocumentContext>({
   document: undefined,
   setDocument: (_document: DocumentData) => {},
-  loadDocument: (_documentID: string) => {},
+  loadDocument: (_documentUuid: string) => {},
 });
 
 export function useDocument() {
@@ -22,9 +22,9 @@ export function useDocument() {
     setDocumentData(_document);
   }, []);
 
-  const loadDocument = useCallback(async (documentID: string) => {
+  const loadDocument = useCallback(async (documentUuid: string) => {
     try {
-      let documentResult = await ScanbotSDK.Document.loadDocument(documentID);
+      let documentResult = await ScanbotSDK.Document.loadDocument(documentUuid);
       setDocumentData(documentResult);
     } catch (e: any) {
       console.log(e.message);

@@ -8,14 +8,14 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {DocumentContext} from '@context';
 
-import ScanbotSDK from 'react-native-scanbot-sdk';
+import {ScanbotDocument} from 'react-native-scanbot-sdk';
 
 export function useRemovePage() {
   const navigation = useNavigation<PrimaryRouteNavigationProp>();
   const {setDocument} = useContext(DocumentContext);
 
   return useCallback(
-    async ({pageID, documentID}: {pageID: string; documentID: string}) => {
+    async ({pageUuid, documentUuid}: {pageUuid: string; documentUuid: string}) => {
       try {
         /**
          * Check the license status and return early
@@ -25,9 +25,9 @@ export function useRemovePage() {
           return;
         }
         /** Remove the document page */
-        const documentResult = await ScanbotSDK.Document.removePage({
-          documentID: documentID,
-          pageID: pageID,
+        const documentResult = await ScanbotDocument.removePages({
+          pageUuids: [pageUuid],
+          documentUuid: documentUuid,
         });
         /**
          * Handle the result

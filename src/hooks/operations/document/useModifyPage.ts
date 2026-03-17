@@ -2,7 +2,11 @@ import {useCallback, useContext} from 'react';
 import {checkLicense, errorMessageAlert} from '@utils';
 import {ActivityIndicatorContext, DocumentContext} from '@context';
 
-import ScanbotSDK, {ParametricFilter} from 'react-native-scanbot-sdk';
+import {
+  ModifyPageOptions,
+  ParametricFilter,
+  ScanbotDocument,
+} from 'react-native-scanbot-sdk';
 
 export function useModifyPage() {
   const {setDocument} = useContext(DocumentContext);
@@ -11,12 +15,12 @@ export function useModifyPage() {
   return useCallback(
     async ({
       parametricFilter,
-      pageID,
-      documentID,
+      pageUuid,
+      documentUuid,
     }: {
       parametricFilter: ParametricFilter;
-      pageID: string;
-      documentID: string;
+      pageUuid: string;
+      documentUuid: string;
     }) => {
       try {
         setLoading(true);
@@ -28,10 +32,13 @@ export function useModifyPage() {
           return;
         }
         /** Modify the document page */
-        const documentResult = await ScanbotSDK.Document.modifyPage({
-          documentID: documentID,
-          pageID: pageID,
-          filters: [parametricFilter],
+        const options = new ModifyPageOptions();
+        options.filters = [parametricFilter];
+
+        const documentResult = await ScanbotDocument.modifyPage({
+          documentUuid,
+          pageUuid,
+          options,
         });
         /**
          * Handle the result

@@ -43,7 +43,9 @@ export async function selectImageFromLibrary(): Promise<string | undefined> {
     return undefined;
   }
 
-  const imageUri = imageResponse.assets.every(image => image.uri !== undefined);
+  const imageUri =
+    imageResponse.assets.length > 0 &&
+    imageResponse.assets.every(image => image.uri !== undefined);
 
   if (!imageUri) {
     errorMessageAlert('Error picking image from gallery!');

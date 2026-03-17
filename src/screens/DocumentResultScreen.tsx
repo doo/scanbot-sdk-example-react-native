@@ -47,11 +47,11 @@ export function DocumentResultScreen() {
   }, [document, addDocumentPage]);
 
   const onPagePress = useCallback(
-    (pageID: string) => {
+    (pageUuid: string) => {
       return function () {
         if (document !== undefined) {
           navigation.navigate(Screens.DOCUMENT_PAGE_RESULT, {
-            pageID: pageID,
+            pageUuid: pageUuid,
           });
         }
       };
@@ -74,7 +74,7 @@ export function DocumentResultScreen() {
           {document.pages.map(page => (
             <TouchableOpacity key={page.uuid} onPress={onPagePress(page.uuid)}>
               <PageImagePreview
-                pageID={page.uuid}
+                pageUuid={page.uuid}
                 style={[
                   styles.galleryCell,
                   {
@@ -97,7 +97,7 @@ export function DocumentResultScreen() {
       />
       <ExportDocumentModal
         isVisible={modalVisible}
-        documentID={document.uuid}
+        documentUuid={document.uuid}
         onDismiss={onDisplayModal(false)}
       />
     </View>

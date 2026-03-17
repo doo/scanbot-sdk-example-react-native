@@ -10,8 +10,9 @@ import {
 import {ActivityIndicatorContext} from '@context';
 import {useNavigation} from '@react-navigation/native';
 
-import ScanbotSDK, {
+import {
   DocumentDataExtractorConfiguration,
+  ScanbotDocumentDataExtractor,
 } from 'react-native-scanbot-sdk';
 
 export function useDocumentDataExtractorOnImage() {
@@ -40,8 +41,8 @@ export function useDocumentDataExtractorOnImage() {
        * Extract document data from the selected image and
        * Handle the result by navigating to Screens.DOCUMENT_DATA_EXTRACTOR_RESULT
        */
-      const result = await ScanbotSDK.documentDataExtractor({
-        imageFileUri: selectedImage,
+      const result = await ScanbotDocumentDataExtractor.extractFromImage({
+        image: selectedImage,
         configuration: new DocumentDataExtractorConfiguration({}),
       });
 

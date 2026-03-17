@@ -2,11 +2,12 @@ import {Image, LayoutChangeEvent, StyleSheet, View} from 'react-native';
 import {ActionButton} from '@components';
 import React, {useCallback, useRef, useState} from 'react';
 import {useRoute} from '@react-navigation/native';
-import {CroppingViewScreenRouteProp, infoMessageAlert} from '@utils';
+import {CroppingViewScreenRouteProp} from '@utils';
 
 import {
   CroppingViewResult,
   EncodeImageOptions,
+  SBError,
   ScanbotCroppingView,
   ScanbotCroppingViewHandle,
 } from 'react-native-scanbot-sdk';
@@ -48,8 +49,8 @@ export function CroppingScreen() {
     [],
   );
 
-  const onError = useCallback((message: string) => {
-    infoMessageAlert(message);
+  const onError = useCallback((error: SBError) => {
+    console.warn('Cropping view error', error.type);
   }, []);
 
   const onLayoutChange = useCallback(

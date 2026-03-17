@@ -10,7 +10,7 @@ export function errorMessageAlert(message: string | undefined) {
     message ?? '',
     [
       {
-        text: 'Cancel',
+        text: 'Close',
         style: 'cancel',
         onPress: () => {},
       },
@@ -63,40 +63,23 @@ export function infoMessageAlert(message: string) {
   );
 }
 
-export function removePageConfirmationAlert(onDelete: () => void) {
+export function deleteConfirmationAlert(
+  title: string,
+  confirmText: string,
+  onDelete: () => void,
+  message?: string | undefined,
+) {
   Alert.alert(
-    'Removing page',
-    'Are you sure you want to proceed?',
+    title,
+    message,
     [
       {
-        text: 'Close',
+        text: 'Cancel',
         style: 'cancel',
         onPress: () => {},
       },
       {
-        text: 'OK',
-        style: 'default',
-        onPress: onDelete,
-      },
-    ],
-    {
-      cancelable: true,
-    },
-  );
-}
-
-export function deleteAllConfirmationAlert(onDelete: () => void) {
-  Alert.alert(
-    'Clearing storage',
-    'Are you sure you want to proceed?',
-    [
-      {
-        text: 'Close',
-        style: 'cancel',
-        onPress: () => {},
-      },
-      {
-        text: 'OK',
+        text: confirmText,
         style: 'default',
         onPress: onDelete,
       },
