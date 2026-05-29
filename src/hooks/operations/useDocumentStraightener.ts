@@ -5,12 +5,11 @@ import {
   AspectRatio,
   autorelease,
   DocumentStraighteningParameters,
+  ScanbotDocumentEnhancer,
 } from 'react-native-scanbot-sdk';
-import {ScanbotDocumentEnhancer} from 'react-native-scanbot-sdk/src/DocumentEnhancer.ts';
 import {
   checkLicense,
   errorMessageAlert,
-  infoMessageAlert,
   PrimaryRouteNavigationProp,
   Screens,
   selectImageFromLibrary,
@@ -76,13 +75,9 @@ export function useDocumentStraightener() {
           throw Error('Encoding failed.');
         }
 
-        if (result.straightenedImage) {
-          navigation.navigate(Screens.PLAIN_DATA_RESULT, {
-            imageUris: ['data:image/jpeg;base64,' + straightenedImage],
-          });
-        } else {
-          infoMessageAlert('Document could not be straightened');
-        }
+        navigation.navigate(Screens.PLAIN_DATA_RESULT, {
+          imageUris: ['data:image/jpeg;base64,' + straightenedImage],
+        });
       });
     } catch (e: any) {
       errorMessageAlert(e.message);
