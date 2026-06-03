@@ -3,6 +3,7 @@ import {useCallback} from 'react';
 import {COLORS} from '@theme';
 
 import {
+  PatternContentValidator,
   ScanbotTextPattern,
   TextPatternScannerScreenConfiguration,
 } from 'react-native-scanbot-sdk';
@@ -33,6 +34,14 @@ export function useTextPatternScanner() {
         COLORS.SCANBOT_RED;
 
       configuration.scannerConfiguration.minimumNumberOfRequiredFramesWithEqualScanningResult = 4;
+
+      // Add a pattern validator to only scan text that passes the validation
+      configuration.scannerConfiguration.validator =
+        new PatternContentValidator({
+          pattern: '^[0-9]{4}',
+          patternGrammar: 'REGEX',
+          matchSubstring: true,
+        });
 
       const result = await ScanbotTextPattern.startScanner(configuration);
       /**
