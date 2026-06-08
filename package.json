@@ -13,7 +13,7 @@
     "set-new-architecture": "sh set-architecture.sh --new",
     "set-old-architecture": "sh set-architecture.sh --old"
   },
-  "packageManager": "yarn@3.6.4",
+  "packageManager": "yarn@4.16.0",
   "engines": {
     "node": ">=20"
   },
