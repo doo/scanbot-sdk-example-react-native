@@ -38,7 +38,7 @@ export function useTextPatternScanner() {
       // Add a pattern validator to only scan text that passes the validation
       configuration.scannerConfiguration.validator =
         new PatternContentValidator({
-          pattern: '^[0-9]{4}',
+          pattern: '^[a-zA-Z]',
           patternGrammar: 'REGEX',
           matchSubstring: true,
         });
