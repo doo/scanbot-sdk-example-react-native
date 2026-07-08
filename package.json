@@ -13,7 +13,7 @@
     "set-new-architecture": "sh set-architecture.sh --new",
     "set-old-architecture": "sh set-architecture.sh --old"
   },
-  "packageManager": "yarn@3.6.4",
+  "packageManager": "yarn@4.16.0",
   "engines": {
     "node": ">=20"
   },
@@ -26,7 +26,7 @@
     "react-native-fs": "2.20.0",
     "react-native-image-picker": "^8.2.0",
     "react-native-safe-area-context": "^5.4.0",
-    "react-native-scanbot-sdk": "8.0.0",
+    "react-native-scanbot-sdk": "9.0.0",
     "react-native-screens": "~4.10.0",
     "react-native-share": "12.2.5"
   },

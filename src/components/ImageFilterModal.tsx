@@ -9,9 +9,11 @@ import {
   ViewStyle,
 } from 'react-native';
 import {COLORS} from '@theme';
+
 import {
   BrightnessFilter,
   ColorDocumentFilter,
+  ColorDocumentShadowRemovalFilter,
   ContrastFilter,
   CustomBinarizationFilter,
   GrayscaleFilter,
@@ -21,27 +23,49 @@ import {
   WhiteBlackPointFilter,
 } from 'react-native-scanbot-sdk';
 
-const IMAGE_FILTERS: ParametricFilter[] = [
-  new BrightnessFilter({brightness: 0.2}),
-  new ColorDocumentFilter(),
-  new ContrastFilter({contrast: 2}),
-  new CustomBinarizationFilter({preset: 'PRESET_1'}),
-  new GrayscaleFilter(),
-  new ScanbotBinarizationFilter(),
-  new WhiteBlackPointFilter({blackPoint: 0.2, whitePoint: 0.8}),
-  new LegacyFilter(),
-];
-
-const displayItemLabel: Record<ParametricFilter['_type'], string> = {
-  BrightnessFilter: 'Brightness Filter',
-  ColorDocumentFilter: 'Color Document Filter',
-  ContrastFilter: 'Contrast Filter',
-  CustomBinarizationFilter: 'Custom Binarization Filter',
-  GrayscaleFilter: 'Grayscale Filter',
-  LegacyFilter: 'None',
-  ScanbotBinarizationFilter: 'Scanbot Binarization Filter',
-  WhiteBlackPointFilter: 'White BlackPoint Filter',
+const filters: Record<
+  ParametricFilter['_type'],
+  {displayItemLabel: string; parametricFilter: ParametricFilter}
+> = {
+  BrightnessFilter: {
+    parametricFilter: new BrightnessFilter({brightness: 0.2}),
+    displayItemLabel: 'Brightness Filter',
+  },
+  ColorDocumentFilter: {
+    parametricFilter: new ColorDocumentFilter(),
+    displayItemLabel: 'Color Document Filter',
+  },
+  ColorDocumentShadowRemovalFilter: {
+    parametricFilter: new ColorDocumentShadowRemovalFilter(),
+    displayItemLabel: 'Color Document Shadow Removal Filter',
+  },
+  ContrastFilter: {
+    parametricFilter: new ContrastFilter({contrast: 2}),
+    displayItemLabel: 'Contrast Filter',
+  },
+  CustomBinarizationFilter: {
+    parametricFilter: new CustomBinarizationFilter({preset: 'PRESET_1'}),
+    displayItemLabel: 'Custom Binarization Filter',
+  },
+  GrayscaleFilter: {
+    parametricFilter: new GrayscaleFilter(),
+    displayItemLabel: 'Grayscale Filter',
+  },
+  LegacyFilter: {
+    parametricFilter: new LegacyFilter(),
+    displayItemLabel: 'None',
+  },
+  ScanbotBinarizationFilter: {
+    parametricFilter: new ScanbotBinarizationFilter(),
+    displayItemLabel: 'Scanbot Binarization Filter',
+  },
+  WhiteBlackPointFilter: {
+    parametricFilter: new WhiteBlackPointFilter(),
+    displayItemLabel: 'White BlackPoint Filter',
+  },
 };
+
+const IMAGE_FILTERS = Object.values(filters);
 
 function Item(props: {label: string; onPress: () => void; style?: ViewStyle}) {
   return (
@@ -70,9 +94,9 @@ export function ImageFilterModal({
           contentContainerStyle={styles.flatListContentContainer}
           renderItem={({item}) => (
             <Item
-              label={displayItemLabel[item._type]}
+              label={item.displayItemLabel}
               onPress={() => {
-                onSelect(item);
+                onSelect(item.parametricFilter);
                 onDismiss();
               }}
             />

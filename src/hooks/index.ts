@@ -19,6 +19,7 @@ import {usePerformOCR} from './operations/usePerformOCR';
 import {useCleanup} from './operations/useCleanup';
 
 import {useDocumentQualityAnalyzer} from './operations/useDocumentQualityAnalyzer';
+import {useDocumentStraightener} from './operations/useDocumentStraightener.ts';
 import {useScanCheckFromImage} from './operations/useScanCheckFromImage.ts';
 import {useScanMRZFromImage} from './operations/useScanMRZFromImage.ts';
 import {useDocumentDataExtractorOnImage} from './operations/useDocumentDataExtractorOnImage.ts';
@@ -50,6 +51,7 @@ export {
   useDocumentDataExtractorOnImage,
   useScanCreditCardFromImage,
   useDocumentQualityAnalyzer,
+  useDocumentStraightener,
   useSinglePageScanning,
   useSinglePageScanningWithFinder,
   useMultiplePageScanning,

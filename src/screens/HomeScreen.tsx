@@ -9,6 +9,7 @@ import {
   useDocumentDataExtractor,
   useDocumentDataExtractorOnImage,
   useDocumentQualityAnalyzer,
+  useDocumentStraightener,
   useLicenseInfo,
   useMRZScanner,
   useMultiplePageScanning,
@@ -41,6 +42,7 @@ export function HomeScreen() {
   const onScanCreditCard = useScanCreditCardFromImage();
   const onPerformOCR = usePerformOCR();
   const onDocumentQualityAnalyzer = useDocumentQualityAnalyzer();
+  const onDocumentStraightener = useDocumentStraightener();
   const onLicenseInfo = useLicenseInfo();
   const onOCRConfigs = useOCRConfigs();
   const onCleanup = useCleanup();
@@ -112,6 +114,10 @@ export function HomeScreen() {
         <FeatureItem
           onPress={onDocumentQualityAnalyzer}
           title={'Document Quality Analyzer'}
+        />
+        <FeatureItem
+          onPress={onDocumentStraightener}
+          title={'Document Straightener'}
         />
         <FeatureItem title={'Perform OCR on image'} onPress={onPerformOCR} />
         <FeatureItem onPress={onOCRConfigs} title={'OCR Configs'} />
