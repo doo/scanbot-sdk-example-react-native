@@ -2,13 +2,22 @@ import {checkLicense, errorMessageAlert} from '@utils';
 import {useCallback, useContext} from 'react';
 import {DocumentContext} from '@context';
 
-import {CroppingConfiguration, ScanbotDocument} from 'react-native-scanbot-sdk';
+import {
+  CroppingStandaloneConfiguration,
+  ScanbotDocument,
+} from 'react-native-scanbot-sdk';
 
 export function useCropDocumentPage() {
   const {setDocument} = useContext(DocumentContext);
 
   return useCallback(
-    async ({pageUuid, documentUuid}: {pageUuid: string; documentUuid: string}) => {
+    async ({
+      pageUuid,
+      documentUuid,
+    }: {
+      pageUuid: string;
+      documentUuid: string;
+    }) => {
       try {
         /**
          * Check the license status and return early
@@ -21,7 +30,7 @@ export function useCropDocumentPage() {
          * Create the Cropping configuration object and
          * start the Cropping Screen with the configuration, documentUUID and pageUUID
          */
-        const configuration = new CroppingConfiguration({
+        const configuration = new CroppingStandaloneConfiguration({
           documentUuid: documentUuid,
           pageUuid: pageUuid,
         });

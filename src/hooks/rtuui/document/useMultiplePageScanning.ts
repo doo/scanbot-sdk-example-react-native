@@ -36,9 +36,9 @@ export function useMultiplePageScanning() {
         true;
 
       // Hide/Reveal the auto snapping enable/disable button
-      configuration.screens.camera.bottomBar.autoSnappingModeButton.visible =
+      configuration.screens.camera.toolBar.autoSnappingModeButton.visible =
         true;
-      configuration.screens.camera.bottomBar.manualSnappingModeButton.visible =
+      configuration.screens.camera.toolBar.manualSnappingModeButton.visible =
         true;
 
       // Set colors
@@ -57,14 +57,16 @@ export function useMultiplePageScanning() {
       configuration.screens.review.enabled = true;
 
       // Configure the bottom bar (further properties like title, icon and  background can also be set for these buttons)
-      configuration.screens.review.bottomBar.addButton.visible = true;
-      configuration.screens.review.bottomBar.retakeButton.visible = true;
-      configuration.screens.review.bottomBar.cropButton.visible = true;
-      configuration.screens.review.bottomBar.rotateButton.visible = true;
-      configuration.screens.review.bottomBar.deleteButton.visible = true;
+      const toolBar = configuration.screens.review.toolBar;
+      toolBar.addButton.barButton.visible = true;
+      toolBar.retakeButton.barButton.visible = true;
+      toolBar.cropButton.barButton.visible = true;
+      toolBar.rotateButton.barButton.visible = true;
+      toolBar.deleteButton.barButton.visible = true;
 
       // Configure `more` popup on review screen
-      configuration.screens.review.morePopup.reorderPages.icon.visible = true;
+      // TODO: Check
+      // configuration.screens.review.morePopup.reorderPages.icon.visible = true;
       configuration.screens.review.morePopup.deleteAll.icon.visible = true;
       configuration.screens.review.morePopup.deleteAll.title.text =
         'Delete all pages';
@@ -75,9 +77,9 @@ export function useMultiplePageScanning() {
 
       // Configure cropping screen
       configuration.screens.cropping.topBarTitle.text = 'Cropping Screen';
-      configuration.screens.cropping.bottomBar.resetButton.visible = true;
-      configuration.screens.cropping.bottomBar.rotateButton.visible = true;
-      configuration.screens.cropping.bottomBar.detectButton.visible = true;
+      configuration.screens.cropping.toolBar.resetButton.visible = true;
+      configuration.screens.cropping.toolBar.rotateButton.visible = true;
+      configuration.screens.cropping.toolBar.detectButton.visible = true;
 
       const documentResult = await ScanbotDocument.startScanner(configuration);
       /**

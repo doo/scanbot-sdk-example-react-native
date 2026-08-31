@@ -23,10 +23,10 @@ async function documentScanner() {
     new PageSnapFunnelAnimation();
 
   // You may hide the import button in the camera screen, if you don't need it:
-  cameraScreenConfiguration.bottomBar.importButton.visible = false;
+  cameraScreenConfiguration.toolBar.importButton.visible = false;
 
   // Equivalent to bottomBarBackgroundColor: '#ffffff', but not recommended:
-  configuration.appearance.bottomBarBackgroundColor = '#ffffff';
+  configuration.appearance.toolBarBackgroundColor = '#ffffff';
 
   // However, now all the colors can be conveniently set using the Palette object:
   const palette = configuration.palette;

@@ -21,7 +21,7 @@ async function finderDocumentScanner() {
   viewFinder.visible = true;
   viewFinder.aspectRatio = new AspectRatio({width: 3, height: 4});
 
-  const bottomBar = cameraScreenConfiguration.bottomBar;
+  const bottomBar = cameraScreenConfiguration.toolBar;
   bottomBar.previewButton = new NoButtonMode({});
   bottomBar.autoSnappingModeButton.visible = false;
   bottomBar.importButton.visible = false;

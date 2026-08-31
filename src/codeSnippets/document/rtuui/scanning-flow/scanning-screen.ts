@@ -55,21 +55,22 @@ async function startScanning() {
      * Configure the bottom bar and the bottom bar buttons.
      * Set the background color of the bottom bar.
      */
-    configuration.appearance.bottomBarBackgroundColor = '#C8193C';
+    configuration.appearance.toolBarBackgroundColor = '#C8193C';
+    const toolBar = cameraScreenConfig.toolBar;
     /** Import button is used to import image from the gallery. */
-    cameraScreenConfig.bottomBar.importButton.visible = true;
-    cameraScreenConfig.bottomBar.importButton.title.visible = true;
-    cameraScreenConfig.bottomBar.importButton.title.text = 'Import';
+    toolBar.importButton.visible = true;
+    toolBar.importButton.title.visible = true;
+    toolBar.importButton.title.text = 'Import';
     /** Configure the auto/manual snap button. */
-    cameraScreenConfig.bottomBar.autoSnappingModeButton.title.visible = true;
-    cameraScreenConfig.bottomBar.autoSnappingModeButton.title.text = 'Auto';
-    cameraScreenConfig.bottomBar.manualSnappingModeButton.title.visible = true;
-    cameraScreenConfig.bottomBar.manualSnappingModeButton.title.text = 'Manual';
+    toolBar.autoSnappingModeButton.title.visible = true;
+    toolBar.autoSnappingModeButton.title.text = 'Auto';
+    toolBar.manualSnappingModeButton.title.visible = true;
+    toolBar.manualSnappingModeButton.title.text = 'Manual';
     /** Configure the torch off/on button. */
-    cameraScreenConfig.bottomBar.torchOnButton.title.visible = true;
-    cameraScreenConfig.bottomBar.torchOnButton.title.text = 'On';
-    cameraScreenConfig.bottomBar.torchOffButton.title.visible = true;
-    cameraScreenConfig.bottomBar.torchOffButton.title.text = 'Off';
+    toolBar.torchOnButton.title.visible = true;
+    toolBar.torchOnButton.title.text = 'On';
+    toolBar.torchOffButton.title.visible = true;
+    toolBar.torchOffButton.title.text = 'Off';
     /** Configure the camera blink behavior when an image is captured. */
     cameraScreenConfig.captureFeedback.cameraBlinkEnabled = true;
     /**
