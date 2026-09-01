@@ -12,6 +12,7 @@ import {useSinglePageScanningWithFinder} from './rtuui/document/useSinglePageSca
 import {useMultiplePageScanning} from './rtuui/document/useMultiplePageScanning.ts';
 import {useContinueDocumentScanning} from './rtuui/document/useContinueDocumentScanning.ts';
 import {useCropDocumentPage} from './rtuui/document/useCropDocumentPage.ts';
+import {useDocumentCleanupStandalone} from './rtuui/document/useDocumentCleanupStandalone.ts';
 
 import {useLicenseInfo} from './operations/useLicenseInfo';
 import {useOCRConfigs} from './operations/useOCRConfigs';
@@ -56,6 +57,7 @@ export {
   useSinglePageScanningWithFinder,
   useMultiplePageScanning,
   useCropDocumentPage,
+  useDocumentCleanupStandalone,
   useContinueDocumentScanning,
   useAddDocumentPage,
   useCreateDocumentPDF,

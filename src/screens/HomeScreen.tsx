@@ -6,6 +6,7 @@ import {
   useCreateDocumentWithPage,
   useCreditCardScanner,
   useCroppingView,
+  useDocumentCleanupStandalone,
   useDocumentDataExtractor,
   useDocumentDataExtractorOnImage,
   useDocumentQualityAnalyzer,
@@ -43,6 +44,7 @@ export function HomeScreen() {
   const onPerformOCR = usePerformOCR();
   const onDocumentQualityAnalyzer = useDocumentQualityAnalyzer();
   const onDocumentStraightener = useDocumentStraightener();
+  const onDocumentCleanupStandalone = useDocumentCleanupStandalone();
   const onLicenseInfo = useLicenseInfo();
   const onOCRConfigs = useOCRConfigs();
   const onCleanup = useCleanup();
