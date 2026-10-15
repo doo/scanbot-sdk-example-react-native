@@ -51,9 +51,9 @@ export function useSinglePageScanningWithFinder() {
         true;
 
       // Hide the auto-snapping enable/disable button
-      configuration.screens.camera.toolBar.autoSnappingModeButton.visible =
+      configuration.screens.camera.toolbar.autoSnappingModeButton.visible =
         false;
-      configuration.screens.camera.toolBar.manualSnappingModeButton.visible =
+      configuration.screens.camera.toolbar.manualSnappingModeButton.visible =
         false;
 
       // Set colors

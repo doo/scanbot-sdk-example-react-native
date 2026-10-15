@@ -24,7 +24,7 @@ async function startDocumentDetectionWithCroppingScreen() {
       pageUuid: document.pages[0].uuid,
     });
     /* Customize the configuration. */
-    configuration.cropping.toolBar.rotateButton.visible = false;
+    configuration.cropping.toolbar.rotateButton.visible = false;
     configuration.appearance.topBarBackgroundColor = '#c8193c';
     configuration.cropping.topBarConfirmButton.foreground.color = '#ffffff';
     configuration.localization.croppingTopBarCancelButtonTitle = 'Cancel';

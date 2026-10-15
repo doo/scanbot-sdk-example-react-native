@@ -11,7 +11,7 @@ async function startScanning() {
     /** Hide the zoom button. */
     reviewScreenConfiguration.zoomButton.visible = false;
     /** Hide the add button. */
-    reviewScreenConfiguration.toolBar.addButton.barButton.visible = false;
+    reviewScreenConfiguration.toolbar.addButton.barButton.visible = false;
     /** Retrieve the instance of the reorder pages configuration from the main configuration object. */
     const reorderScreenConfiguration = configuration.screens.reorderPages;
     /** Hide the guidance view. */
@@ -21,10 +21,10 @@ async function startScanning() {
     /** Retrieve the instance of the cropping configuration from the main configuration object. */
     const croppingScreenConfiguration = configuration.screens.cropping;
     /** Hide the reset button. */
-    croppingScreenConfiguration.toolBar.resetButton.visible = false;
+    croppingScreenConfiguration.toolbar.resetButton.visible = false;
     /** Retrieve the retake button configuration from the main configuration object. */
     const retakeButtonConfiguration =
-      configuration.screens.review.toolBar.retakeButton.barButton;
+      configuration.screens.review.toolbar.retakeButton.barButton;
     /** Show the retake button. */
     retakeButtonConfiguration.visible = true;
     /** Configure the retake title color. */

@@ -36,9 +36,9 @@ export function useMultiplePageScanning() {
         true;
 
       // Hide/Reveal the auto snapping enable/disable button
-      configuration.screens.camera.toolBar.autoSnappingModeButton.visible =
+      configuration.screens.camera.toolbar.autoSnappingModeButton.visible =
         true;
-      configuration.screens.camera.toolBar.manualSnappingModeButton.visible =
+      configuration.screens.camera.toolbar.manualSnappingModeButton.visible =
         true;
 
       // Set colors
@@ -57,16 +57,13 @@ export function useMultiplePageScanning() {
       configuration.screens.review.enabled = true;
 
       // Configure the bottom bar (further properties like title, icon and  background can also be set for these buttons)
-      const toolBar = configuration.screens.review.toolBar;
+      const toolBar = configuration.screens.review.toolbar;
       toolBar.addButton.barButton.visible = true;
       toolBar.retakeButton.barButton.visible = true;
       toolBar.cropButton.barButton.visible = true;
       toolBar.rotateButton.barButton.visible = true;
       toolBar.deleteButton.barButton.visible = true;
 
-      // Configure `more` popup on review screen
-      // TODO: Check
-      // configuration.screens.review.morePopup.reorderPages.icon.visible = true;
       configuration.screens.review.morePopup.deleteAll.icon.visible = true;
       configuration.screens.review.morePopup.deleteAll.title.text =
         'Delete all pages';
@@ -77,9 +74,18 @@ export function useMultiplePageScanning() {
 
       // Configure cropping screen
       configuration.screens.cropping.topBarTitle.text = 'Cropping Screen';
-      configuration.screens.cropping.toolBar.resetButton.visible = true;
-      configuration.screens.cropping.toolBar.rotateButton.visible = true;
-      configuration.screens.cropping.toolBar.detectButton.visible = true;
+      configuration.screens.cropping.toolbar.resetButton.visible = true;
+      configuration.screens.cropping.toolbar.rotateButton.visible = true;
+      configuration.screens.cropping.toolbar.detectButton.visible = true;
+
+      // Configure cleanup screen
+      configuration.screens.review.toolbar.documentCleanupButton.barButton.visible =
+        true;
+      configuration.screens.cleanup.engineConfiguration.keepText = true;
+      configuration.screens.cleanup.discardChangesAlertDialog.title.text =
+        'Discard changes?';
+      configuration.screens.cleanup.discardChangesAlertDialog.subtitle.text =
+        'Are you sure you want to discard the changes?';
 
       const documentResult = await ScanbotDocument.startScanner(configuration);
       /**

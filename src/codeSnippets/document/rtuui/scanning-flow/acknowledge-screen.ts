@@ -21,7 +21,7 @@ async function startScanning() {
      * You can also configure the buttons in the bottom bar of the acknowledgment screen.
      * e.g To force the user to retake, if the captured document is not OK.
      */
-    const toolBar = acknowledgementScreenConfig.toolBar;
+    const toolBar = acknowledgementScreenConfig.toolbar;
     toolBar.retakeButton.visible = false;
     /** Hide the titles of the buttons. */
     toolBar.acceptWhenAcceptableButton.title.visible = false;

@@ -55,8 +55,8 @@ async function startScanning() {
      * Configure the bottom bar and the bottom bar buttons.
      * Set the background color of the bottom bar.
      */
-    configuration.appearance.toolBarBackgroundColor = '#C8193C';
-    const toolBar = cameraScreenConfig.toolBar;
+    configuration.appearance.toolbarBackgroundColor = '#C8193C';
+    const toolBar = cameraScreenConfig.toolbar;
     /** Import button is used to import image from the gallery. */
     toolBar.importButton.visible = true;
     toolBar.importButton.title.visible = true;
