@@ -15,7 +15,6 @@ import {useCropDocumentPage} from './rtuui/document/useCropDocumentPage.ts';
 import {useDocumentCleanupStandalone} from './rtuui/document/useDocumentCleanupStandalone.ts';
 
 import {useLicenseInfo} from './operations/useLicenseInfo';
-import {useOCRConfigs} from './operations/useOCRConfigs';
 import {usePerformOCR} from './operations/usePerformOCR';
 import {useCleanup} from './operations/useCleanup';
 
@@ -44,7 +43,6 @@ export {
   useVinScanner,
   useDocumentDataExtractor,
   useLicenseInfo,
-  useOCRConfigs,
   usePerformOCR,
   useScanCheckFromImage,
   useScanMRZFromImage,
