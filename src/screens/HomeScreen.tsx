@@ -73,6 +73,10 @@ export function HomeScreen() {
           onPress={onCreateDocument}
         />
         <FeatureItem
+          title={'Document Cleanup Screen'}
+          onPress={onDocumentCleanupStandalone}
+        />
+        <FeatureItem
           title={'Document Scanner View (Classic UI)'}
           onPress={() => navigation.navigate(Screens.DOCUMENT_SCANNER_VIEW)}
         />
