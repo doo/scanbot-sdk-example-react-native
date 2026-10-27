@@ -513,7 +513,7 @@
 			repositoryURL = "https://github.com/doo/scanbot-sdk-native-wrapper-spm";
 			requirement = {
 				kind = exactVersion;
-				version = 10.0.10;
+				version = 10.0.13;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
