@@ -36,6 +36,7 @@ target 'scanbotsdkexample' do
       :mac_catalyst_enabled => false,
       # :ccache_enabled => true
     )
+    scanbot_spm(installer)
 
       installer.pods_project.targets.each do |target|
         if target.name == 'fmt'

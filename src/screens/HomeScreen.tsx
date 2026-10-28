@@ -6,6 +6,7 @@ import {
   useCreateDocumentWithPage,
   useCreditCardScanner,
   useCroppingView,
+  useDocumentCleanupStandalone,
   useDocumentDataExtractor,
   useDocumentDataExtractorOnImage,
   useDocumentQualityAnalyzer,
@@ -13,7 +14,6 @@ import {
   useLicenseInfo,
   useMRZScanner,
   useMultiplePageScanning,
-  useOCRConfigs,
   usePerformOCR,
   useScanCheckFromImage,
   useScanCreditCardFromImage,
@@ -43,8 +43,8 @@ export function HomeScreen() {
   const onPerformOCR = usePerformOCR();
   const onDocumentQualityAnalyzer = useDocumentQualityAnalyzer();
   const onDocumentStraightener = useDocumentStraightener();
+  const onDocumentCleanupStandalone = useDocumentCleanupStandalone();
   const onLicenseInfo = useLicenseInfo();
-  const onOCRConfigs = useOCRConfigs();
   const onCleanup = useCleanup();
   const onSinglePageScanning = useSinglePageScanning();
   const onSinglePageScanningWithFinder = useSinglePageScanningWithFinder();
@@ -71,6 +71,10 @@ export function HomeScreen() {
         <FeatureItem
           title={'Create Document from Image'}
           onPress={onCreateDocument}
+        />
+        <FeatureItem
+          title={'Document Cleanup Screen'}
+          onPress={onDocumentCleanupStandalone}
         />
         <FeatureItem
           title={'Document Scanner View (Classic UI)'}
@@ -120,7 +124,6 @@ export function HomeScreen() {
           title={'Document Straightener'}
         />
         <FeatureItem title={'Perform OCR on image'} onPress={onPerformOCR} />
-        <FeatureItem onPress={onOCRConfigs} title={'OCR Configs'} />
         <FeatureItem onPress={onLicenseInfo} title={'License Info'} />
         <FeatureItem onPress={onCleanup} title={'Clear storage'} />
         <ScanbotLearnMore />

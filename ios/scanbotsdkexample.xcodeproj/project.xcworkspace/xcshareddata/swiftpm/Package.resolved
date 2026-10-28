@@ -1,0 +1,15 @@
+{
+  "originHash" : "a410c6f9ea9c4dbd736627818b45b6d3d00ec51a6b2e3a75810f2f30b24c52b1",
+  "pins" : [
+    {
+      "identity" : "scanbot-sdk-native-wrapper-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/doo/scanbot-sdk-native-wrapper-spm",
+      "state" : {
+        "revision" : "d33376fdbaeb5ddd7f8b7ea62462752623632299",
+        "version" : "10.0.13"
+      }
+    }
+  ],
+  "version" : 3
+}
