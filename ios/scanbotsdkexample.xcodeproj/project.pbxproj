@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		58E48CEDFD6EEC7CE4771128 /* ScanbotSDKNativeWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 064FD978C6A0E4ED69CAFE19 /* ScanbotSDKNativeWrapper */; };
-		66B8D5B3A3C7187C292FB5BE /* ScanbotSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A6A0053F5BB1A8BAEE52F2BF /* ScanbotSDK */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8EAC6DD32D4A68F1002751B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAC6DD22D4A68F1002751B9 /* AppDelegate.swift */; };
 		F46D468FC26EEB0164F830C7 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = D50519A300A583E57E80210A /* PrivacyInfo.xcprivacy */; };
@@ -35,8 +33,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F62E5434C83112F751180B31 /* libPods-scanbotsdkexample.a in Frameworks */,
-				58E48CEDFD6EEC7CE4771128 /* ScanbotSDKNativeWrapper in Frameworks */,
-				66B8D5B3A3C7187C292FB5BE /* ScanbotSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,8 +119,6 @@
 			);
 			name = scanbotsdkexample;
 			packageProductDependencies = (
-				064FD978C6A0E4ED69CAFE19 /* ScanbotSDKNativeWrapper */,
-				A6A0053F5BB1A8BAEE52F2BF /* ScanbotSDK */,
 			);
 			productName = scanbotsdkexample;
 			productReference = 13B07F961A680F5B00A75B9A /* scanbotsdkexample.app */;
@@ -153,7 +147,6 @@
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			packageReferences = (
-				5C1981EB93405FDE12C1D962 /* XCRemoteSwiftPackageReference "scanbot-sdk-native-wrapper-spm" */,
 			);
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
@@ -202,9 +195,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -219,9 +216,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-scanbotsdkexample/Pods-scanbotsdkexample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -387,10 +388,7 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_CFLAGS = "$(inherited)  ";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-DFOLLY_NO_CONFIG",
@@ -464,10 +462,7 @@
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_CFLAGS = "$(inherited)  ";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-DFOLLY_NO_CONFIG",
@@ -506,30 +501,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		5C1981EB93405FDE12C1D962 /* XCRemoteSwiftPackageReference "scanbot-sdk-native-wrapper-spm" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/doo/scanbot-sdk-native-wrapper-spm";
-			requirement = {
-				kind = exactVersion;
-				version = 10.0.13;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		064FD978C6A0E4ED69CAFE19 /* ScanbotSDKNativeWrapper */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5C1981EB93405FDE12C1D962 /* XCRemoteSwiftPackageReference "scanbot-sdk-native-wrapper-spm" */;
-			productName = ScanbotSDKNativeWrapper;
-		};
-		A6A0053F5BB1A8BAEE52F2BF /* ScanbotSDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5C1981EB93405FDE12C1D962 /* XCRemoteSwiftPackageReference "scanbot-sdk-native-wrapper-spm" */;
-			productName = ScanbotSDK;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
 }
