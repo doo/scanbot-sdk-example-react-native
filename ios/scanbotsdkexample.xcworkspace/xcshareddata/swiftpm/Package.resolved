@@ -1,5 +1,5 @@
 {
-  "originHash" : "d6d90120c3367c3efc0ebbfc9318d1afa5aa6495a4fe240c61ba1faa54fd54ca",
+  "originHash" : "a410c6f9ea9c4dbd736627818b45b6d3d00ec51a6b2e3a75810f2f30b24c52b1",
   "pins" : [
     {
       "identity" : "scanbot-sdk-native-wrapper-spm",
